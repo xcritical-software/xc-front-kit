@@ -1,0 +1,71 @@
+{
+  "name": "@xcritical/xc-sidebar",
+  "version": "0.0.0",
+  "description": "XCritical Sidebar Component",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "exit 0",
+    "lint": "eslint --ext .js --ext .jsx src",
+    "lint:teamcity": "npm run lint -- --format ./node_modules/eslint-teamcity/index.js",
+    "lint:fix": "eslint --ext .js --ext .jsx src stories --fix",
+    "compile": "gulp --cwd . compile",
+    "build": "npm run clean && npm run compile",
+    "deploy": "cd .publish && npm publish",
+    "check": "npm run lint && npm run test",
+    "storybook": "start-storybook -p 9009 -s public",
+    "clean": "rimraf dist lib .publish",
+    "update-project": "npm run clean && rd /s/q node_modules && npm cache clean --force && npm i"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/xcritical/xc-front-kit.git"
+  },
+  "keywords": [
+    "fetch",
+    "library"
+  ],
+  "author": "123Software",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/xcritical/xc-front-kit/xc-button#readme",
+  "publishConfig": {
+    "registry": "http://docker.hub:8030/npm/npm/"
+  },
+  "eslint-teamcity": {
+    "reporter": "inspections",
+    "report-name": "ESLint Violations",
+    "error-statistics-name": "ESLint Error Count",
+    "warning-statistics-name": "ESLint Warning Count"
+  },
+  "private": false,
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@storybook/addon-a11y": "^5.0.1",
+    "@storybook/addon-actions": "^5.0.1",
+    "@storybook/addon-backgrounds": "^5.0.1",
+    "@storybook/addon-console": "^1.1.0",
+    "@storybook/addon-cssresources": "^5.0.1",
+    "@storybook/addon-storysource": "^5.0.1",
+    "@storybook/addon-viewport": "^5.0.1",
+    "@storybook/addons": "^5.0.1",
+    "@storybook/react": "^5.0.1",
+    "@storybook/theming": "^5.0.1",
+    "@xcritical/eslint-plugin-xc-front-lint": "latest",
+    "@xcritical/xc-front-libs-utils": "latest",
+    "babel-loader": "^8.0.6",
+    "eslint-teamcity": "^2.1.0",
+    "prop-types": "^15.0.0",
+    "react": "^16.8.3",
+    "react-router-dom": "^5.0.0",
+    "rimraf": "^2.6.2",
+    "styled-components": "^4.1.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.3",
+    "styled-components": "^4.1.0",
+    "prop-types": "^15.0.0"
+  },
+  "dependencies": {
+    "lodash.get": "^4.x",
+    "polished": "^3.0.0"
+  }
+}
