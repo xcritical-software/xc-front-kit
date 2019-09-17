@@ -11,7 +11,7 @@ const CSSModuleLoader = {
 module.exports = {
   resolve: {
     alias: {
-      '@xcritical/xc-button': path.join(__dirname, '../src/'),
+      '@xcritical/xc-sidebar': path.join(__dirname, '../src/'),
     },
   },
   module: {

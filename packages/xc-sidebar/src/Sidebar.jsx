@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Arrow from './arrow.jsx';
+import React, { useState, useCallback } from 'react';
+import Arrow from './Arrow.jsx';
 
 import {
   ResponsiveWrapper,
@@ -7,11 +7,12 @@ import {
   CloseOpenButton,
   RightBorderWrapper,
   AntiSelect,
+  ChildWrapper,
 } from './styled/Sidebar';
 
 
 const Wrapper = ({
-  maxWidth = 400, minWidth = 30, startWidth = 320, children,
+  maxWidth = 400, minWidth = 30, startWidth = maxWidth * 0.8, children, color = 'blue'
 }) => {
   const [transformParams, setTransformParams] = useState({
     width: startWidth || maxWidth * 0.7,
@@ -19,7 +20,7 @@ const Wrapper = ({
   });
   let clickX = 0;
   const [antiSelectLayer, changeAntiSelectLayer] = useState(false);
-  const handleMouseMove = (e) => {
+  const handleMouseMove = useCallback((e) => {
     changeAntiSelectLayer(true);
     document.body.addEventListener('mouseup', () => {
       document.body.removeEventListener('mousemove', handleMouseMove);
@@ -49,15 +50,14 @@ const Wrapper = ({
         arrowToRight: newWidth < maxWidth * 0.3,
       });
     }
-  };
+  }, [clickX, maxWidth, minWidth, transformParams.width]);
 
-  const handleMouseDown = (e) => {
+  const handleMouseDown = useCallback((e) => {
     clickX = e.clientX;
     document.body.addEventListener('mousemove', handleMouseMove);
-    // useEventListener('mousemove', handleMouseMove)
-  };
+  }, [handleMouseMove]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     document.body.removeEventListener('mousemove', handleMouseMove);
     if (transformParams.width < maxWidth * 0.3) {
       setTransformParams({
@@ -72,20 +72,27 @@ const Wrapper = ({
         arrowToRight: true,
       });
     }
-  };
+  }, [handleMouseMove, maxWidth, minWidth, transformParams.width]);
+
+
+  const handleRemoveMouseMove = useCallback(() => {
+    document.body.removeEventListener('mousemove', handleMouseMove);
+  }, [handleMouseMove]);
 
 
   return (
     <ResponsiveWrapper animate={ transformParams.animate } width={ transformParams.width }>
-      <RightBorderWrapper onMouseDown={ handleMouseDown } onMouseUp={ () => document.body.removeEventListener('mousemove', handleMouseMove) }>
-        <RightBorder>
+      <RightBorderWrapper onMouseDown={ handleMouseDown } onMouseUp={ handleRemoveMouseMove }>
+        <RightBorder color={color} >
           <CloseOpenButton toRight={ transformParams.arrowToRight } onClick={ handleClose }>
             <Arrow />
           </CloseOpenButton>
         </RightBorder>
       </RightBorderWrapper>
       { antiSelectLayer && <AntiSelect /> }
-      { children }
+      <ChildWrapper>
+        { children }
+      </ChildWrapper>
     </ResponsiveWrapper>
   );
 };

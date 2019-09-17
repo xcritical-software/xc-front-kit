@@ -19,7 +19,7 @@ addParameters({
     },
   },
   options: {
-    name: 'Xcritical Button Component',
+    name: 'Xcritical Sidebar Component',
     url: '#',
     theme: themes.dark,
   },

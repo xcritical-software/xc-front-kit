@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 export const ResponsiveWrapper = styled.div`
   width: ${({ width }) => `${width}px`};
-  height: 100% ;
-  overflow: hidden;
+  height: 100vh ;
+  position: relative;
+  float: left;
   ${({ animate }) => animate && 'transition: 1s'}
-
 `;
 export const RightBorder = styled.div`
-  width: 3px;
-  background-color: blue;
+  width: 2px;
+  background-color: ${({ color }) => color};
   height: 100% ;
   float: right;
   position: relative;
@@ -32,6 +32,7 @@ export const CloseOpenButton = styled.button`
   transform: ${({ toRight }) => (toRight ? 'rotateZ(-360deg)' : 'rotateZ(180deg)')};
   transition: .5s;
   transition-timing-function: linear;
+  cursor: pointer;
   &:focus {
     outline: none;
   }
@@ -39,13 +40,11 @@ export const CloseOpenButton = styled.button`
 
 export const RightBorderWrapper = styled.div`
   width: 22px;
-  height: 100% ;
+  height: 100vh ;
   float: right;
-  position: relative;
+  right: -10px;
+  position: absolute;
   cursor: pointer;
-  &:hover div {
-    box-shadow: 0px 0px 3.5px 0.5px blue;
-  }
 `;
 
 export const AntiSelect = styled.div`
@@ -54,5 +53,10 @@ export const AntiSelect = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 100;
+  z-index: 999999;
+`;
+
+
+export const ChildWrapper = styled.div`
+  overflow: hidden
 `;

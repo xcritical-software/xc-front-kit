@@ -6,7 +6,6 @@
   "scripts": {
     "test": "exit 0",
     "lint": "eslint --ext .js --ext .jsx src",
-    "lint:teamcity": "npm run lint -- --format ./node_modules/eslint-teamcity/index.js",
     "lint:fix": "eslint --ext .js --ext .jsx src stories --fix",
     "compile": "gulp --cwd . compile",
     "build": "npm run clean && npm run compile",
@@ -26,16 +25,6 @@
   ],
   "author": "123Software",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/xcritical/xc-front-kit/xc-button#readme",
-  "publishConfig": {
-    "registry": "http://docker.hub:8030/npm/npm/"
-  },
-  "eslint-teamcity": {
-    "reporter": "inspections",
-    "report-name": "ESLint Violations",
-    "error-statistics-name": "ESLint Error Count",
-    "warning-statistics-name": "ESLint Warning Count"
-  },
   "private": false,
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -44,20 +33,24 @@
     "@storybook/addon-backgrounds": "^5.0.1",
     "@storybook/addon-console": "^1.1.0",
     "@storybook/addon-cssresources": "^5.0.1",
+    "@storybook/addon-info": "^5.2.0",
     "@storybook/addon-storysource": "^5.0.1",
     "@storybook/addon-viewport": "^5.0.1",
     "@storybook/addons": "^5.0.1",
     "@storybook/react": "^5.0.1",
     "@storybook/theming": "^5.0.1",
+    "@types/storybook__react": "^4.0.2",
     "@xcritical/eslint-plugin-xc-front-lint": "latest",
     "@xcritical/xc-front-libs-utils": "latest",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
-    "eslint-teamcity": "^2.1.0",
     "prop-types": "^15.0.0",
     "react": "^16.8.3",
+    "react-docgen-typescript-loader": "^3.2.0",
     "react-router-dom": "^5.0.0",
     "rimraf": "^2.6.2",
-    "styled-components": "^4.1.0"
+    "styled-components": "^4.1.0",
+    "typescript": "^3.6.3"
   },
   "peerDependencies": {
     "react": "^16.8.3",

@@ -31,7 +31,7 @@ const props = {
   startWidth: 400,
 };
 
-storiesOf('Button', module)
+storiesOf('Sidebar', module)
   .add('Basic', () => (
     <Content>
       <LeftPanel>
