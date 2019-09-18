@@ -13,13 +13,15 @@ module.exports = {
     alias: {
       '@xcritical/xc-sidebar': path.join(__dirname, '../src/'),
     },
+    extensions: [".ts", ".tsx"]
   },
   module: {
     rules: [
       {
-        test: /\.stories\.jsx?$/,
-        loaders: [require.resolve('@storybook/addon-storysource/loader')],
-        enforce: 'pre',
+        test: /\.tsx?$/,
+        use: 'awesome-typescript-loader',
+        // enforce: 'pre',
+        exclude: path.resolve(__dirname, '..' ,'node_modules')
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,

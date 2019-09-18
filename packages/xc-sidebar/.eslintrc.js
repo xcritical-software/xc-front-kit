@@ -1,3 +1,9 @@
+const overrides = require('@xcritical/eslint-plugin-xc-front-lint/overrides/typescript');
+
 module.exports = {
-  extends: ['plugin:@xcritical/eslint-plugin-xc-front-lint/base']
+  extends: ['plugin:@xcritical/eslint-plugin-xc-front-lint/base'],
+  overrides,
+  rules: {
+    "react/jsx-filename-extension": 0
+  }
 };

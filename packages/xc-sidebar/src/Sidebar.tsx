@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import Arrow from './Arrow.jsx';
+import React, { useState, useCallback, ReactElement } from 'react';
+import Arrow from './Arrow';
 
 import {
   ResponsiveWrapper,
@@ -11,12 +11,25 @@ import {
 } from './styled/Sidebar';
 
 
+interface IWrapperProps {
+  maxWidth?: number;
+  minWidth?: number;
+  startWidth?: number;
+  children?: any;
+  color?: string;
+}
+
 const Wrapper = ({
-  maxWidth = 400, minWidth = 30, startWidth = maxWidth * 0.8, children, color = 'blue'
-}) => {
+  minWidth = 30,
+  maxWidth = 600,
+  startWidth = maxWidth * 0.8,
+  color = 'blue',
+  children,
+}: IWrapperProps): ReactElement => {
   const [transformParams, setTransformParams] = useState({
     width: startWidth || maxWidth * 0.7,
     animate: false,
+    arrowToRight: false,
   });
   let clickX = 0;
   const [antiSelectLayer, changeAntiSelectLayer] = useState(false);
@@ -83,7 +96,7 @@ const Wrapper = ({
   return (
     <ResponsiveWrapper animate={ transformParams.animate } width={ transformParams.width }>
       <RightBorderWrapper onMouseDown={ handleMouseDown } onMouseUp={ handleRemoveMouseMove }>
-        <RightBorder color={color} >
+        <RightBorder color={ color }>
           <CloseOpenButton toRight={ transformParams.arrowToRight } onClick={ handleClose }>
             <Arrow />
           </CloseOpenButton>

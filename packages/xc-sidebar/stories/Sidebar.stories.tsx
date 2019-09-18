@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
-import Sidebar from '../src';
+import Sidebar from '@xcritical/xc-sidebar';
 
 
 const Content = styled.div`
@@ -32,7 +32,7 @@ const props = {
 };
 
 storiesOf('Sidebar', module)
-  .add('Basic', () => (
+.add('Basic', () => (
     <Content>
       <LeftPanel>
         <Sidebar { ...props }>
@@ -43,4 +43,36 @@ storiesOf('Sidebar', module)
         { content }
       </RightPanel>
     </Content>
-  ));
+  ),
+  {
+    info: {
+      text: `
+
+  ### Notes
+
+  light button seen on <https://zpl.io/aM49ZBd>
+
+  ### Usage
+  ~~~js
+  <PrimaryButton
+    label={text('label', 'Enroll')}
+    disabled={boolean('disabled',false)}
+    onClick={() => alert('hello there')}
+  />
+  ~~~
+
+`,
+    },
+  }
+  );
+  // storiesOf('Components/Button', module).addWithJSX(
+  //   'basic PrimaryButton',
+  //   () => (
+  //     <PrimaryButton
+  //       label={text('label', 'Enroll')}
+  //       disabled={boolean('disabled', false)}
+  //       onClick={() => alert('hello there')}
+  //     />
+  //   ),
+    
+  // );

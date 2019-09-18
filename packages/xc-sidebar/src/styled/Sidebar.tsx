@@ -1,16 +1,29 @@
 import styled from 'styled-components';
 
 
+interface IResponsiveWrapper {
+  animate: boolean;
+  width: number;
+}
+
+interface IRightBorder {
+  color: string;
+}
+
+interface ICloseOpenButton {
+  toRight: boolean;
+}
+
 export const ResponsiveWrapper = styled.div`
-  width: ${({ width }) => `${width}px`};
+  width: ${({ width }: IResponsiveWrapper): string => `${width}px`};
   height: 100vh ;
   position: relative;
   float: left;
-  ${({ animate }) => animate && 'transition: 1s'}
+  ${({ animate }: IResponsiveWrapper): string | null => (animate ? 'transition: 1s' : null)}
 `;
 export const RightBorder = styled.div`
   width: 2px;
-  background-color: ${({ color }) => color};
+  background-color: ${({ color }: IRightBorder): string => color};
   height: 100% ;
   float: right;
   position: relative;
@@ -29,7 +42,7 @@ export const CloseOpenButton = styled.button`
   border: 1px solid gray;
   padding: 3px;
   background-color: white;
-  transform: ${({ toRight }) => (toRight ? 'rotateZ(-360deg)' : 'rotateZ(180deg)')};
+  transform: ${({ toRight }: ICloseOpenButton): string => (toRight ? 'rotateZ(-360deg)' : 'rotateZ(180deg)')};
   transition: .5s;
   transition-timing-function: linear;
   cursor: pointer;

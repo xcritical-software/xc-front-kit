@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 
-const Arrow = () => (
+const Arrow = (): ReactElement => (
   <svg
     version="1.1"
     id="Capa_1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 32.635 32.635"
-    style={ { enableBackground: 'new 0 0 32.635 32.635' } }
   >
     <g>
       <path d="M32.135,16.817H0.5c-0.276,0-0.5-0.224-0.5-0.5s0.224-0.5,0.5-0.5h31.635c0.276,0,0.5,0.224,0.5,0.5

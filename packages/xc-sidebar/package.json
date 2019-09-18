@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "exit 0",
-    "lint": "eslint --ext .js --ext .jsx src",
-    "lint:fix": "eslint --ext .js --ext .jsx src stories --fix",
+    "lint": "eslint --ext .ts,.tsx src",
+    "lint:fix": "npm run lint -- --fix",
     "compile": "gulp --cwd . compile",
     "build": "npm run clean && npm run compile",
     "deploy": "cd .publish && npm publish",
@@ -39,7 +39,7 @@
     "@storybook/addons": "^5.0.1",
     "@storybook/react": "^5.0.1",
     "@storybook/theming": "^5.0.1",
-    "@types/storybook__react": "^4.0.2",
+    "@types/styled-components": "^4.1.19",
     "@xcritical/eslint-plugin-xc-front-lint": "latest",
     "@xcritical/xc-front-libs-utils": "latest",
     "awesome-typescript-loader": "^5.2.1",
@@ -50,7 +50,8 @@
     "react-router-dom": "^5.0.0",
     "rimraf": "^2.6.2",
     "styled-components": "^4.1.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "storybook": "^5.1.11"
   },
   "peerDependencies": {
     "react": "^16.8.3",
@@ -59,6 +60,7 @@
   },
   "dependencies": {
     "lodash.get": "^4.x",
-    "polished": "^3.0.0"
+    "polished": "^3.0.0",
+    "ts-loader": "^6.1.0"
   }
 }
