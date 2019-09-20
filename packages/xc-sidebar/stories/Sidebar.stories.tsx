@@ -65,14 +65,3 @@ storiesOf('Sidebar', module)
     },
   }
   );
-  // storiesOf('Components/Button', module).addWithJSX(
-  //   'basic PrimaryButton',
-  //   () => (
-  //     <PrimaryButton
-  //       label={text('label', 'Enroll')}
-  //       disabled={boolean('disabled', false)}
-  //       onClick={() => alert('hello there')}
-  //     />
-  //   ),
-    
-  // );
