@@ -69,7 +69,7 @@ export const RightBorderWrapper = styled.div`
   float: right;
   right: -10px;
   position: absolute;
-  cursor: pointer;
+  cursor: w-resize;
   z-index: 9999999999999999;
 `;
 
