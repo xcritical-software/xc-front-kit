@@ -61,6 +61,7 @@
   "dependencies": {
     "lodash.get": "^4.x",
     "polished": "^3.0.0",
+    "resize-observer-polyfill": "^1.5.1",
     "ts-loader": "^6.1.0"
   }
 }

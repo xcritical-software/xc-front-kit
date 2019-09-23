@@ -4,10 +4,16 @@ import styled from 'styled-components';
 interface IResponsiveWrapper {
   animate: boolean;
   width: number;
+  color: string;
+  backgroundColor: string;
+}
+interface IChildWrapper {
+  width: number;
+  animate: boolean;
 }
 
 interface IRightBorder {
-  color: string;
+  seperatorColor: string;
 }
 
 interface ICloseOpenButton {
@@ -16,14 +22,20 @@ interface ICloseOpenButton {
 
 export const ResponsiveWrapper = styled.div`
   width: ${({ width }: IResponsiveWrapper): string => `${width}px`};
-  height: 100vh ;
-  position: relative;
+  color: ${({ color }: IResponsiveWrapper): string => color};
+  min-height: 100vh ;
+  position: fixed;
+  top: 0;
   float: left;
-  ${({ animate }: IResponsiveWrapper): string | null => (animate ? 'transition: 1s' : null)}
+  z-index: 999999999999999;
+  background-color: ${({ backgroundColor }: IResponsiveWrapper): string => backgroundColor };
+  ${({ animate }: IResponsiveWrapper): string | null => (animate ? 'transition: .5s' : null)}
 `;
+
+
 export const RightBorder = styled.div`
   width: 2px;
-  background-color: ${({ color }: IRightBorder): string => color};
+  background-color: ${({ seperatorColor }: IRightBorder): string => seperatorColor};
   height: 100% ;
   float: right;
   position: relative;
@@ -58,6 +70,7 @@ export const RightBorderWrapper = styled.div`
   right: -10px;
   position: absolute;
   cursor: pointer;
+  z-index: 9999999999999999;
 `;
 
 export const AntiSelect = styled.div`
@@ -71,5 +84,13 @@ export const AntiSelect = styled.div`
 
 
 export const ChildWrapper = styled.div`
-  overflow: hidden
+  top: 0;
+  bottom:0;
+  position: fixed; 
+  overflow-y:auto;
+  overflow-x:hidden; 
+  width: ${({ width }: IChildWrapper): string => `${width}px`};
+  ${({ animate }: IChildWrapper): string | null => (animate ? 'transition: .5s' : null)}
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar { width: 0; }
 `;

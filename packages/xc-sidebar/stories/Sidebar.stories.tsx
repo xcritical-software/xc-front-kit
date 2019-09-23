@@ -1,67 +1,102 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
-import Sidebar from '@xcritical/xc-sidebar';
+import { Sidebar } from '../src';
 
 
 const Content = styled.div`
-  width: 100%;
-  height: 100vh;
   background-color: white;
-  display: flex;
+  display: flex; 
+  min-height: 100vh;
 `;
-const LeftPanel = styled.div`
-  color: red;
-`;
-const content = new Array(20).fill(`
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been 
-the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of 
-type and scrambled it to make a type specimen book. It has survived not only five centuries, 
-but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
- in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more 
- recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`).join(' ');
+
+const colors = [
+  'blue', 'lightblue', 'pink', 'indigo', 'red'
+]
+
+const Block = styled.div`
+  width: 100px;
+  height: 100px ;
+  margin: 20px;
+  background-color: ${({ color }) => color};
+  float: left;
+
+`
+
+const Navigation = styled.div`
+  width: 80px;
+  float: left;
+  height: 100vh ;
+  div {
+    width: 80px;
+    background-color: yellow;
+    height: 100vh ;
+    top: 0;
+    position: fixed;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+`
+
+const list = (n: number) => {
+  return (
+    <>
+      <ul style={{ listStyleType: 'none' }} >
+        {new Array(n).fill(true).map((el, i) => (
+          <li
+            style={{ padding: '10px 0 10px 0' }}
+          >This is list item number {i}</li>
+        ))}
+      </ul>
+    </>
+  )
+}
+
+
+const content = new Array(20).fill(true).map(() => <Block color={ colors[Math.floor(Math.random() * colors.length)] }  />)
 const RightPanel = styled.div`
   flex: 1 1 0;
   color: blue;
 `;
 
 const props = {
-  maxWidth: 600,
-  minWidth: 80,
-  startWidth: 400,
+  maxWidth: 400,
+  minWidth: 30,
 };
 
 storiesOf('Sidebar', module)
 .add('Basic', () => (
+  <Content>
+    <Sidebar { ...props } >
+      { list(100) }
+    </Sidebar>
+    <RightPanel>
+      { content }
+    </RightPanel>
+  </Content>
+  ))
+  
+  .add('With left nav', () => (
+    <>
+    <Navigation>
+      <div>
+        <ul>
+          <li>Link 1</li>
+          <li>Link 2</li>
+          <li>Link 3</li>
+          <li>Link 4</li>
+        </ul>
+      </div>
+    </Navigation>
     <Content>
-      <LeftPanel>
-        <Sidebar { ...props }>
-          { content }
+        <Sidebar { ...props } >
+          { list(100) }
         </Sidebar>
-      </LeftPanel>
       <RightPanel>
         { content }
       </RightPanel>
     </Content>
-  ),
-  {
-    info: {
-      text: `
-
-  ### Notes
-
-  light button seen on <https://zpl.io/aM49ZBd>
-
-  ### Usage
-  ~~~js
-  <PrimaryButton
-    label={text('label', 'Enroll')}
-    disabled={boolean('disabled',false)}
-    onClick={() => alert('hello there')}
-  />
-  ~~~
-
-`,
-    },
-  }
-  );
+  </>
+  ))
