@@ -1,12 +1,4 @@
 const path = require('path');
-const CSSModuleLoader = {
-  loader: 'css-loader',
-  options: {
-    modules: true,
-    sourceMap: true,
-    localIdentName: '[local]__[hash:base64:5]',
-  },
-};
 
 module.exports = {
   resolve: {
@@ -35,8 +27,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.scss$/,
-        use: ['style-loader', CSSModuleLoader],
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

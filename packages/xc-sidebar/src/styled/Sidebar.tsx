@@ -3,12 +3,10 @@ import styled from 'styled-components';
 
 interface IResponsiveWrapper {
   animate: boolean;
-  width: number;
   color: string;
   backgroundColor: string;
 }
 interface IChildWrapper {
-  width: number;
   animate: boolean;
 }
 
@@ -21,13 +19,9 @@ interface ICloseOpenButton {
 }
 
 export const ResponsiveWrapper = styled.div`
-  width: ${({ width }: IResponsiveWrapper): string => `${width}px`};
   color: ${({ color }: IResponsiveWrapper): string => color};
   min-height: 100vh ;
-  position: fixed;
-  top: 0;
-  float: left;
-  z-index: 999999999999999;
+  display: inline-block;
   background-color: ${({ backgroundColor }: IResponsiveWrapper): string => backgroundColor };
   ${({ animate }: IResponsiveWrapper): string | null => (animate ? 'transition: .5s' : null)}
 `;
@@ -70,7 +64,7 @@ export const RightBorderWrapper = styled.div`
   right: -10px;
   position: absolute;
   cursor: w-resize;
-  z-index: 9999999999999999;
+  z-index: 999999;
 `;
 
 export const AntiSelect = styled.div`
@@ -82,15 +76,24 @@ export const AntiSelect = styled.div`
   z-index: 999999;
 `;
 
+export const SidebarWrapper = styled.div`
+  height: 100vh ;
+  position: fixed;
+  top: 0;
+  left: 0;
+`
 
 export const ChildWrapper = styled.div`
   top: 0;
   bottom:0;
-  position: fixed; 
+  position: fixed;
+  display: inline-block;
   overflow-y:auto;
   overflow-x:hidden; 
-  width: ${({ width }: IChildWrapper): string => `${width}px`};
   ${({ animate }: IChildWrapper): string | null => (animate ? 'transition: .5s' : null)}
-  -ms-overflow-style: none;
-  ::-webkit-scrollbar { width: 0; }
 `;
+
+export const NavComponentWrapper = styled.div`
+height: calc(100vh + 10px);
+float: left;
+`

@@ -1,102 +1,163 @@
-import React from 'react';
+import React  from 'react';
+import { MdiReactIconComponentType } from 'mdi-react'
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 import { Sidebar } from '../src';
-
-
-const Content = styled.div`
-  background-color: white;
-  display: flex; 
-  min-height: 100vh;
-`;
-
-const colors = [
-  'blue', 'lightblue', 'pink', 'indigo', 'red'
-]
-
-const Block = styled.div`
-  width: 100px;
-  height: 100px ;
-  margin: 20px;
-  background-color: ${({ color }) => color};
-  float: left;
-
-`
-
-const Navigation = styled.div`
-  width: 80px;
-  float: left;
-  height: 100vh ;
-  div {
-    width: 80px;
-    background-color: yellow;
-    height: 100vh ;
-    top: 0;
-    position: fixed;
-  }
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-`
-
+import { NavLink, BrowserRouter, Switch, Route } from 'react-router-dom';
+import { routerConfig } from '../src/routerConfig'
 const list = (n: number) => {
   return (
-    <>
+    <div >
       <ul style={{ listStyleType: 'none' }} >
         {new Array(n).fill(true).map((el, i) => (
-          <li
-            style={{ padding: '10px 0 10px 0' }}
+          <li 
+            key={i}
+            style={{ padding: '10px 10px 10px 10px' }}
           >This is list item number {i}</li>
         ))}
       </ul>
-    </>
+    </div>
   )
 }
+const SidebarNavigate = styled.div`
+  padding-bottom: 60px;
+  flex-grow: 1;
+  flex-shrink: 1;
+  
+  a {
+    position: relative;
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 5px 0;
+    fill: white;
+  }
 
+  a:hover { 
+    ::before {
+      content: " ";
+      height: 100%;
+      width: 2px;
+      position: absolute;
+      background-color: blue;
+      left: 0;
+    }
+  }
 
-const content = new Array(20).fill(true).map(() => <Block color={ colors[Math.floor(Math.random() * colors.length)] }  />)
-const RightPanel = styled.div`
-  flex: 1 1 0;
-  color: blue;
+  &__item_active::before {
+    content: " ";
+    height: 100%;
+    width: 2px;
+    position: absolute;
+    background-color: blue;
+    left: 0;
+  }
+
+  svg {
+    display: inline-block;
+    fill: white;    
+    margin: 5px 0;
+  }
+
+  span {
+    font-size: 13px;
+    font-weight: 500;
+    color: white;    
+    display: block;
+  }
 `;
+
+const NavPanelWrapper = styled.div`
+  background-color: #31394C;
+  min-height: 100%;
+  width: 150px;
+  border-right: 1px solid #47536C;
+  float: left;
+`
+const NavPanelContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+`
+const NavPanelLogo = styled.div`
+  height: 90px;
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+`
+
+interface IrouterConfig {
+  path: string,
+  exact: boolean,
+  title: string,
+  Icon: MdiReactIconComponentType
+}
+
+const NavPanel = () => (
+  <NavPanelWrapper>
+    <NavPanelContent>
+      <NavPanelLogo>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#FD5200" height="50" viewBox="0 0 83.93 83.37">
+          <title>XCritical_logo_Mini</title>
+          <path
+            className="cls-1"
+            d="M123.38,42.47a24.86,24.86,0,0,0-4.61-7.78L107.16,53,125.6,82.33a20.18,20.18,0,0,0-2.22-39.86"
+            transform="translate(-57.78 -12.53)"
+          />
+          <path
+            className="cls-1"
+            d="M80.52,34.92a24.85,24.85,0,0,0-4.41,7.55A20.18,20.18,0,0,0,73.9,82.34L92.11,53.48Z"
+            transform="translate(-57.78 -12.53)"
+          />
+          <path
+            className="cls-1"
+            d="M93.28,31.37l6.46,11.76,8.79-15.6a25.09,25.09,0,0,0-8.79-1.64,24.56,24.56,0,0,0-5.66.67l-11.27-14Z"
+            transform="translate(-57.78 -12.53)"
+          />
+          <polygon
+            className="cls-1"
+            points="52.38 70.27 52.42 70.27 41.96 51.51 30.9 70.27 48.29 70.27 59.56 83.37 52.38 70.27"
+          />
+        </svg>
+      </NavPanelLogo>
+      <SidebarNavigate>
+    {routerConfig.map(({ path, exact, title, Icon }: IrouterConfig, i) => (
+      <NavLink
+      to={ path }
+      exact={ exact }
+      key={i}
+      >
+        <Icon />
+        <span>{ title }</span>
+        </NavLink>
+    )) }
+    </SidebarNavigate>
+    </NavPanelContent>
+  </NavPanelWrapper>
+);
+
 
 const props = {
   maxWidth: 400,
   minWidth: 30,
+  navComponent: NavPanel(),
+  navWidth: 150
 };
+
 
 storiesOf('Sidebar', module)
 .add('Basic', () => (
-  <Content>
+    <BrowserRouter>  
     <Sidebar { ...props } >
       { list(100) }
     </Sidebar>
-    <RightPanel>
-      { content }
-    </RightPanel>
-  </Content>
+     <Switch>
+       {routerConfig.map(({ path, component, exact }: any) => {
+         return <Route  key={path} path={path}  component={component} exact={exact}></Route>
+        }
+        )}
+     </Switch>
+  </BrowserRouter> 
   ))
+
   
-  .add('With left nav', () => (
-    <>
-    <Navigation>
-      <div>
-        <ul>
-          <li>Link 1</li>
-          <li>Link 2</li>
-          <li>Link 3</li>
-          <li>Link 4</li>
-        </ul>
-      </div>
-    </Navigation>
-    <Content>
-        <Sidebar { ...props } >
-          { list(100) }
-        </Sidebar>
-      <RightPanel>
-        { content }
-      </RightPanel>
-    </Content>
-  </>
-  ))

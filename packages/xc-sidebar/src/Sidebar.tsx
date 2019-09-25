@@ -1,9 +1,9 @@
 import React, {
-  useState, useCallback, ReactElement, useRef, useEffect,
+  useState, useCallback, ReactElement, useRef, useEffect, ReactNode
 } from 'react';
+import { Scrollbars } from 'react-custom-scrollbars';
 import ResizeObserver from 'resize-observer-polyfill';
 import Arrow from './Arrow';
-
 import {
   ResponsiveWrapper,
   RightBorder,
@@ -11,32 +11,43 @@ import {
   RightBorderWrapper,
   AntiSelect,
   ChildWrapper,
+  SidebarWrapper,
+  NavComponentWrapper
 } from './styled/Sidebar';
+
+
+
 
 
 interface IWrapperProps {
   maxWidth?: number;
   minWidth?: number;
-  startWidth?: number;
-  children?: any;
-  seperatorColor?: string;
+  navWidth?: number
   color?: string; 
+  seperatorColor?: string;
   backgroundColor?: string;
+  navComponent?: ReactNode,
+  children?: ReactNode;
 }
+
+
+
+
 
 export const Sidebar = ({
   minWidth = 30,
   maxWidth = 400,
-  startWidth = maxWidth * 0.8,
   seperatorColor = 'blue',
   color = 'white',
   backgroundColor = '#31394C',
   children,
+  navComponent,
+  navWidth = 80
 }: IWrapperProps): ReactElement => {
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   const [transformParams, setTransformParams] = useState({
-    width: startWidth || maxWidth * 0.7,
+    width: maxWidth * 0.7,
     animate: false,
     arrowToRight: false,
   });
@@ -110,7 +121,6 @@ export const Sidebar = ({
       if (sidebarRef.current === null) {
         return;
       }
-
       const parentNode = sidebarRef.current.parentNode as HTMLElement;
       const parentRect = parentNode.getBoundingClientRect();
       parentNode.style.paddingLeft = `${sidebarRef.current.offsetWidth}px`;
@@ -127,22 +137,33 @@ export const Sidebar = ({
         componentObserver.disconnect();
       }
     }
-  }, [componentObserver]);
+  }, []);
 
 
   return (
-    <ResponsiveWrapper backgroundColor={ backgroundColor } color={ color } animate={ transformParams.animate } width={ transformParams.width } ref={ sidebarRef }>
-      <RightBorderWrapper onMouseDown={ handleMouseDown } onMouseUp={ handleRemoveMouseMove }>
-        <RightBorder  seperatorColor={ seperatorColor }>
-          <CloseOpenButton toRight={ transformParams.arrowToRight } onClick={ handleClose }>
-            <Arrow />
-          </CloseOpenButton>
-        </RightBorder>
-      </RightBorderWrapper>
-      { antiSelectLayer && <AntiSelect /> }
-      <ChildWrapper width={ transformParams.width } animate={ transformParams.animate }>
-        { children }
-      </ChildWrapper>
-    </ResponsiveWrapper>
+      <SidebarWrapper ref={ sidebarRef }>
+        { navComponent && 
+        <NavComponentWrapper>
+          <Scrollbars style={{ width: navWidth }}>
+            { navComponent }
+          </Scrollbars>
+        </NavComponentWrapper>
+          }
+        <ResponsiveWrapper  backgroundColor={backgroundColor} color={color}  animate={transformParams.animate}  style={{ width: transformParams.width }} >
+          <RightBorderWrapper onMouseDown={ handleMouseDown } onMouseUp={ handleRemoveMouseMove }>
+            <RightBorder  seperatorColor={ seperatorColor }>
+              <CloseOpenButton toRight={ transformParams.arrowToRight } onClick={ handleClose }>
+                <Arrow />
+              </CloseOpenButton>
+            </RightBorder>
+          </RightBorderWrapper>
+          { antiSelectLayer && <AntiSelect /> }
+          <ChildWrapper style={{ width: transformParams.width }} animate={ transformParams.animate }>
+            <Scrollbars style={{ width: transformParams.width }}>
+            { children }
+          </Scrollbars>
+          </ChildWrapper>
+        </ResponsiveWrapper>
+      </SidebarWrapper>
   );
 };
