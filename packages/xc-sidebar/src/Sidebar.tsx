@@ -159,7 +159,7 @@ export const Sidebar = ({
           </RightBorderWrapper>
           { antiSelectLayer && <AntiSelect /> }
           <ChildWrapper style={{ width: transformParams.width }} animate={ transformParams.animate }>
-            <Scrollbars style={{ width: transformParams.width }}>
+            <Scrollbars style={{ width: transformParams.width,  transition: transformParams.animate ? '0.5s' : '0s'}}  >
             { children }
           </Scrollbars>
           </ChildWrapper>

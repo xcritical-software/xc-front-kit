@@ -33,7 +33,7 @@ export const RightBorder = styled.div`
   height: 100% ;
   float: right;
   position: relative;
-  right: 9px;
+  right: 10px;
 `;
 
 
@@ -58,7 +58,7 @@ export const CloseOpenButton = styled.button`
 `;
 
 export const RightBorderWrapper = styled.div`
-  width: 22px;
+  width: 10px;
   height: 100vh ;
   float: right;
   right: -10px;
