@@ -1,13 +1,16 @@
 import React  from 'react';
 import { MdiReactIconComponentType } from 'mdi-react'
 import { storiesOf } from '@storybook/react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { Sidebar } from '../src';
 import { NavLink, BrowserRouter, Switch, Route } from 'react-router-dom';
-import { routerConfig } from '../src/routerConfig'
+import { routerConfig } from '../src/routerConfig';
+import { sidebarThemeNamespace } from '../src/theme';
+
+
 const list = (n: number) => {
   return (
-    <div >
+    <div  >
       <ul style={{ listStyleType: 'none' }} >
         {new Array(n).fill(true).map((el, i) => (
           <li 
@@ -70,9 +73,8 @@ const SidebarNavigate = styled.div`
 const NavPanelWrapper = styled.div`
   background-color: #31394C;
   min-height: 100%;
-  width: 150px;
+  width: 90px;
   border-right: 1px solid #47536C;
-  float: left;
 `
 const NavPanelContent = styled.div`
   display: flex;
@@ -81,9 +83,10 @@ const NavPanelContent = styled.div`
 `
 const NavPanelLogo = styled.div`
   height: 90px;
-  text-align: center;
-  width: 100%;
-  padding: 5px;
+  width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 interface IrouterConfig {
@@ -137,27 +140,54 @@ const NavPanel = () => (
 );
 
 
+const theme = {
+  [sidebarThemeNamespace]: {
+    appearance: {
+      rightBackground: 'red',
+      default: {
+        minWidth : 30,
+        maxWidth : 400,
+        separatorColor : 'lightblue',
+        leftWidth : 91,
+        color: 'white',
+        leftBackground: '#31394C',
+        rightBackground: '#31394C'
+      },
+      theme2: {
+        minWidth : 130,
+        maxWidth : 700,
+        separatorColor : 'red',
+        leftWidth : 100,
+        color: 'green',
+        leftBackground: 'pink',
+        rightBackground: 'pink'
+      },
+    }
+  },
+};
+
+
 const props = {
-  maxWidth: 400,
-  minWidth: 30,
   navComponent: NavPanel(),
-  navWidth: 150
+  alwaysShowScrollbar: false
 };
 
 
 storiesOf('Sidebar', module)
 .add('Basic', () => (
-    <BrowserRouter>  
-    <Sidebar { ...props } >
-      { list(100) }
-    </Sidebar>
-     <Switch>
-       {routerConfig.map(({ path, component, exact }: any) => {
-         return <Route  key={path} path={path}  component={component} exact={exact}></Route>
-        }
-        )}
-     </Switch>
-  </BrowserRouter> 
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>  
+        <Sidebar { ...props } theme={theme} >
+          { list(100) }
+        </Sidebar>
+       <Switch>
+         {routerConfig.map(({ path, component, exact }: any) => {
+           return <Route  key={path} path={path}  component={component} exact={exact}></Route>
+          }
+          )}
+       </Switch>
+      </BrowserRouter> 
+    </ThemeProvider>
   ))
 
   

@@ -1,8 +1,8 @@
 import React from 'react'
 import ChartLineIcon from 'mdi-react/ChartLineIcon';
+import BookIcon from 'mdi-react/BookIcon';
 import SecurityIcon from 'mdi-react/SecurityIcon';
 import AccountCircleIcon from 'mdi-react/AccountCircleIcon';
-import BookIcon from 'mdi-react/BookIcon';
 import CreditCardIcon from 'mdi-react/CreditCardIcon';
 import EarthIcon from 'mdi-react/EarthIcon';
 import BookOpenOutlineIcon from 'mdi-react/BookOpenOutlineIcon';
@@ -13,6 +13,10 @@ const AffiliatesPage = () : any => {
 const LandingsPage = () : any => {
   return <div style={{ width: '100vw', height: '100vh', backgroundColor: 'rgb(30,230,30)' }} >Landings page</div>
 }
+const StartPage = () : any => {
+  return <div style={{ width: '100vw', height: '100vh', backgroundColor: 'rgb(30,130,130)' }} >Start page</div>
+}
+
 const ManagersPage = () : any => {
   return <div style={{ width: '100vw', height: '100vh', backgroundColor: 'rgb(230,30,30)' }} >Managers page</div>
 }
@@ -32,9 +36,6 @@ const LeadsPage = () : any => {
   return <div style={{ width: '100vw', height: '100vh', backgroundColor: 'rgb(130,130,30)' }} >Leads page</div>
 }
 
-const StartPage = () : any => {
-  return <div style={{ width: '100vw', height: '100vh', backgroundColor: 'rgb(30,130,130)' }} >Start page</div>
-}
 
 
 export const routerConfig =  [

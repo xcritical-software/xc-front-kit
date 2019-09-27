@@ -1,41 +1,84 @@
 import styled from 'styled-components';
+import { 
+  getLeftBackground,
+  getRightBackground,
+  getSeparatorColor,
+  getColor
+ } from '../utils'
+
+
+interface IProps {
+  theme?: object;
+  appearance: string;
+  baseAppearance: string;
+}
+
 
 
 interface IResponsiveWrapper {
   animate: boolean;
-  color: string;
-  backgroundColor: string;
 }
-interface IChildWrapper {
+interface IChildWrapper extends IProps {
   animate: boolean;
 }
 
-interface IRightBorder {
-  seperatorColor: string;
-}
 
 interface ICloseOpenButton {
   toRight: boolean;
 }
 
-export const ResponsiveWrapper = styled.div`
-  color: ${({ color }: IResponsiveWrapper): string => color};
-  min-height: 100vh ;
-  display: inline-block;
-  background-color: ${({ backgroundColor }: IResponsiveWrapper): string => backgroundColor };
-  ${({ animate }: IResponsiveWrapper): string | null => (animate ? 'transition: .5s' : null)}
-`;
 
-
-export const RightBorder = styled.div`
+export const RightBorder = styled.div<IProps>`
+background-color: ${getSeparatorColor};
   width: 2px;
-  background-color: ${({ seperatorColor }: IRightBorder): string => seperatorColor};
   height: 100% ;
   float: right;
   position: relative;
   right: 10px;
-`;
 
+`;
+  //  ${getSeparatorColor}
+  /* color: ${getColor}; */
+// color: ${({ theme: { color } } : ISidebarWrapper) => color};
+/* ${SidebarWrapperStyled} */
+export const SidebarWrapper = styled.div<IProps>`
+color: ${getColor};
+  height: 100vh ;
+  position: fixed;
+  top: 0;
+  left: 0;
+`
+
+
+// background-color: ${({ theme: { leftBackground } }: INavComponentWrapper) => leftBackground}; 
+export const NavComponentWrapper = styled.div<IProps>`
+background-color: ${getLeftBackground}; 
+  height: calc(100vh + 10px);
+  float: left;
+`
+
+
+
+
+export const ChildWrapper = styled.div`
+background-color:  ${getRightBackground};
+  top: 0;
+  bottom:0;
+  position: fixed;
+  display: inline-block;
+  overflow-y:auto;
+  overflow-x:hidden;
+  ${({ animate }: IChildWrapper): string | null => (animate ? 'transition: .5s' : null)};
+`;
+// background-color: ${({ theme: { rightBackground } }: IChildWrapper) => rightBackground };
+
+
+
+export const ResponsiveWrapper = styled.div<IResponsiveWrapper>`
+  min-height: 100vh ;
+  display: inline-block;
+  ${({ animate }: IResponsiveWrapper): string | null => (animate ? 'transition: .5s' : null)}
+`;
 
 export const CloseOpenButton = styled.button`
   width: 20px;
@@ -76,24 +119,3 @@ export const AntiSelect = styled.div`
   z-index: 999999;
 `;
 
-export const SidebarWrapper = styled.div`
-  height: 100vh ;
-  position: fixed;
-  top: 0;
-  left: 0;
-`
-
-export const ChildWrapper = styled.div`
-  top: 0;
-  bottom:0;
-  position: fixed;
-  display: inline-block;
-  overflow-y:auto;
-  overflow-x:hidden; 
-  ${({ animate }: IChildWrapper): string | null => (animate ? 'transition: .5s' : null)}
-`;
-
-export const NavComponentWrapper = styled.div`
-height: calc(100vh + 10px);
-float: left;
-`
