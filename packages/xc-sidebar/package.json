@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/xcritical/xc-front-kit.git"
+    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
   },
   "keywords": [
     "fetch",
