@@ -122,7 +122,7 @@ const resultDarkAppearance: IThemeBase = {
 };
 
 describe('This is the tests for the theme utils', () => {
-  test("getAppearancePath('default', 'background') to equal ['appearance', 'default', 'background']", () => {
+  test('getAppearancePath(\'default\', \'background\') to equal [\'appearance\', \'default\', \'background\']', () => {
     expect(getAppearancePath('default', 'background')).toEqual(['appearance', 'default', 'background']);
     expect(getAppearancePath('default', ['font', 'weight'])).toEqual(['appearance', 'default', 'font', 'weight']);
   });

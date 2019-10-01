@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/xc-theme",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -35,7 +35,7 @@
     "error-statistics-name": "ESLint Error Count",
     "warning-statistics-name": "ESLint Warning Count"
   },
-  "private": false,
+  "private": true,
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@types/jest": "^24.0.18",

@@ -26,6 +26,9 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "boltify": "^1.1.2"
+    "boltify": "^1.1.2",
+    "@xcritical/eslint-plugin-xc-front-lint": "^1.0.0",
+    "@xcritical/xc-front-libs-utils": "^1.0.0",
+    "lint-staged": "^9.2.5"
   }
 }

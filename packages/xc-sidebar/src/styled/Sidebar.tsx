@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { 
+import {
   getLeftBackground,
   getRightBackground,
   getSeparatorColor,
-  getColor
- } from '../utils'
+  getColor,
+} from '../utils';
 
 
 interface IProps {
@@ -12,7 +12,6 @@ interface IProps {
   appearance: string;
   baseAppearance: string;
 }
-
 
 
 interface IResponsiveWrapper {
@@ -47,17 +46,15 @@ color: ${getColor};
   position: fixed;
   top: 0;
   left: 0;
-`
+`;
 
 
-// background-color: ${({ theme: { leftBackground } }: INavComponentWrapper) => leftBackground}; 
+// background-color: ${({ theme: { leftBackground } }: INavComponentWrapper) => leftBackground};
 export const NavComponentWrapper = styled.div<IProps>`
 background-color: ${getLeftBackground}; 
   height: calc(100vh + 10px);
   float: left;
-`
-
-
+`;
 
 
 export const ChildWrapper = styled.div`
@@ -71,7 +68,6 @@ background-color:  ${getRightBackground};
   ${({ animate }: IChildWrapper): string | null => (animate ? 'transition: .5s' : null)};
 `;
 // background-color: ${({ theme: { rightBackground } }: IChildWrapper) => rightBackground };
-
 
 
 export const ResponsiveWrapper = styled.div<IResponsiveWrapper>`
@@ -118,4 +114,3 @@ export const AntiSelect = styled.div`
   height: 100vh;
   z-index: 999999;
 `;
-

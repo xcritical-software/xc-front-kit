@@ -1,2 +1,4 @@
+import './style.css';
+
+
 export * from './Sidebar';
-import './style.css'

@@ -25,7 +25,7 @@ export const getAppearancePath = (
 
   console.log(res);
   return res;
-}
+};
 
 export const mergeBaseTheme = memoize(
   (namespace: string,
@@ -58,7 +58,7 @@ export const compileAppearanceTheme = memoize(
         themeExtractor(theme, getAppearancePath(appearanceName)) || {},
       );
     }
-    console.log(appearanceName)
+    console.log(appearanceName);
 
     return themeExtractor(theme, getAppearancePath(appearanceName)) || {};
   },

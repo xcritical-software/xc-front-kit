@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/xc-sidebar",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "XCritical Sidebar Component",
   "main": "src/index.js",
   "scripts": {
@@ -47,7 +47,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "prop-types": "^15.7.2",
-    "react": "^16.8.3",
+    "react": "^16.9.0",
     "react-docgen-typescript-loader": "^3.2.0",
     "react-router-dom": "^5.0.1",
     "rimraf": "^2.6.2",
@@ -56,14 +56,14 @@
     "typescript": "^3.6.3"
   },
   "peerDependencies": {
-    "react": "^16.8.3",
+    "react": "^16.9.0",
     "styled-components": "^4.1.0",
     "prop-types": "^15.0.0"
   },
   "dependencies": {
     "@types/react-custom-scrollbars": "^4.0.6",
     "@types/react-router-dom": "^4.3.5",
-    "@xcritical/xc-theme": "^1.1.52",
+    "@xcritical/xc-theme": "^1.0.0",
     "lodash.get": "^4.x",
     "mdi-react": "^6.1.0",
     "polished": "^3.0.0",

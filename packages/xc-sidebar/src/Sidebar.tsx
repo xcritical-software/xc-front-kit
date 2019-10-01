@@ -1,10 +1,10 @@
 import React, {
-  useState, useCallback, ReactElement, useRef, useEffect, ReactNode
+  useState, useCallback, ReactElement, useRef, useEffect, ReactNode,
 } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import ResizeObserver from 'resize-observer-polyfill';
 import Arrow from './Arrow';
-import { sidebarThemeNamespace } from './theme'
+import { sidebarThemeNamespace } from './theme';
 import {
   ResponsiveWrapper,
   RightBorder,
@@ -13,9 +13,8 @@ import {
   AntiSelect,
   ChildWrapper,
   SidebarWrapper,
-  NavComponentWrapper
+  NavComponentWrapper,
 } from './styled/Sidebar';
-
 
 
 // interface ITheme {
@@ -29,19 +28,14 @@ import {
 // }
 
 
-
-
 interface IWrapperProps {
-  navComponent?: ReactNode,
+  navComponent?: ReactNode;
   children?: ReactNode;
-  theme: object,
-  alwaysShowScrollbar: boolean,
-  appearance?: string,
-  baseAppearance?: string,
+  theme: object;
+  alwaysShowScrollbar: boolean;
+  appearance?: string;
+  baseAppearance?: string;
 }
-
-
-
 
 
 export const Sidebar = ({
@@ -50,13 +44,12 @@ export const Sidebar = ({
   navComponent,
   alwaysShowScrollbar,
   appearance = 'default',
-  baseAppearance =  'default',
+  baseAppearance = 'default',
 }: IWrapperProps): ReactElement => {
-
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   const [transformParams, setTransformParams] = useState({
-    width: theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].maxWidth * 0.7,
+    width: theme[sidebarThemeNamespace].appearance[appearance || baseAppearance].maxWidth * 0.7,
     animate: false,
     arrowToRight: false,
   });
@@ -72,17 +65,17 @@ export const Sidebar = ({
 
     const { clientX: currentX } = e;
     const newWidth = transformParams.width + (currentX - clickX);
-    if (newWidth >= theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].maxWidth) return;
+    if (newWidth >= theme[sidebarThemeNamespace].appearance[appearance || baseAppearance].maxWidth) return;
     if (newWidth <= 0) {
       document.body.removeEventListener('mousemove', handleMouseMove);
       setTransformParams({
-        width: theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].minWidth,
+        width: theme[sidebarThemeNamespace].appearance[appearance || baseAppearance].minWidth,
         animate: false,
         arrowToRight: true,
       });
-    } else if (newWidth <= theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].minWidth) {
+    } else if (newWidth <= theme[sidebarThemeNamespace].appearance[appearance || baseAppearance].minWidth) {
       setTransformParams({
-        width: theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].minWidth,
+        width: theme[sidebarThemeNamespace].appearance[appearance || baseAppearance].minWidth,
         animate: false,
         arrowToRight: true,
       });
@@ -90,10 +83,10 @@ export const Sidebar = ({
       setTransformParams({
         width: newWidth,
         animate: false,
-        arrowToRight: newWidth < theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].maxWidth * 0.3,
+        arrowToRight: newWidth < theme[sidebarThemeNamespace].appearance[appearance || baseAppearance].maxWidth * 0.3,
       });
     }
-  }, [clickX, theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].maxWidth, theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].minWidth, transformParams.width]);
+  }, [appearance, baseAppearance, clickX, theme, transformParams.width]);
 
   const handleMouseDown = useCallback((e) => {
     clickX = e.clientX;
@@ -102,20 +95,20 @@ export const Sidebar = ({
 
   const handleClose = useCallback(() => {
     document.body.removeEventListener('mousemove', handleMouseMove);
-    if (transformParams.width < theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].maxWidth * 0.3) {
+    if (transformParams.width < theme[sidebarThemeNamespace].appearance[appearance || baseAppearance].maxWidth * 0.3) {
       setTransformParams({
-        width: theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].maxWidth,
+        width: theme[sidebarThemeNamespace].appearance[appearance || baseAppearance].maxWidth,
         animate: true,
         arrowToRight: false,
       });
     } else {
       setTransformParams({
-        width: theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].minWidth,
+        width: theme[sidebarThemeNamespace].appearance[appearance || baseAppearance].minWidth,
         animate: true,
         arrowToRight: true,
       });
     }
-  }, [handleMouseMove, theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].maxWidth, theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].minWidth, transformParams.width]);
+  }, [appearance, baseAppearance, handleMouseMove, theme, transformParams.width]);
 
 
   const handleRemoveMouseMove = useCallback(() => {
@@ -146,49 +139,60 @@ export const Sidebar = ({
         componentObserver.disconnect();
       }
     }
-  }, []);
-  const leftWidth = alwaysShowScrollbar ? theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].leftWidth : theme[sidebarThemeNamespace]['appearance'][appearance || baseAppearance].leftWidth + 10 ;
+  }, [componentObserver]);
+  const leftWidth = alwaysShowScrollbar ? theme[sidebarThemeNamespace].appearance[appearance || baseAppearance].leftWidth : theme[sidebarThemeNamespace].appearance[appearance || baseAppearance].leftWidth + 10;
   const responsiveWrapperStyles = {
     width: transformParams.width,
-    marginLeft:  alwaysShowScrollbar ?  0 : '-10px' 
-  }
-  const rightWidth = alwaysShowScrollbar ?   transformParams.width : transformParams.width + 10;
+    marginLeft: alwaysShowScrollbar ? 0 : '-10px',
+  };
+  const rightWidth = alwaysShowScrollbar ? transformParams.width : transformParams.width + 10;
 
 
   return (
-      <SidebarWrapper ref={ sidebarRef } 
-       theme={theme}
-       appearance={appearance} baseAppearance={baseAppearance} 
-      >
-        { navComponent && 
-        <NavComponentWrapper theme={theme}
-         appearance={appearance} baseAppearance={baseAppearance}
-         >
-          <Scrollbars style={{ width: leftWidth }}>
-            { navComponent }
-          </Scrollbars>
-        </NavComponentWrapper>
-          }
-        <ResponsiveWrapper  animate={transformParams.animate}  style={responsiveWrapperStyles} >
-          <RightBorderWrapper onMouseDown={ handleMouseDown } onMouseUp={ handleRemoveMouseMove }>
-            <RightBorder  theme={theme}
-             appearance={appearance} baseAppearance={baseAppearance}
-             >
-              <CloseOpenButton toRight={ transformParams.arrowToRight } onClick={ handleClose }>
-                <Arrow />
-              </CloseOpenButton>
-            </RightBorder>
-          </RightBorderWrapper>
-          { antiSelectLayer && <AntiSelect /> }
-          <ChildWrapper theme={theme}  style={{ width: transformParams.width }} animate={ transformParams.animate }
-           appearance={appearance} baseAppearance={baseAppearance}
->
-            <Scrollbars style={{ width: rightWidth,  transition: transformParams.animate ? '0.5s' : '0s'}}  >
+    <SidebarWrapper
+      ref={ sidebarRef }
+      theme={ theme }
+      appearance={ appearance }
+      baseAppearance={ baseAppearance }
+    >
+      { navComponent
+        && (
+          <NavComponentWrapper
+            theme={ theme }
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
+          >
+            <Scrollbars style={ { width: leftWidth } }>
+              { navComponent }
+            </Scrollbars>
+          </NavComponentWrapper>
+        )
+      }
+      <ResponsiveWrapper animate={ transformParams.animate } style={ responsiveWrapperStyles }>
+        <RightBorderWrapper onMouseDown={ handleMouseDown } onMouseUp={ handleRemoveMouseMove }>
+          <RightBorder
+            theme={ theme }
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
+          >
+            <CloseOpenButton toRight={ transformParams.arrowToRight } onClick={ handleClose }>
+              <Arrow />
+            </CloseOpenButton>
+          </RightBorder>
+        </RightBorderWrapper>
+        { antiSelectLayer && <AntiSelect /> }
+        <ChildWrapper
+          theme={ theme }
+          style={ { width: transformParams.width } }
+          animate={ transformParams.animate }
+          appearance={ appearance }
+          baseAppearance={ baseAppearance }
+        >
+          <Scrollbars style={ { width: rightWidth, transition: transformParams.animate ? '0.5s' : '0s' } }>
             { children }
           </Scrollbars>
-          </ChildWrapper>
-        </ResponsiveWrapper>
-      </SidebarWrapper>
+        </ChildWrapper>
+      </ResponsiveWrapper>
+    </SidebarWrapper>
   );
 };
-
