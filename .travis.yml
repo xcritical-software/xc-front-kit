@@ -1,0 +1,39 @@
+git:
+  depth: false
+sudo: required
+language: node_js
+node_js:
+  - '10'
+cache: 
+  yarn: true
+  directories:
+  - node_modules
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.17.3
+  - export PATH="$HOME/.yarn/bin:$PATH"
+install: yarn install --no-progress --frozen-lockfile
+stages:
+#  - lint
+#  - build
+  - name: next-version
+    if: branch = master AND type = push AND commit_message !~ /(release)/
+jobs:
+  include:
+    #- stage: lint
+    #  script: yarn lint && yarn test && yarn build
+    - stage: next-version
+      script: skip
+      if: branch = master AND type = push AND commit_message !~ /(release)/
+      before_deploy:
+        - git config --local user.name "TravisCI"
+        - git config --local user.email "frontend@xcritical.software"        
+        - git remote set-url origin https://${GH_TOKEN}@github.com/xcritical-software/xc-front-presets-test.git > /dev/null 2>&1
+        - git fetch --tags --force
+        - git checkout master
+        - git pull
+      deploy:
+        provider: script
+        script: yarn boltify version --loglevel silly --message "chore(release):" && yarn deploy
+        skip_cleanup: true
+        on:
+          branch: master
