@@ -2,10 +2,11 @@
   "name": "@xcritical/xc-theme",
   "version": "1.0.0",
   "description": "",
+  "main": "./src/index.ts",
   "scripts": {
     "test": "jest --config=jest.config.js",
     "compile": "gulp --cwd . compile",
-    "build": "npm run clean && npm run compile",
+    "build": "yarn clean && yarn compile",
     "clean": "rimraf dist lib .publish"
   },
   "repository": {

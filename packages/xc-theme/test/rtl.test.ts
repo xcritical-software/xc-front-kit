@@ -1,4 +1,4 @@
-import { rtlSide, rtlSwapper } from '../utils';
+import { rtlSide, rtlSwapper } from '../src';
 
 
 describe('This is the tests for the rtl utils', () => {

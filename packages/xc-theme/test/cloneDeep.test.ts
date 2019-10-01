@@ -1,4 +1,4 @@
-import { cloneDeep, cloneObjectDeep } from '../utils';
+import { cloneDeep, cloneObjectDeep } from '/src';
 
 
 const obj = {

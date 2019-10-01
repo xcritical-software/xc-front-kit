@@ -1,4 +1,4 @@
-import { cloneShallow, cloneRegExp } from '../utils';
+import { cloneShallow, cloneRegExp } from '../src';
 
 
 const obj = {

@@ -1,4 +1,4 @@
-import { union } from '../utils';
+import { union } from '../src';
 
 
 describe('This is the tests for the "array union" util', () => {

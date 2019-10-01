@@ -1,4 +1,4 @@
-import { mergeDeep } from '../utils';
+import { mergeDeep } from '../src';
 
 
 describe('This is the tests for the "merge deep" util', () => {

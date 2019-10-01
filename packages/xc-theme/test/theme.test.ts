@@ -9,9 +9,9 @@ import {
   getAppearanceTheme,
   getFontStyle,
   getFontObj,
-} from '../utils';
+} from '../src';
 
-import { ITheme, IThemeBase, IAppearance } from '../interfaces';
+import { ITheme, IThemeBase, IAppearance } from '../src';
 
 
 interface ICustomAppearance extends IAppearance {

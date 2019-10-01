@@ -1,4 +1,4 @@
-import { isObject, isObjectObject, isPlainObject } from '../utils';
+import { isObject, isObjectObject, isPlainObject } from '../src';
 
 
 const obj = {

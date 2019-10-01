@@ -11,7 +11,7 @@
     ]
   },
   "scripts": {
-    "test": "exit 0",
+    "test": "jest --config=jest.config.js",
     "lint": "yarn eslint packages/**/src/**/*.{js,jsx,ts,tsx}",
     "lint:fix": "yarn lint --fix",
     "compile": "yarn boltify run build",

@@ -1,7 +1,8 @@
 import {
   getAppearanceTheme,
-} from '@xcritical/xc-theme/utils';
-import { ITheme } from '@xcritical/xc-theme/interfaces';
+  ITheme,
+} from '@xcritical/xc-theme';
+
 import {
   sidebarThemeNamespace,
   sidebarThemeStyle,

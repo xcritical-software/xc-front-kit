@@ -6,7 +6,7 @@
   "scripts": {
     "test": "exit 0",
     "compile": "gulp --cwd . compile",
-    "build": "npm run clean && npm run compile",
+    "build": "yarn clean && yarn compile",
     "storybook": "start-storybook -p 9009 -s public",
     "clean": "rimraf dist lib .publish"
   },

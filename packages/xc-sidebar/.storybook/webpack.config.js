@@ -4,7 +4,6 @@ module.exports = {
   resolve: {
     alias: {
       '@xcritical/xc-sidebar': path.join(__dirname, '../src/'),
-      '@xcritical/xc-theme': path.join(__dirname, '../../xc-theme/src/'),
     },
     extensions: [".ts", ".tsx"],
   },
