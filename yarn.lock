@@ -2322,7 +2322,7 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
 
-"@types/styled-components@^4.1.18", "@types/styled-components@^4.1.19":
+"@types/styled-components@^4.1.19":
   version "4.1.19"
   resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-4.1.19.tgz#535b455d7744fda1608c605df82c0800eda61a09"
   integrity sha512-nDkoTQ8ItcJiyEvTa24TwsIpIfNKCG+Lq0LvAwApOcjQ8OaeOOCg66YSPHBePHUh6RPt1LA8aEzRlgWhQPFqPg==
@@ -2546,7 +2546,7 @@
     text-table "^0.2.0"
     webpack-log "^1.1.2"
 
-"@xcritical/eslint-plugin-xc-front-lint@^1.0.0", "@xcritical/eslint-plugin-xc-front-lint@latest":
+"@xcritical/eslint-plugin-xc-front-lint@^1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@xcritical/eslint-plugin-xc-front-lint/-/eslint-plugin-xc-front-lint-1.0.1.tgz#c321ce2a0462be5ee8c1cbb2f21f63ec0351601a"
   integrity sha512-SqVW/PpJbl+c0mNgcoGF/ckt2BfKCUeKmTwntXJ+59NWAe6RFHMe64dxK/hpKM8LfhpRc1UyvZvOHBZ/FNFwrw==
@@ -2600,7 +2600,7 @@
     babel-plugin-lodash "^3.3.4"
     babel-plugin-styled-components "^1.10.0"
 
-"@xcritical/xc-front-libs-utils@^1.0.0", "@xcritical/xc-front-libs-utils@latest":
+"@xcritical/xc-front-libs-utils@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@xcritical/xc-front-libs-utils/-/xc-front-libs-utils-1.0.0.tgz#0da772145429dc766abc89c470fc248bbf6ad0df"
   integrity sha512-hATxfTahYDvQvfD7yMyeV6/aUUq13ZRfIFePBxkc04m6Y8179lCrn9TbKbWW9EbYyXfhS8hwcyjV3MFFxrMkaA==
@@ -5769,6 +5769,11 @@ eslint-config-prettier@^4.0.0:
   dependencies:
     get-stdin "^6.0.0"
 
+eslint-import-resolver-alias@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-alias/-/eslint-import-resolver-alias-1.1.2.tgz#297062890e31e4d6651eb5eba9534e1f6e68fc97"
+  integrity sha512-WdviM1Eu834zsfjHtcGHtGfcu+F30Od3V7I9Fi57uhBEwPkjDcii7/yW8jAT+gOhn4P/vOxxNAXbFAKsrrc15w==
+
 eslint-import-resolver-node@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.2.tgz#58f15fb839b8d0576ca980413476aab2472db66a"
@@ -5804,7 +5809,7 @@ eslint-plugin-babel@^5.3.0:
   dependencies:
     eslint "^4.9.0"
 
-"eslint-plugin-import@>= 2.14.0":
+"eslint-plugin-import@>= 2.14.0", eslint-plugin-import@^2.18.2:
   version "2.18.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.18.2.tgz#02f1180b90b077b33d447a17a2326ceb400aceb6"
   integrity sha512-5ohpsHAiUBRNaBWAF08izwUGlbrJoJJ+W9/TBwsGoR1MnlgfwMIKrFeSjWbt6moabiXW9xNvtFz+97KHRfI4HQ==
@@ -8575,11 +8580,6 @@ jest-snapshot@^24.9.0:
     natural-compare "^1.4.0"
     pretty-format "^24.9.0"
     semver "^6.2.0"
-
-jest-teamcity-reporter@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/jest-teamcity-reporter/-/jest-teamcity-reporter-0.9.0.tgz#a9f337a928a14e7e84163817456b930ecf7cbce8"
-  integrity sha512-q6W+ZaJSCIXmxC9wsY67zNn+vwG/EgKJygYJYH860jih5zS6mc2ZFc4v78gh6rgzgM9/siUtQm7SnRunYuWmVw==
 
 jest-util@^24.9.0:
   version "24.9.0"

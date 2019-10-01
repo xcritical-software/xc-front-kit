@@ -5,15 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jest --config=jest.config.js",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
-    "lint:teamcity": "npm run lint -- --format ./node_modules/eslint-teamcity/index.js",
-    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx src --fix",
     "compile": "gulp --cwd . compile",
     "build": "npm run clean && npm run compile",
-    "deploy": "cd .publish && npm publish",
-    "check": "npm run lint && npm run test",
-    "clean": "rimraf dist lib .publish",
-    "re-install": "npm run clean && rd /s/q node_modules && npm cache clean --force && npm i"
+    "clean": "rimraf dist lib .publish"
   },
   "repository": {
     "type": "git",
@@ -32,26 +26,7 @@
     "error-statistics-name": "ESLint Error Count",
     "warning-statistics-name": "ESLint Warning Count"
   },
-  "private": true,
-  "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@types/jest": "^24.0.18",
-    "@types/kind-of": "^6.0.0",
-    "@types/lodash.get": "^4.4.6",
-    "@types/lodash.isempty": "^4.4.6",
-    "@types/memoizee": "^0.4.2",
-    "@types/styled-components": "^4.1.18",
-    "@xcritical/eslint-plugin-xc-front-lint": "latest",
-    "@xcritical/xc-front-libs-utils": "latest",
-    "eslint-teamcity": "^2.1.0",
-    "jest": "^24.9.0",
-    "jest-teamcity-reporter": "^0.9.0",
-    "polished": "^3.0.0",
-    "react": "^16.9.0",
-    "rimraf": "^2.6.2",
-    "styled-components": "^4.1.0",
-    "ts-jest": "^24.0.2"
-  },
+  "private": false,
   "peerDependencies": {
     "styled-components": "^4.1.0",
     "react": "^16.9.0"
