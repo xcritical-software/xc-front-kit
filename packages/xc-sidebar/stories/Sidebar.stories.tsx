@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Sidebar } from '../src';
 import { NavLink, BrowserRouter, Switch, Route } from 'react-router-dom';
-import { routerConfig } from '../src/routerConfig';
+import { routerConfig } from './routerConfig';
 import { sidebarThemeNamespace } from '../src/theme';
 
 

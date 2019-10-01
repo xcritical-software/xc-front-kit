@@ -19,7 +19,9 @@
     "pre-deploy": "bash ./copy-to-publish.sh",
     "deploy": "bash ./publish.sh",
     "check": "npm run lint && npm run test",
-    "clean": "rimraf dist lib .publish"
+    "clean": "rimraf dist lib .publish",
+    "storybook:sidebar": "yarn boltify run storybook --only=@xcritical/xc-sidebar"
+
   },
   "repository": "https://github.com:xcritical-software/xc-front-kit.git",
   "author": "Xcritical Software",
