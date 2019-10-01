@@ -24,7 +24,8 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "paths": {
-      "@xcritical/xc-sidebar": ["./packages/xc-sidebar/src", "../src"]
+      "@xcritical/xc-sidebar": ["./packages/xc-sidebar/src"],
+      "@xcritical/xc-theme": ["./packages/xc-theme/src"]
     }
   },
   "include": ["packages/**/src/**/*"],

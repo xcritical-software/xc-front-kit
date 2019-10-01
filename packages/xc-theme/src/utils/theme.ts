@@ -5,7 +5,10 @@ import { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import mergeDeep from './mergeDeep';
 import {
-  IFont, ITheme, IThemeNamespace, OneOrManyString,
+  IFont,
+  ITheme,
+  IThemeNamespace,
+  OneOrManyString,
 } from '../interfaces';
 
 
@@ -15,15 +18,14 @@ interface IFuncStateTheme {
 
 export const getAppearancePath = (
   appearanceName = 'default', propertyPath?: OneOrManyString,
+// eslint-disable-next-line function-paren-newline
 ): string[] => {
-  debugger;
   const res = [
     'appearance',
     appearanceName,
     ...(Array.isArray(propertyPath) ? propertyPath : [propertyPath]),
-  ].filter(item => !!item);
+  ].filter(item => !!item) as string[];
 
-  console.log(res);
   return res;
 };
 

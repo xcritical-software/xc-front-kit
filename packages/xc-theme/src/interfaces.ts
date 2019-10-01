@@ -3,6 +3,8 @@ export type AllType = undefined | null | boolean | Buffer | number | string | Da
 | WeakSet<any> | Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array
 | Int32Array | Uint32Array | Float32Array | Float64Array | any;
 
+export type IFilteredPath = string[];
+
 export type OneOrManyString = string | string[];
 
 export interface IIndentation {
@@ -13,6 +15,8 @@ export interface IIndentation {
 }
 
 export interface IFont<T> {
+  fontSize?: T;
+  fontWeight?: number;
   size?: T;
   weight?: number;
   lineHeight?: string;
