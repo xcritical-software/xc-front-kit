@@ -1,16 +1,8 @@
 import styled from 'styled-components';
-import {
-  getLeftBackground,
-  getRightBackground,
-  getSeparatorColor,
-  getColor,
-} from '../utils';
 
 
 interface IProps {
-  theme?: object;
-  appearance: string;
-  baseAppearance: string;
+  theme: object;
 }
 
 
@@ -28,7 +20,7 @@ interface ICloseOpenButton {
 
 
 export const RightBorder = styled.div<IProps>`
-background-color: ${getSeparatorColor};
+  background-color: ${({ theme: { separatorColor } }) => separatorColor};
   width: 2px;
   height: 100% ;
   float: right;
@@ -36,39 +28,31 @@ background-color: ${getSeparatorColor};
   right: 10px;
 
 `;
-  //  ${getSeparatorColor}
-  /* color: ${getColor}; */
-// color: ${({ theme: { color } } : ISidebarWrapper) => color};
-/* ${SidebarWrapperStyled} */
 export const SidebarWrapper = styled.div<IProps>`
-color: ${getColor};
+  color: ${({ theme: { color } }) => color};
   height: 100vh ;
   position: fixed;
   top: 0;
   left: 0;
 `;
 
-
-// background-color: ${({ theme: { leftBackground } }: INavComponentWrapper) => leftBackground};
 export const NavComponentWrapper = styled.div<IProps>`
-background-color: ${getLeftBackground}; 
+  background-color: ${({ theme: { leftBackground } }) => leftBackground};
   height: calc(100vh + 10px);
   float: left;
 `;
 
 
-export const ChildWrapper = styled.div`
-background-color:  ${getRightBackground};
+export const ChildWrapper = styled.div<IChildWrapper>`
+  background-color: ${({ theme: { rightBackground } }) => rightBackground};
   top: 0;
   bottom:0;
   position: fixed;
   display: inline-block;
   overflow-y:auto;
   overflow-x:hidden;
-  ${({ animate }: IChildWrapper): string | null => (animate ? 'transition: .5s' : null)};
+  ${({ animate }): string | null => (animate ? 'transition: .5s' : null)};
 `;
-// background-color: ${({ theme: { rightBackground } }: IChildWrapper) => rightBackground };
-
 
 export const ResponsiveWrapper = styled.div<IResponsiveWrapper>`
   min-height: 100vh ;

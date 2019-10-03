@@ -40,7 +40,7 @@ export const mergeBaseTheme = memoize(
 
 
 export const getThemedState = (namespace: string, defaultTheme: ITheme) => (
-  theme: IThemeNamespace = {}, propertyPath: OneOrManyString,
+  theme: IThemeNamespace = {}, propertyPath: OneOrManyString | undefined,
 ): ITheme => {
   const componentTheme = mergeBaseTheme(namespace, defaultTheme, theme);
   return propertyPath ? get(componentTheme, propertyPath) : componentTheme;

@@ -1,6 +1,7 @@
 import {
-  getAppearanceTheme,
+  getThemedState,
   ITheme,
+  IThemeNamespace,
 } from '@xcritical/xc-theme';
 
 import {
@@ -9,54 +10,22 @@ import {
 } from '../theme';
 
 
-export const sidebarTheme = (
-  theme: any,
-  appearanceName: string,
-  baseAppearance: string,
-  propertyPath: string,
-): ITheme => {
-  const func = getAppearanceTheme(sidebarThemeNamespace, sidebarThemeStyle);
-  return func(theme, appearanceName, propertyPath, baseAppearance);
-};
+export interface ISidebarTheme extends ITheme {
+  leftBackground: string;
+  rightBackground: string;
+  color?: string;
+  separatorColor: string;
+  minWidth: number;
+  maxWidth: number;
+  leftWidth: number;
+}
 
+export type IThemeProp<T> = T;
 
-export const getLeftBackground = ({
-  theme,
-  appearance,
-  baseAppearance,
-}: any) => {
-  const backgroundColor = sidebarTheme(
-    theme, appearance, baseAppearance, 'leftBackground',
-  ) as string;
-  return backgroundColor;
-};
-export const getRightBackground = ({
-  theme,
-  appearance,
-  baseAppearance,
-}: any) => {
-  const backgroundColor = sidebarTheme(
-    theme, appearance, baseAppearance, 'rightBackground',
-  ) as string;
-  return backgroundColor;
-};
-export const getSeparatorColor = ({
-  theme,
-  appearance,
-  baseAppearance,
-}: any) => {
-  const backgroundColor = sidebarTheme(
-    theme, appearance, baseAppearance, 'separatorColor',
-  ) as string;
-  return backgroundColor;
-};
-export const getColor = ({
-  theme,
-  appearance,
-  baseAppearance,
-}: any) => {
-  const color = sidebarTheme(
-    theme, appearance, baseAppearance, 'color',
-  ) as string;
-  return color;
-};
+export function sidebarTheme<T>(
+  theme: IThemeNamespace,
+  propertyPath?: string | undefined,
+): ISidebarTheme | IThemeProp<T> {
+  const func = getThemedState(sidebarThemeNamespace, sidebarThemeStyle);
+  return func(theme, propertyPath) as ISidebarTheme | T;
+}

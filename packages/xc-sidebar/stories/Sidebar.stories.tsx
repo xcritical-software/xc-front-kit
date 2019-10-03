@@ -6,6 +6,8 @@ import { Sidebar } from '../src';
 import { NavLink, BrowserRouter, Switch, Route } from 'react-router-dom';
 import { routerConfig } from './routerConfig';
 import { sidebarThemeNamespace } from '../src/theme';
+import { IThemeNamespace } from '@xcritical/xc-theme';
+import { ISidebarTheme } from '../src/utils';
 
 
 const list = (n: number) => {
@@ -140,30 +142,16 @@ const NavPanel = () => (
 );
 
 
-const theme = {
+const theme: IThemeNamespace = {
   [sidebarThemeNamespace]: {
-    appearance: {
-      rightBackground: 'red',
-      default: {
-        minWidth : 30,
-        maxWidth : 400,
-        separatorColor : 'lightblue',
-        leftWidth : 91,
-        color: 'white',
-        leftBackground: '#31394C',
-        rightBackground: '#31394C'
-      },
-      theme2: {
-        minWidth : 130,
-        maxWidth : 700,
-        separatorColor : 'red',
-        leftWidth : 100,
-        color: 'green',
-        leftBackground: 'pink',
-        rightBackground: 'pink'
-      },
-    }
-  },
+      rightBackground: 'lightblue',
+      minWidth : 20,
+      maxWidth : 400,
+      // separatorColor : 'blue',
+      // leftWidth : 100,
+      // color: 'green',
+      // leftBackground: 'pink',
+  } as ISidebarTheme
 };
 
 
@@ -177,7 +165,7 @@ storiesOf('Sidebar', module)
 .add('Basic', () => (
     <ThemeProvider theme={theme}>
       <BrowserRouter>  
-        <Sidebar { ...props } theme={theme} >
+        <Sidebar { ...props } theme={theme}>
           { list(100) }
         </Sidebar>
        <Switch>
