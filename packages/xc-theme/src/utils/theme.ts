@@ -3,7 +3,7 @@ import isEmpty from 'lodash.isempty';
 import memoize from 'memoizee';
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import mergeDeep from './mergeDeep';
+import { mergeDeep } from 'utilitify';
 import {
   IFont,
   ITheme,

@@ -14250,6 +14250,13 @@ utila@^0.4.0, utila@~0.4:
   resolved "https://registry.yarnpkg.com/utila/-/utila-0.4.0.tgz#8a16a05d445657a3aea5eecc5b12a4fa5379772c"
   integrity sha1-ihagXURWV6Oupe7MWxKk+lN5dyw=
 
+utilitify@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/utilitify/-/utilitify-1.0.0.tgz#b2a41681d4f4223a7fcb71494de9ab60fbf324bd"
+  integrity sha512-BuBhb6A3DVU1qY/n1azX1r3yT2wRkFR7Q3goHUAPFPUox4DM3OxLvaPaiAqF8LzgelBmAy46m1pUBIo+xMehqA==
+  dependencies:
+    kind-of "^6.0.2"
+
 utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"

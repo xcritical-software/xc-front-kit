@@ -138,8 +138,8 @@ describe('This is the tests for the theme utils', () => {
     expect(getThemedStateMocked).toHaveReturned();
     expect(func).not.toBe(undefined);
     expect(func(customTheme, 'width')).toEqual('100%');
-    expect(func(customTheme, null)).toEqual(resultTheme);
-    expect(func({}, null)).toEqual(defaultTheme);
+    expect(func(customTheme, undefined)).toEqual(resultTheme);
+    expect(func({}, undefined)).toEqual(defaultTheme);
     expect(func({}, 'width')).toEqual(undefined);
     expect(func(undefined, 'width')).toEqual(undefined);
   });
@@ -162,7 +162,6 @@ describe('This is the tests for the theme utils', () => {
     expect(getStatesThemeMocked).toHaveReturned();
     expect(withoutDefaultBaseState).not.toBe(undefined);
     expect(withoutDefaultBaseState('display', 'none')).toEqual('none');
-    expect(withoutDefaultBaseState(null, 'none')).toEqual({});
 
     const withDefaultBaseState = getStatesThemeMocked(defaultTheme, 'default', 'selected');
     expect(getStatesThemeMocked).toHaveReturned();
