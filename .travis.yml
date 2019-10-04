@@ -14,9 +14,9 @@ before_install:
 install: yarn install --no-progress --frozen-lockfile
 stages:
   - lint
-  #- build
   - name: next-version
     if: branch = master AND type = push AND commit_message !~ /(release)/
+  - gen-docs
 jobs:
   include:
     - stage: lint
@@ -37,3 +37,14 @@ jobs:
         skip_cleanup: true
         on:
           branch: master
+    - stage: gen-docs
+      script: skip
+      deploy:
+        provider: pages
+        skip-cleanup: true 
+        github-token: $GH_TOKEN
+        local_dir: .storybook-static
+        repo: xcritical-software/xc-front-kit
+        target_branch: gh-pages
+        on:
+          branch: develop
