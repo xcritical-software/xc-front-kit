@@ -157,7 +157,7 @@ const theme: IThemeNamespace = {
 
 const props = {
   navComponent: NavPanel(),
-  alwaysShowScrollbar: false
+  showScrollbar: 'auto'
 };
 
 
@@ -165,7 +165,7 @@ storiesOf('Sidebar', module)
 .add('Basic', () => (
     <ThemeProvider theme={theme}>
       <BrowserRouter>  
-        <Sidebar { ...props } theme={theme}>
+        <Sidebar { ...props } theme={theme}  >
           { list(100) }
         </Sidebar>
        <Switch>
