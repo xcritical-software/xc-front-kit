@@ -9249,6 +9249,16 @@ lodash.debounce@^4.0.8:
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
+lodash.get@4.x:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
+
+lodash.isempty@4.x:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.isempty/-/lodash.isempty-4.4.0.tgz#6f86cbedd8be4ec987be9aaf33c9684db1b31e7e"
+  integrity sha1-b4bL7di+TsmHvpqvM8loTbGzHn4=
+
 lodash.memoize@4.x, lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -9591,7 +9601,7 @@ memoize-one@^5.0.0:
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
   integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
 
-memoizee@0.4.X:
+memoizee@0.4.X, memoizee@^0.4.14:
   version "0.4.14"
   resolved "https://registry.yarnpkg.com/memoizee/-/memoizee-0.4.14.tgz#07a00f204699f9a95c2d9e77218271c7cd610d57"
   integrity sha512-/SWFvWegAIYAO4NQMpcX+gcra0yEZu4OntmUdrBaWrJncxOqAziGFlHxc7yjKVK2uu3lpPW27P27wkR82wA8mg==
@@ -11019,7 +11029,7 @@ pnp-webpack-plugin@1.4.3:
   dependencies:
     ts-pnp "^1.1.2"
 
-polished@^3.3.1:
+polished@3.x, polished@^3.3.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/polished/-/polished-3.4.1.tgz#1eb5597ec1792206365635811d465751f5cbf71c"
   integrity sha512-GflTnlP5rrpDoigjczEkS6Ye7NDA4sFvAnlr5hSDrEvjiVj97Xzev3hZlLi3UB27fpxyTS9rWU64VzVLWkG+mg==
@@ -14172,6 +14182,13 @@ utila@^0.4.0, utila@~0.4:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/utila/-/utila-0.4.0.tgz#8a16a05d445657a3aea5eecc5b12a4fa5379772c"
   integrity sha1-ihagXURWV6Oupe7MWxKk+lN5dyw=
+
+utilitify@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/utilitify/-/utilitify-1.0.0.tgz#b2a41681d4f4223a7fcb71494de9ab60fbf324bd"
+  integrity sha512-BuBhb6A3DVU1qY/n1azX1r3yT2wRkFR7Q3goHUAPFPUox4DM3OxLvaPaiAqF8LzgelBmAy46m1pUBIo+xMehqA==
+  dependencies:
+    kind-of "^6.0.2"
 
 utils-merge@1.0.1:
   version "1.0.1"
