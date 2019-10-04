@@ -13,14 +13,14 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
 install: yarn install --no-progress --frozen-lockfile
 stages:
-#  - lint
-#  - build
+  - lint
+  #- build
   - name: next-version
     if: branch = master AND type = push AND commit_message !~ /(release)/
 jobs:
   include:
-    #- stage: lint
-    #  script: yarn lint && yarn test && yarn build
+    - stage: lint
+      script: yarn lint && yarn test && yarn build
     - stage: next-version
       script: skip
       if: branch = master AND type = push AND commit_message !~ /(release)/
