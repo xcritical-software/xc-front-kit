@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import ResizeObserver from 'resize-observer-polyfill';
-import { IThemeNamespace } from '@xcritical/xc-theme';
+import { IThemeNamespace } from '@xcritical/theme';
 import Arrow from './Arrow';
 import { sidebarTheme, ISidebarTheme } from './utils';
 import {

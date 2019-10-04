@@ -6,7 +6,7 @@ import { Sidebar } from '../src';
 import { NavLink, BrowserRouter, Switch, Route } from 'react-router-dom';
 import { routerConfig } from './routerConfig';
 import { sidebarThemeNamespace } from '../src/theme';
-import { IThemeNamespace } from '@xcritical/xc-theme';
+import { IThemeNamespace } from '@xcritical/theme';
 import { ISidebarTheme } from '../src/utils';
 
 

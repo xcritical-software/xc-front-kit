@@ -27,7 +27,7 @@
     "prop-types": "^15.0.0"
   },
   "dependencies": {
-    "@xcritical/xc-theme": "^1.0.0",
+    "@xcritical/theme": "^1.0.0",
     "lodash.get": "^4.x",
     "mdi-react": "^6.1.0",
     "polished": "^3.0.0",

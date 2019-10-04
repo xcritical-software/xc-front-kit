@@ -7,7 +7,7 @@ module.exports = {
       },
       alias: {
         map: [
-          ['@xcritical/xc-theme', './packages/xc-theme/src'],
+          ['@xcritical/theme', './packages/xc-theme/src'],
         ],
         extensions: ['.ts', '.js', '.jsx', '.json']
       }

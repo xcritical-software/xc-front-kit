@@ -2,7 +2,7 @@ import {
   getThemedState,
   ITheme,
   IThemeNamespace,
-} from '@xcritical/xc-theme';
+} from '@xcritical/theme';
 
 import {
   sidebarThemeNamespace,
