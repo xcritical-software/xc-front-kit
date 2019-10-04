@@ -25,7 +25,7 @@
     "esModuleInterop": true,
     "paths": {
       "@xcritical/xc-sidebar": ["./packages/xc-sidebar/src"],
-      "@xcritical/xc-theme": ["./packages/xc-theme/src"]
+      "@xcritical/theme": ["./packages/theme/src"]
     }
   },
   "include": ["packages/**/src/**/*"],

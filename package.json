@@ -65,10 +65,11 @@
     "storybook": "^5.1.11",
     "styled-components": "^4.1.0",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3"
-  },
-  "dependencies": {
+    "typescript": "^3.6.3",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.18.2"
+  },
+  "dependencies": {
+
   }
 }
