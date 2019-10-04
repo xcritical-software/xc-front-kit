@@ -20,8 +20,7 @@
     "deploy": "bash ./publish.sh",
     "check": "npm run lint && npm run test",
     "clean": "rimraf dist lib .publish",
-    "storybook:sidebar": "yarn boltify run storybook --only=@xcritical/xc-sidebar"
-
+    "storybook": "start-storybook -p 9009 -s public"
   },
   "repository": "https://github.com:xcritical-software/xc-front-kit.git",
   "author": "Xcritical Software",

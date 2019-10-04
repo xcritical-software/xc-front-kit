@@ -1,5 +1,5 @@
 {
-  "name": "@xcritical/xc-sidebar",
+  "name": "@xcritical/sidebar",
   "version": "1.0.0",
   "description": "XCritical Sidebar Component",
   "main": "src/index.js",
@@ -7,7 +7,6 @@
     "test": "exit 0",
     "compile": "gulp --cwd . compile",
     "build": "yarn clean && yarn compile",
-    "storybook": "start-storybook -p 9009 -s public",
     "clean": "rimraf dist lib .publish"
   },
   "repository": {
@@ -15,7 +14,7 @@
     "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
   },
   "keywords": [
-    "fetch",
+    "sidebar",
     "library"
   ],
   "author": "123Software",

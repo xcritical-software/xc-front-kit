@@ -19,9 +19,9 @@ addParameters({
     },
   },
   options: {
-    name: 'Xcritical Sidebar Component',
+    name: 'XCritical Components',
     url: '#',
-    theme: themes.dark,
+    theme: themes.normal,
   },
   viewport: {
     viewports: {
@@ -30,16 +30,16 @@ addParameters({
     },
   },
   backgrounds: [
-    { name: 'white', value: '#ffffff' },
+    { name: 'white', value: '#ffffff', default: true  },
     { name: 'light', value: '#eeeeee' },
     { name: 'gray', value: '#cccccc' },
-    { name: 'dark', value: '#222222', default: true },
+    { name: 'dark', value: '#222222'},
     { name: 'black', value: '#000000' },
   ],
 });
 
 function loadStories() {
-  const req = require.context('../stories', true, /\.stories\.(ts|tsx)$/);
+  const req = require.context('../packages', true, /\.stories\.(ts|tsx)$/);
   req.keys().forEach(filename => req(filename));
 }
 configure(loadStories, module);
