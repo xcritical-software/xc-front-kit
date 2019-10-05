@@ -16,7 +16,8 @@ stages:
   - lint
   - name: next-version
     if: branch = master AND type = push AND commit_message !~ /(release)/
-  - gen-docs
+  - name: gen-docs
+    if: branch = master AND type = push AND commit_message !~ /(release)/
 jobs:
   include:
     - stage: lint
@@ -39,12 +40,14 @@ jobs:
           branch: master
     - stage: gen-docs
       script: skip
+      before_deploy:
+        - yarn build:storybook
       deploy:
         provider: pages
         skip-cleanup: true 
         github-token: $GH_TOKEN
         local_dir: .storybook-static
-        repo: xcritical-software/xc-front-kit
+        repo: tundraray/xc-front-kit
         target_branch: gh-pages
         on:
-          branch: develop
+          branch: master
