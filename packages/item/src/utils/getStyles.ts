@@ -75,7 +75,7 @@ export const getHeightStyle = ({
 };
 
 export const getItemStatesStyle = (stateName: string) => ({
-  theme,  
+  theme,
   baseAppearance = 'default',
   appearance = 'default',
 }: IItemProps) => {

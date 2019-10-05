@@ -1,7 +1,6 @@
 import { ITheme } from '@xcritical/theme';
 
 
-
 export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
 export interface IPadding {
   bottom?: number;

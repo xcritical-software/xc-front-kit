@@ -32,7 +32,7 @@ export const Root = styled.div<IRootProps>`
 `;
 
 
-const PrefixPostfixBase= styled.span<IPrefixPostfixProps>`
+const PrefixPostfixBase = styled.span<IPrefixPostfixProps>`
   align-items: center;
   display: flex;
   flex-shrink: 0;
