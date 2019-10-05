@@ -1,0 +1,14 @@
+[build]
+  # This is the directory to change to before starting a build.
+  base    = "./"
+  # NOTE: This is where we will look for package.json/.nvmrc/etc, not root.
+  # This is the directory that you are publishing from (relative to root of your repo)
+  publish = ".storybook-static"
+  # This will be your default build command
+  command = "yarn && yarn build:storybook"
+
+
+# Deploy Preview context: All Deploy Previews (https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/)
+# will inherit these settings.
+[context.deploy-preview]
+  publish = ".storybook-static"
