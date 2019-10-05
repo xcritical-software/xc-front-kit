@@ -1,7 +1,7 @@
 {
-  "name": "@xcritical/react-tools",
+  "name": "@xcritical/<package_name>",
   "version": "1.0.0",
-  "description": "React tools",
+  "description": "<>",
   "main": "src/index.js",
   "scripts": {
     "test": "exit 0",
@@ -14,12 +14,10 @@
     "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
   },
   "keywords": [
-    "react",
-    "effects"
   ],
   "author": "XCritical Software",
   "license": "MIT",
-  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/react-tools#readme",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/<package_name>#readme",
   "private": false,
   "peerDependencies": {
     "hoist-non-react-statics": "^3.3.0",
