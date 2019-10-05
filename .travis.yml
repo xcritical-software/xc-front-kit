@@ -50,4 +50,4 @@ jobs:
         repo: tundraray/xc-front-kit
         target_branch: gh-pages
         on:
-          branch: develop
+          branch: master
