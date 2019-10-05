@@ -8,8 +8,6 @@
     "allowJs": false,
     "jsx": "react",
     "moduleResolution": "node",
-    "rootDirs": ["src", "stories"],
-    "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -24,6 +22,6 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
   },
-  "include": ["packages/**/src/**/*"],
+  "include": ["packages/**/src/**/*", "packages/**/stories/**/*", "packages/**/test/**/*"],
   "exclude": ["node_modules", "build", "scripts", ]
 }
