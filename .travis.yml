@@ -20,8 +20,8 @@ stages:
     if: branch = master AND type = push AND commit_message !~ /(release)/
 jobs:
   include:
-    # - stage: lint
-    #   script: yarn lint && yarn test && yarn build
+    - stage: lint
+      script: yarn lint && yarn test && yarn build
     - stage: next-version
       script: skip
       if: branch = master AND type = push AND commit_message !~ /(release)/
