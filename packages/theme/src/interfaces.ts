@@ -67,18 +67,19 @@ export type IThemeBase<T> = T & {
   selected?: T;
   focus?: T;
   invalid?: T;
-}
+};
 
 export type ITheme<T = IStylesBase> = IThemeBase<T> & {
   appearance?: IAppearance<T>;
-}
+};
 
 export type Theme<T = IStylesBase> = IThemeBase<T> & {
   appearance?: IAppearance<T>;
-}
+};
 
 export interface IAppearance<T> {
   default: IThemeBase<T>;
+  [namespace: string]: IThemeBase<T>;
 }
 
 export interface IThemeNamespace<T= IStylesBase> {

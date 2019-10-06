@@ -24,7 +24,7 @@ export const getAppearancePath = (
     'appearance',
     appearanceName,
     ...(Array.isArray(propertyPath) ? propertyPath : [propertyPath]),
-  ].filter(item => !!item) as string[];
+  ].filter((item) => !!item) as string[];
 
   return res;
 };

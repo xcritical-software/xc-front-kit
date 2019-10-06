@@ -11,7 +11,7 @@ const ItemGroup: FunctionComponent<IItemGroupProps> = ({
   appearance,
   baseAppearance,
 }: IItemGroupProps) => {
-  const renderAllItems = () => {
+  const renderAllItems = (): React.ReactElement | React.ReactElement[] => {
     const allNonEmptyItems = toArray(children);
     return allNonEmptyItems.map((child: any, index) => React.cloneElement(child, {
       ...(divided && index < allNonEmptyItems.length - 1 ? { divided: true } : {}),

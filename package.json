@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "jest --config=jest.config.js",
-    "lint": "yarn eslint packages/**/src/**/*.{js,jsx,ts,tsx}",
+    "lint": "yarn eslint packages/**/{src,stories,test}/**/*.{js,jsx,ts,tsx}",
     "lint:fix": "yarn lint --fix",
     "compile": "yarn boltify run build",
     "build": "yarn clean && yarn compile",
@@ -39,7 +39,7 @@
   "author": "Xcritical Software",
   "license": "MIT",
   "private": true,
-  "devDependencies": {
+  "devDependencies": {    
     "@babel/cli": "^7.2.3",
     "@storybook/addon-a11y": "^5.0.1",
     "@storybook/addon-actions": "^5.0.1",
@@ -62,8 +62,8 @@
     "@types/react-router": "^5.0.5",
     "@types/react-router-dom": "^4.3.5",
     "@types/styled-components": "^4.1.19",
-    "@xcritical/eslint-plugin-xc-front-lint": "^1.0.0",
-    "@xcritical/xc-front-libs-utils": "^1.0.0",
+    "@xcritical/eslint-plugin-xcritical": "^2.0.1",
+    "@xcritical/gulpify": "^2.0.0",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "boltify": "^1.1.2",

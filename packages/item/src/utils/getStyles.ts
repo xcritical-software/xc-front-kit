@@ -2,8 +2,9 @@ import {
   getAppearanceTheme,
   getFontStyle,
   Theme,
+  AllType,
 } from '@xcritical/theme';
-import { css } from 'styled-components';
+import { css, FlattenSimpleInterpolation, FlattenInterpolation } from 'styled-components';
 
 import { itemThemeNamespace, itemThemeStyle } from '../theme';
 import { IItemTheme, IItemProps } from '../interfaces';
@@ -14,7 +15,7 @@ export const itemTheme = (
   appearanceName: string,
   baseAppearance: string,
   propertyPath: string | string[],
-) => {
+): AllType => {
   const func = getAppearanceTheme(itemThemeNamespace, itemThemeStyle);
   return func(theme, appearanceName, propertyPath, baseAppearance);
 };
@@ -24,7 +25,7 @@ export const getPaddingStyle = ({
   appearance = 'default',
   baseAppearance = 'default',
   isRTL,
-}: IItemProps) => {
+}: IItemProps): FlattenSimpleInterpolation => {
   const {
     bottom = 0,
     left = 0,
@@ -46,7 +47,7 @@ export const getBaseStyle = ({
   theme,
   appearance = 'default',
   baseAppearance = 'default',
-}: IItemProps) => {
+}: IItemProps): FlattenSimpleInterpolation => {
   const background: string = itemTheme(theme, appearance, baseAppearance, 'background');
   const color = itemTheme(theme, appearance, baseAppearance, 'color');
   const fontWeight = itemTheme(theme, appearance, baseAppearance, 'fontWeight');
@@ -65,7 +66,7 @@ export const getHeightStyle = ({
   theme,
   appearance = 'default',
   baseAppearance = 'default',
-}: IItemProps) => {
+}: IItemProps): FlattenSimpleInterpolation | string => {
   const height = itemTheme(theme, appearance, baseAppearance, 'height');
   return height
     ? css`
@@ -99,7 +100,7 @@ export const getFontSize = ({
   theme,
   appearance = 'default',
   baseAppearance = 'default',
-}: IItemProps) => {
+}: IItemProps): FlattenSimpleInterpolation => {
   const {
     size = 0,
     weight = 0,
@@ -115,7 +116,7 @@ export const getItemInteractiveStyles = ({
   baseAppearance = 'default',
   disabled,
   selected,
-}: IItemProps) => {
+}: IItemProps): FlattenInterpolation<any> => {
   const standardFocus = css`
     &:focus {
       box-shadow: 0 0 0 2px ${itemTheme(theme, appearance, baseAppearance, ['focus', 'outline'])} inset;

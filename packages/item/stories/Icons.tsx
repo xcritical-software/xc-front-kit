@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 
-export const MasterCardIcon = () => (
+export const MasterCardIcon = (): ReactElement => (
   <svg width="32" height="20" viewBox="0 0 32 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M20.3269 17.8631H11.6718V2.1394H20.3269V17.8631Z" fill="#FF5F00" />
     <path d="M12.2264 9.99996C12.2264 6.81032 13.7037 3.96908 16.0043 2.13808C14.3219 0.799158 12.1987 5.33495e-07 9.89114 5.33495e-07C4.42828 5.33495e-07 0 4.47706 0 9.99996C0 15.5229 4.42828 19.9999 9.89114 19.9999C12.1987 19.9999 14.3219 19.2008 16.0043 17.8618C13.7037 16.0308 12.2264 13.1896 12.2264 9.99996Z" fill="#EB001B" />

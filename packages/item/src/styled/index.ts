@@ -17,15 +17,15 @@ export const Root = styled.div<IRootProps>`
   ${getFontSize}
   box-sizing: border-box;
   cursor: pointer;
-  display: ${({ isHidden }) => (isHidden ? 'none' : 'flex')};
-  border-radius: ${({ theme, appearance, baseAppearance }) => itemTheme(theme, appearance, baseAppearance, 'borderRadius')}px;
+  display: ${({ isHidden }): string => (isHidden ? 'none' : 'flex')};
+  border-radius: ${({ theme, appearance, baseAppearance }): string => itemTheme(theme, appearance, baseAppearance, 'borderRadius')}px;
   flex: none;
-  direction: ${({ isRTL }) => (isRTL ? 'rtl' : 'ltr')};
+  direction: ${({ isRTL }): string => (isRTL ? 'rtl' : 'ltr')};
   ${getItemInteractiveStyles}
 
   ${({
     theme, appearance, baseAppearance, divided,
-  }) => divided
+  }): any => divided
     && `
     border-bottom: solid 1px ${itemTheme(theme, appearance, baseAppearance, ['divided', 'color'])};
   `};
@@ -40,11 +40,11 @@ const PrefixPostfixBase = styled.span<IPrefixPostfixProps>`
 `;
 
 export const Prefix = styled(PrefixPostfixBase)<IPrefixPostfixProps>`
-  margin-${({ isRTL }) => (isRTL ? 'left' : 'right')}: ${({ theme, appearance, baseAppearance }) => itemTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
+  margin-${({ isRTL }): string => (isRTL ? 'left' : 'right')}: ${({ theme, appearance, baseAppearance }): string => itemTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
 `;
 
 export const Postfix = styled(PrefixPostfixBase)`
-  margin-${({ isRTL }) => (isRTL ? 'right' : 'left')}: ${({ theme, appearance, baseAppearance }) => itemTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
+  margin-${({ isRTL }): string => (isRTL ? 'right' : 'left')}: ${({ theme, appearance, baseAppearance }): string => itemTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
 `;
 
 
@@ -66,6 +66,6 @@ export const Content = styled.span<IContentProps>`
   flex: 1 1 auto;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: ${({ allowMultiline }) => (allowMultiline ? 'normal' : 'nowrap')};
-  text-align: ${({ isRTL, textPosition = 'center' }) => rtlSide(isRTL, textPosition)};
+  white-space: ${({ allowMultiline }): string => (allowMultiline ? 'normal' : 'nowrap')};
+  text-align: ${({ isRTL, textPosition = 'center' }): string => rtlSide(isRTL, textPosition)};
 `;

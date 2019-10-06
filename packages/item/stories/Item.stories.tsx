@@ -11,6 +11,7 @@ import { action } from '@storybook/addon-actions';
 import Item, { ItemGroup, itemThemeNamespace } from '../src';
 
 import { MasterCardIcon } from './Icons';
+import { ItemTheme } from '../src/interfaces';
 
 
 const generateTheme = (
@@ -19,7 +20,7 @@ const generateTheme = (
   textColor: string,
   focusColor: string,
   dividedColor: string,
-) => ({
+): ItemTheme => ({
   appearance: {
     myaccount: {
       prefixSpacing: padding,
@@ -81,7 +82,7 @@ storiesOf('Item', module)
           value={ { id: 1 } }
           prefix={ <MasterCardIcon /> }
         >
-         { 'This is just a standard item' }
+          This is just a standard item
         </Item>
         <Item
           prefix={ <MasterCardIcon /> }

@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['plugin:@xcritical/eslint-plugin-xc-front-lint/typescript'],
+  extends: ['plugin:@xcritical/eslint-plugin-xcritical/typescript'],
   settings: {
     'import/resolver': {
       "node": {
@@ -16,6 +16,9 @@ module.exports = {
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
     "no-console": [1, { allow: ["error"] }],
-    "@typescript-eslint/no-unnecessary-condition": 0
+    "@typescript-eslint/no-unnecessary-condition": 0,    
+    '@typescript-eslint/quotes': ["error", "single"],
+    "react/jsx-props-no-spreading": 0,
+    "@typescript-eslint/explicit-function-return-type": ["error", { allowExpressions: true, allowTypedFunctionExpressions: true, allowHigherOrderFunctions: true }]
   },
 };
