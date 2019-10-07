@@ -16,7 +16,7 @@
     "lint:fix": "yarn lint --fix",
     "compile": "yarn boltify run build",
     "build": "yarn clean && yarn compile",
-    "build:storybook": "build-storybook -c .storybook -o .storybook-static",
+    "build:storybook": "build-storybook -c .storybook -o .storybook-static --quiet",
     "pre-deploy": "bash ./copy-to-publish.sh",
     "deploy": "bash ./publish.sh",
     "check": "npm run lint && npm run test",

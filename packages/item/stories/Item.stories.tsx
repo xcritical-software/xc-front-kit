@@ -44,7 +44,6 @@ const generateTheme = (
       background: baseBgColor,
       color: textColor,
       fontWeight: 600,
-
       hover: {
         background: darken(0.05, baseBgColor),
         color: '#fff',

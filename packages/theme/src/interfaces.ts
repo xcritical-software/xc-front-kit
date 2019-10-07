@@ -78,7 +78,6 @@ export type Theme<T = IStylesBase> = IThemeBase<T> & {
 };
 
 export interface IAppearance<T> {
-  default: IThemeBase<T>;
   [namespace: string]: IThemeBase<T>;
 }
 

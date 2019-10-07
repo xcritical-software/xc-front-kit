@@ -48,7 +48,7 @@ const alignmentContainer: any = {
 
 const content = <div style={ layerStyles }>LayerContent</div>;
 
-const ExampleAlignment = (props: IPopperProps): ReactElement => (
+const ExampleAlignment = (props: IPopperProps): React.ReactElement => (
   <Popper
     { ...props }
     content={ (

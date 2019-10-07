@@ -28,6 +28,7 @@ export interface IItemTheme {
   divided?: IDivided;
   background?: string;
   color?: string;
+  fontWeight?: number;
 }
 
 export type ItemTheme = ITheme<IItemTheme>;
