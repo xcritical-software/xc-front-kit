@@ -1,8 +1,8 @@
 {
-  "name": "@xcritical/<package_name>",
-  "version": "1.0.0",
-  "description": "<>",
-  "main": "src/index.js",
+  "name": "@xcritical/item",
+  "version": "0.0.0",
+  "description": "XCritical Item Component",
+  "main": "src/index.ts",
   "scripts": {
     "test": "exit 0",
     "compile": "gulp --cwd . compile",
@@ -17,12 +17,17 @@
   ],
   "author": "XCritical Software",
   "license": "MIT",
-  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/<package_name>#readme",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/item#readme",
   "private": false,
   "peerDependencies": {
-    "hoist-non-react-statics": "^3.3.0",
     "react": "^16.8.3",
-    "prop-types": "^15.0.0"
+    "styled-components": "^4.1.0",
+    "prop-types": "^15.0.0",
+    "polished": "^3.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@xcritical/theme": "^0.0.0",
+    "lodash.get": "4.x",
+    "polished": "^3.0.0"
+  }
 }

@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@xcritical/theme": ["../xc-theme/src"]
+      "@xcritical/theme": ["../theme/src"]
     },
   },
   "include": ["src/**/*", "stories/**/*"]                        /* Avoid stories dir of being compiled */

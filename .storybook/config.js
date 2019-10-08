@@ -40,6 +40,7 @@ addParameters({
 
 function loadStories() {
   const req = require.context('../packages', true, /\.stories\.(ts|tsx)$/);
+
   req.keys().forEach(filename => req(filename));
 }
 configure(loadStories, module);

@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type AllType = undefined | null | boolean | Buffer | number | string | Date | RegExp | Error
 | Iterator<any> | any[] | Function | Promise<any> | Map<any, any> | WeakMap<any, any> | Set<any>
 | WeakSet<any> | Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array
 | Int32Array | Uint32Array | Float32Array | Float64Array | any;
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export type IFilteredPath = string[];
 
@@ -58,23 +60,27 @@ export interface IStylesBase {
   opacity?: number;
 }
 
-export interface IThemeBase extends IStylesBase {
-  hover?: IStylesBase;
-  active?: IStylesBase;
-  disabled?: IStylesBase;
-  selected?: IStylesBase;
-  focus?: IStylesBase;
-  invalid?: IStylesBase;
+export type IThemeBase<T> = T & {
+  hover?: T;
+  active?: T;
+  disabled?: T;
+  selected?: T;
+  focus?: T;
+  invalid?: T;
+};
+
+export type ITheme<T = IStylesBase> = IThemeBase<T> & {
+  appearance?: IAppearance<T>;
+};
+
+export type Theme<T = IStylesBase> = IThemeBase<T> & {
+  appearance?: IAppearance<T>;
+};
+
+export interface IAppearance<T> {
+  [namespace: string]: IThemeBase<T>;
 }
 
-export interface ITheme extends IThemeBase {
-  appearance?: IAppearance;
-}
-
-export interface IAppearance {
-  default: IThemeBase;
-}
-
-export interface IThemeNamespace {
-  [namespace: string]: ITheme;
+export interface IThemeNamespace<T= IStylesBase> {
+  [namespace: string]: ITheme<T>;
 }

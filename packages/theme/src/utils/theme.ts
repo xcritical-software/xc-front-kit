@@ -24,7 +24,7 @@ export const getAppearancePath = (
     'appearance',
     appearanceName,
     ...(Array.isArray(propertyPath) ? propertyPath : [propertyPath]),
-  ].filter(item => !!item) as string[];
+  ].filter((item) => !!item) as string[];
 
   return res;
 };
@@ -80,31 +80,39 @@ export const getStatesTheme = (
   ): ITheme => (propertyPath ? get(merged, propertyPath, defaultValue) : merged);
 };
 
-export const getAppearanceTheme = (
+export function getAppearanceTheme<T>(
   namespace: string,
-  defaultTheme: ITheme,
-) => (theme: IThemeNamespace,
-  appearanceName: string,
-  propertyPath: string,
-  baseAppearanceName = 'default'): ITheme => {
-  const themeExtractor = getThemedState(namespace, defaultTheme);
+  defaultTheme: ITheme | ITheme<T>,
+): Function {
+  return function func(
+    theme: IThemeNamespace,
+    appearanceName: string,
+    propertyPath: string,
+    baseAppearanceName?: string,
+  ): ITheme | ITheme<T> {
+    const themeExtractor = getThemedState(namespace, defaultTheme);
 
-  const compiledTheme = compileAppearanceTheme(
-    namespace,
-    defaultTheme,
-    theme,
-    appearanceName,
-    baseAppearanceName,
-  );
+    const compiledTheme = compileAppearanceTheme(
+      namespace,
+      defaultTheme,
+      theme,
+      appearanceName,
+      baseAppearanceName || 'default',
+    );
 
-  if (propertyPath) {
-    return get(compiledTheme, propertyPath) || themeExtractor(theme, propertyPath);
-  }
+    if (propertyPath) {
+      return get(compiledTheme, propertyPath) || themeExtractor(theme, propertyPath);
+    }
 
-  return compiledTheme;
-};
+    return compiledTheme;
+  };
+}
 
-export const getFontStyle = ({ size, weight, lineHeightRatio = 1.69 }: IFont<number>): FlattenSimpleInterpolation => css`
+export const getFontStyle = ({
+  size,
+  weight,
+  lineHeightRatio = 1.69,
+}: IFont<number>): FlattenSimpleInterpolation => css`
         ${weight ? `font-weight: ${weight}` : null};
         ${size ? `font-size: ${size}px; line-height: ${size * lineHeightRatio}px;` : null};
       `;

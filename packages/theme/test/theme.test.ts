@@ -9,16 +9,16 @@ import {
   getAppearanceTheme,
   getFontStyle,
   getFontObj,
+  IStylesBase,
+  ITheme, IThemeBase, IAppearance,
 } from '../src';
 
-import { ITheme, IThemeBase, IAppearance } from '../src';
 
-
-interface ICustomAppearance extends IAppearance {
-  dark: IThemeBase;
+interface ICustomAppearance extends IAppearance<IStylesBase> {
+  dark: IThemeBase<IStylesBase>;
 }
 
-interface ICustomTheme extends IThemeBase {
+interface ICustomTheme extends IThemeBase<IStylesBase> {
   appearance?: ICustomAppearance;
 }
 
@@ -107,14 +107,14 @@ const resultTheme: ICustomTheme = {
   },
 };
 
-const resultDefaultAppearance: IThemeBase = {
+const resultDefaultAppearance: IThemeBase<IStylesBase> = {
   background: '#fff',
   color: 'red',
   font: { weight: 500, size: 14 },
   display: 'block',
 };
 
-const resultDarkAppearance: IThemeBase = {
+const resultDarkAppearance: IThemeBase<IStylesBase> = {
   background: '#000',
   color: 'yellow',
   font: { weight: 500, size: 14 },

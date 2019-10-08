@@ -14,8 +14,9 @@ before_install:
 install: yarn install --no-progress --frozen-lockfile
 stages:
   - lint
-  #- build
   - name: next-version
+    if: branch = master AND type = push AND commit_message !~ /(release)/
+  - name: gen-docs
     if: branch = master AND type = push AND commit_message !~ /(release)/
 jobs:
   include:
@@ -35,5 +36,18 @@ jobs:
         provider: script
         script: yarn boltify version --loglevel silly --message "chore(release):" && yarn deploy
         skip_cleanup: true
+        on:
+          branch: master
+    - stage: gen-docs
+      script: skip
+      before_deploy:
+        - yarn build:storybook
+      deploy:
+        provider: pages
+        skip-cleanup: true 
+        github-token: $GH_TOKEN
+        local_dir: .storybook-static
+        repo: tundraray/xc-front-kit
+        target_branch: gh-pages
         on:
           branch: master
