@@ -71,14 +71,14 @@ const Popper = (props: IPopperProps): React.ReactElement => {
       const left = Math.round($state.offsets.popper.left);
       const top = fixPositionTopUnderflow(
         $state.offsets.popper.top,
-        'initial', // TODO: maybe not needed
+        'absolute', // TODO: maybe not needed
       );
 
       const originalHeight = state.originalHeight || popperHeight;
       const maxHeight = calculateMaxHeight(
         popperHeight,
         top,
-        'initial',
+        'absolute',
         boundariesElement,
         state.originalHeight,
       );
@@ -86,7 +86,7 @@ const Popper = (props: IPopperProps): React.ReactElement => {
       setState({
         originalHeight,
         hasExtractedStyles: true,
-        cssPosition: 'initial',
+        cssPosition: 'absolute',
         transform: `translate3d( ${left}px, ${top}px, 0px)`,
         maxHeight,
       });
