@@ -1,0 +1,6 @@
+gulpfile.js
+node_modules/
+*.config.js
+config/
+.publish
+dist

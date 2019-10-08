@@ -12,22 +12,34 @@
   },
   "scripts": {
     "test": "jest --config=jest.config.js",
-    "lint": "yarn eslint packages/**/src/**/*.{js,jsx,ts,tsx}",
+    "lint": "yarn eslint packages/**/{src,stories,test}/**/*.{js,jsx,ts,tsx}",
     "lint:fix": "yarn lint --fix",
     "compile": "yarn boltify run build",
     "build": "yarn clean && yarn compile",
-    "build:storybook": "build-storybook -c .storybook -o .storybook-static",
+    "build:storybook": "build-storybook -c .storybook -o .storybook-static --quiet",
     "pre-deploy": "bash ./copy-to-publish.sh",
     "deploy": "bash ./publish.sh",
     "check": "npm run lint && npm run test",
     "clean": "rimraf dist lib .publish",
     "storybook": "start-storybook -p 9009 -s public"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn build && yarn lint && yarn test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "repository": "https://github.com:xcritical-software/xc-front-kit.git",
   "author": "Xcritical Software",
   "license": "MIT",
   "private": true,
-  "devDependencies": {
+  "devDependencies": {    
     "@babel/cli": "^7.2.3",
     "@storybook/addon-a11y": "^5.0.1",
     "@storybook/addon-actions": "^5.0.1",
@@ -50,13 +62,16 @@
     "@types/react-router": "^5.0.5",
     "@types/react-router-dom": "^4.3.5",
     "@types/styled-components": "^4.1.19",
-    "@xcritical/eslint-plugin-xc-front-lint": "^1.0.0",
-    "@xcritical/xc-front-libs-utils": "^1.0.0",
+    "@xcritical/eslint-plugin-xcritical": "^2.0.1",
+    "@xcritical/gulpify": "^2.0.0",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
-    "boltify": "^1.1.2",
+    "boltify": "^1.1.3",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.18.2",
+    "husky": "^3.0.8",
     "jest": "^24.9.0",
-    "lint-staged": "^9.2.5",
+    "lint-staged": "^9.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-docgen-typescript-loader": "^3.2.0",
@@ -65,11 +80,8 @@
     "storybook": "^5.1.11",
     "styled-components": "^4.1.0",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-import": "^2.18.2"
+    "ts-loader": "^6.2.0",
+    "typescript": "^3.6.3"
   },
-  "dependencies": {
-
-  }
+  "dependencies": {}
 }
