@@ -1,4 +1,4 @@
-export type Column = {
+export interface IColumn {
   title: string;
   width: number;
   order: number;
@@ -8,13 +8,13 @@ export type Column = {
 
 export interface ITable {
   rows: object[];
-  columns: Column[];
+  columns: IColumn[];
   theme: any;
 }
 
-export type TableProps = {
+export interface ITableProps {
   rows: object[];
-  columns: Column[];
+  columns: IColumn[];
   theme: any;
 }
 
@@ -56,7 +56,7 @@ export interface IHeader {
   theme: any;
 }
 
-export type HeaderPros = {
+export interface IHeaderPros {
   columnName: string;
   width: number;
   theme: any;

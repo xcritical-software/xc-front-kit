@@ -6,10 +6,10 @@ import {
 import { Header } from '../header/header';
 import { Row } from '../row/row';
 import { tableTheme } from '../theme/theme';
-import { ITable, TableProps, Column } from '../../interfaces';
+import { ITable, ITableProps, IColumn } from '../../interfaces';
 
 
-export const Table: React.FC<ITable> = React.memo((props: TableProps) => {
+export const Table: React.FC<ITable> = React.memo((props: ITableProps) => {
   const { rows, columns } = props;
   const tableWrapperElement: any = React.useRef<HTMLDivElement>();
   const [selectedRowId, setSelectedRowId] = useState(null);
@@ -20,7 +20,7 @@ export const Table: React.FC<ITable> = React.memo((props: TableProps) => {
     <ContentWrapper theme={ theme }>
       <HeadWrapper>
         <TableHead style={ { transform: `translateX(-${tableScroll}px)` } } theme={ theme }>
-          { columns.map(({ title, width }: Column) => (
+          { columns.map(({ title, width }: IColumn) => (
             <Header
               columnName={ title }
               width={ width }

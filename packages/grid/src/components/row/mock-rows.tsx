@@ -1,4 +1,4 @@
-import { Column } from '../../interfaces';
+import { IColumn } from '../../interfaces';
 
 
 export const mockRows = [
@@ -2738,8 +2738,8 @@ export const fields = Array.from(generateFields(mockRows));
 
 const returnOne = (): string => '1';
 
-const generateMockColumns = (): Column[] => {
-  const mockRowsItems: Column[] = [];
+const generateMockColumns = (): IColumn[] => {
+  const mockRowsItems: IColumn[] = [];
   fields.forEach((field: string, i) => {
     const newItem = {
       title: field.toUpperCase(),

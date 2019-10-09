@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyledCell, RowStyled } from '../styled/styled';
-import { Column, IRow } from '../../interfaces';
+import { IColumn, IRow } from '../../interfaces';
 
 
 export const Row: React.FC<IRow> = React.memo((props: any) => {
@@ -19,7 +19,7 @@ export const Row: React.FC<IRow> = React.memo((props: any) => {
       theme={ theme }
       onClick={ (): undefined => onChangeActiveRow(rowId) }
     >
-      { columns.map((column: Column) => {
+      { columns.map((column: IColumn) => {
         const { render, field, width } = column;
         const cellContent = render ? render(row) : row[field];
 
@@ -32,8 +32,7 @@ export const Row: React.FC<IRow> = React.memo((props: any) => {
             { cellContent }
           </StyledCell>
         );
-      })
-      }
+      }) }
     </RowStyled>
   );
 });
