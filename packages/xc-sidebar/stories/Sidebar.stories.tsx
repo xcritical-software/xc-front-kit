@@ -162,7 +162,7 @@ const theme: IThemeNamespace = {
 
 
 const props = {
-  navComponent: NavPanel(),
+  navComponent: <NavPanel />,
   showScrollbar: 'auto',
 };
 
