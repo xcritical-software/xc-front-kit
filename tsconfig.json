@@ -21,10 +21,6 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "paths": {
-      "@xcritical/xc-sidebar": ["./packages/xc-sidebar/src"],
-      "@xcritical/theme": ["./packages/theme/src"]
-    }
   },
   "include": ["packages/**/src/**/*", "packages/**/stories/**/*", "packages/**/test/**/*"],
   "exclude": ["node_modules", "build", "scripts", ]
