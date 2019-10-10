@@ -1,8 +1,18 @@
 import styled from 'styled-components';
 
 
+interface ISidebarTheme {
+  leftBackground: string;
+  rightBackground: string;
+  color: string;
+  separatorColor: string;
+  minWidth: number;
+  maxWidth: number;
+  leftWidth: number;
+}
+
 interface IProps {
-  theme: object;
+  theme: ISidebarTheme;
 }
 
 
@@ -20,7 +30,7 @@ interface ICloseOpenButton {
 
 
 export const RightBorder = styled.div<IProps>`
-  background-color: ${({ theme: { separatorColor } }) => separatorColor};
+  background-color: ${({ theme: { separatorColor } }: IProps): string => separatorColor};
   width: 2px;
   height: 100% ;
   float: right;
@@ -29,7 +39,7 @@ export const RightBorder = styled.div<IProps>`
 
 `;
 export const SidebarWrapper = styled.div<IProps>`
-  color: ${({ theme: { color } }) => color};
+  color: ${({ theme: { color } }: IProps): string => color};
   height: 100vh ;
   position: fixed;
   top: 0;
@@ -37,14 +47,14 @@ export const SidebarWrapper = styled.div<IProps>`
 `;
 
 export const NavComponentWrapper = styled.div<IProps>`
-  background-color: ${({ theme: { leftBackground } }) => leftBackground};
+  background-color: ${({ theme: { leftBackground } }: IProps): string => leftBackground};
   height: calc(100vh + 10px);
   float: left;
 `;
 
 
 export const ChildWrapper = styled.div<IChildWrapper>`
-  background-color: ${({ theme: { rightBackground } }) => rightBackground};
+  background-color: ${({ theme: { rightBackground } }: IProps): string => rightBackground};
   top: 0;
   bottom:0;
   position: fixed;

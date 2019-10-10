@@ -153,10 +153,6 @@ const theme: IThemeNamespace = {
     rightBackground: 'lightblue',
     minWidth: 20,
     maxWidth: 400,
-    // separatorColor : 'blue',
-    // leftWidth : 100,
-    // color: 'green',
-    // leftBackground: 'pink',
   } as ISidebarTheme,
 };
 
