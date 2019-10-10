@@ -1,4 +1,4 @@
-import App from './App';
+import { Grid } from './components/grid/grid';
 
 
-export { App as default };
+export { Grid as default };

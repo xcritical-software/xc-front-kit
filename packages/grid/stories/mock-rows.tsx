@@ -1,4 +1,4 @@
-import { IColumn } from '../../interfaces';
+import { IColumn } from '../src/interfaces';
 
 
 export const mockRows = [
@@ -2730,7 +2730,6 @@ export const generateFields = (rowsArr: Record<string, any>[]): Set<string> => {
     });
   });
 
-  console.log(fields);
   return fields;
 };
 

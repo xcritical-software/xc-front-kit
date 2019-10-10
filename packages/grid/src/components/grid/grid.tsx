@@ -9,7 +9,7 @@ import { tableTheme } from '../theme/theme';
 import { ITable, ITableProps, IColumn } from '../../interfaces';
 
 
-export const Table: React.FC<ITable> = React.memo((props: ITableProps) => {
+export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
   const { rows, columns } = props;
   const tableWrapperElement: any = React.useRef<HTMLDivElement>();
   const [selectedRowId, setSelectedRowId] = useState(null);
