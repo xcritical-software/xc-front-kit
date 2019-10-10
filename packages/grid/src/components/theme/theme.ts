@@ -37,7 +37,7 @@ export const tableTheme = {
       weight: 400,
       color: 'rgb(115, 115, 115)',
     },
-    headerPadding: {
+    padding: {
       top: '5px',
       right: '5px',
       bottom: '5px',

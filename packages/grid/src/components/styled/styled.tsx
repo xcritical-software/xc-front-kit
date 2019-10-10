@@ -31,9 +31,10 @@ export const HeaderStyled = styled.div<IHeaderStyled>`
    padding: ${({
     theme: {
       header: {
-        top, right, bottom, left,
+        padding: {
+          top, right, bottom, left,
+        },
       },
-
     },
   }): string => `${top} ${right} ${bottom} ${left}`};
   width: ${({ width }): string => `${width}px`};
@@ -78,7 +79,7 @@ export const TableHead = styled.div<IHead>`
 
 export const TableWrapper = styled.div`
   height: calc(100% - 25px);
-  width: calc(100% - 25px);
+  width: calc(100% - 0px);
   overflow: scroll;
 
   ::-webkit-scrollbar { width: 10px; height: 10px;};
