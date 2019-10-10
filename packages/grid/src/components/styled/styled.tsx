@@ -7,19 +7,20 @@ import {
 export const StyledCell = styled.div<IStyledCell>`
   padding: ${({
     theme: {
-      cellPadding: {
+      cell: {
         top, right, bottom, left,
       },
+
     },
   }): string => `${top} ${right} ${bottom} ${left}`};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   box-sizing: border-box;
-  font-size: ${({ theme: { cellFont: { size } } }): string => `${size}`};
-  font-weight: ${({ theme: { cellFont: { weight } } }): string => `${weight}`};
-  color: ${({ theme: { cellFont: { color } } }): string => `${color}`};
-  border-right: ${({ theme: { cellBorderRight: { width, color, style } } }): string => `${width} ${color} ${style}`};
+  font-size: ${({ theme: { cell: { font: { size } } } }): string => `${size}`};
+  font-weight: ${({ theme: { cell: { font: { weight } } } }): string => `${weight}`};
+  color: ${({ theme: { cell: { font: { color } } } }): string => `${color}`};
+  border-right: ${({ theme: { cell: { borderRight: { width, color, style } } } }): string => `${width} ${color} ${style}`};
   font-family: "Open Sans",sans-serif;
   width: ${({ width }): string => `${width}px`};
   box-sizing: border-box;
@@ -71,7 +72,7 @@ export const TableHead = styled.div<IHead>`
 
 export const TableWrapper = styled.div`
   height: calc(100% - 25px);
-  width: calc(100% - 0px);
+  width: calc(100% - 25px);
   overflow: scroll;
 
   ::-webkit-scrollbar { width: 10px; height: 10px;};
@@ -92,6 +93,7 @@ export const ContentWrapper = styled.div<IContentWrapper>`
   overflow: hidden;
   height: ${({ theme: { tableHeight } }): string => tableHeight};
   width: ${({ theme: { tableWidth } }): string => tableWidth};
+  max-height: 100%;
 `;
 
 export const HeadWrapper = styled.div`

@@ -61,3 +61,6 @@ export interface IHeaderPros {
   width: number;
   theme: any;
 }
+
+// export interface ITableTheme {
+// }

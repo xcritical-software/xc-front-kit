@@ -1,53 +1,33 @@
 {
-  "name": "table",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@types/jest": "24.0.18",
-    "@types/node": "12.7.8",
-    "@types/react": "16.9.3",
-    "@types/react-dom": "16.9.1",
-    "@types/styled-components": "4.1.19",
-    "@typescript-eslint/parser": "^2.3.2",
-    "@xcritical/eslint-plugin-xc-front-lint": "1.0.3",
-    "babel-eslint": "^10.0.3",
-    "eslint-config-airbnb": "^18.0.1",
-    "react": "^16.10.1",
-    "react-dom": "^16.10.1",
-    "react-scripts": "3.1.2",
-    "styled-components": "4.4.0",
-    "tslint-config-airbnb": "^5.11.2",
-    "typescript": "3.6.3"
-  },
+  "name": "@xcritical/grid",
+  "version": "0.0.0",
+  "description": "XCritical Grid Component",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint --fix"
+    "test": "exit 0",
+    "compile": "gulp --cwd . compile",
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf dist lib .publish"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "keywords": [
+  ],
+  "author": "XCritical Software",
+  "license": "MIT",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/item#readme",
+  "private": false,
+  "peerDependencies": {
+    "react": "^16.8.3",
+    "styled-components": "^4.1.0",
+    "prop-types": "^15.0.0",
+    "polished": "^3.0.0"
   },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.3.0",
-    "eslint": "^6.5.1",
-    "eslint-config-airbnb-typescript": "5.0.0",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.14.3",
-    "eslint-plugin-react-hooks": "1.7.0"
+  "dependencies": {
+    "@xcritical/theme": "^0.0.0",
+    "lodash.get": "4.x",
+    "polished": "^3.0.0"
   }
 }
