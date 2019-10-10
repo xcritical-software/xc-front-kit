@@ -28,17 +28,18 @@ export const StyledCell = styled.div<IStyledCell>`
 
 
 export const HeaderStyled = styled.div<IHeaderStyled>`
-    padding: ${({
+   padding: ${({
     theme: {
-      headerPadding: {
+      header: {
         top, right, bottom, left,
       },
+
     },
   }): string => `${top} ${right} ${bottom} ${left}`};
   width: ${({ width }): string => `${width}px`};
-  font-size: ${({ theme: { headerFont: { size } } }): string => `${size}`};
-  font-weight: ${({ theme: { headerFont: { weight } } }): string => `${weight}`};
-  color: ${({ theme: { headerFont: { color } } }): string => `${color}`};
+
+
+
   text-align: left;
   font-family: "Open Sans", sans-serif;
   overflow: hidden;
@@ -48,6 +49,11 @@ export const HeaderStyled = styled.div<IHeaderStyled>`
   :hover {
     background-color: ${({ theme: { headerHoverColor } }): string => headerHoverColor};
   }
+  font-size: ${({ theme: { header: { font: { size } } } }): string => `${size}`};
+  font-weight: ${({ theme: { header: { font: { weight } } } }): string => `${weight}`};
+  color: ${({ theme: { header: { font: { color } } } }): string => `${color}`};
+
+  font-family: "Open Sans",sans-serif;
 `;
 
 export const RowStyled = styled.div<IStyledRow>`

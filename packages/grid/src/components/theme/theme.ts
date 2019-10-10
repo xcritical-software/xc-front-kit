@@ -1,17 +1,8 @@
 export const tableTheme = {
   tableWidth: '100%',
   tableHeight: '500px',
-  headerFont: {
-    size: '12px',
-    weight: 400,
-    color: 'rgb(115, 115, 115)',
-  },
-  headerPadding: {
-    top: '5px',
-    right: '5px',
-    bottom: '5px',
-    left: '5px',
-  },
+
+
   headBorderBottom: {
     width: '1px',
     style: 'solid',
@@ -41,6 +32,16 @@ export const tableTheme = {
     },
   },
   header: {
-
+    font: {
+      size: '12px',
+      weight: 400,
+      color: 'rgb(115, 115, 115)',
+    },
+    headerPadding: {
+      top: '5px',
+      right: '5px',
+      bottom: '5px',
+      left: '5px',
+    },
   },
 };
