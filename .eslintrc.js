@@ -14,11 +14,22 @@ module.exports = {
     },
   },
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
-    "no-console": [1, { allow: ["error"] }],
-    "@typescript-eslint/no-unnecessary-condition": 0,    
+    "react/jsx-filename-extension": [1, {
+      "extensions": [".tsx", ".jsx"]
+    }],
+    "no-console": [1, {
+      allow: ["error"]
+    }],
+    "@typescript-eslint/no-unnecessary-condition": 0,
     '@typescript-eslint/quotes': ["error", "single"],
     "react/jsx-props-no-spreading": 0,
-    "@typescript-eslint/explicit-function-return-type": ["error", { allowExpressions: true, allowTypedFunctionExpressions: true, allowHigherOrderFunctions: true }]
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": ["**/stories/**/*.tsx", "**/stories/**/*.ts"]
+    }],
+    "@typescript-eslint/explicit-function-return-type": ["error", {
+      allowExpressions: true,
+      allowTypedFunctionExpressions: true,
+      allowHigherOrderFunctions: true
+    }]
   },
 };
