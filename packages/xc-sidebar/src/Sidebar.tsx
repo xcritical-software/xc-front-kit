@@ -39,13 +39,13 @@ export const Sidebar = ({
   navComponent,
   showScrollbar,
 }: IWrapperProps): ReactElement => {
-
   const themeRef = useRef(sidebarTheme<ISidebarTheme>(theme));
   const [transformParams, setTransformParams] = useState({
     width: themeRef.current.maxWidth * 0.7,
     animate: false,
     arrowToRight: false,
   });
+
   const [antiSelectLayer, changeAntiSelectLayer] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   let clickX = 0;
@@ -60,7 +60,7 @@ export const Sidebar = ({
 
       const { clientX: currentX } = e;
       const newWidth = transformParams.width + (currentX - clickX);
-      
+
       if (newWidth >= themeRef.current.maxWidth) return;
       if (newWidth <= 0) {
         document.body.removeEventListener('mousemove', handleMouseMove);
@@ -85,7 +85,6 @@ export const Sidebar = ({
     },
     [clickX, transformParams.width],
   );
-
 
   const handleMouseDown = useCallback(
     (e) => {
