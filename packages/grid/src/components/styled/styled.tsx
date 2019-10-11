@@ -98,8 +98,8 @@ export const TableWrapper = styled.div`
 
 export const ContentWrapper = styled.div<IContentWrapper>`
   overflow: hidden;
-  height: ${({ theme: { tableHeight } }): string => tableHeight};
-  width: ${({ theme: { tableWidth } }): string => tableWidth};
+  height: ${({ theme: { height } }): string => height};
+  width: ${({ theme: { width } }): string => width};
   max-height: 100%;
 `;
 

@@ -1,6 +1,6 @@
 export const tableTheme = {
-  tableWidth: '100%',
-  tableHeight: '500px',
+  width: '100%',
+  height: '500px',
 
 
   headBorderBottom: {
@@ -45,3 +45,5 @@ export const tableTheme = {
     },
   },
 };
+
+export const gridThemeNamespace = '@xcritical\\grid';
