@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-
-import {
-  TableStyled, TableHead, TableWrapper, ContentWrapper, HeadWrapper,
-} from '../styled/styled';
+import React, { useRef, useState } from 'react';
+import { IColumn, ITable, ITableProps } from '../../interfaces';
 import { Header } from '../header/header';
 import { Row } from '../row/row';
-import { tableTheme } from '../theme/theme';
-import { ITable, ITableProps, IColumn } from '../../interfaces';
+import {
+  ContentWrapper, HeadWrapper, TableHead, TableStyled, TableWrapper,
+} from '../styled/styled';
+import { gridThemeNamespace, tableTheme } from '../theme/theme';
+import { gridTheme, ITableTheme } from '../utils/get-styles';
 
 
 export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
@@ -14,18 +14,19 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
   const tableWrapperElement: any = React.useRef<HTMLDivElement>();
   const [selectedRowId, setSelectedRowId] = useState(null);
   const [tableScroll, setTableScroll] = useState(null);
-  const { theme = tableTheme } = props;
+  const theme = { [gridThemeNamespace]: tableTheme };
+  const themeRef = useRef(gridTheme<ITableTheme>(theme));
 
   return (
-    <ContentWrapper theme={ theme }>
+    <ContentWrapper theme={ themeRef.current }>
       <HeadWrapper>
-        <TableHead style={ { transform: `translateX(-${tableScroll}px)` } } theme={ theme }>
+        <TableHead style={ { transform: `translateX(-${tableScroll}px)` } } theme={ themeRef.current }>
           { columns.map(({ title, width }: IColumn) => (
             <Header
               columnName={ title }
               width={ width }
               key={ title }
-              theme={ theme }
+              theme={ themeRef.current }
             />
           )) }
         </TableHead>
@@ -50,13 +51,12 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
                 isSelected={ selectedRowId === rowId }
                 rowId={ rowId }
                 onChangeActiveRow={ setSelectedRowId }
-                theme={ theme }
+                theme={ themeRef.current }
               />
             );
           }) }
         </TableStyled>
       </TableWrapper>
-
     </ContentWrapper>
   );
 });
