@@ -27,16 +27,15 @@
 		"position",
 		"attached",
 		"popper.js",
-		"wrapper"
+		"wrapper",
+		"react",
+    "react-popper"
 	],
 	"author": "123Software",
 	"license": "MIT",
 	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/popper#readme",
-	"eslint-teamcity": {
-		"reporter": "inspections",
-		"report-name": "ESLint Violations",
-		"error-statistics-name": "ESLint Error Count",
-		"warning-statistics-name": "ESLint Warning Count"
+	"publishConfig": {
+		"access": "public"
 	},
 	"private": false,
 	"devDependencies": {

@@ -18,7 +18,10 @@
   "author": "XCritical Software",
   "license": "MIT",
   "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/item#readme",
-  "private": false,
+  "publishConfig": {
+		"access": "public"
+	},
+	"private": false,
   "peerDependencies": {
     "react": "^16.8.3",
     "styled-components": "^4.1.0",

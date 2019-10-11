@@ -20,6 +20,9 @@
 	"author": "123Software",
 	"license": "MIT",
 	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/theme#readme",
+	"publishConfig": {
+		"access": "public"
+	},
 	"private": false,
 	"peerDependencies": {
 		"styled-components": "^4.1.0",
