@@ -20,7 +20,8 @@
     "deploy": "bash ./copy-to-publish.sh && bash ./publish.sh",
     "check": "npm run lint && npm run test",
     "clean": "rimraf dist lib .publish",
-    "storybook": "start-storybook -p 9009 -s public"
+    "storybook": "start-storybook -p 9009 -s public",
+    "build:lastcommit": "yarn clean && yarn compile --since HEAD~1"
   },
   "husky": {
     "hooks": {

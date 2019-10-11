@@ -32,9 +32,12 @@ jobs:
         - git fetch --tags --force
         - git checkout master
         - git pull
+        - yarn boltify version --loglevel silly --message "chore(release):" --no-push
+      after_deploy: 
+        - git push --follow-tags --no-verify
       deploy:
         provider: script
-        script: yarn boltify version --loglevel silly --message "chore(release):" && yarn deploy
+        script: yarn build:lastcommit && npm run deploy
         skip_cleanup: true
         on:
           branch: master
