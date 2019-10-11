@@ -1,21 +1,23 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { IColumn, ITable, ITableProps } from '../../interfaces';
 import { Header } from '../header/header';
 import { Row } from '../row/row';
 import {
   ContentWrapper, HeadWrapper, TableHead, TableStyled, TableWrapper,
 } from '../styled/styled';
-import { gridThemeNamespace, tableTheme } from '../theme/theme';
+
 import { gridTheme, ITableTheme } from '../utils/get-styles';
 
 
 export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
-  const { rows, columns } = props;
+  const { rows, columns, theme } = props;
   const tableWrapperElement: any = React.useRef<HTMLDivElement>();
   const [selectedRowId, setSelectedRowId] = useState(null);
   const [tableScroll, setTableScroll] = useState(null);
-  const theme = { [gridThemeNamespace]: tableTheme };
   const themeRef = useRef(gridTheme<ITableTheme>(theme));
+  useEffect(() => {
+    themeRef.current = gridTheme<ITableTheme>(theme);
+  });
 
   return (
     <ContentWrapper theme={ themeRef.current }>
