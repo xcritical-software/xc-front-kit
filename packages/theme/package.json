@@ -1,36 +1,36 @@
 {
-  "name": "@xcritical/theme",
-  "version": "0.0.0",
-  "description": "",
-  "main": "./src/index.ts",
-  "scripts": {
-    "test": "jest --config=jest.config.js",
-    "compile": "gulp --cwd . compile",
-    "build": "yarn clean && yarn compile",
-    "clean": "rimraf dist lib .publish"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
-  },
-  "keywords": [
-    "theme",
-    "style-components"
-  ],
-  "author": "123Software",
-  "license": "MIT",
-  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/theme#readme",
-  "private": false,
-  "peerDependencies": {
-    "styled-components": "^4.1.0",
-    "react": "^16.9.0"
-  },
-  "dependencies": {
-    "kind-of": "^6.0.2",
-    "lodash.get": "4.x",
-    "lodash.isempty": "4.x",
-    "memoizee": "^0.4.14",
-    "polished": "3.x",
-    "utilitify": "^1.0.0"
-  }
+	"name": "@xcritical/theme",
+	"version": "0.0.1",
+	"description": "",
+	"main": "./src/index.ts",
+	"scripts": {
+		"test": "jest --config=jest.config.js",
+		"compile": "gulp --cwd . compile",
+		"build": "yarn clean && yarn compile",
+		"clean": "rimraf dist lib .publish"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+	},
+	"keywords": [
+		"theme",
+		"style-components"
+	],
+	"author": "123Software",
+	"license": "MIT",
+	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/theme#readme",
+	"private": false,
+	"peerDependencies": {
+		"styled-components": "^4.1.0",
+		"react": "^16.9.0"
+	},
+	"dependencies": {
+		"kind-of": "^6.0.2",
+		"lodash.get": "4.x",
+		"lodash.isempty": "4.x",
+		"memoizee": "^0.4.14",
+		"polished": "3.x",
+		"utilitify": "^1.0.0"
+	}
 }
