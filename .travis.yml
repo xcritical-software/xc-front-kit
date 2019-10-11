@@ -14,8 +14,8 @@ before_install:
 install: yarn install --no-progress --frozen-lockfile
 stages:
   - lint
-  # - name: next-version
-  #   if: branch = master AND type = push AND commit_message !~ /(release)/
+  - name: next-version
+    if: branch = master AND type = push AND commit_message !~ /(release)/
   - name: gen-docs
     if: branch = master AND type = push AND commit_message !~ /(release)/
 jobs:
@@ -47,6 +47,8 @@ jobs:
       before_deploy:
         - yarn build:storybook
       deploy:
+        edge:
+          branch: v1.8.47
         provider: pages
         skip-cleanup: true 
         github-token: $GH_TOKEN
