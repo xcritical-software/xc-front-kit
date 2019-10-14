@@ -18,7 +18,7 @@ module.exports = {
   collectCoverage: true,
   verbose: true,
   displayName: {
-    name: '@xcritical/xc-theme',
+    name: '@xcritical/theme',
     color: 'blue',
   },
   errorOnDeprecated: true,
