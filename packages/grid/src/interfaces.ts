@@ -1,4 +1,8 @@
+import { ITableTheme } from './components/utils/get-styles';
+
+
 export interface IColumn {
+
   title: string;
   width: number;
   order: number;
@@ -9,13 +13,13 @@ export interface IColumn {
 export interface ITable {
   rows: object[];
   columns: IColumn[];
-  theme: any;
+  theme?: any;
 }
 
 export interface ITableProps {
   rows: object[];
   columns: IColumn[];
-  theme: any;
+  theme?: any;
 }
 
 export interface IRow {
@@ -24,43 +28,40 @@ export interface IRow {
   rowId: number;
   onChangeActiveRow: Function;
   columns: object[];
-  theme: any;
+  theme: ITableTheme;
 }
 
 export interface IStyledCell {
   width: number;
-  theme: any;
+  theme: ITableTheme;
 }
 
 export interface IHeaderStyled {
   width: number;
-  theme: any;
+  theme: ITableTheme;
 }
 
 export interface IStyledRow {
   isSelected: boolean;
-  theme: any;
+  theme: ITableTheme;
 }
 
 export interface IHead {
-  theme: any;
+  theme: ITableTheme;
 }
 
 export interface IContentWrapper {
-  theme: any;
+  theme: ITableTheme;
 }
 
 export interface IHeader {
   columnName: string;
   width: number;
-  theme: any;
+  theme: ITableTheme;
 }
 
 export interface IHeaderPros {
   columnName: string;
   width: number;
-  theme: any;
+  theme: ITableTheme;
 }
-
-// export interface ITableTheme {
-// }

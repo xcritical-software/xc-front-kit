@@ -11,47 +11,47 @@ import {
 
 
 export interface ITableTheme extends ITheme {
-  width: string;
-  tableHeight: string;
-  headBorderBottom: {
-    width: string;
-    style: string;
-    color: string;
+  width?: string;
+  tableHeight?: string;
+  headBorderBottom?: {
+    width?: string;
+    style?: string;
+    color?: string;
   };
-  rowColor: string;
-  evenRowColor: string;
-  activeRowColor: string;
-  headerBackgroundColor: string;
-  headerHoverColor: string;
-  cell: {
-    borderRight: {
-      width: string;
-      color: string;
-      style: string;
+  rowColor?: string;
+  evenRowColor?: string;
+  activeRowColor?: string;
+  headerBackgroundColor?: string;
+  headerHoverColor?: string;
+  cell?: {
+    borderRight?: {
+      width?: string;
+      color?: string;
+      style?: string;
     };
-    padding: {
-      top: string;
-      right: string;
-      bottom: string;
-      left: string;
+    padding?: {
+      top?: string;
+      right?: string;
+      bottom?: string;
+      left?: string;
     };
-    font: {
-      size: string;
-      weight: string;
-      color: string;
+    font?: {
+      size?: string;
+      weight?: string;
+      color?: string;
     };
   };
-  header: {
-    font: {
-      size: string;
-      weight: string;
-      color: string;
+  header?: {
+    font?: {
+      size?: string;
+      weight?: string;
+      color?: string;
     };
-    padding: {
-      top: string;
-      right: string;
-      bottom: string;
-      left: string;
+    padding?: {
+      top?: string;
+      right?: string;
+      bottom?: string;
+      left?: string;
     };
   };
 }

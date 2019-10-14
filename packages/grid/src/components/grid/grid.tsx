@@ -17,7 +17,7 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
   const themeRef = useRef(gridTheme<ITableTheme>(theme));
   useEffect(() => {
     themeRef.current = gridTheme<ITableTheme>(theme);
-  });
+  }, [theme]);
 
   return (
     <ContentWrapper theme={ themeRef.current }>
