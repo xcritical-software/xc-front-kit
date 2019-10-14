@@ -32,7 +32,7 @@
     "react-router": "^5.0.1"
   },
   "dependencies": {
-    "@xcritical/theme": "^0.0.0",
+    "@xcritical/theme": "^0.0.1",
     "lodash.get": "^4.x",
     "polished": "^3.0.0",
     "react-custom-scrollbars": "^4.2.1",
