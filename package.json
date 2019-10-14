@@ -17,11 +17,11 @@
     "compile": "yarn boltify run build",
     "build": "yarn clean && yarn compile",
     "build:storybook": "build-storybook -c .storybook -o .storybook-static --quiet",
-    "pre-deploy": "bash ./copy-to-publish.sh",
-    "deploy": "bash ./publish.sh",
+    "deploy": "bash ./copy-to-publish.sh && bash ./publish.sh",
     "check": "npm run lint && npm run test",
     "clean": "rimraf dist lib .publish",
-    "storybook": "start-storybook -p 9009 -s public"
+    "storybook": "start-storybook -p 9009 -s public",
+    "build:lastcommit": "yarn clean && yarn compile --since HEAD~1"
   },
   "husky": {
     "hooks": {
