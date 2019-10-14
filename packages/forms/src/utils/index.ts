@@ -3,8 +3,9 @@ import get from 'lodash.get';
 import { setIn } from 'utilitify';
 
 
-export const reducerDictionary = ($reducer: Reducer, propName: string)
-=> (state = {}, action: any = {}) => {
+export const reducerDictionary = ($reducer:
+Reducer,
+propName: string) => (state = {}, action: any = {}) => {
   const name = get(action, ['meta', propName]);
   if (!name) {
     return state;
