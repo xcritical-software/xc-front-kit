@@ -14386,7 +14386,7 @@ utila@^0.4.0, utila@~0.4:
   resolved "https://registry.yarnpkg.com/utila/-/utila-0.4.0.tgz#8a16a05d445657a3aea5eecc5b12a4fa5379772c"
   integrity sha1-ihagXURWV6Oupe7MWxKk+lN5dyw=
 
-utilitify@1.0.2:
+utilitify@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/utilitify/-/utilitify-1.0.2.tgz#125613f0ef5ce04606195e850a76de2126c8e586"
   integrity sha512-hVNGN8RevWmc8HxR10/wq851OsMOKyyrnHXeDSGdAzVaPDcrAf9DSsgtI7t1ajIZt8PKadGXAu8Y1kbBfF6ybw==
@@ -14399,13 +14399,6 @@ utilitify@1.0.2:
     lodash.set "^4.3.2"
     lodash.topath "^4.5.2"
     lodash.transform "^4.6.0"
-
-utilitify@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/utilitify/-/utilitify-1.0.0.tgz#b2a41681d4f4223a7fcb71494de9ab60fbf324bd"
-  integrity sha512-BuBhb6A3DVU1qY/n1azX1r3yT2wRkFR7Q3goHUAPFPUox4DM3OxLvaPaiAqF8LzgelBmAy46m1pUBIo+xMehqA==
-  dependencies:
-    kind-of "^6.0.2"
 
 utils-merge@1.0.1:
   version "1.0.1"
