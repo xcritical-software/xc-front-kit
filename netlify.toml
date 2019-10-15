@@ -12,3 +12,4 @@
 # will inherit these settings.
 [context.deploy-preview]
   publish = ".storybook-static"
+

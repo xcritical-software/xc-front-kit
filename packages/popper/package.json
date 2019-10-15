@@ -1,56 +1,55 @@
 {
-  "name": "@xcritical/popper",
-  "version": "0.0.0",
-  "description": "",
-  "main": "src/index.ts",
-  "scripts": {
-    "test": "exit 0",
-    "lint": "eslint --ext .js --ext .jsx src",
-    "lint:teamcity": "npm run lint -- --format ./node_modules/eslint-teamcity/index.js",
-    "lint:fix": "eslint --ext .js --ext .jsx src stories --fix",
-    "compile": "gulp --cwd . compile",
-    "build": "npm run clean && npm run compile",
-    "deploy": "cd .publish && npm publish",
-    "check": "npm run lint && npm run test",
-    "clean": "rimraf dist lib .publish"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
-  },
-  "keywords": [
-    "popperjs",
-    "component",
-    "drop",
-    "tooltip",
-    "popover",
-    "position",
-    "attached",
-    "popper.js",
-    "wrapper"
-  ],
-  "author": "123Software",
-  "license": "MIT",
-  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/popper#readme",
-  "eslint-teamcity": {
-    "reporter": "inspections",
-    "report-name": "ESLint Violations",
-    "error-statistics-name": "ESLint Error Count",
-    "warning-statistics-name": "ESLint Warning Count"
-  },
-  "private": false,
-  "devDependencies": {
-    "@types/raf-schd": "^4.0.0"
-  },
-  "peerDependencies": {
-    "react": "^16.8.3",
-    "styled-components": "^4.1.0",
-    "polished": "^3.0.0"
-  },
-  "dependencies": {
-    "popper.js": "^1.15.0",
-    "raf-schd": "^4.0.0",
-    "csstype": "^2.6.7",
-    "react-outside-click-handler": "^1.2.3"
-  }
+	"name": "@xcritical/popper",
+	"version": "0.0.1",
+	"description": "",
+	"main": "src/index.ts",
+	"scripts": {
+		"test": "exit 0",
+		"lint": "eslint --ext .js --ext .jsx src",
+		"lint:teamcity": "npm run lint -- --format ./node_modules/eslint-teamcity/index.js",
+		"lint:fix": "eslint --ext .js --ext .jsx src stories --fix",
+		"compile": "gulp --cwd . compile",
+		"build": "npm run clean && npm run compile",
+		"deploy": "cd .publish && npm publish",
+		"check": "npm run lint && npm run test",
+		"clean": "rimraf dist lib .publish"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+	},
+	"keywords": [
+		"popperjs",
+		"component",
+		"drop",
+		"tooltip",
+		"popover",
+		"position",
+		"attached",
+		"popper.js",
+		"wrapper",
+		"react",
+		"react-popper"
+	],
+	"author": "123Software",
+	"license": "MIT",
+	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/popper#readme",
+	"publishConfig": {
+		"access": "public"
+	},
+	"private": false,
+	"devDependencies": {
+		"@types/raf-schd": "^4.0.0"
+	},
+	"peerDependencies": {
+		"react": "^16.8.3",
+		"styled-components": "^4.1.0",
+		"polished": "^3.0.0"
+	},
+	"dependencies": {
+		"popper.js": "^1.15.0",
+		"raf-schd": "^4.0.0",
+		"csstype": "^2.6.7",
+		"react-outside-click-handler": "^1.2.3"
+	}
 }
