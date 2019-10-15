@@ -1,5 +1,5 @@
-import { ITableTheme } from './components/utils/get-styles';
 import { IThemeNamespace } from '@xcritical/theme';
+import { ITableTheme } from './components/utils/get-styles';
 
 
 export interface IColumn {
