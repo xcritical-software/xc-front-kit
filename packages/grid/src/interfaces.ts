@@ -1,4 +1,5 @@
 import { ITableTheme } from './components/utils/get-styles';
+import { IThemeNamespace } from '@xcritical/theme';
 
 
 export interface IColumn {
@@ -13,13 +14,14 @@ export interface IColumn {
 export interface ITable {
   rows: object[];
   columns: IColumn[];
-  theme?: any;
+  theme?: IThemeNamespace;
 }
+
 
 export interface ITableProps {
   rows: object[];
   columns: IColumn[];
-  theme?: any;
+  theme?: IThemeNamespace;
 }
 
 export interface IRow {
@@ -63,5 +65,19 @@ export interface IHeader {
 export interface IHeaderPros {
   columnName: string;
   width: number;
+  theme: ITableTheme;
+}
+
+export interface IRowData {
+  id: number;
+  [key: string]: string | number | boolean | undefined | number[] | null;
+}
+
+export interface IRowProps {
+  row: IRowData;
+  isSelected: boolean;
+  rowId: number;
+  onChangeActiveRow: Function;
+  columns: object[];
   theme: ITableTheme;
 }

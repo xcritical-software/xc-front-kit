@@ -1,4 +1,4 @@
-import { IColumn } from '../src/interfaces';
+import { IColumn, IRowData } from '../src/interfaces';
 
 
 export const mockRows = [
@@ -2722,9 +2722,9 @@ export const mockRows = [
   },
 ];
 
-export const generateFields = (rowsArr: Record<string, any>[]): Set<string> => {
+export const generateFields = (rowsArr: IRowData[]): Set<string> => {
   const fields: Set<string> = new Set();
-  rowsArr.forEach((row: Record<string, any>) => {
+  rowsArr.forEach((row: IRowData) => {
     Object.keys(row).forEach((it) => {
       fields.add(it);
     });

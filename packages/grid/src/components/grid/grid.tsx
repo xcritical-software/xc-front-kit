@@ -1,19 +1,20 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { IColumn, ITable, ITableProps } from '../../interfaces';
+import {
+  IColumn, ITable, ITableProps, IRowData,
+} from '../../interfaces';
 import { Header } from '../header/header';
 import { Row } from '../row/row';
 import {
   ContentWrapper, HeadWrapper, TableHead, TableStyled, TableWrapper,
 } from '../styled/styled';
-
 import { gridTheme, ITableTheme } from '../utils/get-styles';
 
 
 export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
-  const { rows, columns, theme } = props;
-  const tableWrapperElement: any = React.useRef<HTMLDivElement>();
+  const { rows, columns, theme = {} } = props;
+  const tableWrapperElement = React.createRef<HTMLDivElement>();
   const [selectedRowId, setSelectedRowId] = useState(null);
-  const [tableScroll, setTableScroll] = useState(null);
+  const [tableScroll, setTableScroll] = useState(0);
   const themeRef = useRef(gridTheme<ITableTheme>(theme));
   useEffect(() => {
     themeRef.current = gridTheme<ITableTheme>(theme);
@@ -36,14 +37,14 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
       <TableWrapper
         ref={ tableWrapperElement }
         onScroll={ (): void => {
-          const { current } = tableWrapperElement;
-          if (current) {
-            setTableScroll(current.scrollLeft);
+          const scrolledDiv = tableWrapperElement.current;
+          if (scrolledDiv) {
+            setTableScroll(scrolledDiv.scrollLeft);
           }
         } }
       >
         <TableStyled>
-          { rows.map((row: any) => {
+          { rows.map((row: IRowData) => {
             const rowId = row.id;
             return (
               <Row
