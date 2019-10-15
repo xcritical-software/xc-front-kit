@@ -1,11 +1,14 @@
-import { Reducer } from 'redux';
+import { Reducer, Action, Store } from 'redux';
 import get from 'lodash.get';
 import { setIn } from 'utilitify';
 
+import { IFormAction } from '../actions';
 
-export const reducerDictionary = ($reducer:
-Reducer,
-propName: string) => (state = {}, action: any = {}) => {
+
+export const reducerDictionary = (
+  $reducer: Reducer,
+  propName: string,
+) => (state: Store, action: Action<IFormAction>) => {
   const name = get(action, ['meta', propName]);
   if (!name) {
     return state;
