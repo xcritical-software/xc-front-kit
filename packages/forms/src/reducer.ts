@@ -15,19 +15,7 @@ import {
 } from './actions';
 
 import { reducerDictionary } from './utils';
-
-
-export interface IFormState {
-  source?: { [fieldName: string]: any };
-  model?: { [fieldName: string]: any };
-  isNew: boolean;
-  isChanged: boolean;
-  errors: { [fieldName: string]: string };
-}
-
-export interface IFormStateMap {
-  [formName: string]: IFormState;
-}
+import { IFormState } from './interfaces';
 
 
 const behaviors: Record<FormActionType, Function> = {
