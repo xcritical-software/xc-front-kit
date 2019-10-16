@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { ITableTheme } from '../utils/get-styles';
 import {
-  IStyledCell, IHeaderStyled, IStyledRow, IHead, IContentWrapper,
+  IStyledRow,
+  IStyledCell,
 } from '../../interfaces';
 
 
@@ -27,7 +29,7 @@ export const StyledCell = styled.div<IStyledCell>`
 `;
 
 
-export const HeaderStyled = styled.div<IHeaderStyled>`
+export const HeaderStyled = styled.div<IStyledCell>`
    padding: ${({
     theme: {
       header: {
@@ -72,7 +74,7 @@ export const TableStyled = styled.div`
 `;
 
 
-export const TableHead = styled.div<IHead>`
+export const TableHead = styled.div<ITableTheme>`
   display: flex;
   border-bottom: ${({ theme: { headBorderBottom: { width, color, style } } }): string => `${width} ${color} ${style}`};
 `;
@@ -96,7 +98,7 @@ export const TableWrapper = styled.div`
   scrollbar-color: #ccc;
 `;
 
-export const ContentWrapper = styled.div<IContentWrapper>`
+export const ContentWrapper = styled.div<ITableTheme>`
   overflow: hidden;
   height: ${({ theme: { height } }): string => height};
   width: ${({ theme: { width } }): string => width};

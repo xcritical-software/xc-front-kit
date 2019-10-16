@@ -56,7 +56,6 @@ export interface ITableTheme extends ITheme {
   };
 }
 
-
 export type IThemeProp<T> = T;
 
 export function gridTheme<T>(

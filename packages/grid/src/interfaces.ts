@@ -38,21 +38,8 @@ export interface IStyledCell {
   theme: ITableTheme;
 }
 
-export interface IHeaderStyled {
-  width: number;
-  theme: ITableTheme;
-}
-
 export interface IStyledRow {
   isSelected: boolean;
-  theme: ITableTheme;
-}
-
-export interface IHead {
-  theme: ITableTheme;
-}
-
-export interface IContentWrapper {
   theme: ITableTheme;
 }
 
