@@ -26,7 +26,7 @@ export const Row: React.FC<IRow> = React.memo((props: IRowProps) => {
         return (
           <StyledCell
             key={ field }
-            theme={ theme }
+            theme={ theme.cell }
             width={ width }
           >
             { cellContent }

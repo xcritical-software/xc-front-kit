@@ -1,60 +1,55 @@
 import styled from 'styled-components';
-import { ITableTheme } from '../utils/get-styles';
 import {
+  ITableTheme,
   IStyledRow,
   IStyledCell,
+  IStyledHead,
 } from '../../interfaces';
 
 
 export const StyledCell = styled.div<IStyledCell>`
   padding: ${({
     theme: {
-      cell: {
-        top, right, bottom, left,
-      },
-
+      top, right, bottom, left,
     },
   }): string => `${top} ${right} ${bottom} ${left}`};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   box-sizing: border-box;
-  font-size: ${({ theme: { cell: { font: { size } } } }): string => `${size}`};
-  font-weight: ${({ theme: { cell: { font: { weight } } } }): string => `${weight}`};
-  color: ${({ theme: { cell: { font: { color } } } }): string => `${color}`};
-  border-right: ${({ theme: { cell: { borderRight: { width, color, style } } } }): string => `${width} ${color} ${style}`};
+  font-size: ${({ theme: { font: { size } } }): string => `${size}`};
+  font-weight: ${({ theme: { font: { weight } } }): string => `${weight}`};
+  color: ${({ theme: { font: { color } } }): string => `${color}`};
+  border-right: ${({ theme: { borderRight: { width, color, style } } }): string => `${width} ${color} ${style}`};
   font-family: inherit;
   width: ${({ width }): string => `${width}px`};
   box-sizing: border-box;
 `;
 
 
-export const HeaderStyled = styled.div<IStyledCell>`
+export const HeaderStyled = styled.div<IStyledHead>`
    padding: ${({
     theme: {
-      header: {
-        padding: {
-          top, right, bottom, left,
-        },
+
+      padding: {
+        top, right, bottom, left,
       },
+
     },
   }): string => `${top} ${right} ${bottom} ${left}`};
   width: ${({ width }): string => `${width}px`};
-
-
-
   text-align: left;
   font-family: inherit;
   overflow: hidden;
   text-overflow: ellipsis;
   box-sizing: border-box;
-  background-color: ${({ theme: { headerBackgroundColor } }): string => headerBackgroundColor};
+  background-color: ${({ theme: { backgroundColor } }): string => backgroundColor};
   :hover {
-    background-color: ${({ theme: { headerHoverColor } }): string => headerHoverColor};
+    background-color: ${({ theme: { hoverColor } }): string => hoverColor};
   }
-  font-size: ${({ theme: { header: { font: { size } } } }): string => `${size}`};
-  font-weight: ${({ theme: { header: { font: { weight } } } }): string => `${weight}`};
-  color: ${({ theme: { header: { font: { color } } } }): string => `${color}`};
+  font-size: ${({ theme: { font: { size } } }): string => `${size}`};
+  font-weight: ${({ theme: { font: { weight } } }): string => `${weight}`};
+  color: ${({ theme: { font: { color } } }): string => `${color}`};
 
   font-family: inherit;
 `;
@@ -81,7 +76,6 @@ export const TableHead = styled.div<ITableTheme>`
 
 export const TableWrapper = styled.div`
   height: calc(100% - 25px);
-  width: calc(100% - 0px);
   overflow: scroll;
 
   ::-webkit-scrollbar { width: 10px; height: 10px;};

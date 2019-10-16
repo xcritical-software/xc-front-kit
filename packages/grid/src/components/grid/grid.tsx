@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import {
-  IColumn, ITable, ITableProps, IRowData,
+  IColumn, ITable, ITableProps, IRowData, ITableTheme,
 } from '../../interfaces';
 import { Header } from '../header/header';
 import { Row } from '../row/row';
 import {
   ContentWrapper, HeadWrapper, TableHead, TableStyled, TableWrapper,
 } from '../styled/styled';
-import { gridTheme, ITableTheme } from '../utils/get-styles';
+import { gridTheme } from '../utils/get-styles';
 
 
 export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {

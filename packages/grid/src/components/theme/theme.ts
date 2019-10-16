@@ -11,8 +11,8 @@ export const tableTheme = {
   rowColor: 'white',
   evenRowColor: 'rgb(184, 223, 240)',
   activeRowColor: '#c3e7b7',
-  headerBackgroundColor: 'white',
-  headerHoverColor: 'rgb(184, 223, 240)',
+
+
   cell: {
     borderRight: {
       width: '1px',
@@ -31,7 +31,7 @@ export const tableTheme = {
       color: '#000',
     },
   },
-  header: {
+  head: {
     font: {
       size: '12px',
       weight: 400,
@@ -43,6 +43,8 @@ export const tableTheme = {
       bottom: '5px',
       left: '5px',
     },
+    backgroundColor: 'white',
+    hoverColor: 'rgb(184, 223, 240)',
   },
 };
 
