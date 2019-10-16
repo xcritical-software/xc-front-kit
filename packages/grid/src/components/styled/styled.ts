@@ -21,7 +21,7 @@ export const StyledCell = styled.div<IStyledCell>`
   font-weight: ${({ theme: { cell: { font: { weight } } } }): string => `${weight}`};
   color: ${({ theme: { cell: { font: { color } } } }): string => `${color}`};
   border-right: ${({ theme: { cell: { borderRight: { width, color, style } } } }): string => `${width} ${color} ${style}`};
-  font-family: "Open Sans",sans-serif;
+  font-family: inherit;
   width: ${({ width }): string => `${width}px`};
   box-sizing: border-box;
 `;
@@ -42,7 +42,7 @@ export const HeaderStyled = styled.div<IHeaderStyled>`
 
 
   text-align: left;
-  font-family: "Open Sans", sans-serif;
+  font-family: inherit;
   overflow: hidden;
   text-overflow: ellipsis;
   box-sizing: border-box;
@@ -54,7 +54,7 @@ export const HeaderStyled = styled.div<IHeaderStyled>`
   font-weight: ${({ theme: { header: { font: { weight } } } }): string => `${weight}`};
   color: ${({ theme: { header: { font: { color } } } }): string => `${color}`};
 
-  font-family: "Open Sans",sans-serif;
+  font-family: inherit;
 `;
 
 export const RowStyled = styled.div<IStyledRow>`
