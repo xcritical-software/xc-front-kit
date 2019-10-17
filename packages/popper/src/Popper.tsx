@@ -4,209 +4,97 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import styled from 'styled-components';
+
 import PopperJS, { Data } from 'popper.js';
 import rafSchedule from 'raf-schd';
 
-import ContentContainer from './contentContainer';
-import {
-  positionPropToPopperPosition,
-  calculateMaxHeight,
-  fixPositionTopUnderflow,
-} from './utils';
-import {
-  IPopperProps, IPopperState, IFixedOffset, IFixedTargetProps,
-} from './interfaces';
+import { IPopperProps, IPopperState } from './interfaces';
+import { getPopperPlacementByPosition, getPositionByPopperPlacement } from './utils/helpers';
+import { getModifiers } from './utils/modifiers';
 
 
-const FixedTarget = styled.div<IFixedTargetProps>`
-  ${({ fixedOffset, targetRef }) => {
-    if (fixedOffset && targetRef) {
-      const actualTarget = targetRef.firstChild;
-      const rect = actualTarget.getBoundingClientRect();
-      return `
-        position: fixed;
-        top: ${fixedOffset.top}px;
-        left: ${fixedOffset.left}px;
-        height: ${rect.height}px;
-        width: ${rect.width}px;
-        z-index: -1;
-      `;
-    }
-    return 'display: none;';
-  }};
-`;
-
-const Popper = (props: IPopperProps): React.ReactElement => {
+export const Popper = (props: IPopperProps): React.ReactElement => {
   const {
+    children,
+    content: Content,
+    modifiers,
+    position = 'bottom center',
+    eventsEnabled = true,
+    positionFixed = false,
     autoFlip = true,
-    boundariesElement = 'viewport',
-    children = null,
-    content = null,
-    offset = '0,0',
-    position: propsPosition = 'right middle',
-    zIndex = 400,
-    isAlwaysFixed = false,
-    onPositioned = () => { },
   } = props;
 
-  const popper = useRef<PopperJS>();
-  const fixedRef = useRef<any>();
-  const contentRef = useRef<any>();
+  const popperInstance = useRef<PopperJS>();
   const targetRef = useRef<any>();
+  const contentRef = useRef<any>();
 
   const [state, setState] = useState<IPopperState>({
-    hasExtractedStyles: false,
-    cssPosition: 'absolute',
-    originalHeight: null,
-    maxHeight: null,
+    popperStyles: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      opacity: 0,
+      pointerEvents: 'none',
+    },
+    arrowStyles: {},
+    position,
   });
 
-  const [fixedOffset, setFixedOffset] = useState<IFixedOffset>();
+  const scheduleSetState = useRef(rafSchedule((data: Data) => {
+    setState({
+      popperStyles: data.styles,
+      arrowStyles: data.arrowStyles,
+      position: getPositionByPopperPlacement(data.placement),
+    });
+  }));
 
-
-  const extractStyles = useRef(rafSchedule((($state: Data) => {
-    if ($state) {
-      const popperHeight = $state.offsets.popper.height;
-      const left = Math.round($state.offsets.popper.left);
-      const top = fixPositionTopUnderflow(
-        $state.offsets.popper.top,
-        'absolute', // TODO: maybe not needed
-      );
-
-      const originalHeight = state.originalHeight || popperHeight;
-      const maxHeight = calculateMaxHeight(
-        popperHeight,
-        top,
-        'absolute',
-        boundariesElement,
-        state.originalHeight,
-      );
-
-      setState({
-        originalHeight,
-        hasExtractedStyles: true,
-        cssPosition: 'absolute',
-        transform: `translate3d( ${left}px, ${top}px, 0px)`,
-        maxHeight,
-      });
+  const destroyPopperInstance = (): void => {
+    if (popperInstance.current) {
+      popperInstance.current.destroy();
     }
-  })));
+  };
 
+  const getOptions = useCallback((): PopperJS.PopperOptions => ({
+    placement: getPopperPlacementByPosition(position),
+    eventsEnabled,
+    positionFixed,
+    onCreate: scheduleSetState.current,
+    onUpdate: scheduleSetState.current,
+    modifiers: getModifiers(autoFlip, modifiers),
+  }), ([position, eventsEnabled, positionFixed, autoFlip, modifiers]));
 
-  const applyPopper = useCallback(() => {
-    const actualTarget = isAlwaysFixed
-      ? fixedRef.current
-      : targetRef.current && targetRef.current.firstChild;
+  const setPopperInstance = useCallback((): void => {
+    destroyPopperInstance();
 
-    const popperOpts: PopperJS.PopperOptions = {
-      placement: positionPropToPopperPosition(propsPosition),
-      onCreate: extractStyles.current,
-      onUpdate: extractStyles.current,
-      modifiers: {
-        applyStyle: {
-          enabled: false,
-        },
-        hide: {
-          enabled: false,
-        },
-        offset: {
-          enabled: true,
-          offset,
-        },
-        flip: {
-          enabled: !!autoFlip,
-          flipVariations: true,
-          boundariesElement,
-          padding: 0, // leave 0 pixels between popper and the boundariesElement
-        },
-        preventOverflow: {
-          enabled: !!autoFlip,
-          escapeWithReference: !(
-            boundariesElement === 'scrollParent'
-          ),
-        },
-      },
-    };
+    const popperOptions = getOptions();
 
-    popper.current = new PopperJS(actualTarget, contentRef.current, popperOpts);
-  }, [autoFlip, boundariesElement, isAlwaysFixed, offset, propsPosition]);
-
-  const calculateFixedOffset = useCallback(() => {
-    if (isAlwaysFixed && targetRef.current) {
-      const actualTarget = targetRef.current.firstChild;
-      setFixedOffset({
-        top: actualTarget.getBoundingClientRect().top,
-        left: actualTarget.getBoundingClientRect().left,
-      });
-    } else if (!isAlwaysFixed && fixedOffset !== null) {
-      setFixedOffset(undefined);
-    }
-  }, [fixedOffset, isAlwaysFixed]);
+    popperInstance.current = new PopperJS(
+      targetRef.current.firstChild,
+      contentRef.current,
+      popperOptions,
+    );
+  }, [getOptions]);
 
   useEffect(() => {
-    applyPopper();
-    calculateFixedOffset();
-  }, [applyPopper, calculateFixedOffset]);
-
-  useEffect(() => {
-    applyPopper();
-    calculateFixedOffset();
-  }, [applyPopper, calculateFixedOffset, props]);
-
-  useEffect(() => {
-    if (state.hasExtractedStyles && onPositioned) {
-      onPositioned();
+    if (Content) {
+      setPopperInstance();
     }
-  });
+  }, [Content, setPopperInstance]);
 
   useEffect(() => () => {
-    extractStyles.current.cancel();
-    if (popper.current) {
-      popper.current.destroy();
-    }
-  });
-
-  const {
-    hasExtractedStyles,
-    maxHeight,
-    cssPosition,
-    transform,
-  } = state;
-  const opacity = hasExtractedStyles ? {} : { opacity: 0 };
+    destroyPopperInstance();
+  }, []);
 
   return (
     <div>
-      <div
-        ref={ targetRef }
-      >
+      <div ref={ targetRef }>
         { children }
       </div>
-      <FixedTarget targetRef={ targetRef.current } fixedOffset={ fixedOffset }>
-        <div
-          style={ { height: '100%', width: '100%' } }
-          ref={ fixedRef }
-        />
-      </FixedTarget>
-      <ContentContainer maxHeight={ maxHeight }>
-        <div
-          ref={ contentRef }
-          style={ {
-            top: 0,
-            left: 0,
-            position: cssPosition,
-            transform,
-            zIndex,
-            ...opacity,
-          } }
-        >
-          { content }
+      { Content && (
+        <div ref={ contentRef } style={ state.popperStyles }>
+          <Content position={ state.position } arrowStyles={ state.arrowStyles } />
         </div>
-      </ContentContainer>
+      ) }
     </div>
   );
-};
-
-export {
-  Popper,
 };

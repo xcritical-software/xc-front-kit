@@ -39,7 +39,7 @@
   "author": "Xcritical Software",
   "license": "MIT",
   "private": true,
-  "devDependencies": {    
+  "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@storybook/addon-a11y": "^5.0.1",
     "@storybook/addon-actions": "^5.0.1",
