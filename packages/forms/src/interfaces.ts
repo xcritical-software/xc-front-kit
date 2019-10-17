@@ -40,5 +40,5 @@ export interface IFormConnectedFieldDispatch {
 }
 
 export interface IForm {
-  Field?: React.ComponentType<IFormFieldProps>;
+  Field: React.ComponentType<IFormFieldProps>;
 }
