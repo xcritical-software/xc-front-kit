@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import {
   IColumn, ITable, ITableProps, IRowData, ITableTheme,
-} from '../../interfaces';
+} from '../interfaces';
 import { Header } from '../header/header';
 import { Row } from '../row/row';
 import {

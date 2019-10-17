@@ -1,5 +1,5 @@
 import { IThemeNamespace } from '@xcritical/theme';
-import { gridThemeNamespace } from '../src/components/theme/theme';
+import { gridThemeNamespace } from '../src/theme/theme';
 import { ITableTheme } from '../src/interfaces';
 
 

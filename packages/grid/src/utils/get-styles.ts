@@ -9,7 +9,7 @@ import {
 
 } from '../theme/theme';
 
-import { ITableTheme } from '../../interfaces';
+import { ITableTheme } from '../interfaces';
 
 
 export type IThemeProp<T> = T;

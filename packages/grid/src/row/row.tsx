@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyledCell, RowStyled } from '../styled/styled';
-import { IColumn, IRow, IRowProps } from '../../interfaces';
+import { IColumn, IRow, IRowProps } from '../interfaces';
 
 
 export const Row: React.FC<IRow> = React.memo((props: IRowProps) => {

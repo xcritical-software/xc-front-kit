@@ -4,7 +4,7 @@ import {
   IStyledRow,
   IStyledCell,
   IStyledHead,
-} from '../../interfaces';
+} from '../interfaces';
 
 
 export const StyledCell = styled.div<IStyledCell>`

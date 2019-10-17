@@ -2619,16 +2619,6 @@
     typescript "3.5.3"
     vinyl "^2.2.0"
 
-"@xcritical/theme@^0.0.0":
-  version "0.0.1"
-  dependencies:
-    kind-of "^6.0.2"
-    lodash.get "4.x"
-    lodash.isempty "4.x"
-    memoizee "^0.4.14"
-    polished "3.x"
-    utilitify "^1.0.0"
-
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
