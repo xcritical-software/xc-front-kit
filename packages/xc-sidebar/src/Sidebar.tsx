@@ -172,40 +172,42 @@ export const Sidebar = ({
           <Scrollbars autoHide={ showScrollbar === 'auto' } style={ { width: leftWidth } }>{ navComponent }</Scrollbars>
         </NavComponentWrapper>
       ) }
-      <ResponsiveWrapper
-        animate={ transformParams.animate }
-        style={ responsiveWrapperStyles }
-      >
-        <RightBorderWrapper
-          onMouseDown={ handleMouseDown }
-          onMouseUp={ handleRemoveMouseMove }
-        >
-          <RightBorder theme={ themeRef.current }>
-            <CloseOpenButton
-              toRight={ transformParams.arrowToRight }
-              onClick={ handleClose }
-            >
-              <Arrow />
-            </CloseOpenButton>
-          </RightBorder>
-        </RightBorderWrapper>
-        { antiSelectLayer && <AntiSelect /> }
-        <ChildWrapper
-          theme={ themeRef.current }
-          style={ { width: transformParams.width } }
+      { children && (
+        <ResponsiveWrapper
           animate={ transformParams.animate }
+          style={ responsiveWrapperStyles }
         >
-          <Scrollbars
-            style={ {
-              width: rightWidth,
-              transition: transformParams.animate ? '0.5s' : '0s',
-            } }
-            autoHide={ showScrollbar === 'auto' }
+          <RightBorderWrapper
+            onMouseDown={ handleMouseDown }
+            onMouseUp={ handleRemoveMouseMove }
           >
-            { children }
-          </Scrollbars>
-        </ChildWrapper>
-      </ResponsiveWrapper>
+            <RightBorder theme={ themeRef.current }>
+              <CloseOpenButton
+                toRight={ transformParams.arrowToRight }
+                onClick={ handleClose }
+              >
+                <Arrow />
+              </CloseOpenButton>
+            </RightBorder>
+          </RightBorderWrapper>
+          { antiSelectLayer && <AntiSelect /> }
+          <ChildWrapper
+            theme={ themeRef.current }
+            style={ { width: transformParams.width } }
+            animate={ transformParams.animate }
+          >
+            <Scrollbars
+              style={ {
+                width: rightWidth,
+                transition: transformParams.animate ? '0.5s' : '0s',
+              } }
+              autoHide={ showScrollbar === 'auto' }
+            >
+              { children }
+            </Scrollbars>
+          </ChildWrapper>
+        </ResponsiveWrapper>
+      ) }
     </SidebarWrapper>
   );
 };
