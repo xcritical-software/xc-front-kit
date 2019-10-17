@@ -4,7 +4,8 @@ import { withForm, FormProvider } from './FormContext';
 import СreateConnectedFormField from './ConnectedFormField';
 import { IFormProps, IForm } from '../interfaces';
 
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 export const PureForm: React.FC<IFormProps> & IForm = ({
   name,
   children,
@@ -40,6 +41,6 @@ export const PureForm: React.FC<IFormProps> & IForm = ({
   );
 };
 
-(PureForm as IForm).Field = withForm(СreateConnectedFormField);
+PureForm.Field = withForm(СreateConnectedFormField);
 
 export default PureForm;
