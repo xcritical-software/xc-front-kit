@@ -12,9 +12,10 @@ module.exports = {
           loader: 'ts-loader',
         },
         // enforce: 'pre',
-        exclude: [
-          path.resolve(__dirname, '..' ,'node_modules'),
-        ]
+        exclude(modulePath) {
+          return /node_modules/.test(modulePath) &&
+            !/xcritical/.test(modulePath)
+         },
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
