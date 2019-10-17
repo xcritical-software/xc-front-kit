@@ -1,4 +1,4 @@
-import { Grid } from './grid/grid';
+import { Grid } from './grid/Grid';
 
 
 export { Grid as default };
