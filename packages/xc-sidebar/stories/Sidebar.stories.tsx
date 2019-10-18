@@ -176,4 +176,15 @@ storiesOf('Sidebar', module)
         </Switch>
       </BrowserRouter>
     </ThemeProvider>
+  ))
+  .add('Only left panel', () => (
+    <ThemeProvider theme={ theme }>
+      <BrowserRouter>
+        <Sidebar { ...props } theme={ theme } />
+        <Switch>
+          { routerConfig.map(({ path, component, exact }: any) => (
+            <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+        </Switch>
+      </BrowserRouter>
+    </ThemeProvider>
   ));
