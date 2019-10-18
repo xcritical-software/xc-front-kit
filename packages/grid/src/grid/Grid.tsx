@@ -60,6 +60,7 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
                 rowId={ rowId }
                 onChangeActiveRow={ setSelectedRowId }
                 theme={ themeRef.current }
+                level={ 0 }
               />
             );
           }) }
