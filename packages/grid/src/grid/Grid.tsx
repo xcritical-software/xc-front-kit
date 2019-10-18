@@ -9,6 +9,15 @@ import {
 } from '../styled/styled';
 import { gridTheme } from '../utils/get-styles';
 
+// const guid = () => {
+//   function s4() {
+//     return Math.floor((1 + Math.random()) * 0x10000)
+//       .toString(16)
+//       .substring(1);
+//   }
+
+//   return (`${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`);
+// };
 
 export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
   const { rows, columns, theme = {} } = props;
@@ -20,12 +29,14 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
     themeRef.current = gridTheme<ITableTheme>(theme);
   }, [theme]);
 
+
   const handleScroll = (): void => {
     const scrolledDiv = tableWrapperElement.current;
     if (scrolledDiv) {
       setTableScroll(scrolledDiv.scrollLeft);
     }
   };
+
 
   return (
     <ContentWrapper theme={ themeRef.current }>
@@ -49,21 +60,18 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
         onScroll={ handleScroll }
       >
         <TableStyled>
-          { rows.map((row: IRowData) => {
-            const rowId = row.id;
-            return (
-              <Row
-                row={ row }
-                key={ rowId }
-                columns={ columns }
-                isSelected={ selectedRowId === rowId }
-                rowId={ rowId }
-                onChangeActiveRow={ setSelectedRowId }
-                theme={ themeRef.current }
-                level={ 0 }
-              />
-            );
-          }) }
+          { rows.map((row: IRowData) => (
+            <Row
+              row={ row }
+              key={ row.id }
+              columns={ columns }
+              isSelected={ selectedRowId === row.id }
+              rowId={ row.id }
+              onChangeActiveRow={ setSelectedRowId }
+              theme={ themeRef.current }
+              level={ 0 }
+            />
+          )) }
         </TableStyled>
       </TableWrapper>
     </ContentWrapper>

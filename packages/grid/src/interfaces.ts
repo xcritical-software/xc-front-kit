@@ -69,7 +69,7 @@ export interface ITableProps {
 }
 
 export interface IRow {
-  row: any;
+  row: IRowData;
   isSelected: boolean;
   rowId: number;
   onChangeActiveRow: Function;
