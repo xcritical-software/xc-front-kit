@@ -32,7 +32,7 @@ export const PureForm: React.FC<IFormProps> & IForm = ({
   React.Children.forEach(children, findChildPropName);
 
   return (
-    <form { ...otherProps }>
+    <form name={ name } { ...otherProps }>
       <FormProvider value={ { formName: name, fields: fieldNames } }>
         { children }
       </FormProvider>
