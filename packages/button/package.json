@@ -23,7 +23,13 @@
 	},
 	"private": false,
   "peerDependencies": {
-
+    "react": "^16.9.0",
+    "styled-components": "^4.1.0",
+    "prop-types": "^15.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@xcritical/theme": "0.0.1",
+    "lodash.get": "^4.x",
+    "polished": "^3.0.0"
+  }
 }
