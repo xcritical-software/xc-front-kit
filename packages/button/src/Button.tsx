@@ -36,7 +36,7 @@ const defaultProps = {
   onClick: () => {},
 };
 
-export const PureButton: React.FC<IButtonProps> = ({
+export const PureButton = ({
   prefix,
   postfix,
   children,
@@ -47,7 +47,7 @@ export const PureButton: React.FC<IButtonProps> = ({
   isRTL,
   onClick: onClickProps,
   ...rest
-}) => {
+}: IButtonProps): React.ReactElement => {
   const themeContext = useContext<IThemeNamespace<IButtonTheme>>(ThemeContext);
   const innerTheme = theme || themeContext;
   const buttonRef = useRef();
@@ -94,8 +94,7 @@ export const PureButton: React.FC<IButtonProps> = ({
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
+
 PureButton.defaultProps = defaultProps;
 
 export const Button = memo(PureButton);
