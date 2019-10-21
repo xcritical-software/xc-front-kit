@@ -1,15 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { forwardRef } from 'react';
+import React, { forwardRef, AllHTMLAttributes } from 'react';
 import { storiesOf } from '@storybook/react';
-import { ThemeProvider, css } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { Link, MemoryRouter } from 'react-router-dom';
 
 // eslint-disable-next-line import/no-unresolved
-import Button, { buttonThemeNamespace } from '@xcritical-old/xc-button';
+import { IThemeNamespace } from '@xcritical/theme';
+import Button, { buttonThemeNamespace } from '../src';
 
 import { MasterCardIcon, ChevronDown, ChevronUp } from './Icons';
+import { ButtonTheme } from '../src/interfaces';
 
 
 const appearances = [
@@ -25,27 +27,23 @@ const appearances = [
   'dark',
 ];
 
-const Table = (props) => (
+const Table = (props: any) => (
   <div style={ { display: 'table', minWidth: '280px' } } { ...props } />
 );
-const Row = (props) => (
+const Row = (props: any) => (
   <div style={ { display: 'table-row' } } { ...props } />
 );
-const Cell = (props) => (
+const Cell = (props: any) => (
   <div style={ { display: 'table-cell', padding: 4 } } { ...props } />
 );
 
-function capitalize(str) {
+function capitalize(str: string) {
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-const customButton = css`
- background-image: linear-gradient(to top,  #337e29, #66a436);
- width: 280px;
- color: white;
-`;
 
-const theme = {
+const theme: IThemeNamespace<ButtonTheme> = {
   [buttonThemeNamespace]: {
     font: {
       size: 15,
@@ -174,7 +172,6 @@ storiesOf('Button', module)
   ))
   .add('Other', () => (
     <Table>
-      <Row><Cell><Button css={ customButton }>Pay</Button></Cell></Row>
       <Row>
         <Cell>
           <span>
@@ -208,11 +205,13 @@ storiesOf('Button', module)
             <Cell>
               <Button
                 href="/ro"
-                component={ forwardRef(({ href = '', children, ...rest }, ref) => (
-                  <Link { ...rest } to={ href } innerRef={ ref }>
-                    { children }
-                  </Link>
-                )) }
+                component={
+                  forwardRef<HTMLAnchorElement, Link & AllHTMLAttributes<HTMLAnchorElement>>(({ href = '', children, ...rest }, ref) => (
+                    <Link { ...rest } to={ href } innerRef={ ref }>
+                      { children }
+                    </Link>
+                  ))
+                }
               >
               Go to
               </Button>
