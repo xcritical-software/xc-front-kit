@@ -52,8 +52,6 @@ export const PureButton = ({
   const innerTheme = theme || themeContext;
   const buttonRef = useRef();
 
-  console.log(innerTheme);
-
   const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     if (onClickProps && !disabled) {
       onClickProps(e);
