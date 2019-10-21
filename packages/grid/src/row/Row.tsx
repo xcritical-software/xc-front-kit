@@ -7,17 +7,15 @@ import { IColumn, IRow } from '../interfaces';
 
 export const Row: React.FC<IRow> = React.memo(({
   row,
-  isSelected,
-  rowId,
-  onChangeActiveRow,
   columns,
   theme,
   level,
+  selectedRows,
+  handleSelectRows,
 }: IRow) => {
   const [expand, changeExpand] = useState(false);
-
+  const isSelected = selectedRows.some((el: any) => el === row);
   const onToggle = (): void => changeExpand(!expand);
-
   const getExpandButton = (): ReactElement => (
     <ToggleButton
       onClick={ onToggle }
@@ -25,7 +23,7 @@ export const Row: React.FC<IRow> = React.memo(({
       { expand ? <MinusBoxOutlineIcon size="20" /> : <PlusBoxOutlineIcon size="20" /> }
     </ToggleButton>
   );
-
+  console.log('render');
 
   const getGridRow = (): ReactElement[] => columns.map((column: IColumn, i) => {
     const { render, field, width } = column;
@@ -49,25 +47,25 @@ export const Row: React.FC<IRow> = React.memo(({
     );
   });
   const renderChildren = (children: any): ReactElement => (Array.isArray(children)
-    ? children.map((el, index) => (
+    ? children.map((el) => (
       <Row
         row={ el }
-        isSelected={ false }
-        rowId={ index }
-        onChangeActiveRow={ () => {} }
         columns={ columns }
         theme={ theme }
+        key={ el.id }
         level={ level + 1 }
+        handleSelectRows={ handleSelectRows }
+        selectedRows={ selectedRows }
       />
     )) : children);
-
 
   return (
     <>
       <RowStyled
         isSelected={ isSelected }
         theme={ theme }
-        onClick={ (): undefined => onChangeActiveRow(rowId) }
+        tabIndex={ 0 }
+        onClick={ () => handleSelectRows(row) }
       >
         { getGridRow() }
       </RowStyled>

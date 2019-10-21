@@ -70,12 +70,11 @@ export interface ITableProps {
 
 export interface IRow {
   row: IRowData;
-  isSelected: boolean;
-  rowId: number;
-  onChangeActiveRow: Function;
   columns: object[];
   theme: ITableTheme;
   level: number;
+  selectedRows: any;
+  handleSelectRows: any;
 }
 
 export interface IStyledCell {
