@@ -1,7 +1,7 @@
-import React, { useRef, memo } from 'react';
-import PropTypes from 'prop-types';
-import { withTheme } from 'styled-components';
+import React, { useRef, memo, useContext } from 'react';
+import { ThemeContext, ThemeProvider } from 'styled-components';
 
+import { IThemeNamespace } from '@xcritical/theme';
 import {
   Root,
   Prefix,
@@ -9,6 +9,8 @@ import {
   ContentWrapper,
   Content,
 } from './styled/Button';
+import { IButtonProps, IButtonTheme } from './interfaces';
+import { buttonThemeNamespace, buttonThemeStyle } from './theme';
 
 
 const defaultProps = {
@@ -28,51 +30,37 @@ const defaultProps = {
   shouldFitContent: false,
   isRTL: false,
   textPosition: 'center',
+  theme: {
+    [buttonThemeNamespace]: buttonThemeStyle,
+  },
   onClick: () => {},
 };
 
-const propTypes = {
-  children: PropTypes.node.isRequired,
-  prefix: PropTypes.node,
-  postfix: PropTypes.node,
-  component: PropTypes.node,
-  shouldFitContent: PropTypes.bool,
-  isRTL: PropTypes.bool,
-  outline: PropTypes.bool,
-  disabled: PropTypes.bool,
-  selected: PropTypes.bool,
-  spacing: PropTypes.oneOf(['compact', 'default', 'none']),
-  href: PropTypes.string,
-  appearance: PropTypes.string,
-  baseAppearance: PropTypes.string,
-  height: PropTypes.string,
-  role: PropTypes.string,
-  title: PropTypes.string,
-  textPosition: PropTypes.string,
-  onClick: PropTypes.func,
-};
-
-
-export const PureButton = memo(({
+export const PureButton: React.FC<IButtonProps> = ({
   prefix,
   postfix,
   children,
   href,
   disabled,
+  theme,
   textPosition,
   isRTL,
   onClick: onClickProps,
   ...rest
 }) => {
+  const themeContext = useContext<IThemeNamespace<IButtonTheme>>(ThemeContext);
+  const innerTheme = theme || themeContext;
   const buttonRef = useRef();
 
-  const onClick = () => {
+  console.log(innerTheme);
+
+  const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     if (onClickProps && !disabled) {
-      onClickProps();
+      onClickProps(e);
     }
   };
 
-  const getElement = () => {
+  const getElement = (): string => {
     if (href) {
       return disabled ? 'span' : 'a';
     }
@@ -82,29 +70,32 @@ export const PureButton = memo(({
   const RootElement = Root(getElement());
 
   return (
-    <RootElement
-      isRTL={ isRTL }
-      ref={ buttonRef }
-      disabled={ disabled }
-      onClick={ onClick }
-      { ...(href ? { href } : null) }
-      { ...rest }
-    >
+    <ThemeProvider theme={ innerTheme }>
+      <RootElement
+        isRTL={ isRTL }
+        ref={ buttonRef }
+        disabled={ disabled }
+        onClick={ onClick }
+        { ...(href ? { href } : null) }
+        { ...rest }
+      >
 
-      { !!prefix && (<Prefix isRTL={ isRTL }>{ prefix }</Prefix>) }
+        { !!prefix && (<Prefix isRTL={ isRTL }>{ prefix }</Prefix>) }
 
-      <ContentWrapper isRTL={ isRTL }>
-        <Content textPosition={ textPosition } isRTL={ isRTL }>
-          { children }
-        </Content>
-      </ContentWrapper>
+        <ContentWrapper>
+          <Content textPosition={ textPosition } isRTL={ isRTL }>
+            { children }
+          </Content>
+        </ContentWrapper>
 
-      { !!postfix && (<Postfix isRTL={ isRTL }>{ postfix }</Postfix>) }
-    </RootElement>
+        { !!postfix && (<Postfix isRTL={ isRTL }>{ postfix }</Postfix>) }
+      </RootElement>
+    </ThemeProvider>
   );
-});
+};
 
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
 PureButton.defaultProps = defaultProps;
-PureButton.propTypes = propTypes;
-export const Button = withTheme(PureButton);
+
+export const Button = memo(PureButton);

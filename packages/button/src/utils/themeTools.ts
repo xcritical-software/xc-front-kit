@@ -1,9 +1,25 @@
 import { darken } from 'polished';
 
+import { IButtonTheme, IFont } from '../interfaces';
+
+
+interface IGenApperance {
+  background?: string;
+  color?: string;
+  boxShadowColor?: string;
+  font?: IFont;
+  outline?: IButtonTheme;
+  borderColor?: string;
+}
 
 export const generateApperance = ({
-  background, color, boxShadowColor, font, outline, borderColor,
-}) => ({
+  background = '',
+  color,
+  boxShadowColor,
+  font,
+  outline,
+  borderColor = '',
+}: IGenApperance): IButtonTheme => ({
   background,
   color,
   boxShadowColor: boxShadowColor || darken(0.1, background),

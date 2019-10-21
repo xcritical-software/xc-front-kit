@@ -1,11 +1,12 @@
-import * as colors from '@xcritical-old/xc-theme/colors';
+import * as colors from '@xcritical/theme';
 
 import { generateApperance } from './utils/themeTools';
+import { ButtonTheme } from './interfaces';
 
 
 export const buttonThemeNamespace = '@xcritical\\xc-button';
 
-export const buttonThemeStyle = {
+export const buttonThemeStyle: ButtonTheme = {
   padding: {
     bottom: 7,
     left: 20,

@@ -8,27 +8,24 @@ import {
   getItemInteractiveStyles,
   getFontSize,
 } from '../utils';
+import { IPrefixProps, IButtonProps, IContentProps } from '../interfaces';
 
 
-const style = css`  
+const style = css<IButtonProps>`  
 ${getButtonStyles};
 ${getPaddingStyle};  
 ${getFontSize}
 ${getItemInteractiveStyles}
 ${({ height }) => (height ? `height: ${height}` : null)}
-${(props) => props.css}
+${({ css: cssInner }) => (cssInner || null)}
 direction: ${({ isRTL }) => (isRTL ? 'rtl' : 'ltr')};
 `;
 
-export const Root = (tag) => styled[tag]`
+export const Root = (tag: string) => styled[tag]`
   ${style}
 `;
 
-export const ComponentStyle = (component) => styled(component)`
-${style}
-`;
-
-const PrefixPostfixBase = styled.span`
+const PrefixPostfixBase = styled.span<IPrefixProps>`
   direction: inherit;
   align-items: center;
   display: flex;
@@ -36,11 +33,13 @@ const PrefixPostfixBase = styled.span`
 `;
 
 export const Prefix = styled(PrefixPostfixBase)`
-  margin-${({ isRTL }) => (isRTL ? 'left' : 'right')}: ${({ theme, appearance, baseAppearance }) => buttonTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
+  margin-${({ isRTL }) => (isRTL ? 'left' : 'right')}: ${({ theme, appearance = 'default', baseAppearance = 'default' }) => buttonTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
 `;
 
 export const Postfix = styled(PrefixPostfixBase)`
-  margin-${({ isRTL }) => (isRTL ? 'right' : 'left')}: ${({ theme, appearance, baseAppearance }) => buttonTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
+  margin-${({ isRTL }) => (isRTL ? 'right' : 'left')}: ${(
+  { theme, appearance = 'default', baseAppearance = 'default' },
+) => buttonTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
 `;
 
 export const ContentWrapper = styled.span`
@@ -57,12 +56,12 @@ export const ContentWrapper = styled.span`
 `;
 
 
-export const Content = styled.span`
+export const Content = styled.span<IContentProps>`
   direction: inherit;
   display: block;
   flex: 1 1 auto;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: 'nowrap';
-  text-align: ${({ isRTL, textPosition = 'center' }) => rtlSide(isRTL, textPosition)};
+  text-align: ${({ isRTL, textPosition = 'center' }) => rtlSide(isRTL || false, textPosition)};
 `;
