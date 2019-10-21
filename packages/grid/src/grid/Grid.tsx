@@ -1,4 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {
+  useRef, useState, useEffect, useCallback,
+} from 'react';
 import {
   IColumn, ITable, ITableProps, IRowData, ITableTheme,
 } from '../interfaces';
@@ -29,14 +31,16 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
     }
   };
 
-  const handleSelectRows = (row: any): void => {
+  const handleSelectRows = useCallback((row: any): void => {
     if (selectedRows.some((el) => el === row)) {
       const newRows = [...selectedRows].filter((el) => row !== el);
       changeSelectedRows(newRows);
     } else {
       changeSelectedRows([...selectedRows, row]);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <ContentWrapper theme={ themeRef.current }>
       <HeadWrapper>
@@ -66,7 +70,6 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
               columns={ columns }
               theme={ themeRef.current }
               level={ 0 }
-              selectedRows={ selectedRows }
               handleSelectRows={ handleSelectRows }
             />
           )) }
