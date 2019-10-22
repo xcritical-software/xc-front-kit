@@ -1,7 +1,7 @@
 {
   "name": "@xcritical/forms",
   "version": "0.0.0",
-  "description": "<>",
+  "description": "The simple way to manage your form state in Redux",
   "main": "src/index.js",
   "scripts": {
     "test": "exit 0",
