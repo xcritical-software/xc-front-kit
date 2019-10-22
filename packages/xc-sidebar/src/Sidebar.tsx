@@ -48,7 +48,7 @@ export const Sidebar = ({
 
   const [antiSelectLayer, changeAntiSelectLayer] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  let clickX = 0;
+  const clickX = useRef(0);
 
   const handleMouseMove = useCallback(
     (e) => {
@@ -59,7 +59,7 @@ export const Sidebar = ({
       });
 
       const { clientX: currentX } = e;
-      const newWidth = transformParams.width + (currentX - clickX);
+      const newWidth = transformParams.width + (currentX - clickX.current);
 
       if (newWidth >= themeRef.current.maxWidth) return;
       if (newWidth <= 0) {
@@ -83,12 +83,12 @@ export const Sidebar = ({
         });
       }
     },
-    [clickX, transformParams.width],
+    [transformParams.width],
   );
 
   const handleMouseDown = useCallback(
     (e) => {
-      clickX = e.clientX;
+      clickX.current = e.clientX;
       document.body.addEventListener('mousemove', handleMouseMove);
     },
     [handleMouseMove],
