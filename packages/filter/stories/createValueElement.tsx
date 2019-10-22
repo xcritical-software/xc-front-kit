@@ -55,7 +55,6 @@ const DateSelector = ({ handleChange, value }: any): ReactElement => {
   const handleChangeFocus = (): void => {
     changeFocus(!focus);
   };
-
   return (
     <SingleDatePicker
       id="date_input"

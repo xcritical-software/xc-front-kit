@@ -48,8 +48,10 @@ const threeFiltersAdd = [
     value: '200',
   },
 ];
-setTimeout(() => store.dispatch(xcriticalFiltersInit('three', threeFilters)), 3000);
-setTimeout(() => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)), 5000);
+setTimeout(() => store.dispatch(xcriticalFiltersInit('three', threeFilters)), 1000);
+setTimeout(() => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)), 2000);
+setTimeout(() => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)), 3000);
+setTimeout(() => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)), 4000);
 
 
 storiesOf('Filter', module)

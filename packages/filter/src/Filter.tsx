@@ -15,6 +15,7 @@ import {
   SubmitButton,
 } from './styled';
 import FilterRow from './FilterRow';
+import Tag from './Tag';
 import {
   xcriticalFiltersAddFilter,
   xcriticalFiltersApply,
@@ -50,7 +51,18 @@ const Filter: React.SFC<IFilterProps> = ({
   return (
     <Wrapper>
       <TopPanel>
-        <FilterButton onClick={ () => changeOpen(!open) }>Filter</FilterButton>
+        <FilterButton onClick={ () => changeOpen(!open) }>
+Filter
+        </FilterButton>
+        { activeFilters.map((filter, id) => (
+          <Tag
+            id={ id }
+            filters={ filters }
+            filter={ filter }
+            name={ name }
+            key={ filter.key }
+          />
+        )) }
       </TopPanel>
       <WrapperFilters open={ open }>
         <Header>

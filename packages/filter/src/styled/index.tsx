@@ -101,8 +101,8 @@ export const FilterButton = styled.button`
 `;
 
 export const TopPanel = styled.div`
-  height: 30px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 70px;
   border: 1px solid #c4c4c4;
