@@ -7,8 +7,8 @@ const reducer = combineReducers({
 });
 
 
-const { __REDUX_DEVTOOLS_EXTENSION_COMPOSE__ } = window;
-const composeEnhancers = __REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const devtoolsCompose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+const composeEnhancers = devtoolsCompose || compose;
 const composedMiddleware = composeEnhancers();
 
 const store = createStore(
