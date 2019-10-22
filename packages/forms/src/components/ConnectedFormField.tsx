@@ -10,6 +10,7 @@ import {
   IFormConnectedFieldProps,
   IFormConnectedFieldDispatch,
 } from '../interfaces';
+import { isEvent, getValueFromNativeComponent } from '../utils';
 
 
 const ConnectedFormField: React.FC<IFormFieldProps> = ({
@@ -38,7 +39,9 @@ const mapDispatchToProps = (
 ): IFormConnectedFieldDispatch => ({
   onChange: (value: any, action: Function) => {
     let $value = value;
-    if (action) {
+    if (isEvent(value)) {
+      $value = getValueFromNativeComponent(value);
+    } else if (action) {
       $value = action(value);
     }
     dispatch(xcriticalFormPropertyChange(formName, name, $value));

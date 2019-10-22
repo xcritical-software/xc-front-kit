@@ -23,9 +23,12 @@ export interface IFormStateMap {
   [formName: string]: IFormState;
 }
 
-export interface IFormFieldProps extends React.ComponentProps<any> {
+export interface IFormFieldPropsWithoutContext extends React.ComponentProps<any> {
   component: React.ComponentType<any>;
   name: string;
+}
+
+export interface IFormFieldProps extends IFormFieldPropsWithoutContext {
   formName: string;
 }
 
@@ -40,5 +43,5 @@ export interface IFormConnectedFieldDispatch {
 }
 
 export interface IForm {
-  Field: React.ComponentType<IFormFieldProps>;
+  Field: React.ComponentType<IFormFieldPropsWithoutContext>;
 }
