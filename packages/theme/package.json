@@ -34,6 +34,6 @@
 		"lodash.isempty": "4.x",
 		"memoizee": "^0.4.14",
 		"polished": "3.x",
-		"utilitify": "^1.0.0"
+		"utilitify": "^1.0.2"
 	}
 }
