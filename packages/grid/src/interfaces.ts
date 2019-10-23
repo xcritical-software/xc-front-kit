@@ -69,12 +69,13 @@ export interface ITableProps {
 }
 
 export interface IRow {
-  row: object;
-  isSelected: boolean;
-  rowId: number;
-  onChangeActiveRow: Function;
+  row: IRowData;
   columns: object[];
   theme: ITableTheme;
+  level: number;
+  selectedRows?: any;
+  handleSelectRows: any;
+  getSelectedRows?: any;
 }
 
 export interface IStyledCell {
@@ -106,14 +107,6 @@ export interface IHeaderPros {
 
 export interface IRowData {
   id: number;
-  [key: string]: string | number | boolean | undefined | number[] | null;
-}
-
-export interface IRowProps {
-  row: IRowData;
-  isSelected: boolean;
-  rowId: number;
-  onChangeActiveRow: Function;
-  columns: object[];
-  theme: ITableTheme;
+  children?: object[];
+  [key: string]: string | number | boolean | undefined | number[] | null | object;
 }

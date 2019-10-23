@@ -26,6 +26,7 @@
     "polished": "^3.0.0"
   },
   "dependencies": {
+    "mdi-react": "^6.2.0",
     "@xcritical/theme": "^0.0.1",
     "lodash.get": "4.x",
     "polished": "^3.0.0"

@@ -1,4 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {
+  useRef, useState, useEffect, useCallback,
+} from 'react';
 import {
   IColumn, ITable, ITableProps, IRowData, ITableTheme,
 } from '../interfaces';
@@ -12,13 +14,15 @@ import { gridTheme } from '../utils/get-styles';
 
 export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
   const { rows, columns, theme = {} } = props;
+  const [selectedRows, changeSelectedRows] = useState<any[]>([]);
+
   const tableWrapperElement = React.createRef<HTMLDivElement>();
-  const [selectedRowId, setSelectedRowId] = useState(null);
   const [tableScroll, setTableScroll] = useState(0);
   const themeRef = useRef(gridTheme<ITableTheme>(theme));
   useEffect(() => {
     themeRef.current = gridTheme<ITableTheme>(theme);
   }, [theme]);
+
 
   const handleScroll = (): void => {
     const scrolledDiv = tableWrapperElement.current;
@@ -26,6 +30,16 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
       setTableScroll(scrolledDiv.scrollLeft);
     }
   };
+
+  const handleSelectRows = useCallback((row: any): void => {
+    if (selectedRows.some((el) => el === row)) {
+      const newRows = [...selectedRows].filter((el) => row !== el);
+      changeSelectedRows(newRows);
+    } else {
+      changeSelectedRows([...selectedRows, row]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ContentWrapper theme={ themeRef.current }>
@@ -49,20 +63,16 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
         onScroll={ handleScroll }
       >
         <TableStyled>
-          { rows.map((row: IRowData) => {
-            const rowId = row.id;
-            return (
-              <Row
-                row={ row }
-                key={ rowId }
-                columns={ columns }
-                isSelected={ selectedRowId === rowId }
-                rowId={ rowId }
-                onChangeActiveRow={ setSelectedRowId }
-                theme={ themeRef.current }
-              />
-            );
-          }) }
+          { rows.map((row: IRowData) => (
+            <Row
+              row={ row }
+              key={ row.id }
+              columns={ columns }
+              theme={ themeRef.current }
+              level={ 0 }
+              handleSelectRows={ handleSelectRows }
+            />
+          )) }
         </TableStyled>
       </TableWrapper>
     </ContentWrapper>

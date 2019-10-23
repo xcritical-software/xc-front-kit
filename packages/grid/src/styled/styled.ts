@@ -24,6 +24,8 @@ export const StyledCell = styled.div<IStyledCell>`
   font-family: inherit;
   width: ${({ width }): string => `${width}px`};
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
 `;
 
 
@@ -101,4 +103,13 @@ export const ContentWrapper = styled.div<ITableTheme>`
 
 export const HeadWrapper = styled.div`
   display: table;
+`;
+
+
+export const ToggleButton = styled.button`
+  background-color: rgba(0,0,0,0);
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
 `;
