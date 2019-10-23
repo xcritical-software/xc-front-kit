@@ -59,7 +59,6 @@ export function xcriticalFormSaved(name: string): IFormAction {
   };
 }
 
-//  Put null instead of form object
 export function xcriticalFormDelete(name: string): IFormAction {
   return {
     type: XCRITICAL_FORM_DELETE,
