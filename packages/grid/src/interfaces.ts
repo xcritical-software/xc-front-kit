@@ -48,6 +48,7 @@ export interface ITableTheme extends ITheme {
 
 
 export interface IColumn {
+  isExpandable?: boolean;
   title: string;
   width: number;
   order: number;

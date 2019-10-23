@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState, ReactElement } from 'react';
 import PlusBoxOutlineIcon from 'mdi-react/PlusBoxOutlineIcon';
 import MinusBoxOutlineIcon from 'mdi-react/MinusBoxOutlineIcon';
@@ -30,8 +31,9 @@ export const Row: React.FC<IRow> = React.memo(({
     </ToggleButton>
   );
 
-  const getGridRow = (): ReactElement[] => columns.map((column: IColumn, i) => {
-    const { render, field, width } = column;
+  const getGridRow = (): ReactElement[] => columns.map(({
+    render, field, width, isExpandable,
+  }: IColumn) => {
     const cellContent = render ? render(row) : row[field];
     return (
       <StyledCell
@@ -39,11 +41,14 @@ export const Row: React.FC<IRow> = React.memo(({
         theme={ theme.cell }
         width={ width }
       >
-        { row.children && i === 0 ? getExpandButton()
-          : i === 0 && <RowShift width="32px" /> }
-        { level > 0 && i === 0 ? (
+        {
+          isExpandable
+            ? (row.children ? getExpandButton() : <RowShift width="32px" />)
+            : null
+        }
+        { level > 0 && isExpandable ? (
           <RowShift
-            width={ `${level * 40}px` }
+            width={ `${level * 15}px` }
           />
         ) : null }
         { cellContent }

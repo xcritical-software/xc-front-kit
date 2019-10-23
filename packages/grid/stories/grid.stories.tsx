@@ -71,6 +71,7 @@ const columns = [
     title: el.toUpperCase(),
     order: i,
     field: el,
+    isExpandable: i === 0,
     render: /* Math.random() > 0.3 ? */ null/* : returnOne */,
     width: 200,
   }
