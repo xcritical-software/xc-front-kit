@@ -1,7 +1,9 @@
 import React, { useState, ReactElement } from 'react';
 import PlusBoxOutlineIcon from 'mdi-react/PlusBoxOutlineIcon';
 import MinusBoxOutlineIcon from 'mdi-react/MinusBoxOutlineIcon';
-import { StyledCell, RowStyled, ToggleButton } from '../styled/styled';
+import {
+  StyledCell, RowStyled, ToggleButton, RowShift,
+} from '../styled/styled';
 import { IColumn, IRow } from '../interfaces';
 
 
@@ -38,11 +40,10 @@ export const Row: React.FC<IRow> = React.memo(({
         width={ width }
       >
         { row.children && i === 0 ? getExpandButton()
-          : i === 0 && <div style={ { width: '20px', height: 'auto', padding: '6px' } } /> }
+          : i === 0 && <RowShift width="32px" /> }
         { level > 0 && i === 0 ? (
-          <div style={ {
-            width: `${(level) * 40}px`, height: '1px', backgroundColor: 'rgba(0,0,0,0)', float: 'left',
-          } }
+          <RowShift
+            width={ `${level * 40}px` }
           />
         ) : null }
         { cellContent }

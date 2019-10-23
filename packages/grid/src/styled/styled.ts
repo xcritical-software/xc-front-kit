@@ -4,6 +4,7 @@ import {
   IStyledRow,
   IStyledCell,
   IStyledHead,
+  IRowShift,
 } from '../interfaces';
 
 
@@ -113,3 +114,11 @@ export const ToggleButton = styled.button`
   display: flex;
   align-items: center;
 `;
+
+export const RowShift = styled.div<IRowShift>`
+  width: ${({ width }) => width};
+  height: 1px;
+  float: left;
+  background-color: rgba(0,0,0,0);
+  ${({ backgroundColor }) => `background-color: ${backgroundColor}`};
+  `;

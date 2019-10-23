@@ -110,3 +110,8 @@ export interface IRowData {
   children?: object[];
   [key: string]: string | number | boolean | undefined | number[] | null | object;
 }
+
+export interface IRowShift {
+  width: string;
+  backgroundColor?: string;
+}
