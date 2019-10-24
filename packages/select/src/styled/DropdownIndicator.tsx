@@ -2,13 +2,10 @@ import React from 'react';
 import { components } from 'react-select';
 
 import { ChevronDown, ChevronUp } from '../Icons';
+import { DropdownIndicatorProps } from '../interfaces';
 
 
-const propTypes = {
-  getStyles: PropTypes.func.isRequired,
-};
-
-const DropdownIndicator = (props) => {
+const DropdownIndicator = (props: DropdownIndicatorProps) => {
   const { getStyles } = props;
   const dropdownIndicatorStyles = getStyles('dropdownIndicator', props);
 
@@ -24,7 +21,5 @@ const DropdownIndicator = (props) => {
     )
   );
 };
-
-DropdownIndicator.propTypes = propTypes;
 
 export default DropdownIndicator;

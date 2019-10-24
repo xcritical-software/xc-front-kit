@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { StylesConfig } from 'react-select/src/styles';
+import { FormatOptionLabelMeta } from 'react-select/src/Select';
+import { OptionTypeBase } from 'react-select/src/types';
 import {
   getDisplayStyles,
   getPaddingStyles,
@@ -12,6 +15,7 @@ import {
   getCommonStyles,
   getStatesStyles,
 } from '../utils';
+import { SelectProps } from '../interfaces';
 
 
 const labelCSS = ({ context }) => ({
@@ -45,10 +49,9 @@ const Option = (opt) => (
     <span style={ textCSS({ ...opt }) }>{ opt.children }</span>
   </div>
 );
-
 export const getFormatOptionLabel = ({
   theme, appearance, baseAppearance, isRTL,
-}) => (opt, { context }) => (
+}: SelectProps) => (opt: OptionTypeBase, { context }: FormatOptionLabelMeta<OptionTypeBase>) => (
   <Option
     theme={ theme }
     appearance={ appearance }
@@ -61,7 +64,7 @@ export const getFormatOptionLabel = ({
   </Option>
 );
 
-export const getStyles = (props) => {
+export const getStyles = (props: SelectProps) => {
   const getElementStyles = getCommonStyles(props);
   const getInteractiveStyles = getStatesStyles(props);
   const getDisplay = getDisplayStyles(props);
@@ -73,7 +76,7 @@ export const getStyles = (props) => {
   const getWidth = getWidthStyles(props);
   const getHeight = getHeightStyles(props);
 
-  const styles = {
+  const styles: StylesConfig = {
     container: (css) => ({
       ...css,
       ...getFont({ elementName: 'container' }),

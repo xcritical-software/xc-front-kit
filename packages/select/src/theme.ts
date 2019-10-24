@@ -1,11 +1,12 @@
 import { lighten, darken } from 'polished';
 
 import * as colors from '@xcritical/theme';
+import { SelectTheme } from './interfaces';
 
 
 export const selectThemeNamespace = '@xcritical\\xc-select';
 
-export const selectThemeStyle = {
+export const selectThemeStyle: SelectTheme = {
   display: 'inherit',
   padding: {
     bottom: 15,

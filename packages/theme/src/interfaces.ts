@@ -84,3 +84,10 @@ export interface IAppearance<T> {
 export interface IThemeNamespace<T= IStylesBase> {
   [namespace: string]: ITheme<T>;
 }
+
+export interface IIndents {
+  bottom?: number;
+  left?: number;
+  right?: number;
+  top?: number;
+}

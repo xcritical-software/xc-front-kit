@@ -1,5 +1,5 @@
-export const convertToOptions = (items) => {
-  const options = [];
+export const convertToOptions = (items: any[]) => {
+  const options: any[] = [];
   Object.keys(items).forEach((key) => {
     const option = {
       key: items[key].key,
@@ -14,7 +14,7 @@ export const convertToOptions = (items) => {
   return options;
 };
 
-export const findOptionByValue = (value, options) => {
+export const findOptionByValue = (value: any, options: any[]) => {
   if (Array.isArray(value)) {
     return value;
   }

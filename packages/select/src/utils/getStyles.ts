@@ -1,30 +1,36 @@
 import memoizee from 'memoizee';
 
-import { getAppearanceTheme, getStatesTheme } from '@xcritical/theme';
+import { getAppearanceTheme, getStatesTheme, IThemeNamespace } from '@xcritical/theme';
 import { isObject } from 'utilitify';
 import { selectThemeNamespace, selectThemeStyle } from '../theme';
+import { SelectTheme, GetStyles, ISelectTheme } from '../interfaces';
 
 
 export const selectTheme = (
-  theme,
-  appearanceName,
-  baseAppearance,
-  propertyPath,
-) => {
+  theme: IThemeNamespace<SelectTheme> = {},
+  appearanceName: string,
+  baseAppearance: string,
+  propertyPath?: string | string[],
+): ISelectTheme | any => {
   const func = getAppearanceTheme(selectThemeNamespace, selectThemeStyle);
   return func(theme, appearanceName, propertyPath, baseAppearance);
 };
 
-const getAppearanceStyleProperty = (theme, appearance, baseAppearance, stateName) => {
+const getAppearanceStyleProperty = (
+  theme: IThemeNamespace<SelectTheme> = {},
+  appearance: string,
+  baseAppearance: string,
+  stateName: string,
+): any => {
   const appearanceTheme = selectTheme(theme, appearance, baseAppearance);
   const statesTheme = getStatesTheme(appearanceTheme, stateName);
   return statesTheme();
 };
 
-export const getDisplayStyles = memoizee(({
+export const getDisplayStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
 }) => {
   const display = selectTheme(theme, appearance, baseAppearance, 'display');
 
@@ -39,10 +45,10 @@ export const getDisplayStyles = memoizee(({
   });
 });
 
-export const getPaddingStyles = memoizee(({
+export const getPaddingStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
 }) => {
   const {
     bottom,
@@ -73,10 +79,10 @@ export const getPaddingStyles = memoizee(({
   });
 });
 
-export const getMarginStyles = memoizee(({
+export const getMarginStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
 }) => {
   const {
     bottom,
@@ -107,10 +113,10 @@ export const getMarginStyles = memoizee(({
   });
 });
 
-export const getFontStyles = memoizee(({
+export const getFontStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
 }) => {
   const {
     size,
@@ -133,10 +139,10 @@ export const getFontStyles = memoizee(({
   });
 });
 
-export const getBorderStyles = memoizee(({
+export const getBorderStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
 }) => {
   const {
     width,
@@ -159,10 +165,10 @@ export const getBorderStyles = memoizee(({
   });
 });
 
-export const getWidthStyles = memoizee(({
+export const getWidthStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
   shouldFitContainer,
 }) => {
   let width = selectTheme(theme, appearance, baseAppearance, 'width');
@@ -182,10 +188,10 @@ export const getWidthStyles = memoizee(({
   });
 });
 
-export const getHeightStyles = memoizee(({
+export const getHeightStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
 }) => {
   let height = selectTheme(theme, appearance, baseAppearance, 'height');
 
@@ -204,10 +210,10 @@ export const getHeightStyles = memoizee(({
   });
 });
 
-export const getBorderRadiusStyles = memoizee(({
+export const getBorderRadiusStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
 }) => {
   const borderRadius = selectTheme(theme, appearance, baseAppearance, 'borderRadius');
 
@@ -245,10 +251,10 @@ export const getBorderRadiusStyles = memoizee(({
   });
 });
 
-export const getBackgroundStyles = memoizee(({
+export const getBackgroundStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
 }) => {
   let background = selectTheme(theme, appearance, baseAppearance, 'background');
 
@@ -267,10 +273,10 @@ export const getBackgroundStyles = memoizee(({
   });
 });
 
-export const getColorStyles = memoizee(({
+export const getColorStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
 }) => {
   let color = selectTheme(theme, appearance, baseAppearance, 'color');
 
@@ -289,10 +295,10 @@ export const getColorStyles = memoizee(({
   });
 });
 
-export const getCommonStyles = memoizee(({
+export const getCommonStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
 }) => {
   const background = selectTheme(theme, appearance, baseAppearance, 'background');
   const color = selectTheme(theme, appearance, baseAppearance, 'color');
@@ -309,10 +315,10 @@ export const getCommonStyles = memoizee(({
   });
 });
 
-export const getStatesStyles = memoizee(({
+export const getStatesStyles: GetStyles = memoizee(({
   theme,
-  appearance,
-  baseAppearance,
+  appearance = 'default',
+  baseAppearance = 'default',
 }) => {
   const hoverStyles = getAppearanceStyleProperty(theme, appearance, baseAppearance, 'hover');
   const activeStyles = getAppearanceStyleProperty(theme, appearance, baseAppearance, 'active');

@@ -1,17 +1,10 @@
-import { ITheme, IThemeNamespace } from '@xcritical/theme';
+import { ITheme, IThemeNamespace, IIndents } from '@xcritical/theme';
 import {
   FlattenInterpolation, ThemedStyledProps,
 } from 'styled-components';
 
 
 export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
-export interface IPadding {
-  bottom?: number;
-  left?: number;
-  right?: number;
-  top?: number;
-}
-
 
 export interface IFont {
   weight?: ICSSWideKeyword | 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
@@ -19,7 +12,7 @@ export interface IFont {
 }
 
 export interface IButtonTheme {
-  padding?: IPadding;
+  padding?: IIndents;
   prefixSpacing?: number;
   postfixSpacing?: number;
   borderRadius?: number;

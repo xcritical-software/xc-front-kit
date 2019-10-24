@@ -24,7 +24,7 @@
 	"private": false,
   "peerDependencies": {
     "hoist-non-react-statics": "^3.3.0",
-    "react": "^16.8.3",
+    "react": "^16.8.3"
   },
   "dependencies": {}
 }

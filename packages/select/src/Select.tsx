@@ -7,35 +7,8 @@ import { selectThemeNamespace, selectThemeStyle } from './theme';
 import { getStyles, getFormatOptionLabel } from './styled/Select';
 import DropdownIndicator from './styled/DropdownIndicator';
 import { convertToOptions, findOptionByValue } from './utils/utils';
+import { SelectProps } from './interfaces';
 
-
-const propTypes = {
-  disabled: PropTypes.bool,
-  isMulti: PropTypes.bool,
-  isSearchable: PropTypes.bool,
-  isOpenMenu: PropTypes.bool,
-  theme: PropTypes.object,
-  appearance: PropTypes.string,
-  baseAppearance: PropTypes.string,
-  items: PropTypes.objectOf(
-    PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.node])),
-  ),
-  onChange: PropTypes.func,
-  value: PropTypes.oneOfType(
-    [
-      PropTypes.string,
-      PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])),
-    ],
-  ),
-  className: PropTypes.string,
-  shouldFitContainer: PropTypes.bool,
-  isRTL: PropTypes.bool,
-  isCloseMenuOnSelect: PropTypes.bool,
-  isHideSelectedOptions: PropTypes.bool,
-  isControlShouldRenderValue: PropTypes.bool,
-  textPosition: PropTypes.string,
-  placeholder: PropTypes.string,
-};
 
 const defaultProps = {
   value: null,
@@ -44,7 +17,7 @@ const defaultProps = {
   isSearchable: false,
   isOpenMenu: false,
   className: null,
-  items: {},
+  items: [],
   shouldFitContainer: false,
   isRTL: false,
   isCloseMenuOnSelect: true,
@@ -65,21 +38,20 @@ export const PureSelect = ({
   disabled,
   isMulti,
   isSearchable,
-  isOpenMenu,
   isRTL,
   isCloseMenuOnSelect,
   isHideSelectedOptions,
   isControlShouldRenderValue,
   appearance,
   baseAppearance,
-  items,
+  items = [],
   value,
   placeholder,
   onChange,
   theme,
   ...rest
-}) => {
-  const selectRef = useRef();
+}: SelectProps): React.ReactElement => {
+  const selectRef = useRef<any>();
   const options = useRef(convertToOptions(items));
   const formatOptionLabel = useRef(getFormatOptionLabel({
     theme, appearance, baseAppearance, isRTL,
@@ -148,7 +120,6 @@ export const PureSelect = ({
   );
 };
 
-PureSelect.propTypes = propTypes;
 PureSelect.defaultProps = defaultProps;
 
 export default PureSelect;
