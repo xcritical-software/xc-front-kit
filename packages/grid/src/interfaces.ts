@@ -44,6 +44,8 @@ export interface ITableTheme extends ITheme {
   headerHoverColor?: string;
   cell?: ICell;
   head?: IHead;
+  buttonShift?: string;
+  nexLevelLineSift?: number;
 }
 
 
@@ -113,6 +115,6 @@ export interface IRowData {
 }
 
 export interface IRowShift {
-  width: string;
+  width?: string;
   backgroundColor?: string;
 }

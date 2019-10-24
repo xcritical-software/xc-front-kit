@@ -15,6 +15,7 @@ export const Row: React.FC<IRow> = React.memo(({
   level,
   handleSelectRows,
 }: IRow) => {
+  const { buttonShift, nexLevelLineSift = 0 } = theme;
   const [expand, changeExpand] = useState(false);
   const [isSelected, setSelected] = useState(false);
   const handleRowClick = (): void => {
@@ -43,12 +44,12 @@ export const Row: React.FC<IRow> = React.memo(({
       >
         {
           isExpandable
-            ? (row.children ? getExpandButton() : <RowShift width="32px" />)
+            ? (row.children ? getExpandButton() : <RowShift width={ buttonShift } />)
             : null
         }
         { level > 0 && isExpandable ? (
           <RowShift
-            width={ `${level * 15}px` }
+            width={ `${level * nexLevelLineSift}px` }
           />
         ) : null }
         { cellContent }

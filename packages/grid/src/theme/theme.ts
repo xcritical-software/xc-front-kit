@@ -46,6 +46,8 @@ export const tableTheme = {
     backgroundColor: 'white',
     hoverColor: 'rgb(184, 223, 240)',
   },
+  buttonShift: '32px',
+  nexLevelLineSift: '15px',
 };
 
 export const gridThemeNamespace = '@xcritical\\grid';
