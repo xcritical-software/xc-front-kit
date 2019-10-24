@@ -1,0 +1,37 @@
+{
+  "name": "@xcritical/select",
+  "version": "0.0.0",
+  "description": "XCritical Select Component",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "exit 0",
+    "compile": "gulp --cwd . compile",
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf dist lib .publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+  },
+  "keywords": [
+  ],
+  "author": "XCritical Software",
+  "license": "MIT",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/select#readme",
+  "publishConfig": {
+		"access": "public"
+	},
+	"private": false,
+  "peerDependencies": {
+    "react": "^16.8.3",
+    "styled-components": "^4.1.0",
+    "lodash.get": "^4.x"
+  },
+  "dependencies": {
+    "@xcritical/popper": "0.0.1",
+    "@xcritical/theme": "0.0.1",
+    "memoizee": "^0.4.14",
+    "polished": "^3.0.0",
+    "react-select": "^3.0.4"
+  }
+}
