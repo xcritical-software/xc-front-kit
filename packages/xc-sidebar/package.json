@@ -21,7 +21,6 @@
   "license": "MIT",
   "private": false,
   "peerDependencies": {
-    "prop-types": "^15.0.0",
     "react": "^16.9.0",
     "styled-components": "^4.1.0"
   },

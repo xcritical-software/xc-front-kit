@@ -32,6 +32,7 @@
     "@xcritical/theme": "0.0.1",
     "memoizee": "^0.4.14",
     "polished": "^3.0.0",
+    "utilitify": "^1.0.2",
     "react-select": "^3.0.4"
   }
 }

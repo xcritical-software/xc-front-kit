@@ -1,10 +1,9 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 // eslint-disable-next-line import/no-unresolved
-import Select from '@xcritical-old/xc-select';
+import Select from '../src';
 
 import { MasterCardIcon } from './MasterCardIcon';
 import { customTheme } from './customThemes';

@@ -1,7 +1,6 @@
 import React, {
   useState, useRef, useEffect, useCallback,
 } from 'react';
-import PropTypes from 'prop-types';
 import Select from 'react-select';
 
 import { selectThemeNamespace, selectThemeStyle } from './theme';

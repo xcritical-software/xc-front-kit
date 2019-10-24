@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { components } from 'react-select';
 
 import { ChevronDown, ChevronUp } from '../Icons';

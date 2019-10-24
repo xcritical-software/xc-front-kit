@@ -1,6 +1,7 @@
 import memoizee from 'memoizee';
 
-import { getAppearanceTheme, getStatesTheme, isObject } from '@xcritical-old/xc-theme/utils';
+import { getAppearanceTheme, getStatesTheme } from '@xcritical/theme';
+import { isObject } from 'utilitify';
 import { selectThemeNamespace, selectThemeStyle } from '../theme';
 
 

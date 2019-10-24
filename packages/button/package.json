@@ -24,8 +24,7 @@
 	"private": false,
   "peerDependencies": {
     "react": "^16.9.0",
-    "styled-components": "^4.1.0",
-    "prop-types": "^15.0.0"
+    "styled-components": "^4.1.0"
   },
   "dependencies": {
     "@xcritical/theme": "0.0.1",
