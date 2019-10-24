@@ -46,6 +46,7 @@ export interface ITableTheme extends ITheme {
   head?: IHead;
   buttonShift?: string;
   nexLevelLineSift?: number;
+  rowSwitchButtonSize?: string;
 }
 
 

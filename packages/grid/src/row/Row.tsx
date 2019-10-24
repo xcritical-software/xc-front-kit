@@ -15,7 +15,7 @@ export const Row: React.FC<IRow> = React.memo(({
   level,
   handleSelectRows,
 }: IRow) => {
-  const { buttonShift, nexLevelLineSift = 0 } = theme;
+  const { buttonShift, nexLevelLineSift = 0, rowSwitchButtonSize } = theme;
   const [expand, changeExpand] = useState(false);
   const [isSelected, setSelected] = useState(false);
   const handleRowClick = (): void => {
@@ -28,7 +28,7 @@ export const Row: React.FC<IRow> = React.memo(({
     <ToggleButton
       onClick={ onToggle }
     >
-      { expand ? <MinusBoxOutlineIcon size="20" /> : <PlusBoxOutlineIcon size="20" /> }
+      { expand ? <MinusBoxOutlineIcon size={ rowSwitchButtonSize } /> : <PlusBoxOutlineIcon size="20" /> }
     </ToggleButton>
   );
 
