@@ -16,11 +16,11 @@ export interface IIndentation {
   left?: number;
 }
 
+export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
 export interface IFont<T> {
   fontSize?: T;
-  fontWeight?: number;
   size?: T;
-  weight?: number;
+  weight?: ICSSWideKeyword | 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
   lineHeight?: string;
   lineHeightRatio?: number;
 }
@@ -55,7 +55,7 @@ export interface IStylesBase {
   margin?: IIndentation;
   font?: IFont<number>;
   border?: IBorder;
-  borderRadius?: IBorderRadius;
+  borderRadius?: IBorderRadius | number;
   transition?: ITransition;
   opacity?: number;
 }

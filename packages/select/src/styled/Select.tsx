@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 import { StylesConfig } from 'react-select/src/styles';
-import { FormatOptionLabelMeta } from 'react-select/src/Select';
+import { FormatOptionLabelMeta, FormatOptionLabelContext } from 'react-select/src/Select';
 import { OptionTypeBase } from 'react-select/src/types';
+import { IThemeNamespace } from '@xcritical/theme';
 import {
   getDisplayStyles,
   getPaddingStyles,
@@ -15,21 +16,28 @@ import {
   getCommonStyles,
   getStatesStyles,
 } from '../utils';
-import { SelectProps } from '../interfaces';
+import {
+  IOptionProps, SelectTheme,
+} from '../interfaces';
 
 
-const labelCSS = ({ context }) => ({
+const labelCSS = (context: FormatOptionLabelContext): CSSProperties => ({
   display: 'flex',
   alignItems: 'center',
   position: 'relative',
   top: context === 'value' ? '1px' : '0',
 });
 
-const textCSS = ({ isRTL, ...rest }) => {
+const textCSS = (
+  isRTL: boolean,
+  theme: IThemeNamespace<SelectTheme>,
+  appearance: string,
+  baseAppearance: string,
+): CSSProperties => {
   let paddingRight;
   let paddingLeft;
 
-  const padding = getPaddingStyles(rest)({ elementName: 'labelText' });
+  const padding = getPaddingStyles(theme, appearance, baseAppearance)('labelText');
 
   if (isRTL) {
     paddingRight = (padding && padding.paddingRight) || 0;
@@ -43,15 +51,30 @@ const textCSS = ({ isRTL, ...rest }) => {
   };
 };
 
-const Option = (opt) => (
-  <div style={ labelCSS({ ...opt }) }>
-    <span>{ opt.icon }</span>
-    <span style={ textCSS({ ...opt }) }>{ opt.children }</span>
+const Option: React.FC<IOptionProps> = ({
+  context,
+  icon,
+  children,
+  isRTL,
+  theme = {},
+  appearance = 'default',
+  baseAppearance = 'default',
+}) => (
+  <div style={ labelCSS(context) }>
+    <span>{ icon }</span>
+    <span style={ textCSS(isRTL, theme, appearance, baseAppearance) }>{ children }</span>
   </div>
 );
-export const getFormatOptionLabel = ({
-  theme, appearance, baseAppearance, isRTL,
-}: SelectProps) => (opt: OptionTypeBase, { context }: FormatOptionLabelMeta<OptionTypeBase>) => (
+
+export const getFormatOptionLabel = (
+  theme: IThemeNamespace<SelectTheme>,
+  appearance: string,
+  baseAppearance: string,
+  isRTL: boolean,
+) => (
+  opt: OptionTypeBase,
+  { context }: FormatOptionLabelMeta<IOptionProps>,
+) => (
   <Option
     theme={ theme }
     appearance={ appearance }
@@ -64,44 +87,49 @@ export const getFormatOptionLabel = ({
   </Option>
 );
 
-export const getStyles = (props: SelectProps) => {
-  const getElementStyles = getCommonStyles(props);
-  const getInteractiveStyles = getStatesStyles(props);
-  const getDisplay = getDisplayStyles(props);
-  const getPadding = getPaddingStyles(props);
-  const getMargin = getMarginStyles(props);
-  const getFont = getFontStyles(props);
-  const getBorder = getBorderStyles(props);
-  const getBorderRadius = getBorderRadiusStyles(props);
-  const getWidth = getWidthStyles(props);
-  const getHeight = getHeightStyles(props);
+export const getStyles = (
+  theme: IThemeNamespace<SelectTheme>,
+  appearance: string,
+  baseAppearance: string,
+  shouldFitContainer: boolean,
+): any => {
+  const getElementStyles = getCommonStyles(theme, appearance, baseAppearance);
+  const getInteractiveStyles = getStatesStyles(theme, appearance, baseAppearance);
+  const getDisplay = getDisplayStyles(theme, appearance, baseAppearance);
+  const getPadding = getPaddingStyles(theme, appearance, baseAppearance);
+  const getMargin = getMarginStyles(theme, appearance, baseAppearance);
+  const getFont = getFontStyles(theme, appearance, baseAppearance);
+  const getBorder = getBorderStyles(theme, appearance, baseAppearance);
+  const getBorderRadius = getBorderRadiusStyles(theme, appearance, baseAppearance);
+  const getWidth = getWidthStyles(theme, appearance, baseAppearance);
+  const getHeight = getHeightStyles(theme, appearance, baseAppearance);
 
   const styles: StylesConfig = {
     container: (css) => ({
       ...css,
-      ...getFont({ elementName: 'container' }),
-      ...getWidth({ elementName: 'container' }),
-      ...getMargin({ elementName: 'container' }),
+      ...getFont('container'),
+      ...getWidth('container', shouldFitContainer),
+      ...getMargin('container'),
     }),
-    control: (css, state) => ({
+    control: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getHeight({ elementName: 'button' }),
-      ...getBorder({ elementName: 'button' }),
-      ...getPadding({ elementName: 'button' }),
-      ...getBorderRadius({ elementName: 'button' }),
-      ...getElementStyles({ elementName: 'button', ...props }),
-      ...getInteractiveStyles({ elementName: 'button', ...state, ...props }),
+      ...getHeight('button'),
+      ...getBorder('button'),
+      ...getPadding('button'),
+      ...getBorderRadius('button'),
+      ...getElementStyles('button'),
+      ...getInteractiveStyles('button', isDisabled, isFocused, isSelected),
     }),
-    input: (css, state) => ({
+    input: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getElementStyles({ elementName: 'input', ...props }),
-      ...getInteractiveStyles({ elementName: 'input', ...state, ...props }),
+      ...getElementStyles('input'),
+      ...getInteractiveStyles('input', isDisabled, isFocused, isSelected),
     }),
-    placeholder: (css, state) => ({
+    placeholder: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getFont({ elementName: 'placeholder' }),
-      ...getElementStyles({ elementName: 'placeholder', ...props }),
-      ...getInteractiveStyles({ elementName: 'placeholder', ...state, ...props }),
+      ...getFont('placeholder'),
+      ...getElementStyles('placeholder'),
+      ...getInteractiveStyles('placeholder', isDisabled, isFocused, isSelected),
     }),
 
     group: (css) => ({
@@ -111,102 +139,102 @@ export const getStyles = (props: SelectProps) => {
       ...css,
     }),
 
-    indicatorsContainer: (css, state) => ({
+    indicatorsContainer: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getPadding({ elementName: 'indicatorsContainer' }),
-      ...getMargin({ elementName: 'indicatorsContainer' }),
-      ...getElementStyles({ elementName: 'indicatorsContainer', ...props }),
-      ...getInteractiveStyles({ elementName: 'indicatorsContainer', ...state, ...props }),
+      ...getPadding('indicatorsContainer'),
+      ...getMargin('indicatorsntainer'),
+      ...getElementStyles('indicatorsContainer'),
+      ...getInteractiveStyles('indicatorsContainer', isDisabled, isFocused, isSelected),
     }),
     indicatorSeparator: (css) => ({
       ...css,
-      ...getDisplay({ elementName: 'indicatorSeparator' }),
+      ...getDisplay('indicatorSeparator'),
     }),
-    dropdownIndicator: (css, state) => ({
+    dropdownIndicator: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getPadding({ elementName: 'dropdownIndicator' }),
-      ...getElementStyles({ elementName: 'dropdownIndicator', ...props }),
-      ...getInteractiveStyles({ elementName: 'dropdownIndicator', ...state, ...props }),
+      ...getPadding('dropdownIndicator'),
+      ...getElementStyles('dropdownIndicator'),
+      ...getInteractiveStyles('dropdownIndicator', isDisabled, isFocused, isSelected),
     }),
-    clearIndicator: (css, state) => ({
+    clearIndicator: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getPadding({ elementName: 'clearIndicator' }),
-      ...getElementStyles({ elementName: 'clearIndicator', ...props }),
-      ...getInteractiveStyles({ elementName: 'clearIndicator', ...state, ...props }),
+      ...getPadding('clearIndicator'),
+      ...getElementStyles('clearIndicator'),
+      ...getInteractiveStyles('clearIndicator', isDisabled, isFocused, isSelected),
     }),
-    loadingIndicator: (css, state) => ({
+    loadingIndicator: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getPadding({ elementName: 'loadingIndicator' }),
-      ...getElementStyles({ elementName: 'loadingIndicator', ...props }),
-      ...getInteractiveStyles({ elementName: 'loadingIndicator', ...state, ...props }),
+      ...getPadding('loadingIndicator'),
+      ...getElementStyles('loadingIndicator'),
+      ...getInteractiveStyles('loadingIndicator', isDisabled, isFocused, isSelected),
     }),
-    loadingMessage: (css, state) => ({
+    loadingMessage: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getFont({ elementName: 'loadingMessage' }),
-      ...getElementStyles({ elementName: 'loadingMessage', ...props }),
-      ...getInteractiveStyles({ elementName: 'loadingMessage', ...state, ...props }),
+      ...getFont('loadingMessage'),
+      ...getElementStyles('loadingMessage'),
+      ...getInteractiveStyles('loadingMessage', isDisabled, isFocused, isSelected),
     }),
 
-    menu: (css, state) => ({
+    menu: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getElementStyles({ elementName: 'dropdown', ...props }),
-      ...getInteractiveStyles({ elementName: 'dropdown', ...state, ...props }),
+      ...getElementStyles('dropdown'),
+      ...getInteractiveStyles('dropdown', isDisabled, isFocused, isSelected),
     }),
-    menuList: (css, state) => ({
+    menuList: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getPadding({ elementName: 'dropdownList' }),
-      ...getBorderRadius({ elementName: 'dropdownList' }),
-      ...getElementStyles({ elementName: 'dropdownList', ...props }),
-      ...getInteractiveStyles({ elementName: 'dropdownList', ...state, ...props }),
+      ...getPadding('dropdownList'),
+      ...getBorderRadius('dropdownList'),
+      ...getElementStyles('dropdownList'),
+      ...getInteractiveStyles('dropdownList', isDisabled, isFocused, isSelected),
     }),
     menuPortal: (css) => ({
       ...css,
     }),
-    option: (css, state) => ({
+    option: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getPadding({ elementName: 'option' }),
-      ...getFont({ elementName: 'option' }),
-      ...getElementStyles({ elementName: 'option', ...props }),
-      ...getInteractiveStyles({ elementName: 'option', ...state, ...props }),
+      ...getPadding('option'),
+      ...getFont('option'),
+      ...getElementStyles('option'),
+      ...getInteractiveStyles('option', isDisabled, isFocused, isSelected),
     }),
-    noOptionsMessage: (css, state) => ({
+    noOptionsMessage: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getFont({ elementName: 'noOptionsMessage' }),
-      ...getElementStyles({ elementName: 'noOptionsMessage', ...props }),
-      ...getInteractiveStyles({ elementName: 'noOptionsMessage', ...state, ...props }),
+      ...getFont('noOptionsMessage'),
+      ...getElementStyles('noOptionsMessage'),
+      ...getInteractiveStyles('noOptionsMessage', isDisabled, isFocused, isSelected),
     }),
 
-    valueContainer: (css, state) => ({
+    valueContainer: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getDisplay({ elementName: 'valueContainer' }),
-      ...getWidth({ elementName: 'valueContainer' }),
-      ...getElementStyles({ elementName: 'valueContainer', ...props }),
-      ...getInteractiveStyles({ elementName: 'valueContainer', ...state, ...props }),
+      ...getDisplay('valueContainer'),
+      ...getWidth('valueContainer'),
+      ...getElementStyles('valueContainer'),
+      ...getInteractiveStyles('valueContainer', isDisabled, isFocused, isSelected),
     }),
-    singleValue: (css, state) => ({
+    singleValue: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getDisplay({ elementName: 'singleValue' }),
-      ...getFont({ elementName: 'singleValue' }),
-      ...getElementStyles({ elementName: 'singleValue', ...props }),
-      ...getInteractiveStyles({ elementName: 'singleValue', ...state, ...props }),
+      ...getDisplay('singleValue'),
+      ...getFont('singleValue'),
+      ...getElementStyles('singleValue'),
+      ...getInteractiveStyles('singleValue', isDisabled, isFocused, isSelected),
     }),
-    multiValue: (css, state) => ({
+    multiValue: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getDisplay({ elementName: 'multiValue' }),
-      ...getFont({ elementName: 'multiValue' }),
-      ...getElementStyles({ elementName: 'multiValue', ...props }),
-      ...getInteractiveStyles({ elementName: 'multiValue', ...state, ...props }),
+      ...getDisplay('multiValue'),
+      ...getFont('multiValue'),
+      ...getElementStyles('multiValue'),
+      ...getInteractiveStyles('multiValue', isDisabled, isFocused, isSelected),
     }),
-    multiValueLabel: (css, state) => ({
+    multiValueLabel: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getFont({ elementName: 'multiValueLabel' }),
-      ...getElementStyles({ elementName: 'multiValueLabel', ...props }),
-      ...getInteractiveStyles({ elementName: 'multiValueLabel', ...state, ...props }),
+      ...getFont('multiValueLabel'),
+      ...getElementStyles('multiValueLabel'),
+      ...getInteractiveStyles('multiValueLabel', isDisabled, isFocused, isSelected),
     }),
-    multiValueRemove: (css, state) => ({
+    multiValueRemove: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getElementStyles({ elementName: 'multiValueRemove', ...props }),
-      ...getInteractiveStyles({ elementName: 'multiValueRemove', ...state, ...props }),
+      ...getElementStyles('multiValueRemove'),
+      ...getInteractiveStyles('multiValueRemove', isDisabled, isFocused, isSelected),
     }),
   };
 

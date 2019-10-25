@@ -11,7 +11,6 @@ import { SelectProps } from './interfaces';
 
 
 const defaultProps = {
-  value: null,
   disabled: false,
   isMulti: false,
   isSearchable: false,
@@ -35,27 +34,33 @@ const defaultProps = {
 
 export const PureSelect = ({
   className,
-  disabled,
-  isMulti,
-  isSearchable,
-  isRTL,
-  isCloseMenuOnSelect,
-  isHideSelectedOptions,
-  isControlShouldRenderValue,
-  appearance,
-  baseAppearance,
+  disabled = false,
+  isMulti = false,
+  isSearchable = false,
+  isRTL = false,
+  isCloseMenuOnSelect = true,
+  isHideSelectedOptions = true,
+  isControlShouldRenderValue = true,
+  appearance = 'default',
+  baseAppearance = 'default',
+  shouldFitContainer = false,
   items = [],
   value,
   placeholder,
   onChange,
-  theme,
+  theme = {
+    [selectThemeNamespace]: selectThemeStyle,
+  },
   ...rest
-}: SelectProps): React.ReactElement => {
+}: SelectProps): React.ReactElement<SelectProps> => {
   const selectRef = useRef<any>();
   const options = useRef(convertToOptions(items));
-  const formatOptionLabel = useRef(getFormatOptionLabel({
-    theme, appearance, baseAppearance, isRTL,
-  }));
+  const formatOptionLabel = useRef(getFormatOptionLabel(
+    theme,
+    appearance,
+    baseAppearance,
+    isRTL,
+  ));
 
   const [currentOption, setCurrentOption] = useState(findOptionByValue(value, options.current));
 
@@ -67,25 +72,31 @@ export const PureSelect = ({
     setCurrentOption(findOptionByValue(value, options.current));
   }, [value]);
 
-  const styles = useRef(getStyles({
-    theme, appearance, baseAppearance, isRTL, ...rest,
-  }));
-
-  useEffect(() => {
-    styles.current = getStyles({
-      theme, appearance, baseAppearance, isRTL, ...rest,
-    });
-
-    formatOptionLabel.current = getFormatOptionLabel({
-      theme, appearance, baseAppearance, isRTL,
-    });
-  }, [
+  const styles = useRef(getStyles(
     theme,
     appearance,
     baseAppearance,
-    isRTL,
-    rest,
-  ]);
+    shouldFitContainer,
+  ));
+
+  useEffect(() => {
+    styles.current = getStyles(
+      theme,
+      appearance,
+      baseAppearance,
+      shouldFitContainer,
+    );
+  }, [theme, appearance, baseAppearance, shouldFitContainer]);
+
+  useEffect(() => {
+    formatOptionLabel.current = getFormatOptionLabel(
+      theme,
+      appearance,
+      baseAppearance,
+      isRTL,
+    );
+  }, [theme, appearance, baseAppearance, isRTL]);
+
 
   const onItemChanged = useCallback((selectedOption) => {
     setCurrentOption(selectedOption);
