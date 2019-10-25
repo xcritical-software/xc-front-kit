@@ -4,69 +4,21 @@ import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 
 import Grid from '../src';
-import { /* mockColumns, */mockRows } from './mock-rows';
+// import { /* mockColumns, */mockRows } from './mock-rows';
 import { mockTheme } from './mock-theme';
+import { generateMockData } from './generateMocks';
 
+
+console.log(generateMockData(Math.floor(Math.random() * 100), Math.floor(Math.random() * 50)));
+const data = generateMockData(100, 100);
+
+const mockRows = data.rows;
+const mockColumns = data.columns;
 
 const Div = styled.div`
 height: 500px;
 `;
-const columns = [
-  'firstName',
-  'lastName',
-  'fullName',
-  'salesStatusId',
-  'salesStatus',
-  'salesStatusRejectReason',
-  'salesStatusRejectReasonId',
-  'tradingStatus',
-  'eligibilityRejectReason',
-  'eligibilityRejectReasonId',
-  'isEligible',
-  'country',
-  'city',
-  'language',
-  'timeZone',
-  'creationDate',
-  'phoneVerification',
-  'registrationDate',
-  'accountCreationDate',
-  'channelName',
-  'isOnline',
-  'isDay',
-  'lastRegistrationAttemptDate',
-  'lastActivityDate',
-  'lastLoginDate',
-  'complianceStatus',
-  'initialDepositPbc',
-  'redepositPbc',
-  'balancePbc',
-  'netCreditPbc',
-  'chargebackPbc',
-  'chargebackReversalPbc',
-  'numberOfAccounts',
-  'domainName',
-  'originalDomainName',
-  'phone1',
-  'nameDuplicates',
-  'deviceType',
-  'isDuplicateChecked',
-  'isDuplicateCheckedText',
-  'leadId',
-  'tradingPlatformId',
-  'email',
-  'businessUnitId',
-  'businessUnit',
-  'conversionAgentId',
-  'conversionAgent',
-  'retentionManagerId',
-  'retentionManager',
-  'vipManagerId',
-  'vipManager',
-  'closerManagerId',
-  'closerManager',
-  'id',
-].map((el, i) => (
+const columns = mockColumns.map((el: any, i: number) => (
   {
     title: el.toUpperCase(),
     order: i,
@@ -76,6 +28,8 @@ const columns = [
     width: 200,
   }
 ));
+
+console.log(columns);
 
 
 storiesOf('Grid', module)

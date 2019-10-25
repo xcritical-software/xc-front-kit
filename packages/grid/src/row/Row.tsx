@@ -42,7 +42,7 @@ export const Row: React.FC<IRow> = React.memo(({
     const cellContent = render ? render(row) : row[field];
     return (
       <StyledCell
-        key={ field }
+        key={ `${row.id}${field}` }
         theme={ theme.cell }
         width={ width }
       >
@@ -66,7 +66,7 @@ export const Row: React.FC<IRow> = React.memo(({
         row={ el }
         columns={ columns }
         theme={ theme }
-        key={ el.id }
+        key={ `${el.id}` }
         level={ level + 1 }
         handleSelectRows={ handleSelectRows }
       />
