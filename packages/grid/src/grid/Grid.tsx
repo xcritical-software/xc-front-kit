@@ -2,7 +2,7 @@ import React, {
   useRef, useState, useEffect, useCallback,
 } from 'react';
 import {
-  IColumn, ITable, ITableProps, IRowData, ITableTheme,
+  IColumn, ITable, ITableProps, IRowData, ITableTheme, IRow,
 } from '../interfaces';
 
 import { Row } from '../row/Row';
@@ -10,7 +10,6 @@ import {
   ContentWrapper, HeadWrapper, TableHead, TableStyled, TableWrapper, HeaderStyled,
 } from '../styled/styled';
 import { gridTheme } from '../utils/get-styles';
-import { IRow } from '../../.publish/interfaces.d';
 
 
 export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
