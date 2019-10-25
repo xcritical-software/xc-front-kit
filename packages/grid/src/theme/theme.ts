@@ -47,7 +47,7 @@ export const tableTheme = {
     hoverColor: 'rgb(184, 223, 240)',
   },
   buttonShift: '32px',
-  nexLevelLineSift: '15px',
+  nexLevelLineSift: '15',
   rowSwitchButtonSize: '20',
 };
 

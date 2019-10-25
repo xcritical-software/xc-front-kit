@@ -28,7 +28,11 @@ export const Row: React.FC<IRow> = React.memo(({
     <ToggleButton
       onClick={ onToggle }
     >
-      { expand ? <MinusBoxOutlineIcon size={ rowSwitchButtonSize } /> : <PlusBoxOutlineIcon size="20" /> }
+      { expand ? (
+        <MinusBoxOutlineIcon
+          size={ rowSwitchButtonSize }
+        />
+      ) : <PlusBoxOutlineIcon size={ rowSwitchButtonSize } /> }
     </ToggleButton>
   );
 
