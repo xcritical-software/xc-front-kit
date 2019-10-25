@@ -10,11 +10,12 @@ import {
   ContentWrapper, HeadWrapper, TableHead, TableStyled, TableWrapper, HeaderStyled,
 } from '../styled/styled';
 import { gridTheme } from '../utils/get-styles';
+import { IRow } from '../../.publish/interfaces.d';
 
 
 export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
   const { rows, columns, theme = {} } = props;
-  const [selectedRows, changeSelectedRows] = useState<any[]>([]);
+  const [selectedRows, changeSelectedRows] = useState<IRow[] | []>([]);
 
   const tableWrapperElement = React.createRef<HTMLDivElement>();
   const [tableScroll, setTableScroll] = useState(0);
@@ -31,7 +32,7 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
     }
   };
 
-  const handleSelectRows = useCallback((row: any): void => {
+  const handleSelectRows = useCallback((row: IRow): void => {
     if (selectedRows.some((el) => el === row)) {
       const newRows = [...selectedRows].filter((el) => row !== el);
       changeSelectedRows(newRows);

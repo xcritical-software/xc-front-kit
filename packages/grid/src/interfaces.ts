@@ -77,9 +77,10 @@ export interface IRow {
   columns: object[];
   theme: ITableTheme;
   level: number;
-  selectedRows?: any;
-  handleSelectRows: any;
-  getSelectedRows?: any;
+  selectedRows?: IRow;
+  handleSelectRows: Function;
+  getSelectedRows?: Function;
+  id?: string | number;
 }
 
 export interface IStyledCell {

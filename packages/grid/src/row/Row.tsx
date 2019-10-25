@@ -5,7 +5,7 @@ import MinusBoxOutlineIcon from 'mdi-react/MinusBoxOutlineIcon';
 import {
   StyledCell, RowStyled, ToggleButton, RowShift,
 } from '../styled/styled';
-import { IColumn, IRow } from '../interfaces';
+import { IColumn, IRow, IRowData } from '../interfaces';
 
 
 export const Row: React.FC<IRow> = React.memo(({
@@ -57,7 +57,7 @@ export const Row: React.FC<IRow> = React.memo(({
     );
   });
   const renderChildren = (children: any): ReactElement => (Array.isArray(children)
-    ? children.map((el) => (
+    ? children.map((el: IRowData) => (
       <Row
         row={ el }
         columns={ columns }
