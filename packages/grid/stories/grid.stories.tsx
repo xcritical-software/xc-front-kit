@@ -90,7 +90,7 @@ storiesOf('Grid', module)
       rows={ mockRows }
       theme={ mockTheme }
     />
-  )).add('WithWrapper', () => (
+  )).add('WithScroll', () => (
     <Div>
       <Grid
         columns={ columns }
