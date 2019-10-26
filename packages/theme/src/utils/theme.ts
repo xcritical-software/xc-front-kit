@@ -12,8 +12,8 @@ import {
 } from '../interfaces';
 
 
-interface IFuncStateTheme {
-  (propertyPath: string, defaultValue: string): ITheme;
+interface IFuncStateTheme<T = ITheme> {
+  (propertyPath?: string, defaultValue?: any): T;
 }
 
 export const getAppearancePath = (
@@ -66,19 +66,21 @@ export const compileAppearanceTheme = memoize(
 );
 
 
-export const getStatesTheme = (
-  theme: ITheme, stateName: string, baseState = 'default',
-): IFuncStateTheme => {
+export function getStatesTheme<T>(
+  theme: T,
+  stateName: string,
+  baseState = 'default',
+): IFuncStateTheme<T> {
   const merged = mergeDeep(
-    get(theme, baseState) || {},
-    get(theme, stateName) || {},
+    get(theme, baseState, {}),
+    get(theme, stateName, {}),
   );
 
   return (
-    propertyPath: string,
-    defaultValue: string,
-  ): ITheme => (propertyPath ? get(merged, propertyPath, defaultValue) : merged);
-};
+    propertyPath?: string,
+    defaultValue?: any,
+  ): T | any => (propertyPath ? get(merged, propertyPath, defaultValue) : merged);
+}
 
 export function getAppearanceTheme<T>(
   namespace: string,
