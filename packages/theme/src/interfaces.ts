@@ -17,9 +17,8 @@ export interface IIndentation {
 }
 
 export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
-export interface IFont<T> {
-  fontSize?: T;
-  size?: T;
+export interface IFont {
+  size?: number | string;
   weight?: ICSSWideKeyword | 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
   lineHeight?: string;
   lineHeightRatio?: number;
@@ -53,7 +52,7 @@ export interface IStylesBase {
   height?: number | string;
   padding?: IIndentation;
   margin?: IIndentation;
-  font?: IFont<number>;
+  font?: IFont;
   border?: IBorder;
   borderRadius?: IBorderRadius | number;
   transition?: ITransition;
@@ -81,7 +80,7 @@ export interface IAppearance<T> {
   [namespace: string]: IThemeBase<T>;
 }
 
-export interface IThemeNamespace<T= IStylesBase> {
+export interface IThemeNamespace<T = IStylesBase> {
   [namespace: string]: ITheme<T>;
 }
 

@@ -4,7 +4,7 @@ import * as colors from '@xcritical/theme';
 import { SelectTheme } from './interfaces';
 
 
-export const selectThemeNamespace = '@xcritical\\xc-select';
+export const selectThemeNamespace = '@xcritical\\select';
 
 export const selectThemeStyle: SelectTheme = {
   display: 'inherit',
@@ -25,8 +25,6 @@ export const selectThemeStyle: SelectTheme = {
     weight: 600,
   },
   width: 335,
-  prefixSpacing: 15,
-  postfixSpacing: 15,
   borderRadius: 6,
   border: {
     width: 1,
@@ -35,35 +33,31 @@ export const selectThemeStyle: SelectTheme = {
   },
   background: colors.GRAY_LIGHT,
   color: colors.CHAROCOAL,
-  fontWeight: 'normal',
 
   appearance: {
     default: {
       divided: {
         color: '#F0F0F0',
       },
-      focus: {
-        outline: 0,
-      },
       hover: {
         background: '#efefef',
         color: colors.CHAROCOAL,
-        fontWeight: 'normal',
+
       },
       selected: {
         background: '#efefef',
         color: colors.CHAROCOAL,
-        fontWeight: 'normal',
+
       },
       active: {
         background: '#efefef',
         color: colors.CHAROCOAL,
-        fontWeight: 'normal',
+
       },
       disabled: {
         background: '#F0F0F0',
         color: lighten(0.6, colors.CHAROCOAL),
-        fontWeight: 'normal',
+
         opacity: 0.75,
       },
 
@@ -96,7 +90,6 @@ export const selectThemeStyle: SelectTheme = {
         hover: {
           background: darken(0.1, colors.GRAY_LIGHT),
           color: colors.CHAROCOAL,
-          borderColor: '#fff',
         },
         focus: {
           boxShadow: 'none',

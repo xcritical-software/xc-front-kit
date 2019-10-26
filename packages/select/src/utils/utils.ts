@@ -1,4 +1,4 @@
-export const convertToOptions = (items: any[]) => {
+export const convertToOptions = (items: Record<string, any>) => {
   const options: any[] = [];
   Object.keys(items).forEach((key) => {
     const option = {

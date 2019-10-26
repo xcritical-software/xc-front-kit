@@ -1,13 +1,15 @@
 import React, {
-  useState, useRef, useEffect, useCallback,
+  useState, useRef, useEffect, useCallback, useContext,
 } from 'react';
 import Select from 'react-select';
 
+import { ThemeContext } from 'styled-components';
+import { IThemeNamespace } from '@xcritical/theme';
 import { selectThemeNamespace, selectThemeStyle } from './theme';
 import { getStyles, getFormatOptionLabel } from './styled/Select';
 import DropdownIndicator from './styled/DropdownIndicator';
 import { convertToOptions, findOptionByValue } from './utils/utils';
-import { SelectProps } from './interfaces';
+import { SelectProps, ISelectTheme } from './interfaces';
 
 
 const defaultProps = {
@@ -16,7 +18,7 @@ const defaultProps = {
   isSearchable: false,
   isOpenMenu: false,
   className: null,
-  items: [],
+  items: {},
   shouldFitContainer: false,
   isRTL: false,
   isCloseMenuOnSelect: true,
@@ -44,7 +46,7 @@ export const PureSelect = ({
   appearance = 'default',
   baseAppearance = 'default',
   shouldFitContainer = false,
-  items = [],
+  items = {},
   value,
   placeholder,
   onChange,
@@ -53,10 +55,13 @@ export const PureSelect = ({
   },
   ...rest
 }: SelectProps): React.ReactElement<SelectProps> => {
+  const themeContext = useContext<IThemeNamespace<ISelectTheme>>(ThemeContext);
+  const innerTheme = theme || themeContext;
+
   const selectRef = useRef<any>();
   const options = useRef(convertToOptions(items));
   const formatOptionLabel = useRef(getFormatOptionLabel(
-    theme,
+    innerTheme,
     appearance,
     baseAppearance,
     isRTL,
@@ -73,7 +78,7 @@ export const PureSelect = ({
   }, [value]);
 
   const styles = useRef(getStyles(
-    theme,
+    innerTheme,
     appearance,
     baseAppearance,
     shouldFitContainer,
@@ -81,30 +86,30 @@ export const PureSelect = ({
 
   useEffect(() => {
     styles.current = getStyles(
-      theme,
+      innerTheme,
       appearance,
       baseAppearance,
       shouldFitContainer,
     );
-  }, [theme, appearance, baseAppearance, shouldFitContainer]);
+  }, [innerTheme, appearance, baseAppearance, shouldFitContainer]);
 
   useEffect(() => {
     formatOptionLabel.current = getFormatOptionLabel(
-      theme,
+      innerTheme,
       appearance,
       baseAppearance,
       isRTL,
     );
-  }, [theme, appearance, baseAppearance, isRTL]);
+  }, [innerTheme, appearance, baseAppearance, isRTL]);
 
 
-  const onItemChanged = useCallback((selectedOption) => {
+  const onItemChanged = useCallback((selectedOption, action) => {
     setCurrentOption(selectedOption);
 
     if (onChange) {
       const selectedValue = !isMulti && selectedOption ? selectedOption.value : selectedOption;
 
-      onChange(selectedValue);
+      onChange(selectedValue, action);
     }
   }, [isMulti, onChange]);
 

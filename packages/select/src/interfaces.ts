@@ -1,6 +1,8 @@
 import { OptionTypeBase } from 'react-select/src/types';
-import SelectBase, { FormatOptionLabelContext } from 'react-select/src/Select';
-import { ITheme, IThemeNamespace, IStylesBase } from '@xcritical/theme';
+import { FormatOptionLabelContext, Props } from 'react-select/src/Select';
+import {
+  ITheme, IThemeNamespace, IStylesBase, IThemeBase,
+} from '@xcritical/theme';
 import { IndicatorProps } from 'react-select/src/components/indicators';
 
 
@@ -15,15 +17,14 @@ export interface IThemeProps {
 }
 
 export interface ISelectOnlyProps {
-  theme?: IThemeNamespace<SelectTheme>;
+
   appearance?: string;
   baseAppearance?: string;
   disabled?: boolean;
   isMulti?: boolean;
   isSearchable?: boolean;
   isOpenMenu?: boolean;
-  items?: any[];
-  onChange?: Function;
+  items?: { [key: string]: any};
   value?: string | { [key: string]: any };
   className?: string;
   shouldFitContainer?: boolean;
@@ -33,40 +34,41 @@ export interface ISelectOnlyProps {
   isControlShouldRenderValue?: boolean;
   textPosition?: string;
   placeholder?: string;
+  theme?: IThemeNamespace<SelectTheme>;
 }
 
-export type SelectProps = SelectBase<OptionTypeBase> & ISelectOnlyProps;
+export type SelectProps = Omit<Props<IOptionProps>, 'theme' | 'value'> & ISelectOnlyProps;
 
 export interface ISubComponents {
-  dropdown?: ISelectTheme;
-  dropdownList?: ISelectTheme;
-  button?: ISelectTheme;
-  indicatorsContainer?: ISelectTheme;
-  indicatorSeparator?: ISelectTheme;
-  dropdownIndicator?: ISelectTheme;
-  clearIndicator?: ISelectTheme;
-  loadingIndicator?: ISelectTheme;
-  loadingMessage?: ISelectTheme;
-  input?: ISelectTheme;
-  placeholder?: ISelectTheme;
-  labelText?: ISelectTheme;
-  option?: ISelectTheme;
-  valueContainer?: ISelectTheme;
-  singleValue?: ISelectTheme;
-  multiValue?: ISelectTheme;
-  multiValueLabel?: ISelectTheme;
-  multiValueRemove?: ISelectTheme;
-  noOptionsMessage?: ISelectTheme;
+  dropdown?: IThemeBase<ISelectCssTheme>;
+  dropdownList?: IThemeBase<ISelectCssTheme>;
+  button?: IThemeBase<ISelectCssTheme>;
+  indicatorsContainer?: IThemeBase<ISelectCssTheme>;
+  indicatorSeparator?: IThemeBase<ISelectCssTheme>;
+  dropdownIndicator?: IThemeBase<ISelectCssTheme>;
+  clearIndicator?: IThemeBase<ISelectCssTheme>;
+  loadingIndicator?: IThemeBase<ISelectCssTheme>;
+  loadingMessage?: IThemeBase<ISelectCssTheme>;
+  input?: IThemeBase<ISelectCssTheme>;
+  placeholder?: IThemeBase<ISelectCssTheme>;
+  labelText?: IThemeBase<ISelectCssTheme>;
+  option?: IThemeBase<ISelectCssTheme>;
+  valueContainer?: IThemeBase<ISelectCssTheme>;
+  singleValue?: IThemeBase<ISelectCssTheme>;
+  multiValue?: IThemeBase<ISelectCssTheme>;
+  multiValueLabel?: IThemeBase<ISelectCssTheme>;
+  multiValueRemove?: IThemeBase<ISelectCssTheme>;
+  noOptionsMessage?: IThemeBase<ISelectCssTheme>;
 }
 
-export interface ISelectTheme extends IStylesBase {
+export interface ISelectCssTheme extends IStylesBase {
   divided?: {
     color: string;
   };
-
-  outline?: ISelectTheme;
-
+  boxShadow?: string;
 }
+
+export type ISelectTheme = ISelectCssTheme & ISubComponents;
 
 export interface IReturnFunction< TValue> {
   (theme: IThemeNamespace<SelectTheme>, appearance: string, baseAppearance: string): TValue;
@@ -79,7 +81,7 @@ export interface IReturnWithArgsFunction<TProp, TValue> {
 export type GetStyles<TResult = { [key: string]: any }> =
   IReturnFunction<IReturnWithArgsFunction<any, TResult>>;
 
-export type SelectTheme = ITheme<ISelectTheme & ISubComponents>;
+export type SelectTheme = ITheme<ISelectTheme>;
 
 export interface IOptionProps extends IThemeProps, OptionTypeBase {
   icon: React.ReactElement;

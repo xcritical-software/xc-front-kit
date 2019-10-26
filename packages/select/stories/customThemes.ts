@@ -1,7 +1,9 @@
-import { selectThemeNamespace } from '@xcritical-old/xc-select';
+import { IThemeNamespace } from '@xcritical/theme';
+import { selectThemeNamespace } from '../src';
+import { SelectTheme } from '../src/interfaces';
 
 
-export const customTheme = {
+export const customTheme: IThemeNamespace<SelectTheme> = {
   [selectThemeNamespace]: {
     appearance: {
       default: {
@@ -20,7 +22,7 @@ export const customTheme = {
         },
         background: 'linear-gradient(to top, #474747, #383838)',
         color: '#fff',
-        borderColor: '#575857',
+
         border: {
           width: 1,
           style: 'solid',
@@ -32,7 +34,7 @@ export const customTheme = {
         },
         active: {
           color: '#fff',
-          borderColor: '#575857',
+
           background: 'linear-gradient(to top, #474747, #383838)',
         },
 
@@ -64,7 +66,7 @@ export const customTheme = {
           },
           hover: {
             background: 'linear-gradient(to top, #505050, #424242)',
-            borderColor: '#575857',
+
           },
           focus: {
             boxShadow: 'none',
