@@ -126,14 +126,14 @@ export const getItemInteractiveStyles = ({
   if (disabled) {
     return css`
       cursor: not-allowed;
-      ${getItemStatesStyle('disabled')} 
+      ${getItemStatesStyle('disabled')}
       ${standardFocus};
     `;
   }
 
   if (selected) {
     return css`
-      ${getItemStatesStyle('selected')} 
+      ${getItemStatesStyle('selected')}
       &:hover {
         ${getItemStatesStyle('hover')};
       }

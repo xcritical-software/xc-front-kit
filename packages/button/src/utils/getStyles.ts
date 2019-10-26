@@ -198,13 +198,13 @@ export const getItemInteractiveStyles = ({
     return css`
       cursor: not-allowed;
       opacity: 0.5;
-      ${getButtonStatesStyle('disabled')} 
+      ${getButtonStatesStyle('disabled')}
     `;
   }
 
   if (selected) {
     return css`
-      ${getButtonStatesStyle('selected')} 
+      ${getButtonStatesStyle('selected')}
 
       &:hover {
         ${getButtonStatesStyle('hover')};
