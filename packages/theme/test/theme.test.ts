@@ -187,7 +187,7 @@ describe('This is the tests for the theme utils', () => {
     expect(getFontStyle({ size: 14, weight: 500, lineHeightRatio: 1.69 }))
       .toEqual(css`
         ${`font-weight: ${500}`};
-        ${`font-size: ${14}px; line-height: ${14 * 1.69}px;`};
+        ${`font-size: ${14}px; line-height: ${1.69};`};
       `);
 
     expect(getFontStyle({ weight: 500 }))
@@ -199,7 +199,7 @@ describe('This is the tests for the theme utils', () => {
     expect(getFontStyle({ size: 14, lineHeightRatio: 1.69 }))
       .toEqual(css`
         ${null};
-        ${`font-size: ${14}px; line-height: ${14 * 1.69}px;`};
+        ${`font-size: ${14}px; line-height: ${1.69};`};
       `);
 
     expect(getFontStyle({ lineHeightRatio: 1.69 }))
@@ -211,15 +211,15 @@ describe('This is the tests for the theme utils', () => {
 
   test('getFontObj checking', () => {
     expect(getFontObj({ size: 14, weight: 500, lineHeightRatio: 1.69 }))
-      .toEqual({ fontSize: '14px', fontWeight: 500, lineHeight: '23.66px;' });
+      .toEqual({ fontSize: '14px', fontWeight: 500, lineHeight: 1.69 });
 
     expect(getFontObj({ weight: 500 })).toEqual({ fontWeight: 500 });
 
     expect(getFontObj({ size: 14, lineHeightRatio: 1.69 }))
-      .toEqual({ fontSize: '14px', lineHeight: '23.66px;' });
+      .toEqual({ fontSize: '14px', lineHeight: 1.69 });
 
     expect(getFontObj({ size: 14, weight: 500 }))
-      .toEqual({ fontSize: '14px', fontWeight: 500, lineHeight: '23.66px;' });
+      .toEqual({ fontSize: '14px', fontWeight: 500, lineHeight: 1.69 });
 
     expect(getFontObj({ lineHeightRatio: 1.69 })).toEqual({});
     expect(getFontObj(undefined)).toEqual({});
