@@ -1,6 +1,5 @@
 import namor from 'namor';
-import { IRow } from '../.publish/interfaces.d';
-import { IColumn } from '../src/interfaces';
+import { IColumn, IRow } from '../src/interfaces';
 
 
 const guid = (): string => {
