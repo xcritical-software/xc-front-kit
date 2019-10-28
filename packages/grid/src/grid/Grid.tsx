@@ -54,7 +54,6 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
             >
               { title }
             </HeaderStyled>
-
           )) }
         </TableHead>
       </HeadWrapper>

@@ -1,4 +1,6 @@
 import namor from 'namor';
+import { IRow } from '../.publish/interfaces.d';
+import { IColumn } from '../src/interfaces';
 
 
 const guid = (): string => {
@@ -11,10 +13,9 @@ const guid = (): string => {
   return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
 };
 
-
-const generateMockRow = (columns: any): any => {
+const generateMockRow = (columns: string[]): IRow => {
   const row: any = {};
-  columns.forEach((field: any) => {
+  columns.forEach((field: string) => {
     row[field] = namor.generate({
       words: Math.floor(Math.random() * 4 + 1),
       numbers: Math.floor(Math.random() * 10),
@@ -24,22 +25,39 @@ const generateMockRow = (columns: any): any => {
 
   return row;
 };
-const generateMockRows = (rowsNumber: number, cellsNumber: number, columns: any): any => new Array(rowsNumber).fill('').map(() => generateMockRow(columns));
+const generateMockRows = (rowsNumber: number, columns: string[]): IRow[] => new Array(rowsNumber).fill('').map(() => generateMockRow(columns));
 
-const generateChildren = (cellsNumber: number, row: any, columns: any): any => {
+const generateChildren = (row: any, columns: string[]): void => {
   if (Math.random() > 0.8) {
-    row.children = generateMockRows(cellsNumber, Math.floor(Math.random() * 5 + 1), columns);
+    row.children = generateMockRows(Math.floor(Math.random() * 5 + 1), columns);
   }
 };
 
-const generateColumns = (columnsNumber: number): any => new Array(columnsNumber).fill('').map(() => namor.generate({ words: 1, numbers: 0 }));
+const generateColumnsData = (columnsNumber: number): string[] => new Array(columnsNumber).fill('').map(() => namor
+  .generate({ words: 1, numbers: 0 }));
 
-export const generateMockData = (cellNumber: any, rowsNumber: any): any => {
-  const columns = generateColumns(cellNumber);
-  const rows = generateMockRows(rowsNumber, cellNumber, columns);
-  rows.forEach((row: any) => {
-    generateChildren(cellNumber, row, columns);
+const generateMockColumns = (mockColumns:
+string[]): IColumn[] => mockColumns
+  .map((el: string, i: number) => (
+    {
+      title: el.toUpperCase(),
+      order: i,
+      field: el,
+      isExpandable: i === 0,
+      render: /* Math.random() > 0.3 ? */ null/* : returnOne */,
+      width: 200,
+    }
+  ));
+
+export const generateMockData = (cellNumber: number,
+  rowsNumber: number): { rows: IRow[]; columns: IColumn[] } => {
+  const columnsData = generateColumnsData(cellNumber);
+  const rows = generateMockRows(rowsNumber, columnsData);
+  rows.forEach((row: IRow) => {
+    generateChildren(row, columnsData);
   });
+
+  const columns = generateMockColumns(columnsData);
 
   return {
     rows,
