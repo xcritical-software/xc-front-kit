@@ -6,8 +6,12 @@ import Select from 'react-select';
 import { ThemeContext } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
 import { selectThemeNamespace, selectThemeStyle } from './theme';
-import { getStyles, getFormatOptionLabel } from './styled/Select';
-import DropdownIndicator from './styled/DropdownIndicator';
+import {
+  getStyles,
+  getFormatOptionLabel,
+  ClearIndicator,
+  DropdownIndicator,
+} from './styled';
 import { convertToOptions, findOptionByValue } from './utils/utils';
 import { SelectProps, ISelectTheme } from './interfaces';
 
@@ -17,7 +21,7 @@ const defaultProps = {
   isMulti: false,
   isSearchable: false,
   isOpenMenu: false,
-  className: null,
+  className: 'xc-select',
   items: {},
   shouldFitContainer: false,
   isRTL: false,
@@ -117,6 +121,7 @@ export const PureSelect = ({
     <Select
       ref={ selectRef }
       className={ className }
+      classNamePrefix={ className }
       value={ currentOption }
       onChange={ onItemChanged }
       options={ options.current }
@@ -130,7 +135,7 @@ export const PureSelect = ({
       closeMenuOnSelect={ isCloseMenuOnSelect }
       hideSelectedOptions={ isHideSelectedOptions }
       placeholder={ placeholder }
-      components={ { DropdownIndicator } }
+      components={ { DropdownIndicator, ClearIndicator } }
       { ...rest }
     />
   );

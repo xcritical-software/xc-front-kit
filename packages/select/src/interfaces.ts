@@ -6,9 +6,17 @@ import {
 import { IndicatorProps } from 'react-select/src/components/indicators';
 
 
-export type DropdownIndicatorProps = IndicatorProps<OptionTypeBase> & {
+export type DropdownIndicatorProps = IndicatorProps<IOptionItem> & {
   getStyles: any;
 };
+
+export type ClearIndicatorProps = IndicatorProps<IOptionItem> & {
+  getStyles: any;
+};
+
+export interface IIsRTL {
+  isRTL?: boolean;
+}
 
 export interface IThemeProps {
   theme: IThemeNamespace<SelectTheme>;
@@ -24,8 +32,8 @@ export interface ISelectOnlyProps {
   isMulti?: boolean;
   isSearchable?: boolean;
   isOpenMenu?: boolean;
-  items?: { [key: string]: any};
-  value?: string | { [key: string]: any };
+  items?: { [key: string]: IOptionItem};
+  value?: string | { [key: string]: IOptionItem };
   className?: string;
   shouldFitContainer?: boolean;
   isRTL?: boolean;
@@ -66,6 +74,13 @@ export interface ISelectCssTheme extends IStylesBase {
     color: string;
   };
   boxShadow?: string;
+  prefixSpacing?: number;
+  postfixSpacing?: number;
+}
+
+export interface ILabelTextCssTheme extends ISelectCssTheme {
+  prefixSpacing?: number;
+  postfixSpacing?: number;
 }
 
 export type ISelectTheme = ISelectCssTheme & ISubComponents;
@@ -84,7 +99,17 @@ export type GetStyles<TResult = { [key: string]: any }> =
 export type SelectTheme = ITheme<ISelectTheme>;
 
 export interface IOptionProps extends IThemeProps, OptionTypeBase {
-  icon: React.ReactElement;
+  prefix?: React.ReactElement;
+  postfix?: React.ReactElement;
   context: FormatOptionLabelContext;
   isRTL: boolean;
+}
+
+export interface IOptionItem extends OptionTypeBase {
+  prefix?: React.ReactElement;
+  postfix?: React.ReactElement;
+  name: any;
+}
+
+export interface IPrefixProps extends IThemeProps, IIsRTL {
 }

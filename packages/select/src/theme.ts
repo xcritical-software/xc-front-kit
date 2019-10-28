@@ -9,10 +9,10 @@ export const selectThemeNamespace = '@xcritical\\select';
 export const selectThemeStyle: SelectTheme = {
   display: 'inherit',
   padding: {
-    bottom: 15,
+    bottom: 7,
     left: 15,
     right: 15,
-    top: 15,
+    top: 7,
   },
   margin: {
     bottom: 0,
@@ -82,10 +82,10 @@ export const selectThemeStyle: SelectTheme = {
       button: {
         background: colors.GRAY_LIGHT,
         padding: {
-          bottom: 15,
-          left: 5,
-          right: 5,
-          top: 15,
+          bottom: 7,
+          left: 15,
+          right: 15,
+          top: 7,
         },
         hover: {
           background: darken(0.1, colors.GRAY_LIGHT),
@@ -118,15 +118,28 @@ export const selectThemeStyle: SelectTheme = {
         },
       },
       indicatorSeparator: {
-        display: 'none',
+        background: '#A7A7A7',
+        padding: {
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+        },
+
+        margin: {
+          bottom: 0,
+          left: 10,
+          right: 10,
+          top: 0,
+        },
       },
       dropdownIndicator: {
         background: 'transparent',
         color: '#A7A7A7',
         padding: {
           bottom: 0,
-          left: 10,
-          right: 10,
+          left: 0,
+          right: 0,
           top: 0,
         },
         hover: {
@@ -137,7 +150,14 @@ export const selectThemeStyle: SelectTheme = {
         },
       },
       clearIndicator: {
+        color: '#A7A7A7',
         background: 'transparent',
+        margin: {
+          bottom: 5,
+          left: 0,
+          right: 0,
+          top: 5,
+        },
         padding: {
           bottom: 0,
           left: 0,
@@ -201,17 +221,17 @@ export const selectThemeStyle: SelectTheme = {
       },
       labelText: {
         padding: {
-          bottom: 0,
-          left: 10,
-          right: 10,
-          top: 0,
+          left: 0,
+          right: 0,
         },
+        prefixSpacing: 15,
+        postfixSpacing: 15,
       },
 
       option: {
         color: 'inherit',
         font: {
-          size: 13,
+          size: 'inherit',
           weight: 'normal',
         },
         hover: {
@@ -230,6 +250,12 @@ export const selectThemeStyle: SelectTheme = {
 
       valueContainer: {
         background: 'transparent',
+        padding: {
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 3,
+        },
         border: {
           width: 0,
         },
@@ -242,6 +268,8 @@ export const selectThemeStyle: SelectTheme = {
       },
       singleValue: {
         color: 'inherit',
+        height: '100%',
+        display: 'inline-block',
         background: 'transparent',
         hover: {
           background: 'transparent',

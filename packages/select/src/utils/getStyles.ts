@@ -269,6 +269,19 @@ export const getBackgroundStyles: GetStyles = memoizee((
   });
 });
 
+export const getCustomStyles: GetStyles = memoizee((
+  theme,
+  appearance = 'default',
+  baseAppearance = 'default',
+) => memoizee((
+  elementName,
+  propertyPath,
+) => {
+  const propValue = selectTheme(theme, appearance, baseAppearance, [elementName, propertyPath]);
+
+  return propValue;
+}));
+
 export const getCommonStyles: GetStyles = memoizee((
   theme,
   appearance = 'default',
@@ -277,12 +290,14 @@ export const getCommonStyles: GetStyles = memoizee((
   const background = selectTheme(theme, appearance, baseAppearance, 'background');
   const color = selectTheme(theme, appearance, baseAppearance, 'color');
 
+
   return memoizee((elementName) => {
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
 
     return {
       background: (element && element.background) || background,
       color: (element && element.color) || color,
+      height: (element && element.height) || null,
     };
   });
 });

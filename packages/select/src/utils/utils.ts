@@ -1,18 +1,18 @@
-export const convertToOptions = (items: Record<string, any>) => {
-  const options: any[] = [];
-  Object.keys(items).forEach((key) => {
-    const option = {
-      key: items[key].key,
-      value: items[key].value || key,
-      label: items[key].name,
-      icon: items[key].icon,
-    };
+export const convertToOptions = (items: Record<string, any>) => Object.entries(items).map(([key, {
+  key: keyProp,
+  value,
+  name,
+  ...otherProp
+}]) => {
+  const option = {
+    key: keyProp || key,
+    value: value || key,
+    label: name,
+    ...otherProp,
+  };
 
-    options.push(option);
-  });
-
-  return options;
-};
+  return option;
+});
 
 export const findOptionByValue = (value: any, options: any[]) => {
   if (Array.isArray(value)) {
