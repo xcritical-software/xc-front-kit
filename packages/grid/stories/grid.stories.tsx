@@ -9,7 +9,6 @@ import { mockTheme } from './mock-theme';
 import { generateMockData } from './generateMocks';
 
 
-console.log(generateMockData(Math.floor(Math.random() * 100), Math.floor(Math.random() * 50)));
 const data = generateMockData(100, 100);
 
 const mockRows = data.rows;
@@ -29,8 +28,6 @@ const columns = mockColumns.map((el: any, i: number) => (
   }
 ));
 
-console.log(columns);
-
 
 storiesOf('Grid', module)
   .add(' default', () => (
@@ -44,7 +41,7 @@ storiesOf('Grid', module)
       rows={ mockRows }
       theme={ mockTheme }
     />
-  )).add('WithScroll', () => (
+  )).add('With Scroll', () => (
     <Div>
       <Grid
         columns={ columns }
