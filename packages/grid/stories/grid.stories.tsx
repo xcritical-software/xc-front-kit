@@ -4,12 +4,11 @@ import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 
 import Grid from '../src';
-// import { /* mockColumns, */mockRows } from './mock-rows';
 import { mockTheme } from './mock-theme';
 import { generateMockData } from './generateMocks';
 
 
-const data = generateMockData(100, 100);
+const data = generateMockData(20, 100);
 
 const mockRows = data.rows;
 const mockColumns = data.columns;

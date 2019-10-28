@@ -1,6 +1,17 @@
 import namor from 'namor';
 
 
+const guid = (): string => {
+  function s4(): string {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+
+  return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
+};
+
+
 const generateMockRow = (columns: any): any => {
   const row: any = {};
   columns.forEach((field: any) => {
@@ -9,7 +20,7 @@ const generateMockRow = (columns: any): any => {
       numbers: Math.floor(Math.random() * 10),
     });
   });
-  row.id = `${Date.now()}${Math.random()}`;
+  row.id = guid();
 
   return row;
 };
