@@ -9,9 +9,11 @@ import {
 
 
 export const StyledCell = styled.div<IStyledCell>`
-  padding: ${({
+   padding: ${({
     theme: {
-      top, right, bottom, left,
+      padding: {
+        top, right, bottom, left,
+      },
     },
   }): string => `${top} ${right} ${bottom} ${left}`};
   white-space: nowrap;
@@ -27,7 +29,6 @@ export const StyledCell = styled.div<IStyledCell>`
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
-
 `;
 
 
