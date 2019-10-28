@@ -1,4 +1,5 @@
 /* eslint-disable import/no-unresolved */
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { MdiReactIconComponentType } from 'mdi-react';
 import { storiesOf } from '@storybook/react';
@@ -170,6 +171,17 @@ storiesOf('Sidebar', module)
         <Sidebar { ...props } theme={ theme }>
           { list(100) }
         </Sidebar>
+        <Switch>
+          { routerConfig.map(({ path, component, exact }: any) => (
+            <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+        </Switch>
+      </BrowserRouter>
+    </ThemeProvider>
+  ))
+  .add('Only left panel', () => (
+    <ThemeProvider theme={ theme }>
+      <BrowserRouter>
+        <Sidebar { ...props } theme={ theme } />
         <Switch>
           { routerConfig.map(({ path, component, exact }: any) => (
             <Route key={ path } path={ path } component={ component } exact={ exact } />)) }

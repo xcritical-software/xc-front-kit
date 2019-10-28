@@ -17,16 +17,18 @@ module.exports = {
     "react/jsx-filename-extension": [1, {
       "extensions": [".tsx", ".jsx"]
     }],
+    "react/prop-types": 0,
     "no-console": [1, {
       allow: ["error"]
     }],
+    "react/prop-types": 0,
     "@typescript-eslint/no-unnecessary-condition": 0,
     '@typescript-eslint/quotes': ["error", "single"],
     "react/jsx-props-no-spreading": 0,
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": ["**/stories/**/*.tsx", "**/stories/**/*.ts"]
     }],
-    "@typescript-eslint/explicit-function-return-type": ["error", {
+    "@typescript-eslint/explicit-function-return-type": [1, {
       allowExpressions: true,
       allowTypedFunctionExpressions: true,
       allowHigherOrderFunctions: true

@@ -48,7 +48,21 @@ export const Sidebar = ({
 
   const [antiSelectLayer, changeAntiSelectLayer] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  let clickX = 0;
+
+  const clickX = useRef(0);
+  const [offsetLeft, changeOffsetLeft] = useState(0);
+  const leftWidth = showScrollbar
+    ? themeRef.current.leftWidth
+    : themeRef.current.leftWidth + 10;
+
+  const responsiveWrapperStyles = {
+    width: transformParams.width,
+    marginLeft: showScrollbar ? 0 : '-10px',
+  };
+
+  const rightWidth = showScrollbar
+    ? transformParams.width
+    : transformParams.width + 10;
 
   const handleMouseMove = useCallback(
     (e) => {
@@ -59,7 +73,7 @@ export const Sidebar = ({
       });
 
       const { clientX: currentX } = e;
-      const newWidth = transformParams.width + (currentX - clickX);
+      const newWidth = transformParams.width + (currentX - clickX.current);
 
       if (newWidth >= themeRef.current.maxWidth) return;
       if (newWidth <= 0) {
@@ -83,12 +97,12 @@ export const Sidebar = ({
         });
       }
     },
-    [clickX, transformParams.width],
+    [transformParams.width],
   );
 
   const handleMouseDown = useCallback(
     (e) => {
-      clickX = e.clientX;
+      clickX.current = e.clientX;
       document.body.addEventListener('mousemove', handleMouseMove);
     },
     [handleMouseMove],
@@ -124,10 +138,7 @@ export const Sidebar = ({
       if (sidebarRef.current === null) {
         return undefined;
       }
-      const parentNode = sidebarRef.current.parentNode as HTMLElement;
-      const parentRect = parentNode.getBoundingClientRect();
-      parentNode.style.paddingLeft = `${sidebarRef.current.offsetWidth}px`;
-      sidebarRef.current.style.left = `${parentRect.left}px`;
+      changeOffsetLeft(sidebarRef.current.offsetWidth);
       return undefined;
     });
     observer.observe(sidebarRef.current);
@@ -152,60 +163,55 @@ export const Sidebar = ({
     [observerRef],
   );
 
-  const leftWidth = showScrollbar
-    ? themeRef.current.leftWidth
-    : themeRef.current.leftWidth + 10;
-
-  const responsiveWrapperStyles = {
-    width: transformParams.width,
-    marginLeft: showScrollbar ? 0 : '-10px',
-  };
-
-  const rightWidth = showScrollbar
-    ? transformParams.width
-    : transformParams.width + 10;
 
   return (
-    <SidebarWrapper ref={ sidebarRef } theme={ themeRef.current }>
-      { navComponent && (
-        <NavComponentWrapper theme={ themeRef.current }>
-          <Scrollbars autoHide={ showScrollbar === 'auto' } style={ { width: leftWidth } }>{ navComponent }</Scrollbars>
-        </NavComponentWrapper>
-      ) }
-      <ResponsiveWrapper
-        animate={ transformParams.animate }
-        style={ responsiveWrapperStyles }
-      >
-        <RightBorderWrapper
-          onMouseDown={ handleMouseDown }
-          onMouseUp={ handleRemoveMouseMove }
-        >
-          <RightBorder theme={ themeRef.current }>
-            <CloseOpenButton
-              toRight={ transformParams.arrowToRight }
-              onClick={ handleClose }
-            >
-              <Arrow />
-            </CloseOpenButton>
-          </RightBorder>
-        </RightBorderWrapper>
-        { antiSelectLayer && <AntiSelect /> }
-        <ChildWrapper
-          theme={ themeRef.current }
-          style={ { width: transformParams.width } }
-          animate={ transformParams.animate }
-        >
-          <Scrollbars
-            style={ {
-              width: rightWidth,
-              transition: transformParams.animate ? '0.5s' : '0s',
-            } }
-            autoHide={ showScrollbar === 'auto' }
+    <div style={ {
+      height: '100%', width: `${offsetLeft}px`, minHeight: '100vh', float: 'left',
+    } }
+    >
+      <SidebarWrapper ref={ sidebarRef } theme={ themeRef.current }>
+        { navComponent && (
+          <NavComponentWrapper theme={ themeRef.current }>
+            <Scrollbars autoHide={ showScrollbar === 'auto' } style={ { width: leftWidth } }>{ navComponent }</Scrollbars>
+          </NavComponentWrapper>
+        ) }
+        { children && (
+          <ResponsiveWrapper
+            animate={ transformParams.animate }
+            style={ responsiveWrapperStyles }
           >
-            { children }
-          </Scrollbars>
-        </ChildWrapper>
-      </ResponsiveWrapper>
-    </SidebarWrapper>
+            <RightBorderWrapper
+              onMouseDown={ handleMouseDown }
+              onMouseUp={ handleRemoveMouseMove }
+            >
+              <RightBorder theme={ themeRef.current }>
+                <CloseOpenButton
+                  toRight={ transformParams.arrowToRight }
+                  onClick={ handleClose }
+                >
+                  <Arrow />
+                </CloseOpenButton>
+              </RightBorder>
+            </RightBorderWrapper>
+            { antiSelectLayer && <AntiSelect /> }
+            <ChildWrapper
+              theme={ themeRef.current }
+              style={ { width: transformParams.width } }
+              animate={ transformParams.animate }
+            >
+              <Scrollbars
+                style={ {
+                  width: rightWidth,
+                  transition: transformParams.animate ? '0.5s' : '0s',
+                } }
+                autoHide={ showScrollbar === 'auto' }
+              >
+                { children }
+              </Scrollbars>
+            </ChildWrapper>
+          </ResponsiveWrapper>
+        ) }
+      </SidebarWrapper>
+    </div>
   );
 };

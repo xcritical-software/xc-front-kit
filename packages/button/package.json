@@ -1,7 +1,7 @@
 {
-  "name": "@xcritical/sidebar",
+  "name": "@xcritical/button",
   "version": "1.0.0",
-  "description": "XCritical Sidebar Component",
+  "description": "<>",
   "main": "src/index.js",
   "scripts": {
     "test": "exit 0",
@@ -14,27 +14,22 @@
     "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
   },
   "keywords": [
-    "sidebar",
-    "library"
   ],
   "author": "XCritical Software",
   "license": "MIT",
-  "private": false,
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/button#readme",
+  "publishConfig": {
+		"access": "public"
+	},
+	"private": false,
   "peerDependencies": {
-    "prop-types": "^15.0.0",
     "react": "^16.9.0",
-    "styled-components": "^4.1.0"
-  },
-  "devDependencies": {
-    "mdi-react": "^6.2.0",
-    "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1"
+    "styled-components": "^4.1.0",
+    "prop-types": "^15.0.0"
   },
   "dependencies": {
-    "@xcritical/theme": "^0.0.1",
+    "@xcritical/theme": "0.0.1",
     "lodash.get": "^4.x",
-    "polished": "^3.0.0",
-    "react-custom-scrollbars": "^4.2.1",
-    "resize-observer-polyfill": "^1.5.1"
+    "polished": "^3.0.0"
   }
 }
