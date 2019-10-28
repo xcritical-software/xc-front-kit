@@ -26,7 +26,8 @@ export const StyledCell = styled.div<IStyledCell>`
   width: ${({ width }): string => `${width}px`};
   box-sizing: border-box;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+
 `;
 
 
@@ -121,4 +122,5 @@ export const RowShift = styled.div<IRowShift>`
   float: left;
   background-color: rgba(0,0,0,0);
   ${({ backgroundColor }) => `background-color: ${backgroundColor}`};
+  flex-shrink: 0;
   `;
