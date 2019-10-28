@@ -12,25 +12,27 @@ import { customTheme } from './customThemes';
 const items = {
   firstCard: {
     name: '1234 1234 1234 1234',
-    icon: <MasterCardIcon />,
+    prefix: <MasterCardIcon />,
   },
   secondCard: {
     name: '4321 4321 4321 4321',
-    icon: <MasterCardIcon />,
+    prefix: <MasterCardIcon />,
   },
   thirdCard: {
     name: '4567 4567 4567 4567',
-    icon: <MasterCardIcon />,
+    prefix: <MasterCardIcon />,
   },
   fourthCard: {
     name: '0123 0123 0123 0123',
-    icon: <MasterCardIcon />,
+    prefix: <MasterCardIcon />,
   },
 };
 
 storiesOf('Select', module)
   .add('Basic', () => (
-    <Select items={ items } />
+    <>
+      <Select items={ items } />
+    </>
   ))
   .add('Empty', () => (
     <Select />
