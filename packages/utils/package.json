@@ -1,5 +1,5 @@
 {
-  "name": "@xcritical/<package_name>",
+  "name": "@xcritical/utils",
   "version": "1.0.0",
   "description": "<>",
   "main": "src/index.js",
@@ -17,7 +17,7 @@
   ],
   "author": "XCritical Software",
   "license": "MIT",
-  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/<package_name>#readme",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/utils#readme",
   "publishConfig": {
 		"access": "public"
 	},

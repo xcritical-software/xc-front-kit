@@ -28,13 +28,17 @@ jobs:
       before_deploy:
         - git config --local user.name "TravisCI"
         - git config --local user.email "frontend@xcritical.software"        
-        - git remote set-url origin https://${GH_TOKEN}@github.com/xcritical-software/xc-front-presets-test.git > /dev/null 2>&1
+        - git remote set-url origin https://${GH_TOKEN}@github.com/xcritical-software/xc-front-kit.git > /dev/null 2>&1
+        - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
         - git fetch --tags --force
         - git checkout master
         - git pull
+        - yarn boltify version --loglevel silly --message "chore(release):" --no-push
+      after_deploy: 
+        - git push --follow-tags --no-verify
       deploy:
         provider: script
-        script: yarn boltify version --loglevel silly --message "chore(release):" && yarn deploy
+        script: yarn build:lastcommit && npm run deploy
         skip_cleanup: true
         on:
           branch: master
@@ -43,11 +47,15 @@ jobs:
       before_deploy:
         - yarn build:storybook
       deploy:
+        edge:
+          branch: v1.8.47
         provider: pages
         skip-cleanup: true 
         github-token: $GH_TOKEN
         local_dir: .storybook-static
-        repo: tundraray/xc-front-kit
+        repo: xcritical-software/xc-front-kit
         target_branch: gh-pages
+        verbose: true
+        keep_history: false
         on:
           branch: master
