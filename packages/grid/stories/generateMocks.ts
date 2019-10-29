@@ -13,7 +13,7 @@ const guid = (): string => {
 };
 
 const generateMockRow = (columns: string[]): IRow => {
-  const row: any = {};
+  const row = {} as IRow;
   columns.forEach((field: string) => {
     row[field] = namor.generate({
       words: Math.floor(Math.random() * 4 + 1),
