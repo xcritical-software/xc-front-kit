@@ -60,7 +60,7 @@ Filter
             filters={ filters }
             filter={ filter }
             name={ name }
-            key={ filter.key }
+            key={ filter.column + filter.condition + filter.value }
           />
         )) }
       </TopPanel>

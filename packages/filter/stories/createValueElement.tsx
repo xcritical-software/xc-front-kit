@@ -10,51 +10,76 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 
 
-const Input = ({ handleChange, value }: IElementProps): ReactElement => (
-  <input
-    style={ { width: '100%' } }
-    value={ value }
-    onChange={ (e) => handleChange(e.target.value) }
-  />
-);
+const Input = ({
+  handleChange,
+  value,
+  isEdit,
+}: IElementProps): ReactElement => {
+  if (!isEdit) return <span>{ value }</span>;
+  return (
+    <input
+      style={ { width: '100%' } }
+      value={ value }
+      onChange={ (e) => handleChange(e.target.value) }
+    />
+  );
+};
 
 const DictionarySelector = ({
   name,
   dictionaries,
   value,
   handleChange,
-}: IDictionaryElementProps): ReactElement => (
-  <select onChange={ (e) => handleChange(e.target.value) }>
-    { !value && <option selected>Please select...</option> }
-    { dictionaries[name]
-      && dictionaries[name].map(({ id, name: n }: IDictionary) => (
-        <option key={ id } value={ id } selected={ +value === id }>
-          { n }
-        </option>
-      )) }
-  </select>
-);
+  isEdit,
+}: IDictionaryElementProps): ReactElement => {
+  if (!isEdit) {
+    return (
+      <span>
+        { dictionaries[name]
+          .find(({ id }: any) => +id === +value).name }
+      </span>
+    );
+  }
+
+  return (
+    <select onChange={ (e) => handleChange(e.target.value) }>
+      { !value && <option selected>Please select...</option> }
+      { dictionaries[name]
+        && dictionaries[name].map(({ id, name: n }: IDictionary) => (
+          <option key={ id } value={ id } selected={ +value === id }>
+            { n }
+          </option>
+        )) }
+    </select>
+  );
+};
 
 const BooleanSelector = ({
   handleChange,
   value,
-}: IElementProps): ReactElement => (
-  <select onChange={ (e) => handleChange(e.target.value) }>
-    { !value && <option selected>Please select...</option> }
-    <option key="yes" value="yes">
-      Yes
-    </option>
-    <option key="no" value="no">
-      No
-    </option>
-  </select>
-);
+  isEdit,
+}: IElementProps): ReactElement => {
+  if (!isEdit) return <span>{ value }</span>;
+  return (
+    <select onChange={ (e) => handleChange(e.target.value) }>
+      { !value && <option selected>Please select...</option> }
+      <option key="yes" value="yes">
+        Yes
+      </option>
+      <option key="no" value="no">
+        No
+      </option>
+    </select>
+  );
+};
 
-const DateSelector = ({ handleChange, value }: any): ReactElement => {
+const DateSelector = ({ handleChange, value, isEdit }: any): ReactElement => {
   const [focus, changeFocus] = useState(false);
   const handleChangeFocus = (): void => {
     changeFocus(!focus);
   };
+  if (!isEdit) return <span>{ value ? value.format('YYYY MM DD') : null }</span>;
+
   return (
     <SingleDatePicker
       id="date_input"
@@ -78,11 +103,12 @@ export const createElement = ({
     case 'Currency':
       return Input;
     case 'Enum':
-      return ({ handleChange, value }: IElementProps) => DictionarySelector({
+      return ({ handleChange, value, isEdit }: IElementProps) => DictionarySelector({
         name,
         dictionaries,
         value,
         handleChange,
+        isEdit,
       });
     case 'Boolean':
       return BooleanSelector;

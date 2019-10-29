@@ -112,6 +112,7 @@ const FilterRow: React.FC<IFilterRow> = ({
             handleChange={ (value: string) => handleChange(value, 'value') }
             value={ filter.value }
             key={ filter.column }
+            isEdit
           />
         ) }
       </FilterField>

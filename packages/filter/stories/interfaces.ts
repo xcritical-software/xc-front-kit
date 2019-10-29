@@ -86,6 +86,7 @@ export interface ICreateElement {
 export interface IElementProps {
   handleChange: FunctionStringCallback;
   value: string;
+  isEdit: boolean;
 }
 export interface IDictionaryElementProps extends IElementProps {
   name: string;
