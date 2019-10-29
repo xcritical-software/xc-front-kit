@@ -5,6 +5,7 @@ import {
   IStyledCell,
   IStyledHead,
   IRowShift,
+  ITableData,
 } from '../interfaces';
 
 
@@ -124,7 +125,7 @@ export const RowShift = styled.div<IRowShift>`
   flex-shrink: 0;
   `;
 
-export const TableDataStyled = styled.span<any>`
+export const TableDataStyled = styled.span<ITableData>`
     word-wrap: ${({ theme: { wordWrap } }) => wordWrap};
     overflow: hidden;
     text-overflow: ${({ theme: { textOverflow } }) => textOverflow};

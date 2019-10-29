@@ -33,7 +33,7 @@ interface IHead {
   hoverColor: string;
 }
 
-interface ITableData {
+export interface ITableData {
   textOverflow?: string;
   whiteSpace?: string;
 }
