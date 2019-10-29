@@ -2,13 +2,11 @@ import {
   getThemedState,
   IThemeNamespace,
 } from '@xcritical/theme';
-
 import {
   gridThemeNamespace,
   tableTheme,
 
 } from '../theme/theme';
-
 import { ITableTheme } from '../interfaces';
 
 

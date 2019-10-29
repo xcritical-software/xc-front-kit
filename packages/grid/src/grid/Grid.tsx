@@ -4,7 +4,6 @@ import React, {
 import {
   IColumn, ITable, ITableProps, IRowData, ITableTheme, IRow,
 } from '../interfaces';
-
 import { Row } from '../row/Row';
 import {
   ContentWrapper, HeadWrapper, TableHead, TableStyled, TableWrapper, HeaderStyled,

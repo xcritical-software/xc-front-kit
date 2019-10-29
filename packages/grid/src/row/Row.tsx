@@ -44,6 +44,7 @@ export const Row: React.FC<IRow> = React.memo(({
     render, field, width, isExpandable,
   }: IColumn) => {
     const cellContent = render ? render(row) : row[field];
+
     return (
       <StyledCell
         key={ `${row.id}${field}` }
