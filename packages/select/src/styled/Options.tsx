@@ -59,7 +59,7 @@ const textCSS = (
   };
 };
 
-const Option: React.FC<IOptionProps> = ({
+const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(({
   context,
   prefix,
   postfix,
@@ -94,7 +94,7 @@ const Option: React.FC<IOptionProps> = ({
       </LabelPostfix>
     ) }
   </div>
-);
+));
 
 export const getFormatOptionLabel = (
   theme: IThemeNamespace<SelectTheme>,
@@ -103,20 +103,17 @@ export const getFormatOptionLabel = (
   isRTL: boolean,
 ) => (
   opt: IOptionItem,
-  { context, inputValue }: FormatOptionLabelMeta<IOptionProps>,
-) => {
-  console.log(opt, inputValue);
-  return (
-    <Option
-      theme={ theme }
-      appearance={ appearance }
-      baseAppearance={ baseAppearance }
-      prefix={ opt.prefix }
-      postfix={ opt.postfix }
-      context={ context }
-      isRTL={ isRTL }
-    >
-      { opt.label }
-    </Option>
-  );
-};
+  { context }: FormatOptionLabelMeta<IOptionProps>,
+) => (
+  <Option
+    theme={ theme }
+    appearance={ appearance }
+    baseAppearance={ baseAppearance }
+    prefix={ opt.prefix }
+    postfix={ opt.postfix }
+    context={ context }
+    isRTL={ isRTL }
+  >
+    { opt.label }
+  </Option>
+);

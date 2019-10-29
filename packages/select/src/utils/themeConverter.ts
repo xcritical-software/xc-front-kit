@@ -1,5 +1,6 @@
 import { StylesConfig } from 'react-select/src/styles';
 import { IThemeNamespace } from '@xcritical/theme';
+
 import {
   getDisplayStyles,
   getPaddingStyles,
@@ -11,18 +12,18 @@ import {
   getBorderRadiusStyles,
   getCommonStyles,
   getStatesStyles,
-} from '../utils';
+} from './getStyles';
 import {
   SelectTheme,
 } from '../interfaces';
 
 
-export const getStyles = (
+export const themeConverter = (
   theme: IThemeNamespace<SelectTheme>,
   appearance: string,
   baseAppearance: string,
   shouldFitContainer: boolean,
-): any => {
+): StylesConfig => {
   const getElementStyles = getCommonStyles(theme, appearance, baseAppearance);
   const getInteractiveStyles = getStatesStyles(theme, appearance, baseAppearance);
   const getDisplay = getDisplayStyles(theme, appearance, baseAppearance);

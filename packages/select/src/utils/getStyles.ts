@@ -1,7 +1,8 @@
 import memoizee from 'memoizee';
-
+import get from 'lodash.get';
 import { getAppearanceTheme, getStatesTheme, IThemeNamespace } from '@xcritical/theme';
 import { isObject } from 'utilitify';
+
 import { selectThemeNamespace, selectThemeStyle } from '../theme';
 import { SelectTheme, GetStyles, ISelectTheme } from '../interfaces';
 
@@ -32,13 +33,13 @@ export const getDisplayStyles: GetStyles = memoizee((
   appearance = 'default',
   baseAppearance = 'default',
 ) => {
-  const display = selectTheme(theme, appearance, baseAppearance, 'display');
+  const display = selectTheme(theme, appearance, baseAppearance, ['display']);
 
   return memoizee((elementName) => {
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
 
     return {
-      display: (element && element.display) || display,
+      display: get(element, ['display'], display),
     };
   });
 });
@@ -53,24 +54,16 @@ export const getPaddingStyles: GetStyles = memoizee((
     left,
     right,
     top,
-  } = selectTheme(theme, appearance, baseAppearance, 'padding');
+  } = selectTheme(theme, appearance, baseAppearance, ['padding']);
 
   return memoizee((elementName) => {
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
 
     return {
-      paddingLeft: element && element.padding && element.padding.left !== undefined
-        ? element.padding.left
-        : left,
-      paddingRight: element && element.padding && element.padding.right !== undefined
-        ? element.padding.right
-        : right,
-      paddingBottom: element && element.padding && element.padding.bottom !== undefined
-        ? element.padding.bottom
-        : bottom,
-      paddingTop: element && element.padding && element.padding.top !== undefined
-        ? element.padding.top
-        : top,
+      paddingLeft: get(element, ['padding', 'left'], left),
+      paddingRight: get(element, ['padding', 'right'], right),
+      paddingBottom: get(element, ['padding', 'bottom'], bottom),
+      paddingTop: get(element, ['padding', 'top'], top),
     };
   });
 });
@@ -85,7 +78,7 @@ export const getMarginStyles: GetStyles = memoizee((
     left,
     right,
     top,
-  } = selectTheme(theme, appearance, baseAppearance, 'margin');
+  } = selectTheme(theme, appearance, baseAppearance, ['margin']);
 
   return memoizee((
     elementName,
@@ -93,18 +86,10 @@ export const getMarginStyles: GetStyles = memoizee((
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
 
     return {
-      marginLeft: element && element.margin && element.margin.left !== undefined
-        ? element.margin.left
-        : left,
-      marginRight: element && element.margin && element.margin.right !== undefined
-        ? element.margin.right
-        : right,
-      marginBottom: element && element.margin && element.margin.bottom !== undefined
-        ? element.margin.bottom
-        : bottom,
-      marginTop: element && element.margin && element.margin.top !== undefined
-        ? element.margin.top
-        : top,
+      marginLeft: get(element, ['margin', 'left'], left),
+      marginRight: get(element, ['margin', 'right'], right),
+      marginBottom: get(element, ['margin', 'bottom'], bottom),
+      marginTop: get(element, ['margin', 'top'], top),
     };
   });
 });
@@ -117,7 +102,7 @@ export const getFontStyles: GetStyles = memoizee((
   const {
     size,
     weight,
-  } = selectTheme(theme, appearance, baseAppearance, 'font');
+  } = selectTheme(theme, appearance, baseAppearance, ['font']);
 
   return memoizee((
     elementName,
@@ -125,12 +110,8 @@ export const getFontStyles: GetStyles = memoizee((
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
 
     return {
-      fontSize: element && element.font && element.font.size !== undefined
-        ? element.font.size
-        : size,
-      fontWeight: element && element.font && element.font.weight !== undefined
-        ? element.font.weight
-        : weight,
+      fontSize: get(element, ['font', 'size'], size),
+      fontWeight: get(element, ['font', 'weight'], weight),
     };
   });
 });
@@ -144,7 +125,7 @@ export const getBorderStyles: GetStyles = memoizee((
     width,
     style,
     color,
-  } = selectTheme(theme, appearance, baseAppearance, 'border');
+  } = selectTheme(theme, appearance, baseAppearance, ['border']);
 
   return memoizee((
     elementName,
@@ -152,11 +133,9 @@ export const getBorderStyles: GetStyles = memoizee((
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
 
     return {
-      borderWidth: element && element.border && element.border.width !== undefined
-        ? element.border.width
-        : width,
-      borderStyle: (element && element.border && element.border.style) || style,
-      borderColor: (element && element.border && element.border.color) || color,
+      borderWidth: get(element, ['border', 'width'], width),
+      borderStyle: get(element, ['border', 'style'], style),
+      borderColor: get(element, ['border', 'color'], color),
     };
   });
 });
@@ -166,7 +145,7 @@ export const getWidthStyles: GetStyles = memoizee((
   appearance = 'default',
   baseAppearance = 'default',
 ) => {
-  let width = selectTheme(theme, appearance, baseAppearance, 'width');
+  let width = selectTheme(theme, appearance, baseAppearance, ['width']);
 
   if (!width) {
     width = 'auto';
@@ -179,7 +158,7 @@ export const getWidthStyles: GetStyles = memoizee((
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
 
     return {
-      width: shouldFitContainer ? '100%' : ((element && element.width) || width),
+      width: shouldFitContainer ? '100%' : get(element, ['width'], width),
     };
   });
 });
@@ -189,7 +168,7 @@ export const getHeightStyles: GetStyles = memoizee((
   appearance = 'default',
   baseAppearance = 'default',
 ) => {
-  let height = selectTheme(theme, appearance, baseAppearance, 'height');
+  let height = selectTheme(theme, appearance, baseAppearance, ['height']);
 
   if (!height) {
     height = 'auto';
@@ -201,7 +180,7 @@ export const getHeightStyles: GetStyles = memoizee((
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
 
     return {
-      height: (element && element.height) || height,
+      height: get(element, ['height'], height),
     };
   });
 });
@@ -211,7 +190,7 @@ export const getBorderRadiusStyles: GetStyles = memoizee((
   appearance = 'default',
   baseAppearance = 'default',
 ) => {
-  const borderRadius = selectTheme(theme, appearance, baseAppearance, 'borderRadius');
+  const borderRadius = selectTheme(theme, appearance, baseAppearance, ['borderRadius']);
 
   return memoizee((
     elementName,
@@ -242,7 +221,7 @@ export const getBorderRadiusStyles: GetStyles = memoizee((
     }
 
     return {
-      borderRadius: (element && element.borderRadius) || borderRadius,
+      borderRadius: get(element, ['borderRadius'], borderRadius),
     };
   });
 });
@@ -252,7 +231,7 @@ export const getBackgroundStyles: GetStyles = memoizee((
   appearance = 'default',
   baseAppearance = 'default',
 ) => {
-  let background = selectTheme(theme, appearance, baseAppearance, 'background');
+  let background = selectTheme(theme, appearance, baseAppearance, ['background']);
 
   if (!background) {
     background = 'transparent';
@@ -295,9 +274,10 @@ export const getCommonStyles: GetStyles = memoizee((
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
 
     return {
-      background: (element && element.background) || background,
-      color: (element && element.color) || color,
-      height: (element && element.height) || null,
+      ...element,
+      background: get(element, ['background'], background),
+      color: get(element, ['color'], color),
+      height: get(element, ['height']),
     };
   });
 });

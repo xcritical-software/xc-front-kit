@@ -32,7 +32,7 @@ export interface ISelectOnlyProps {
   isMulti?: boolean;
   isSearchable?: boolean;
   isOpenMenu?: boolean;
-  items?: { [key: string]: IOptionItem};
+  items?: { [key: string]: IOptionItem };
   value?: string | { [key: string]: IOptionItem };
   className?: string;
   shouldFitContainer?: boolean;

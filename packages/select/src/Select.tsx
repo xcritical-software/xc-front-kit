@@ -7,12 +7,11 @@ import { ThemeContext } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
 import { selectThemeNamespace, selectThemeStyle } from './theme';
 import {
-  getStyles,
   getFormatOptionLabel,
   ClearIndicator,
   DropdownIndicator,
 } from './styled';
-import { convertToOptions, findOptionByValue } from './utils/utils';
+import { convertToOptions, findOptionByValue, themeConverter } from './utils';
 import { SelectProps, ISelectTheme } from './interfaces';
 
 
@@ -81,7 +80,7 @@ export const PureSelect = ({
     setCurrentOption(findOptionByValue(value, options.current));
   }, [value]);
 
-  const styles = useRef(getStyles(
+  const styles = useRef(themeConverter(
     innerTheme,
     appearance,
     baseAppearance,
@@ -89,7 +88,7 @@ export const PureSelect = ({
   ));
 
   useEffect(() => {
-    styles.current = getStyles(
+    styles.current = themeConverter(
       innerTheme,
       appearance,
       baseAppearance,
