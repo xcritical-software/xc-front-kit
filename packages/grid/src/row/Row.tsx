@@ -1,5 +1,7 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, ReactElement, useCallback } from 'react';
+import React, {
+  useState, ReactElement, useCallback, useMemo,
+} from 'react';
 import PlusBoxOutlineIcon from 'mdi-react/PlusBoxOutlineIcon';
 import MinusBoxOutlineIcon from 'mdi-react/MinusBoxOutlineIcon';
 import {
@@ -25,6 +27,7 @@ export const Row: React.FC<IRow> = React.memo(({
   };
 
   const onToggle = useCallback((): void => changeExpand(!expand), [expand]);
+
   const getExpandButton = (): ReactElement => (
     <ToggleButton
       onClick={ onToggle }
@@ -64,7 +67,8 @@ export const Row: React.FC<IRow> = React.memo(({
       </StyledCell>
     );
   });
-  const renderChildren = (children: any): ReactElement => (Array.isArray(children)
+
+  const renderChildren = useCallback((children: any): ReactElement => (Array.isArray(children)
     ? children.map((el: IRowData) => (
       <Row
         row={ el }
@@ -74,7 +78,12 @@ export const Row: React.FC<IRow> = React.memo(({
         level={ level + 1 }
         handleSelectRows={ handleSelectRows }
       />
-    )) : children);
+    )) : children), [columns, handleSelectRows, level, theme]);
+
+  const renderChildrenMemo = useMemo(():
+  ReactElement => (renderChildren(row.children)), [renderChildren, row.children]);
+
+  const gridRowMemo = useMemo(getGridRow, [columns, row, expand]);
 
   return (
     <>
@@ -84,9 +93,9 @@ export const Row: React.FC<IRow> = React.memo(({
         tabIndex={ 0 }
         onClick={ handleRowClick }
       >
-        { getGridRow() }
+        { gridRowMemo }
       </RowStyled>
-      { expand && renderChildren(row.children) }
+      { expand && renderChildrenMemo }
     </>
   );
 });
