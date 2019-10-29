@@ -13,17 +13,15 @@ import { getPopperPlacementByPosition, getPositionByPopperPlacement } from './ut
 import { getModifiers } from './utils/modifiers';
 
 
-export const Popper = (props: IPopperProps): React.ReactElement => {
-  const {
-    children,
-    content: Content,
-    modifiers,
-    position = 'bottom center',
-    eventsEnabled = true,
-    positionFixed = false,
-    autoFlip = true,
-  } = props;
-
+export const Popper: React.FC<IPopperProps> = ({
+  children,
+  content: Content,
+  modifiers,
+  position = 'bottom center',
+  eventsEnabled = true,
+  positionFixed = false,
+  autoFlip = true,
+}) => {
   const popperInstance = useRef<PopperJS>();
   const targetRef = useRef<any>();
   const contentRef = useRef<any>();
