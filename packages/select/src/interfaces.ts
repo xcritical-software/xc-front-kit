@@ -14,6 +14,10 @@ export type ClearIndicatorProps = IndicatorProps<IOptionItem> & {
   getStyles: any;
 };
 
+export type MultiValueRemoveProps = IndicatorProps<IOptionItem> & {
+  getStyles: any;
+};
+
 export interface IIsRTL {
   isRTL?: boolean;
 }

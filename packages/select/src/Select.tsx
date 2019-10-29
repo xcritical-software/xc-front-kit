@@ -9,33 +9,12 @@ import { selectThemeNamespace, selectThemeStyle } from './theme';
 import {
   getFormatOptionLabel,
   ClearIndicator,
+  MultiValueRemove,
   DropdownIndicator,
 } from './styled';
 import { convertToOptions, findOptionByValue, themeConverter } from './utils';
 import { SelectProps, ISelectTheme } from './interfaces';
 
-
-const defaultProps = {
-  disabled: false,
-  isMulti: false,
-  isSearchable: false,
-  isOpenMenu: false,
-  className: 'xc-select',
-  items: {},
-  shouldFitContainer: false,
-  isRTL: false,
-  isCloseMenuOnSelect: true,
-  isHideSelectedOptions: true,
-  isControlShouldRenderValue: true,
-  appearance: 'default',
-  baseAppearance: 'default',
-  textPosition: 'left',
-  placeholder: 'Select...',
-  theme: {
-    [selectThemeNamespace]: selectThemeStyle,
-  },
-  onChange: () => {},
-};
 
 export const PureSelect = ({
   className,
@@ -134,12 +113,15 @@ export const PureSelect = ({
       closeMenuOnSelect={ isCloseMenuOnSelect }
       hideSelectedOptions={ isHideSelectedOptions }
       placeholder={ placeholder }
-      components={ { DropdownIndicator, ClearIndicator } }
+      components={ {
+        DropdownIndicator,
+        ClearIndicator,
+        MultiValueRemove,
+        ...rest.components,
+      } }
       { ...rest }
     />
   );
 };
-
-PureSelect.defaultProps = defaultProps;
 
 export default PureSelect;

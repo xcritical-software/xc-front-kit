@@ -29,8 +29,8 @@ export const ChevronDown = ({ fill = '#A7A7A7' }) => (
   </svg>
 );
 
-export const Close = ({ fill = '#A7A7A7' }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 14 14">
+export const Close = ({ fill = '#A7A7A7', size = 12 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={ size } height={ size } viewBox="0 0 14 14">
     <path
       d="M142-60.59,140.59-62,135-56.41,129.41-62,128-60.59,133.59-55,128-49.41,129.41-48,135-53.59,140.59-48,142-49.41,136.41-55Z"
       transform="translate(-128 62)"

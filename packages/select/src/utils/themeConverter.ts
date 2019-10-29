@@ -54,6 +54,8 @@ export const themeConverter = (
     input: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
       ...getElementStyles('input'),
+      ...getMargin('input'),
+      ...getPadding('input'),
       ...getInteractiveStyles('input', isDisabled, isFocused, isSelected),
     }),
     placeholder: (css, { isDisabled, isFocused, isSelected }) => ({
@@ -158,17 +160,23 @@ export const themeConverter = (
       ...getDisplay('multiValue'),
       ...getFont('multiValue'),
       ...getElementStyles('multiValue'),
+      ...getPadding('multiValue'),
+      ...getMargin('multiValue'),
       ...getInteractiveStyles('multiValue', isDisabled, isFocused, isSelected),
     }),
     multiValueLabel: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
       ...getFont('multiValueLabel'),
       ...getElementStyles('multiValueLabel'),
+      ...getPadding('multiValueLabel'),
+      ...getMargin('multiValueLabel'),
       ...getInteractiveStyles('multiValueLabel', isDisabled, isFocused, isSelected),
     }),
     multiValueRemove: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
       ...getElementStyles('multiValueRemove'),
+      ...getPadding('multiValueRemove'),
+      ...getMargin('multiValueRemove'),
       ...getInteractiveStyles('multiValueRemove', isDisabled, isFocused, isSelected),
     }),
   };

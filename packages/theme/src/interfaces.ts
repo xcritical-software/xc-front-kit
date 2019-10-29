@@ -48,10 +48,11 @@ export interface IStylesBase {
   display?: string;
   background?: string;
   color?: string;
+  fill?: string;
   width?: number | string;
   height?: number | string;
-  padding?: IIndentation;
-  margin?: IIndentation;
+  padding?: number | string | IIndentation;
+  margin?: number | string |IIndentation;
   font?: IFont;
   border?: IBorder;
   borderRadius?: IBorderRadius | number;

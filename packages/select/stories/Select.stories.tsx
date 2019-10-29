@@ -32,6 +32,7 @@ storiesOf('Select', module)
   .add('Basic', () => (
     <>
       <Select items={ items } />
+      <Select isSearchable textPosition="left" items={ items } />
     </>
   ))
   .add('Empty', () => (
@@ -50,8 +51,8 @@ storiesOf('Select', module)
     <Select disabled textPosition="left" items={ items } />
   ))
   .add('Autocomplete', () => (
-    <Select theme={ customTheme } isSearchable textPosition="left" items={ items } />
+    <Select isSearchable textPosition="left" items={ items } />
   ))
   .add('Multi Select', () => (
-    <Select theme={ customTheme } textPosition="left" items={ items } isMulti />
+    <Select textPosition="left" items={ items } isMulti />
   ));

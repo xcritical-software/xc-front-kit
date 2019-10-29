@@ -197,6 +197,18 @@ export const selectThemeStyle: SelectTheme = {
       input: {
         color: colors.CHAROCOAL,
         background: 'transparent',
+        padding: {
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+        },
+        margin: {
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+        },
         hover: {
           background: 'transparent',
         },
@@ -280,32 +292,72 @@ export const selectThemeStyle: SelectTheme = {
       },
       multiValue: {
         color: 'inherit',
+        height: '100%',
+        display: 'inline-flex',
         background: 'transparent',
         hover: {
           background: 'transparent',
         },
         active: {
           background: 'transparent',
+        },
+        margin: {
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+        },
+        padding: {
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
         },
       },
       multiValueLabel: {
         color: 'inherit',
+        height: '100%',
         background: 'transparent',
         hover: {
           background: 'transparent',
         },
         active: {
           background: 'transparent',
+        },
+        padding: {
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+        },
+        margin: {
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
         },
       },
       multiValueRemove: {
-        color: 'inherit',
+        color: '#A7A7A7',
+        fill: '#A7A7A7',
         background: 'transparent',
         hover: {
           background: 'transparent',
         },
         active: {
           background: 'transparent',
+        },
+        padding: {
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+        },
+        margin: {
+          bottom: 0,
+          left: 4,
+          right: 4,
+          top: 3,
         },
       },
       noOptionsMessage: {
