@@ -58,7 +58,7 @@ export const Row: React.FC<IRow> = React.memo(({
           />
 
         ) : null }
-        <TableDataStyled theme={ theme.tableData }>
+        <TableDataStyled title={ cellContent } theme={ theme.tableData }>
           { cellContent }
         </TableDataStyled>
       </StyledCell>
