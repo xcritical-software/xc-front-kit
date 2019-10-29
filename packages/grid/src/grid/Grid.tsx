@@ -19,10 +19,6 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
   const tableWrapperElement = React.createRef<HTMLDivElement>();
   const [tableScroll, setTableScroll] = useState(0);
   const themeRef = useRef(gridTheme<ITableTheme>(theme));
-  useEffect(() => {
-    themeRef.current = gridTheme<ITableTheme>(theme);
-  }, [theme]);
-
 
   const handleScroll = (): void => {
     const scrolledDiv = tableWrapperElement.current;
@@ -40,6 +36,10 @@ export const Grid: React.FC<ITable> = React.memo((props: ITableProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    themeRef.current = gridTheme<ITableTheme>(theme);
+  }, [theme]);
 
   return (
     <ContentWrapper theme={ themeRef.current }>
