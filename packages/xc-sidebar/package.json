@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/sidebar",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "XCritical Sidebar Component",
   "main": "src/index.js",
   "scripts": {
@@ -17,6 +17,9 @@
     "sidebar",
     "library"
   ],
+  "publishConfig": {
+		"access": "public"
+	},
   "author": "XCritical Software",
   "license": "MIT",
   "private": false,

@@ -1,6 +1,7 @@
 git:
   depth: false
-sudo: required
+os:
+  - linux
 language: node_js
 node_js:
   - '10'
@@ -47,11 +48,9 @@ jobs:
       before_deploy:
         - yarn build:storybook
       deploy:
-        edge:
-          branch: v1.8.47
         provider: pages
         skip-cleanup: true 
-        github-token: $GH_TOKEN
+        github_token: $GH_TOKEN
         local_dir: .storybook-static
         repo: xcritical-software/xc-front-kit
         target_branch: gh-pages
