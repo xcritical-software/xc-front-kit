@@ -16,9 +16,7 @@ export const StyledCell = styled.div<IStyledCell>`
       },
     },
   }): string => `${top} ${right} ${bottom} ${left}`};
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
   box-sizing: border-box;
   font-size: ${({ theme: { font: { size } } }): string => `${size}`};
   font-weight: ${({ theme: { font: { weight } } }): string => `${weight}`};
@@ -124,4 +122,11 @@ export const RowShift = styled.div<IRowShift>`
   background-color: rgba(0,0,0,0);
   ${({ backgroundColor }) => `background-color: ${backgroundColor}`};
   flex-shrink: 0;
+  `;
+
+export const TableDataStyled = styled.span<any>`
+    word-wrap: ${({ theme: { wordWrap } }) => wordWrap};
+    overflow: hidden;
+    text-overflow: ${({ theme: { textOverflow } }) => textOverflow};
+    white-space: ${({ theme: { whiteSpace } }) => whiteSpace}
   `;

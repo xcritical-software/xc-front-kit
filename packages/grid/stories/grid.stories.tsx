@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
-
 import Grid from '../src';
 import { mockTheme } from './mock-theme';
 import { generateMockData } from './generateMocks';

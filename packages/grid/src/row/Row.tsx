@@ -3,7 +3,7 @@ import React, { useState, ReactElement } from 'react';
 import PlusBoxOutlineIcon from 'mdi-react/PlusBoxOutlineIcon';
 import MinusBoxOutlineIcon from 'mdi-react/MinusBoxOutlineIcon';
 import {
-  StyledCell, RowStyled, ToggleButton, RowShift,
+  StyledCell, RowStyled, ToggleButton, RowShift, TableDataStyled,
 } from '../styled/styled';
 import { IColumn, IRow, IRowData } from '../interfaces';
 
@@ -18,6 +18,7 @@ export const Row: React.FC<IRow> = React.memo(({
   const { buttonShift, nexLevelLineSift = 0, rowSwitchButtonSize } = theme;
   const [expand, changeExpand] = useState(false);
   const [isSelected, setSelected] = useState(false);
+
   const handleRowClick = (): void => {
     setSelected(!isSelected);
     handleSelectRows(row);
@@ -55,8 +56,11 @@ export const Row: React.FC<IRow> = React.memo(({
           <RowShift
             width={ `${level * nexLevelLineSift}px` }
           />
+
         ) : null }
-        { cellContent }
+        <TableDataStyled theme={ theme.tableData }>
+          { cellContent }
+        </TableDataStyled>
       </StyledCell>
     );
   });

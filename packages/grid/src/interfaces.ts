@@ -33,6 +33,11 @@ interface IHead {
   hoverColor: string;
 }
 
+interface ITableData {
+  textOverflow: string;
+  whiteSpace: string;
+}
+
 export interface ITableTheme extends ITheme {
   width?: string;
   tableHeight?: string;
@@ -47,6 +52,7 @@ export interface ITableTheme extends ITheme {
   buttonShift?: string;
   nexLevelLineSift?: number;
   rowSwitchButtonSize?: string;
+  tableData?: ITableData;
 }
 
 

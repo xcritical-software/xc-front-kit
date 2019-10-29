@@ -49,6 +49,10 @@ export const tableTheme = {
   buttonShift: '32px',
   nexLevelLineSift: '15',
   rowSwitchButtonSize: '20',
+  tableData: {
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
 };
 
 export const gridThemeNamespace = '@xcritical\\grid';
