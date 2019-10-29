@@ -1,6 +1,7 @@
 git:
   depth: false
-sudo: required
+os:
+  - linux
 language: node_js
 node_js:
   - '10'
