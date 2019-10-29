@@ -34,8 +34,8 @@ interface IHead {
 }
 
 interface ITableData {
-  textOverflow: string;
-  whiteSpace: string;
+  textOverflow?: string;
+  whiteSpace?: string;
 }
 
 export interface ITableTheme extends ITheme {

@@ -9,3 +9,11 @@ export const mockTheme: IThemeNamespace<ITableTheme> = {
     width: '50%',
   },
 };
+
+export const multilineTheme: IThemeNamespace<ITableTheme> = {
+  [gridThemeNamespace]: {
+    tableData: {
+      whiteSpace: 'normal',
+    },
+  },
+};

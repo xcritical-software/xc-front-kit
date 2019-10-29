@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 import Grid from '../src';
-import { mockTheme } from './mock-theme';
+import { mockTheme, multilineTheme } from './mock-theme';
 import { generateMockData } from './generateMocks';
 
 
@@ -33,4 +33,11 @@ storiesOf('Grid', module)
         rows={ rows }
       />
     </Div>
+  ))
+  .add('Multiline Table Data', () => (
+    <Grid
+      columns={ columns }
+      rows={ rows }
+      theme={ multilineTheme }
+    />
   ));
