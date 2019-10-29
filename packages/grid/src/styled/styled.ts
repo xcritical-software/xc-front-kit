@@ -107,7 +107,6 @@ export const HeadWrapper = styled.div`
   display: table;
 `;
 
-
 export const ToggleButton = styled.button`
   background-color: rgba(0,0,0,0);
   outline: none;

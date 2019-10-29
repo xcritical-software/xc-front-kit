@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useState, ReactElement } from 'react';
+import React, { useState, ReactElement, useCallback } from 'react';
 import PlusBoxOutlineIcon from 'mdi-react/PlusBoxOutlineIcon';
 import MinusBoxOutlineIcon from 'mdi-react/MinusBoxOutlineIcon';
 import {
@@ -24,7 +24,7 @@ export const Row: React.FC<IRow> = React.memo(({
     handleSelectRows(row);
   };
 
-  const onToggle = (): void => changeExpand(!expand);
+  const onToggle = useCallback((): void => changeExpand(!expand), [expand]);
   const getExpandButton = (): ReactElement => (
     <ToggleButton
       onClick={ onToggle }
