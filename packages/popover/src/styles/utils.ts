@@ -4,9 +4,11 @@ import { IThemed, ArrowDirection } from '../interfaces';
 import { popperThemeNamespace, defaultPopperTheme } from '../theme';
 
 
-export const getPopperProperty = (props: IThemed): (propertyPath: string) => any => {
-  const { theme, appearance, baseAppearance } = props;
-
+export const getPopperProperty = ({
+  theme,
+  appearance,
+  baseAppearance,
+}: IThemed): (propertyPath: string[]) => any => {
   const func = getAppearanceTheme(popperThemeNamespace, defaultPopperTheme);
 
   return (propertyPath) => func(theme, appearance, propertyPath, baseAppearance);
@@ -19,7 +21,7 @@ export const getArrowSizes = (
   width: string;
   height: string;
 } => {
-  const size = getPopperProperty(props)('arrow.size');
+  const size = getPopperProperty(props)(['arrow', 'size']);
 
   switch (arrowDirection) {
     case 'top':
@@ -44,7 +46,7 @@ export const getArrowSizes = (
 };
 
 export const getArrowBorderWidth = (props: IThemed, arrowDirection: ArrowDirection): string => {
-  const size = getPopperProperty(props)('arrow.size');
+  const size = getPopperProperty(props)(['arrow', 'size']);
 
   switch (arrowDirection) {
     case 'top': return `${size} ${size} 0 ${size}`;

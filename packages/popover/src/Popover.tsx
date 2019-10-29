@@ -5,21 +5,21 @@ import { IPopover } from './interfaces';
 import { Content, Arrow } from './styles';
 
 
-export const Popover = (props: IPopover): ReactElement => {
-  const {
-    position,
-    content,
-    autoFlip,
-    children,
-    visible = false,
-    withArrow = true,
-    appearance = 'default',
-    baseAppearance = 'default',
-  } = props;
-
+export const Popover: React.FC<IPopover> = ({
+  position,
+  content,
+  autoFlip,
+  children,
+  visible = false,
+  withArrow = true,
+  theme,
+  appearance = 'default',
+  baseAppearance = 'default',
+}) => {
   const PopoverContent = (popperProps: IContent): ReactElement => (
     <Content
       data-content-position={ popperProps.position }
+      theme={ theme }
       appearance={ appearance }
       baseAppearance={ baseAppearance }
     >
@@ -29,6 +29,7 @@ export const Popover = (props: IPopover): ReactElement => {
           x-arrow=""
           style={ popperProps.arrowStyles }
           data-arrow-position={ popperProps.position }
+          theme={ theme }
           appearance={ appearance }
           baseAppearance={ baseAppearance }
         />
