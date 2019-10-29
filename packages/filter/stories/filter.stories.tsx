@@ -36,7 +36,31 @@ const threeFilters = [
     value: '20',
   },
 ];
-const threeFiltersAdd = [
+const threeFiltersAdd1 = [
+  {
+    column: 'aaid',
+    condition: 'startsWith',
+    value: '150',
+  },
+  {
+    column: 'acid',
+    condition: 'endsWith',
+    value: '200',
+  },
+];
+const threeFiltersAdd2 = [
+  {
+    column: 'aaid',
+    condition: 'startsWith',
+    value: '150',
+  },
+  {
+    column: 'acid',
+    condition: 'endsWith',
+    value: '200',
+  },
+];
+const threeFiltersAdd3 = [
   {
     column: 'aaid',
     condition: 'startsWith',
@@ -49,9 +73,9 @@ const threeFiltersAdd = [
   },
 ];
 setTimeout(() => store.dispatch(xcriticalFiltersInit('three', threeFilters)), 1000);
-setTimeout(() => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)), 2000);
-setTimeout(() => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)), 3000);
-setTimeout(() => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)), 4000);
+setTimeout(() => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd1)), 2000);
+setTimeout(() => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd2)), 3000);
+setTimeout(() => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd3)), 4000);
 
 
 storiesOf('Filter', module)

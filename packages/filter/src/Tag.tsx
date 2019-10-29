@@ -64,7 +64,7 @@ const Tag = ({
   const handleChange = (v: any): void => {
     changeValue(v);
   };
-  console.log(filter);
+
   return (
     <WrapperTag>
       <WrapperFilter
