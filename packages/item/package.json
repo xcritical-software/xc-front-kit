@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/item",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "XCritical Item Component",
 	"main": "src/index.ts",
 	"scripts": {
@@ -13,7 +13,11 @@
 		"type": "git",
 		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
 	},
-	"keywords": [],
+	"keywords": [
+		"item",
+		"style-components",
+		"themed"
+	],
 	"author": "XCritical Software",
 	"license": "MIT",
 	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/item#readme",
@@ -28,7 +32,7 @@
 		"polished": "^3.0.0"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^0.0.1",
+		"@xcritical/theme": "^0.1.0",
 		"lodash.get": "4.x",
 		"polished": "^3.0.0"
 	}
