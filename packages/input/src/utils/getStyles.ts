@@ -4,7 +4,7 @@ import memoize from 'memoizee';
 import {
   getAppearanceTheme,
   getStatesTheme,
-} from '@xcritical-old/xc-theme/utils';
+} from '@xcritical/theme';
 
 import {
   inputThemeNamespace,

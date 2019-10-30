@@ -7,7 +7,7 @@ import { storiesOf } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 
-import Input, { inputThemeNamespace, inputThemeStyle } from '@xcritical-old/xc-input';
+import Input, { inputThemeNamespace, inputThemeStyle } from '@xcritical/input';
 
 import { customTheme } from './customThemes';
 import { SearchIcon, ErrorIcon } from './Icons';

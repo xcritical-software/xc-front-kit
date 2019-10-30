@@ -1,4 +1,4 @@
-import * as colors from '@xcritical-old/xc-theme/colors';
+import * as colors from '@xcritical/theme';
 
 import { generateApperance } from './utils/themeTools';
 
