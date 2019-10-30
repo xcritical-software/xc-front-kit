@@ -44,13 +44,13 @@ const getGridRow = ({
   );
 });
 
-export const Row: React.FC<IRow> = React.memo(({
+export const Row: React.FC<IRow> = React.memo<IRow>(({
   row,
   columns,
   theme,
   level,
   handleSelectRows,
-}: IRow) => {
+}) => {
   const { rowSwitchButtonSize } = theme;
   const [expand, changeExpand] = useState(false);
   const [isSelected, setSelected] = useState(false);
