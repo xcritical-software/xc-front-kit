@@ -7,8 +7,42 @@ import MinusBoxOutlineIcon from 'mdi-react/MinusBoxOutlineIcon';
 import {
   StyledCell, RowStyled, ToggleButton, RowShift, TableDataStyled,
 } from '../styled/styled';
-import { IColumn, IRow, IRowData } from '../interfaces';
+import {
+  IColumn, IRow, IRowData,
+} from '../interfaces';
 
+
+const getGridRow = ({
+  columns,
+  row,
+  theme, level, getExpandButton,
+}: any): ReactElement[] => columns.map(({
+  render, field, width, isExpandable,
+}: IColumn) => {
+  const cellContent = render ? render(row) : row[field];
+
+  return (
+    <StyledCell
+      key={ `${row.id}${field}` }
+      theme={ theme.cell }
+      width={ width }
+    >
+      {
+        isExpandable
+          ? (row.children ? getExpandButton : <RowShift width={ theme.buttonShift } />)
+          : null
+      }
+      { level > 0 && isExpandable ? (
+        <RowShift
+          width={ `${level * theme.nexLevelLineSift}px` }
+        />
+      ) : null }
+      <TableDataStyled title={ cellContent } theme={ theme.tableData }>
+        { cellContent }
+      </TableDataStyled>
+    </StyledCell>
+  );
+});
 
 export const Row: React.FC<IRow> = React.memo(({
   row,
@@ -17,7 +51,7 @@ export const Row: React.FC<IRow> = React.memo(({
   level,
   handleSelectRows,
 }: IRow) => {
-  const { buttonShift, nexLevelLineSift = 0, rowSwitchButtonSize } = theme;
+  const { rowSwitchButtonSize } = theme;
   const [expand, changeExpand] = useState(false);
   const [isSelected, setSelected] = useState(false);
 
@@ -28,7 +62,7 @@ export const Row: React.FC<IRow> = React.memo(({
 
   const onToggle = useCallback((): void => changeExpand(!expand), [expand]);
 
-  const getExpandButton = (): ReactElement => (
+  const getExpandButton = useMemo((): ReactElement => (
     <ToggleButton
       onClick={ onToggle }
     >
@@ -38,36 +72,7 @@ export const Row: React.FC<IRow> = React.memo(({
         />
       ) : <PlusBoxOutlineIcon size={ rowSwitchButtonSize } /> }
     </ToggleButton>
-  );
-
-  const getGridRow = (): ReactElement[] => columns.map(({
-    render, field, width, isExpandable,
-  }: IColumn) => {
-    const cellContent = render ? render(row) : row[field];
-
-    return (
-      <StyledCell
-        key={ `${row.id}${field}` }
-        theme={ theme.cell }
-        width={ width }
-      >
-        {
-          isExpandable
-            ? (row.children ? getExpandButton() : <RowShift width={ buttonShift } />)
-            : null
-        }
-        { level > 0 && isExpandable ? (
-          <RowShift
-            width={ `${level * nexLevelLineSift}px` }
-          />
-
-        ) : null }
-        <TableDataStyled title={ cellContent } theme={ theme.tableData }>
-          { cellContent }
-        </TableDataStyled>
-      </StyledCell>
-    );
-  });
+  ), [expand, onToggle, rowSwitchButtonSize]);
 
   const renderChildren = useCallback((children: any): ReactElement => (Array.isArray(children)
     ? children.map((el: IRowData) => (
@@ -81,10 +86,16 @@ export const Row: React.FC<IRow> = React.memo(({
       />
     )) : children), [columns, handleSelectRows, level, theme]);
 
-  const renderChildrenMemo = useMemo(():
-  ReactElement => (renderChildren(row.children)), [renderChildren, row.children]);
+  const renderChildrenMemo = useMemo<ReactElement>(() => (renderChildren(row.children)),
+    [renderChildren, row.children]);
 
-  const gridRowMemo = useMemo(getGridRow, [columns, row, expand]);
+  const gridRowMemo = useMemo(() => getGridRow({
+    columns,
+    row,
+    theme,
+    level,
+    getExpandButton,
+  }), [columns, getExpandButton, level, row, theme]);
 
   return (
     <>
