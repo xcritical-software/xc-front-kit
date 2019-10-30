@@ -17,7 +17,10 @@
 		"popover",
 		"style-components",
 		"themed"
-	],
+  ],
+  "publishConfig": {
+		"access": "public"
+	},
 	"author": "XCritical Software",
 	"license": "MIT",
 	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/popover#readme",
