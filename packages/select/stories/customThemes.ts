@@ -1,9 +1,9 @@
-import { IThemeNamespace } from '@xcritical/theme';
+import { IThemeNamespace, ITheme } from '@xcritical/theme';
 import { selectThemeNamespace } from '../src';
-import { SelectTheme } from '../src/interfaces';
+import { ISelectBaseTheme } from '../src/interfaces';
 
 
-export const customTheme: IThemeNamespace<SelectTheme> = {
+export const customTheme: IThemeNamespace<ITheme<ISelectBaseTheme>> = {
   [selectThemeNamespace]: {
     appearance: {
       default: {

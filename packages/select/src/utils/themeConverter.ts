@@ -1,5 +1,5 @@
 import { StylesConfig } from 'react-select/src/styles';
-import { IThemeNamespace } from '@xcritical/theme';
+import { IThemeNamespace, ITheme } from '@xcritical/theme';
 
 import {
   getDisplayStyles,
@@ -14,12 +14,12 @@ import {
   getStatesStyles,
 } from './getStyles';
 import {
-  SelectTheme,
+  ISelectBaseTheme,
 } from '../interfaces';
 
 
 export const themeConverter = (
-  theme: IThemeNamespace<SelectTheme>,
+  theme: IThemeNamespace<ITheme<ISelectBaseTheme>>,
   appearance: string,
   baseAppearance: string,
   shouldFitContainer: boolean,

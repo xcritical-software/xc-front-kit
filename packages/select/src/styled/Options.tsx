@@ -1,10 +1,10 @@
 import React, { CSSProperties } from 'react';
-import { IThemeNamespace } from '@xcritical/theme';
+import { IThemeNamespace, ITheme } from '@xcritical/theme';
 import styled from 'styled-components';
 import { FormatOptionLabelContext, FormatOptionLabelMeta } from 'react-select/src/Select';
 import { getPaddingStyles, getCustomStyles } from '../utils';
 import {
-  IOptionProps, SelectTheme, IPrefixProps, IOptionItem,
+  IOptionProps, IPrefixProps, IOptionItem, ISelectBaseTheme,
 } from '../interfaces';
 
 
@@ -38,7 +38,7 @@ const labelCSS = (context: FormatOptionLabelContext): CSSProperties => ({
 
 const textCSS = (
   isRTL: boolean,
-  theme: IThemeNamespace<SelectTheme>,
+  theme: IThemeNamespace<ITheme<ISelectBaseTheme>>,
   appearance: string,
   baseAppearance: string,
 ): CSSProperties => {
@@ -97,7 +97,7 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(({
 ));
 
 export const getFormatOptionLabel = (
-  theme: IThemeNamespace<SelectTheme>,
+  theme: IThemeNamespace<ITheme<ISelectBaseTheme>>,
   appearance: string,
   baseAppearance: string,
   isRTL: boolean,

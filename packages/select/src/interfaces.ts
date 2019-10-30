@@ -23,7 +23,7 @@ export interface IIsRTL {
 }
 
 export interface IThemeProps {
-  theme: IThemeNamespace<SelectTheme>;
+  theme: IThemeNamespace<ITheme<ISelectBaseTheme>>;
   appearance: string;
   baseAppearance: string;
 }
@@ -46,7 +46,7 @@ export interface ISelectOnlyProps {
   isControlShouldRenderValue?: boolean;
   textPosition?: string;
   placeholder?: string;
-  theme?: IThemeNamespace<SelectTheme>;
+  theme?: IThemeNamespace<ITheme<ISelectBaseTheme>>;
 }
 
 export type SelectProps = Omit<Props<IOptionProps>, 'theme' | 'value'> & ISelectOnlyProps;
@@ -87,11 +87,15 @@ export interface ILabelTextCssTheme extends ISelectCssTheme {
   postfixSpacing?: number;
 }
 
-export interface ISelectTheme extends ISelectCssTheme, ISubComponents {
+export interface ISelectBaseTheme extends ISelectCssTheme, ISubComponents {
 }
 
 export interface IReturnFunction< TValue> {
-  (theme: IThemeNamespace<SelectTheme>, appearance: string, baseAppearance: string): TValue;
+  (
+    theme: IThemeNamespace<ITheme<ISelectBaseTheme>>,
+    appearance: string,
+    baseAppearance: string
+  ): TValue;
 }
 
 export interface IReturnWithArgsFunction<TProp, TValue> {
@@ -101,7 +105,6 @@ export interface IReturnWithArgsFunction<TProp, TValue> {
 export type GetStyles<TResult = { [key: string]: any }> =
   IReturnFunction<IReturnWithArgsFunction<any, TResult>>;
 
-export type SelectTheme = ITheme<ISelectTheme>;
 
 export interface IOptionProps extends IThemeProps, OptionTypeBase {
   prefix?: React.ReactElement;
