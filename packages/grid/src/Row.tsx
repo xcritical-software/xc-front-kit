@@ -6,10 +6,10 @@ import PlusBoxOutlineIcon from 'mdi-react/PlusBoxOutlineIcon';
 import MinusBoxOutlineIcon from 'mdi-react/MinusBoxOutlineIcon';
 import {
   StyledCell, RowStyled, ToggleButton, RowShift, TableDataStyled,
-} from '../styled/styled';
+} from './styled';
 import {
   IColumn, IRow, IRowData,
-} from '../interfaces';
+} from './interfaces';
 
 
 const getGridRow = ({

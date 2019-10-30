@@ -6,7 +6,7 @@ import {
   gridThemeNamespace,
   tableTheme,
 
-} from '../theme/theme';
+} from '../theme';
 import { ITableTheme } from '../interfaces';
 
 

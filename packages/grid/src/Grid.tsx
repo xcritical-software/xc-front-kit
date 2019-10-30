@@ -3,12 +3,12 @@ import React, {
 } from 'react';
 import {
   IColumn, ITable, ITableProps, IRowData, ITableTheme, IRow,
-} from '../interfaces';
-import { Row } from '../row/Row';
+} from './interfaces';
+import { Row } from './Row';
 import {
   ContentWrapper, HeadWrapper, TableHead, TableStyled, TableWrapper, HeaderStyled,
-} from '../styled/styled';
-import { gridTheme } from '../utils/get-styles';
+} from './styled';
+import { gridTheme } from './utils/get-styles';
 
 
 export const Grid: React.FC<ITable> = React.memo<ITableProps>(({ rows, columns, theme = {} }) => {

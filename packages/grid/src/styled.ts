@@ -6,7 +6,7 @@ import {
   IStyledHead,
   IRowShift,
   ITableData,
-} from '../interfaces';
+} from './interfaces';
 
 
 export const StyledCell = styled.div<IStyledCell>`
