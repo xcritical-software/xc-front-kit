@@ -4,7 +4,7 @@ import React, {
 import Select from 'react-select';
 
 import { ThemeContext } from 'styled-components';
-import { IThemeNamespace } from '@xcritical/theme';
+import { IThemeNamespace, ITheme } from '@xcritical/theme';
 import { selectThemeNamespace, selectThemeStyle } from './theme';
 import {
   getFormatOptionLabel,
@@ -13,10 +13,10 @@ import {
   DropdownIndicator,
 } from './styled';
 import { convertToOptions, findOptionByValue, themeConverter } from './utils';
-import { SelectProps, ISelectTheme } from './interfaces';
+import { SelectProps, ISelectBaseTheme } from './interfaces';
 
 
-export const PureSelect = ({
+export const PureSelect: React.FC<SelectProps> = ({
   className,
   disabled = false,
   isMulti = false,
@@ -36,8 +36,8 @@ export const PureSelect = ({
     [selectThemeNamespace]: selectThemeStyle,
   },
   ...rest
-}: SelectProps): React.ReactElement<SelectProps> => {
-  const themeContext = useContext<IThemeNamespace<ISelectTheme>>(ThemeContext);
+}) => {
+  const themeContext = useContext<IThemeNamespace<ITheme<ISelectBaseTheme>>>(ThemeContext);
   const innerTheme = theme || themeContext;
 
   const selectRef = useRef<any>();

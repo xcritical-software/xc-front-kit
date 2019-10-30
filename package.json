@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/front-kit",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Front Kit for XCritical projects",
   "workspaces": [
     "packages/*"
@@ -83,6 +83,6 @@
   },
   "dependencies": {
     "@types/react-redux": "^7.1.5",
-    "@types/react-select": "^3.0.5"
+    "styled-css-grid": "^1.2.1"
   }
 }

@@ -1,4 +1,4 @@
-import { ITheme, IThemeNamespace, IIndents } from '@xcritical/theme';
+import { ITheme, IThemeNamespace, IIndentation } from '@xcritical/theme';
 import {
   FlattenInterpolation, ThemedStyledProps,
 } from 'styled-components';
@@ -12,7 +12,7 @@ export interface IFont {
 }
 
 export interface IButtonTheme {
-  padding?: IIndents;
+  padding?: IIndentation;
   prefixSpacing?: number;
   postfixSpacing?: number;
   borderRadius?: number;

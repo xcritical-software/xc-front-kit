@@ -1,34 +1,37 @@
-import { Boundary } from 'popper.js';
-// eslint-disable-next-line import/no-unresolved
-import { PositionProperty } from 'csstype';
+import { Modifiers } from 'popper.js';
 
+
+export type Position =
+  'top left'
+  | 'top center'
+  | 'top right'
+  | 'right top'
+  | 'right middle'
+  | 'right bottom'
+  | 'bottom left'
+  | 'bottom center'
+  | 'bottom right'
+  | 'left top'
+  | 'left middle'
+  | 'left bottom';
 
 export interface IPopperProps {
-  autoFlip?: boolean;
-  content?: any;
-  isAlwaysFixed?: boolean;
-  zIndex?: number;
   children?: any;
-  position?: string;
-  offset?: string;
-  boundariesElement?: Boundary;
-  onPositioned?: Function;
+  content?: any;
+  eventsEnabled?: boolean;
+  modifiers?: Modifiers;
+  position?: Position;
+  positionFixed?: boolean;
+  autoFlip?: boolean;
 }
 
 export interface IPopperState {
-  transform?: string;
-  hasExtractedStyles: boolean | null;
-  cssPosition?: PositionProperty;
-  originalHeight: number | null;
-  maxHeight: number | null;
+  popperStyles: object;
+  arrowStyles: object;
+  position: Position;
 }
 
-export interface IFixedOffset {
-  top: number;
-  left: number;
-}
-
-export interface IFixedTargetProps {
-  fixedOffset?: IFixedOffset;
-  targetRef?: any;
+export interface IContent {
+  position: Position;
+  arrowStyles: object;
 }

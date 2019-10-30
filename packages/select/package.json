@@ -28,11 +28,13 @@
     "lodash.get": "^4.x"
   },
   "dependencies": {
-    "@xcritical/popper": "0.0.1",
-    "@xcritical/theme": "0.0.1",
+    "@xcritical/theme": "0.1.0",
     "memoizee": "^0.4.14",
-    "polished": "^3.0.0",
     "utilitify": "^1.0.2",
-    "react-select": "^3.0.4"
+    "react-select": "^3.0.5",
+    "polished": "^3.0.0"
+  },
+  "devDependencies": {    
+    "@types/react-select": "^3.0.5"
   }
 }
