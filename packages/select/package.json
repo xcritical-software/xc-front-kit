@@ -28,7 +28,7 @@
     "lodash.get": "^4.x"
   },
   "dependencies": {
-    "@xcritical/theme": "0.1.0",
+    "@xcritical/theme": "^0.1.0",
     "memoizee": "^0.4.14",
     "utilitify": "^1.0.2",
     "react-select": "^3.0.5",
