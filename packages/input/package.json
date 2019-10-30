@@ -1,5 +1,5 @@
 {
-  "name": "@xcritical/<package_name>",
+  "name": "@xcritical/input",
   "version": "0.0.0",
   "description": "<>",
   "main": "src/index.ts",
@@ -16,7 +16,7 @@
   "keywords": [],
   "author": "XCritical Software",
   "license": "MIT",
-  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/<package_name>#readme",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/input#readme",
   "publishConfig": {
     "access": "public"
   },
