@@ -1,6 +1,6 @@
 import { lighten } from 'polished';
 
-import * as colors from '@xcritical/theme';
+import { colors } from '@xcritical/theme';
 import { ItemTheme } from './interfaces';
 
 

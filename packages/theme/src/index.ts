@@ -1,3 +1,9 @@
+import * as colors from './colors';
+
+
 export * from './utils';
-export * from './colors';
 export * from './interfaces';
+
+export {
+  colors,
+};

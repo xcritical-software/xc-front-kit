@@ -1,4 +1,4 @@
-import * as colors from '@xcritical/theme';
+import { colors } from '@xcritical/theme';
 
 import { generateApperance } from './utils/themeTools';
 import { ButtonTheme } from './interfaces';

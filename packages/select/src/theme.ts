@@ -1,12 +1,12 @@
 import { lighten, darken } from 'polished';
 
-import * as themes from '@xcritical/theme';
+import { ITheme, colors } from '@xcritical/theme';
 import { ISelectBaseTheme } from './interfaces';
 
 
 export const selectThemeNamespace = '@xcritical\\select';
 
-export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
+export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
   display: 'inherit',
   padding: {
     bottom: 7,
@@ -29,10 +29,10 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
   border: {
     width: 1,
     style: 'solid',
-    color: themes.GRAY_LIGHT,
+    color: colors.GRAY_LIGHT,
   },
-  background: themes.GRAY_LIGHT,
-  color: themes.CHAROCOAL,
+  background: colors.GRAY_LIGHT,
+  color: colors.CHAROCOAL,
 
   appearance: {
     default: {
@@ -41,33 +41,33 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
       },
       hover: {
         background: '#efefef',
-        color: themes.CHAROCOAL,
+        color: colors.CHAROCOAL,
 
       },
       selected: {
         background: '#efefef',
-        color: themes.CHAROCOAL,
+        color: colors.CHAROCOAL,
 
       },
       active: {
         background: '#efefef',
-        color: themes.CHAROCOAL,
+        color: colors.CHAROCOAL,
 
       },
       disabled: {
         background: '#F0F0F0',
-        color: lighten(0.6, themes.CHAROCOAL),
+        color: lighten(0.6, colors.CHAROCOAL),
 
         opacity: 0.75,
       },
 
       dropdown: {
-        background: themes.GRAY_LIGHT,
+        background: colors.GRAY_LIGHT,
         selected: {
-          background: themes.GRAY_LIGHT,
+          background: colors.GRAY_LIGHT,
         },
         hover: {
-          background: themes.GRAY_LIGHT,
+          background: colors.GRAY_LIGHT,
         },
       },
       dropdownList: {
@@ -80,7 +80,7 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
         },
       },
       button: {
-        background: themes.GRAY_LIGHT,
+        background: colors.GRAY_LIGHT,
         padding: {
           bottom: 7,
           left: 15,
@@ -88,8 +88,8 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
           top: 7,
         },
         hover: {
-          background: darken(0.1, themes.GRAY_LIGHT),
-          color: themes.CHAROCOAL,
+          background: darken(0.1, colors.GRAY_LIGHT),
+          color: colors.CHAROCOAL,
         },
         focus: {
           boxShadow: 'none',
@@ -195,7 +195,7 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
       },
 
       input: {
-        color: themes.CHAROCOAL,
+        color: colors.CHAROCOAL,
         background: 'transparent',
         padding: {
           bottom: 0,
@@ -256,7 +256,7 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
           background: '#efefef',
         },
         selected: {
-          background: darken(0.1, themes.GRAY_LIGHT),
+          background: darken(0.1, colors.GRAY_LIGHT),
         },
       },
 
