@@ -27,7 +27,7 @@ export const Grid: React.FC<ITable> = React.memo<ITableProps>(({ rows, columns, 
 
   const handleSelectRows = useCallback((row: IRow): void => {
     if (selectedRows.some((el) => el === row)) {
-      const newRows = [...selectedRows].filter((el) => row !== el);
+      const newRows = selectedRows.filter((el) => row !== el);
       changeSelectedRows(newRows);
     } else {
       changeSelectedRows([...selectedRows, row]);

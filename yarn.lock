@@ -2649,18 +2649,6 @@
     typescript "3.5.3"
     vinyl "^2.2.0"
 
-"@xcritical/theme@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@xcritical/theme/-/theme-0.0.1.tgz#7a3b55e60eb35356bda83386ff3a26ab43dea5fe"
-  integrity sha512-A0kBMq0JNwsb8pKa0nv6F0ws2dngY+MIokHknttIwoNCbw7YgvUFYpeHPXnafQnc41LciI1rbMBkan5JhvHm0Q==
-  dependencies:
-    kind-of "^6.0.2"
-    lodash.get "4.x"
-    lodash.isempty "4.x"
-    memoizee "^0.4.14"
-    polished "3.x"
-    utilitify "^1.0.0"
-
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -14303,7 +14291,7 @@ utila@^0.4.0, utila@~0.4:
   resolved "https://registry.yarnpkg.com/utila/-/utila-0.4.0.tgz#8a16a05d445657a3aea5eecc5b12a4fa5379772c"
   integrity sha1-ihagXURWV6Oupe7MWxKk+lN5dyw=
 
-utilitify@^1.0.0, utilitify@^1.0.2:
+utilitify@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/utilitify/-/utilitify-1.0.2.tgz#125613f0ef5ce04606195e850a76de2126c8e586"
   integrity sha512-hVNGN8RevWmc8HxR10/wq851OsMOKyyrnHXeDSGdAzVaPDcrAf9DSsgtI7t1ajIZt8PKadGXAu8Y1kbBfF6ybw==
