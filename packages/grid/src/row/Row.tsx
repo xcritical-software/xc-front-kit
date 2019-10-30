@@ -20,6 +20,7 @@ const getGridRow = ({
   render, field, width, isExpandable,
 }: IColumn) => {
   const cellContent = render ? render(row) : row[field];
+  const { buttonShift, nexLevelLineShift } = theme;
 
   return (
     <StyledCell
@@ -29,12 +30,12 @@ const getGridRow = ({
     >
       {
         isExpandable
-          ? (row.children ? getExpandButton : <RowShift width={ theme.buttonShift } />)
+          ? (row.children ? getExpandButton : <RowShift width={ buttonShift } />)
           : null
       }
       { level > 0 && isExpandable ? (
         <RowShift
-          width={ `${level * theme.nexLevelLineSift}px` }
+          width={ `${level * nexLevelLineShift}px` }
         />
       ) : null }
       <TableDataStyled title={ cellContent } theme={ theme.tableData }>
