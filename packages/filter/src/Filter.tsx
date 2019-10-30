@@ -13,6 +13,8 @@ import {
   FiltersHeader,
   Button,
   SubmitButton,
+  TopPanelTags,
+  TopPanelButtons,
 } from './styled';
 import FilterRow from './FilterRow';
 import Tag from './Tag';
@@ -50,23 +52,24 @@ const Filter: React.SFC<IFilterProps> = ({
 
   return (
     <Wrapper>
+
+
       <TopPanel>
-        <FilterButton onClick={ () => changeOpen(!open) }>
-Filter
-        </FilterButton>
-        { activeFilters.map((filter, id) => (
-          <Tag
-            id={ id }
-            filters={ filters }
-            filter={ filter }
-            name={ name }
-            key={ filter.column + filter.condition + filter.value + filter.key }
-          />
-        )) }
-      </TopPanel>
-      <WrapperFilters open={ open }>
-        <Header>
-          <HeaderTab>Filter</HeaderTab>
+
+        <TopPanelTags>
+          { activeFilters.map((filter, id) => (
+            <Tag
+              id={ id }
+              filters={ filters }
+              filter={ filter }
+              name={ name }
+              key={ filter.column + filter.condition + filter.value + filter.key }
+            />
+          )) }
+        </TopPanelTags>
+
+        <TopPanelButtons>
+          <FilterButton onClick={ () => changeOpen(!open) }>Filter</FilterButton>
           <SubmitButton
             onClick={ () => apply(
               activeFilters
@@ -82,6 +85,14 @@ Filter
           >
             Apply
           </SubmitButton>
+        </TopPanelButtons>
+
+      </TopPanel>
+
+
+      <WrapperFilters open={ open }>
+        <Header>
+          <HeaderTab>Filter</HeaderTab>
         </Header>
 
         <BodyWrapper>
@@ -139,7 +150,6 @@ const mapStateToProps = (
   activeFilters: state.filters[ownProps.name],
   ...ownProps,
 });
-
 
 const mapDispatchToProps = (
   dispatch: Dispatch,

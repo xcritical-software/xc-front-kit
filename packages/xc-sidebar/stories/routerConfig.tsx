@@ -8,16 +8,16 @@ import EarthIcon from 'mdi-react/EarthIcon';
 import BookOpenOutlineIcon from 'mdi-react/BookOpenOutlineIcon';
 
 
-const AffiliatesPage = (): ReactElement => <div style={ { width: '100vw', height: '100vh', backgroundColor: 'rgb(30,230,30)' } }>Affiliates page</div>;
-const LandingsPage = (): ReactElement => <div style={ { width: '100vw', height: '100vh', backgroundColor: 'rgb(30,230,30)' } }>Landings page</div>;
-const StartPage = (): ReactElement => <div style={ { width: '100vw', height: '100vh', backgroundColor: 'rgb(30,130,130)' } }>Start page</div>;
+const AffiliatesPage = (): ReactElement => <div style={ { height: '100vh', backgroundColor: 'rgb(30,230,30)' } }>Affiliates page</div>;
+const LandingsPage = (): ReactElement => <div style={ { height: '100vh', backgroundColor: 'rgb(30,230,30)' } }>Landings page</div>;
+const StartPage = (): ReactElement => <div style={ { height: '100vh', backgroundColor: 'rgb(30,130,130)' } }>Start page</div>;
 
-const ManagersPage = (): ReactElement => <div style={ { width: '100vw', height: '100vh', backgroundColor: 'rgb(230,30,30)' } }>Managers page</div>;
-const RolesPage = (): ReactElement => <div style={ { width: '100vw', height: '100vh', backgroundColor: 'rgb(30,130,30)' } }>Roles page</div>;
-const PayoutsPage = (): ReactElement => <div style={ { width: '100vw', height: '100vh', backgroundColor: 'rgb(100,230,30)' } }>Payouts page</div>;
-const RedirectPage = (): ReactElement => <div style={ { width: '100vw', height: '100vh', backgroundColor: 'rgb(30,30,130)' } }>Redirect page</div>;
-const FailedPage = (): ReactElement => <div style={ { width: '100vw', height: '100vh', backgroundColor: 'rgb(30,30,230)' } }>Failed page</div>;
-const LeadsPage = (): ReactElement => <div style={ { width: '100vw', height: '100vh', backgroundColor: 'rgb(130,130,30)' } }>Leads page</div>;
+const ManagersPage = (): ReactElement => <div style={ { height: '100vh', backgroundColor: 'rgb(230,30,30)' } }>Managers page</div>;
+const RolesPage = (): ReactElement => <div style={ { height: '100vh', backgroundColor: 'rgb(30,130,30)' } }>Roles page</div>;
+const PayoutsPage = (): ReactElement => <div style={ { height: '100vh', backgroundColor: 'rgb(100,230,30)' } }>Payouts page</div>;
+const RedirectPage = (): ReactElement => <div style={ { height: '100vh', backgroundColor: 'rgb(30,30,130)' } }>Redirect page</div>;
+const FailedPage = (): ReactElement => <div style={ { height: '100vh', backgroundColor: 'rgb(30,30,230)' } }>Failed page</div>;
+const LeadsPage = (): ReactElement => <div style={ { height: '100vh', backgroundColor: 'rgb(130,130,30)' } }>Leads page</div>;
 
 
 export const routerConfig = [

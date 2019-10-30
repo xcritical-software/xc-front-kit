@@ -21,6 +21,7 @@ const Input = ({
       style={ { width: '100%' } }
       value={ value }
       onChange={ (e) => handleChange(e.target.value) }
+      defaultValue=""
     />
   );
 };
@@ -42,7 +43,7 @@ const DictionarySelector = ({
   }
 
   return (
-    <select onChange={ (e) => handleChange(e.target.value) }>
+    <select defaultValue={ 0 } onChange={ (e) => handleChange(e.target.value) }>
       { !value && <option selected>Please select...</option> }
       { dictionaries[name]
         && dictionaries[name].map(({ id, name: n }: IDictionary) => (
@@ -61,7 +62,7 @@ const BooleanSelector = ({
 }: IElementProps): ReactElement => {
   if (!isEdit) return <span>{ value }</span>;
   return (
-    <select onChange={ (e) => handleChange(e.target.value) }>
+    <select defaultValue="yes" onChange={ (e) => handleChange(e.target.value) }>
       { !value && <option selected>Please select...</option> }
       <option key="yes" value="yes">
         Yes

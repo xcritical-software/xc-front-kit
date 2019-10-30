@@ -21,15 +21,23 @@ const WrapperTag = styled.div`
   margin-right: 10px;
   margin-left: 10px;
   border: 1px solid black;
-  padding: 2px 5px;
+  padding-left: 5px;
   display: flex;
   align-items: center;
   border-radius: 5px;
+  height: 26px ;
 `;
+
+
 const DeleteButton = styled.button`
   width: 25px;
-  height: 25px;
-  border-radius: 50%;
+  height: 100%;
+  background-color: rgba(0,0,0,0);
+  :hover {
+    background-color: ${({ color }) => color};
+  }
+  border: none;
+  outline: none;
 `;
 
 const WrapperElement = styled.div`
@@ -43,6 +51,7 @@ const WrapperFilter = styled.div`
 `;
 const WrapperButtons = styled.div`
   margin-left: 10px;
+  height: 100%;
 `;
 
 const Tag = ({
@@ -99,6 +108,7 @@ const Tag = ({
                 changeEdit(false);
                 changeFilter({ field: 'value', value, id });
               } }
+              color="#9FF33D"
             >
               OK
             </DeleteButton>
@@ -106,12 +116,13 @@ const Tag = ({
               onClick={ () => {
                 changeValue(filter.value);
               } }
+              color="#FF8D40"
             >
               Can
             </DeleteButton>
           </>
         ) : (
-          <DeleteButton onClick={ () => removeFilter(id) }>X</DeleteButton>
+          <DeleteButton color="#FF0000" onClick={ () => removeFilter(id) }>X</DeleteButton>
         ) }
       </WrapperButtons>
     </WrapperTag>

@@ -87,14 +87,13 @@ export const SubmitButton = styled.button`
 
 export const FilterButton = styled.button`
   font-size: 14px;
-  height: 26px;
+  height: 30px;
   padding: 1px 0;
   line-height: 30px;
   font-size: 14px;
   vertical-align: middle;
   color: #ffffff;
   padding: 0 15px;
-  height: 100%;
   border: none;
   background-color: #4db625;
   cursor: pointer;
@@ -103,8 +102,19 @@ export const FilterButton = styled.button`
 export const TopPanel = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  /* align-items: center; */
+  justify-content: flex-end;
   margin-top: 70px;
   border: 1px solid #c4c4c4;
   background-color: #f7fcef;
+`;
+export const TopPanelTags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: calc(100% - 125px);
+`;
+
+export const TopPanelButtons = styled.div`
+  flex-basis: 120px;
+  display: flex;
 `;
