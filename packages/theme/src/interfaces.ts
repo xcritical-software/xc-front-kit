@@ -16,11 +16,10 @@ export interface IIndentation {
   left?: number;
 }
 
-export interface IFont<T> {
-  fontSize?: T;
-  fontWeight?: number;
-  size?: T;
-  weight?: number;
+export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
+export interface IFont {
+  size?: number | string;
+  weight?: ICSSWideKeyword | 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
   lineHeight?: string;
   lineHeightRatio?: number;
 }
@@ -49,13 +48,14 @@ export interface IStylesBase {
   display?: string;
   background?: string;
   color?: string;
+  fill?: string;
   width?: number | string;
   height?: number | string;
-  padding?: IIndentation;
-  margin?: IIndentation;
-  font?: IFont<number>;
+  padding?: number | string | IIndentation;
+  margin?: number | string |IIndentation;
+  font?: IFont;
   border?: IBorder;
-  borderRadius?: IBorderRadius;
+  borderRadius?: IBorderRadius | number;
   transition?: ITransition;
   opacity?: number;
 }
@@ -81,6 +81,6 @@ export interface IAppearance<T> {
   [namespace: string]: IThemeBase<T>;
 }
 
-export interface IThemeNamespace<T= IStylesBase> {
+export interface IThemeNamespace<T = IStylesBase> {
   [namespace: string]: ITheme<T>;
 }

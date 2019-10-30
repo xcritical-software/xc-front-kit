@@ -43,7 +43,7 @@ const SidebarNavigate = styled.div`
     fill: white;
   }
 
-  a:hover { 
+  a:hover {
     ::before {
       content: " ";
       height: 100%;
@@ -65,14 +65,14 @@ const SidebarNavigate = styled.div`
 
   svg {
     display: inline-block;
-    fill: white;    
+    fill: white;
     margin: 5px 0;
   }
 
   span {
     font-size: 13px;
     font-weight: 500;
-    color: white;    
+    color: white;
     display: block;
   }
 `;
