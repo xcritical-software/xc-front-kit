@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/front-kit",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Front Kit for XCritical projects",
   "workspaces": [
     "packages/*"
