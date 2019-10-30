@@ -16,8 +16,9 @@
   "keywords": [],
   "author": "XCritical Software",
   "license": "MIT",
-  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/item#readme",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/grid#readme",
   "private": false,
+  "publishConfig": { "access": "public" },
   "peerDependencies": {
     "polished": "^3.0.0",
     "prop-types": "^15.0.0",
