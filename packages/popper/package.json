@@ -23,7 +23,6 @@
 		"component",
 		"drop",
 		"tooltip",
-		"popover",
 		"position",
 		"attached",
 		"popper.js",
@@ -48,6 +47,6 @@
 	"dependencies": {
 		"popper.js": "^1.15.0",
 		"raf-schd": "^4.0.0",
-        "utilitify": "^1.0.2"
+    "utilitify": "^1.0.2"
 	}
 }

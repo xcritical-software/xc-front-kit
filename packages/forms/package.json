@@ -14,6 +14,9 @@
     "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
   },
   "keywords": [
+    "forms",
+    "react",
+    "redux"
   ],
   "author": "XCritical Software",
   "license": "MIT",
