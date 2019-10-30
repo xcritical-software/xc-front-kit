@@ -13,19 +13,16 @@
     "type": "git",
     "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "XCritical Software",
   "license": "MIT",
   "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/<package_name>#readme",
   "publishConfig": {
-		"access": "public"
-	},
-	"private": false,
+    "access": "public"
+  },
+  "private": false,
   "peerDependencies": {
-    "hoist-non-react-statics": "^3.3.0",
-    "react": "^16.8.3",
-    "prop-types": "^15.0.0"
+    "react": "^16.8.3"
   },
   "dependencies": {}
 }

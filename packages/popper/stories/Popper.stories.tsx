@@ -37,27 +37,27 @@ const StyledRow = styled.div`
   align-items: center;
 `;
 
-const alignmentContainer: any = {
-  position: 'relative',
-  height: '100px',
-  width: '100px',
-  backgroundColor: '#eee',
-  display: 'inline-block',
-  margin: '25px 0px',
-};
+const AlignmentContainer = styled.div`
+  position: relative;
+  height: 100px;
+  width: 100px;
+  background-color: #eee;
+  display: inline-block;
+  margin: 25px 0;
+`;
 
-const content = <div style={ layerStyles }>LayerContent</div>;
+const Content = (): React.ReactElement => <div style={ layerStyles }>LayerContent</div>;
 
 const ExampleAlignment = (props: IPopperProps): React.ReactElement => (
   <Popper
     { ...props }
-    content={ (
+    content={ () => (
       <div style={ { background: '#fca' } }>
         { props.position }
       </div>
     ) }
   >
-    <div style={ alignmentContainer } />
+    <AlignmentContainer />
   </Popper>
 );
 
@@ -100,10 +100,10 @@ storiesOf('Popper', module)
       >
         <div style={ { width: '500px', height: '500px' } }>
           <Popper
-            content={ content }
-            position="right middle"
             autoFlip
-            boundariesElement="scrollParent"
+            content={ Content }
+            position="right middle"
+            modifiers={ { flip: { boundariesElement: 'scrollParent' } } }
           >
             <div style={ targetStyle }>Target</div>
           </Popper>
