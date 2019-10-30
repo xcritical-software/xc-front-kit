@@ -48,9 +48,10 @@ jobs:
       before_deploy:
         - yarn build:storybook
       deploy:
-        provider: pages
-        skip-cleanup: true 
-        github_token: $GH_TOKEN
+        provider: pages:git
+        edge: true
+        cleanup: true 
+        token: $GITHUB_TOKEN
         local_dir: .storybook-static
         repo: xcritical-software/xc-front-kit
         target_branch: gh-pages
