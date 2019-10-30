@@ -16,7 +16,7 @@ import { convertToOptions, findOptionByValue, themeConverter } from './utils';
 import { SelectProps, ISelectTheme } from './interfaces';
 
 
-export const PureSelect = ({
+export const PureSelect: React.FC<SelectProps> = ({
   className,
   disabled = false,
   isMulti = false,
@@ -36,7 +36,7 @@ export const PureSelect = ({
     [selectThemeNamespace]: selectThemeStyle,
   },
   ...rest
-}: SelectProps): React.ReactElement<SelectProps> => {
+}) => {
   const themeContext = useContext<IThemeNamespace<ISelectTheme>>(ThemeContext);
   const innerTheme = theme || themeContext;
 

@@ -87,7 +87,8 @@ export interface ILabelTextCssTheme extends ISelectCssTheme {
   postfixSpacing?: number;
 }
 
-export type ISelectTheme = ISelectCssTheme & ISubComponents;
+export interface ISelectTheme extends ISelectCssTheme, ISubComponents {
+}
 
 export interface IReturnFunction< TValue> {
   (theme: IThemeNamespace<SelectTheme>, appearance: string, baseAppearance: string): TValue;
