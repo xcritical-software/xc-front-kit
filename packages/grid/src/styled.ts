@@ -80,7 +80,7 @@ export const TableHead = styled.div<ITableTheme>`
 
 export const TableWrapper = styled.div`
   height: calc(100% - 25px);
-  overflow: scroll;
+  overflow: auto;
 
   ::-webkit-scrollbar { width: 10px; height: 10px;};
   ::-webkit-scrollbar-button {  background-color: #FFF; width: 0px; height: 0px;}
