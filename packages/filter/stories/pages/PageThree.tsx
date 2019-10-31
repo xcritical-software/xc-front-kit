@@ -27,13 +27,20 @@ const PageThree: React.FC<IPage> = ({ filters, dictionaries }) => {
         { pageName }
       </h1>
       <Filter filters={ mappedFilters } name={ pageName } />
+      <div style={ { backgroundColor: 'red', height: '100px' } } />
+      <div style={ { backgroundColor: 'orange', height: '100px' } } />
+      <div style={ { backgroundColor: 'yellow', height: '100px' } } />
+      <div style={ { backgroundColor: 'green', height: '100px' } } />
+      <div style={ { backgroundColor: 'blue', height: '100px' } } />
+      <div style={ { backgroundColor: 'indigo', height: '100px' } } />
     </>
   );
 };
 
-const mapStateToProps = (state: any): IPage => ({
+const mapStateToProps = (state: any, { theme }: any): IPage => ({
   filters: state.config.columns,
   dictionaries: state.config.dictionaries,
+  theme,
 });
 
 export const PageThreeContainer = connect(mapStateToProps)(PageThree);

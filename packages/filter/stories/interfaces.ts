@@ -1,6 +1,10 @@
+import { IThemeNamespace } from '@xcritical/theme';
+
+
 export interface IPage {
   filters: IMappedFilter[];
   dictionaries: IDictionary[];
+  theme?: IThemeNamespace;
 }
 
 export interface IMappedFilter {

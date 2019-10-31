@@ -38,5 +38,6 @@
     "mdi-react": "^6.2.0"
   },
 	"dependencies": {
+    "@xcritical/theme": "^0.0.1"
 	}
 }

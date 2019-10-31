@@ -31,9 +31,10 @@ const PageTwo: React.FC<IPage> = ({ filters, dictionaries }) => {
   );
 };
 
-const mapStateToProps = (state: any): IPage => ({
+const mapStateToProps = (state: any, { theme }: any): IPage => ({
   filters: state.config.columns,
   dictionaries: state.config.dictionaries,
+  theme,
 });
 
 export const PageTwoContainer = connect(mapStateToProps)(PageTwo);

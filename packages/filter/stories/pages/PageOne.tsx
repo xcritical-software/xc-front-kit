@@ -7,7 +7,7 @@ import { IPage, IMappedFilter, IFilter } from '../interfaces';
 
 
 const pageName = 'one';
-const PageOne: React.FC<IPage> = ({ filters, dictionaries }) => {
+const PageOne: React.FC<IPage> = ({ filters, dictionaries, theme }) => {
   const mappedFilters: IFilter[] = filters
     ? filters
       .sort((a: IMappedFilter, b: IMappedFilter) => (a.displayName > b.displayName ? 1 : -1))
@@ -26,14 +26,15 @@ const PageOne: React.FC<IPage> = ({ filters, dictionaries }) => {
         Page
         { pageName }
       </h1>
-      <Filter filters={ mappedFilters } name={ pageName } />
+      <Filter filters={ mappedFilters } name={ pageName } theme={ theme } />
     </>
   );
 };
 
-const mapStateToProps = (state: any): IPage => ({
+const mapStateToProps = (state: any, { theme }: any): IPage => ({
   filters: state.config.columns,
   dictionaries: state.config.dictionaries,
+  theme,
 });
 
 export const PageOneContainer = connect(mapStateToProps)(PageOne);

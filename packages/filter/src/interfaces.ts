@@ -1,3 +1,10 @@
+import { IThemeNamespace } from '@xcritical/theme';
+import { IFilterTheme } from './utils';
+
+
+export interface IFilterTag extends IFilterRow {
+  theme: IFilterTheme;
+}
 export interface IFilterRow {
   filters: IFilter[];
   filter: IFilterFromStore;
@@ -29,6 +36,10 @@ interface IFilterFromStore {
   key: string;
 }
 
+export interface IFilterTagProps extends IFilterRowProps {
+  theme: IFilterTheme;
+}
+
 export interface IFilterRowProps {
   id: number;
   filters: IFilter[];
@@ -54,6 +65,7 @@ export interface IState {
 export interface IFilterRecivedProps {
   filters: IFilter[];
   name: string;
+  theme?: IThemeNamespace;
 }
 
 export interface IFilterProps {
@@ -64,6 +76,7 @@ export interface IFilterProps {
   openFilters: Function;
   name: string;
   resetFilters: Function;
+  theme?: IThemeNamespace;
 }
 
 export interface IAction {

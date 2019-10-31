@@ -2,37 +2,23 @@ import styled from 'styled-components';
 
 
 export const Wrapper = styled.div`
-  border: 1px solid #a5c2d8;
 `;
 
 interface IWrapperFilters {
   open: boolean;
+  top: number;
 }
+
 
 export const WrapperFilters = styled.div<IWrapperFilters>`
   background-color: #deedf9;
   min-height: ${({ open }) => (open ? '300px' : '0px')};
   display: ${({ open }) => (open ? 'block' : 'none')};
+  position: absolute;
+  width: 100%;
+  top: ${({ top }) => (top ? `${top + 36}px` : 'none')};
 `;
 
-export const Header = styled.div`
-  height: 30px;
-  background-color: #eef5fc;
-`;
-
-export const HeaderTab = styled.button`
-  background-color: #eef5fc;
-  color: #878787;
-  height: 30px;
-  padding: 5px 16px;
-  font-size: 12px;
-  border: none;
-  border-bottom: none;
-  border-right: 1px solid #a5c2d8;
-  :focus {
-    outline: none;
-  }
-`;
 
 export const BodyWrapper = styled.div`
   height: 100%;
@@ -79,25 +65,6 @@ export const RowWrapper = styled.div`
   margin-bottom: 15px;
 `;
 
-export const SubmitButton = styled.button`
-  float: right;
-  height: 30px;
-  padding: 5px 10px;
-`;
-
-export const FilterButton = styled.button`
-  font-size: 14px;
-  height: 30px;
-  padding: 1px 0;
-  line-height: 30px;
-  font-size: 14px;
-  vertical-align: middle;
-  color: #ffffff;
-  padding: 0 15px;
-  border: none;
-  background-color: #4db625;
-  cursor: pointer;
-`;
 
 export const TopPanel = styled.div`
   display: flex;
@@ -106,15 +73,26 @@ export const TopPanel = styled.div`
   justify-content: flex-end;
   margin-top: 70px;
   border: 1px solid #c4c4c4;
-  background-color: #f7fcef;
+  background-color: ${({ theme: { backgroundTopPanel } }) => backgroundTopPanel};
 `;
 export const TopPanelTags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  flex-basis: calc(100% - 125px);
+  flex-basis: calc(100% - 200px);
+  padding-top: 4px;
 `;
 
 export const TopPanelButtons = styled.div`
-  flex-basis: 120px;
+  flex:  0 0 0;
+  height: 36px ;
   display: flex;
+`;
+
+export const WrapperFilterButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 300px; 
+  margin-left: 50px; 
+  margin-bottom: 30px; 
+  margin-top: 30px;
 `;
