@@ -1,103 +1,43 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withTheme } from 'styled-components';
 
+import { useCallback } from '@storybook/addons';
 import {
   Root,
   Prefix,
   Suffix,
   StyledInput,
 } from './styled/Input';
+import { IInputProps } from './interfaces';
 
-
-const propTypes = {
-  className: PropTypes.string,
-  appearance: PropTypes.string,
-  baseAppearance: PropTypes.string,
-  id: PropTypes.string,
-  name: PropTypes.string,
-  placeholder: PropTypes.string,
-  prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  suffix: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  autoComplete: PropTypes.string,
-  autoFocus: PropTypes.bool,
-  type: PropTypes.string,
-  value: PropTypes.any,
-  disabled: PropTypes.bool,
-  selected: PropTypes.bool,
-  invalid: PropTypes.bool,
-  maxLength: PropTypes.number,
-  isRTL: PropTypes.bool,
-  isDivided: PropTypes.bool,
-  pattern: PropTypes.instanceOf(RegExp),
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onValidate: PropTypes.func,
-};
-
-const defaultProps = {
-  className: '',
-  appearance: 'default',
-  baseAppearance: 'default',
-  id: '',
-  name: '',
-  placeholder: '',
-  prefix: null,
-  suffix: null,
-  type: 'text',
-  value: '',
-  autoFocus: false,
-  autoComplete: 'on',
-  disabled: false,
-  selected: false,
-  invalid: false,
-  maxLength: Infinity,
-  isRTL: false,
-  isDivided: false,
-  pattern: null,
-  onChange: () => {},
-  onFocus: () => {},
-  onBlur: () => {},
-  onValidate: () => {},
-};
-
-export const PureInput = ({
+export const PureInput: React.FC<IInputProps> = ({
   className,
-  appearance,
-  baseAppearance,
-  id,
-  name,
-  placeholder,
+  appearance = 'default',
+  baseAppearance = 'default',
   prefix,
-  suffix,
-  type,
-  value,
-  autoFocus,
-  autoComplete,
-  maxLength,
-  isRTL,
-  isDivided,
-  disabled,
-  selected,
-  invalid,
+  postfix,
+  isRTL = false,
+  isDivided = false,
+  disabled = false,
+  invalid = false,
   pattern,
   onChange,
-  onFocus,
-  onBlur,
   onValidate,
+  type = 'text',
+  autoComplete = 'on',
   ...rest
 }) => {
-  const inputOnChange = (e) => {
-    if (onValidate && pattern) {
-      onValidate(pattern.test(e.target.value));
-    }
+  const inputOnChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (onValidate && pattern) {
+        onValidate(RegExp(pattern).test(e.target.value));
+      }
 
-    if (onChange) {
-      onChange(e.target.value);
-    }
-  };
+      if (onChange) {
+        onChange(e.target.value, e);
+      }
+    }, [onChange, onValidate, pattern],
+  );
 
   return (
     <Root
@@ -106,7 +46,6 @@ export const PureInput = ({
       baseAppearance={ baseAppearance }
       isRTL={ isRTL }
       disabled={ disabled }
-      selected={ selected }
       invalid={ invalid }
     >
       { !!prefix && (
@@ -122,41 +61,27 @@ export const PureInput = ({
       <StyledInput
         appearance={ appearance }
         baseAppearance={ baseAppearance }
-        id={ id }
-        name={ name }
-        placeholder={ placeholder }
-        type={ type }
-        autoComplete={ autoComplete }
-        autoFocus={ autoFocus }
-        value={ value }
-        maxLength={ maxLength }
         isRTL={ isRTL }
         isDivided={ isDivided }
         disabled={ disabled }
-        selected={ selected }
         invalid={ invalid }
         hasPrefix={ !!prefix }
-        hasSuffix={ !!suffix }
+        hasSuffix={ !!postfix }
         onChange={ inputOnChange }
-        onFocus={ onFocus }
-        onBlur={ onBlur }
+        type={ type }
+        autoComplete={ autoComplete }
         { ...rest }
       />
-      { !!suffix && (
+      { !!postfix && (
         <Suffix
           appearance={ appearance }
           baseAppearance={ baseAppearance }
           isRTL={ isRTL }
           isDivided={ isDivided }
         >
-          { suffix }
+          { postfix }
         </Suffix>
       ) }
     </Root>
   );
 };
-
-PureInput.propTypes = propTypes;
-PureInput.defaultProps = defaultProps;
-
-export const Input = withTheme(PureInput);

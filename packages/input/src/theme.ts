@@ -1,11 +1,12 @@
-import * as colors from '@xcritical/theme';
+import { colors, ITheme } from '@xcritical/theme';
 
 import { generateApperance } from './utils/themeTools';
+import { InputTheme } from './interfaces';
 
 
-export const inputThemeNamespace = '@xcritical\\xc-input';
+export const inputThemeNamespace = '@xcritical\\input';
 
-export const inputThemeStyle = {
+export const inputThemeStyle: ITheme<InputTheme> = {
   background: colors.GRAY_LIGHT,
   color: colors.CHAROCOAL,
   prefixSpacing: 5,

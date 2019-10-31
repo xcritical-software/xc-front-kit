@@ -1,10 +1,19 @@
 import { darken } from 'polished';
+import { InputTheme } from '../interfaces';
 
 
 export const generateApperance = ({
-  background, color, height, boxShadowColor, padding, font, border, borderRadius, transition,
-}) => ({
-  background,
+  background, 
+  color, 
+  height, 
+  boxShadowColor, 
+  padding, 
+  font, 
+  border, 
+  borderRadius, 
+  transition,
+}: any): InputTheme  => ({
+  backgroundColor: background,
   color,
   height,
   boxShadowColor: boxShadowColor || darken(0.95, background),
@@ -14,7 +23,7 @@ export const generateApperance = ({
   borderRadius,
   transition,
   hover: {
-    background: darken(0.1, background),
+    backgroundColor: darken(0.1, background),
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),
@@ -25,7 +34,7 @@ export const generateApperance = ({
     transition,
   },
   focus: {
-    background: darken(0.1, background),
+    backgroundColor: darken(0.1, background),
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),
@@ -36,7 +45,7 @@ export const generateApperance = ({
     transition,
   },
   selected: {
-    background: darken(0.1, background),
+    backgroundColor: darken(0.1, background),
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),
@@ -47,7 +56,7 @@ export const generateApperance = ({
     transition,
   },
   active: {
-    background: darken(0.1, background),
+    backgroundColor: darken(0.1, background),
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),
@@ -58,7 +67,7 @@ export const generateApperance = ({
     transition,
   },
   disabled: {
-    background,
+    backgroundColor,
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),
@@ -69,7 +78,7 @@ export const generateApperance = ({
     transition,
   },
   invalid: {
-    background,
+    backgroundColor,
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),

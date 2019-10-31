@@ -1,11 +1,12 @@
-import { Input, PureInput } from './Input';
+import { PureInput } from './Input';
 import { inputThemeNamespace, inputThemeStyle } from './theme';
 
 
+export * from './interfaces';
+
 export {
-  PureInput,
   inputThemeNamespace,
   inputThemeStyle,
 };
 
-export default Input;
+export default PureInput;

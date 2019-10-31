@@ -14,6 +14,7 @@ import {
   getRootInputInteractiveStyles,
   getPrefixSuffixStyles,
 } from '../utils';
+import { IInputProps } from '../interfaces';
 
 
 const styles = css`
@@ -32,7 +33,7 @@ const inputStyles = css`
   ${(props) => getBackgroundStyle(props, 'control')}
 `;
 
-export const Root = styled.div`
+export const Root = styled.div<IInputProps>`
   ${styles}
   ${rootStyles}
   ${getBorderStyle}
@@ -43,7 +44,7 @@ export const Root = styled.div`
   flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-start;
-  ${(props) => props.css}
+  ${({ css: cssInner }) => (cssInner || null)}
 `;
 
 const PrefixSuffixBase = styled.span`
@@ -65,7 +66,7 @@ export const Suffix = styled(PrefixSuffixBase)`
   ${(props) => getWidthStyle(props, 'suffix')}
 `;
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.input<IInputProps>`
   ${rootStyles}
   ${inputStyles}
   ${(props) => getPaddingStyle(props, 'control')}

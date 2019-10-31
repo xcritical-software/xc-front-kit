@@ -4,20 +4,22 @@ import memoize from 'memoizee';
 import {
   getAppearanceTheme,
   getStatesTheme,
+  IReturnThemeFunction,
 } from '@xcritical/theme';
 
 import {
   inputThemeNamespace,
   inputThemeStyle,
 } from '../theme';
+import { InputTheme } from '../interfaces';
 
 
 export const inputTheme = (
-  theme,
-  appearanceName,
-  baseAppearance,
-  propertyPath,
-) => {
+  theme: IThemeNamespace<InputTheme> = {},
+  appearanceName: string,
+  baseAppearance: string,
+  propertyPath?: string | string[],
+): InputTheme | any  => {
   const func = getAppearanceTheme(inputThemeNamespace, inputThemeStyle);
   return func(theme, appearanceName, propertyPath, baseAppearance);
 };
@@ -28,11 +30,12 @@ const getAppearanceStyleProperty = (theme, appearance, baseAppearance, stateName
   return statesTheme();
 };
 
-export const getBackgroundStyle = memoize(({
+export const getBackgroundStyle: IReturnThemeFunction<InputTheme> = memoize((
   theme,
   appearance,
   baseAppearance,
-}, elementName) => {
+  elementName,
+) => {
   const element = inputTheme(theme, appearance, baseAppearance, elementName);
 
   const background = (element && element.background)
@@ -43,11 +46,11 @@ export const getBackgroundStyle = memoize(({
   `;
 });
 
-export const getColorStyle = memoize(({
+export const getColorStyle: IReturnThemeFunction<InputTheme> = memoize((
   theme,
   appearance,
   baseAppearance,
-}, elementName) => {
+ elementName) => {
   const element = inputTheme(theme, appearance, baseAppearance, elementName);
 
   const color = (element && element.color)
@@ -58,7 +61,7 @@ export const getColorStyle = memoize(({
   `;
 });
 
-export const getPaddingStyle = memoize(({
+export const getPaddingStyle: IReturnThemeFunction<InputTheme> = memoize((
   theme,
   appearance,
   baseAppearance,
@@ -66,7 +69,7 @@ export const getPaddingStyle = memoize(({
   isDivided,
   hasPrefix,
   hasSuffix,
-}, elementName) => {
+ elementName) => {
   const {
     bottom = 0,
     left = 0,
@@ -122,11 +125,11 @@ export const getPaddingStyle = memoize(({
   `;
 });
 
-export const getWidthStyle = memoize(({
+export const getWidthStyle: IReturnThemeFunction<InputTheme> = memoize((
   theme,
   appearance,
   baseAppearance,
-}, elementName) => {
+ elementName) => {
   const element = inputTheme(theme, appearance, baseAppearance, elementName);
 
   let finalWidth;
@@ -145,11 +148,11 @@ export const getWidthStyle = memoize(({
   `;
 });
 
-export const getHeightStyle = memoize(({
+export const getHeightStyle: IReturnThemeFunction<InputTheme> = memoize((
   theme,
   appearance,
   baseAppearance,
-}, elementName) => {
+ elementName) => {
   const element = inputTheme(theme, appearance, baseAppearance, elementName);
 
   let finalHeight;
@@ -168,11 +171,11 @@ export const getHeightStyle = memoize(({
   `;
 });
 
-export const getFontStyle = memoize(({
+export const getFontStyle = memoize((
   theme,
   appearance,
   baseAppearance,
-}, elementName) => {
+ elementName) => {
   const {
     weight,
     size,
@@ -192,11 +195,11 @@ export const getFontStyle = memoize(({
   `;
 });
 
-export const getBorderStyle = memoize(({
+export const getBorderStyle: IReturnThemeFunction<InputTheme> = memoize((
   theme,
   appearance,
   baseAppearance,
-}) => {
+) => {
   const {
     width,
     style,
@@ -208,14 +211,14 @@ export const getBorderStyle = memoize(({
   `;
 });
 
-export const getBorderRadiusStyle = memoize(({
+export const getBorderRadiusStyle: IReturnThemeFunction<InputTheme> = memoize((
   theme,
   appearance,
   baseAppearance,
   isRTL,
   hasPrefix,
   hasSuffix,
-}) => {
+) => {
   const {
     topLeft = 0,
     topRight = 0,
@@ -252,7 +255,7 @@ export const getBorderRadiusStyle = memoize(({
   `;
 });
 
-export const getTransitionStyle = memoize(({
+export const getTransitionStyle: IReturnThemeFunction<InputTheme> = memoize(({
   theme,
   appearance,
   baseAppearance,
@@ -272,7 +275,7 @@ export const getTransitionStyle = memoize(({
   `;
 });
 
-const getFontAppearanceStyle = memoize((font = {}) => {
+const getFontAppearanceStyle: IReturnThemeFunction<InputTheme> = memoize((font = {}) => {
   const { weight, size, lineHeightRatio } = font;
 
   return css`

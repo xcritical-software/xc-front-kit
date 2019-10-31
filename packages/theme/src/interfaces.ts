@@ -84,3 +84,12 @@ export interface IAppearance<T> {
 export interface IThemeNamespace<T = IStylesBase> {
   [namespace: string]: ITheme<T>;
 }
+
+export interface IReturnThemeFunction<T, TProp = [], TValue = any> {
+  (
+    theme: IThemeNamespace<ITheme<T>>,
+    appearance: string,
+    baseAppearance: string,
+    ...props: TProp[]
+  ): TValue;
+}
