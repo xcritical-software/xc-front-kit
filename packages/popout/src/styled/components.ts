@@ -13,9 +13,9 @@ export const Blanket = styled.div`
 
 export const Menu = styled.div`
   background-color: white;
-  border-radius: 4;
+  border-radius: 4px;
   box-shadow: 0 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.1);
-  margin-top: 8;
+  margin-top: 8px;
   position: absolute;
   z-index: 2;
 `;

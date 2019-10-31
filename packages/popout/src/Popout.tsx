@@ -1,18 +1,22 @@
-import React, { Component, useState } from 'react';
-import Button from '@xc-front-kit/button';
-
-import Select from '@xc-front-kit/select';
-import { Dropdown, ChevronDown } from './styled';
+import React, { useState } from 'react';
+import Button from '@xcritical/button';
+import Select, { SelectProps } from '@xcritical/select';
+import get from 'lodash.get';
+import {
+  Dropdown, ChevronDown, ChevronUp, DropdownIndicator,
+} from './styled';
 
 
 const selectStyles = {
-  control: (provided) => ({ ...provided, minWidth: 240, margin: 8 }),
+  control: (provided: any) => ({ ...provided, minWidth: 240, margin: 8 }),
   menu: () => ({ boxShadow: 'inset 0 1px 0 rgba(0, 0, 0, 0.1)' }),
 };
 
-const PopoutExample = ({
-  items: any,
-}: any) => {
+const Popout: React.FC<SelectProps> = ({
+  disabled,
+  items,
+  theme = {},
+}) => {
   const [stateValue, setStateValue] = useState<any>();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +26,7 @@ const PopoutExample = ({
   };
   const onSelectChange = (value: any) => {
     toggleOpen();
-    setStateValue(value);
+    setStateValue(get(items, [value]));
   };
 
   return (
@@ -31,21 +35,27 @@ const PopoutExample = ({
       onClose={ toggleOpen }
       target={ (
         <Button
-          iconAfter={ <ChevronDown /> }
+          disabled={ disabled }
+          baseAppearance="test-1"
+          appearance="test-2"
+          postfix={ isOpen ? <ChevronUp /> : <ChevronDown /> }
+          prefix={ stateValue ? stateValue.prefix : null }
           onClick={ toggleOpen }
-          isSelected={ isOpen }
+          selected={ isOpen }
+          theme={ theme }
         >
-          { stateValue ? `State: ${stateValue.label}` : 'Select a State' }
+          { stateValue ? stateValue.name : 'Select a State' }
         </Button>
       ) }
     >
       <Select
         autoFocus
         backspaceRemovesValue={ false }
-        components={ { IndicatorSeparator: null } }
+        components={ { DropdownIndicator, IndicatorSeparator: null } }
         controlShouldRenderValue={ false }
         hideSelectedOptions={ false }
         isClearable={ false }
+        isSearchable
         menuIsOpen
         onChange={ onSelectChange }
         items={ items }
@@ -58,4 +68,4 @@ const PopoutExample = ({
   );
 };
 
-export default PopoutExample;
+export default Popout;
