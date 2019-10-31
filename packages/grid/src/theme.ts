@@ -51,7 +51,6 @@ export const tableTheme = {
   rowSwitchButtonSize: '20',
   tableData: {
     textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
   },
 };
 

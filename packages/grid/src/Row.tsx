@@ -5,7 +5,11 @@ import React, {
 import PlusBoxOutlineIcon from 'mdi-react/PlusBoxOutlineIcon';
 import MinusBoxOutlineIcon from 'mdi-react/MinusBoxOutlineIcon';
 import {
-  StyledCell, RowStyled, ToggleButton, RowShift, TableDataStyled,
+  StyledCell,
+  RowStyled,
+  ToggleButton,
+  RowShift,
+  TableDataStyled,
 } from './styled';
 import {
   IColumn, IRow, IRowData,
@@ -15,9 +19,15 @@ import {
 const getGridRow = ({
   columns,
   row,
-  theme, level, getExpandButton,
+  theme,
+  level,
+  getExpandButton,
+  multiline,
 }: any): ReactElement[] => columns.map(({
-  render, field, width, isExpandable,
+  render,
+  field,
+  width,
+  isExpandable,
 }: IColumn) => {
   const cellContent = render ? render(row) : row[field];
   const { buttonShift, nexLevelLineShift } = theme;
@@ -38,7 +48,11 @@ const getGridRow = ({
           width={ `${level * nexLevelLineShift}px` }
         />
       ) : null }
-      <TableDataStyled title={ cellContent } theme={ theme.tableData }>
+      <TableDataStyled
+        title={ cellContent }
+        multiline={ multiline }
+        theme={ theme.tableData }
+      >
         { cellContent }
       </TableDataStyled>
     </StyledCell>
@@ -51,6 +65,7 @@ export const Row: React.FC<IRow> = React.memo<IRow>(({
   theme,
   level,
   handleSelectRows,
+  multiline,
 }) => {
   const { rowSwitchButtonSize } = theme;
   const [expand, changeExpand] = useState(false);
@@ -96,7 +111,8 @@ export const Row: React.FC<IRow> = React.memo<IRow>(({
     theme,
     level,
     getExpandButton,
-  }), [columns, getExpandButton, level, row, theme]);
+    multiline,
+  }), [columns, getExpandButton, level, multiline, row, theme]);
 
   return (
     <>

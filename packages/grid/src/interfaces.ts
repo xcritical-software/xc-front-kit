@@ -35,7 +35,7 @@ interface IHead {
 
 export interface ITableData {
   textOverflow?: string;
-  whiteSpace?: string;
+  multiline?: boolean;
 }
 
 export interface ITableTheme extends ITheme {
@@ -69,6 +69,8 @@ export interface ITable {
   rows: object[];
   columns: IColumn[];
   theme?: IThemeNamespace;
+  multiline?: boolean;
+
 }
 
 
@@ -76,6 +78,7 @@ export interface ITableProps {
   rows: object[];
   columns: IColumn[];
   theme?: IThemeNamespace;
+  multiline?: boolean;
 }
 
 export interface IRow {
@@ -87,6 +90,7 @@ export interface IRow {
   handleSelectRows: Function;
   getSelectedRows?: Function;
   id?: string | number;
+  multiline?: boolean;
 }
 
 export interface IStyledCell {

@@ -125,8 +125,7 @@ export const RowShift = styled.div<IRowShift>`
   `;
 
 export const TableDataStyled = styled.span<ITableData>`
-    word-wrap: ${({ theme: { wordWrap } }) => wordWrap};
     overflow: hidden;
     text-overflow: ${({ theme: { textOverflow } }) => textOverflow};
-    white-space: ${({ theme: { whiteSpace } }) => whiteSpace}
+    white-space: ${({ multiline }) => (multiline ? '' : 'nowrap')};
   `;

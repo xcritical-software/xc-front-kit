@@ -11,7 +11,12 @@ import {
 import { gridTheme } from './utils/get-styles';
 
 
-export const Grid: React.FC<ITable> = React.memo<ITableProps>(({ rows, columns, theme = {} }) => {
+export const Grid: React.FC<ITable> = React.memo<ITableProps>(({
+  rows,
+  columns,
+  theme = {},
+  multiline = false,
+}) => {
   const [selectedRows, changeSelectedRows] = useState<IRow[] | []>([]);
 
   const tableWrapperElement = React.createRef<HTMLDivElement>();
@@ -68,6 +73,7 @@ export const Grid: React.FC<ITable> = React.memo<ITableProps>(({ rows, columns, 
               theme={ themeRef.current }
               level={ 0 }
               handleSelectRows={ handleSelectRows }
+              multiline={ multiline }
             />
           )) }
         </TableStyled>

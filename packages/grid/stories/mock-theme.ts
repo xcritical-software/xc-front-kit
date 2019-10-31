@@ -10,14 +10,6 @@ export const mockTheme: IThemeNamespace<ITableTheme> = {
   },
 };
 
-export const multilineTheme: IThemeNamespace<ITableTheme> = {
-  [gridThemeNamespace]: {
-    tableData: {
-      whiteSpace: 'normal',
-    },
-  },
-};
-
 export const withoutColorLines: IThemeNamespace<ITableTheme> = {
   [gridThemeNamespace]: {
     evenRowColor: '',
