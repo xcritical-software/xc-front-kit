@@ -9,21 +9,43 @@ import {
 } from './interfaces';
 
 
-export const StyledCell = styled.div<IStyledCell>`
-   padding: ${({
-    theme: {
-      padding: {
-        top, right, bottom, left,
-      },
+const getBorder = (borderName: string) => ({
+  theme:
+  {
+    [borderName]:
+    {
+      width,
+      color,
+      style,
     },
-  }): string => `${top} ${right} ${bottom} ${left}`};
+  },
+}: any): string => `${width} ${color} ${style}`;
+
+const getPadding = ({
+  theme: {
+    padding: {
+      top,
+      right,
+      bottom,
+      left,
+    },
+  },
+}:
+{theme: {padding:
+{
+  top: string;
+  right: string;
+  bottom: string;
+  left: string;}; };}): string => `${top} ${right} ${bottom} ${left}`;
+
+export const StyledCell = styled.div<IStyledCell>`
+   padding: ${getPadding};
   overflow: hidden;
   box-sizing: border-box;
   font-size: ${({ theme: { font: { size } } }): string => `${size}`};
   font-weight: ${({ theme: { font: { weight } } }): string => `${weight}`};
   color: ${({ theme: { font: { color } } }): string => `${color}`};
-  border-right: ${({ theme: { borderRight: { width, color, style } } }): string => `${width} ${color} ${style}`};
-  font-family: inherit;
+  border-right: ${getBorder('borderRight')};
   width: ${({ width }): string => `${width}px`};
   box-sizing: border-box;
   display: flex;
@@ -32,15 +54,7 @@ export const StyledCell = styled.div<IStyledCell>`
 
 
 export const HeaderStyled = styled.div<IStyledHead>`
-   padding: ${({
-    theme: {
-
-      padding: {
-        top, right, bottom, left,
-      },
-
-    },
-  }): string => `${top} ${right} ${bottom} ${left}`};
+   padding: ${getPadding};
   width: ${({ width }): string => `${width}px`};
   text-align: left;
   font-family: inherit;
@@ -54,7 +68,6 @@ export const HeaderStyled = styled.div<IStyledHead>`
   font-size: ${({ theme: { font: { size } } }): string => `${size}`};
   font-weight: ${({ theme: { font: { weight } } }): string => `${weight}`};
   color: ${({ theme: { font: { color } } }): string => `${color}`};
-
   font-family: inherit;
 `;
 
@@ -75,7 +88,7 @@ export const TableStyled = styled.div`
 
 export const TableHead = styled.div<ITableTheme>`
   display: flex;
-  border-bottom: ${({ theme: { headBorderBottom: { width, color, style } } }): string => `${width} ${color} ${style}`};
+  border-bottom: ${getBorder('headBorderBottom')};
 `;
 
 export const TableWrapper = styled.div`
