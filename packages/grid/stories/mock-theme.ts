@@ -17,3 +17,9 @@ export const multilineTheme: IThemeNamespace<ITableTheme> = {
     },
   },
 };
+
+export const withoutColorLines: IThemeNamespace<ITableTheme> = {
+  [gridThemeNamespace]: {
+    evenRowColor: '',
+  },
+};

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
 import Grid from '../src';
-import { mockTheme, multilineTheme } from './mock-theme';
+import { mockTheme, multilineTheme, withoutColorLines } from './mock-theme';
 import { generateMockData } from './generateMocks';
 
 
@@ -31,6 +31,15 @@ storiesOf('Grid', module)
       <Grid
         columns={ columns }
         rows={ rows }
+      />
+    </Div>
+  ))
+  .add('Without Color Lines', () => (
+    <Div>
+      <Grid
+        columns={ columns }
+        rows={ rows }
+        theme={ withoutColorLines }
       />
     </Div>
   ))
