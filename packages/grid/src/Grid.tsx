@@ -50,7 +50,6 @@ export const Grid: React.FC<ITable> = React.memo<ITableProps>(({
         <TableHead style={ { transform: `translateX(-${tableScroll}px)` } } theme={ themeRef.current }>
           { columns.map(({ title, width }: IColumn) => (
             <HeaderStyled
-              // columnName={ title }
               width={ width }
               key={ title }
               theme={ themeRef.current.head }
