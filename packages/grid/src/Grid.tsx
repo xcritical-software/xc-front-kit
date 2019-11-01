@@ -18,7 +18,6 @@ export const Grid: React.FC<ITable> = React.memo<ITableProps>(({
   multiline = false,
 }) => {
   const [selectedRows, changeSelectedRows] = useState<IRow[] | []>([]);
-
   const tableWrapperElement = React.createRef<HTMLDivElement>();
   const [tableScroll, setTableScroll] = useState(0);
   const themeRef = useRef(gridTheme<ITableTheme>(theme));
