@@ -48,6 +48,7 @@ const DictionarySelector = ({
         {},
       ) }
       onChange={ handleChange }
+      value={ value }
     />
     // <select defaultValue={ 0 } onChange={ (e) => handleChange(e.target.value) }>
     //   { !value && <option selected>Please select...</option> }
