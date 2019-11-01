@@ -85,7 +85,6 @@ export const TableStyled = styled.div`
   display: table;
 `;
 
-
 export const TableHead = styled.div<ITableTheme>`
   display: flex;
   border-bottom: ${getBorder('headBorderBottom')};

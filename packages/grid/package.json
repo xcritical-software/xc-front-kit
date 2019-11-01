@@ -26,8 +26,7 @@
   "dependencies": {
     "@xcritical/theme": "^0.1.0",
     "lodash.get": "4.x",
-    "mdi-react": "^6.2.0",
-    "polished": "^3.0.0"
+    "mdi-react": "^6.2.0"
   },
   "devDependencies": {
     "namor": "1.1.3"
