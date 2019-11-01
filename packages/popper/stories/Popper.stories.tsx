@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
 
 // eslint-disable-next-line import/no-unresolved
-import Popper from '@xcritical/popper';
+import Popper, { IContent } from '@xcritical/popper';
 import { IPopperProps } from '../src/interfaces';
 
 
@@ -45,13 +45,23 @@ const AlignmentContainer = styled.div`
   margin: 25px 0;
 `;
 
-const Content = (): React.ReactElement => <div style={ layerStyles }>LayerContent</div>;
+const Content: React.FC<IContent> = (popperProps) => (
+  <div
+    ref={ popperProps.contentRef }
+    style={ { ...popperProps.popperStyles, ...layerStyles } }
+  >
+    LayerContent
+  </div>
+);
 
 const ExampleAlignment = (props: IPopperProps): React.ReactElement => (
   <Popper
     { ...props }
-    content={ () => (
-      <div style={ { background: '#fca' } }>
+    content={ (popperProps: IContent) => (
+      <div
+        ref={ popperProps.contentRef }
+        style={ { ...popperProps.popperStyles, background: '#fca' } }
+      >
         { props.position }
       </div>
     ) }
