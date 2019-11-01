@@ -4,6 +4,7 @@ import {
   IThemeNamespace,
 } from '@xcritical/theme';
 
+import { CSSProperties } from 'styled-components';
 import {
   filterThemeNamespace,
   defaultTheme,
@@ -11,35 +12,8 @@ import {
 
 
 export interface IFilterTheme extends ITheme {
-  backgroundTopPanel: 'red';
-  tag: {
-    padding: {
-      top: number;
-      right: number;
-      bottom: number;
-      left: number;
-    };
-    margin: {
-      top: number;
-      right: number;
-      bottom: number;
-      left: number;
-    };
-    border: {
-      radius: number;
-      color: string;
-      style: string;
-      width: number;
-    };
-    backgroundColor: string;
-    font: string;
-  };
-  buttonsAppearances: {
-    more: string;
-    apply: string;
-    add: string;
-    reset: string;
-  };
+  backgroundTopPanel: string;
+  tag: CSSProperties;
 }
 
 export type IThemeProp<T> = T;

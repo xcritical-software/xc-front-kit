@@ -17,7 +17,7 @@ module.exports = {
   },
   collectCoverage: true,
   verbose: true,
-  displayName: {
+  name: {
     name: '@xcritical/theme',
     color: 'blue',
   },

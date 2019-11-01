@@ -22,6 +22,7 @@ import { data } from './dummyData';
 import { getConfigSuccess } from './actions';
 import './index.css';
 import { filterThemeNamespace } from '../src/theme';
+// import { buttonThemeNamespace } from '../../button/src';
 
 
 const store = createStore(
@@ -86,6 +87,15 @@ const theme: IThemeNamespace = {
     backgroundTopPanel: 'lightblue',
 
   } as IThemeNamespace,
+  // [ buttonThemeNamespace ]: {
+  //   appearance: {
+  //     ['filter-button-apply']: {
+  //       margin: {
+  //         .....
+  //       }
+  //     }
+  //   }
+  // }
 };
 
 storiesOf('Filter', module)

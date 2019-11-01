@@ -1,9 +1,19 @@
 import React, {
-  useEffect, ReactElement, useState, useRef, MutableRefObject, useContext,
+  useEffect,
+  ReactElement,
+  useState,
+  useRef,
+  MutableRefObject,
+  useContext,
+  useMemo,
+  useCallback,
 } from 'react';
 import { ThemeContext } from 'styled-components';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+
+import Button from '@xcritical/button';
+
 import {
   Wrapper,
   TopPanel,
@@ -31,7 +41,6 @@ import {
   IFilterStateProps,
   IMapDispatchFilter,
 } from './interfaces';
-import Button from '../../button/src';
 import { filterThemeNamespace, defaultTheme } from './theme';
 import { IFilterTheme, filterTheme } from './utils';
 
@@ -44,74 +53,97 @@ const Filter: React.SFC<IFilterProps> = ({
   openFilters,
   name,
   resetFilters,
-  // theme = {
-  //   [filterThemeNamespace]: defaultTheme,
-  // },
+  theme = {
+    [filterThemeNamespace]: defaultTheme,
+  },
 }): ReactElement => {
-  const themeRef = useRef(filterTheme<IFilterTheme>(
-    useContext(ThemeContext) || { [filterThemeNamespace]: defaultTheme },
-  ));
-  const [open, changeOpen] = useState(false);
+  const themeRef = useRef(
+    filterTheme<IFilterTheme>(useContext(ThemeContext) || theme),
+  );
+  const [open, changeOpen] = useState(true);
   const buttonsRef: MutableRefObject<any> = useRef();
-  // console.log(themeRef.current)
+
   useEffect(() => {
     openFilters();
   }, [openFilters]);
 
+  const filtersItems = useMemo(
+    () => filters.reduce(
+      (acc, { field, displayName }) => ({
+        ...acc,
+        [field]: { name: displayName },
+      }),
+      {},
+    ),
+    [filters],
+  );
+
+  const handleOpen = useCallback(() => {
+    changeOpen(!open);
+  }, [open]);
+
+  const handleApply = useCallback(() => {
+    const mappedFilters = activeFilters
+      .filter(
+        ({ column }: IStateFilter) => column && column !== 'Please select...',
+      )
+      .map(({ column, condition, value }: IStateFilter) => ({
+        column,
+        condition,
+        value,
+      }));
+    apply(mappedFilters);
+  }, [activeFilters, apply]);
+
+  const handleAddFilter = useCallback(() => addFilter(), [addFilter]);
+  const handleResetFilters = useCallback(() => resetFilters(), [resetFilters]);
+
   return (
     <Wrapper>
       <TopPanel theme={ themeRef.current }>
-
         <TopPanelTags>
-          { activeFilters.map((filter, id) => (
+          { activeFilters.map((filter) => (
             <Tag
-              id={ id }
+              guid={ filter.key }
               filters={ filters }
               filter={ filter }
               name={ name }
               key={ filter.column + filter.condition + filter.value + filter.key }
               theme={ themeRef.current }
+              filterItems={ filtersItems }
             />
           )) }
         </TopPanelTags>
 
         <TopPanelButtons ref={ buttonsRef }>
           <Button
-            appearance={ themeRef.current.buttonsAppearances.more }
-            onClick={ () => changeOpen(!open) }
+            appearance="filters-more-button-appearance"
+            onClick={ handleOpen }
           >
-              More filters
+            More filters
           </Button>
           <Button
-            appearance={ themeRef.current.buttonsAppearances.apply }
-            onClick={ () => apply(
-              activeFilters
-                .filter(
-                  ({ column }: IStateFilter) => column && column !== 'Please select...',
-                )
-                .map(({ column, condition, value }: IStateFilter) => ({
-                  column,
-                  condition,
-                  value,
-                })),
-            ) }
+            appearance="filters-apply-button-appearance"
+            onClick={ handleApply }
           >
             Apply
           </Button>
         </TopPanelButtons>
-
       </TopPanel>
 
-
-      <WrapperFilters open={ open } top={ buttonsRef.current && buttonsRef.current.offsetTop }>
+      <WrapperFilters
+        open={ open }
+        top={ buttonsRef.current && buttonsRef.current.offsetTop }
+      >
         <FiltersHeader>
           <FilterColumn>Filter name</FilterColumn>
           <FilterColumn>Condition</FilterColumn>
           <FilterColumn>Value</FilterColumn>
         </FiltersHeader>
-        { activeFilters.map((filter: IStateFilter, id: number) => (
+        { activeFilters.map((filter: IStateFilter) => (
           <FilterRow
-            id={ id }
+            filterItems={ filtersItems }
+            guid={ filter.key }
             filters={ filters }
             filter={ filter }
             name={ name }
@@ -120,30 +152,24 @@ const Filter: React.SFC<IFilterProps> = ({
         )) }
         <WrapperFilterButtons>
           <Button
-            appearance={ themeRef.current.buttonsAppearances.add }
-            disabled={
-              !!activeFilters.find(
-                ({ column, condition, value }: IStateFilter) => {
-                  if (value) return false;
-                  if (!condition) return true;
-                  const filter = filters.find(
-                    (f: IFilter) => f.field === column,
-                  );
-                  if (filter && filter.conditions[condition].hasValue) {
-                    return !value;
-                  }
-                  return false;
-                },
-              )
-            }
-            onClick={ () => addFilter() }
+            appearance="filter-add-button-appearance"
+            disabled={ activeFilters.some(({ column, condition, value }: IStateFilter) => {
+              if (value) return false;
+              if (!condition) return true;
+              const filter = filters.find((f: IFilter) => f.field === column);
+              if (filter && filter.conditions[condition].hasValue) {
+                return !value;
+              }
+              return false;
+            }) }
+            onClick={ handleAddFilter }
           >
             Add new filter
           </Button>
           <Button
-            appearance={ themeRef.current.buttonsAppearances.reset }
-            disabled={ !activeFilters.find(({ column }: IStateFilter) => column) }
-            onClick={ () => resetFilters() }
+            appearance="filter-reset-button-appearance"
+            disabled={ !activeFilters.some(({ column }: IStateFilter) => column) }
+            onClick={ handleResetFilters }
           >
             Reset filters
           </Button>
@@ -163,7 +189,7 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
-  { name }: IFilterRecivedProps,
+  { name }: any,
 ): IMapDispatchFilter => ({
   addFilter: () => dispatch(xcriticalFiltersAddFilter(name)),
   apply: (filters: IStateRecivedFilter[]) => dispatch(xcriticalFiltersApply(name, filters)),

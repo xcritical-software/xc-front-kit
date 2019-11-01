@@ -4,39 +4,39 @@ import { IConditionsAll } from './interfaces';
 export const conditions: IConditionsAll = {
   String: {
     equalsTo: {
-      displayName: 'Equals to',
+      name: 'Equals to',
       hasValue: true,
     },
     startsWith: {
-      displayName: 'Starts with',
+      name: 'Starts with',
       hasValue: true,
     },
     endsWith: {
-      displayName: 'Ends with',
+      name: 'Ends with',
       hasValue: true,
     },
     contains: {
-      displayName: 'Contains',
+      name: 'Contains',
       hasValue: true,
     },
     isEmpty: {
-      displayName: 'Is empty',
+      name: 'Is empty',
       hasValue: false,
     },
     notEqualsTo: {
-      displayName: 'Not equalsTo',
+      name: 'Not equalsTo',
       hasValue: true,
     },
     in: {
-      displayName: 'In',
+      name: 'In',
       hasValue: true,
     },
     notIn: {
-      displayName: 'Not in',
+      name: 'Not in',
       hasValue: true,
     },
     notEmpty: {
-      displayName: 'Not empty',
+      name: 'Not empty',
       hasValue: false,
     },
   },
@@ -44,168 +44,168 @@ export const conditions: IConditionsAll = {
   Numeric: {
     // числа, везде просто ввод одного числа
     equals: {
-      displayName: 'Equals',
+      name: 'Equals',
       hasValue: true,
     },
     lessThan: {
-      displayName: 'Less than',
+      name: 'Less than',
       hasValue: true,
     },
     lessOrEquals: {
-      displayName: 'Less or equals',
+      name: 'Less or equals',
       hasValue: true,
     },
     greaterThan: {
-      displayName: 'Greater than',
+      name: 'Greater than',
       hasValue: true,
     },
     greaterOrEquals: {
-      displayName: 'Greater or equals',
+      name: 'Greater or equals',
       hasValue: true,
     },
     notEquals: {
-      displayName: 'Not equals',
+      name: 'Not equals',
       hasValue: true,
     },
     isEmpty: {
-      displayName: 'Is empty',
+      name: 'Is empty',
       hasValue: false,
     },
     in: {
-      displayName: 'In',
+      name: 'In',
       hasValue: true,
     },
     notIn: {
-      displayName: 'Not in',
+      name: 'Not in',
       hasValue: true,
     },
     notEmpty: {
-      displayName: 'Not empty',
+      name: 'Not empty',
       hasValue: false,
     },
   },
   Currency: {
     // числа, везде просто ввод одного числа
     equals: {
-      displayName: 'Equals',
+      name: 'Equals',
       hasValue: true,
     },
     lessThan: {
-      displayName: 'Less than',
+      name: 'Less than',
       hasValue: true,
     },
     lessOrEquals: {
-      displayName: 'Less or equals',
+      name: 'Less or equals',
       hasValue: true,
     },
     greaterThan: {
-      displayName: 'Greater than',
+      name: 'Greater than',
       hasValue: true,
     },
     greaterOrEquals: {
-      displayName: 'Greater or equals',
+      name: 'Greater or equals',
       hasValue: true,
     },
     notEquals: {
-      displayName: 'Not equals',
+      name: 'Not equals',
       hasValue: true,
     },
     isEmpty: {
-      displayName: 'Is empty',
+      name: 'Is empty',
       hasValue: false,
     },
     in: {
-      displayName: 'In',
+      name: 'In',
       hasValue: true,
     },
     notIn: {
-      displayName: 'Not in',
+      name: 'Not in',
       hasValue: true,
     },
     notEmpty: {
-      displayName: 'Not empty',
+      name: 'Not empty',
       hasValue: false,
     },
   },
   Date: {
     lessOrEquals: {
-      displayName: 'Less or equals',
+      name: 'Less or equals',
       hasValue: true,
     }, // одна дата
     greaterOrEquals: {
-      displayName: 'Greater or equals',
+      name: 'Greater or equals',
       hasValue: true,
     }, // одна дата
     notEquals: {
-      displayName: 'Not equals',
+      name: 'Not equals',
       hasValue: true,
     }, // одна дата
     isEmpty: {
-      displayName: 'Is empty',
+      name: 'Is empty',
       hasValue: false,
     },
     notEmpty: {
-      displayName: 'Not empty',
+      name: 'Not empty',
       hasValue: false,
     },
     last20Minuts: {
-      displayName: 'Last 20 minuts',
+      name: 'Last 20 minuts',
       hasValue: false,
     },
     today: {
-      displayName: 'Today',
+      name: 'Today',
       hasValue: false,
     },
     yesterday: {
-      displayName: 'Yesterday',
+      name: 'Yesterday',
       hasValue: false,
     },
     last7Days: {
-      displayName: 'Last 7 days',
+      name: 'Last 7 days',
       hasValue: false,
     },
     last30Days: {
-      displayName: 'Last 30 days',
+      name: 'Last 30 days',
       hasValue: false,
     },
     last60Days: {
-      displayName: 'Last 60 days',
+      name: 'Last 60 days',
       hasValue: false,
     },
     last90Days: {
-      displayName: 'Last 90 days',
+      name: 'Last 90 days',
       hasValue: false,
     },
     thisMonth: {
-      displayName: 'This month',
+      name: 'This month',
       hasValue: false,
     },
     lastMonth: {
-      displayName: 'Last month',
+      name: 'Last month',
       hasValue: false,
     },
     last3Months: {
-      displayName: 'Last3 months',
+      name: 'Last3 months',
       hasValue: false,
     },
     last6Months: {
-      displayName: 'Last6 months',
+      name: 'Last6 months',
       hasValue: false,
     },
     thisQuater: {
-      displayName: 'This quater',
+      name: 'This quater',
       hasValue: false,
     },
     lastQuater: {
-      displayName: 'Last quater',
+      name: 'Last quater',
       hasValue: false,
     },
     thisYear: {
-      displayName: 'This year',
+      name: 'This year',
       hasValue: false,
     },
     lastYear: {
-      displayName: 'Last year',
+      name: 'Last year',
       hasValue: false,
     },
   },
@@ -213,31 +213,31 @@ export const conditions: IConditionsAll = {
   Enum: {
     // dictionary selector
     equalsTo: {
-      displayName: 'Equals to',
+      name: 'Equals to',
       hasValue: true,
     }, // один вариант
     contains: {
-      displayName: 'Contains',
+      name: 'Contains',
       hasValue: true,
     }, // содержит часть слова
     isEmpty: {
-      displayName: 'Is empty',
+      name: 'Is empty',
       hasValue: false,
     },
     notEquals: {
-      displayName: 'Not equals',
+      name: 'Not equals',
       hasValue: true,
     }, // один вариант, не равно
     in: {
-      displayName: 'In',
+      name: 'In',
       hasValue: true,
     }, // мультиселектор, одно из
     notIn: {
-      displayName: 'Not in',
+      name: 'Not in',
       hasValue: true,
     }, // мультиселектор, не одно из
     notEmpty: {
-      displayName: 'Not empty',
+      name: 'Not empty',
       hasValue: false,
     },
   },
@@ -245,7 +245,7 @@ export const conditions: IConditionsAll = {
   Boolean: {
     // да нет
     equalsTo: {
-      displayName: 'Equals to',
+      name: 'Equals to',
       hasValue: true,
     },
   },

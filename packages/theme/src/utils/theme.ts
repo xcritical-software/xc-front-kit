@@ -113,15 +113,19 @@ export function getAppearanceTheme<T>(
 export const getFontStyle = ({
   size,
   weight,
+  lineHeight,
   lineHeightRatio = 1.69,
-}: IFont<number>): FlattenSimpleInterpolation => css`
+}: IFont): FlattenSimpleInterpolation => css`
         ${weight ? `font-weight: ${weight}` : null};
-        ${size ? `font-size: ${size}px; line-height: ${size * lineHeightRatio}px;` : null};
+        ${size ? `font-size: ${size}px; line-height: ${lineHeight || lineHeightRatio};` : null};
       `;
 
-export const getFontObj = (
-  { size, weight, lineHeightRatio = 1.69 }: IFont<number> = {},
-): IFont<string> => ({
+export const getFontObj = ({
+  size,
+  weight,
+  lineHeight,
+  lineHeightRatio = 1.69,
+}: IFont = {}): React.CSSProperties => ({
   ...weight && ({ fontWeight: weight }),
-  ...size && ({ fontSize: `${size}px`, lineHeight: `${size * lineHeightRatio}px;` }),
+  ...size && ({ fontSize: `${size}px`, lineHeight: lineHeight || lineHeightRatio }),
 });

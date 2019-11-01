@@ -53,7 +53,11 @@ const addFilter = (state: IState, action: IAction): IState => ({
 
 const removeFilter = (state: IState, action: IRemoveFilter): IState => {
   const newActiveFilters = [...state[action.name]];
-  delete newActiveFilters[action.payload.id];
+
+
+  delete newActiveFilters[newActiveFilters.findIndex(({ key }) => key === action.payload.guid)];
+
+
   const newActiveFiltersFiltered = newActiveFilters.filter(Boolean);
   if (!newActiveFiltersFiltered.length) {
     newActiveFiltersFiltered.push({ ...newFilter, key: guid() });
@@ -67,13 +71,14 @@ const removeFilter = (state: IState, action: IRemoveFilter): IState => {
 
 const changeFilter = (state: IState, action: IChangeFilter): IState => {
   const {
-    payload: { id, field, value },
+    payload: { guid: id, field, value },
     name,
   } = action;
   const newFilters: IStateFilter[] = [...state[name]];
-  const changedFilter = { ...newFilters[id] };
+  const changedFilterIndex = newFilters.findIndex(({ key }) => key === id);
+  const changedFilter = { ...newFilters[changedFilterIndex] };
   changedFilter[field] = value;
-  newFilters[id] = changedFilter;
+  newFilters[changedFilterIndex] = changedFilter;
   return {
     ...state,
     [name]: newFilters,

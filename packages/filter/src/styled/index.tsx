@@ -16,7 +16,7 @@ export const WrapperFilters = styled.div<IWrapperFilters>`
   display: ${({ open }) => (open ? 'block' : 'none')};
   position: absolute;
   width: 100%;
-  top: ${({ top }) => (top ? `${top + 36}px` : 'none')};
+  top: ${({ top }) => (top ? `${top + 42}px` : 'none')};
 `;
 
 
@@ -62,14 +62,14 @@ export const Button = styled.button`
 `;
 
 export const RowWrapper = styled.div`
-  margin-bottom: 15px;
+  margin-bottom: 35px;
+  height: 25px;
 `;
 
 
 export const TopPanel = styled.div`
   display: flex;
   flex-wrap: wrap;
-  /* align-items: center; */
   justify-content: flex-end;
   margin-top: 70px;
   border: 1px solid #c4c4c4;
@@ -86,6 +86,8 @@ export const TopPanelButtons = styled.div`
   flex:  0 0 0;
   height: 36px ;
   display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
 `;
 
 export const WrapperFilterButtons = styled.div`
@@ -95,4 +97,27 @@ export const WrapperFilterButtons = styled.div`
   margin-left: 50px; 
   margin-bottom: 30px; 
   margin-top: 30px;
+`;
+
+
+export const WrapperTag = styled.div`
+  ${({ theme }) => theme.tag}
+  display: flex;
+  align-items: center;
+  height: 37px;
+  cursor: pointer;
+`;
+
+export const WrapperElement = styled.div`
+  padding-right: 5px;
+  padding-left: 5px;
+`;
+
+export const WrapperFilter = styled.div`
+  display: flex;
+  align-items: center;
+`;
+export const WrapperButtons = styled.div`
+  margin-left: 10px;
+  height: 100%;
 `;

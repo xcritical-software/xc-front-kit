@@ -22,7 +22,7 @@ export interface IFilter {
 }
 
 export interface ICondition {
-  displayName: string;
+  name: string;
   hasValue: boolean;
 }
 

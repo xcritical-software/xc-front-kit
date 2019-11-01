@@ -1,41 +1,42 @@
 {
-  "name": "@xcritical/forms",
-  "version": "0.0.0",
-  "description": "The simple way to manage your form state in Redux",
-  "main": "src/index.js",
-  "scripts": {
-    "test": "exit 0",
-    "compile": "gulp --cwd . compile",
-    "build": "yarn clean && yarn compile",
-    "clean": "rimraf dist lib .publish"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
-  },
-  "keywords": [
-  ],
-  "author": "XCritical Software",
-  "license": "MIT",
-  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/forms#readme",
-  "publishConfig": {
+	"name": "@xcritical/forms",
+	"version": "0.1.0",
+	"description": "The simple way to manage your form state in Redux",
+	"main": "src/index.ts",
+	"scripts": {
+		"test": "exit 0",
+		"compile": "gulp --cwd . compile",
+		"build": "yarn clean && yarn compile",
+		"clean": "rimraf dist lib .publish"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+	},
+	"keywords": [
+		"forms",
+		"react",
+		"redux"
+	],
+	"author": "XCritical Software",
+	"license": "MIT",
+	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/forms#readme",
+	"publishConfig": {
 		"access": "public"
 	},
-  "private": false,
-  "devDependencies": {
-    "redux": "^4.0.4",
-    "react-redux": "^7.0.2"
-  },
-  "peerDependencies": {
-    "hoist-non-react-statics": "^3.3.0",
-    "react": "^16.8.3",
-    "prop-types": "^15.0.0",
-    "redux": "^4.0.4",
-    "react-redux": "^7.0.2"
-  },
-  "dependencies": {
-    "utilitify": "^1.0.2",
-    "lodash.get": "4.x",
-    "lodash.isempty": "4.x"
-  }
+	"private": false,
+	"devDependencies": {
+		"redux": "^4.0.4",
+		"react-redux": "^7.0.2"
+	},
+	"peerDependencies": {
+		"react": "^16.8.3",
+		"redux": "^4.0.4",
+		"react-redux": "^7.0.2"
+	},
+	"dependencies": {
+		"utilitify": "^1.0.2",
+		"lodash.get": "4.x",
+		"lodash.isempty": "4.x"
+	}
 }

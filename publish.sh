@@ -3,13 +3,13 @@
 
 publish()
 {
-  for dirname in $(echo ./.publish/*)
-  do
-  
-  (cd $dirname; npm version $version)
-  npm publish $dirname
-
-  done
+  if [[ -e '.publish' ]]; then
+    for dirname in $(echo ./.publish/*)
+    do    
+      (cd $dirname; npm version $version)
+      npm publish $dirname
+    done
+  fi
 }
 
 usage()

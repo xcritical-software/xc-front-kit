@@ -1,13 +1,13 @@
 import React, { useState, ReactElement } from 'react';
 import { SingleDatePicker } from 'react-dates';
 import {
-  IDictionary,
   ICreateElement,
   IElementProps,
   IDictionaryElementProps,
 } from './interfaces';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
+import Select from '../../select/src';
 
 
 const Input = ({
@@ -36,22 +36,28 @@ const DictionarySelector = ({
   if (!isEdit) {
     return (
       <span>
-        { dictionaries[name]
-          .find(({ id }: any) => +id === +value).name }
+        { dictionaries[name].find(({ id }: any) => +id === +value).name }
       </span>
     );
   }
 
   return (
-    <select defaultValue={ 0 } onChange={ (e) => handleChange(e.target.value) }>
-      { !value && <option selected>Please select...</option> }
-      { dictionaries[name]
-        && dictionaries[name].map(({ id, name: n }: IDictionary) => (
-          <option key={ id } value={ id } selected={ +value === id }>
-            { n }
-          </option>
-        )) }
-    </select>
+    <Select
+      items={ dictionaries[name].reduce(
+        (acc: any, elem: any) => ({ ...acc, [elem.id]: { name: elem.name } }),
+        {},
+      ) }
+      onChange={ handleChange }
+    />
+    // <select defaultValue={ 0 } onChange={ (e) => handleChange(e.target.value) }>
+    //   { !value && <option selected>Please select...</option> }
+    //   { dictionaries[name]
+    //     && dictionaries[name].map(({ id, name: n }: IDictionary) => (
+    //       <option key={ id } value={ id } selected={ +value === id }>
+    //         { n }
+    //       </option>
+    //     )) }
+    // </select>
   );
 };
 

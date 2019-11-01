@@ -36,12 +36,12 @@ export function xcriticalFiltersAddFilter(name: string): IAction {
 }
 export function xcriticalFiltersRemoveFilter(
   name: string,
-  id: number,
+  guid: string,
 ): IRemoveFilter {
   return {
     type: REMOVE_FILTER,
     name,
-    payload: { id },
+    payload: { guid },
   };
 }
 export function xcriticalFiltersApply(

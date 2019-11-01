@@ -9,8 +9,9 @@ export interface IFilterRow {
   filters: IFilter[];
   filter: IFilterFromStore;
   removeFilter: Function;
-  id: number;
+  guid: string;
   changeFilter: Function;
+  filterItems: any;
 }
 
 export interface IFilter {
@@ -21,7 +22,7 @@ export interface IFilter {
 }
 
 export interface ICondition {
-  displayName: string;
+  name: string;
   hasValue: boolean;
 }
 
@@ -41,11 +42,12 @@ export interface IFilterTagProps extends IFilterRowProps {
 }
 
 export interface IFilterRowProps {
-  id: number;
+  guid: string;
   filters: IFilter[];
   filter: IFilterFromStore;
   name: string;
   key: string;
+  filterItems: any;
 }
 
 export interface IStateRecivedFilter {
@@ -88,14 +90,14 @@ export interface IRemoveFilter extends IAction {
   payload: IPayloadRemoveFilter;
 }
 export interface IPayloadRemoveFilter {
-  id: number;
+  guid: string;
 }
 
 export interface IChangeFilter extends IAction {
   payload: IPayloadChangeFilter;
 }
 export interface IPayloadChangeFilter {
-  id: number;
+  guid: string;
   field: string;
   value: string;
 }
@@ -126,8 +128,8 @@ export interface IMapDispatchFilterRow {
 }
 
 export interface IMapDispatchFilter {
-  addFilter: Function;
-  apply: Function;
-  openFilters: Function;
-  resetFilters: Function;
+  addFilter: any;
+  apply: any;
+  openFilters: any;
+  resetFilters: any;
 }
