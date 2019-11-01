@@ -2,34 +2,25 @@ export const tableTheme = {
   width: '100%',
   height: '100%',
 
-
-  headBorderBottom: {
-    width: '1px',
-    style: 'solid',
-    color: '#ccc',
+  header: {
+    borderBottomWidth: '1px',
+    borderBottomColor: 'rgb(223, 234, 241)',
+    borderBottomStyle: 'solid',
+    rowColor: 'white',
   },
-  rowColor: 'white',
   evenRowColor: 'rgb(184, 223, 240)',
   activeRowColor: '#c3e7b7',
-
-
   cell: {
-    borderRight: {
-      width: '1px',
-      color: 'rgb(223, 234, 241)',
-      style: 'solid',
-    },
-    padding: {
-      top: '5px',
-      right: '5px',
-      bottom: '5px',
-      left: '5px',
-    },
-    font: {
-      size: '12px',
-      weight: 400,
-      color: '#000',
-    },
+    borderRightWidth: '1px',
+    borderRightColor: 'rgb(223, 234, 241)',
+    borderRightStyle: 'solid',
+    paddingTop: '5px',
+    paddingBottom: '5px',
+    paddingLeft: '5px',
+    paddingRight: '5px',
+    fontSize: '12px',
+    fontWeight: 400,
+    color: '#000',
   },
   head: {
     font: {
@@ -37,12 +28,10 @@ export const tableTheme = {
       weight: 400,
       color: 'rgb(115, 115, 115)',
     },
-    padding: {
-      top: '5px',
-      right: '5px',
-      bottom: '5px',
-      left: '5px',
-    },
+    paddingTop: '5px',
+    paddingBottom: '5px',
+    paddingLeft: '5px',
+    paddingRight: '5px',
     backgroundColor: 'white',
     hoverColor: 'rgb(184, 223, 240)',
   },

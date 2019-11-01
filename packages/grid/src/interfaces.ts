@@ -21,9 +21,14 @@ interface IFont {
 }
 
 interface ICell {
-  borderRight?: IBorder;
-  padding?: IPadding;
   font?: IFont;
+  paddingTop: string;
+  paddingBottom: string;
+  paddingLeft: string;
+  paddingRight: string;
+  borderRightWidth: string;
+  borderRightColor: string;
+  borderRightStyle: string;
 }
 
 interface IHead {
@@ -59,7 +64,7 @@ export interface ITableTheme extends ITheme {
 export interface IColumn {
   isExpandable?: boolean;
   title: string;
-  width: number;
+  width: string;
   order: number;
   render: Function | null;
   field: string;
@@ -94,12 +99,12 @@ export interface IRow {
 }
 
 export interface IStyledCell {
-  width: number;
+  width: string;
   theme: ICell;
 }
 
 export interface IStyledHead {
-  width: number;
+  width: string;
   theme: IHead;
 }
 
@@ -110,18 +115,18 @@ export interface IStyledRow {
 
 export interface IHeader {
   columnName: string;
-  width: number;
+  width: string;
   theme: ITableTheme;
 }
 
 export interface IHeaderPros {
   columnName: string;
-  width: number;
+  width: string;
   theme: ITableTheme;
 }
 
 export interface IRowData {
-  id: number;
+  id: string;
   children?: object[];
   [key: string]: string | number | boolean | undefined | number[] | null | object;
 }

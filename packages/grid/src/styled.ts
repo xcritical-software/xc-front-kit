@@ -9,53 +9,17 @@ import {
 } from './interfaces';
 
 
-const getBorder = (borderName: string) => ({
-  theme:
-  {
-    [borderName]:
-    {
-      width,
-      color,
-      style,
-    },
-  },
-}: any): string => `${width} ${color} ${style}`;
-
-const getPadding = ({
-  theme: {
-    padding: {
-      top,
-      right,
-      bottom,
-      left,
-    },
-  },
-}:
-{theme: {padding:
-{
-  top: string;
-  right: string;
-  bottom: string;
-  left: string;}; };}): string => `${top} ${right} ${bottom} ${left}`;
-
 export const StyledCell = styled.div<IStyledCell>`
-   padding: ${getPadding};
   overflow: hidden;
   box-sizing: border-box;
-  font-size: ${({ theme: { font: { size } } }): string => `${size}`};
-  font-weight: ${({ theme: { font: { weight } } }): string => `${weight}`};
-  color: ${({ theme: { font: { color } } }): string => `${color}`};
-  border-right: ${getBorder('borderRight')};
-  width: ${({ width }): string => `${width}px`};
+  width: ${({ width }): string => width};
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
+  ${({ theme }) => theme};
 `;
 
-
 export const HeaderStyled = styled.div<IStyledHead>`
-   padding: ${getPadding};
-  width: ${({ width }): string => `${width}px`};
   text-align: left;
   font-family: inherit;
   overflow: hidden;
@@ -69,12 +33,13 @@ export const HeaderStyled = styled.div<IStyledHead>`
   font-weight: ${({ theme: { font: { weight } } }): string => `${weight}`};
   color: ${({ theme: { font: { color } } }): string => `${color}`};
   font-family: inherit;
+  ${({ theme }) => theme};
+  width: ${({ width }): string => width};
 `;
 
 export const RowStyled = styled.div<IStyledRow>`
   display: flex;
   background-color: ${({ theme: { rowColor } }): string => rowColor};
-
   :nth-child(2n) {
     background-color: ${({ isSelected, theme: { evenRowColor } }): string => (isSelected ? 'none' : evenRowColor)}
   };
@@ -87,13 +52,12 @@ export const TableStyled = styled.div`
 
 export const TableHead = styled.div<ITableTheme>`
   display: flex;
-  border-bottom: ${getBorder('headBorderBottom')};
+  ${({ theme: { header } }) => header};
 `;
 
 export const TableWrapper = styled.div`
   height: calc(100% - 25px);
   overflow: auto;
-
   ::-webkit-scrollbar { width: 10px; height: 10px;};
   ::-webkit-scrollbar-button {  background-color: #FFF; width: 0px; height: 0px;}
   ::-webkit-scrollbar-track {  background-color: #999;}
