@@ -1,36 +1,22 @@
-import { ITheme, IThemeNamespace, IIndentation } from '@xcritical/theme';
 import {
-  FlattenInterpolation, ThemedStyledProps,
+  ITheme, IThemeNamespace, IThemeBase, IHtmlActionStates,
+} from '@xcritical/theme';
+// eslint-disable-next-line import/no-unresolved
+import {
+  FlattenInterpolation, ThemedStyledProps, CSSObject,
 } from 'styled-components';
 
 
 export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
 
-export interface IFont {
-  weight?: ICSSWideKeyword | 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
-  size?: number;
-}
-
-export interface IButtonTheme {
-  padding?: IIndentation;
+export interface IBaseButtonTheme extends CSSObject {
   prefixSpacing?: number;
   postfixSpacing?: number;
-  borderRadius?: number;
-  borderColor?: string;
-  font?: IFont;
-  background?: string;
-  color?: string;
-  fontWeight?: number;
   boxShadowColor?: string;
-
-  outline?: IButtonTheme;
-  selected?: IButtonTheme;
-  active?: IButtonTheme;
-  hover?: IButtonTheme;
-  disabled?: IButtonTheme;
+  _outline?: CSSObject;
 }
 
-export type ButtonTheme = ITheme<IButtonTheme>;
+export type ButtonTheme = ITheme<IThemeBase<IHtmlActionStates<IBaseButtonTheme>>>;
 
 export interface IButtonApperanceProps {
   theme?: IThemeNamespace<ButtonTheme>;

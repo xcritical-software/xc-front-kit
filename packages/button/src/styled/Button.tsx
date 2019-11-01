@@ -2,19 +2,15 @@ import styled, { css } from 'styled-components';
 import { rtlSide } from '@xcritical/theme';
 
 import {
-  getPaddingStyle,
   buttonTheme,
   getButtonStyles,
   getItemInteractiveStyles,
-  getFontSize,
 } from '../utils';
 import { IPrefixProps, IButtonProps, IContentProps } from '../interfaces';
 
 
 const style = css<IButtonProps>`
 ${getButtonStyles};
-${getPaddingStyle};
-${getFontSize}
 ${getItemInteractiveStyles}
 ${({ height }) => (height ? `height: ${height}` : null)}
 ${({ css: cssInner }) => (cssInner || null)}
@@ -33,7 +29,11 @@ const PrefixPostfixBase = styled.span<IPrefixProps>`
 `;
 
 export const Prefix = styled(PrefixPostfixBase)`
-  margin-${({ isRTL }) => (isRTL ? 'left' : 'right')}: ${({ theme, appearance = 'default', baseAppearance = 'default' }) => buttonTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
+  margin-${({ isRTL }) => (isRTL ? 'left' : 'right')}: ${({
+  theme,
+  appearance = 'default',
+  baseAppearance = 'default',
+}) => buttonTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
 `;
 
 export const Postfix = styled(PrefixPostfixBase)`

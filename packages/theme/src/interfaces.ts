@@ -60,14 +60,16 @@ export interface IStylesBase {
   opacity?: number;
 }
 
-export type IThemeBase<T> = T & {
+export interface IHtmlActionStates<T> {
   hover?: T;
   active?: T;
   disabled?: T;
   selected?: T;
   focus?: T;
   invalid?: T;
-};
+}
+
+export type IThemeBase<T> = T & IHtmlActionStates<T>;
 
 export type ITheme<T = IStylesBase> = IThemeBase<T> & {
   appearance?: IAppearance<T>;
@@ -83,4 +85,13 @@ export interface IAppearance<T> {
 
 export interface IThemeNamespace<T = IStylesBase> {
   [namespace: string]: ITheme<T>;
+}
+
+
+export interface IApperanceStateFunc<T> {
+  (theme: IThemeNamespace,
+    appearanceName: string,
+    propertyPath?: string | string[],
+    baseAppearanceName?: string
+  ): ITheme | ITheme<T>;
 }

@@ -1,4 +1,6 @@
-import React, { useRef, memo, useContext } from 'react';
+import React, {
+  useRef, memo, useMemo, useContext, useCallback,
+} from 'react';
 import { ThemeContext, ThemeProvider } from 'styled-components';
 
 import { IThemeNamespace } from '@xcritical/theme';
@@ -52,20 +54,21 @@ export const PureButton = ({
   const innerTheme = theme || themeContext;
   const buttonRef = useRef();
 
-  const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+  const onClick = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     if (onClickProps && !disabled) {
       onClickProps(e);
     }
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const getElement = (): string => {
+  const getElement = useCallback((): string => {
     if (href) {
       return disabled ? 'span' : 'a';
     }
     return 'button';
-  };
+  }, [disabled, href]);
 
-  const RootElement = Root(getElement());
+  const RootElement = useMemo(() => Root(getElement()), [getElement]);
 
   return (
     <ThemeProvider theme={ innerTheme }>

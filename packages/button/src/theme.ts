@@ -7,21 +7,22 @@ import { ButtonTheme } from './interfaces';
 export const buttonThemeNamespace = '@xcritical\\xc-button';
 
 export const buttonThemeStyle: ButtonTheme = {
-  padding: {
-    bottom: 7,
-    left: 20,
-    right: 20,
-    top: 7,
-  },
+  paddingBottom: '7px',
+  paddingLeft: '20px',
+  paddingRight: '20px',
+  paddingTop: '7px',
   appearance: {
-    default: generateApperance({
-      background: colors.GRAY_LIGHT,
-      color: colors.CHAROCOAL,
-      outline: {
-        background: colors.WHITE,
+    default: {
+      ...generateApperance({
+        background: colors.GRAY_LIGHT,
         color: colors.CHAROCOAL,
-      },
-    }),
+        outline: {
+          background: colors.WHITE,
+          color: colors.CHAROCOAL,
+        },
+      }),
+      borderRadius: '6px',
+    },
     primary: generateApperance({ background: colors.PRIMARY, color: colors.WHITE }),
     secondary: generateApperance({ background: colors.SECONDARY, color: colors.WHITE }),
     success: generateApperance({ background: colors.SUCCESS, color: colors.WHITE }),
@@ -33,7 +34,7 @@ export const buttonThemeStyle: ButtonTheme = {
     link: generateApperance({
       background: 'transparent',
       color: colors.PRIMARY,
-      font: { weight: 'inherit' },
+      fontWeight: 'inherit',
       borderColor: 'transparent',
       outline: {
         background: 'transparent',
@@ -44,10 +45,8 @@ export const buttonThemeStyle: ButtonTheme = {
   },
   prefixSpacing: 15,
   postfixSpacing: 15,
-  font: {
-    weight: 600,
-    size: 14,
-  },
+  fontWeight: 600,
+  fontSize: 14,
   borderRadius: 3,
 };
 

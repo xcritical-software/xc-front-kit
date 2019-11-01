@@ -101,7 +101,7 @@ export const getFormatOptionLabel = (
   appearance: string,
   baseAppearance: string,
   isRTL: boolean,
-) => (
+): any => (
   opt: IOptionItem,
   { context }: FormatOptionLabelMeta<IOptionProps>,
 ) => (
