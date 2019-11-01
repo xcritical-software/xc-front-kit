@@ -20,7 +20,7 @@ export const Arrow = styled.div<IThemed>`
   &[data-arrow-position^='top'] {
     ${(props) => getArrowSizes(props, 'top')};
     margin: 0 ${(props) => getPopperProperty(props)(['arrow', 'offset'])};
-    bottom: 0;
+    bottom: ${(props) => `-${getPopperProperty(props)(['arrow', 'size'])}`};
   
     &:before {
       border-width: ${(props) => getArrowBorderWidth(props, 'top')};
@@ -37,7 +37,7 @@ export const Arrow = styled.div<IThemed>`
   &[data-arrow-position^='right'] {
     ${(props) => getArrowSizes(props, 'right')};
     margin: ${(props) => getPopperProperty(props)(['arrow', 'offset'])} 0;
-    left: 0;
+    left: ${(props) => `-${getPopperProperty(props)(['arrow', 'size'])}`};
   
     &:before {
       border-width: ${(props) => getArrowBorderWidth(props, 'right')};
@@ -54,7 +54,7 @@ export const Arrow = styled.div<IThemed>`
   &[data-arrow-position^='bottom'] {
     ${(props) => getArrowSizes(props, 'bottom')};
     margin: 0 ${(props) => getPopperProperty(props)(['arrow', 'offset'])};
-    top: 0;
+    top: ${(props) => `-${getPopperProperty(props)(['arrow', 'size'])}`};
   
     &:before {
       border-width: ${(props) => getArrowBorderWidth(props, 'bottom')};
@@ -71,7 +71,7 @@ export const Arrow = styled.div<IThemed>`
   &[data-arrow-position^='left'] {
     ${(props) => getArrowSizes(props, 'left')};
     margin: ${(props) => getPopperProperty(props)(['arrow', 'offset'])} 0;
-    right: 0;
+    right: ${(props) => `-${getPopperProperty(props)(['arrow', 'size'])}`};
   
     &:before {
       border-width: ${(props) => getArrowBorderWidth(props, 'left')};

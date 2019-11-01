@@ -1,3 +1,4 @@
+import { CSSObject } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
 import { Position } from '@xcritical/popper';
 
@@ -8,6 +9,7 @@ export interface IPopover {
   position: Position;
   autoFlip?: boolean;
   visible?: boolean;
+  fullWidthContent?: boolean;
   withArrow?: boolean;
   theme?: IThemeNamespace<IPopperTheme>;
   appearance?: string;
@@ -15,20 +17,8 @@ export interface IPopover {
 }
 
 export interface IPopperTheme {
-  content?: {
+  content?: CSSObject & {
     offset?: string;
-    background?: string;
-    padding?: {
-      top?: string;
-      right?: string;
-      bottom?: string;
-      left?: string;
-    };
-    border?: {
-      width?: string;
-      radius?: string;
-      color?: string;
-    };
   };
   arrow?: {
     offset?: string;
@@ -39,6 +29,10 @@ export interface IPopperTheme {
       color?: string;
     };
   };
+}
+
+export interface IContent extends IThemed {
+  fullWidthContent?: boolean;
 }
 
 export interface IThemed {

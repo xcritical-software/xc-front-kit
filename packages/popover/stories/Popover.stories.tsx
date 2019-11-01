@@ -15,14 +15,10 @@ const theme = {
       default: {
         content: {
           background: '#ddd',
-          padding: {
-            left: '10px',
-            right: '10px',
-          },
-          border: {
-            color: '#777',
-            radius: '5px',
-          },
+          padding: '5px 10px',
+          border: '1px solid #777',
+          borderRadius: '5px',
+          boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
         },
         arrow: {
           background: '#ddd',
@@ -65,7 +61,7 @@ const Controlled = (): ReactElement => {
         content={ popoverContent }
         visible={ controlledVisible }
       >
-        <ComponentWithPopover>Right Top</ComponentWithPopover>
+        <ComponentWithPopover>Bottom Center</ComponentWithPopover>
       </Popover>
     </>
   );
@@ -195,10 +191,15 @@ storiesOf('Popover', module)
   .add('Themed', () => (
     <ThemeProvider theme={ theme }>
       <Popover position="bottom center" visible content={ popoverContent }>
-        <ComponentWithPopover>Right Top</ComponentWithPopover>
+        <ComponentWithPopover>Bottom Center</ComponentWithPopover>
       </Popover>
     </ThemeProvider>
   ))
   .add('Controlled', () => (
     <Controlled />
+  ))
+  .add('Full width content', () => (
+    <Popover position="bottom center" visible fullWidthContent content={ popoverContent }>
+      <ComponentWithPopover>Bottom Center</ComponentWithPopover>
+    </Popover>
   ));
