@@ -1,6 +1,6 @@
 import { darken } from 'polished';
 
-import { IThemeBase, IHtmlActionStates } from '@xcritical/theme';
+import { IThemeBase } from '@xcritical/theme';
 import { IBaseButtonTheme, ICSSWideKeyword } from '../interfaces';
 
 
@@ -22,7 +22,7 @@ export const generateApperance = ({
   fontSize,
   outline: _outline,
   borderColor = '',
-}: IGenApperance): IThemeBase<IHtmlActionStates<IBaseButtonTheme>> => ({
+}: IGenApperance): IThemeBase<IBaseButtonTheme> => ({
   background,
   color,
   boxShadowColor: boxShadowColor || darken(0.1, background),

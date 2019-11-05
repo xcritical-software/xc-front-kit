@@ -1,22 +1,22 @@
 import {
-  ITheme, IThemeNamespace, IThemeBase, IHtmlActionStates,
+  ITheme, IThemeNamespace, ICSSProperties,
 } from '@xcritical/theme';
 // eslint-disable-next-line import/no-unresolved
 import {
-  FlattenInterpolation, ThemedStyledProps, CSSObject,
+  FlattenInterpolation, ThemedStyledProps,
 } from 'styled-components';
 
 
 export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
 
-export interface IBaseButtonTheme extends CSSObject {
+export interface IBaseButtonTheme extends ICSSProperties {
   prefixSpacing?: number;
   postfixSpacing?: number;
   boxShadowColor?: string;
-  _outline?: CSSObject;
+  _outline?: ICSSProperties;
 }
 
-export type ButtonTheme = ITheme<IThemeBase<IHtmlActionStates<IBaseButtonTheme>>>;
+export type ButtonTheme = ITheme<IBaseButtonTheme>;
 
 export interface IButtonApperanceProps {
   theme?: IThemeNamespace<ButtonTheme>;

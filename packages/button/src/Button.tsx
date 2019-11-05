@@ -11,7 +11,7 @@ import {
   ContentWrapper,
   Content,
 } from './styled/Button';
-import { IButtonProps, IButtonTheme } from './interfaces';
+import { IButtonProps, ButtonTheme } from './interfaces';
 import { buttonThemeNamespace, buttonThemeStyle } from './theme';
 
 
@@ -50,7 +50,7 @@ export const PureButton = ({
   onClick: onClickProps,
   ...rest
 }: IButtonProps): React.ReactElement => {
-  const themeContext = useContext<IThemeNamespace<IButtonTheme>>(ThemeContext);
+  const themeContext = useContext<IThemeNamespace<ButtonTheme>>(ThemeContext);
   const innerTheme = theme || themeContext;
   const buttonRef = useRef();
 
