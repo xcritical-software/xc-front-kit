@@ -6,10 +6,10 @@ export const tableTheme = {
     borderBottomWidth: '1px',
     borderBottomColor: 'rgb(223, 234, 241)',
     borderBottomStyle: 'solid',
-    rowColor: 'white',
   },
   evenRowColor: 'rgb(184, 223, 240)',
   activeRowColor: '#c3e7b7',
+  rowColor: 'white',
   cell: {
     borderRightWidth: '1px',
     borderRightColor: 'rgb(223, 234, 241)',
@@ -23,11 +23,9 @@ export const tableTheme = {
     color: '#000',
   },
   head: {
-    font: {
-      size: '12px',
-      weight: 400,
-      color: 'rgb(115, 115, 115)',
-    },
+    fontSize: '12px',
+    fontWeight: 400,
+    color: 'rgb(115, 115, 115)',
     paddingTop: '5px',
     paddingBottom: '5px',
     paddingLeft: '5px',

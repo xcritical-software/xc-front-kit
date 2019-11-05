@@ -28,10 +28,8 @@ export const HeaderStyled = styled.div<IStyledHead>`
   background-color: ${({ theme: { backgroundColor } }): string => backgroundColor};
   :hover {
     background-color: ${({ theme: { hoverColor } }): string => hoverColor};
-  }
-  font-size: ${({ theme: { font: { size } } }): string => `${size}`};
-  font-weight: ${({ theme: { font: { weight } } }): string => `${weight}`};
-  color: ${({ theme: { font: { color } } }): string => `${color}`};
+  };
+
   font-family: inherit;
   ${({ theme }) => theme};
   width: ${({ width }): string => width};

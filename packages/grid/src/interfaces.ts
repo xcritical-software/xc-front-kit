@@ -1,41 +1,25 @@
 import { IThemeNamespace, ITheme } from '@xcritical/theme';
 
 
-interface IPadding{
-  top?: string;
-  right?: string;
-  bottom?: string;
-  left?: string;
-}
-
-interface IBorder {
-  width?: string;
-  color?: string;
-  style?: string;
-}
-
-interface IFont {
-  size?: string;
-  weight?: string;
-  color?: string;
-}
-
 interface ICell {
-  font?: IFont;
-  paddingTop: string;
-  paddingBottom: string;
-  paddingLeft: string;
-  paddingRight: string;
-  borderRightWidth: string;
-  borderRightColor: string;
-  borderRightStyle: string;
+  paddingTop?: string;
+  paddingBottom?: string;
+  paddingLeft?: string;
+  paddingRight?: string;
+  borderRightWidth?: string;
+  borderRightColor?: string;
+  borderRightStyle?: string;
 }
 
 interface IHead {
-  font: IFont;
-  padding: IPadding;
-  backgroundColor: string;
-  hoverColor: string;
+  backgroundColor?: string;
+  hoverColor?: string;
+  paddingTop?: string;
+  paddingBottom?: string;
+  paddingLeft?: string;
+  paddingRight?: string;
+  borderRightWidth?: string;
+  borderRightColor?: string;
 }
 
 export interface ITableData {
@@ -46,7 +30,6 @@ export interface ITableData {
 export interface ITableTheme extends ITheme {
   width?: string;
   tableHeight?: string;
-  headBorderBottom?: IBorder;
   rowColor?: string;
   evenRowColor?: string;
   activeRowColor?: string;
