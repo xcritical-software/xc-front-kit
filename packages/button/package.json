@@ -34,8 +34,5 @@
 		"lodash.get": "^4.x",
 		"memoizee": "0.4.14",
 		"polished": "^3.0.0"
-	},
-	"devDependencies": {
-		"csstype": "2.6.7"
 	}
 }
