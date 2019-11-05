@@ -1,7 +1,7 @@
 import { OptionTypeBase } from 'react-select/src/types';
 import { FormatOptionLabelContext, Props } from 'react-select/src/Select';
 import {
-  ITheme, IThemeNamespace, IStylesBase, IThemeBase,
+  ITheme, IThemeNamespace, ICSSProperties, IThemeBase,
 } from '@xcritical/theme';
 import { IndicatorProps } from 'react-select/src/components/indicators';
 
@@ -73,7 +73,7 @@ export interface ISubComponents {
   noOptionsMessage?: IThemeBase<ISelectCssTheme>;
 }
 
-export interface ISelectCssTheme extends IStylesBase {
+export interface ISelectCssTheme extends ICSSProperties {
   divided?: {
     color: string;
   };

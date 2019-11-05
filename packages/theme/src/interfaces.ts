@@ -1,7 +1,6 @@
 import * as CSS from 'csstype';
 
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ICSSProperties extends CSS.Properties<string | number | any> {
   [key: string]: string | number | any | undefined;
 }

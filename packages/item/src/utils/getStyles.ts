@@ -1,7 +1,7 @@
 import {
   getAppearanceTheme,
   getFontStyle,
-  Theme,
+  ITheme,
   AllType,
 } from '@xcritical/theme';
 import { css, FlattenSimpleInterpolation, FlattenInterpolation } from 'styled-components';
@@ -11,7 +11,7 @@ import { IItemTheme, IItemProps } from '../interfaces';
 
 
 export const itemTheme = (
-  theme: Theme<IItemTheme>,
+  theme: ITheme<IItemTheme>,
   appearanceName: string,
   baseAppearance: string,
   propertyPath: string | string[],
