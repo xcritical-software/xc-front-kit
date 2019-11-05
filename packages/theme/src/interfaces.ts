@@ -1,3 +1,11 @@
+import * as CSS from 'csstype';
+
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface ICSSProperties extends CSS.Properties<string | number | any> {
+  [key: string]: string | number | any | undefined;
+}
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type AllType = undefined | null | boolean | Buffer | number | string | Date | RegExp | Error
 | Iterator<any> | any[] | Function | Promise<any> | Map<any, any> | WeakMap<any, any> | Set<any>
@@ -44,21 +52,6 @@ export interface ITransition {
   delay?: OneOrManyString;
 }
 
-export interface IStylesBase {
-  display?: string;
-  background?: string;
-  color?: string;
-  fill?: string;
-  width?: number | string;
-  height?: number | string;
-  padding?: number | string | IIndentation;
-  margin?: number | string |IIndentation;
-  font?: IFont;
-  border?: IBorder;
-  borderRadius?: IBorderRadius | number;
-  transition?: ITransition;
-  opacity?: number;
-}
 
 export interface IHtmlActionStates<T> {
   hover?: T;
@@ -69,13 +62,13 @@ export interface IHtmlActionStates<T> {
   invalid?: T;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export type IThemeBase<T> = T & IHtmlActionStates<T>;
 
-export type ITheme<T = IStylesBase> = IThemeBase<T> & {
-  appearance?: IAppearance<T>;
-};
-
-export type Theme<T = IStylesBase> = IThemeBase<T> & {
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export type ITheme<T = ICSSProperties | any> = Pick<IThemeBase<T>,
+Exclude<keyof IThemeBase<T>, 'appearance'>
+> & {
   appearance?: IAppearance<T>;
 };
 
@@ -83,8 +76,8 @@ export interface IAppearance<T> {
   [namespace: string]: IThemeBase<T>;
 }
 
-export interface IThemeNamespace<T = IStylesBase> {
-  [namespace: string]: ITheme<T>;
+export interface IThemeNamespace<T = ICSSProperties | any> {
+  [namespace: string]: ITheme<T> | IThemeBase<T>;
 }
 
 
