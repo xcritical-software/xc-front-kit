@@ -1,10 +1,10 @@
 import React, {
-  useState, useRef, useEffect, useCallback, useContext, 
+  useState, useRef, useEffect, useCallback, useContext,
 } from 'react';
 import Select from 'react-select';
 
 import { ThemeContext } from 'styled-components';
-import { IThemeNamespace, ITheme } from '@xcritical/theme';
+import { IThemeNamespace } from '@xcritical/theme';
 import { selectThemeNamespace, selectThemeStyle } from './theme';
 import {
   getFormatOptionLabel,
@@ -38,7 +38,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   components,
   ...rest
 }) => {
-  const themeContext = useContext<IThemeNamespace<ITheme<ISelectBaseTheme>>>(ThemeContext);
+  const themeContext = useContext<IThemeNamespace<ISelectBaseTheme>>(ThemeContext);
   const innerTheme = theme || themeContext;
 
   const selectRef = useRef<any>();
@@ -59,7 +59,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
 
   useEffect(() => {
     setCurrentOption(findOptionByValue(value, options));
-  }, [value]);
+  }, [options, value]);
 
   const styles = useRef(themeConverter(
     innerTheme,

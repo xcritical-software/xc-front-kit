@@ -11,7 +11,6 @@ interface IGenApperance {
   outline?: IBaseButtonTheme;
   borderColor?: string;
   fontWeight?: ICSSWideKeyword | 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
-  fontSize?: string;
 }
 
 export const generateApperance = ({
@@ -19,23 +18,21 @@ export const generateApperance = ({
   color,
   boxShadowColor,
   fontWeight,
-  fontSize,
   outline: _outline,
   borderColor = '',
 }: IGenApperance): IThemeBase<IBaseButtonTheme> => ({
   background,
   color,
   boxShadowColor: boxShadowColor || darken(0.1, background),
-  fontWeight,
-  fontSize,
+  ...fontWeight && { fontWeight },
   _outline,
   borderColor: borderColor || background,
   hover: {
     background: darken(0.1, background),
     color,
     boxShadowColor: boxShadowColor || darken(0.1, background),
-    fontWeight,
-    fontSize,
+    ...fontWeight && { fontWeight },
+
     _outline: {
       background,
       color,
@@ -46,8 +43,8 @@ export const generateApperance = ({
     background: darken(0.1, background),
     color,
     boxShadowColor: boxShadowColor || darken(0.1, background),
-    fontWeight,
-    fontSize,
+    ...fontWeight && { fontWeight },
+
     _outline,
     borderColor: borderColor || background,
   },
@@ -55,8 +52,8 @@ export const generateApperance = ({
     background: darken(0.1, background),
     color,
     boxShadowColor: boxShadowColor || darken(0.1, background),
-    fontWeight,
-    fontSize,
+    ...fontWeight && { fontWeight },
+
     _outline,
     borderColor: borderColor || background,
   },
@@ -64,8 +61,8 @@ export const generateApperance = ({
     background,
     color,
     boxShadowColor: boxShadowColor || darken(0.1, background),
-    fontWeight,
-    fontSize,
+    ...fontWeight && { fontWeight },
+
     _outline,
     borderColor: borderColor || background,
   },

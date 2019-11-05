@@ -1,7 +1,7 @@
 import memoizee from 'memoizee';
 import get from 'lodash.get';
 import {
-  getAppearanceTheme, getStatesTheme, IThemeNamespace, ITheme,
+  getAppearanceTheme, getStatesTheme, IThemeNamespace,
 } from '@xcritical/theme';
 import { isObject } from 'utilitify';
 
@@ -10,7 +10,7 @@ import { GetStyles, ISelectBaseTheme } from '../interfaces';
 
 
 export const selectTheme = (
-  theme: IThemeNamespace<ITheme<ISelectBaseTheme>> = {},
+  theme: IThemeNamespace<ISelectBaseTheme> = {},
   appearanceName: string,
   baseAppearance: string,
   propertyPath?: string | string[],
@@ -20,7 +20,7 @@ export const selectTheme = (
 };
 
 const getAppearanceStyleProperty = (
-  theme: IThemeNamespace<ITheme<ISelectBaseTheme>> = {},
+  theme: IThemeNamespace<ISelectBaseTheme> = {},
   appearance: string,
   baseAppearance: string,
   stateName: string,
@@ -50,97 +50,23 @@ export const getPaddingStyles: GetStyles = memoizee((
   theme,
   appearance = 'default',
   baseAppearance = 'default',
-) => {
-  const {
-    bottom,
-    left,
-    right,
-    top,
-  } = selectTheme(theme, appearance, baseAppearance, ['padding']);
-
-  return memoizee((elementName) => {
-    const element = selectTheme(theme, appearance, baseAppearance, elementName);
-
-    return {
-      paddingLeft: get(element, ['padding', 'left'], left),
-      paddingRight: get(element, ['padding', 'right'], right),
-      paddingBottom: get(element, ['padding', 'bottom'], bottom),
-      paddingTop: get(element, ['padding', 'top'], top),
-    };
-  });
-});
+) => memoizee((elementName) => ({
+  paddingLeft: selectTheme(theme, appearance, baseAppearance, [elementName, 'paddingLeft']),
+  paddingRight: selectTheme(theme, appearance, baseAppearance, [elementName, 'paddingRight']),
+  paddingBottom: selectTheme(theme, appearance, baseAppearance, [elementName, 'paddingBottom']),
+  paddingTop: selectTheme(theme, appearance, baseAppearance, [elementName, 'paddingTop']),
+})));
 
 export const getMarginStyles: GetStyles = memoizee((
   theme,
   appearance = 'default',
   baseAppearance = 'default',
-) => {
-  const {
-    bottom,
-    left,
-    right,
-    top,
-  } = selectTheme(theme, appearance, baseAppearance, ['margin']);
-
-  return memoizee((
-    elementName,
-  ) => {
-    const element = selectTheme(theme, appearance, baseAppearance, elementName);
-
-    return {
-      marginLeft: get(element, ['margin', 'left'], left),
-      marginRight: get(element, ['margin', 'right'], right),
-      marginBottom: get(element, ['margin', 'bottom'], bottom),
-      marginTop: get(element, ['margin', 'top'], top),
-    };
-  });
-});
-
-export const getFontStyles: GetStyles = memoizee((
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-) => {
-  const {
-    size,
-    weight,
-  } = selectTheme(theme, appearance, baseAppearance, ['font']);
-
-  return memoizee((
-    elementName,
-  ) => {
-    const element = selectTheme(theme, appearance, baseAppearance, elementName);
-
-    return {
-      fontSize: get(element, ['font', 'size'], size),
-      fontWeight: get(element, ['font', 'weight'], weight),
-    };
-  });
-});
-
-export const getBorderStyles: GetStyles = memoizee((
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-) => {
-  const {
-    width,
-    style,
-    color,
-  } = selectTheme(theme, appearance, baseAppearance, ['border']);
-
-  return memoizee((
-    elementName,
-  ) => {
-    const element = selectTheme(theme, appearance, baseAppearance, elementName);
-
-    return {
-      borderWidth: get(element, ['border', 'width'], width),
-      borderStyle: get(element, ['border', 'style'], style),
-      borderColor: get(element, ['border', 'color'], color),
-    };
-  });
-});
+) => memoizee((elementName) => ({
+  marginLeft: selectTheme(theme, appearance, baseAppearance, [elementName, 'marginLeft']),
+  marginRight: selectTheme(theme, appearance, baseAppearance, [elementName, 'marginRight']),
+  marginBottom: selectTheme(theme, appearance, baseAppearance, [elementName, 'marginBottom']),
+  marginTop: selectTheme(theme, appearance, baseAppearance, [elementName, 'marginTop']),
+})));
 
 export const getWidthStyles: GetStyles = memoizee((
   theme,

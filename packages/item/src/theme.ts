@@ -1,18 +1,16 @@
 import { lighten } from 'polished';
 
-import * as colors from '@xcritical/theme';
+import { colors } from '@xcritical/theme';
 import { ItemTheme } from './interfaces';
 
 
 export const itemThemeNamespace = '@xcritical\\xc-item';
 
 export const itemThemeStyle: ItemTheme = {
-  padding: {
-    bottom: 15,
-    left: 15,
-    right: 15,
-    top: 15,
-  },
+  paddingBottom: 15,
+  paddingLeft: 15,
+  paddingRight: 15,
+  paddingTop: 15,
   prefixSpacing: 15,
   postfixSpacing: 15,
   borderRadius: 0,

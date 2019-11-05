@@ -8,6 +8,7 @@ import {
 
 import {
   getAppearanceTheme,
+  getThemedState,
   getStatesTheme,
   IThemeNamespace,
 } from '@xcritical/theme';
@@ -23,6 +24,15 @@ import {
 
 
 export const buttonTheme = memoize((
+  theme: IThemeNamespace<ButtonTheme> = {},
+  propertyPath?: string | string[],
+): ButtonTheme | any => {
+  const func = getThemedState(buttonThemeNamespace, buttonThemeStyle);
+  return func(theme, propertyPath);
+});
+
+
+export const buttonAppearanceTheme = memoize((
   theme: IThemeNamespace<ButtonTheme> = {},
   appearanceName: string,
   baseAppearance: string,
@@ -53,7 +63,7 @@ const getApperanceStyleProperty = memoize((
   stateName: string,
   outlineEnable: boolean,
 ): any => {
-  const appearanceTheme: ButtonTheme = buttonTheme(theme, appearance, baseAppearance);
+  const appearanceTheme: ButtonTheme = buttonAppearanceTheme(theme, appearance, baseAppearance);
   const statesTheme = getStatesTheme(appearanceTheme, stateName);
 
   if (outlineEnable) {
@@ -118,7 +128,7 @@ export const getItemInteractiveStyles = memoize(({
 }: IButtonProps): FlattenInterpolation<any> => {
   const standardFocus = css`
     &:focus {
-      box-shadow: 0 0 0 2px ${buttonTheme(theme, appearance, baseAppearance, 'boxShadowColor')};
+      box-shadow: 0 0 0 2px ${buttonAppearanceTheme(theme, appearance, baseAppearance, 'boxShadowColor')};
     }
   `;
   if (disabled) {
@@ -163,11 +173,16 @@ export const getButtonStyles = memoize(({
   ...props
 }: IButtonProps): Record<string, any> => {
   const {
-    background, styles, borderColor, outline,
-  } = buttonTheme(theme, appearance, baseAppearance);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    appearance: _dontTouch, prefixSpacing, postfixSpacing, ...rootStyles
+  } = buttonTheme(theme);
+  const {
+    background, borderColor, outline, ...styles
+  } = buttonAppearanceTheme(theme, appearance, baseAppearance);
 
   return {
     ...staticStyles,
+    ...rootStyles,
     ...styles,
     background,
     fill: background,

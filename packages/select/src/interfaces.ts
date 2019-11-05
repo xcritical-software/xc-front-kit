@@ -1,7 +1,7 @@
 import { OptionTypeBase } from 'react-select/src/types';
 import { FormatOptionLabelContext, Props } from 'react-select/src/Select';
 import {
-  ITheme, IThemeNamespace, ICSSProperties, IThemeBase,
+  IThemeNamespace, ICSSProperties, IThemeBase,
 } from '@xcritical/theme';
 import { IndicatorProps } from 'react-select/src/components/indicators';
 
@@ -23,7 +23,7 @@ export interface IIsRTL {
 }
 
 export interface IThemeProps {
-  theme: IThemeNamespace<ITheme<ISelectBaseTheme>>;
+  theme: IThemeNamespace<ISelectBaseTheme>;
   appearance: string;
   baseAppearance: string;
 }
@@ -46,7 +46,7 @@ export interface ISelectOnlyProps {
   isControlShouldRenderValue?: boolean;
   textPosition?: string;
   placeholder?: string;
-  theme?: IThemeNamespace<ITheme<ISelectBaseTheme>>;
+  theme?: IThemeNamespace<ISelectBaseTheme>;
 }
 
 export type SelectProps = Omit<Props<IOptionProps>, 'theme' | 'value'> & ISelectOnlyProps;
@@ -74,9 +74,7 @@ export interface ISubComponents {
 }
 
 export interface ISelectCssTheme extends ICSSProperties {
-  divided?: {
-    color: string;
-  };
+  divided?: ICSSProperties;
   boxShadow?: string;
   prefixSpacing?: number;
   postfixSpacing?: number;
@@ -92,7 +90,7 @@ export interface ISelectBaseTheme extends ISelectCssTheme, ISubComponents {
 
 export interface IReturnFunction< TValue> {
   (
-    theme: IThemeNamespace<ITheme<ISelectBaseTheme>>,
+    theme: IThemeNamespace<ISelectBaseTheme>,
     appearance: string,
     baseAppearance: string
   ): TValue;

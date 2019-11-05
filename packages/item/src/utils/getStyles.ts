@@ -1,6 +1,5 @@
 import {
   getAppearanceTheme,
-  getFontStyle,
   ITheme,
   AllType,
 } from '@xcritical/theme';
@@ -14,7 +13,7 @@ export const itemTheme = (
   theme: ITheme<IItemTheme>,
   appearanceName: string,
   baseAppearance: string,
-  propertyPath: string | string[],
+  propertyPath?: string | string[],
 ): AllType => {
   const func = getAppearanceTheme(itemThemeNamespace, itemThemeStyle);
   return func(theme, appearanceName, propertyPath, baseAppearance);
@@ -50,8 +49,11 @@ export const getBaseStyle = ({
 }: IItemProps): FlattenSimpleInterpolation => {
   const background: string = itemTheme(theme, appearance, baseAppearance, 'background');
   const color = itemTheme(theme, appearance, baseAppearance, 'color');
+  const styles = itemTheme(theme, appearance, baseAppearance);
   const fontWeight = itemTheme(theme, appearance, baseAppearance, 'fontWeight');
+
   return css`
+    ${styles}
     background: ${background};
     color: ${color};
     fill: ${color};
@@ -79,35 +81,16 @@ export const getItemStatesStyle = (stateName: string) => ({
   theme,
   baseAppearance = 'default',
   appearance = 'default',
-}: IItemProps) => {
-  const {
-    background,
-    color,
-    fontWeight,
-  } = itemTheme(theme, appearance, baseAppearance, stateName);
+}: IItemProps): FlattenInterpolation<any> => {
+  const styles = itemTheme(theme, appearance, baseAppearance, stateName);
+
   return css`
-    ${color && `color: ${color}`};
-    ${color && `fill: ${color}`};
-    ${background && `background: ${background}`};
-    ${fontWeight && `font-weight: ${fontWeight}`};
+    ${styles}
+
     &:focus {
       color: inherit;
     }
   `;
-};
-
-export const getFontSize = ({
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-}: IItemProps): FlattenSimpleInterpolation => {
-  const {
-    size = 0,
-    weight = 0,
-  } = itemTheme(
-    theme, appearance, baseAppearance, 'font',
-  );
-  return getFontStyle({ size, weight });
 };
 
 export const getItemInteractiveStyles = ({

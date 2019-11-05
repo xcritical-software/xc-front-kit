@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { rtlSide } from '@xcritical/theme';
 
 import {
-  buttonTheme,
+  buttonAppearanceTheme,
   getButtonStyles,
   getItemInteractiveStyles,
 } from '../utils';
@@ -33,13 +33,13 @@ export const Prefix = styled(PrefixPostfixBase)`
   theme,
   appearance = 'default',
   baseAppearance = 'default',
-}) => buttonTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
+}) => buttonAppearanceTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
 `;
 
 export const Postfix = styled(PrefixPostfixBase)`
   margin-${({ isRTL }) => (isRTL ? 'right' : 'left')}: ${(
   { theme, appearance = 'default', baseAppearance = 'default' },
-) => buttonTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
+) => buttonAppearanceTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
 `;
 
 export const ContentWrapper = styled.span`

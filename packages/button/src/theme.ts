@@ -1,4 +1,4 @@
-import * as colors from '@xcritical/theme';
+import { colors } from '@xcritical/theme';
 
 import { generateApperance } from './utils/themeTools';
 import { ButtonTheme } from './interfaces';
@@ -21,7 +21,6 @@ export const buttonThemeStyle: ButtonTheme = {
           color: colors.CHAROCOAL,
         },
       }),
-      borderRadius: '6px',
     },
     primary: generateApperance({ background: colors.PRIMARY, color: colors.WHITE }),
     secondary: generateApperance({ background: colors.SECONDARY, color: colors.WHITE }),
@@ -43,11 +42,12 @@ export const buttonThemeStyle: ButtonTheme = {
       },
     }),
   },
+  lineHeight: 1.69,
   prefixSpacing: 15,
   postfixSpacing: 15,
   fontWeight: 600,
-  fontSize: 14,
-  borderRadius: 3,
+  fontSize: '14px',
+  borderRadius: '3px',
 };
 
 

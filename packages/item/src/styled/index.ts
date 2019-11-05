@@ -6,7 +6,6 @@ import {
   itemTheme,
   getBaseStyle,
   getItemInteractiveStyles,
-  getFontSize,
 } from '../utils';
 import { IPrefixPostfixProps, IContentProps, IRootProps } from '../interfaces';
 
@@ -14,7 +13,6 @@ import { IPrefixPostfixProps, IContentProps, IRootProps } from '../interfaces';
 export const Root = styled.div<IRootProps>`
   ${getPaddingStyle};
   ${getBaseStyle}
-  ${getFontSize}
   box-sizing: border-box;
   cursor: pointer;
   display: ${({ isHidden }): string => (isHidden ? 'none' : 'flex')};
