@@ -10,6 +10,7 @@ import { createStore, combineReducers } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 import { ThemeProvider } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
+import { buttonThemeNamespace } from '@xcritical/button';
 import {
   PageOneContainer,
   PageTwoContainer,
@@ -64,22 +65,22 @@ setTimeout(
   () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
   200,
 );
-setTimeout(
-  () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
-  400,
-);
-setTimeout(
-  () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
-  600,
-);
-setTimeout(
-  () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
-  800,
-);
-setTimeout(
-  () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
-  1000,
-);
+// setTimeout(
+//   () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
+//   400,
+// );
+// setTimeout(
+//   () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
+//   600,
+// );
+// setTimeout(
+//   () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
+//   800,
+// );
+// setTimeout(
+//   () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
+//   1000,
+// );
 
 /* eslint no-unused-vars: "error" */
 const theme: IThemeNamespace = {
@@ -87,15 +88,16 @@ const theme: IThemeNamespace = {
     backgroundTopPanel: 'lightblue',
 
   } as IThemeNamespace,
-  // [ buttonThemeNamespace ]: {
-  //   appearance: {
-  //     ['filter-button-apply']: {
-  //       margin: {
-  //         .....
-  //       }
-  //     }
-  //   }
-  // }
+  [buttonThemeNamespace]: {
+    appearance: {
+      'filter-more-button-appearance': {},
+      'filter-apply-button-appearance': {},
+      'filter-delete-button-appearance': {},
+      'filter-tag-ok-button-appearance': {},
+      'filter-tag-cancel-button-appearance': {},
+      'filter-tag-delete-button-appearance': {},
+    },
+  },
 };
 
 storiesOf('Filter', module)

@@ -90,7 +90,6 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
         <FilterField>
           { Element
             && filter.condition
-            && conditions
             && conditions[filter.condition]
             && conditions[filter.condition].hasValue && (
             <Element
@@ -102,7 +101,7 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
           ) }
         </FilterField>
 
-        <Button onClick={ handleRemoveFilter }>Delete</Button>
+        <Button appearance="filter-delete-button-appearance" onClick={ handleRemoveFilter }>Delete</Button>
       </RowWrapper>
     );
   },

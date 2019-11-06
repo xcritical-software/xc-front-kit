@@ -68,12 +68,10 @@ export const RowWrapper = styled.div`
 
 
 export const TopPanel = styled.div`
+  ${({ theme }) => theme.topPanel}
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  margin-top: 70px;
-  border: 1px solid #c4c4c4;
-  background-color: ${({ theme: { backgroundTopPanel } }) => backgroundTopPanel};
 `;
 export const TopPanelTags = styled.div`
   display: flex;
@@ -104,7 +102,6 @@ export const WrapperTag = styled.div`
   ${({ theme }) => theme.tag}
   display: flex;
   align-items: center;
-  height: 37px;
   cursor: pointer;
 `;
 

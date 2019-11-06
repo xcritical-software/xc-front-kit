@@ -27,19 +27,6 @@ import {
   WrapperButtons,
 } from './styled';
 
-// const TagButtons = React.memo(
-//   ({ isEdit, handleOk, handleCancel, handleDelete }: any) => {
-//     console.log(isEdit, handleOk, handleCancel, handleDelete)
-//     if (isEdit)
-//     return (
-//       <>
-//           <Button onClick={handleOk}>OK</Button>
-//           <Button onClick={handleCancel}>CAN</Button>
-//         </>
-//       );
-//     return <Button onClick={handleDelete}>X</Button>;
-//   }
-// );
 
 const Tag = ({
   filter,
@@ -116,13 +103,13 @@ const Tag = ({
         { isEdit ? (
           <>
             <Button
-              appearance="filters-tag-ok-button-appearance"
+              appearance="filter-tag-ok-button-appearance"
               onClick={ handleOk }
             >
               OK
             </Button>
             <Button
-              appearance="filters-tag-cancel-button-appearance"
+              appearance="filter-tag-cancel-button-appearance"
               onClick={ handleCancel }
             >
               CAN
@@ -130,7 +117,7 @@ const Tag = ({
           </>
         ) : (
           <Button
-            appearance="filters-tag-delete-button-appearance"
+            appearance="filter-tag-delete-button-appearance"
             onClick={ handleDelete }
           >
             X

@@ -57,8 +57,9 @@ const Filter: React.SFC<IFilterProps> = ({
     [filterThemeNamespace]: defaultTheme,
   },
 }): ReactElement => {
+  const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(
-    filterTheme<IFilterTheme>(useContext(ThemeContext) || theme),
+    filterTheme<IFilterTheme>(theme || contextTheme),
   );
   const [open, changeOpen] = useState(true);
   const buttonsRef: MutableRefObject<any> = useRef();

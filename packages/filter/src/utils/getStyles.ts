@@ -12,8 +12,9 @@ import {
 
 
 export interface IFilterTheme extends ITheme {
-  backgroundTopPanel: string;
   tag: CSSProperties;
+  topPanel: CSSProperties;
+  row: CSSProperties;
 }
 
 export type IThemeProp<T> = T;
