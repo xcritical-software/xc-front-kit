@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React, {
   ReactElement,
   useState,
@@ -76,7 +78,6 @@ const Tag = ({
     changeValue(filter.value);
   }, [filter.value]);
 
-  const handleDelete = useCallback(() => removeFilter(), [removeFilter]);
 
   return (
     <WrapperTag theme={ theme } onKeyDown={ handleKeyDown }>
@@ -118,12 +119,12 @@ const Tag = ({
             </Button>
           </>
         ) : (
-          <Button
-            appearance="filter-tag-delete-button-appearance"
-            onClick={ handleDelete }
+          <button
+            // appearance="filter-tag-delete-button-appearance"
+            onClick={ removeFilter }
           >
             X
-          </Button>
+          </button>
         ) }
       </WrapperButtons>
     </WrapperTag>
@@ -137,7 +138,7 @@ const mapDispatchToProps = (
   changeFilter: (
     changes: IPayloadChangeFilter,
   ): any => dispatch(xcriticalFiltersChangeFilter(changes, name)),
-  removeFilter: (): any => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
+  removeFilter: (e: any): any => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
 });
 
 export default connect(

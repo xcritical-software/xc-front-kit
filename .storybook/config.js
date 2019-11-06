@@ -1,4 +1,4 @@
-import '@storybook/addon-console';
+// import '@storybook/addon-console';
 import { configure, addDecorator, addParameters } from '@storybook/react';
 import { themes } from '@storybook/theming';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';

@@ -65,8 +65,8 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
     );
 
     const handleRemoveFilter = useCallback(
-      () => removeFilter(guid),
-      [guid, removeFilter],
+      () => removeFilter(),
+      [removeFilter],
     );
 
     return (
@@ -107,7 +107,6 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
           </FilterField>
         </div>
         <div style={ { float: 'right' } }>
-
           <Button appearance="filter-delete-button-appearance" onClick={ handleRemoveFilter }>Delete</Button>
         </div>
       </RowWrapper>
@@ -117,12 +116,12 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
-  { name }: IFilterRowProps,
+  { name, guid }: IFilterRowProps,
 ): IMapDispatchFilterRow => ({
   changeFilter: (
     changes: IPayloadChangeFilter,
   ): any => dispatch(xcriticalFiltersChangeFilter(changes, name)),
-  removeFilter: (guid: string): any => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
+  removeFilter: (): any => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
 });
 
 export default connect(

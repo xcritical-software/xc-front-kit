@@ -24,7 +24,6 @@ import { data } from './dummyData';
 import { getConfigSuccess } from './actions';
 import './index.css';
 import { filterThemeNamespace } from '../src/theme';
-// import { buttonThemeNamespace } from '../../button/src';
 
 
 const store = createStore(

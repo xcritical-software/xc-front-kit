@@ -8,7 +8,7 @@ export interface IFilterTag extends IFilterRow {
 export interface IFilterRow {
   filters: IFilter[];
   filter: IFilterFromStore;
-  removeFilter: Function;
+  removeFilter: any;
   guid: string;
   changeFilter: Function;
   filterItems: any;

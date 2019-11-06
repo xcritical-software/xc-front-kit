@@ -70,7 +70,7 @@ export const PureButton = ({
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const RootElement = useMemo(() => Root(getElement()), [disabled, href]);
-
+  console.log('!!!BUTTON', children);
   return (
     <ThemeProvider theme={ innerTheme }>
       <RootElement
