@@ -1,6 +1,4 @@
-
-import * as colors from '@xcritical/theme';
-import { rgba } from 'polished';
+import { darken, lighten } from 'polished';
 import { IFilterTheme } from './utils';
 
 
@@ -8,21 +6,22 @@ export const filterThemeNamespace = '@xcritical\\xc-filter';
 
 export const defaultTheme: IFilterTheme = {
   topPanel: {
-    background: 'red',
-    border: '1px solid black',
-    paddingRight: '50px',
+    background: 'lightblue',
+    paddingRight: '20px',
   },
   tag: {
     padding: '0px 0px 0px 8px',
     margin: '0px 10px 4px 10px',
     borderRadius: '6px',
-    border: `1px ${colors.BLACK_RAISIN} solid`,
-    backgroundColor: rgba(0, 0, 0, 0),
+    border: 'none',
+    backgroundColor: darken(0.15, 'lightblue'),
     fontSize: '16px',
+    fontWeight: 400,
   },
-  row: {
-    marginBottom: '25px',
-    height: '25px',
+  filtersPanel: {
+    background: lighten(0.15, 'lightblue'),
   },
-
+  filterPanelButtons: {
+    margin: '30px auto',
+  },
 };

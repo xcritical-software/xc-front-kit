@@ -91,6 +91,7 @@ export interface IElementProps {
   handleChange: FunctionStringCallback;
   value: string;
   isEdit: boolean;
+  inTag: boolean;
 }
 export interface IDictionaryElementProps extends IElementProps {
   name: string;

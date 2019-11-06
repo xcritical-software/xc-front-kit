@@ -18,11 +18,11 @@ import {
   Wrapper,
   TopPanel,
   WrapperFilters,
-  FilterColumn,
-  FiltersHeader,
   TopPanelTags,
   TopPanelButtons,
   WrapperFilterButtons,
+  RowWrapper,
+  FilterField,
 } from './styled';
 import FilterRow from './FilterRow';
 import Tag from './Tag';
@@ -53,15 +53,13 @@ const Filter: React.SFC<IFilterProps> = ({
   openFilters,
   name,
   resetFilters,
-  theme = {
-    [filterThemeNamespace]: defaultTheme,
-  },
+  theme,
 }): ReactElement => {
   const contextTheme = useContext(ThemeContext);
-  const themeRef = useRef(
-    filterTheme<IFilterTheme>(theme || contextTheme),
-  );
-  const [open, changeOpen] = useState(true);
+  const themeRef = useRef(filterTheme<IFilterTheme>(theme || contextTheme || {
+    [filterThemeNamespace]: defaultTheme,
+  }));
+  const [isOpen, changeIsOpen] = useState(true);
   const buttonsRef: MutableRefObject<any> = useRef();
 
   useEffect(() => {
@@ -80,8 +78,8 @@ const Filter: React.SFC<IFilterProps> = ({
   );
 
   const handleOpen = useCallback(() => {
-    changeOpen(!open);
-  }, [open]);
+    changeIsOpen(!isOpen);
+  }, [isOpen]);
 
   const handleApply = useCallback(() => {
     const mappedFilters = activeFilters
@@ -121,7 +119,7 @@ const Filter: React.SFC<IFilterProps> = ({
             appearance="filters-more-button-appearance"
             onClick={ handleOpen }
           >
-            More filters
+            { isOpen ? 'Close filters' : 'More filters' }
           </Button>
           <Button
             appearance="filters-apply-button-appearance"
@@ -133,14 +131,24 @@ const Filter: React.SFC<IFilterProps> = ({
       </TopPanel>
 
       <WrapperFilters
-        open={ open }
+        open={ isOpen }
         top={ buttonsRef.current && buttonsRef.current.offsetTop }
+        theme={ themeRef.current }
       >
-        <FiltersHeader>
-          <FilterColumn>Filter name</FilterColumn>
-          <FilterColumn>Condition</FilterColumn>
-          <FilterColumn>Value</FilterColumn>
-        </FiltersHeader>
+        <RowWrapper>
+          <div style={ { width: '80%', display: 'flex' } }>
+
+            <FilterField>
+              <h3>Filter name</h3>
+            </FilterField>
+            <FilterField>
+              <h3>Condition</h3>
+            </FilterField>
+            <FilterField>
+              <h3>Value</h3>
+            </FilterField>
+          </div>
+        </RowWrapper>
         { activeFilters.map((filter: IStateFilter) => (
           <FilterRow
             filterItems={ filtersItems }
@@ -151,18 +159,20 @@ const Filter: React.SFC<IFilterProps> = ({
             key={ filter.key }
           />
         )) }
-        <WrapperFilterButtons>
+        <WrapperFilterButtons theme={ themeRef.current }>
           <Button
             appearance="filter-add-button-appearance"
-            disabled={ activeFilters.some(({ column, condition, value }: IStateFilter) => {
-              if (value) return false;
-              if (!condition) return true;
-              const filter = filters.find((f: IFilter) => f.field === column);
-              if (filter && filter.conditions[condition].hasValue) {
-                return !value;
-              }
-              return false;
-            }) }
+            disabled={ activeFilters.some(
+              ({ column, condition, value }: IStateFilter) => {
+                if (value) return false;
+                if (!condition) return true;
+                const filter = filters.find((f: IFilter) => f.field === column);
+                if (filter && filter.conditions[condition].hasValue) {
+                  return !value;
+                }
+                return false;
+              },
+            ) }
             onClick={ handleAddFilter }
           >
             Add new filter

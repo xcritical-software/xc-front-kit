@@ -32,6 +32,7 @@ const DictionarySelector = ({
   value,
   handleChange,
   isEdit,
+  inTag,
 }: IDictionaryElementProps): ReactElement => {
   if (!isEdit) {
     return (
@@ -40,13 +41,28 @@ const DictionarySelector = ({
       </span>
     );
   }
-
+  if (inTag) {
+    return (
+      <div style={ { width: '130px' } }>
+        <Select
+          items={ dictionaries[name].reduce(
+            (acc: any, elem: any) => ({ ...acc, [elem.id]: { name: elem.name } }),
+            {},
+          ) }
+          shouldFitContainer
+          onChange={ handleChange }
+          value={ value }
+        />
+      </div>
+    );
+  }
   return (
     <Select
       items={ dictionaries[name].reduce(
         (acc: any, elem: any) => ({ ...acc, [elem.id]: { name: elem.name } }),
         {},
       ) }
+      shouldFitContainer
       onChange={ handleChange }
       value={ value }
     />
@@ -111,12 +127,15 @@ export const createElement = ({
     case 'Currency':
       return Input;
     case 'Enum':
-      return ({ handleChange, value, isEdit }: IElementProps) => DictionarySelector({
+      return ({
+        handleChange, value, isEdit, inTag,
+      }: IElementProps) => DictionarySelector({
         name,
         dictionaries,
         value,
         handleChange,
         isEdit,
+        inTag,
       });
     case 'Boolean':
       return BooleanSelector;

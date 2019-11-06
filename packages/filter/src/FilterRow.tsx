@@ -71,37 +71,43 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
 
     return (
       <RowWrapper>
-        <FilterField>
-          <Select
-            onChange={ changeColumn }
-            items={ filterItems }
-            value={ filter.column }
-          />
-        </FilterField>
+        <div style={ { width: '80%', display: 'flex', alignItems: 'center' } }>
+          <FilterField>
+            <Select
+              shouldFitContainer
+              onChange={ changeColumn }
+              items={ filterItems }
+              value={ filter.column }
+            />
+          </FilterField>
 
-        <FilterField>
-          <Select
-            onChange={ changeCondition }
-            disabled={ !filter.column }
-            items={ conditions }
-            value={ filter.condition }
-          />
-        </FilterField>
-        <FilterField>
-          { Element
+          <FilterField>
+            <Select
+              shouldFitContainer
+              onChange={ changeCondition }
+              disabled={ !filter.column }
+              items={ conditions }
+              value={ filter.condition }
+            />
+          </FilterField>
+          <FilterField>
+            { Element
             && filter.condition
             && conditions[filter.condition]
             && conditions[filter.condition].hasValue && (
-            <Element
-              handleChange={ changeValue }
-              value={ filter.value }
-              key={ filter.column }
-              isEdit
-            />
-          ) }
-        </FilterField>
+              <Element
+                handleChange={ changeValue }
+                value={ filter.value }
+                key={ filter.column }
+                isEdit
+              />
+            ) }
+          </FilterField>
+        </div>
+        <div style={ { float: 'right' } }>
 
-        <Button appearance="filter-delete-button-appearance" onClick={ handleRemoveFilter }>Delete</Button>
+          <Button appearance="filter-delete-button-appearance" onClick={ handleRemoveFilter }>Delete</Button>
+        </div>
       </RowWrapper>
     );
   },

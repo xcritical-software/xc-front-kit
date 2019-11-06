@@ -14,7 +14,8 @@ import {
 export interface IFilterTheme extends ITheme {
   tag: CSSProperties;
   topPanel: CSSProperties;
-  row: CSSProperties;
+  filtersPanel: CSSProperties;
+  filterPanelButtons: CSSProperties;
 }
 
 export type IThemeProp<T> = T;

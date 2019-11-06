@@ -11,6 +11,7 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
 import { ThemeProvider } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
 import { buttonThemeNamespace } from '@xcritical/button';
+import { darken, lighten } from 'polished';
 import {
   PageOneContainer,
   PageTwoContainer,
@@ -59,34 +60,49 @@ const threeFiltersAdd = [
 
 setTimeout(
   () => store.dispatch(xcriticalFiltersInit('three', threeFilters)),
-  100,
+  500,
 );
 setTimeout(
   () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
-  200,
+  1000,
 );
-// setTimeout(
-//   () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
-//   400,
-// );
-// setTimeout(
-//   () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
-//   600,
-// );
-// setTimeout(
-//   () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
-//   800,
-// );
-// setTimeout(
-//   () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
-//   1000,
-// );
+
 
 /* eslint no-unused-vars: "error" */
-const theme: IThemeNamespace = {
+const themeOne: IThemeNamespace = {
   [filterThemeNamespace]: {
-    backgroundTopPanel: 'lightblue',
-
+    topPanel: {
+      background: 'rgb(252, 115, 3)',
+    },
+    tag: {
+      backgroundColor: darken(0.15, 'rgb(252, 115, 3)'),
+    },
+    filtersPanel: {
+      background: lighten(0.15, 'rgb(252, 115, 3)'),
+    },
+  } as IThemeNamespace,
+  [buttonThemeNamespace]: {
+    appearance: {
+      'filter-more-button-appearance': {},
+      'filter-apply-button-appearance': {},
+      'filter-delete-button-appearance': {},
+      'filter-tag-ok-button-appearance': {},
+      'filter-tag-cancel-button-appearance': {},
+      'filter-tag-delete-button-appearance': {},
+    },
+  },
+};
+const themeTwo: IThemeNamespace = {
+  [filterThemeNamespace]: {
+    topPanel: {
+      background: 'rgb(4, 219, 90)',
+    },
+    tag: {
+      backgroundColor: darken(0.15, 'rgb(4, 219, 90)'),
+    },
+    filtersPanel: {
+      background: lighten(0.15, 'rgb(4, 219, 90)'),
+    },
   } as IThemeNamespace,
   [buttonThemeNamespace]: {
     appearance: {
@@ -102,23 +118,19 @@ const theme: IThemeNamespace = {
 
 storiesOf('Filter', module)
   .add('One', () => (
-    <ThemeProvider theme={ theme }>
-      <Provider store={ store }>
-        <PageOneContainer theme={ theme } />
-      </Provider>
-    </ThemeProvider>
+    <Provider store={ store }>
+      <PageOneContainer theme={ themeOne } />
+    </Provider>
   ))
   .add('Two', () => (
-    <ThemeProvider theme={ theme }>
+    <ThemeProvider theme={ themeTwo }>
       <Provider store={ store }>
         <PageTwoContainer />
       </Provider>
     </ThemeProvider>
   ))
   .add('Three, with content', () => (
-    <ThemeProvider theme={ theme }>
-      <Provider store={ store }>
-        <PageThreeContainer />
-      </Provider>
-    </ThemeProvider>
+    <Provider store={ store }>
+      <PageThreeContainer />
+    </Provider>
   ));

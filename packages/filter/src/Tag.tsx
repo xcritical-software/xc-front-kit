@@ -94,6 +94,7 @@ const Tag = ({
               value={ value }
               key={ filter.column }
               isEdit={ isEdit }
+              inTag
             />
           </WrapperElement>
         ) }
