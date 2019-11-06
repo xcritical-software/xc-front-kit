@@ -134,15 +134,23 @@ const Tag = ({
   );
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  { name, guid }: IFilterTagProps,
-): IMapDispatchFilterRow => ({
-  changeFilter: (
-    changes: IPayloadChangeFilter,
-  ): any => dispatch(xcriticalFiltersChangeFilter(changes, name)),
-  removeFilter: (e: any): any => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
-});
+const mapDispatchToProps = () => {
+  let dispatchProps: IMapDispatchFilterRow;
+  return (
+    dispatch: Dispatch,
+    { name, guid }: IFilterTagProps,
+  ) => {
+    if (!dispatchProps) {
+      dispatchProps = {
+        changeFilter: (
+          changes: IPayloadChangeFilter,
+        ): any => dispatch(xcriticalFiltersChangeFilter(changes, name)),
+        removeFilter: (e: any): any => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
+      };
+    }
+    return dispatchProps;
+  };
+};
 
 export default connect(
   null,

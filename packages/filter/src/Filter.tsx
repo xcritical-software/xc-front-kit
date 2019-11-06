@@ -198,15 +198,23 @@ const mapStateToProps = (
   ...ownProps,
 });
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  { name }: any,
-): IMapDispatchFilter => ({
-  addFilter: () => dispatch(xcriticalFiltersAddFilter(name)),
-  apply: (filters: IStateRecivedFilter[]) => dispatch(xcriticalFiltersApply(name, filters)),
-  openFilters: () => dispatch(xcriticalFiltersOpenFilters(name)),
-  resetFilters: () => dispatch(xcriticalFiltersReset(name)),
-});
+const mapDispatchToProps = () => {
+  let dispatchProps: IMapDispatchFilter;
+  return (
+    dispatch: Dispatch,
+    { name }: any,
+  ) => {
+    if (!dispatchProps) {
+      dispatchProps = {
+        addFilter: () => dispatch(xcriticalFiltersAddFilter(name)),
+        apply: (filters: IStateRecivedFilter[]) => dispatch(xcriticalFiltersApply(name, filters)),
+        openFilters: () => dispatch(xcriticalFiltersOpenFilters(name)),
+        resetFilters: () => dispatch(xcriticalFiltersReset(name)),
+      };
+    }
+    return dispatchProps;
+  };
+};
 
 export default connect(
   mapStateToProps,

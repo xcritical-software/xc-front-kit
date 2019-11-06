@@ -28,7 +28,6 @@ export const buttonTheme = memoize((
   theme: IThemeNamespace<ButtonTheme> = {},
   propertyPath?: string | string[],
 ): ButtonTheme | any => {
-  console.log('BUTTON ', theme);
   const func = getThemedState(buttonThemeNamespace, buttonThemeStyle);
   return func(theme, propertyPath);
 }, {
@@ -98,7 +97,7 @@ const getWidth = ({
 }: IShouldFitContent): string => (shouldFitContent ? '100%' : 'auto');
 
 
-export const getButtonStatesStyle = (stateName: string) => ({
+const getButtonStatesStyle = (stateName: string) => ({
   theme,
   appearance = 'default',
   baseAppearance = 'default',

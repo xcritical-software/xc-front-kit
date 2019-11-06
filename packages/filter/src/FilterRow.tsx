@@ -114,15 +114,30 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
   },
 );
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  { name, guid }: IFilterRowProps,
-): IMapDispatchFilterRow => ({
-  changeFilter: (
-    changes: IPayloadChangeFilter,
-  ): any => dispatch(xcriticalFiltersChangeFilter(changes, name)),
-  removeFilter: (): any => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
-});
+const mapDispatchToProps = () => {
+  let dispatchProps: IMapDispatchFilterRow;
+  return (
+    dispatch: Dispatch,
+    { name, guid }: IFilterRowProps,
+  ) => {
+    if (!dispatchProps) {
+      dispatchProps = {
+        changeFilter: (
+          changes: IPayloadChangeFilter,
+        ): any => dispatch(xcriticalFiltersChangeFilter(changes, name)),
+        removeFilter: (): any => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
+      };
+    }
+    return dispatchProps;
+  };
+};
+
+// const mapDispatchToProps = (
+//   dispatch: Dispatch,
+//   { name, guid }: IFilterRowProps,
+// ): IMapDispatchFilterRow => ({
+
+// });
 
 export default connect(
   null,
