@@ -103,21 +103,17 @@ export const getFormatOptionLabel = (
   isRTL: boolean,
 ): any => (
   opt: IOptionItem,
-  lb: FormatOptionLabelMeta<IOptionProps>,
-) => {
-  console.log(lb);
-  const { context } = lb;
-  return (
-    <Option
-      theme={ theme }
-      appearance={ appearance }
-      baseAppearance={ baseAppearance }
-      prefix={ opt.prefix }
-      postfix={ opt.postfix }
-      context={ context }
-      isRTL={ isRTL }
-    >
-      { opt.label }
-    </Option>
-  );
-};
+  { context }: FormatOptionLabelMeta<IOptionProps>,
+) => (
+  <Option
+    theme={ theme }
+    appearance={ appearance }
+    baseAppearance={ baseAppearance }
+    prefix={ opt.prefix }
+    postfix={ opt.postfix }
+    context={ context }
+    isRTL={ isRTL }
+  >
+    { opt.label }
+  </Option>
+);

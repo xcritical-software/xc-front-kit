@@ -68,7 +68,8 @@ export const PureButton = ({
     return 'button';
   }, [disabled, href]);
 
-  const RootElement = useMemo(() => Root(getElement()), [getElement]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const RootElement = useMemo(() => Root(getElement()), [disabled, href]);
 
   return (
     <ThemeProvider theme={ innerTheme }>
