@@ -78,6 +78,7 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
               onChange={ changeColumn }
               items={ filterItems }
               value={ filter.column }
+              key={ filter.column }
             />
           </FilterField>
 
@@ -88,6 +89,7 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
               disabled={ !filter.column }
               items={ conditions }
               value={ filter.condition }
+              key={ filter.condition }
             />
           </FilterField>
           <FilterField>

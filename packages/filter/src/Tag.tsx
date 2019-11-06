@@ -82,8 +82,9 @@ const Tag = ({
     <WrapperTag theme={ theme } onKeyDown={ handleKeyDown }>
       <WrapperFilter onClick={ handleClick }>
         { displayName }
-
-        { filter.condition && conditions[filter.condition].name }
+        <span style={ { paddingLeft: '5px' } }>
+          { filter.condition && conditions[filter.condition].name }
+        </span>
 
         { filter.value
           && filter.condition

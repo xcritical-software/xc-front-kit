@@ -9,6 +9,7 @@ import {
   ITheme,
   IThemeNamespace,
   OneOrManyString,
+  IApperanceStateFunc,
 } from '../interfaces';
 
 
@@ -85,12 +86,12 @@ export function getStatesTheme<T>(
 export function getAppearanceTheme<T>(
   namespace: string,
   defaultTheme: ITheme | ITheme<T>,
-): Function {
+): IApperanceStateFunc<T> {
   return function func(
-    theme: IThemeNamespace,
-    appearanceName: string,
-    propertyPath: string,
-    baseAppearanceName?: string,
+    theme,
+    appearanceName,
+    propertyPath,
+    baseAppearanceName,
   ): ITheme | ITheme<T> {
     const themeExtractor = getThemedState(namespace, defaultTheme);
 

@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import get from 'lodash.get';
+import memoize from 'memoizee';
 import {
   css,
   FlattenInterpolation,
@@ -7,7 +8,7 @@ import {
 
 import {
   getAppearanceTheme,
-  getFontStyle,
+  getThemedState,
   getStatesTheme,
   IThemeNamespace,
 } from '@xcritical/theme';
@@ -18,39 +19,29 @@ import {
   staticStyles,
 } from '../theme';
 import {
-  IButtonProps, IButtonTheme, ButtonTheme, IShouldFitContent, ISpacing,
+  IButtonProps, ButtonTheme, IShouldFitContent, ISpacing,
 } from '../interfaces';
 
 
-export const buttonTheme = (
-  theme: IThemeNamespace<IButtonTheme> = {},
+export const buttonTheme = memoize((
+  theme: IThemeNamespace<ButtonTheme> = {},
+  propertyPath?: string | string[],
+): ButtonTheme | any => {
+  const func = getThemedState(buttonThemeNamespace, buttonThemeStyle);
+  return func(theme, propertyPath);
+});
+
+
+export const buttonAppearanceTheme = memoize((
+  theme: IThemeNamespace<ButtonTheme> = {},
   appearanceName: string,
   baseAppearance: string,
   propertyPath?: string | string[],
-): IButtonTheme | any => {
+): ButtonTheme | any => {
   const func = getAppearanceTheme(buttonThemeNamespace, buttonThemeStyle);
   return func(theme, appearanceName, propertyPath, baseAppearance);
-};
+});
 
-export const getPaddingStyle = ({
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-  isRTL,
-}: IButtonProps): FlattenInterpolation<any> => {
-  const {
-    bottom = 0,
-    left = 0,
-    right = 0,
-    top = 0,
-  } = buttonTheme(
-    theme, appearance, baseAppearance, 'padding',
-  );
-
-  return css`
-    padding: ${top}px ${isRTL ? left : right}px ${bottom}px ${isRTL ? right : left}px;
-  `;
-};
 
 const getTransition = (state = 'default'): string => (state === 'hover'
   ? 'background 0s ease-out, box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38)'
@@ -65,14 +56,14 @@ const getCursor = (state = 'default'): string => (
       : 'default'
 );
 
-const getApperanceStyleProperty = (
+const getApperanceStyleProperty = memoize((
   theme: IThemeNamespace<ButtonTheme> = {},
   appearance: string,
   baseAppearance: string,
   stateName: string,
   outlineEnable: boolean,
 ): any => {
-  const appearanceTheme: IButtonTheme = buttonTheme(theme, appearance, baseAppearance);
+  const appearanceTheme: ButtonTheme = buttonAppearanceTheme(theme, appearance, baseAppearance);
   const statesTheme = getStatesTheme(appearanceTheme, stateName);
 
   if (outlineEnable) {
@@ -87,47 +78,7 @@ const getApperanceStyleProperty = (
     };
   }
   return statesTheme();
-};
-
-export const getFontSize = ({
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-}: IButtonProps): FlattenInterpolation<any> => {
-  const {
-    size = 0,
-    weight = 0,
-  } = buttonTheme(
-    theme,
-    appearance,
-    baseAppearance,
-    'font',
-  );
-  return getFontStyle({
-    size,
-    weight,
-  });
-};
-
-export const getFocusSize = ({
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-}: IButtonProps): FlattenInterpolation<any> => {
-  const {
-    size = 0,
-    weight = 0,
-  } = buttonTheme(
-    theme,
-    appearance,
-    baseAppearance,
-    'font',
-  );
-  return getFontStyle({
-    size,
-    weight,
-  });
-};
+});
 
 
 const getVerticalAlign = ({
@@ -138,13 +89,6 @@ const getWidth = ({
   shouldFitContent,
 }: IShouldFitContent): string => (shouldFitContent ? '100%' : 'auto');
 
-const getBorderRadius = (
-  appearance = 'default',
-  baseAppearance = 'default',
-  theme?: IThemeNamespace<ButtonTheme>,
-): string => buttonTheme(
-  theme, appearance, baseAppearance, 'borderRadius',
-);
 
 export const getButtonStatesStyle = (stateName: string) => ({
   theme,
@@ -153,11 +97,8 @@ export const getButtonStatesStyle = (stateName: string) => ({
   outline,
 }: IButtonProps): FlattenInterpolation<any> => {
   const {
-    background,
-    color,
     boxShadowColor,
-    font,
-    borderColor,
+    ...styles
   } = getApperanceStyleProperty(
     theme,
     appearance,
@@ -167,11 +108,7 @@ export const getButtonStatesStyle = (stateName: string) => ({
   );
 
   return css`
-    ${color && `color: ${color}`};
-    ${background && `fill: ${background}`};
-    ${background && `background: ${background}`};
-    ${borderColor && `border-color: ${borderColor}`};
-    ${font ? getFontStyle(font) : null}
+    ${styles}
     cursor: ${getCursor(stateName)};
     transition: ${getTransition(stateName)};
 
@@ -182,7 +119,7 @@ export const getButtonStatesStyle = (stateName: string) => ({
   `;
 };
 
-export const getItemInteractiveStyles = ({
+export const getItemInteractiveStyles = memoize(({
   disabled,
   selected,
   theme,
@@ -191,7 +128,7 @@ export const getItemInteractiveStyles = ({
 }: IButtonProps): FlattenInterpolation<any> => {
   const standardFocus = css`
     &:focus {
-      box-shadow: 0 0 0 2px ${buttonTheme(theme, appearance, baseAppearance, 'boxShadowColor')};
+      box-shadow: 0 0 0 2px ${buttonAppearanceTheme(theme, appearance, baseAppearance, 'boxShadowColor')};
     }
   `;
   if (disabled) {
@@ -226,34 +163,33 @@ export const getItemInteractiveStyles = ({
     }
     ${standardFocus}
   `;
-};
+});
 
-export const getButtonStyles = ({
+export const getButtonStyles = memoize(({
   theme,
   appearance = 'default',
   baseAppearance = 'default',
   outline: outlineEnable,
   ...props
 }: IButtonProps): Record<string, any> => {
-  const background = buttonTheme(theme, appearance, baseAppearance, 'background');
-  const color = buttonTheme(theme, appearance, baseAppearance, 'color');
-  const borderColor = buttonTheme(theme, appearance, baseAppearance, 'borderColor');
-  const outline = buttonTheme(theme, appearance, baseAppearance, 'outline');
+  const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    appearance: _dontTouch, prefixSpacing, postfixSpacing, ...rootStyles
+  } = buttonTheme(theme);
+  const {
+    background, borderColor, outline, ...styles
+  } = buttonAppearanceTheme(theme, appearance, baseAppearance);
 
   return {
     ...staticStyles,
+    ...rootStyles,
+    ...styles,
     background,
-    color,
     fill: background,
     border: '1px solid transparent',
     borderColor: borderColor || 'transparent',
     cursor: getCursor(),
     transition: getTransition(),
-    borderRadius: `${getBorderRadius(
-      appearance,
-      baseAppearance,
-      theme,
-    )}px`,
     textAlign: 'center',
     justifyContent: 'center',
     boxSizing: 'border-box',
@@ -266,4 +202,4 @@ export const getButtonStyles = ({
       color: background,
     }),
   };
-};
+});

@@ -1,38 +1,30 @@
 import { lighten, darken } from 'polished';
 
-import * as themes from '@xcritical/theme';
+import { colors, ITheme } from '@xcritical/theme';
 import { ISelectBaseTheme } from './interfaces';
 
 
 export const selectThemeNamespace = '@xcritical\\select';
 
-export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
+export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
   display: 'inherit',
-  padding: {
-    bottom: 7,
-    left: 15,
-    right: 15,
-    top: 7,
-  },
-  margin: {
-    bottom: 0,
-    left: 0,
-    right: 0,
-    top: 0,
-  },
-  font: {
-    size: 13,
-    weight: 600,
-  },
+  paddingBottom: '7px',
+  paddingLeft: '15px',
+  paddingRight: '15px',
+  paddingTop: '7px',
+  marginBottom: 0,
+  marginLeft: 0,
+  marginRight: 0,
+  marginTop: 0,
+  fontSize: '13px',
+  fontWeight: 600,
   width: 335,
   borderRadius: 6,
-  border: {
-    width: 1,
-    style: 'solid',
-    color: themes.GRAY_LIGHT,
-  },
-  background: themes.GRAY_LIGHT,
-  color: themes.CHAROCOAL,
+  borderWidth: 1,
+  borderStyle: 'solid',
+  borderColor: colors.GRAY_LIGHT,
+  background: colors.GRAY_LIGHT,
+  color: colors.CHAROCOAL,
 
   appearance: {
     default: {
@@ -41,55 +33,51 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
       },
       hover: {
         background: '#efefef',
-        color: themes.CHAROCOAL,
+        color: colors.CHAROCOAL,
 
       },
       selected: {
         background: '#efefef',
-        color: themes.CHAROCOAL,
+        color: colors.CHAROCOAL,
 
       },
       active: {
         background: '#efefef',
-        color: themes.CHAROCOAL,
+        color: colors.CHAROCOAL,
 
       },
       disabled: {
         background: '#F0F0F0',
-        color: lighten(0.6, themes.CHAROCOAL),
+        color: lighten(0.6, colors.CHAROCOAL),
 
         opacity: 0.75,
       },
 
       dropdown: {
-        background: themes.GRAY_LIGHT,
+        background: colors.GRAY_LIGHT,
         selected: {
-          background: themes.GRAY_LIGHT,
+          background: colors.GRAY_LIGHT,
         },
         hover: {
-          background: themes.GRAY_LIGHT,
+          background: colors.GRAY_LIGHT,
         },
       },
       dropdownList: {
         borderRadius: 6,
-        padding: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
       },
       button: {
-        background: themes.GRAY_LIGHT,
-        padding: {
-          bottom: 7,
-          left: 15,
-          right: 15,
-          top: 7,
-        },
+        background: colors.GRAY_LIGHT,
+        paddingBottom: '7px',
+        paddingLeft: '15px',
+        paddingRight: '15px',
+        paddingTop: '7px',
         hover: {
-          background: darken(0.1, themes.GRAY_LIGHT),
-          color: themes.CHAROCOAL,
+          background: darken(0.1, colors.GRAY_LIGHT),
+          color: colors.CHAROCOAL,
         },
         focus: {
           boxShadow: 'none',
@@ -98,18 +86,11 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
 
       indicatorsContainer: {
         background: 'transparent',
-        margin: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
-        padding: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
+        marginBottom: 0,
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
         hover: {
           background: 'transparent',
         },
@@ -119,29 +100,23 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
       },
       indicatorSeparator: {
         background: '#A7A7A7',
-        padding: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
 
-        margin: {
-          bottom: 0,
-          left: 10,
-          right: 10,
-          top: 0,
-        },
+        marginBottom: 0,
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 0,
       },
       dropdownIndicator: {
         background: 'transparent',
         color: '#A7A7A7',
-        padding: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
         hover: {
           background: 'transparent',
         },
@@ -152,18 +127,14 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
       clearIndicator: {
         color: '#A7A7A7',
         background: 'transparent',
-        margin: {
-          bottom: 5,
-          left: 0,
-          right: 0,
-          top: 5,
-        },
-        padding: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
+        marginBottom: 5,
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 5,
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
         hover: {
           background: 'transparent',
         },
@@ -173,12 +144,10 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
       },
       loadingIndicator: {
         background: 'transparent',
-        padding: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
         hover: {
           background: 'transparent',
         },
@@ -188,27 +157,18 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
       },
       loadingMessage: {
         color: 'inherit',
-        font: {
-          size: 13,
-          weight: 'normal',
-        },
+        fontSize: '13px',
+        fontWeight: 'normal',
       },
 
       input: {
-        color: themes.CHAROCOAL,
+        color: colors.CHAROCOAL,
         background: 'transparent',
-        padding: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
-        margin: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        marginLeft: 0,
         hover: {
           background: 'transparent',
         },
@@ -242,10 +202,9 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
 
       option: {
         color: 'inherit',
-        font: {
-          size: 'inherit',
-          weight: 'normal',
-        },
+
+        fontSize: 'inherit',
+        fontWeight: 'normal',
         hover: {
           background: '#efefef',
         },
@@ -256,7 +215,7 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
           background: '#efefef',
         },
         selected: {
-          background: darken(0.1, themes.GRAY_LIGHT),
+          background: darken(0.1, colors.GRAY_LIGHT),
         },
       },
 
@@ -301,18 +260,11 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
         active: {
           background: 'transparent',
         },
-        margin: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
-        padding: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
+        marginRight: 0,
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
       },
       multiValueLabel: {
         color: 'inherit',
@@ -324,18 +276,11 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
         active: {
           background: 'transparent',
         },
-        padding: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
-        margin: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        marginTop: 0,
       },
       multiValueRemove: {
         color: '#A7A7A7',
@@ -347,25 +292,19 @@ export const selectThemeStyle: themes.ITheme<ISelectBaseTheme> = {
         active: {
           background: 'transparent',
         },
-        padding: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
-        margin: {
-          bottom: 0,
-          left: 4,
-          right: 4,
-          top: 3,
-        },
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        marginBottom: 0,
+        marginLeft: 4,
+        marginRight: 4,
+        marginTop: 3,
       },
       noOptionsMessage: {
         color: 'inherit',
-        font: {
-          size: 13,
-          weight: 'normal',
-        },
+        fontSize: '13px',
+        fontWeight: 'normal',
       },
     },
   },

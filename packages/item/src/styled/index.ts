@@ -2,23 +2,19 @@ import styled from 'styled-components';
 import { rtlSide } from '@xcritical/theme';
 
 import {
-  getPaddingStyle,
-  itemTheme,
+  itemAppearanceTheme,
   getBaseStyle,
   getItemInteractiveStyles,
-  getFontSize,
 } from '../utils';
 import { IPrefixPostfixProps, IContentProps, IRootProps } from '../interfaces';
 
 
 export const Root = styled.div<IRootProps>`
-  ${getPaddingStyle};
   ${getBaseStyle}
-  ${getFontSize}
   box-sizing: border-box;
   cursor: pointer;
   display: ${({ isHidden }): string => (isHidden ? 'none' : 'flex')};
-  border-radius: ${({ theme, appearance, baseAppearance }): string => itemTheme(theme, appearance, baseAppearance, 'borderRadius')}px;
+  border-radius: ${({ theme, appearance, baseAppearance }): string => itemAppearanceTheme(theme, appearance, baseAppearance, 'borderRadius')}px;
   flex: none;
   direction: ${({ isRTL }): string => (isRTL ? 'rtl' : 'ltr')};
   ${getItemInteractiveStyles}
@@ -27,7 +23,7 @@ export const Root = styled.div<IRootProps>`
     theme, appearance, baseAppearance, divided,
   }): any => divided
     && `
-    border-bottom: solid 1px ${itemTheme(theme, appearance, baseAppearance, ['divided', 'color'])};
+    border-bottom: solid 1px ${itemAppearanceTheme(theme, appearance, baseAppearance, ['divided', 'color'])};
   `};
 `;
 
@@ -40,11 +36,11 @@ const PrefixPostfixBase = styled.span<IPrefixPostfixProps>`
 `;
 
 export const Prefix = styled(PrefixPostfixBase)<IPrefixPostfixProps>`
-  margin-${({ isRTL }): string => (isRTL ? 'left' : 'right')}: ${({ theme, appearance, baseAppearance }): string => itemTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
+  margin-${({ isRTL }): string => (isRTL ? 'left' : 'right')}: ${({ theme, appearance, baseAppearance }): string => itemAppearanceTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
 `;
 
 export const Postfix = styled(PrefixPostfixBase)`
-  margin-${({ isRTL }): string => (isRTL ? 'right' : 'left')}: ${({ theme, appearance, baseAppearance }): string => itemTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
+  margin-${({ isRTL }): string => (isRTL ? 'right' : 'left')}: ${({ theme, appearance, baseAppearance }): string => itemAppearanceTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
 `;
 
 
