@@ -1,4 +1,4 @@
-import memoizee from 'memoizee';
+import memoizee from 'micro-memoize';
 import get from 'lodash.get';
 import {
   getAppearanceTheme, getStatesTheme, IThemeNamespace,

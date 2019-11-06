@@ -28,7 +28,7 @@
 	},
 	"dependencies": {
 		"@xcritical/theme": "^0.1.1",
-		"memoizee": "^0.4.14",
+		"micro-memoize": "^4.0.8",
 		"polished": "^3.0.0",
 		"react-select": "3.0.5",
 		"utilitify": "^1.0.2"

@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import get from 'lodash.get';
-import memoize from 'memoizee';
+import memoize from 'micro-memoize';
 import {
   css,
   FlattenInterpolation,

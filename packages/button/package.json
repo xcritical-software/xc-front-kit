@@ -32,7 +32,7 @@
 	"dependencies": {
 		"@xcritical/theme": "^0.1.0",
 		"lodash.get": "^4.x",
-		"memoizee": "0.4.14",
+		"micro-memoize": "4.0.8",
 		"polished": "^3.0.0"
 	}
 }
