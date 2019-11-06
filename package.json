@@ -45,19 +45,19 @@
     "@storybook/addon-actions": "^5.0.1",
     "@storybook/addon-backgrounds": "^5.0.1",
     "@storybook/addon-console": "^1.1.0",
-    "@storybook/addon-cssresources": "^5.0.1",
-    "@storybook/addon-info": "^5.2.0",
-    "@storybook/addon-storysource": "^5.0.1",
-    "@storybook/addon-viewport": "^5.0.1",
-    "@storybook/addons": "^5.0.1",
-    "@storybook/react": "^5.0.1",
-    "@storybook/theming": "^5.0.1",
-    "@types/history": "^2.0.45",
-    "@types/jest": "^24.0.18",
+    "@storybook/addon-cssresources": "^5.2.4",
+    "@storybook/addon-docs": "^5.2.5",
+    "@storybook/addon-info": "^5.2.4",
+    "@storybook/addon-storysource": "^5.2.4",
+    "@storybook/addon-viewport": "^5.2.4",
+    "@storybook/addons": "^5.2.4",
+    "@storybook/react": "^5.2.4",
+    "@storybook/theming": "^5.2.4",
+    "@types/history": "^4.7.3",
+    "@types/jest": "^24.0.19",
     "@types/kind-of": "^6.0.0",
     "@types/lodash.get": "^4.4.6",
     "@types/lodash.isempty": "^4.4.6",
-    "@types/memoizee": "^0.4.2",
     "@types/react-custom-scrollbars": "^4.0.6",
     "@types/react-dates": "^17.1.5",
     "@types/react-redux": "^7.1.4",
@@ -84,6 +84,9 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "react": "^16.9.0"
+    "react": "^16.9.0",
+    "@storybook/addon-knobs": "^5.2.5",
+    "@types/react-redux": "^7.1.5",
+    "styled-css-grid": "^1.2.1"
   }
 }

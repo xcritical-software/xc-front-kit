@@ -13,6 +13,7 @@ import {
 } from './styled/Button';
 import { IButtonProps, ButtonTheme } from './interfaces';
 import { buttonThemeNamespace, buttonThemeStyle } from './theme';
+import { getElement } from './utils';
 
 
 const defaultProps = {
@@ -43,7 +44,7 @@ export const PureButton = ({
   postfix,
   children,
   href,
-  disabled,
+  disabled = false,
   theme,
   textPosition,
   isRTL,
@@ -58,19 +59,12 @@ export const PureButton = ({
     if (onClickProps && !disabled) {
       onClickProps(e);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onClickProps, disabled]);
+  }, [disabled, onClickProps]);
 
-  const getElement = useCallback((): string => {
-    if (href) {
-      return disabled ? 'span' : 'a';
-    }
-    return 'button';
-  }, [disabled, href]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const RootElement = useMemo(() => Root(getElement()), [disabled, href]);
-  console.log('!!!BUTTON', children);
+  const RootElement = useMemo(() => Root(getElement(disabled, href)), [disabled, href]);
+
   return (
     <ThemeProvider theme={ innerTheme }>
       <RootElement

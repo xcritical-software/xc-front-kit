@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import get from 'lodash.get';
-import memoize from 'memoizee';
+import memoize from 'micro-memoize';
+import { shallowEqual } from 'fast-equals';
 import {
   css,
   FlattenInterpolation,
@@ -27,8 +28,11 @@ export const buttonTheme = memoize((
   theme: IThemeNamespace<ButtonTheme> = {},
   propertyPath?: string | string[],
 ): ButtonTheme | any => {
+  console.log('BUTTON ', theme);
   const func = getThemedState(buttonThemeNamespace, buttonThemeStyle);
   return func(theme, propertyPath);
+}, {
+  isEqual: shallowEqual,
 });
 
 
@@ -40,6 +44,8 @@ export const buttonAppearanceTheme = memoize((
 ): ButtonTheme | any => {
   const func = getAppearanceTheme(buttonThemeNamespace, buttonThemeStyle);
   return func(theme, appearanceName, propertyPath, baseAppearance);
+}, {
+  isEqual: shallowEqual,
 });
 
 
@@ -78,6 +84,8 @@ const getApperanceStyleProperty = memoize((
     };
   }
   return statesTheme();
+}, {
+  isEqual: shallowEqual,
 });
 
 
@@ -163,6 +171,8 @@ export const getItemInteractiveStyles = memoize(({
     }
     ${standardFocus}
   `;
+}, {
+  isEqual: shallowEqual,
 });
 
 export const getButtonStyles = memoize(({
@@ -202,4 +212,6 @@ export const getButtonStyles = memoize(({
       color: background,
     }),
   };
+}, {
+  isEqual: shallowEqual,
 });

@@ -106,12 +106,14 @@ const Tag = ({
         { isEdit ? (
           <>
             <Button
+              key="filter-tag-tag-button-appearance"
               appearance="filter-tag-ok-button-appearance"
               onClick={ handleOk }
             >
               OK
             </Button>
             <Button
+              key="filter-tag-cancel-button-appearance"
               appearance="filter-tag-cancel-button-appearance"
               onClick={ handleCancel }
             >
@@ -119,12 +121,13 @@ const Tag = ({
             </Button>
           </>
         ) : (
-          <button
-            // appearance="filter-tag-delete-button-appearance"
+          <Button
+            key="filter-tag-delete-button-appearance"
+            appearance="filter-tag-delete-button-appearance"
             onClick={ removeFilter }
           >
             X
-          </button>
+          </Button>
         ) }
       </WrapperButtons>
     </WrapperTag>
