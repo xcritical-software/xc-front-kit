@@ -11,7 +11,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
   paddingBottom: '7px',
   paddingLeft: '15px',
   paddingRight: '15px',
-  paddingTop: '7px',
+  paddingTop: '5px',
   marginBottom: 0,
   marginLeft: 0,
   marginRight: 0,
@@ -28,6 +28,9 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
 
   appearance: {
     default: {
+      container: {
+        display: 'inline-block',
+      },
       divided: {
         color: '#F0F0F0',
       },
@@ -36,6 +39,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         color: colors.CHAROCOAL,
 
       },
+
       selected: {
         background: '#efefef',
         color: colors.CHAROCOAL,
@@ -73,7 +77,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         background: colors.GRAY_LIGHT,
         paddingBottom: '7px',
         paddingLeft: '15px',
-        paddingRight: '15px',
+        paddingRight: '5px',
         paddingTop: '7px',
         hover: {
           background: darken(0.1, colors.GRAY_LIGHT),
@@ -107,7 +111,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
 
         marginBottom: 0,
         marginLeft: 10,
-        marginRight: 10,
+        marginRight: 5,
         marginTop: 0,
       },
       dropdownIndicator: {
@@ -168,7 +172,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         paddingLeft: 0,
         paddingRight: 0,
         paddingTop: 0,
-        marginLeft: 0,
+        margin: 0,
         hover: {
           background: 'transparent',
         },
@@ -192,10 +196,8 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         },
       },
       labelText: {
-        padding: {
-          left: 0,
-          right: 0,
-        },
+        paddingLeft: 0,
+        paddingRight: 0,
         prefixSpacing: 15,
         postfixSpacing: 15,
       },
@@ -221,15 +223,11 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
 
       valueContainer: {
         background: 'transparent',
-        padding: {
-          left: 0,
-          right: 0,
-          top: 0,
-          bottom: 3,
-        },
-        border: {
-          width: 0,
-        },
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        paddingBottom: 3,
+        borderWidth: 0,
         hover: {
           background: 'transparent',
         },
