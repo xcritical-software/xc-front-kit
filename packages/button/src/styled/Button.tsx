@@ -11,9 +11,9 @@ import {
 import { IPrefixProps, IButtonProps, IContentProps } from '../interfaces';
 
 
-const style = css<IButtonProps>`  
+const style = css<IButtonProps>`
 ${getButtonStyles};
-${getPaddingStyle};  
+${getPaddingStyle};
 ${getFontSize}
 ${getItemInteractiveStyles}
 ${({ height }) => (height ? `height: ${height}` : null)}
