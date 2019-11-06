@@ -17,8 +17,8 @@
 		"popover",
 		"style-components",
 		"themed"
-  ],
-  "publishConfig": {
+	],
+	"publishConfig": {
 		"access": "public"
 	},
 	"author": "XCritical Software",
@@ -31,6 +31,7 @@
 	},
 	"dependencies": {
 		"@xcritical/popper": "^0.1.0",
-		"@xcritical/theme": "^0.1.0"
+		"@xcritical/theme": "^0.1.0",
+		"styled-css-grid": "^1.2.1"
 	}
 }
