@@ -58,7 +58,6 @@
     "@types/lodash.isempty": "^4.4.6",
     "@types/react-custom-scrollbars": "^4.0.6",
     "@types/react-dates": "^17.1.5",
-    "@types/react-redux": "^7.1.4",
     "@types/react-router": "^5.0.5",
     "@types/react-router-dom": "^4.3.5",
     "@types/styled-components": "^4.1.19",
