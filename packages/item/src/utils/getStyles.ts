@@ -1,5 +1,6 @@
 import {
   getAppearanceTheme,
+  getThemedState,
   ITheme,
   AllType,
 } from '@xcritical/theme';
@@ -11,6 +12,14 @@ import { IItemTheme, IItemProps } from '../interfaces';
 
 export const itemTheme = (
   theme: ITheme<IItemTheme>,
+  propertyPath?: string | string[],
+): AllType => {
+  const func = getThemedState(itemThemeNamespace, itemThemeStyle);
+  return func(theme, propertyPath);
+};
+
+export const itemAppearanceTheme = (
+  theme: ITheme<IItemTheme>,
   appearanceName: string,
   baseAppearance: string,
   propertyPath?: string | string[],
@@ -19,40 +28,19 @@ export const itemTheme = (
   return func(theme, appearanceName, propertyPath, baseAppearance);
 };
 
-export const getPaddingStyle = ({
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-  isRTL,
-}: IItemProps): FlattenSimpleInterpolation => {
-  const {
-    bottom = 0,
-    left = 0,
-    right = 0,
-    top = 0,
-  } = itemTheme(
-    theme,
-    appearance,
-    baseAppearance,
-    'padding',
-  );
-
-  return css`
-    padding: ${top}px ${isRTL ? left : right}px ${bottom}px ${isRTL ? right : left}px;
-  `;
-};
-
 export const getBaseStyle = ({
   theme,
   appearance = 'default',
   baseAppearance = 'default',
 }: IItemProps): FlattenSimpleInterpolation => {
-  const background: string = itemTheme(theme, appearance, baseAppearance, 'background');
-  const color = itemTheme(theme, appearance, baseAppearance, 'color');
-  const styles = itemTheme(theme, appearance, baseAppearance);
-  const fontWeight = itemTheme(theme, appearance, baseAppearance, 'fontWeight');
+  const background: string = itemAppearanceTheme(theme, appearance, baseAppearance, 'background');
+  const color = itemAppearanceTheme(theme, appearance, baseAppearance, 'color');
+  const baseStyles = itemTheme(theme);
+  const styles = itemAppearanceTheme(theme, appearance, baseAppearance);
+  const fontWeight = itemAppearanceTheme(theme, appearance, baseAppearance, 'fontWeight');
 
   return css`
+    ${baseStyles}
     ${styles}
     background: ${background};
     color: ${color};
@@ -69,7 +57,7 @@ export const getHeightStyle = ({
   appearance = 'default',
   baseAppearance = 'default',
 }: IItemProps): FlattenSimpleInterpolation | string => {
-  const height = itemTheme(theme, appearance, baseAppearance, 'height');
+  const height = itemAppearanceTheme(theme, appearance, baseAppearance, 'height');
   return height
     ? css`
         height: ${height}px;
@@ -82,7 +70,7 @@ export const getItemStatesStyle = (stateName: string) => ({
   baseAppearance = 'default',
   appearance = 'default',
 }: IItemProps): FlattenInterpolation<any> => {
-  const styles = itemTheme(theme, appearance, baseAppearance, stateName);
+  const styles = itemAppearanceTheme(theme, appearance, baseAppearance, stateName);
 
   return css`
     ${styles}
@@ -102,7 +90,7 @@ export const getItemInteractiveStyles = ({
 }: IItemProps): FlattenInterpolation<any> => {
   const standardFocus = css`
     &:focus {
-      box-shadow: 0 0 0 2px ${itemTheme(theme, appearance, baseAppearance, ['focus', 'outline'])} inset;
+      box-shadow: 0 0 0 2px ${itemAppearanceTheme(theme, appearance, baseAppearance, ['focus', 'outline'])} inset;
     }
   `;
 

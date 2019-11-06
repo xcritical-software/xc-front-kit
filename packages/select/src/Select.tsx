@@ -1,5 +1,5 @@
 import React, {
-  useState, useRef, useEffect, useCallback, useContext,
+  useState, useRef, useEffect, useCallback, useContext, useMemo,
 } from 'react';
 import Select from 'react-select';
 
@@ -44,12 +44,12 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   const selectRef = useRef<any>();
 
   const [options, setOptions] = useState(convertToOptions(items));
-  const [formatOptionLabel, setFormatOptionLabel] = useState(getFormatOptionLabel(
+  const formatOptionLabel = useMemo(() => getFormatOptionLabel(
     innerTheme,
     appearance,
     baseAppearance,
     isRTL,
-  ));
+  ), [appearance, baseAppearance, innerTheme, isRTL]);
 
   const [currentOption, setCurrentOption] = useState(findOptionByValue(value, options));
 
@@ -76,15 +76,6 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
       shouldFitContainer,
     );
   }, [innerTheme, appearance, baseAppearance, shouldFitContainer]);
-
-  useEffect(() => {
-    setFormatOptionLabel(getFormatOptionLabel(
-      innerTheme,
-      appearance,
-      baseAppearance,
-      isRTL,
-    ));
-  }, [innerTheme, appearance, baseAppearance, isRTL]);
 
 
   const onItemChanged = useCallback((selectedOption, action) => {
