@@ -198,8 +198,8 @@ storiesOf('Popover', module)
   .add('Controlled', () => (
     <Controlled />
   ))
-  .add('Full width content', () => (
-    <Popover position="bottom center" visible fullWidthContent content={ popoverContent }>
+  .add('Content fit container width', () => (
+    <Popover position="bottom center" visible shouldFitContainer content={ popoverContent }>
       <ComponentWithPopover>Bottom Center</ComponentWithPopover>
     </Popover>
   ));

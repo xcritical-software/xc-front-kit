@@ -9,7 +9,7 @@ export interface IPopover {
   position: Position;
   autoFlip?: boolean;
   visible?: boolean;
-  fullWidthContent?: boolean;
+  shouldFitContainer?: boolean;
   withArrow?: boolean;
   theme?: IThemeNamespace<IPopperTheme>;
   appearance?: string;
@@ -32,7 +32,7 @@ export interface IPopperTheme {
 }
 
 export interface IContent extends IThemed {
-  fullWidthContent?: boolean;
+  shouldFitContainer?: boolean;
 }
 
 export interface IThemed {

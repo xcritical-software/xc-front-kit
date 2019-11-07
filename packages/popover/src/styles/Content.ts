@@ -23,7 +23,7 @@ export const Content = styled.div<IContent>`
     margin-right: ${(props) => getPopperProperty(props)(['content', 'offset'])};
   }
   
-  width: ${(props) => (props.fullWidthContent ? '100%' : 'auto')};
+  width: ${({ shouldFitContainer }) => (shouldFitContainer ? '100%' : 'auto')};
 
   ${(props) => getContentStyles(props)}
 `;

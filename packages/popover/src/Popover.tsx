@@ -12,7 +12,7 @@ export const Popover: React.FC<IPopover> = ({
   children,
   visible = false,
   withArrow = true,
-  fullWidthContent = false,
+  shouldFitContainer = false,
   theme,
   appearance = 'default',
   baseAppearance = 'default',
@@ -21,7 +21,7 @@ export const Popover: React.FC<IPopover> = ({
     <Content
       ref={ popperProps.contentRef }
       data-content-position={ popperProps.position }
-      fullWidthContent={ fullWidthContent }
+      shouldFitContainer={ shouldFitContainer }
       theme={ theme }
       appearance={ appearance }
       baseAppearance={ baseAppearance }
