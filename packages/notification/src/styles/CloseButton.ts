@@ -1,24 +1,9 @@
-import { css } from 'styled-components';
+import { css, CSSObject, FlattenSimpleInterpolation } from 'styled-components';
 
 
-export const CloseButton = css`
+export const CloseButton = (closeButtonStyles: CSSObject): FlattenSimpleInterpolation => css`
   .Toastify__close-button {
-    color: #fff;
-    font-weight: bold;
-    font-size: 14px;
-    background: transparent;
-    outline: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: 0.3s ease;
-    align-self: flex-start;
-  }
-  
-  .Toastify__close-button--default {
-    color: #000;
-    opacity: 0.3;
+    ${closeButtonStyles}
   }
   
   .Toastify__close-button:hover,

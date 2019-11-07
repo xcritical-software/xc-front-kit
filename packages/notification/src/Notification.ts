@@ -5,11 +5,6 @@ import { getNotificationThemeGeneralStyles, getNotificationThemeTypeStyles } fro
 import { NotificationContainer } from './NotificationContainer';
 
 import {
-  ToastContainer,
-  Toast,
-  ToastBody,
-  CloseButton,
-  ProgressBar,
   BounceAnimation,
   ZoomAnimation,
   FlipAnimation,
@@ -18,17 +13,13 @@ import {
 
 
 export const Notification = styled(NotificationContainer)<INotification>`
-  ${ToastContainer};
-  ${Toast};
-  ${ToastBody};
-  ${CloseButton};
-  ${ProgressBar};
   ${BounceAnimation};
   ${ZoomAnimation};
   ${FlipAnimation};
   ${SlideAnimation};
   
   ${getNotificationThemeGeneralStyles}
+  
   ${(props) => getNotificationThemeTypeStyles(props)('default')}
   ${(props) => getNotificationThemeTypeStyles(props)('info')}
   ${(props) => getNotificationThemeTypeStyles(props)('warning')}

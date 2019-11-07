@@ -1,9 +1,8 @@
-import { css } from 'styled-components';
+import { css, CSSObject, FlattenSimpleInterpolation } from 'styled-components';
 
 
-export const ToastBody = css`
+export const ToastBody = (toastBodyStyles: CSSObject): FlattenSimpleInterpolation => css`
   .Toastify__toast-body {
-    margin: auto 0;
-    flex: 1;
+    ${toastBodyStyles}
   }
 `;

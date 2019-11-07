@@ -1,63 +1,63 @@
 import get from 'lodash.get';
 import { TypeOptions } from 'react-toastify';
-import { css, FlattenSimpleInterpolation } from 'styled-components';
+import { css, CSSObject, FlattenSimpleInterpolation } from 'styled-components';
+import { mergeDeep } from 'utilitify';
 
 import { INotification } from './interfaces';
-import { notificationThemeNamespace } from './theme';
+import { notificationThemeNamespace, defaultNotificationTheme } from './theme';
+
+import {
+  ToastContainer,
+  Toast,
+  ToastBody,
+  CloseButton,
+  ProgressBar,
+} from './styles';
 
 
-const getNotificationProperty = ({ theme }: INotification) => (propertyPath: string[]) => (
-  get(theme, [notificationThemeNamespace, ...propertyPath])
-);
+const getNotificationThemeStylesByProperty = (
+  { theme }: INotification,
+) => (propertyPath: string[]): CSSObject => {
+  const notificationTheme = get(theme, notificationThemeNamespace);
+  const mergedTheme = mergeDeep(defaultNotificationTheme, notificationTheme);
+
+  return get(mergedTheme, propertyPath);
+};
 
 export const getNotificationThemeGeneralStyles = (props: INotification):
 FlattenSimpleInterpolation => {
-  const container = getNotificationProperty(props)(['container']);
-  const toast = getNotificationProperty(props)(['toast']);
-  const body = getNotificationProperty(props)(['body']);
-  const closeButton = getNotificationProperty(props)(['closeButton']);
-  const progressBar = getNotificationProperty(props)(['progressBar']);
+  const containerStyles = getNotificationThemeStylesByProperty(props)(['container']);
+  const toastStyles = getNotificationThemeStylesByProperty(props)(['toast']);
+  const bodyStyles = getNotificationThemeStylesByProperty(props)(['body']);
+  const closeButtonStyles = getNotificationThemeStylesByProperty(props)(['closeButton']);
+  const progressBarStyles = getNotificationThemeStylesByProperty(props)(['progressBar']);
 
   return css`
-    .Toastify__toast-container {
-      ${container};
-    }
-    
-    .Toastify__toast {
-      ${toast};
-    }
-    
-    .Toastify__toast-body {
-      ${body};
-    }
-    
-    .Toastify__close-button {
-      ${closeButton};
-    }
-  
-    .Toastify__progress-bar {
-      ${progressBar};
-    }
+    ${ToastContainer(containerStyles)}
+    ${Toast(toastStyles)}
+    ${ToastBody(bodyStyles)}
+    ${CloseButton(closeButtonStyles)}
+    ${ProgressBar(progressBarStyles)}
   `;
 };
 
 export const getNotificationThemeTypeStyles = (props: INotification):
 (type: TypeOptions) => FlattenSimpleInterpolation => (type) => {
-  const toast = getNotificationProperty(props)([type, 'toast']);
-  const closeButton = getNotificationProperty(props)([type, 'closeButton']);
-  const progressBar = getNotificationProperty(props)([type, 'progressBar']);
+  const toastStyles = getNotificationThemeStylesByProperty(props)([type, 'toast']);
+  const closeButtonStyles = getNotificationThemeStylesByProperty(props)([type, 'closeButton']);
+  const progressBarStyles = getNotificationThemeStylesByProperty(props)([type, 'progressBar']);
 
   return css`
     .Toastify__toast--${type} {
-      ${toast};
+      ${toastStyles};
     }
     
     .Toastify__close-button--${type} {
-      ${closeButton};
+      ${closeButtonStyles};
     }
   
     .Toastify__progress-bar--${type} {
-      ${progressBar};
+      ${progressBarStyles};
     }
   `;
 };
