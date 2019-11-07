@@ -1,22 +1,18 @@
-import { IThemeNamespace, ITheme } from '@xcritical/theme';
+import { IThemeNamespace } from '@xcritical/theme';
 import { selectThemeNamespace } from '../src';
 import { ISelectBaseTheme } from '../src/interfaces';
 
 
-export const customTheme: IThemeNamespace<ITheme<ISelectBaseTheme>> = {
+export const customTheme: IThemeNamespace<ISelectBaseTheme> = {
   [selectThemeNamespace]: {
     appearance: {
       default: {
-        font: {
-          size: 13,
-          weight: 600,
-        },
-        padding: {
-          bottom: 11,
-          left: 15,
-          right: 15,
-          top: 11,
-        },
+        fontSize: '13px',
+        fontWeight: 600,
+        paddingBottom: '11px',
+        paddingLeft: '15px',
+        paddingRight: '15px',
+        paddingTop: '11px',
         divided: {
           color: '#4D4D4D',
         },
@@ -58,12 +54,10 @@ export const customTheme: IThemeNamespace<ITheme<ISelectBaseTheme>> = {
         },
         button: {
           background: 'linear-gradient(to top, #474747, #383838)',
-          padding: {
-            bottom: 11,
-            left: 5,
-            right: 5,
-            top: 11,
-          },
+          paddingBottom: '11px',
+          paddingLeft: '5px',
+          paddingRight: '5px',
+          paddingTop: '11px',
           hover: {
             background: 'linear-gradient(to top, #505050, #424242)',
 
@@ -74,12 +68,10 @@ export const customTheme: IThemeNamespace<ITheme<ISelectBaseTheme>> = {
         },
         dropdownIndicator: {
           background: 'transparent',
-          padding: {
-            bottom: 0,
-            left: 10,
-            right: 10,
-            top: 0,
-          },
+          paddingBottom: 0,
+          paddingLeft: '10px',
+          paddingRight: '10px',
+          paddingTop: 0,
         },
         input: {
           color: '#fff',

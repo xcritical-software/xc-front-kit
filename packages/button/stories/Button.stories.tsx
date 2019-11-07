@@ -44,24 +44,18 @@ function capitalize(str: string) {
 
 const theme: IThemeNamespace<ButtonTheme> = {
   [buttonThemeNamespace]: {
-    font: {
-      size: 15,
-    },
+    fontSize: '15px',
     appearance: {
       pay: {
         prefixSpacing: 15,
         postfixSpacing: 15,
         background: 'linear-gradient(to top,  #337e29, #66a436)',
         color: '#fff',
-        font: {
-          size: 15,
-        },
-        padding: {
-          bottom: 0,
-          left: 0,
-          right: 0,
-          top: 0,
-        },
+        fontSize: '15px',
+        paddingBottom: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
         hover: {
           background: 'linear-gradient(to top,  #66a436, #337e29)',
           color: '#fff',
@@ -98,9 +92,7 @@ const theme: IThemeNamespace<ButtonTheme> = {
         },
       },
       default: {
-        font: {
-          weight: 400,
-        },
+        fontWeight: 400,
         color: '#a7a7a7',
         background: '#575857',
         borderColor: 'transparent',
@@ -124,15 +116,11 @@ const theme: IThemeNamespace<ButtonTheme> = {
         },
       },
       primary: {
-        padding: {
-          bottom: 10,
-          left: 10,
-          right: 10,
-          top: 10,
-        },
-        font: {
-          weight: 600,
-        },
+        paddingBottom: '10px',
+        paddingLeft: '10px',
+        paddingRight: '10px',
+        paddingTop: '10px',
+        fontWeight: 600,
         color: '#fff',
         background: 'linear-gradient(to top, #337e29, #66a436)',
         borderColor: 'transparent',

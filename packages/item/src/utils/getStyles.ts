@@ -1,7 +1,7 @@
 import {
   getAppearanceTheme,
-  getFontStyle,
-  Theme,
+  getThemedState,
+  ITheme,
   AllType,
 } from '@xcritical/theme';
 import { css, FlattenSimpleInterpolation, FlattenInterpolation } from 'styled-components';
@@ -11,36 +11,21 @@ import { IItemTheme, IItemProps } from '../interfaces';
 
 
 export const itemTheme = (
-  theme: Theme<IItemTheme>,
+  theme: ITheme<IItemTheme>,
+  propertyPath?: string | string[],
+): AllType => {
+  const func = getThemedState(itemThemeNamespace, itemThemeStyle);
+  return func(theme, propertyPath);
+};
+
+export const itemAppearanceTheme = (
+  theme: ITheme<IItemTheme>,
   appearanceName: string,
   baseAppearance: string,
-  propertyPath: string | string[],
+  propertyPath?: string | string[],
 ): AllType => {
   const func = getAppearanceTheme(itemThemeNamespace, itemThemeStyle);
   return func(theme, appearanceName, propertyPath, baseAppearance);
-};
-
-export const getPaddingStyle = ({
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-  isRTL,
-}: IItemProps): FlattenSimpleInterpolation => {
-  const {
-    bottom = 0,
-    left = 0,
-    right = 0,
-    top = 0,
-  } = itemTheme(
-    theme,
-    appearance,
-    baseAppearance,
-    'padding',
-  );
-
-  return css`
-    padding: ${top}px ${isRTL ? left : right}px ${bottom}px ${isRTL ? right : left}px;
-  `;
 };
 
 export const getBaseStyle = ({
@@ -48,10 +33,15 @@ export const getBaseStyle = ({
   appearance = 'default',
   baseAppearance = 'default',
 }: IItemProps): FlattenSimpleInterpolation => {
-  const background: string = itemTheme(theme, appearance, baseAppearance, 'background');
-  const color = itemTheme(theme, appearance, baseAppearance, 'color');
-  const fontWeight = itemTheme(theme, appearance, baseAppearance, 'fontWeight');
+  const background: string = itemAppearanceTheme(theme, appearance, baseAppearance, 'background');
+  const color = itemAppearanceTheme(theme, appearance, baseAppearance, 'color');
+  const baseStyles = itemTheme(theme);
+  const styles = itemAppearanceTheme(theme, appearance, baseAppearance);
+  const fontWeight = itemAppearanceTheme(theme, appearance, baseAppearance, 'fontWeight');
+
   return css`
+    ${baseStyles}
+    ${styles}
     background: ${background};
     color: ${color};
     fill: ${color};
@@ -67,7 +57,7 @@ export const getHeightStyle = ({
   appearance = 'default',
   baseAppearance = 'default',
 }: IItemProps): FlattenSimpleInterpolation | string => {
-  const height = itemTheme(theme, appearance, baseAppearance, 'height');
+  const height = itemAppearanceTheme(theme, appearance, baseAppearance, 'height');
   return height
     ? css`
         height: ${height}px;
@@ -79,35 +69,16 @@ export const getItemStatesStyle = (stateName: string) => ({
   theme,
   baseAppearance = 'default',
   appearance = 'default',
-}: IItemProps) => {
-  const {
-    background,
-    color,
-    fontWeight,
-  } = itemTheme(theme, appearance, baseAppearance, stateName);
+}: IItemProps): FlattenInterpolation<any> => {
+  const styles = itemAppearanceTheme(theme, appearance, baseAppearance, stateName);
+
   return css`
-    ${color && `color: ${color}`};
-    ${color && `fill: ${color}`};
-    ${background && `background: ${background}`};
-    ${fontWeight && `font-weight: ${fontWeight}`};
+    ${styles}
+
     &:focus {
       color: inherit;
     }
   `;
-};
-
-export const getFontSize = ({
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-}: IItemProps): FlattenSimpleInterpolation => {
-  const {
-    size = 0,
-    weight = 0,
-  } = itemTheme(
-    theme, appearance, baseAppearance, 'font',
-  );
-  return getFontStyle({ size, weight });
 };
 
 export const getItemInteractiveStyles = ({
@@ -119,7 +90,7 @@ export const getItemInteractiveStyles = ({
 }: IItemProps): FlattenInterpolation<any> => {
   const standardFocus = css`
     &:focus {
-      box-shadow: 0 0 0 2px ${itemTheme(theme, appearance, baseAppearance, ['focus', 'outline'])} inset;
+      box-shadow: 0 0 0 2px ${itemAppearanceTheme(theme, appearance, baseAppearance, ['focus', 'outline'])} inset;
     }
   `;
 

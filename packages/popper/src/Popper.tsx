@@ -89,9 +89,12 @@ export const Popper: React.FC<IPopperProps> = ({
         { children }
       </div>
       { Content && (
-        <div ref={ contentRef } style={ state.popperStyles }>
-          <Content position={ state.position } arrowStyles={ state.arrowStyles } />
-        </div>
+        <Content
+          contentRef={ contentRef }
+          position={ state.position }
+          arrowStyles={ state.arrowStyles }
+          popperStyles={ state.popperStyles }
+        />
       ) }
     </div>
   );

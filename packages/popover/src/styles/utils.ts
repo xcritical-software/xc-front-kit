@@ -1,3 +1,4 @@
+import { CSSObject } from 'styled-components';
 import { getAppearanceTheme } from '@xcritical/theme';
 
 import { IThemed, ArrowDirection } from '../interfaces';
@@ -12,6 +13,13 @@ export const getPopperProperty = ({
   const func = getAppearanceTheme(popperThemeNamespace, defaultPopperTheme);
 
   return (propertyPath) => func(theme, appearance, propertyPath, baseAppearance);
+};
+
+export const getContentStyles = (props: IThemed): CSSObject => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { offset, ...contentStyles } = getPopperProperty(props)(['content']);
+
+  return contentStyles;
 };
 
 export const getArrowSizes = (

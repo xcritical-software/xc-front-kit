@@ -1,3 +1,4 @@
+import { RefObject } from 'react';
 import { Modifiers } from 'popper.js';
 
 
@@ -32,6 +33,8 @@ export interface IPopperState {
 }
 
 export interface IContent {
+  contentRef: RefObject<HTMLDivElement>;
   position: Position;
   arrowStyles: object;
+  popperStyles: object;
 }
