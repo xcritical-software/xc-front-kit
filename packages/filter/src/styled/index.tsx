@@ -1,15 +1,5 @@
 import styled from 'styled-components';
-import { IFilterTheme } from '../utils';
-
-
-export const Wrapper = styled.div`
-`;
-
-interface IWrapperFilters {
-  open: boolean;
-  top: number;
-  theme: IFilterTheme;
-}
+import { IWrapperFilters } from '../interfaces';
 
 
 export const WrapperFilters = styled.div<IWrapperFilters>`
@@ -21,16 +11,6 @@ export const WrapperFilters = styled.div<IWrapperFilters>`
   top: ${({ top }) => (top ? `${top + 40}px` : 'none')};
 `;
 
-
-export const BodyWrapper = styled.div`
-  height: 100%;
-  width: 80%;
-  min-width: 970px;
-  margin: auto;
-  margin-top: 30px;
-`;
-
-
 export const FilterField = styled.div`
   width: 30%;
   margin-left: 10px;
@@ -39,13 +19,11 @@ export const FilterField = styled.div`
 
 export const RowWrapper = styled.div`
   display: flex;
-  /* justify-content: space-between; */
-  /* align-items: center; */
-  /* width: 1200px; */
+  width: 80%;
+  align-items: center;
   margin: 0 auto;
   margin-top: 35px;
 `;
-
 
 export const TopPanel = styled.div`
   ${({ theme }) => theme.topPanel}

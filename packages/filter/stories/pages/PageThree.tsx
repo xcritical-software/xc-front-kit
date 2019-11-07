@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Filter from '../../src/Filter';
+import Filter from '../../src';
 import { conditions } from '../conditions';
 import { createElement } from '../createValueElement';
 import { IPage, IMappedFilter, IFilter } from '../interfaces';
@@ -14,10 +14,10 @@ const PageThree: React.FC<IPage> = ({ filters, dictionaries }) => {
       .map(({
         field, name, type, displayName,
       }: IMappedFilter) => ({
-        field, // что отправится в редюсер в поле column
-        displayName, // выводится пользователю
-        conditions: conditions[type], // conditions текущего фильтра
-        Element: createElement({ name, type, dictionaries }), // элемент для value
+        field,
+        displayName,
+        conditions: conditions[type],
+        Element: createElement({ name, type, dictionaries }),
       }))
     : [];
   return (

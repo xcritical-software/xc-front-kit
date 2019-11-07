@@ -9,13 +9,10 @@ import React, {
   useCallback,
 } from 'react';
 import { ThemeContext } from 'styled-components';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import Button from '@xcritical/button';
 
 import {
-  Wrapper,
   TopPanel,
   WrapperFilters,
   TopPanelTags,
@@ -24,22 +21,12 @@ import {
   RowWrapper,
   FilterField,
 } from './styled';
-import FilterRow from './FilterRow';
-import Tag from './Tag';
+import FilterRowContainer from './filterRowContainer';
+import TagContainer from './tagContainer';
 import {
-  xcriticalFiltersAddFilter,
-  xcriticalFiltersApply,
-  xcriticalFiltersOpenFilters,
-  xcriticalFiltersReset,
-} from './actions';
-import {
-  IFilterRecivedProps,
   IFilterProps,
   IStateFilter,
-  IStateRecivedFilter,
-  IFilter,
-  IFilterStateProps,
-  IMapDispatchFilter,
+  // IFilter,
 } from './interfaces';
 import { filterThemeNamespace, defaultTheme } from './theme';
 import { IFilterTheme, filterTheme } from './utils';
@@ -81,28 +68,12 @@ const Filter: React.SFC<IFilterProps> = ({
     changeIsOpen(!isOpen);
   }, [isOpen]);
 
-  const handleApply = useCallback(() => {
-    const mappedFilters = activeFilters
-      .filter(
-        ({ column }: IStateFilter) => column && column !== 'Please select...',
-      )
-      .map(({ column, condition, value }: IStateFilter) => ({
-        column,
-        condition,
-        value,
-      }));
-    apply(mappedFilters);
-  }, [activeFilters, apply]);
-
-  const handleAddFilter = useCallback(() => addFilter(), [addFilter]);
-  const handleResetFilters = useCallback(() => resetFilters(), [resetFilters]);
-
   return (
-    <Wrapper>
+    <div>
       <TopPanel theme={ themeRef.current }>
         <TopPanelTags>
           { activeFilters.map((filter) => (
-            <Tag
+            <TagContainer
               guid={ filter.key }
               filters={ filters }
               filter={ filter }
@@ -123,7 +94,7 @@ const Filter: React.SFC<IFilterProps> = ({
           </Button>
           <Button
             appearance="filters-apply-button-appearance"
-            onClick={ handleApply }
+            onClick={ apply }
           >
             Apply
           </Button>
@@ -136,21 +107,18 @@ const Filter: React.SFC<IFilterProps> = ({
         theme={ themeRef.current }
       >
         <RowWrapper>
-          <div style={ { width: '80%', display: 'flex' } }>
-
-            <FilterField>
-              <h3>Filter name</h3>
-            </FilterField>
-            <FilterField>
-              <h3>Condition</h3>
-            </FilterField>
-            <FilterField>
-              <h3>Value</h3>
-            </FilterField>
-          </div>
+          <FilterField>
+            <h3>Filter name</h3>
+          </FilterField>
+          <FilterField>
+            <h3>Condition</h3>
+          </FilterField>
+          <FilterField>
+            <h3>Value</h3>
+          </FilterField>
         </RowWrapper>
         { activeFilters.map((filter: IStateFilter) => (
-          <FilterRow
+          <FilterRowContainer
             filterItems={ filtersItems }
             guid={ filter.key }
             filters={ filters }
@@ -162,61 +130,32 @@ const Filter: React.SFC<IFilterProps> = ({
         <WrapperFilterButtons theme={ themeRef.current }>
           <Button
             appearance="filter-add-button-appearance"
-            disabled={ activeFilters.some(
-              ({ column, condition, value }: IStateFilter) => {
-                if (value) return false;
-                if (!condition) return true;
-                const filter = filters.find((f: IFilter) => f.field === column);
-                if (filter && filter.conditions[condition].hasValue) {
-                  return !value;
-                }
-                return false;
-              },
-            ) }
-            onClick={ handleAddFilter }
+            // disabled={ activeFilters.some(
+            //   ({ column, condition, value }: IStateFilter) => {
+            //     if (value) return false;
+            //     if (!condition) return true;
+            //     const filter = filters.find((f: IFilter) => f.field === column);
+            //     if (filter && filter.conditions[condition].hasValue) {
+            //       return !value;
+            //     }
+            //     return false;
+            //   },
+            // ) }
+            onClick={ addFilter }
           >
             Add new filter
           </Button>
           <Button
             appearance="filter-reset-button-appearance"
             disabled={ !activeFilters.some(({ column }: IStateFilter) => column) }
-            onClick={ handleResetFilters }
+            onClick={ resetFilters }
           >
             Reset filters
           </Button>
         </WrapperFilterButtons>
       </WrapperFilters>
-    </Wrapper>
+    </div>
   );
 };
 
-const mapStateToProps = (
-  state: any,
-  ownProps: IFilterRecivedProps,
-): IFilterStateProps => ({
-  activeFilters: state.filters[ownProps.name],
-  ...ownProps,
-});
-
-const mapDispatchToProps = () => {
-  let dispatchProps: IMapDispatchFilter;
-  return (
-    dispatch: Dispatch,
-    { name }: any,
-  ) => {
-    if (!dispatchProps) {
-      dispatchProps = {
-        addFilter: () => dispatch(xcriticalFiltersAddFilter(name)),
-        apply: (filters: IStateRecivedFilter[]) => dispatch(xcriticalFiltersApply(name, filters)),
-        openFilters: () => dispatch(xcriticalFiltersOpenFilters(name)),
-        resetFilters: () => dispatch(xcriticalFiltersReset(name)),
-      };
-    }
-    return dispatchProps;
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Filter);
+export default Filter;

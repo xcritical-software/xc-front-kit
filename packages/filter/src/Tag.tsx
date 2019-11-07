@@ -8,20 +8,11 @@ import React, {
   MutableRefObject,
   useCallback,
 } from 'react';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
 import Button from '@xcritical/button';
 import {
-  IMapDispatchFilterRow,
-  IPayloadChangeFilter,
   IFilter,
   IFilterTag,
-  IFilterTagProps,
 } from './interfaces';
-import {
-  xcriticalFiltersChangeFilter,
-  xcriticalFiltersRemoveFilter,
-} from './actions';
 import {
   WrapperTag,
   WrapperElement,
@@ -49,7 +40,7 @@ const Tag = ({
   const handleChange = (v: any): void => {
     changeValue(v);
   };
-  // eslint-disable
+
   const handleOk = useCallback(() => {
     changeIsEdit(false);
     changeFilter({ field: 'value', value, guid });
@@ -106,14 +97,12 @@ const Tag = ({
         { isEdit ? (
           <>
             <Button
-              key="filter-tag-tag-button-appearance"
               appearance="filter-tag-ok-button-appearance"
               onClick={ handleOk }
             >
               OK
             </Button>
             <Button
-              key="filter-tag-cancel-button-appearance"
               appearance="filter-tag-cancel-button-appearance"
               onClick={ handleCancel }
             >
@@ -122,7 +111,6 @@ const Tag = ({
           </>
         ) : (
           <Button
-            key="filter-tag-delete-button-appearance"
             appearance="filter-tag-delete-button-appearance"
             onClick={ removeFilter }
           >
@@ -134,25 +122,4 @@ const Tag = ({
   );
 };
 
-const mapDispatchToProps = () => {
-  let dispatchProps: IMapDispatchFilterRow;
-  return (
-    dispatch: Dispatch,
-    { name, guid }: IFilterTagProps,
-  ) => {
-    if (!dispatchProps) {
-      dispatchProps = {
-        changeFilter: (
-          changes: IPayloadChangeFilter,
-        ): any => dispatch(xcriticalFiltersChangeFilter(changes, name)),
-        removeFilter: (e: any): any => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
-      };
-    }
-    return dispatchProps;
-  };
-};
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Tag);
+export default Tag;

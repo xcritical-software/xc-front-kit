@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Filter from '../../src/Filter';
+import Filter from '../../src';
 import { conditions } from '../conditions';
 import { createElement } from '../createValueElement';
 import { IPage, IMappedFilter, IFilter } from '../interfaces';

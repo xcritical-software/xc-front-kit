@@ -45,8 +45,7 @@ export const Sidebar = ({
     animate: false,
     arrowToRight: false,
   });
-  console.log(themeRef.current);
-  console.log(theme);
+
   const [antiSelectLayer, changeAntiSelectLayer] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
 

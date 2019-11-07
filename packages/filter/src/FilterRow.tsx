@@ -1,8 +1,6 @@
 import React, {
   useState, useEffect, ReactElement, useCallback,
 } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 import Button from '@xcritical/button';
 import Select from '../../select/src';
 import {
@@ -10,15 +8,8 @@ import {
   RowWrapper,
 } from './styled';
 import {
-  xcriticalFiltersChangeFilter,
-  xcriticalFiltersRemoveFilter,
-} from './actions';
-import {
   IFilterRow,
   IFilter,
-  IPayloadChangeFilter,
-  IFilterRowProps,
-  IMapDispatchFilterRow,
 } from './interfaces';
 
 
@@ -64,82 +55,48 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
       [changeFilter, guid],
     );
 
-    const handleRemoveFilter = useCallback(
-      () => removeFilter(),
-      [removeFilter],
-    );
-
     return (
       <RowWrapper>
-        <div style={ { width: '80%', display: 'flex', alignItems: 'center' } }>
-          <FilterField>
-            <Select
-              shouldFitContainer
-              onChange={ changeColumn }
-              items={ filterItems }
-              value={ filter.column }
-              key={ filter.column }
-            />
-          </FilterField>
+        <FilterField>
+          <Select
+            shouldFitContainer
+            onChange={ changeColumn }
+            items={ filterItems }
+            value={ filter.column }
+            key={ filter.column }
+          />
+        </FilterField>
 
-          <FilterField>
-            <Select
-              shouldFitContainer
-              onChange={ changeCondition }
-              disabled={ !filter.column }
-              items={ conditions }
-              value={ filter.condition }
-              key={ filter.condition }
-            />
-          </FilterField>
-          <FilterField>
-            { Element
+        <FilterField>
+          <Select
+            shouldFitContainer
+            onChange={ changeCondition }
+            disabled={ !filter.column }
+            items={ conditions }
+            value={ filter.condition }
+            key={ filter.condition }
+          />
+        </FilterField>
+        <FilterField>
+          { Element
             && filter.condition
             && conditions[filter.condition]
             && conditions[filter.condition].hasValue && (
-              <Element
-                handleChange={ changeValue }
-                value={ filter.value }
-                key={ filter.column }
-                isEdit
-              />
-            ) }
-          </FilterField>
-        </div>
+            <Element
+              handleChange={ changeValue }
+              value={ filter.value }
+              key={ filter.column }
+              isEdit
+            />
+          ) }
+        </FilterField>
         <div style={ { float: 'right' } }>
-          <Button appearance="filter-delete-button-appearance" onClick={ handleRemoveFilter }>Delete</Button>
+          <Button appearance="filter-delete-button-appearance" onClick={ removeFilter }>Delete</Button>
         </div>
       </RowWrapper>
     );
   },
 );
 
-const mapDispatchToProps = () => {
-  let dispatchProps: IMapDispatchFilterRow;
-  return (
-    dispatch: Dispatch,
-    { name, guid }: IFilterRowProps,
-  ) => {
-    if (!dispatchProps) {
-      dispatchProps = {
-        changeFilter: (
-          changes: IPayloadChangeFilter,
-        ): any => dispatch(xcriticalFiltersChangeFilter(changes, name)),
-        removeFilter: (): any => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
-      };
-    }
-    return dispatchProps;
-  };
-};
 
-// const mapDispatchToProps = (
-//   dispatch: Dispatch,
-//   { name, guid }: IFilterRowProps,
-// ): IMapDispatchFilterRow => ({
-
-// });
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(FilterRow);
+export default FilterRow;

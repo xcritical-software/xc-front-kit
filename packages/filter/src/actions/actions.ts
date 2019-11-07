@@ -46,12 +46,9 @@ export function xcriticalFiltersRemoveFilter(
 }
 export function xcriticalFiltersApply(
   name: string,
-  filters: IStateRecivedFilter[],
 ): any {
-  console.log('request width filters: ', { name, filters });
   return {
     type: APPLY_FILTERS,
-    payload: { filters },
     name,
   };
 }

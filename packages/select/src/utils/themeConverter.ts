@@ -37,6 +37,7 @@ export const themeConverter = (
       ...getElementStyles('container'),
       ...getWidth('container', shouldFitContainer),
       ...getMargin('container'),
+      ...getBorderRadius('container'),
     }),
     control: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,

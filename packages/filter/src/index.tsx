@@ -1,4 +1,4 @@
-import Filter from './Filter';
+import FilterContainer from './filterContainer';
 
 
 export {
@@ -9,4 +9,4 @@ export {
 } from './actions';
 export { filters } from './filterReducer';
 
-export default Filter;
+export default FilterContainer;

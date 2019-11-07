@@ -73,11 +73,11 @@ export interface IFilterRecivedProps {
 export interface IFilterProps {
   filters: IFilter[];
   activeFilters: IStateFilter[];
-  addFilter: Function;
-  apply: Function;
-  openFilters: Function;
+  addFilter: any;
+  apply: any;
+  openFilters: any;
   name: string;
-  resetFilters: Function;
+  resetFilters: any;
   theme?: IThemeNamespace;
 }
 
@@ -132,4 +132,10 @@ export interface IMapDispatchFilter {
   apply: any;
   openFilters: any;
   resetFilters: any;
+}
+
+export interface IWrapperFilters {
+  open: boolean;
+  top: number;
+  theme: IFilterTheme;
 }
