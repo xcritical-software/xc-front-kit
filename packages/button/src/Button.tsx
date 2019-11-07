@@ -12,7 +12,6 @@ import {
   Content,
 } from './styled/Button';
 import { IButtonProps, ButtonTheme } from './interfaces';
-import { buttonThemeNamespace, buttonThemeStyle } from './theme';
 import { getElement } from './utils';
 
 
@@ -33,9 +32,6 @@ const defaultProps = {
   shouldFitContent: false,
   isRTL: false,
   textPosition: 'center',
-  theme: {
-    [buttonThemeNamespace]: buttonThemeStyle,
-  },
   onClick: () => {},
 };
 
@@ -44,7 +40,7 @@ export const PureButton = ({
   postfix,
   children,
   href,
-  disabled = false,
+  disabled,
   theme,
   textPosition,
   isRTL,
