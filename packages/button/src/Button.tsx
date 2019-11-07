@@ -48,7 +48,7 @@ export const PureButton = ({
   ...rest
 }: IButtonProps): React.ReactElement => {
   const themeContext = useContext<IThemeNamespace<ButtonTheme>>(ThemeContext);
-  const innerTheme = theme || themeContext;
+  const innerTheme = theme || themeContext || {};
   const buttonRef = useRef();
 
   const onClick = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
