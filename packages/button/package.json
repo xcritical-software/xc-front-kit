@@ -30,8 +30,9 @@
 		"styled-components": "^4.1.0"
 	},
 	"dependencies": {
-		"@xcritical/theme": "0.1.0",
+		"@xcritical/theme": "^0.1.0",
 		"lodash.get": "^4.x",
+		"micro-memoize": "4.0.8",
 		"polished": "^3.0.0"
 	}
 }

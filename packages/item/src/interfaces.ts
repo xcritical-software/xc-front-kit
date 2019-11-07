@@ -1,34 +1,16 @@
-import { ITheme } from '@xcritical/theme';
+import { ITheme, ICSSProperties } from '@xcritical/theme';
 
-
-export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
-export interface IPadding {
-  bottom?: number;
-  left?: number;
-  right?: number;
-  top?: number;
-}
-
-
-export interface IFont {
-  weight?: ICSSWideKeyword | 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
-}
 
 export interface IDivided {
   color: string;
 }
 
-export interface IItemTheme {
-  padding?: IPadding;
+export interface IItemTheme extends ICSSProperties {
   prefixSpacing?: number;
   postfixSpacing?: number;
   borderRadius?: number;
   outline?: string;
-  font?: IFont;
   divided?: IDivided;
-  background?: string;
-  color?: string;
-  fontWeight?: number;
 }
 
 export type ItemTheme = ITheme<IItemTheme>;

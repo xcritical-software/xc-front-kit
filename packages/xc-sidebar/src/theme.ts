@@ -1,4 +1,4 @@
-import * as colors from './colors';
+import { colors } from '@xcritical/theme';
 
 
 export const sidebarThemeNamespace = '@xcritical\\xc-sidebar';

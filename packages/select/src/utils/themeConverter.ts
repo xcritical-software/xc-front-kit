@@ -1,12 +1,10 @@
 import { StylesConfig } from 'react-select/src/styles';
-import { IThemeNamespace, ITheme } from '@xcritical/theme';
+import { IThemeNamespace } from '@xcritical/theme';
 
 import {
   getDisplayStyles,
   getPaddingStyles,
   getMarginStyles,
-  getFontStyles,
-  getBorderStyles,
   getWidthStyles,
   getHeightStyles,
   getBorderRadiusStyles,
@@ -19,7 +17,7 @@ import {
 
 
 export const themeConverter = (
-  theme: IThemeNamespace<ITheme<ISelectBaseTheme>>,
+  theme: IThemeNamespace<ISelectBaseTheme>,
   appearance: string,
   baseAppearance: string,
   shouldFitContainer: boolean,
@@ -29,8 +27,6 @@ export const themeConverter = (
   const getDisplay = getDisplayStyles(theme, appearance, baseAppearance);
   const getPadding = getPaddingStyles(theme, appearance, baseAppearance);
   const getMargin = getMarginStyles(theme, appearance, baseAppearance);
-  const getFont = getFontStyles(theme, appearance, baseAppearance);
-  const getBorder = getBorderStyles(theme, appearance, baseAppearance);
   const getBorderRadius = getBorderRadiusStyles(theme, appearance, baseAppearance);
   const getWidth = getWidthStyles(theme, appearance, baseAppearance);
   const getHeight = getHeightStyles(theme, appearance, baseAppearance);
@@ -38,17 +34,16 @@ export const themeConverter = (
   const styles: StylesConfig = {
     container: (css) => ({
       ...css,
-      ...getFont('container'),
+      ...getElementStyles('container'),
       ...getWidth('container', shouldFitContainer),
       ...getMargin('container'),
     }),
     control: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
+      ...getElementStyles('button'),
       ...getHeight('button'),
-      ...getBorder('button'),
       ...getPadding('button'),
       ...getBorderRadius('button'),
-      ...getElementStyles('button'),
       ...getInteractiveStyles('button', isDisabled, isFocused, isSelected),
     }),
     input: (css, { isDisabled, isFocused, isSelected }) => ({
@@ -60,7 +55,6 @@ export const themeConverter = (
     }),
     placeholder: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getFont('placeholder'),
       ...getElementStyles('placeholder'),
       ...getInteractiveStyles('placeholder', isDisabled, isFocused, isSelected),
     }),
@@ -71,16 +65,16 @@ export const themeConverter = (
     groupHeading: (css) => ({
       ...css,
     }),
-
     indicatorsContainer: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
+      ...getElementStyles('indicatorsContainer'),
       ...getPadding('indicatorsContainer'),
       ...getMargin('indicatorsContainer'),
-      ...getElementStyles('indicatorsContainer'),
       ...getInteractiveStyles('indicatorsContainer', isDisabled, isFocused, isSelected),
     }),
     indicatorSeparator: (css) => ({
       ...css,
+      ...getElementStyles('indicatorSeparator'),
       ...getPadding('indicatorSeparator'),
       ...getMargin('indicatorSeparator'),
       ...getElementStyles('indicatorSeparator'),
@@ -88,8 +82,8 @@ export const themeConverter = (
     }),
     dropdownIndicator: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getPadding('dropdownIndicator'),
       ...getElementStyles('dropdownIndicator'),
+      ...getPadding('dropdownIndicator'),
       ...getInteractiveStyles('dropdownIndicator', isDisabled, isFocused, isSelected),
     }),
     clearIndicator: (css, { isDisabled, isFocused, isSelected }) => ({
@@ -106,7 +100,6 @@ export const themeConverter = (
     }),
     loadingMessage: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getFont('loadingMessage'),
       ...getElementStyles('loadingMessage'),
       ...getInteractiveStyles('loadingMessage', isDisabled, isFocused, isSelected),
     }),
@@ -129,44 +122,39 @@ export const themeConverter = (
     option: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
       ...getPadding('option'),
-      ...getFont('option'),
       ...getElementStyles('option'),
       ...getInteractiveStyles('option', isDisabled, isFocused, isSelected),
     }),
     noOptionsMessage: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getFont('noOptionsMessage'),
       ...getElementStyles('noOptionsMessage'),
       ...getInteractiveStyles('noOptionsMessage', isDisabled, isFocused, isSelected),
     }),
 
     valueContainer: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
+      ...getElementStyles('valueContainer'),
       ...getPadding('valueContainer'),
       ...getDisplay('valueContainer'),
       ...getWidth('valueContainer'),
-      ...getElementStyles('valueContainer'),
       ...getInteractiveStyles('valueContainer', isDisabled, isFocused, isSelected),
     }),
     singleValue: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getDisplay('singleValue'),
-      ...getFont('singleValue'),
       ...getElementStyles('singleValue'),
+      ...getDisplay('singleValue'),
       ...getInteractiveStyles('singleValue', isDisabled, isFocused, isSelected),
     }),
     multiValue: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getDisplay('multiValue'),
-      ...getFont('multiValue'),
       ...getElementStyles('multiValue'),
+      ...getDisplay('multiValue'),
       ...getPadding('multiValue'),
       ...getMargin('multiValue'),
       ...getInteractiveStyles('multiValue', isDisabled, isFocused, isSelected),
     }),
     multiValueLabel: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
-      ...getFont('multiValueLabel'),
       ...getElementStyles('multiValueLabel'),
       ...getPadding('multiValueLabel'),
       ...getMargin('multiValueLabel'),

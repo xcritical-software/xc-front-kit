@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/theme",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "",
 	"main": "src/index.ts",
 	"scripts": {
@@ -32,8 +32,10 @@
 		"kind-of": "^6.0.2",
 		"lodash.get": "4.x",
 		"lodash.isempty": "4.x",
-		"memoizee": "^0.4.14",
+		"micro-memoize": "^4.0.8",
 		"polished": "3.x",
-		"utilitify": "^1.0.2"
+		"utilitify": "^1.0.2",
+		"csstype": "^2.2.0",
+		"fast-equals": "2.0.0"
 	}
 }

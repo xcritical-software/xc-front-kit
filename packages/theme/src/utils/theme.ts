@@ -1,6 +1,7 @@
 import get from 'lodash.get';
 import isEmpty from 'lodash.isempty';
-import memoize from 'memoizee';
+import memoize from 'micro-memoize';
+import { shallowEqual } from 'fast-equals';
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { mergeDeep } from 'utilitify';
@@ -9,6 +10,7 @@ import {
   ITheme,
   IThemeNamespace,
   OneOrManyString,
+  IApperanceStateFunc,
 } from '../interfaces';
 
 
@@ -36,15 +38,21 @@ export const mergeBaseTheme = memoize(
     namespace && theme[namespace] && !isEmpty(theme[namespace])
       ? mergeDeep(defaultTheme, theme[namespace])
       : defaultTheme),
+  {
+    isEqual: shallowEqual,
+  },
 );
 
 
-export const getThemedState = (namespace: string, defaultTheme: ITheme) => (
+export const getThemedState = (namespace: string, defaultTheme: ITheme) => memoize((
   theme: IThemeNamespace = {}, propertyPath: OneOrManyString | undefined,
 ): ITheme => {
   const componentTheme = mergeBaseTheme(namespace, defaultTheme, theme);
   return propertyPath ? get(componentTheme, propertyPath) : componentTheme;
-};
+},
+{
+  isEqual: shallowEqual,
+});
 
 export const compileAppearanceTheme = memoize(
   (namespace: string,
@@ -53,7 +61,6 @@ export const compileAppearanceTheme = memoize(
     appearanceName: string,
     baseAppearanceName: string): ITheme => {
     const themeExtractor = getThemedState(namespace, defaultTheme);
-
     if (appearanceName !== baseAppearanceName) {
       return mergeDeep(
         themeExtractor(theme, getAppearancePath(baseAppearanceName)) || {},
@@ -62,6 +69,9 @@ export const compileAppearanceTheme = memoize(
     }
 
     return themeExtractor(theme, getAppearancePath(appearanceName)) || {};
+  },
+  {
+    isEqual: shallowEqual,
   },
 );
 
@@ -85,13 +95,13 @@ export function getStatesTheme<T>(
 export function getAppearanceTheme<T>(
   namespace: string,
   defaultTheme: ITheme | ITheme<T>,
-): Function {
-  return function func(
-    theme: IThemeNamespace,
-    appearanceName: string,
-    propertyPath: string,
-    baseAppearanceName?: string,
-  ): ITheme | ITheme<T> {
+): IApperanceStateFunc<T> {
+  return memoize((
+    theme,
+    appearanceName,
+    propertyPath,
+    baseAppearanceName,
+  ): ITheme | ITheme<T> => {
     const themeExtractor = getThemedState(namespace, defaultTheme);
 
     const compiledTheme = compileAppearanceTheme(
@@ -107,7 +117,10 @@ export function getAppearanceTheme<T>(
     }
 
     return compiledTheme;
-  };
+  },
+  {
+    isEqual: shallowEqual,
+  });
 }
 
 export const getFontStyle = ({

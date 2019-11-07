@@ -1,11 +1,10 @@
 import React, {
-  useState, useRef, useEffect, useCallback, useContext,
+  useState, useRef, useEffect, useCallback, useContext, useMemo,
 } from 'react';
 import Select from 'react-select';
 
 import { ThemeContext } from 'styled-components';
-import { IThemeNamespace, ITheme } from '@xcritical/theme';
-import { selectThemeNamespace, selectThemeStyle } from './theme';
+import { IThemeNamespace } from '@xcritical/theme';
 import {
   getFormatOptionLabel,
   ClearIndicator,
@@ -16,7 +15,7 @@ import { convertToOptions, findOptionByValue, themeConverter } from './utils';
 import { SelectProps, ISelectBaseTheme } from './interfaces';
 
 
-export const PureSelect: React.FC<SelectProps> = ({
+export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   className,
   disabled = false,
   isMulti = false,
@@ -32,32 +31,32 @@ export const PureSelect: React.FC<SelectProps> = ({
   value,
   placeholder,
   onChange,
-  theme = {
-    [selectThemeNamespace]: selectThemeStyle,
-  },
+  theme,
+  components,
   ...rest
 }) => {
-  const themeContext = useContext<IThemeNamespace<ITheme<ISelectBaseTheme>>>(ThemeContext);
+  const themeContext = useContext<IThemeNamespace<ISelectBaseTheme>>(ThemeContext);
   const innerTheme = theme || themeContext;
 
   const selectRef = useRef<any>();
-  const options = useRef(convertToOptions(items));
-  const formatOptionLabel = useRef(getFormatOptionLabel(
+
+  const [options, setOptions] = useState(convertToOptions(items));
+  const formatOptionLabel = useMemo(() => getFormatOptionLabel(
     innerTheme,
     appearance,
     baseAppearance,
     isRTL,
-  ));
+  ), [appearance, baseAppearance, innerTheme, isRTL]);
 
-  const [currentOption, setCurrentOption] = useState(findOptionByValue(value, options.current));
+  const [currentOption, setCurrentOption] = useState(findOptionByValue(value, options));
 
   useEffect(() => {
-    options.current = convertToOptions(items);
+    setOptions(convertToOptions(items));
   }, [items]);
 
   useEffect(() => {
-    setCurrentOption(findOptionByValue(value, options.current));
-  }, [value]);
+    setCurrentOption(findOptionByValue(value, options));
+  }, [options, value]);
 
   const styles = useRef(themeConverter(
     innerTheme,
@@ -75,15 +74,6 @@ export const PureSelect: React.FC<SelectProps> = ({
     );
   }, [innerTheme, appearance, baseAppearance, shouldFitContainer]);
 
-  useEffect(() => {
-    formatOptionLabel.current = getFormatOptionLabel(
-      innerTheme,
-      appearance,
-      baseAppearance,
-      isRTL,
-    );
-  }, [innerTheme, appearance, baseAppearance, isRTL]);
-
 
   const onItemChanged = useCallback((selectedOption, action) => {
     setCurrentOption(selectedOption);
@@ -93,7 +83,8 @@ export const PureSelect: React.FC<SelectProps> = ({
 
       onChange(selectedValue, action);
     }
-  }, [isMulti, onChange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Select
@@ -102,8 +93,8 @@ export const PureSelect: React.FC<SelectProps> = ({
       classNamePrefix={ className }
       value={ currentOption }
       onChange={ onItemChanged }
-      options={ options.current }
-      formatOptionLabel={ formatOptionLabel.current }
+      options={ options }
+      formatOptionLabel={ formatOptionLabel }
       styles={ styles.current }
       isDisabled={ disabled }
       isMulti={ isMulti }
@@ -117,11 +108,11 @@ export const PureSelect: React.FC<SelectProps> = ({
         DropdownIndicator,
         ClearIndicator,
         MultiValueRemove,
-        ...rest.components,
+        ...components,
       } }
       { ...rest }
     />
   );
-};
+});
 
 export default PureSelect;
