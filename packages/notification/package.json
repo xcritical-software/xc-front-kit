@@ -14,7 +14,7 @@
     "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
   },
   "keywords": [
-    "popover",
+    "notification",
     "style-components",
     "themed"
   ],
@@ -23,7 +23,7 @@
   },
   "author": "XCritical Software",
   "license": "MIT",
-  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/popover#readme",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/notification#readme",
   "private": false,
   "peerDependencies": {
     "react": "^16.8.3",
