@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import Popper, { IContent } from '@xcritical/popper';
 
 import { IPopover } from './interfaces';
-import { Content, Arrow } from './styles';
+import { Content, Arrow, PopperWrapper } from './styles';
 
 
 export const Popover: React.FC<IPopover> = ({
@@ -12,16 +12,20 @@ export const Popover: React.FC<IPopover> = ({
   children,
   visible = false,
   withArrow = true,
+  shouldFitContainer = false,
   theme,
   appearance = 'default',
   baseAppearance = 'default',
 }) => {
   const PopoverContent = (popperProps: IContent): ReactElement => (
     <Content
+      ref={ popperProps.contentRef }
       data-content-position={ popperProps.position }
+      shouldFitContainer={ shouldFitContainer }
       theme={ theme }
       appearance={ appearance }
       baseAppearance={ baseAppearance }
+      style={ popperProps.popperStyles }
     >
       { content }
       { withArrow && (
@@ -38,12 +42,14 @@ export const Popover: React.FC<IPopover> = ({
   );
 
   return (
-    <Popper
-      position={ position }
-      autoFlip={ autoFlip }
-      content={ visible && PopoverContent }
-    >
-      { children }
-    </Popper>
+    <PopperWrapper>
+      <Popper
+        position={ position }
+        autoFlip={ autoFlip }
+        content={ visible && PopoverContent }
+      >
+        { children }
+      </Popper>
+    </PopperWrapper>
   );
 };

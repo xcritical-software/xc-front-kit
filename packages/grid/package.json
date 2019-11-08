@@ -1,0 +1,36 @@
+{
+	"name": "@xcritical/grid",
+	"version": "0.0.1",
+	"description": "XCritical Grid Component",
+	"main": "src/index.ts",
+	"scripts": {
+		"test": "exit 0",
+		"compile": "gulp --cwd . compile",
+		"build": "yarn clean && yarn compile",
+		"clean": "rimraf dist lib .publish"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+	},
+	"keywords": [],
+	"author": "XCritical Software",
+	"license": "MIT",
+	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/grid#readme",
+	"private": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"peerDependencies": {
+		"react": "^16.8.3",
+		"styled-components": "^4.1.0"
+	},
+	"dependencies": {
+		"@xcritical/theme": "^0.1.2",
+		"lodash.get": "4.x",
+		"mdi-react": "^6.2.0"
+	},
+	"devDependencies": {
+		"namor": "1.1.3"
+	}
+}

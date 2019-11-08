@@ -1,37 +1,39 @@
 import { darken } from 'polished';
 
-import { IButtonTheme, IFont } from '../interfaces';
+import { IThemeBase } from '@xcritical/theme';
+import { IBaseButtonTheme, ICSSWideKeyword } from '../interfaces';
 
 
 interface IGenApperance {
   background?: string;
   color?: string;
   boxShadowColor?: string;
-  font?: IFont;
-  outline?: IButtonTheme;
+  outline?: IBaseButtonTheme;
   borderColor?: string;
+  fontWeight?: ICSSWideKeyword | 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 }
 
 export const generateApperance = ({
   background = '',
   color,
   boxShadowColor,
-  font,
-  outline,
+  fontWeight,
+  outline: _outline,
   borderColor = '',
-}: IGenApperance): IButtonTheme => ({
+}: IGenApperance): IThemeBase<IBaseButtonTheme> => ({
   background,
   color,
   boxShadowColor: boxShadowColor || darken(0.1, background),
-  font,
-  outline,
+  ...fontWeight && { fontWeight },
+  _outline,
   borderColor: borderColor || background,
   hover: {
     background: darken(0.1, background),
     color,
     boxShadowColor: boxShadowColor || darken(0.1, background),
-    font,
-    outline: {
+    ...fontWeight && { fontWeight },
+
+    _outline: {
       background,
       color,
       borderColor: borderColor || background,
@@ -41,24 +43,27 @@ export const generateApperance = ({
     background: darken(0.1, background),
     color,
     boxShadowColor: boxShadowColor || darken(0.1, background),
-    font,
-    outline,
+    ...fontWeight && { fontWeight },
+
+    _outline,
     borderColor: borderColor || background,
   },
   active: {
     background: darken(0.1, background),
     color,
     boxShadowColor: boxShadowColor || darken(0.1, background),
-    font,
-    outline,
+    ...fontWeight && { fontWeight },
+
+    _outline,
     borderColor: borderColor || background,
   },
   disabled: {
     background,
     color,
     boxShadowColor: boxShadowColor || darken(0.1, background),
-    font,
-    outline,
+    ...fontWeight && { fontWeight },
+
+    _outline,
     borderColor: borderColor || background,
   },
 });

@@ -9,81 +9,60 @@ import {
   getAppearanceTheme,
   getFontStyle,
   getFontObj,
-  IStylesBase,
-  ITheme, IThemeBase, IAppearance,
+  ITheme, IThemeBase, ICSSProperties,
 } from '../src';
 
 
-interface ICustomAppearance extends IAppearance<IStylesBase> {
-  dark: IThemeBase<IStylesBase>;
-}
-
-interface ICustomTheme extends IThemeBase<IStylesBase> {
-  appearance?: ICustomAppearance;
-}
-
 interface ICustomThemeNamespace {
-  [namespace: string]: ICustomTheme;
+  [namespace: string]: ITheme;
 }
 
 const namespace = '@xcritical\\xc-theme';
 
 const defaultTheme: ITheme = {
-  padding: {
-    top: 5,
-    right: 10,
-    bottom: 5,
-    left: 10,
-  },
+  paddingTop: 5,
+  paddingRight: 10,
+  paddingBottom: 5,
+  paddingLeft: 10,
   appearance: {
     default: {
       background: '#fff',
       color: '#000',
-      font: {
-        weight: 600,
-        size: 14,
-      },
+      fontWeight: 600,
+      fontSize: 14,
     },
   },
 };
 
 const customTheme: ICustomThemeNamespace = {
   '@xcritical\\xc-theme': {
-    padding: {
-      top: 0,
-      right: 10,
-      bottom: 0,
-      left: 10,
-    },
+    paddingTop: 0,
+    paddingRight: 10,
+    paddingBottom: 0,
+    paddingLeft: 10,
     width: '100%',
     height: '100%',
     appearance: {
       default: {
         display: 'block',
         color: 'red',
-        font: {
-          weight: 500,
-        },
+        fontWeight: 600,
       },
       dark: {
         background: '#000',
         display: 'block',
         color: 'yellow',
-        font: {
-          weight: 500,
-        },
+        fontWeight: 500,
       },
     },
   },
 };
 
-const resultTheme: ICustomTheme = {
-  padding: {
-    top: 0,
-    right: 10,
-    bottom: 0,
-    left: 10,
-  },
+const resultTheme: ITheme = {
+  paddingTop: 0,
+  paddingRight: 10,
+  paddingBottom: 0,
+  paddingLeft: 10,
   width: '100%',
   height: '100%',
   appearance: {
@@ -91,33 +70,31 @@ const resultTheme: ICustomTheme = {
       background: '#fff',
       display: 'block',
       color: 'red',
-      font: {
-        weight: 500,
-        size: 14,
-      },
+      fontWeight: 600,
+      fontSize: 14,
     },
     dark: {
       background: '#000',
       display: 'block',
       color: 'yellow',
-      font: {
-        weight: 500,
-      },
+      fontWeight: 500,
     },
   },
 };
 
-const resultDefaultAppearance: IThemeBase<IStylesBase> = {
+const resultDefaultAppearance: IThemeBase<ICSSProperties> = {
   background: '#fff',
   color: 'red',
-  font: { weight: 500, size: 14 },
+  fontWeight: 600,
+  fontSize: 14,
   display: 'block',
 };
 
-const resultDarkAppearance: IThemeBase<IStylesBase> = {
+const resultDarkAppearance: IThemeBase<ICSSProperties> = {
   background: '#000',
   color: 'yellow',
-  font: { weight: 500, size: 14 },
+  fontWeight: 500,
+  fontSize: 14,
   display: 'block',
 };
 

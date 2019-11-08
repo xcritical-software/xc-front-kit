@@ -1,3 +1,11 @@
+// eslint-disable-next-line import/no-unresolved
+import * as CSS from 'csstype';
+
+
+export interface ICSSProperties extends CSS.Properties<string | number | any> {
+  [key: string]: string | number | any | undefined;
+}
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type AllType = undefined | null | boolean | Buffer | number | string | Date | RegExp | Error
 | Iterator<any> | any[] | Function | Promise<any> | Map<any, any> | WeakMap<any, any> | Set<any>
@@ -44,36 +52,23 @@ export interface ITransition {
   delay?: OneOrManyString;
 }
 
-export interface IStylesBase {
-  display?: string;
-  background?: string;
-  color?: string;
-  fill?: string;
-  width?: number | string;
-  height?: number | string;
-  padding?: number | string | IIndentation;
-  margin?: number | string |IIndentation;
-  font?: IFont;
-  border?: IBorder;
-  borderRadius?: IBorderRadius | number;
-  transition?: ITransition;
-  opacity?: number;
-}
 
-export type IThemeBase<T> = T & {
+export interface IHtmlActionStates<T> {
   hover?: T;
   active?: T;
   disabled?: T;
   selected?: T;
   focus?: T;
   invalid?: T;
-};
+}
 
-export type ITheme<T = IStylesBase> = IThemeBase<T> & {
-  appearance?: IAppearance<T>;
-};
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export type IThemeBase<T> = T & IHtmlActionStates<T>;
 
-export type Theme<T = IStylesBase> = IThemeBase<T> & {
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export type ITheme<T = ICSSProperties | any> = Pick<IThemeBase<T>,
+Exclude<keyof IThemeBase<T>, 'appearance'>
+> & {
   appearance?: IAppearance<T>;
 };
 
@@ -81,8 +76,17 @@ export interface IAppearance<T> {
   [namespace: string]: IThemeBase<T>;
 }
 
-export interface IThemeNamespace<T = IStylesBase> {
-  [namespace: string]: ITheme<T>;
+export interface IThemeNamespace<T = ICSSProperties | any> {
+  [namespace: string]: ITheme<T> | IThemeBase<T>;
+}
+
+
+export interface IApperanceStateFunc<T> {
+  (theme: IThemeNamespace,
+    appearanceName: string,
+    propertyPath?: string | string[],
+    baseAppearanceName?: string
+  ): ITheme | ITheme<T>;
 }
 
 export interface IReturnThemeFunction<T, TProp = [], TValue = any> {

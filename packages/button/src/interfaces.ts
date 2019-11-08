@@ -1,4 +1,6 @@
-import { ITheme, IThemeNamespace, IIndentation } from '@xcritical/theme';
+import {
+  ITheme, IThemeNamespace, ICSSProperties,
+} from '@xcritical/theme';
 import {
   FlattenInterpolation, ThemedStyledProps,
 } from 'styled-components';
@@ -6,31 +8,14 @@ import {
 
 export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
 
-export interface IFont {
-  weight?: ICSSWideKeyword | 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
-  size?: number;
-}
-
-export interface IButtonTheme {
-  padding?: IIndentation;
+export interface IBaseButtonTheme extends ICSSProperties {
   prefixSpacing?: number;
   postfixSpacing?: number;
-  borderRadius?: number;
-  borderColor?: string;
-  font?: IFont;
-  background?: string;
-  color?: string;
-  fontWeight?: number;
   boxShadowColor?: string;
-
-  outline?: IButtonTheme;
-  selected?: IButtonTheme;
-  active?: IButtonTheme;
-  hover?: IButtonTheme;
-  disabled?: IButtonTheme;
+  _outline?: ICSSProperties;
 }
 
-export type ButtonTheme = ITheme<IButtonTheme>;
+export type ButtonTheme = ITheme<IBaseButtonTheme>;
 
 export interface IButtonApperanceProps {
   theme?: IThemeNamespace<ButtonTheme>;

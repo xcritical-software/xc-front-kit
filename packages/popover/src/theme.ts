@@ -7,17 +7,9 @@ export const defaultPopperTheme: IPopperTheme = {
   content: {
     offset: '5px',
     background: '#fff',
-    padding: {
-      top: '5px',
-      right: '5px',
-      bottom: '5px',
-      left: '5px',
-    },
-    border: {
-      width: '1px',
-      radius: '2px',
-      color: '#ddd',
-    },
+    padding: '5px',
+    border: '1px solid #ddd',
+    borderRadius: '2px',
   },
   arrow: {
     offset: '10px',
