@@ -38,6 +38,7 @@
     "mdi-react": "^6.2.0"
   },
 	"dependencies": {
+    "utilitify": "^1.0.2",
     "@xcritical/theme": "^0.1.0",
     "@xcritical/select": "^0.0.1",
     "@xcritical/button": "^1.1.0"

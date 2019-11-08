@@ -28,7 +28,6 @@ import {
   IStateFilter,
   // IFilter,
 } from './interfaces';
-import { filterThemeNamespace, defaultTheme } from './theme';
 import { IFilterTheme, filterTheme } from './utils';
 
 
@@ -43,9 +42,7 @@ const Filter: React.SFC<IFilterProps> = ({
   theme,
 }): ReactElement => {
   const contextTheme = useContext(ThemeContext);
-  const themeRef = useRef(filterTheme<IFilterTheme>(theme || contextTheme || {
-    [filterThemeNamespace]: defaultTheme,
-  }));
+  const themeRef = useRef(filterTheme<IFilterTheme>(theme || contextTheme));
   const [isOpen, changeIsOpen] = useState(true);
   const buttonsRef: MutableRefObject<any> = useRef();
 
@@ -130,17 +127,6 @@ const Filter: React.SFC<IFilterProps> = ({
         <WrapperFilterButtons theme={ themeRef.current }>
           <Button
             appearance="filter-add-button-appearance"
-            // disabled={ activeFilters.some(
-            //   ({ column, condition, value }: IStateFilter) => {
-            //     if (value) return false;
-            //     if (!condition) return true;
-            //     const filter = filters.find((f: IFilter) => f.field === column);
-            //     if (filter && filter.conditions[condition].hasValue) {
-            //       return !value;
-            //     }
-            //     return false;
-            //   },
-            // ) }
             onClick={ addFilter }
           >
             Add new filter

@@ -45,11 +45,13 @@ export function xcriticalFiltersRemoveFilter(
   };
 }
 export function xcriticalFiltersApply(
+  filters: any,
   name: string,
 ): any {
   return {
     type: APPLY_FILTERS,
     name,
+    payload: filters,
   };
 }
 

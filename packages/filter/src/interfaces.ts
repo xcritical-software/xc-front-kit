@@ -61,7 +61,9 @@ export interface IStateFilter extends IStateRecivedFilter {
 }
 
 export interface IState {
-  [key: string]: IStateFilter[];
+  // [key: string]: IStateFilter[];
+  [key: string]: any;
+
 }
 
 export interface IFilterRecivedProps {

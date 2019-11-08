@@ -1,3 +1,5 @@
+import { setIn } from 'utilitify';
+
 import {
   ADD_FILTER,
   ADD_FILTERS,
@@ -6,10 +8,11 @@ import {
   OPEN_FILTERS,
   INIT_FILTERS,
   RESET_FILTERS,
+  APPLY_FILTERS,
 } from './actions/const';
 import {
   IState,
-  IStateFilter,
+  // IStateFilter,
   IStateRecivedFilter,
   FilterActionTypes,
   IRemoveFilter,
@@ -40,32 +43,44 @@ const openFilters = (state: IState, action: IAction): IState => {
     return state;
   }
   const newFilters = { ...state };
-  newFilters[action.name] = [{ ...newFilter, key: guid() }];
+  newFilters[action.name] = {
+    drafts: [{ ...newFilter, key: guid() }],
+    applied: [],
+  };
   return {
     ...newFilters,
   };
 };
 
-const addFilter = (state: IState, action: IAction): IState => ({
-  ...state,
-  [action.name]: [...state[action.name], { ...newFilter, key: guid() }],
-});
+const addFilter = (state: IState, action: IAction): IState => {
+  const applied = state[action.name].applied ? state[action.name].applied : [];
+  return {
+    ...state,
+    [action.name]: {
+      drafts: [...state[action.name].drafts, { ...newFilter, key: guid() }],
+      applied,
+    },
+  };
+};
 
 const removeFilter = (state: IState, action: IRemoveFilter): IState => {
-  const newActiveFilters = [...state[action.name]];
+  const newActiveFilters = [...state[action.name].drafts];
 
 
   delete newActiveFilters[newActiveFilters.findIndex(({ key }) => key === action.payload.guid)];
-
-
   const newActiveFiltersFiltered = newActiveFilters.filter(Boolean);
+
   if (!newActiveFiltersFiltered.length) {
     newActiveFiltersFiltered.push({ ...newFilter, key: guid() });
   }
 
+  const applied = state[action.name].applied ? state[action.name].applied : [];
   return {
     ...state,
-    [action.name]: newActiveFiltersFiltered,
+    [action.name]: {
+      drafts: newActiveFiltersFiltered,
+      applied,
+    },
   };
 };
 
@@ -74,40 +89,62 @@ const changeFilter = (state: IState, action: IChangeFilter): IState => {
     payload: { guid: id, field, value },
     name,
   } = action;
-  const newFilters: IStateFilter[] = [...state[name]];
-  const changedFilterIndex = newFilters.findIndex(({ key }) => key === id);
-  const changedFilter = { ...newFilters[changedFilterIndex] };
-  changedFilter[field] = value;
-  newFilters[changedFilterIndex] = changedFilter;
-  return {
-    ...state,
-    [name]: newFilters,
-  };
+
+  const index = state[name].drafts.findIndex(({ key }: any) => key === id);
+
+  if (field === 'column') {
+    return setIn(state, {
+      column: value, key: id, condition: '', value: '',
+    }, [name, 'drafts', index]);
+  }
+  return setIn(state, value, [name, 'drafts', index, field]);
 };
 
 const initFilters = (state: IState, action: IInitFilters): IState => ({
   ...state,
-  [action.name]: action.payload.filters.map((filter: IStateRecivedFilter) => ({
-    ...filter,
-    key: guid(),
-  })),
-});
-
-const addFilters = (state: IState, action: IInitFilters): IState => ({
-  ...state,
-  [action.name]: [
-    ...state[action.name],
-    ...action.payload.filters.map((filter: IStateRecivedFilter) => ({
+  [action.name]: {
+    drafts: action.payload.filters.map((filter: IStateRecivedFilter) => ({
       ...filter,
       key: guid(),
     })),
-  ],
+    applied: [],
+  },
 });
+
+
+const addFilters = (state: IState, action: IInitFilters): IState => {
+  const applied = state[action.name].applied ? state[action.name].applied : [];
+  return {
+    ...state,
+    [action.name]: {
+      drafts: [
+        ...state[action.name].drafts,
+        ...action.payload.filters.map((filter: IStateRecivedFilter) => ({
+          ...filter,
+          key: guid(),
+        })),
+      ],
+      applied,
+    },
+  };
+};
 
 const resetFilters = (state: IState, action: IAction): IState => ({
   ...state,
-  [action.name]: [{ ...newFilter, key: guid() }],
+  [action.name]: {
+    drafts: [{ ...newFilter, key: guid() }],
+    applied: [],
+  },
 });
+
+const applyFilters = (state: IState, action: any): IState => ({
+  ...state,
+  [action.name]: {
+    ...state[action.name],
+    applied: action.payload,
+  },
+});
+
 
 const filters = (state: IState | {} = {}, action: FilterActionTypes): IState => {
   switch (action.type) {
@@ -130,6 +167,9 @@ const filters = (state: IState | {} = {}, action: FilterActionTypes): IState => 
 
     case RESET_FILTERS:
       return resetFilters(state, action as IAction);
+
+    case APPLY_FILTERS:
+      return applyFilters(state, action as IAction);
 
     default:
       return state;

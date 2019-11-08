@@ -41,8 +41,6 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
     const changeColumn = useCallback(
       (value: string) => {
         changeFilter({ field: 'column', value, guid });
-        changeFilter({ field: 'condition', value: '', guid });
-        changeFilter({ field: 'value', value: '', guid });
       },
       [changeFilter, guid],
     );
