@@ -57,7 +57,7 @@ export const WrapperFilterButtons = styled.div`
   ${({ theme }) => theme.filterPanelButtons}
   display: flex;
   justify-content: space-between;
-  width: 300px; 
+  width: 300px;
 `;
 
 

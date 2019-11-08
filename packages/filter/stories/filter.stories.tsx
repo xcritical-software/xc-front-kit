@@ -22,7 +22,6 @@ import { filters, xcriticalFiltersInit, xcriticalFiltersAdd } from '../src';
 import { config } from './configReducer';
 import { data } from './dummyData';
 import { getConfigSuccess } from './actions';
-import './index.css';
 import { filterThemeNamespace } from '../src/theme';
 
 
