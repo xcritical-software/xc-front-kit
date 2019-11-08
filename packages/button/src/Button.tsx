@@ -12,7 +12,6 @@ import {
   Content,
 } from './styled/Button';
 import { IButtonProps, ButtonTheme } from './interfaces';
-import { buttonThemeNamespace, buttonThemeStyle } from './theme';
 import { getElement } from './utils';
 
 
@@ -33,9 +32,6 @@ const defaultProps = {
   shouldFitContent: false,
   isRTL: false,
   textPosition: 'center',
-  theme: {
-    [buttonThemeNamespace]: buttonThemeStyle,
-  },
   onClick: () => {},
 };
 
@@ -44,7 +40,7 @@ export const PureButton = ({
   postfix,
   children,
   href,
-  disabled = false,
+  disabled,
   theme,
   textPosition,
   isRTL,
@@ -52,7 +48,7 @@ export const PureButton = ({
   ...rest
 }: IButtonProps): React.ReactElement => {
   const themeContext = useContext<IThemeNamespace<ButtonTheme>>(ThemeContext);
-  const innerTheme = theme || themeContext;
+  const innerTheme = theme || themeContext || {};
   const buttonRef = useRef();
 
   const onClick = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
@@ -63,7 +59,7 @@ export const PureButton = ({
 
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const RootElement = useMemo(() => Root(getElement(disabled, href)), [disabled, href]);
+  const RootElement = useMemo(() => Root(getElement(disabled as boolean, href)), [disabled, href]);
 
   return (
     <ThemeProvider theme={ innerTheme }>

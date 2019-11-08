@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/select",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "XCritical Select Component",
 	"main": "src/index.js",
 	"scripts": {
@@ -27,7 +27,7 @@
 		"lodash.get": "^4.x"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^0.1.1",
+		"@xcritical/theme": "^0.1.2",
 		"micro-memoize": "^4.0.8",
 		"polished": "^3.0.0",
 		"react-select": "3.0.5",

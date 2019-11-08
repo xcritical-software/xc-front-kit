@@ -156,6 +156,17 @@ const theme: IThemeNamespace = {
     maxWidth: 400,
   } as ISidebarTheme,
 };
+const propsTheme: IThemeNamespace = {
+  [sidebarThemeNamespace]: {
+    leftBackground: 'red',
+    rightBackground: 'pink',
+    color: 'indigo',
+    separatorColor: 'rgb(150,0,0)',
+    minWidth: 60,
+    maxWidth: 400,
+    leftWidth: 90,
+  } as ISidebarTheme,
+};
 
 
 const props = {
@@ -166,9 +177,29 @@ const props = {
 
 storiesOf('Sidebar', module)
   .add('Basic', () => (
+    <BrowserRouter>
+      <Sidebar { ...props }>
+        { list(100) }
+      </Sidebar>
+      <Switch>
+        { routerConfig.map(({ path, component, exact }: any) => (
+          <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+      </Switch>
+    </BrowserRouter>
+  ))
+  .add('Only left panel', () => (
+    <BrowserRouter>
+      <Sidebar { ...props } />
+      <Switch>
+        { routerConfig.map(({ path, component, exact }: any) => (
+          <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+      </Switch>
+    </BrowserRouter>
+  ))
+  .add('With theme provider', () => (
     <ThemeProvider theme={ theme }>
       <BrowserRouter>
-        <Sidebar { ...props } theme={ theme }>
+        <Sidebar { ...props }>
           { list(100) }
         </Sidebar>
         <Switch>
@@ -178,10 +209,12 @@ storiesOf('Sidebar', module)
       </BrowserRouter>
     </ThemeProvider>
   ))
-  .add('Only left panel', () => (
+  .add('Theme in props', () => (
     <ThemeProvider theme={ theme }>
       <BrowserRouter>
-        <Sidebar { ...props } theme={ theme } />
+        <Sidebar { ...props } theme={ propsTheme }>
+          { list(100) }
+        </Sidebar>
         <Switch>
           { routerConfig.map(({ path, component, exact }: any) => (
             <Route key={ path } path={ path } component={ component } exact={ exact } />)) }

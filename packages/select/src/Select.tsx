@@ -5,7 +5,6 @@ import Select from 'react-select';
 
 import { ThemeContext } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
-import { selectThemeNamespace, selectThemeStyle } from './theme';
 import {
   getFormatOptionLabel,
   ClearIndicator,
@@ -32,14 +31,12 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   value,
   placeholder,
   onChange,
-  theme = {
-    [selectThemeNamespace]: selectThemeStyle,
-  },
+  theme,
   components,
   ...rest
 }) => {
   const themeContext = useContext<IThemeNamespace<ISelectBaseTheme>>(ThemeContext);
-  const innerTheme = theme || themeContext;
+  const innerTheme = theme || themeContext || {};
 
   const selectRef = useRef<any>();
 

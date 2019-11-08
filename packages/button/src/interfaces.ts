@@ -1,7 +1,6 @@
 import {
   ITheme, IThemeNamespace, ICSSProperties,
 } from '@xcritical/theme';
-// eslint-disable-next-line import/no-unresolved
 import {
   FlattenInterpolation, ThemedStyledProps,
 } from 'styled-components';
