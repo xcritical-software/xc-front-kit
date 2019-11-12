@@ -1,67 +1,53 @@
 import { css } from 'styled-components';
-import memoize from 'memoizee';
+import memoize from 'micro-memoize';
 
 import {
   getAppearanceTheme,
-  getStatesTheme,
+  getThemedState,
   IReturnThemeFunction,
+  IThemeNamespace,
 } from '@xcritical/theme';
 
 import {
   inputThemeNamespace,
   inputThemeStyle,
 } from '../theme';
-import { InputTheme } from '../interfaces';
+import {
+  InputTheme, IInputProps, IBaseInputTheme, ISubComponentProps,
+} from '../interfaces';
 
 
-export const inputTheme = (
+export const inputTheme = memoize((
+  theme: IThemeNamespace<InputTheme> = {},
+  propertyPath?: string | string[],
+): InputTheme | any => {
+  const func = getThemedState(inputThemeNamespace, inputThemeStyle);
+  return func(theme, propertyPath);
+});
+
+
+export const inputApperanceTheme = memoize((
   theme: IThemeNamespace<InputTheme> = {},
   appearanceName: string,
   baseAppearance: string,
   propertyPath?: string | string[],
-): InputTheme | any  => {
+): InputTheme | any => {
   const func = getAppearanceTheme(inputThemeNamespace, inputThemeStyle);
   return func(theme, appearanceName, propertyPath, baseAppearance);
-};
+});
 
-const getAppearanceStyleProperty = (theme, appearance, baseAppearance, stateName) => {
-  const appearanceTheme = inputTheme(theme, appearance, baseAppearance);
-  const statesTheme = getStatesTheme(appearanceTheme, stateName);
-  return statesTheme();
-};
 
-export const getBackgroundStyle: IReturnThemeFunction<InputTheme> = memoize((
+export const getComponentStyle: IReturnThemeFunction<IBaseInputTheme, string> = memoize((
   theme,
   appearance,
   baseAppearance,
   elementName,
-) => {
-  const element = inputTheme(theme, appearance, baseAppearance, elementName);
+) => ({
+  ...inputTheme(theme, [elementName]),
+  ...inputApperanceTheme(theme, appearance, baseAppearance, [elementName]),
+}));
 
-  const background = (element && element.background)
-    || inputTheme(theme, appearance, baseAppearance, 'background');
-
-  return css`
-    background: ${background};
-  `;
-});
-
-export const getColorStyle: IReturnThemeFunction<InputTheme> = memoize((
-  theme,
-  appearance,
-  baseAppearance,
- elementName) => {
-  const element = inputTheme(theme, appearance, baseAppearance, elementName);
-
-  const color = (element && element.color)
-    || inputTheme(theme, appearance, baseAppearance, 'color');
-
-  return css`
-    color: ${color};
-  `;
-});
-
-export const getPaddingStyle: IReturnThemeFunction<InputTheme> = memoize((
+export const getPaddingStyle: IReturnThemeFunction<IBaseInputTheme, any> = memoize((
   theme,
   appearance,
   baseAppearance,
@@ -69,15 +55,16 @@ export const getPaddingStyle: IReturnThemeFunction<InputTheme> = memoize((
   isDivided,
   hasPrefix,
   hasSuffix,
- elementName) => {
+  elementName,
+) => {
   const {
     bottom = 0,
     left = 0,
     right = 0,
     top = 0,
-  } = inputTheme(theme, appearance, baseAppearance, 'padding');
+  } = inputApperanceTheme(theme, appearance, baseAppearance, 'padding');
 
-  const element = inputTheme(theme, appearance, baseAppearance, elementName);
+  const element = inputApperanceTheme(theme, appearance, baseAppearance, elementName);
   const commonBottom = (element && element.padding && element.padding.bottom !== undefined)
     ? element.padding.bottom
     : bottom;
@@ -125,253 +112,41 @@ export const getPaddingStyle: IReturnThemeFunction<InputTheme> = memoize((
   `;
 });
 
-export const getWidthStyle: IReturnThemeFunction<InputTheme> = memoize((
+
+export const getRootInputStyles = memoize(({
   theme,
-  appearance,
-  baseAppearance,
- elementName) => {
-  const element = inputTheme(theme, appearance, baseAppearance, elementName);
+  appearance = 'default',
+  baseAppearance = 'default',
+}: IInputProps): any => ({
+  ...inputTheme(theme),
+  ...inputApperanceTheme(theme, appearance, baseAppearance),
+}));
 
-  let finalWidth;
-  let quantity;
-
-  if (element && element.width) {
-    finalWidth = element.width;
-    quantity = typeof finalWidth === 'number' ? 'px' : '';
-  } else {
-    finalWidth = inputTheme(theme, appearance, baseAppearance, 'width');
-    quantity = typeof finalWidth === 'number' ? 'px' : '';
-  }
-
-  return css`
-    width: ${finalWidth}${quantity};
-  `;
-});
-
-export const getHeightStyle: IReturnThemeFunction<InputTheme> = memoize((
-  theme,
-  appearance,
-  baseAppearance,
- elementName) => {
-  const element = inputTheme(theme, appearance, baseAppearance, elementName);
-
-  let finalHeight;
-  let quantity;
-
-  if (element && element.height) {
-    finalHeight = element.height;
-    quantity = typeof finalHeight === 'number' ? 'px' : '';
-  } else {
-    finalHeight = inputTheme(theme, appearance, baseAppearance, 'height');
-    quantity = typeof finalHeight === 'number' ? 'px' : '';
-  }
-
-  return css`
-    height: ${finalHeight}${quantity};
-  `;
-});
-
-export const getFontStyle = memoize((
-  theme,
-  appearance,
-  baseAppearance,
- elementName) => {
-  const {
-    weight,
-    size,
-    lineHeightRatio,
-  } = inputTheme(theme, appearance, baseAppearance, 'font');
-
-  const element = inputTheme(theme, appearance, baseAppearance, elementName);
-
-  const commonSize = (element && element.font && element.font.size !== undefined)
-    ? element.font.size
-    : size;
-
-  return css`
-    font-weight: ${(element && element.font && element.font.weight) || weight};
-    font-size: ${commonSize}px;
-    line-height: ${(element && element.font && element.font.lineHeightRatio !== undefined) ? commonSize * element.font.lineHeightRatio : commonSize * lineHeightRatio}px;
-  `;
-});
-
-export const getBorderStyle: IReturnThemeFunction<InputTheme> = memoize((
-  theme,
-  appearance,
-  baseAppearance,
-) => {
-  const {
-    width,
-    style,
-    color,
-  } = inputTheme(theme, appearance, baseAppearance, 'border');
-
-  return css`
-    border: ${width}px ${style} ${color};
-  `;
-});
-
-export const getBorderRadiusStyle: IReturnThemeFunction<InputTheme> = memoize((
-  theme,
-  appearance,
-  baseAppearance,
-  isRTL,
-  hasPrefix,
-  hasSuffix,
-) => {
-  const {
-    topLeft = 0,
-    topRight = 0,
-    bottomRight = 0,
-    bottomLeft = 0,
-  } = inputTheme(theme, appearance, baseAppearance, 'borderRadius');
-
-  if (hasPrefix && hasSuffix) {
-    return css`
-      border-radius: 0;
-    `;
-  }
-
-  if (hasPrefix) {
-    return css`
-      border-top-left-radius: ${isRTL ? topLeft : 0}px;
-      border-top-right-radius: ${isRTL ? 0 : topRight}px;
-      border-bottom-right-radius: ${isRTL ? 0 : bottomRight}px;
-      border-bottom-left-radius: ${isRTL ? bottomLeft : 0}px;
-    `;
-  }
-
-  if (hasSuffix) {
-    return css`
-      border-top-left-radius: ${isRTL ? 0 : topLeft}px;
-      border-top-right-radius: ${isRTL ? topRight : 0}px;
-      border-bottom-right-radius: ${isRTL ? bottomRight : 0}px;
-      border-bottom-left-radius: ${isRTL ? 0 : bottomLeft}px;
-    `;
-  }
-
-  return css`
-    border-radius: ${topLeft}px ${topRight}px ${bottomRight}px ${bottomLeft}px;
-  `;
-});
-
-export const getTransitionStyle: IReturnThemeFunction<InputTheme> = memoize(({
-  theme,
-  appearance,
-  baseAppearance,
-}) => {
-  const {
-    property,
-    duration,
-    timingFunction,
-    delay,
-  } = inputTheme(theme, appearance, baseAppearance, 'transition');
-
-  return css`
-    transition-property: ${property};
-    transition-duration: ${duration};
-    transition-timing-function: ${timingFunction};
-    transition-delay: ${delay};
-  `;
-});
-
-const getFontAppearanceStyle: IReturnThemeFunction<InputTheme> = memoize((font = {}) => {
-  const { weight, size, lineHeightRatio } = font;
-
-  return css`
-    ${weight && `font-weight: ${weight}`};
-    ${size && `font-size: ${size}px`};
-    ${lineHeightRatio && `line-height: ${size * lineHeightRatio}px`}
-  `;
-});
-
-const getBorderRadiusAppearanceStyle = memoize((borderRadius = {}) => {
-  const {
-    topLeft,
-    topRight,
-    bottomRight,
-    bottomLeft,
-  } = borderRadius;
-
-  return css`
-    ${topLeft && `border-top-left-radius: ${topLeft}px`};
-    ${topRight && `border-top-right-radius: ${topRight}px`};
-    ${bottomRight && `border-bottom-right-radius: ${bottomRight}px`};
-    ${bottomLeft && `border-bottom-left-radius: ${bottomLeft}px`};
-  `;
-});
-
-const getBorderAppearanceStyle = memoize((border = {}) => {
-  const {
-    width,
-    style,
-    color,
-  } = border;
-
-  return css`
-    ${width && `border-width: ${width}px`};
-    ${style && `border-style: ${style}`};
-    ${color && `border-color: ${color}`};
-  `;
-});
-
-const getTransitionAppearanceStyle = memoize((transition = {}) => {
-  const {
-    property,
-    duration,
-    timingFunction,
-    delay,
-  } = transition;
-
-  return css`
-    ${property && `transition-property: ${property}`};
-    ${duration && `transition-duration: ${duration}`};
-    ${timingFunction && `transition-timing-function: ${timingFunction}`};
-    ${delay && `transition-delay: ${delay}`};
-  `;
-});
-
-export const getRootInputStatesStyle = memoize((stateName) => ({
+export const getRootInputStatesStyle = (stateName: string) => memoize(({
   theme,
   baseAppearance,
   appearance,
-}) => {
-  const {
-    background,
-    height,
-    border,
-    borderRadius,
-    transition,
-  } = getAppearanceStyleProperty(theme, appearance, baseAppearance, stateName);
-
-  return css`
-    ${background && `background: ${background}`};
-    ${height && `height: ${height}px`};
-    ${getBorderRadiusAppearanceStyle(borderRadius)}
-    ${getBorderAppearanceStyle(border)}
-    ${getTransitionAppearanceStyle(transition)}
-  `;
-});
+}: ISubComponentProps): any => inputApperanceTheme(theme, appearance, baseAppearance, [stateName]));
 
 export const getRootInputInteractiveStyles = memoize(({
-  theme,
-  appearance,
-  baseAppearance,
   disabled,
-  selected,
   invalid,
-}) => {
-  const boxShadowColor = inputTheme(theme, appearance, baseAppearance, ['boxShadowColor']);
-
+}: IInputProps): any => {
   const standartFocus = css`
     &:focus {
-      box-shadow: 1px 1px 4px 0 ${boxShadowColor};
+      ${getRootInputStatesStyle('focus')}
+    }
+  `;
+
+  const standartActive = css`
+    &:active {
+      ${getRootInputStatesStyle('active')};
     }
   `;
 
   const standartHover = css`
     &:hover {
-      box-shadow: 1px 1px 4px 0 ${boxShadowColor};
+      ${getRootInputStatesStyle('hover')}
     }
   `;
 
@@ -381,20 +156,6 @@ export const getRootInputInteractiveStyles = memoize(({
       opacity: 0.65;
       box-shadow: none;
       ${getRootInputStatesStyle('disabled')}
-
-      ${standartHover}
-      ${standartFocus};
-    `;
-  }
-
-  if (selected) {
-    return css`
-      cursor: pointer;
-      ${getRootInputStatesStyle('selected')}
-
-      &:active {
-        ${getRootInputStatesStyle('active')};
-      }
 
       ${standartHover}
       ${standartFocus};
@@ -406,10 +167,7 @@ export const getRootInputInteractiveStyles = memoize(({
       cursor: pointer;
       ${getRootInputStatesStyle('invalid')}
 
-      &:active {
-        ${getRootInputStatesStyle('active')};
-      }
-
+      ${standartActive}
       ${standartHover}
       ${standartFocus};
     `;
@@ -418,59 +176,28 @@ export const getRootInputInteractiveStyles = memoize(({
   return css`
     cursor: pointer;
 
-    &:active {
-      ${getRootInputStatesStyle('active')};
-    }
-
+    ${standartActive}
     ${standartHover}
-    ${standartFocus};
+    ${standartFocus}
   `;
 });
 
-export const getInputStatesStyle = memoize((stateName) => ({
+export const getInputStatesStyle = (stateName: string) => memoize(({
   theme,
   baseAppearance,
   appearance,
-}) => {
-  const {
-    background,
-    color,
-    height,
-    font,
-    borderRadius,
-  } = getAppearanceStyleProperty(theme, appearance, baseAppearance, stateName);
-
-  return css`
-    ${background && `background: ${background}`};
-    ${color && `color: ${color}`};
-    ${height && `height: ${height}px`};
-    ${getFontAppearanceStyle(font)}
-    ${getBorderRadiusAppearanceStyle(borderRadius)}
-  `;
-});
+}: IInputProps): any => inputApperanceTheme(theme, appearance || '', baseAppearance || '', ['input', stateName]));
 
 export const getInputInteractiveStyles = memoize(({
   disabled,
-  selected,
   invalid,
-}) => {
+}: IInputProps): any => {
   if (disabled) {
     return css`
       cursor: not-allowed;
       opacity: 0.65;
       box-shadow: none;
-      ${getRootInputStatesStyle('disabled')}
-
-      &:active {
-        background: inherit;
-      }
-    `;
-  }
-
-  if (selected) {
-    return css`
-      cursor: pointer;
-      ${getInputStatesStyle('selected')}
+      ${getInputStatesStyle('disabled')}
 
       &:active {
         background: inherit;
@@ -496,52 +223,4 @@ export const getInputInteractiveStyles = memoize(({
       background: inherit;
     }
   `;
-});
-
-export const getPrefixSuffixStyles = memoize((propertyPath) => ({
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-  isRTL,
-  isDivided,
-}) => {
-  const spacing = inputTheme(theme, appearance, baseAppearance, propertyPath);
-
-  const {
-    topLeft,
-    topRight,
-    bottomRight,
-    bottomLeft,
-  } = inputTheme(theme, appearance, baseAppearance, 'borderRadius');
-
-  const {
-    width,
-    style,
-    color,
-  } = inputTheme(theme, appearance, baseAppearance, 'border');
-
-  const addonBackgroundColor = inputTheme(theme, appearance, baseAppearance, 'addonBackgroundColor');
-
-  const styles = css`
-    padding: 0 ${spacing}px;
-    background-color: ${isDivided && addonBackgroundColor ? addonBackgroundColor : 'transparent'};
-  `;
-
-  const leftStyles = css`
-    ${styles}
-    border-radius: ${topLeft}px 0 0 ${bottomLeft}px;
-    border-right: ${isDivided ? `${width}px ${style} ${color}` : 'none'};
-  `;
-
-  const rightStyles = css`
-    ${styles}
-    border-radius: 0 ${topRight}px ${bottomRight}px 0;
-    border-left: ${isDivided ? `${width}px ${style} ${color}` : 'none'};
-  `;
-
-  const rtlStyles = propertyPath === 'prefixSpacing' ? rightStyles : leftStyles;
-
-  const ltrStyles = propertyPath === 'prefixSpacing' ? leftStyles : rightStyles;
-
-  return isRTL ? rtlStyles : ltrStyles;
 });

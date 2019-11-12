@@ -1,79 +1,58 @@
 import styled, { css } from 'styled-components';
 
 import {
-  getBackgroundStyle,
-  getColorStyle,
-  getPaddingStyle,
-  getWidthStyle,
-  getHeightStyle,
-  getFontStyle,
-  getBorderStyle,
-  getBorderRadiusStyle,
-  getTransitionStyle,
+  getComponentStyle,
+  inputApperanceTheme,
   getInputInteractiveStyles,
+  getRootInputStyles,
   getRootInputInteractiveStyles,
-  getPrefixSuffixStyles,
 } from '../utils';
-import { IInputProps } from '../interfaces';
+import { ISubComponentProps, IStyledInput } from '../interfaces';
 
 
-const styles = css`
-  ${getHeightStyle}
-  ${getBackgroundStyle}
+const inputStyles = css<ISubComponentProps>`
+  ${({ theme, appearance, baseAppearance }) => getComponentStyle(theme, appearance, baseAppearance, 'control')}
 `;
 
-const rootStyles = css`
-  ${getBorderRadiusStyle}
-`;
-
-const inputStyles = css`
-  ${(props) => getColorStyle(props, 'control')}
-  ${(props) => getFontStyle(props, 'control')}
-  ${(props) => getHeightStyle(props, 'control')}
-  ${(props) => getBackgroundStyle(props, 'control')}
-`;
-
-export const Root = styled.div<IInputProps>`
-  ${styles}
-  ${rootStyles}
-  ${getBorderStyle}
-  ${getTransitionStyle}
-  ${getRootInputInteractiveStyles}
+export const Root = styled.div<ISubComponentProps>`
   display: flex;
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-start;
-  ${({ css: cssInner }) => (cssInner || null)}
+  ${getRootInputStyles}
+  ${getRootInputInteractiveStyles}
+  ${({ css: cssInner }: any) => (cssInner || null)}
 `;
 
-const PrefixSuffixBase = styled.span`
-  ${styles}
+const PrefixSuffixBase = styled.span<ISubComponentProps>`
   ${inputStyles}
-  display: flex;
+  direction: inherit;
   align-items: center;
-  cursor: inherit;
-  text-align: center;
+  display: flex;
+  flex-shrink: 0;
 `;
 
 export const Prefix = styled(PrefixSuffixBase)`
-  ${getPrefixSuffixStyles('prefixSpacing')}
-  ${(props) => getWidthStyle(props, 'prefix')}
+  margin-${({ isRTL }) => (isRTL ? 'left' : 'right')}: ${({
+  theme,
+  appearance = 'default',
+  baseAppearance = 'default',
+}) => inputApperanceTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
 `;
 
-export const Suffix = styled(PrefixSuffixBase)`
-  ${getPrefixSuffixStyles('suffixSpacing')}
-  ${(props) => getWidthStyle(props, 'suffix')}
+export const Postfix = styled(PrefixSuffixBase)`
+  margin-${({ isRTL }) => (isRTL ? 'right' : 'left')}: ${(
+  { theme, appearance = 'default', baseAppearance = 'default' },
+) => inputApperanceTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
 `;
 
-export const StyledInput = styled.input<IInputProps>`
-  ${rootStyles}
-  ${inputStyles}
-  ${(props) => getPaddingStyle(props, 'control')}
-  ${(props) => getWidthStyle(props, 'control')}
-  ${getInputInteractiveStyles}
+export const StyledInput = styled.input<IStyledInput>`
   direction: ${({ isRTL }) => (isRTL ? 'rtl' : 'ltr')};
-  border: 1px solid transparent;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   outline: 0;
+  ${({ theme, appearance, baseAppearance }) => getComponentStyle(theme, appearance, baseAppearance, 'input')}
+  ${getInputInteractiveStyles}
 `;

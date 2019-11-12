@@ -1,29 +1,31 @@
 import { darken } from 'polished';
-import { InputTheme } from '../interfaces';
+import { colors } from '@xcritical/theme';
+import { IBaseInputTheme } from '../interfaces';
 
 
 export const generateApperance = ({
-  background, 
-  color, 
-  height, 
-  boxShadowColor, 
-  padding, 
-  font, 
-  border, 
-  borderRadius, 
+  background,
+  color,
+  height,
+  boxShadowColor,
+  padding,
+  font,
+  border,
+  borderRadius,
   transition,
-}: any): InputTheme  => ({
+  borderColor,
+}: any): IBaseInputTheme => ({
   backgroundColor: background,
   color,
   height,
   boxShadowColor: boxShadowColor || darken(0.95, background),
   padding,
   font,
-  border,
+  borderColor,
   borderRadius,
   transition,
   hover: {
-    backgroundColor: darken(0.1, background),
+    borderColor: darken(0.1, borderColor),
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),
@@ -34,7 +36,7 @@ export const generateApperance = ({
     transition,
   },
   focus: {
-    backgroundColor: darken(0.1, background),
+    borderColor: darken(0.1, borderColor),
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),
@@ -45,7 +47,7 @@ export const generateApperance = ({
     transition,
   },
   selected: {
-    backgroundColor: darken(0.1, background),
+    borderColor: darken(0.1, borderColor),
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),
@@ -56,7 +58,7 @@ export const generateApperance = ({
     transition,
   },
   active: {
-    backgroundColor: darken(0.1, background),
+    borderColor: darken(0.1, borderColor),
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),
@@ -67,7 +69,7 @@ export const generateApperance = ({
     transition,
   },
   disabled: {
-    backgroundColor,
+    borderColor,
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),
@@ -78,7 +80,7 @@ export const generateApperance = ({
     transition,
   },
   invalid: {
-    backgroundColor,
+    backgroundColor: colors.WARNING,
     color,
     height,
     boxShadowColor: boxShadowColor || darken(0.95, background),

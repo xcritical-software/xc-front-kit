@@ -1,83 +1,85 @@
-import { colors, ITheme } from '@xcritical/theme';
+import { colors } from '@xcritical/theme';
 
-import { generateApperance } from './utils/themeTools';
 import { InputTheme } from './interfaces';
 
 
 export const inputThemeNamespace = '@xcritical\\input';
 
-export const inputThemeStyle: ITheme<InputTheme> = {
-  background: colors.GRAY_LIGHT,
-  color: colors.CHAROCOAL,
-  prefixSpacing: 5,
-  suffixSpacing: 5,
-  addonBackgroundColor: colors.GRAY_LIGHT,
-  height: 30,
-  padding: {
-    top: 0,
-    right: 20,
-    bottom: 0,
-    left: 20,
-  },
-  font: {
-    weight: 600,
-    size: 14,
-    lineHeightRatio: 1.69,
-  },
-  border: {
-    width: 1,
-    style: 'solid',
-    color: colors.CHAROCOAL,
-  },
-  borderRadius: {
-    topLeft: 3,
-    topRight: 3,
-    bottomRight: 3,
-    bottomLeft: 3,
-  },
-  transition: {
-    property: 'all',
-    duration: '0.3s',
-    timingFunction: 'ease-in-out',
-    delay: '0s',
-  },
-  control: {
-    height: 30,
-    width: '100%',
-  },
-  appearance: {
-    default: generateApperance({
-      background: colors.GRAY_LIGHT,
+/*
+generateApperance({
       color: colors.CHAROCOAL,
       height: 30,
-      padding: {
-        top: 0,
-        right: 20,
-        bottom: 0,
-        left: 20,
-      },
-      font: {
-        weight: 600,
-        size: 14,
-        lineHeightRatio: 1.69,
-      },
-      border: {
-        width: 1,
-        style: 'solid',
-        color: colors.CHAROCOAL,
-      },
-      borderRadius: {
-        topLeft: 3,
-        topRight: 3,
-        bottomRight: 3,
-        bottomLeft: 3,
-      },
-      transition: {
-        property: 'all',
-        duration: '0.3s',
-        timingFunction: 'ease-in-out',
-        delay: '0s',
-      },
+      paddingTop: 0,
+      paddingRight: 20,
+      paddingBottom: 0,
+      paddingLeft: 20,
+      fontWeight: 600,
+      fontSize: 14,
+      lineHeight: 1.69,
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: colors.GRAY_LIGHT,
+      borderRadius: 3,
     }),
+*/
+
+const color = colors.CHAROCOAL;
+const height = 30;
+const paddingTop = 0;
+const paddingRight = 5;
+const paddingBottom = 0;
+const paddingLeft = 5;
+const fontWeight = 600;
+const fontSize = 14;
+const lineHeight = 1.69;
+const borderWidth = '1px';
+const borderStyle = 'solid';
+const borderColor = colors.GRAY;
+const borderRadius = 3;
+
+export const inputThemeStyle: InputTheme = {
+  backgroundColor: colors.WHITE,
+  color,
+  prefixSpacing: 5,
+  postfixSpacing: 5,
+  height,
+  paddingTop,
+  paddingRight,
+  paddingBottom,
+  paddingLeft,
+  fontWeight,
+  fontSize,
+  lineHeight,
+  borderWidth,
+  borderStyle,
+  borderColor,
+  borderRadius: 3,
+  control: {
+    width: 'auto',
+  },
+  input: {
+    borderWidth: 0,
+    backgroundColor: 'inherit',
+  },
+  appearance: {
+    default: {
+      hover: {
+        borderColor: colors.PRIMARY,
+      },
+      focus: {
+        borderColor: colors.PRIMARY,
+        borderRadius,
+      },
+      active: {
+        borderColor: colors.PRIMARY,
+      },
+      disabled: {
+        borderColor,
+      },
+      invalid: {
+        borderColor: colors.DANGER,
+        color: colors.DANGER,
+      },
+    },
   },
 };

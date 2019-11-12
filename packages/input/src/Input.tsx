@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/no-autofocus */
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import { useCallback } from '@storybook/addons';
 import {
   Root,
   Prefix,
-  Suffix,
+  Postfix,
   StyledInput,
 } from './styled/Input';
 import { IInputProps } from './interfaces';
+
 
 export const PureInput: React.FC<IInputProps> = ({
   className,
@@ -25,6 +25,7 @@ export const PureInput: React.FC<IInputProps> = ({
   onValidate,
   type = 'text',
   autoComplete = 'on',
+  css,
   ...rest
 }) => {
   const inputOnChange = useCallback(
@@ -47,6 +48,7 @@ export const PureInput: React.FC<IInputProps> = ({
       isRTL={ isRTL }
       disabled={ disabled }
       invalid={ invalid }
+      css={ css }
     >
       { !!prefix && (
         <Prefix
@@ -65,22 +67,20 @@ export const PureInput: React.FC<IInputProps> = ({
         isDivided={ isDivided }
         disabled={ disabled }
         invalid={ invalid }
-        hasPrefix={ !!prefix }
-        hasSuffix={ !!postfix }
         onChange={ inputOnChange }
         type={ type }
         autoComplete={ autoComplete }
         { ...rest }
       />
       { !!postfix && (
-        <Suffix
+        <Postfix
           appearance={ appearance }
           baseAppearance={ baseAppearance }
           isRTL={ isRTL }
           isDivided={ isDivided }
         >
           { postfix }
-        </Suffix>
+        </Postfix>
       ) }
     </Root>
   );

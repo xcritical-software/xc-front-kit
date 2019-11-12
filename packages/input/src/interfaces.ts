@@ -1,24 +1,14 @@
 import {
-  IIndentation, IFont, IThemeNamespace, IIsRTL,
+  ITheme, IThemeNamespace, ICSSProperties, IIsRTL,
 } from '@xcritical/theme';
-import { FlattenInterpolation, ThemedStyledProps, CSSProperties } from 'styled-components';
 
 
-export type BaseInputTheme =
-Exclude<keyof CSSProperties, keyof 'padding' | 'font'> & {
-  padding?: IIndentation;
+export interface IBaseInputTheme extends ICSSProperties {
   prefixSpacing?: number;
   postfixSpacing?: number;
-  font?: IFont;
-};
+}
 
-export type InputTheme = BaseInputTheme & {
-  outline?: BaseInputTheme;
-  selected?: BaseInputTheme;
-  active?: BaseInputTheme;
-  hover?: BaseInputTheme;
-  disabled?: BaseInputTheme;
-};
+export type InputTheme = ITheme<IBaseInputTheme>;
 
 export interface IInputApperanceProps {
   theme?: IThemeNamespace<InputTheme>;
@@ -28,15 +18,15 @@ export interface IInputApperanceProps {
 
 type HtmlAttributes = Pick<React.InputHTMLAttributes<HTMLElement>,
 Exclude<keyof React.InputHTMLAttributes<HTMLElement>, keyof IBaseItemProps | 'css'>
-> & { css?: FlattenInterpolation<ThemedStyledProps<IInputProps, any>> };
+>;
 
 export interface IBaseItemProps {
   prefix?: React.ReactNode;
   postfix?: React.ReactNode;
   invalid?: boolean;
   isDivided?: boolean;
-  onValidate?: (result: boolean) => {};
-  onChange?: (value: string, e: React.ChangeEvent<HTMLInputElement>) => {};
+  onValidate?: (result: boolean) => void;
+  onChange?: (value: string, e?: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface IInputProps
@@ -44,5 +34,18 @@ export interface IInputProps
   IInputApperanceProps,
   IIsRTL,
   IBaseItemProps {
+  css?: any;
+}
+export interface IStyledInput extends HtmlAttributes, ISubComponentProps {
 
+}
+
+export interface ISubComponentProps extends IIsRTL {
+  theme: IThemeNamespace<InputTheme>;
+  appearance: string;
+  baseAppearance: string;
+  isDivided?: boolean;
+  invalid?: boolean;
+  disabled?: boolean;
+  css?: any;
 }
