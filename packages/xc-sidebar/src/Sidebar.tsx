@@ -5,7 +5,9 @@ import React, {
   useRef,
   useEffect,
   ReactNode,
+  useContext,
 } from 'react';
+import { ThemeContext } from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
 import ResizeObserver from 'resize-observer-polyfill';
 import { IThemeNamespace } from '@xcritical/theme';
@@ -21,7 +23,6 @@ import {
   SidebarWrapper,
   NavComponentWrapper,
 } from './styled/Sidebar';
-import { sidebarThemeStyle, sidebarThemeNamespace } from './theme';
 
 
 interface IWrapperProps {
@@ -32,14 +33,13 @@ interface IWrapperProps {
 }
 
 export const Sidebar = ({
-  theme = {
-    [sidebarThemeNamespace]: sidebarThemeStyle,
-  },
+  theme,
   children,
   navComponent,
   showScrollbar,
 }: IWrapperProps): ReactElement => {
-  const themeRef = useRef(sidebarTheme<ISidebarTheme>(theme));
+  const themeContext = useContext(ThemeContext);
+  const themeRef = useRef(sidebarTheme<ISidebarTheme>(theme || themeContext));
   const [transformParams, setTransformParams] = useState({
     width: themeRef.current.maxWidth * 0.7,
     animate: false,
