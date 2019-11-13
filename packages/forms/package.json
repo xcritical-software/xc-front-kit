@@ -27,7 +27,10 @@
 	"private": false,
 	"devDependencies": {
 		"redux": "^4.0.4",
-		"react-redux": "^7.0.2"
+		"react-redux": "^7.0.2",
+		"@xcritical/input": "^0.0.0",
+		"@xcritical/select": "^0.0.2",
+		"@xcritical/button": "^1.1.1"
 	},
 	"peerDependencies": {
 		"react": "^16.8.3",
