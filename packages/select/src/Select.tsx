@@ -2,7 +2,7 @@ import React, {
   useState, useRef, useEffect, useCallback, useContext, useMemo,
 } from 'react';
 import Select from 'react-select';
-
+import isEmpty from 'lodash.isempty';
 import { ThemeContext } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
 import {
@@ -51,7 +51,9 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   const [currentOption, setCurrentOption] = useState(findOptionByValue(value, options));
 
   useEffect(() => {
-    setOptions(convertToOptions(items));
+    if (!isEmpty(items)) {
+      setOptions(convertToOptions(items));
+    }
   }, [items]);
 
   useEffect(() => {
