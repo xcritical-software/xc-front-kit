@@ -41,7 +41,7 @@ const mapDispatchToProps = (
     let $value = value;
     if (isEvent(value)) {
       $value = getValueFromNativeComponent(value);
-    } else if (action) {
+    } else if (action && typeof action === 'function') {
       $value = action(value);
     }
     dispatch(xcriticalFormPropertyChange(formName, name, $value));

@@ -11,12 +11,12 @@ export interface IPopover {
   visible?: boolean;
   shouldFitContainer?: boolean;
   withArrow?: boolean;
-  theme?: IThemeNamespace<IPopperTheme>;
+  theme?: IThemeNamespace<IPopoverTheme>;
   appearance?: string;
   baseAppearance?: string;
 }
 
-export interface IPopperTheme {
+export interface IPopoverTheme {
   content?: CSSObject & {
     offset?: string;
   };
@@ -36,7 +36,7 @@ export interface IContent extends IThemed {
 }
 
 export interface IThemed {
-  theme: IThemeNamespace<IPopperTheme>;
+  theme: IThemeNamespace<IPopoverTheme>;
   appearance: string;
   baseAppearance: string;
 }

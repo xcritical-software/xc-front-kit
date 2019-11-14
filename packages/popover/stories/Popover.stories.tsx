@@ -4,13 +4,11 @@ import styled, { ThemeProvider } from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
 import { storiesOf } from '@storybook/react';
 
-import { Popover } from '../src';
-
-import { popperThemeNamespace } from '../src/theme';
+import { Popover, popoverThemeNamespace } from '../src';
 
 
 const theme = {
-  [popperThemeNamespace]: {
+  [popoverThemeNamespace]: {
     appearance: {
       default: {
         content: {
