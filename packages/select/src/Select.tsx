@@ -51,8 +51,9 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   const [currentOption, setCurrentOption] = useState(findOptionByValue(value, options));
 
   useEffect(() => {
-    if (isEmpty(items)) return;
-    setOptions(convertToOptions(items));
+    if (!isEmpty(items)) {
+      setOptions(convertToOptions(items));
+    }
   }, [items]);
 
   useEffect(() => {
