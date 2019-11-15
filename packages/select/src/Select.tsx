@@ -9,7 +9,7 @@ import {
   ClearIndicator,
   MultiValueRemove,
   DropdownIndicator,
-} from './styled';
+} from './styl
 import { themeConverter } from './utils';
 import { SelectProps, ISelectBaseTheme } from './interfaces';
 
