@@ -23,48 +23,16 @@ const options2 = [
   { value: 'fourthCard', label: '444444444444444444', prefix: <MasterCardIcon /> },
 ];
 
-
-const ChangeItems = () => {
-  const [isFirstItems, changeIsFirstItems] = useState(true);
+const ChangeOptions = () => {
+  const [isFirstOptions, changeIsFirstOptions] = useState(true);
   return (
     <>
-      <button style={ { width: '60px', height: '38px', margin: '10px' } } onClick={ () => changeIsFirstItems(true) }>One</button>
-      <button style={ { width: '60px', height: '38px', margin: '20px ' } } onClick={ () => changeIsFirstItems(false) }>Two</button>
-      <Select items={ isFirstItems ? options : options2 } />
+      <button style={ { width: '60px', height: '38px', margin: '10px' } } onClick={ () => changeIsFirstOptions(true) }>One</button>
+      <button style={ { width: '60px', height: '38px', margin: '20px ' } } onClick={ () => changeIsFirstOptions(false) }>Two</button>
+      <Select options={ isFirstOptions ? options : options2 } />
     </>
   );
 };
-const items2 = {
-  firstCard: {
-    name: '111111111111111111',
-    prefix: <MasterCardIcon />,
-  },
-  secondCard: {
-    name: '222222222222222222',
-    prefix: <MasterCardIcon />,
-  },
-  thirdCard: {
-    name: '333333333333333333',
-    prefix: <MasterCardIcon />,
-  },
-  fourthCard: {
-    name: '444444444444444444',
-    prefix: <MasterCardIcon />,
-  },
-};
-
-const ChangeItems = () => {
-  const [isFirstItems, changeIsFirstItems] = useState(true);
-  return (
-    <>
-      <button style={ { width: '60px', height: '38px', margin: '10px' } } onClick={ () => changeIsFirstItems(true) }>One</button>
-      <button style={ { width: '60px', height: '38px', margin: '20px ' } } onClick={ () => changeIsFirstItems(false) }>Two</button>
-      <Select items={ isFirstItems ? items : items2 } />
-    </>
-  );
-};
-
-
 
 storiesOf('Select', module)
   .add('Basic', () => (
@@ -89,14 +57,12 @@ storiesOf('Select', module)
     <Select isSearchable textPosition="left" options={ options } />
   ))
   .add('Multi Select', () => (
-
     <Select textPosition="left" options={ options } isMulti />
   ))
-  .add('Change Items', () => (
-    <ChangeItems />
+  .add('Change Options', () => (
+    <ChangeOptions />
   ))
   .add('With default option', () => (
-
     <Select isSearchable isClearable defaultValue={ options[2] } options={ options } />
   ))
   .add('Only default option', () => (
