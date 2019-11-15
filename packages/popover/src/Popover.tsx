@@ -1,10 +1,15 @@
-import React, { useState, useRef } from 'react';
-import Popper, { IRenderPopperProps } from '@xcritical/popper';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import isUndefined from 'lodash/isUndefined';
+import Popper, { IRenderPopperProps } from '@xcritical/popper';
 
-import { IPopover } from './interfaces';
+import { IPopover, IPopoverEvents } from './interfaces';
 import { Content, Arrow, PopperWrapper } from './styles';
 
 
@@ -17,17 +22,58 @@ export const Popover: React.FC<IPopover> = ({
   onVisibleChange,
   withArrow = true,
   shouldFitContainer = false,
+  trigger = 'hover',
   theme,
   appearance = 'default',
   baseAppearance = 'default',
 }) => {
-  const popperRef = useRef<HTMLDivElement | null>();
+  const popoverTargetRef = useRef<any>();
+  const popoverContentRef = useRef<any>();
 
   const [_visible, _setVisible] = useState(false);
   const [hideTimeoutId, setHideTimeoutId] = useState<null | number>(null);
 
-  const handleMouseOver = (e: React.MouseEvent): void => {
-    if (e.target === popperRef.current) {
+  const changeVisible = useCallback((newVisible: boolean) => {
+    if (onVisibleChange) {
+      onVisibleChange(newVisible);
+    }
+  }, [onVisibleChange]);
+
+  const handleClick = useCallback((e: Event): void => {
+    if (popoverContentRef.current && popoverContentRef.current.contains(e.target)) {
+      return;
+    }
+
+    if (e.target === popoverTargetRef.current) {
+      _setVisible(false);
+      changeVisible(false);
+      return;
+    }
+
+    if (popoverTargetRef.current && popoverTargetRef.current.contains(e.target)) {
+      _setVisible(!_visible);
+      changeVisible(!_visible);
+      return;
+    }
+
+    _setVisible(false);
+    changeVisible(false);
+  }, [_visible, changeVisible]);
+
+  useEffect(() => {
+    if (trigger === 'click') {
+      document.addEventListener('click', handleClick);
+
+      return () => {
+        document.removeEventListener('click', handleClick);
+      };
+    }
+
+    return () => {};
+  }, [trigger, handleClick]);
+
+  const handleMouseOver = useCallback((e: React.MouseEvent): void => {
+    if (e.target === popoverTargetRef.current) {
       return;
     }
 
@@ -36,23 +82,24 @@ export const Popover: React.FC<IPopover> = ({
     }
 
     _setVisible(true);
+    changeVisible(true);
+  }, [hideTimeoutId, changeVisible]);
 
-    if (onVisibleChange) {
-      onVisibleChange(true);
-    }
-  };
-
-  const handleMouseOut = (): void => {
+  const handleMouseOut = useCallback((): void => {
     const timeoutId = setTimeout(() => {
       _setVisible(false);
-
-      if (onVisibleChange) {
-        onVisibleChange(false);
-      }
-    }, 200);
+      changeVisible(false);
+    }, 150);
 
     setHideTimeoutId(timeoutId);
-  };
+  }, [changeVisible]);
+
+  const events: IPopoverEvents = {};
+
+  if (trigger === 'hover') {
+    events.onMouseOver = handleMouseOver;
+    events.onMouseOut = handleMouseOut;
+  }
 
   return (
     <Popper
@@ -61,21 +108,24 @@ export const Popover: React.FC<IPopover> = ({
       visible={ isUndefined(visible) ? _visible : visible }
     >
       { (popperProps: IRenderPopperProps) => (
-        // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
         <PopperWrapper
           ref={ (node) => {
             const { targetRef } = popperProps;
 
             targetRef.current = node && node.firstChild;
-            popperRef.current = node;
+            popoverTargetRef.current = node;
           } }
-          onMouseOver={ handleMouseOver }
-          onMouseOut={ handleMouseOut }
+          { ...events }
         >
           { children }
           { popperProps.visible && (
             <Content
-              ref={ popperProps.contentRef }
+              ref={ (node) => {
+                const { contentRef } = popperProps;
+
+                contentRef.current = node;
+                popoverContentRef.current = node;
+              } }
               data-content-position={ position }
               shouldFitContainer={ shouldFitContainer }
               theme={ theme }

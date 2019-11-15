@@ -85,6 +85,26 @@ const ControlledHover: React.FC = () => {
   );
 };
 
+const ControlledClick: React.FC = () => {
+  const [controlledVisible, setControlledVisible] = useState(false);
+
+  const handleVisibleChange = (visible: boolean): void => {
+    setControlledVisible(visible);
+  };
+
+  return (
+    <Popover
+      trigger="click"
+      position="bottom center"
+      content={ popoverContent }
+      visible={ controlledVisible }
+      onVisibleChange={ handleVisibleChange }
+    >
+      <ComponentWithPopover>Bottom Center</ComponentWithPopover>
+    </Popover>
+  );
+};
+
 storiesOf('Popover', module)
   .add('Default', () => (
     <Grid columns={ 2 }>
@@ -219,14 +239,22 @@ storiesOf('Popover', module)
   .add('Show on hover', () => (
     <Popover position="bottom center" content={ popoverContent }>
       <Wrapper>
-        <ComponentWithPopover style={ { marginBottom: 0 } }>Top Left</ComponentWithPopover>
+        <ComponentWithPopover style={ { marginBottom: 0 } }>Bottom Center</ComponentWithPopover>
       </Wrapper>
     </Popover>
   ))
-  .add('Controlled Hover', () => (
-    <Popover position="bottom center" content={ popoverContent }>
-      <ControlledHover />
+  .add('Controlled hover', () => (
+    <ControlledHover />
+  ))
+  .add('Show on click', () => (
+    <Popover trigger="click" position="bottom center" content={ popoverContent }>
+      <Wrapper>
+        <ComponentWithPopover style={ { marginBottom: 0 } }>Bottom Center</ComponentWithPopover>
+      </Wrapper>
     </Popover>
+  ))
+  .add('Controlled click', () => (
+    <ControlledClick />
   ))
   .add('Content fit container width', () => (
     <Popover position="bottom center" visible shouldFitContainer content={ popoverContent }>
