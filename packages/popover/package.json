@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/popover",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "",
 	"main": "src/index.ts",
 	"scripts": {
@@ -30,7 +30,7 @@
 		"styled-components": "^4.1.0"
 	},
 	"dependencies": {
-		"@xcritical/popper": "^0.1.0",
+		"@xcritical/popper": "^0.1.1",
 		"@xcritical/theme": "^0.1.2"
 	}
 }

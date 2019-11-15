@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 // eslint-disable-next-line import/no-unresolved
 import Select from '../src';
@@ -9,50 +9,62 @@ import { MasterCardIcon } from './MasterCardIcon';
 import { customTheme } from './customThemes';
 
 
-const items = {
-  firstCard: {
-    name: '1234 1234 1234 1234',
-    prefix: <MasterCardIcon />,
-  },
-  secondCard: {
-    name: '4321 4321 4321 4321',
-    prefix: <MasterCardIcon />,
-  },
-  thirdCard: {
-    name: '4567 4567 4567 4567',
-    prefix: <MasterCardIcon />,
-  },
-  fourthCard: {
-    name: '0123 0123 0123 0123',
-    prefix: <MasterCardIcon />,
-  },
+const options = [
+  { value: 'firstCard', label: '1234 1234 1234 1234', prefix: <MasterCardIcon /> },
+  { value: 'secondCard', label: '4321 4321 4321 4321', prefix: <MasterCardIcon /> },
+  { value: 'thirdCard', label: '4567 4567 4567 4567', prefix: <MasterCardIcon /> },
+  { value: 'fourthCard', label: '0123 0123 0123 0123', prefix: <MasterCardIcon /> },
+];
+
+const options2 = [
+  { value: 'firstCard', label: '111111111111111111', prefix: <MasterCardIcon /> },
+  { value: 'secondCard', label: '222222222222222222', prefix: <MasterCardIcon /> },
+  { value: 'thirdCard', label: '333333333333333333', prefix: <MasterCardIcon /> },
+  { value: 'fourthCard', label: '444444444444444444', prefix: <MasterCardIcon /> },
+];
+
+const ChangeOptions = () => {
+  const [isFirstOptions, changeIsFirstOptions] = useState(true);
+  return (
+    <>
+      <button style={ { width: '60px', height: '38px', margin: '10px' } } onClick={ () => changeIsFirstOptions(true) }>One</button>
+      <button style={ { width: '60px', height: '38px', margin: '20px ' } } onClick={ () => changeIsFirstOptions(false) }>Two</button>
+      <Select options={ isFirstOptions ? options : options2 } />
+    </>
+  );
 };
 
 storiesOf('Select', module)
   .add('Basic', () => (
     <>
-      <Select items={ items } />
-      <Select isSearchable textPosition="left" items={ items } />
+      <Select options={ options } />
+      <Select isSearchable textPosition="left" options={ options } />
     </>
   ))
   .add('Empty', () => (
     <Select />
   ))
-  .add('With value and clear icon', () => (
-    <Select isClearable value="thirdCard" items={ items } />
-  ))
   .add('Themed', () => (
-    <Select theme={ customTheme } textPosition="left" items={ items } />
+    <Select theme={ customTheme } textPosition="left" options={ options } />
   ))
   .add('RTL Support', () => (
-    <Select theme={ customTheme } isRTL textPosition="left" items={ items } />
+    <Select theme={ customTheme } isRTL textPosition="left" options={ options } />
   ))
   .add('Disabled', () => (
-    <Select disabled textPosition="left" items={ items } />
+    <Select disabled textPosition="left" options={ options } />
   ))
   .add('Autocomplete', () => (
-    <Select isSearchable textPosition="left" items={ items } />
+    <Select isSearchable textPosition="left" options={ options } />
   ))
   .add('Multi Select', () => (
-    <Select textPosition="left" items={ items } isMulti />
+    <Select textPosition="left" options={ options } isMulti />
+  ))
+  .add('Change Options', () => (
+    <ChangeOptions />
+  ))
+  .add('With default option', () => (
+    <Select isSearchable isClearable defaultValue={ options[2] } options={ options } />
+  ))
+  .add('Only default option', () => (
+    <Select isSearchable isClearable defaultValue={ options[3] } />
   ));
