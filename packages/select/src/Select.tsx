@@ -59,6 +59,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
     );
   }, [innerTheme, appearance, baseAppearance, shouldFitContainer]);
 
+
   return (
     <Select
       ref={ selectRef }
