@@ -15,12 +15,12 @@ import { getModifiers } from './utils/modifiers';
 
 export const Popper: React.FC<IPopperProps> = ({
   children,
-  content: Content,
   modifiers,
   position = 'bottom center',
   eventsEnabled = true,
   positionFixed = false,
   autoFlip = true,
+  visible = true,
 }) => {
   const popperInstance = useRef<PopperJS>();
   const targetRef = useRef<any>();
@@ -61,41 +61,36 @@ export const Popper: React.FC<IPopperProps> = ({
     modifiers: getModifiers(autoFlip, modifiers),
   }), ([position, eventsEnabled, positionFixed, autoFlip, modifiers]));
 
-  const setPopperInstance = useCallback((): void => {
+  useEffect(() => {
     destroyPopperInstance();
+
+    if (!visible) {
+      return;
+    }
+
+    if (!targetRef.current || !contentRef.current) {
+      return;
+    }
 
     const popperOptions = getOptions();
 
     popperInstance.current = new PopperJS(
-      targetRef.current.firstChild,
+      targetRef.current,
       contentRef.current,
       popperOptions,
     );
-  }, [getOptions]);
-
-  useEffect(() => {
-    if (Content) {
-      setPopperInstance();
-    }
-  }, [Content, setPopperInstance]);
+  }, [getOptions, visible]);
 
   useEffect(() => () => {
     destroyPopperInstance();
   }, []);
 
-  return (
-    <div>
-      <div ref={ targetRef }>
-        { children }
-      </div>
-      { Content && (
-        <Content
-          contentRef={ contentRef }
-          position={ state.position }
-          arrowStyles={ state.arrowStyles }
-          popperStyles={ state.popperStyles }
-        />
-      ) }
-    </div>
-  );
+  return children({
+    targetRef,
+    contentRef,
+    visible,
+    position: state.position,
+    arrowStyles: state.arrowStyles,
+    popperStyles: state.popperStyles,
+  });
 };

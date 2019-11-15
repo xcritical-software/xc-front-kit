@@ -8,9 +8,10 @@ export interface IPopover {
   content: any;
   position: Position;
   autoFlip?: boolean;
-  visible?: boolean;
   shouldFitContainer?: boolean;
   withArrow?: boolean;
+  visible?: boolean;
+  onVisibleChange?: (visible: boolean) => void;
   theme?: IThemeNamespace<IPopperTheme>;
   appearance?: string;
   baseAppearance?: string;

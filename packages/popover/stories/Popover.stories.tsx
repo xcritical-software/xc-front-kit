@@ -1,12 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
+
 import styled, { ThemeProvider } from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
 import { storiesOf } from '@storybook/react';
 
-import { Popover } from '../src';
-
-import { popperThemeNamespace } from '../src/theme';
+import { Popover, popperThemeNamespace } from '../src';
 
 
 const theme = {
@@ -49,7 +48,7 @@ const Wrapper = styled.div`
 
 const popoverContent = <div>Popover Content</div>;
 
-const Controlled = (): ReactElement => {
+const Controlled: React.FC = () => {
   const [controlledVisible, setControlledVisible] = useState(false);
 
   return (
@@ -64,6 +63,25 @@ const Controlled = (): ReactElement => {
         <ComponentWithPopover>Bottom Center</ComponentWithPopover>
       </Popover>
     </>
+  );
+};
+
+const ControlledHover: React.FC = () => {
+  const [controlledVisible, setControlledVisible] = useState(false);
+
+  const handleVisibleChange = (visible: boolean): void => {
+    setControlledVisible(visible);
+  };
+
+  return (
+    <Popover
+      position="bottom center"
+      content={ popoverContent }
+      visible={ controlledVisible }
+      onVisibleChange={ handleVisibleChange }
+    >
+      <ComponentWithPopover>Bottom Center</ComponentWithPopover>
+    </Popover>
   );
 };
 
@@ -197,6 +215,18 @@ storiesOf('Popover', module)
   ))
   .add('Controlled', () => (
     <Controlled />
+  ))
+  .add('Show on hover', () => (
+    <Popover position="bottom center" content={ popoverContent }>
+      <Wrapper>
+        <ComponentWithPopover style={ { marginBottom: 0 } }>Top Left</ComponentWithPopover>
+      </Wrapper>
+    </Popover>
+  ))
+  .add('Controlled Hover', () => (
+    <Popover position="bottom center" content={ popoverContent }>
+      <ControlledHover />
+    </Popover>
   ))
   .add('Content fit container width', () => (
     <Popover position="bottom center" visible shouldFitContainer content={ popoverContent }>
