@@ -5,8 +5,6 @@ import React, {
   useRef,
 } from 'react';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
-import isUndefined from 'lodash/isUndefined';
 import Popper, { IRenderPopperProps } from '@xcritical/popper';
 
 import { IPopover, IPopoverEvents } from './interfaces';
@@ -105,7 +103,7 @@ export const Popover: React.FC<IPopover> = ({
     <Popper
       position={ position }
       autoFlip={ autoFlip }
-      visible={ isUndefined(visible) ? _visible : visible }
+      visible={ visible === undefined ? _visible : visible }
     >
       { (popperProps: IRenderPopperProps) => (
         <PopperWrapper
