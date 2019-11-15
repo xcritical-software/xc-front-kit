@@ -1,8 +1,7 @@
 import React, {
-  useState, useRef, useEffect, useCallback, useContext, useMemo,
+  useRef, useEffect, useContext, useMemo,
 } from 'react';
 import Select from 'react-select';
-import isEmpty from 'lodash.isempty';
 import { ThemeContext } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
 import {
@@ -11,7 +10,7 @@ import {
   MultiValueRemove,
   DropdownIndicator,
 } from './styled';
-import { convertToOptions, findOptionByValue, themeConverter } from './utils';
+import { themeConverter } from './utils';
 import { SelectProps, ISelectBaseTheme } from './interfaces';
 
 
@@ -27,10 +26,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   appearance = 'default',
   baseAppearance = 'default',
   shouldFitContainer = false,
-  items = {},
-  value,
   placeholder,
-  onChange,
   theme,
   components,
   ...rest
@@ -40,25 +36,12 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
 
   const selectRef = useRef<any>();
 
-  const [options, setOptions] = useState(convertToOptions(items));
   const formatOptionLabel = useMemo(() => getFormatOptionLabel(
     innerTheme,
     appearance,
     baseAppearance,
     isRTL,
   ), [appearance, baseAppearance, innerTheme, isRTL]);
-
-  const [currentOption, setCurrentOption] = useState(findOptionByValue(value, options));
-
-  useEffect(() => {
-    if (!isEmpty(items)) {
-      setOptions(convertToOptions(items));
-    }
-  }, [items]);
-
-  useEffect(() => {
-    setCurrentOption(findOptionByValue(value, options));
-  }, [options, value]);
 
   const styles = useRef(themeConverter(
     innerTheme,
@@ -77,25 +60,11 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   }, [innerTheme, appearance, baseAppearance, shouldFitContainer]);
 
 
-  const onItemChanged = useCallback((selectedOption, action) => {
-    setCurrentOption(selectedOption);
-
-    if (onChange) {
-      const selectedValue = !isMulti && selectedOption ? selectedOption.value : selectedOption;
-
-      onChange(selectedValue, action);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <Select
       ref={ selectRef }
       className={ className }
       classNamePrefix={ className }
-      value={ currentOption }
-      onChange={ onItemChanged }
-      options={ options }
       formatOptionLabel={ formatOptionLabel }
       styles={ styles.current }
       isDisabled={ disabled }

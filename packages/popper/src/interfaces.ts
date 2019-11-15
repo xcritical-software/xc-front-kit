@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { MutableRefObject } from 'react';
 import { Modifiers } from 'popper.js';
 
 
@@ -17,13 +17,13 @@ export type Position =
   | 'left bottom';
 
 export interface IPopperProps {
-  children?: any;
-  content?: any;
+  children: any;
   eventsEnabled?: boolean;
   modifiers?: Modifiers;
   position?: Position;
   positionFixed?: boolean;
   autoFlip?: boolean;
+  visible?: boolean;
 }
 
 export interface IPopperState {
@@ -32,8 +32,10 @@ export interface IPopperState {
   position: Position;
 }
 
-export interface IContent {
-  contentRef: RefObject<HTMLDivElement>;
+export interface IRenderPopperProps {
+  targetRef: MutableRefObject<any>;
+  contentRef: MutableRefObject<any>;
+  visible: boolean;
   position: Position;
   arrowStyles: object;
   popperStyles: object;

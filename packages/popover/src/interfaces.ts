@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import { CSSObject } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
 import { Position } from '@xcritical/popper';
@@ -8,9 +9,11 @@ export interface IPopover {
   content: any;
   position: Position;
   autoFlip?: boolean;
-  visible?: boolean;
   shouldFitContainer?: boolean;
   withArrow?: boolean;
+  visible?: boolean;
+  onVisibleChange?: (visible: boolean) => void;
+  trigger?: 'hover' | 'click';
   theme?: IThemeNamespace<IPopoverTheme>;
   appearance?: string;
   baseAppearance?: string;
@@ -29,6 +32,11 @@ export interface IPopoverTheme {
       color?: string;
     };
   };
+}
+
+export interface IPopoverEvents {
+  onMouseOver?: (e: MouseEvent) => void;
+  onMouseOut?: (e: MouseEvent) => void;
 }
 
 export interface IContent extends IThemed {
