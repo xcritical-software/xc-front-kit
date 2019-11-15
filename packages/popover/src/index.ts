@@ -1,2 +1,2 @@
 export { Popover } from './Popover';
-export { popperThemeNamespace } from './theme';
+export { popoverThemeNamespace } from './theme';

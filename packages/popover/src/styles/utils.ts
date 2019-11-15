@@ -2,7 +2,7 @@ import { CSSObject } from 'styled-components';
 import { getAppearanceTheme } from '@xcritical/theme';
 
 import { IThemed, ArrowDirection } from '../interfaces';
-import { popperThemeNamespace, defaultPopperTheme } from '../theme';
+import { popoverThemeNamespace, defaultPopoverTheme } from '../theme';
 
 
 export const getPopperProperty = ({
@@ -10,7 +10,7 @@ export const getPopperProperty = ({
   appearance,
   baseAppearance,
 }: IThemed): (propertyPath: string[]) => any => {
-  const func = getAppearanceTheme(popperThemeNamespace, defaultPopperTheme);
+  const func = getAppearanceTheme(popoverThemeNamespace, defaultPopoverTheme);
 
   return (propertyPath) => func(theme, appearance, propertyPath, baseAppearance);
 };

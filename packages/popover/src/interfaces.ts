@@ -1,4 +1,4 @@
-import React from 'react';
+import { MouseEvent } from 'react';
 import { CSSObject } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
 import { Position } from '@xcritical/popper';
@@ -14,12 +14,12 @@ export interface IPopover {
   visible?: boolean;
   onVisibleChange?: (visible: boolean) => void;
   trigger?: 'hover' | 'click';
-  theme?: IThemeNamespace<IPopperTheme>;
+  theme?: IThemeNamespace<IPopoverTheme>;
   appearance?: string;
   baseAppearance?: string;
 }
 
-export interface IPopperTheme {
+export interface IPopoverTheme {
   content?: CSSObject & {
     offset?: string;
   };
@@ -35,8 +35,8 @@ export interface IPopperTheme {
 }
 
 export interface IPopoverEvents {
-  onMouseOver?: (e: React.MouseEvent) => void;
-  onMouseOut?: (e: React.MouseEvent) => void;
+  onMouseOver?: (e: MouseEvent) => void;
+  onMouseOut?: (e: MouseEvent) => void;
 }
 
 export interface IContent extends IThemed {
@@ -44,7 +44,7 @@ export interface IContent extends IThemed {
 }
 
 export interface IThemed {
-  theme: IThemeNamespace<IPopperTheme>;
+  theme: IThemeNamespace<IPopoverTheme>;
   appearance: string;
   baseAppearance: string;
 }

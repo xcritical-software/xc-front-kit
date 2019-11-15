@@ -1,9 +1,9 @@
-import { IPopperTheme } from './interfaces';
+import { IPopoverTheme } from './interfaces';
 
 
-export const popperThemeNamespace = '@xcritical\\xc-popper';
+export const popoverThemeNamespace = '@xcritical\\xc-popover';
 
-export const defaultPopperTheme: IPopperTheme = {
+export const defaultPopoverTheme: IPopoverTheme = {
   content: {
     offset: '5px',
     background: '#fff',

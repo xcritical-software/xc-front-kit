@@ -8,7 +8,7 @@ import React, {
 import Popper, { IRenderPopperProps } from '@xcritical/popper';
 
 import { IPopover, IPopoverEvents } from './interfaces';
-import { Content, Arrow, PopperWrapper } from './styles';
+import { Content, Arrow, PopoverWrapper } from './styles';
 
 
 export const Popover: React.FC<IPopover> = ({
@@ -106,7 +106,7 @@ export const Popover: React.FC<IPopover> = ({
       visible={ visible === undefined ? _visible : visible }
     >
       { (popperProps: IRenderPopperProps) => (
-        <PopperWrapper
+        <PopoverWrapper
           ref={ (node) => {
             const { targetRef } = popperProps;
 
@@ -144,7 +144,7 @@ export const Popover: React.FC<IPopover> = ({
               ) }
             </Content>
           ) }
-        </PopperWrapper>
+        </PopoverWrapper>
       ) }
     </Popper>
   );
