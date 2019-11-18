@@ -23,6 +23,7 @@ const simpleForm = () => (
           type="text"
           placeholder="First Name"
         />
+
       </div>
     </div>
     <div>
@@ -45,6 +46,7 @@ const simpleForm = () => (
           type="email"
           placeholder="Email"
         />
+        <Form.Field name="favoriteColor" component={ Select } items={ selectItems } />
       </div>
     </div>
     <div>
@@ -65,8 +67,7 @@ const simpleForm = () => (
     <div>
       <label>Favorite Color</label>
       <div>
-        <Form.Field name="favoriteColor" component={ Select } items={ selectItems }>
-        </Form.Field>
+        <Form.Field name="favoriteColor" component={ Select } items={ selectItems } />
       </div>
     </div>
     <div>

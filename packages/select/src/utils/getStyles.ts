@@ -226,16 +226,18 @@ export const getStatesStyles: GetStyles = memoizee((
     isDisabled,
     isFocused,
     isSelected,
+    isSearchable,
   ) => {
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
-
     let elementStyles = {
+      ...(isSearchable && element.searchable),
       ':hover': {
         ...((element && element.hover) || hoverStyles),
       },
       ':active': {
         ...((element && element.active) || activeStyles),
       },
+
     };
 
     if (isDisabled) {

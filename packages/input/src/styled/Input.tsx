@@ -15,7 +15,7 @@ const inputStyles = css<ISubComponentProps>`
 `;
 
 export const Root = styled.div<ISubComponentProps>`
-  display: flex;
+  display: inline-flex;
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   flex-wrap: nowrap;
   align-items: center;
@@ -53,6 +53,8 @@ export const StyledInput = styled.input<IStyledInput>`
   flex-direction: column;
   flex-grow: 1;
   outline: 0;
+  padding: 0;
+  margin: 0;
   ${({ theme, appearance, baseAppearance }) => getComponentStyle(theme, appearance, baseAppearance, 'input')}
   ${getInputInteractiveStyles}
 `;

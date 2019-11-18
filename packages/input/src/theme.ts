@@ -24,13 +24,13 @@ generateApperance({
 */
 
 const color = colors.CHAROCOAL;
-const height = 30;
-const paddingTop = 0;
+const height = 'auto';
+const paddingTop = 7;
 const paddingRight = 5;
-const paddingBottom = 0;
+const paddingBottom = 7;
 const paddingLeft = 5;
 const fontWeight = 600;
-const fontSize = 14;
+const fontSize = 13;
 const lineHeight = 1.69;
 const borderWidth = '1px';
 const borderStyle = 'solid';
@@ -49,7 +49,6 @@ export const inputThemeStyle: InputTheme = {
   paddingLeft,
   fontWeight,
   fontSize,
-  lineHeight,
   borderWidth,
   borderStyle,
   borderColor,
@@ -60,6 +59,7 @@ export const inputThemeStyle: InputTheme = {
   input: {
     borderWidth: 0,
     backgroundColor: 'inherit',
+    lineHeight,
   },
   appearance: {
     default: {
