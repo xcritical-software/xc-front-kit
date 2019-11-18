@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/select",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "XCritical Select Component",
 	"main": "src/index.ts",
 	"scripts": {
@@ -31,7 +31,8 @@
 		"micro-memoize": "^4.0.8",
 		"polished": "^3.0.0",
 		"react-select": "3.0.8",
-		"utilitify": "^1.0.2"
+		"utilitify": "^1.0.2",
+		"lodash.isempty": "4.x"
 	},
 	"devDependencies": {
 		"@types/react-select": "3.0.8"

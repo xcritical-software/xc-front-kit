@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
 
-export const PopperWrapper = styled.div`
+export const PopoverWrapper = styled.div`
   position: relative;
 `;

@@ -29,15 +29,12 @@ export interface IThemeProps {
 }
 
 export interface ISelectOnlyProps {
-
   appearance?: string;
   baseAppearance?: string;
   disabled?: boolean;
   isMulti?: boolean;
   isSearchable?: boolean;
   isOpenMenu?: boolean;
-  items?: { [key: string]: IOptionItem };
-  value?: string | { [key: string]: IOptionItem };
   className?: string;
   shouldFitContainer?: boolean;
   isRTL?: boolean;

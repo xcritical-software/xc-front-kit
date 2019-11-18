@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
 
 // eslint-disable-next-line import/no-unresolved
-import Popper, { IContent } from '@xcritical/popper';
+import Popper, { IRenderPopperProps } from '@xcritical/popper';
 import { IPopperProps } from '../src/interfaces';
 
 
@@ -45,7 +45,7 @@ const AlignmentContainer = styled.div`
   margin: 25px 0;
 `;
 
-const Content: React.FC<IContent> = (popperProps) => (
+const Content: React.FC<IRenderPopperProps> = (popperProps) => (
   <div
     ref={ popperProps.contentRef }
     style={ { ...popperProps.popperStyles, ...layerStyles } }
@@ -54,19 +54,19 @@ const Content: React.FC<IContent> = (popperProps) => (
   </div>
 );
 
-const ExampleAlignment = (props: IPopperProps): React.ReactElement => (
-  <Popper
-    { ...props }
-    content={ (popperProps: IContent) => (
-      <div
-        ref={ popperProps.contentRef }
-        style={ { ...popperProps.popperStyles, background: '#fca' } }
-      >
-        { props.position }
-      </div>
+const ExampleAlignment: React.FC<Omit<IPopperProps, 'children'>> = (props) => (
+  <Popper { ...props }>
+    { (popperProps: IRenderPopperProps) => (
+      <>
+        <AlignmentContainer ref={ popperProps.targetRef } />
+        <div
+          ref={ popperProps.contentRef }
+          style={ { ...popperProps.popperStyles, background: '#fca' } }
+        >
+          { props.position }
+        </div>
+      </>
     ) }
-  >
-    <AlignmentContainer />
   </Popper>
 );
 
@@ -110,11 +110,15 @@ storiesOf('Popper', module)
         <div style={ { width: '500px', height: '500px' } }>
           <Popper
             autoFlip
-            content={ Content }
             position="right middle"
             modifiers={ { flip: { boundariesElement: 'scrollParent' } } }
           >
-            <div style={ targetStyle }>Target</div>
+            { (popperProps: IRenderPopperProps) => (
+              <>
+                <div ref={ popperProps.targetRef } style={ targetStyle }>Target</div>
+                <Content { ...popperProps } />
+              </>
+            ) }
           </Popper>
         </div>
       </div>
