@@ -29,6 +29,7 @@ import {
   // IFilter,
 } from './interfaces';
 import { IFilterTheme, filterTheme } from './utils';
+import { OptionTypeBase } from 'react-select';
 
 
 const Filter: React.SFC<IFilterProps> = ({
@@ -50,13 +51,13 @@ const Filter: React.SFC<IFilterProps> = ({
     openFilters();
   }, [openFilters]);
 
-  const filtersItems = useMemo(
+  const _filters = useMemo(
     () => filters.reduce(
-      (acc, { field, displayName }) => ({
+      (acc: OptionTypeBase[], { field, displayName }) => ([
         ...acc,
-        [field]: { name: displayName },
-      }),
-      {},
+        { label: displayName, value: field },
+      ]),
+      [],
     ),
     [filters],
   );
@@ -77,7 +78,7 @@ const Filter: React.SFC<IFilterProps> = ({
               name={ name }
               key={ filter.column + filter.condition + filter.value + filter.key }
               theme={ themeRef.current }
-              filterItems={ filtersItems }
+              filterItems={ _filters }
             />
           )) }
         </TopPanelTags>
@@ -116,7 +117,7 @@ const Filter: React.SFC<IFilterProps> = ({
         </RowWrapper>
         { activeFilters.map((filter: IStateFilter) => (
           <FilterRowContainer
-            filterItems={ filtersItems }
+            filterItems={ _filters }
             guid={ filter.key }
             filters={ filters }
             filter={ filter }

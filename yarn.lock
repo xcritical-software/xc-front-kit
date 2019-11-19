@@ -2883,17 +2883,6 @@
     typescript "3.5.3"
     vinyl "^2.2.0"
 
-"@xcritical/select@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@xcritical/select/-/select-0.0.1.tgz#bc0c97889ddb113a2477a58fffce4f9dec55740b"
-  integrity sha512-y+CLYSKsjDnXexyi5p6hTqjHIygsjinID+sqtP9WBeNUR1twWrawZGUHSxm6xb1v9ONH6Gd0nnnRjckXUpZAig==
-  dependencies:
-    "@xcritical/theme" "^0.1.1"
-    memoizee "^0.4.14"
-    polished "^3.0.0"
-    react-select "^3.0.5"
-    utilitify "^1.0.2"
-
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -10004,7 +9993,7 @@ memoize-one@^5.0.0:
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
   integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
 
-memoizee@0.4.X, memoizee@^0.4.14:
+memoizee@0.4.X:
   version "0.4.14"
   resolved "https://registry.yarnpkg.com/memoizee/-/memoizee-0.4.14.tgz#07a00f204699f9a95c2d9e77218271c7cd610d57"
   integrity sha512-/SWFvWegAIYAO4NQMpcX+gcra0yEZu4OntmUdrBaWrJncxOqAziGFlHxc7yjKVK2uu3lpPW27P27wkR82wA8mg==
@@ -12211,7 +12200,7 @@ react-router@5.1.2, react-router@^5.0.1:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-select@3.0.8, react-select@^3.0.0, react-select@^3.0.5:
+react-select@3.0.8, react-select@^3.0.0:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/react-select/-/react-select-3.0.8.tgz#06ff764e29db843bcec439ef13e196865242e0c1"
   integrity sha512-v9LpOhckLlRmXN5A6/mGGEft4FMrfaBFTGAnuPHcUgVId7Je42kTq9y0Z+Ye5z8/j0XDT3zUqza8gaRaI1PZIg==

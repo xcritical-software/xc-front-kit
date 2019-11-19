@@ -1,18 +1,9 @@
 import { IThemeNamespace } from '@xcritical/theme';
 import { IFilterTheme } from './utils';
+import { OptionTypeBase } from 'react-select';
 
 
-export interface IFilterTag extends IFilterRow {
-  theme: IFilterTheme;
-}
-export interface IFilterRow {
-  filters: IFilter[];
-  filter: IFilterFromStore;
-  removeFilter: any;
-  guid: string;
-  changeFilter: Function;
-  filterItems: any;
-}
+
 
 export interface IFilter {
   field: string;
@@ -70,6 +61,16 @@ export interface IFilterRecivedProps {
   filters: IFilter[];
   name: string;
   theme?: IThemeNamespace;
+}
+
+export interface IFilterTag extends IFilterRow {
+  theme: IFilterTheme;
+}
+export interface IFilterRow extends IFilterRowProps {
+  removeFilter: any;
+  guid: string;
+  changeFilter: Function;
+  filterItems: OptionTypeBase[];
 }
 
 export interface IFilterProps {

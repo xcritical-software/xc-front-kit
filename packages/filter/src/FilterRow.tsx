@@ -2,7 +2,8 @@ import React, {
   useState, useEffect, ReactElement, useCallback,
 } from 'react';
 import Button from '@xcritical/button';
-import Select from '../../select/src';
+import Select from '@xcritical/select';
+import Input from '@xcritical/input';
 import {
   FilterField,
   RowWrapper,
@@ -29,14 +30,21 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
         (filter.column && !currentFilter)
         || (currentFilter && currentFilter.field !== filter.column)
       ) {
+        
         changeCurrentFilter(
-          filters.find((f: IFilter) => f.field === filter.column),
+          filters.find((f) => f.field === filter.column)
         );
       }
     }, [filter, currentFilter, filters]);
 
-    const conditions = currentFilter ? currentFilter.conditions : {};
-    const Element = currentFilter ? currentFilter.Element : null;
+
+    const conditions = currentFilter ? Object.keys(currentFilter.conditions).map((key) => {
+      return {
+        value: key,
+        label: currentFilter.conditions[key].name,
+      };
+    }) : [];
+    const Element = currentFilter ? currentFilter.Element || Input : null;
 
     const changeColumn = useCallback(
       (value: string) => {
@@ -49,7 +57,7 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
       [changeFilter, guid],
     );
     const changeValue = useCallback(
-      (value: string) => changeFilter({ field: 'value', value, guid }),
+      (value) => changeFilter({ field: 'value', value, guid }),
       [changeFilter, guid],
     );
 
@@ -59,7 +67,7 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
           <Select
             shouldFitContainer
             onChange={ changeColumn }
-            items={ filterItems }
+            options={ filterItems }
             value={ filter.column }
             key={ filter.column }
           />
@@ -70,7 +78,7 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
             shouldFitContainer
             onChange={ changeCondition }
             disabled={ !filter.column }
-            items={ conditions }
+            options={ conditions }
             value={ filter.condition }
             key={ filter.condition }
           />
