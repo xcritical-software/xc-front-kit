@@ -5,24 +5,6 @@ import { InputTheme } from './interfaces';
 
 export const inputThemeNamespace = '@xcritical\\input';
 
-/*
-generateApperance({
-      color: colors.CHAROCOAL,
-      height: 30,
-      paddingTop: 0,
-      paddingRight: 20,
-      paddingBottom: 0,
-      paddingLeft: 20,
-      fontWeight: 600,
-      fontSize: 14,
-      lineHeight: 1.69,
-      borderWidth: '1px',
-      borderStyle: 'solid',
-      borderColor: colors.GRAY_LIGHT,
-      borderRadius: 3,
-    }),
-*/
-
 const color = colors.CHAROCOAL;
 const height = 'auto';
 const paddingTop = 7;

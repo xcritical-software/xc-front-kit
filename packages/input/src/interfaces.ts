@@ -10,7 +10,7 @@ export interface IBaseInputTheme extends ICSSProperties {
 
 export type InputTheme = ITheme<IBaseInputTheme>;
 
-export interface IInputApperanceProps {
+export interface IInputAppearanceProps {
   theme?: IThemeNamespace<InputTheme>;
   appearance?: string;
   baseAppearance?: string;
@@ -31,7 +31,7 @@ export interface IBaseItemProps {
 
 export interface IInputProps
   extends HtmlAttributes,
-  IInputApperanceProps,
+  IInputAppearanceProps,
   IIsRTL,
   IBaseItemProps {
   css?: any;
