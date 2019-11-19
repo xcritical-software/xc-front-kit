@@ -2,7 +2,7 @@
 	"name": "@xcritical/select",
 	"version": "0.1.0",
 	"description": "XCritical Select Component",
-	"main": "src/index.js",
+	"main": "src/index.ts",
 	"scripts": {
 		"test": "exit 0",
 		"compile": "gulp --cwd . compile",
@@ -30,11 +30,11 @@
 		"@xcritical/theme": "^0.1.2",
 		"micro-memoize": "^4.0.8",
 		"polished": "^3.0.0",
-		"react-select": "3.0.5",
+		"react-select": "3.0.8",
 		"utilitify": "^1.0.2",
 		"lodash.isempty": "4.x"
 	},
 	"devDependencies": {
-		"@types/react-select": "3.0.5"
+		"@types/react-select": "3.0.8"
 	}
 }

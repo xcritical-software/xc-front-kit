@@ -132,13 +132,15 @@ export const themeConverter = (
       ...getInteractiveStyles('noOptionsMessage', isDisabled, isFocused, isSelected),
     }),
 
-    valueContainer: (css, { isDisabled, isFocused, isSelected }) => ({
+    valueContainer: (css, {
+      isDisabled, isFocused, isSelected, selectProps: { isSearchable },
+    }) => ({
       ...css,
       ...getElementStyles('valueContainer'),
       ...getPadding('valueContainer'),
       ...getDisplay('valueContainer'),
       ...getWidth('valueContainer'),
-      ...getInteractiveStyles('valueContainer', isDisabled, isFocused, isSelected),
+      ...getInteractiveStyles('valueContainer', isDisabled, isFocused, isSelected, isSearchable),
     }),
     singleValue: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,

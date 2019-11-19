@@ -11,7 +11,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
   paddingBottom: '7px',
   paddingLeft: '15px',
   paddingRight: '15px',
-  paddingTop: '5px',
+  paddingTop: '7px',
   marginBottom: 0,
   marginLeft: 0,
   marginRight: 0,
@@ -19,10 +19,10 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
   fontSize: '13px',
   fontWeight: 600,
   width: 335,
-  borderRadius: 6,
+  borderRadius: 3,
   borderWidth: 1,
   borderStyle: 'solid',
-  borderColor: colors.GRAY_LIGHT,
+  borderColor: colors.GRAY,
   background: colors.GRAY_LIGHT,
   color: colors.CHAROCOAL,
 
@@ -67,21 +67,23 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         },
       },
       dropdownList: {
-        borderRadius: 6,
+        borderRadius: 3,
         paddingBottom: 0,
         paddingLeft: 0,
         paddingRight: 0,
         paddingTop: 0,
       },
       button: {
-        background: colors.GRAY_LIGHT,
+        background: colors.WHITE,
+        borderColor: colors.GRAY,
         paddingBottom: '7px',
         paddingLeft: '15px',
         paddingRight: '5px',
-        paddingTop: '7px',
+        paddingTop: '6px',
+        minHeight: 'auto',
         hover: {
-          background: darken(0.1, colors.GRAY_LIGHT),
           color: colors.CHAROCOAL,
+          borderColor: colors.PRIMARY,
         },
         focus: {
           boxShadow: 'none',
@@ -95,6 +97,8 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         paddingLeft: 0,
         paddingRight: 0,
         paddingTop: 0,
+        lineHeight: 1.69,
+        height: 21,
         hover: {
           background: 'transparent',
         },
@@ -108,7 +112,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         paddingLeft: 0,
         paddingRight: 0,
         paddingTop: 0,
-
+        lineHeight: 1.69,
         marginBottom: 0,
         marginLeft: 10,
         marginRight: 5,
@@ -121,6 +125,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         paddingLeft: 0,
         paddingRight: 0,
         paddingTop: 0,
+        padding: '0 8px',
         hover: {
           background: 'transparent',
         },
@@ -173,6 +178,8 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         paddingRight: 0,
         paddingTop: 0,
         margin: 0,
+
+        height: '16px',
         hover: {
           background: 'transparent',
         },
@@ -223,11 +230,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
 
       valueContainer: {
         background: 'transparent',
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 3,
-        borderWidth: 0,
+        padding: '2px 8px',
         hover: {
           background: 'transparent',
         },
