@@ -1,8 +1,6 @@
 import { IThemeNamespace } from '@xcritical/theme';
-import { IFilterTheme } from './utils';
 import { OptionTypeBase } from 'react-select';
-
-
+import { IFilterTheme } from './utils';
 
 
 export interface IFilter {

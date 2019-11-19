@@ -10,21 +10,21 @@ import 'react-dates/lib/css/_datepicker.css';
 import Select from '../../select/src';
 
 
-const Input = ({
-  handleChange,
-  value,
-  isEdit,
-}: IElementProps): ReactElement => {
-  if (!isEdit) return <span>{ value }</span>;
-  return (
-    <input
-      style={ { width: '100%' } }
-      value={ value }
-      onChange={ (e) => handleChange(e.target.value) }
-      defaultValue=""
-    />
-  );
-};
+// const Input = ({
+//   handleChange,
+//   value,
+//   isEdit,
+// }: IElementProps): ReactElement => {
+//   if (!isEdit) return <span>{ value }</span>;
+//   return (
+//     <input
+//       style={ { width: '100%' } }
+//       value={ value }
+//       onChange={ (e) => handleChange(e.target.value) }
+//       defaultValue=""
+//     />
+//   );
+// };
 
 const DictionarySelector = ({
   name,
@@ -120,12 +120,8 @@ export const createElement = ({
   name,
   type,
   dictionaries,
-}: ICreateElement): Function => {
+}: ICreateElement): Function | null => {
   switch (type) {
-    case 'String':
-    case 'Numeric':
-    case 'Currency':
-      return Input;
     case 'Enum':
       return ({
         handleChange, value, isEdit, inTag,
@@ -142,6 +138,6 @@ export const createElement = ({
     case 'Date':
       return DateSelector;
     default:
-      return Input;
+      return null;
   }
 };

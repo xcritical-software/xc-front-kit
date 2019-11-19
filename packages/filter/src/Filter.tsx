@@ -12,6 +12,7 @@ import { ThemeContext } from 'styled-components';
 
 import Button from '@xcritical/button';
 
+import { OptionTypeBase } from 'react-select';
 import {
   TopPanel,
   WrapperFilters,
@@ -22,14 +23,13 @@ import {
   FilterField,
 } from './styled';
 import FilterRowContainer from './filterRowContainer';
-import TagContainer from './tagContainer';
+// import TagContainer from './tagContainer';
 import {
   IFilterProps,
   IStateFilter,
   // IFilter,
 } from './interfaces';
 import { IFilterTheme, filterTheme } from './utils';
-import { OptionTypeBase } from 'react-select';
 
 
 const Filter: React.SFC<IFilterProps> = ({
@@ -51,7 +51,7 @@ const Filter: React.SFC<IFilterProps> = ({
     openFilters();
   }, [openFilters]);
 
-  const _filters = useMemo(
+  const $filters = useMemo(
     () => filters.reduce(
       (acc: OptionTypeBase[], { field, displayName }) => ([
         ...acc,
@@ -70,7 +70,7 @@ const Filter: React.SFC<IFilterProps> = ({
     <div>
       <TopPanel theme={ themeRef.current }>
         <TopPanelTags>
-          { activeFilters.map((filter) => (
+          { /* { activeFilters.map((filter) => (
             <TagContainer
               guid={ filter.key }
               filters={ filters }
@@ -80,7 +80,7 @@ const Filter: React.SFC<IFilterProps> = ({
               theme={ themeRef.current }
               filterItems={ _filters }
             />
-          )) }
+          )) } */ }
         </TopPanelTags>
 
         <TopPanelButtons ref={ buttonsRef }>
@@ -117,7 +117,7 @@ const Filter: React.SFC<IFilterProps> = ({
         </RowWrapper>
         { activeFilters.map((filter: IStateFilter) => (
           <FilterRowContainer
-            filterItems={ _filters }
+            filterItems={ $filters }
             guid={ filter.key }
             filters={ filters }
             filter={ filter }

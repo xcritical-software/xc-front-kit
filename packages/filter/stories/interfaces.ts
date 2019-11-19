@@ -18,7 +18,7 @@ export interface IFilter {
   field: string;
   displayName: string;
   conditions: IConditions;
-  Element: Function;
+  Element?: Function;
 }
 
 export interface ICondition {
