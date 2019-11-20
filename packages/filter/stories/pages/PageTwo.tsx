@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import Filter from '../../src';
 import { conditions } from '../conditions';
 import { createElement } from '../createValueElement';
-import { IPage, IMappedFilter, IFilter } from '../interfaces';
+import { IPage, IMappedFilter } from '../interfaces';
 
 
 const pageName = 'two';
 const PageTwo: React.FC<IPage> = ({ filters, dictionaries }) => {
-  const mappedFilters: IFilter[] = filters
+  const mappedFilters: any[] = filters
     ? filters
       .sort((a: IMappedFilter, b: IMappedFilter) => (a.displayName > b.displayName ? 1 : -1))
       .map(({
