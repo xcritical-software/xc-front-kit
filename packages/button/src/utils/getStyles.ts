@@ -118,11 +118,11 @@ export const getButtonStatesStyle = (stateName: string) => ({
 };
 
 export const getItemInteractiveStyles = memoize((
-  disabled = false,
-  selected = false,
+  disabled: boolean = false,
+  selected: boolean = false,
   theme?: IThemeNamespace<ButtonTheme>,
-  appearance = 'default',
-  baseAppearance = 'default',
+  appearance: string = 'default',
+  baseAppearance: string = 'default',
 ): FlattenInterpolation<any> => {
   const standardFocus = css`
     &:focus {
@@ -165,11 +165,11 @@ export const getItemInteractiveStyles = memoize((
 
 export const getButtonStyles = memoize((
   theme: IThemeNamespace<ButtonTheme>,
-  appearance = 'default',
-  baseAppearance = 'default',
+  appearance: string = 'default',
+  baseAppearance: string = 'default',
   outlineEnable?: any,
-  shouldFitContent = false,
-  spacing = 'default',
+  shouldFitContent: boolean = false,
+  spacing: string = 'default',
 ): Record<string, any> => {
   const {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
