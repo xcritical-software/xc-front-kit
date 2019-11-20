@@ -10,14 +10,35 @@ import { IPrefixProps, IButtonProps, IContentProps } from '../interfaces';
 
 
 const style = css<IButtonProps>`
-${getButtonStyles};
-${getItemInteractiveStyles}
+${({
+    theme, appearance, baseAppearance, outline, shouldFitContent, spacing,
+  }) => getButtonStyles(theme, appearance, baseAppearance, outline, shouldFitContent, spacing)};
+${({
+    disabled,
+    selected,
+    theme,
+    appearance,
+    baseAppearance,
+  }) => getItemInteractiveStyles(disabled, selected, theme, appearance, baseAppearance)};
 ${({ height }) => (height ? `height: ${height}` : null)}
 ${({ css: cssInner }) => (cssInner || null)}
 direction: ${({ isRTL }) => (isRTL ? 'rtl' : 'ltr')};
 `;
 
 export const Root = (tag: string) => styled[tag]`
+  align-items: center;
+  border-width: 0;
+  box-sizing: border-box;
+  display: inline-flex;
+  font-size: inherit;
+  font-style: normal;
+  font-weight: normal;
+  max-width: 100%;
+  outline: none !important;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid transparent;
   ${style}
 `;
 

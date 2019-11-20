@@ -32,12 +32,6 @@ export const generateApperance = ({
     color,
     boxShadowColor: boxShadowColor || darken(0.1, background),
     ...fontWeight && { fontWeight },
-
-    _outline: {
-      background,
-      color,
-      borderColor: borderColor || background,
-    },
   },
   selected: {
     background: darken(0.1, background),

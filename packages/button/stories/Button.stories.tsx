@@ -286,14 +286,14 @@ storiesOf('Button', module)
         { appearances.map((a) => (
           <Row key={ a }>
             <Cell>
-              <Button appearance={ a }>
+              <Button appearance={ a } key={ `${a}` }>
                 { capitalize(a) }
               </Button>
             </Cell>
 
             <Cell>
               <Button
-
+                key={ `${a}_disabled` }
                 appearance={ a }
                 disabled
               >
@@ -302,7 +302,7 @@ storiesOf('Button', module)
             </Cell>
             <Cell>
               <Button
-
+                key={ `${a}_disabled_selected` }
                 appearance={ a }
                 selected
               >
@@ -310,7 +310,7 @@ storiesOf('Button', module)
               </Button>
             </Cell>
             <Cell>
-              <Button appearance={ a } outline>
+              <Button appearance={ a } outline key={ `${a}_outline` }>
                 { capitalize(a) }
               </Button>
             </Cell>
@@ -319,6 +319,7 @@ storiesOf('Button', module)
               <Button
                 appearance={ a }
                 outline
+                key={ `${a}_outline_disabled` }
                 disabled
               >
                   Disabled
@@ -329,6 +330,7 @@ storiesOf('Button', module)
                 appearance={ a }
                 outline
                 selected
+                key={ `${a}_outline_selected` }
               >
                   Selected
               </Button>
