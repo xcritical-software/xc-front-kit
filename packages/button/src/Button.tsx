@@ -32,7 +32,6 @@ const defaultProps = {
   shouldFitContent: false,
   isRTL: false,
   textPosition: 'center',
-  onClick: () => {},
 };
 
 export const PureButton = ({
