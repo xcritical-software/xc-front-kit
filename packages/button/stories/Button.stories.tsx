@@ -4,6 +4,7 @@ import React, { forwardRef, AllHTMLAttributes } from 'react';
 import { storiesOf } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { Link, MemoryRouter } from 'react-router-dom';
+import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 
 // eslint-disable-next-line import/no-unresolved
 import { IThemeNamespace } from '@xcritical/theme';
@@ -154,8 +155,15 @@ const theme: IThemeNamespace<ButtonTheme> = {
 };
 
 storiesOf('Button', module)
+  .addDecorator(withKnobs)
   .add('Basic', () => (
-    <Button>Button</Button>
+    <Button
+      key="button"
+      disabled={ boolean('Disabled', false) }
+      outline={ boolean('Outline', false) }
+    >
+      { text('Button Text', 'Button') }
+    </Button>
   ))
   .add('Other', () => (
     <Table>
