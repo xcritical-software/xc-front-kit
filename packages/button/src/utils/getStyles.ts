@@ -16,10 +16,9 @@ import {
 import {
   buttonThemeNamespace,
   buttonThemeStyle,
-  staticStyles,
 } from '../theme';
 import {
-  IButtonProps, ButtonTheme, IShouldFitContent, ISpacing,
+  IButtonProps, ButtonTheme,
 } from '../interfaces';
 
 
@@ -81,13 +80,9 @@ const getApperanceStyleProperty = memoize((
 });
 
 
-const getVerticalAlign = ({
-  spacing = 'default',
-}: ISpacing): string => (spacing === 'none' ? 'baseline' : 'middle');
+const getVerticalAlign = (spacing = 'default'): string => (spacing === 'none' ? 'baseline' : 'middle');
 
-const getWidth = ({
-  shouldFitContent,
-}: IShouldFitContent): string => (shouldFitContent ? '100%' : 'auto');
+const getWidth = (shouldFitContent = false): string => (shouldFitContent ? '100%' : 'auto');
 
 
 export const getButtonStatesStyle = (stateName: string) => ({
@@ -98,6 +93,7 @@ export const getButtonStatesStyle = (stateName: string) => ({
 }: IButtonProps): FlattenInterpolation<any> => {
   const {
     boxShadowColor,
+    _outline,
     ...styles
   } = getApperanceStyleProperty(
     theme,
@@ -109,6 +105,8 @@ export const getButtonStatesStyle = (stateName: string) => ({
 
   return css`
     ${styles}
+    ${_outline}
+    
     cursor: ${getCursor(stateName)};
     transition: ${getTransition(stateName)};
 
@@ -119,13 +117,13 @@ export const getButtonStatesStyle = (stateName: string) => ({
   `;
 };
 
-export const getItemInteractiveStyles = memoize(({
-  disabled,
-  selected,
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-}: IButtonProps): FlattenInterpolation<any> => {
+export const getItemInteractiveStyles = memoize((
+  disabled: boolean = false,
+  selected: boolean = false,
+  theme?: IThemeNamespace<ButtonTheme>,
+  appearance: string = 'default',
+  baseAppearance: string = 'default',
+): FlattenInterpolation<any> => {
   const standardFocus = css`
     &:focus {
       box-shadow: 0 0 0 2px ${buttonAppearanceTheme(theme, appearance, baseAppearance, 'boxShadowColor')};
@@ -165,23 +163,23 @@ export const getItemInteractiveStyles = memoize(({
   `;
 });
 
-export const getButtonStyles = memoize(({
-  theme,
-  appearance = 'default',
-  baseAppearance = 'default',
-  outline: outlineEnable,
-  ...props
-}: IButtonProps): Record<string, any> => {
+export const getButtonStyles = memoize((
+  theme: IThemeNamespace<ButtonTheme>,
+  appearance: string = 'default',
+  baseAppearance: string = 'default',
+  outlineEnable?: any,
+  shouldFitContent: boolean = false,
+  spacing: string = 'default',
+): Record<string, any> => {
   const {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     appearance: _dontTouch, prefixSpacing, postfixSpacing, ...rootStyles
   } = buttonTheme(theme);
   const {
-    background, borderColor, outline, ...styles
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    background, borderColor, outline, hover, active, disabled, selected, ...styles
   } = buttonAppearanceTheme(theme, appearance, baseAppearance);
-
   return {
-    ...staticStyles,
     ...rootStyles,
     ...styles,
     background,
@@ -195,8 +193,8 @@ export const getButtonStyles = memoize(({
     boxSizing: 'border-box',
     flex: 'none',
     height: 'auto',
-    verticalAlign: getVerticalAlign(props),
-    width: getWidth(props),
+    verticalAlign: getVerticalAlign(spacing),
+    width: getWidth(shouldFitContent),
     ...outlineEnable && (outline || {
       background: 'white',
       color: background,

@@ -49,20 +49,3 @@ export const buttonThemeStyle: ButtonTheme = {
   fontSize: '14px',
   borderRadius: '3px',
 };
-
-
-export const staticStyles = {
-  alignItems: 'center',
-  borderWidth: 0,
-  boxSizing: 'border-box',
-  display: 'inline-flex',
-  fontSize: 'inherit',
-  fontStyle: 'normal',
-  fontWeight: 'normal',
-  maxWidth: '100%',
-  outline: 'none !important',
-  textAlign: 'center',
-  textDecoration: 'none',
-  whiteSpace: 'nowrap',
-  border: '1px solid transparent',
-};
