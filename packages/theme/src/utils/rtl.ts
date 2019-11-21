@@ -12,6 +12,10 @@ export const rtlSide = (isRTL: boolean, property: string): string => {
   return property;
 };
 
+export interface IIsRTL {
+  isRTL?: boolean;
+}
+
 export const rtlSwapper = (
   isRTL: boolean, left: number | string, right: number | string,
 ): ArrayOfStringsOrNumbers => {

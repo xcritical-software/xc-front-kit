@@ -88,3 +88,12 @@ export interface IApperanceStateFunc<T> {
     baseAppearanceName?: string
   ): ITheme | ITheme<T>;
 }
+
+export interface IReturnThemeFunction<T, TProp = [], TValue = any> {
+  (
+    theme: IThemeNamespace<ITheme<T>>,
+    appearance: string,
+    baseAppearance: string,
+    ...props: TProp[]
+  ): TValue;
+}

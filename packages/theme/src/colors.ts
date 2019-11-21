@@ -22,6 +22,7 @@ export const DEFAULT = '#212734';
 export const BLACK_CHAROCOAL = '#31394C';
 export const CHAROCOAL = BLACK_CHAROCOAL;
 export const PAYNES_GRAY = '#3D465E';
+export const GRAY = '#F0F0F0';
 export const GRAY_BLUE = '#5a6268';
 export const DARK_LIME = '#28a745';
 export const BRIGHT_RED = '#dc3545';

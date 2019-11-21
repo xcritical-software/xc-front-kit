@@ -4,6 +4,7 @@ import React, { forwardRef, AllHTMLAttributes } from 'react';
 import { storiesOf } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { Link, MemoryRouter } from 'react-router-dom';
+import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 
 // eslint-disable-next-line import/no-unresolved
 import { IThemeNamespace } from '@xcritical/theme';
@@ -154,8 +155,15 @@ const theme: IThemeNamespace<ButtonTheme> = {
 };
 
 storiesOf('Button', module)
+  .addDecorator(withKnobs)
   .add('Basic', () => (
-    <Button>Button</Button>
+    <Button
+      key="button"
+      disabled={ boolean('Disabled', false) }
+      outline={ boolean('Outline', false) }
+    >
+      { text('Button Text', 'Button') }
+    </Button>
   ))
   .add('Other', () => (
     <Table>
@@ -286,14 +294,14 @@ storiesOf('Button', module)
         { appearances.map((a) => (
           <Row key={ a }>
             <Cell>
-              <Button appearance={ a }>
+              <Button appearance={ a } key={ `${a}` }>
                 { capitalize(a) }
               </Button>
             </Cell>
 
             <Cell>
               <Button
-
+                key={ `${a}_disabled` }
                 appearance={ a }
                 disabled
               >
@@ -302,7 +310,7 @@ storiesOf('Button', module)
             </Cell>
             <Cell>
               <Button
-
+                key={ `${a}_disabled_selected` }
                 appearance={ a }
                 selected
               >
@@ -310,7 +318,7 @@ storiesOf('Button', module)
               </Button>
             </Cell>
             <Cell>
-              <Button appearance={ a } outline>
+              <Button appearance={ a } outline key={ `${a}_outline` }>
                 { capitalize(a) }
               </Button>
             </Cell>
@@ -319,6 +327,7 @@ storiesOf('Button', module)
               <Button
                 appearance={ a }
                 outline
+                key={ `${a}_outline_disabled` }
                 disabled
               >
                   Disabled
@@ -329,6 +338,7 @@ storiesOf('Button', module)
                 appearance={ a }
                 outline
                 selected
+                key={ `${a}_outline_selected` }
               >
                   Selected
               </Button>

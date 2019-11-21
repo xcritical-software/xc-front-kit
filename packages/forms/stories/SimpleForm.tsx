@@ -2,9 +2,15 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable import/no-unresolved */
 import React from 'react';
-import Form from '../src';
-import { Input, Select, Textarea } from './SampleComponents';
+import Input from '@xcritical/input';
+import Select from '@xcritical/select';
+import Button from '@xcritical/button';
 
+import Form from '../src';
+import { Textarea } from './SampleComponents';
+
+
+const selectItems = { ff0000: { name: 'Red' }, '00ff00': { name: 'Green' }, '0000ff': { name: 'Blue' } };
 
 const simpleForm = () => (
   <Form name="default">
@@ -17,6 +23,7 @@ const simpleForm = () => (
           type="text"
           placeholder="First Name"
         />
+
       </div>
     </div>
     <div>
@@ -39,6 +46,7 @@ const simpleForm = () => (
           type="email"
           placeholder="Email"
         />
+        <Form.Field name="favoriteColor" component={ Select } items={ selectItems } />
       </div>
     </div>
     <div>
@@ -59,12 +67,7 @@ const simpleForm = () => (
     <div>
       <label>Favorite Color</label>
       <div>
-        <Form.Field name="favoriteColor" component={ Select }>
-          <option />
-          <option value="ff0000">Red</option>
-          <option value="00ff00">Green</option>
-          <option value="0000ff">Blue</option>
-        </Form.Field>
+        <Form.Field name="favoriteColor" component={ Select } items={ selectItems } />
       </div>
     </div>
     <div>
@@ -85,10 +88,10 @@ const simpleForm = () => (
       </div>
     </div>
     <div>
-      <button type="submit">Submit</button>
-      <button type="button">
+      <Button type="submit">Submit</Button>
+      <Button type="button">
   Clear Values
-      </button>
+      </Button>
     </div>
     <Form.Field
       id="text"
