@@ -64,21 +64,18 @@ const addFilter = (state: IState, action: IAction): IState => {
 };
 
 const removeFilter = (state: IState, action: IRemoveFilter): IState => {
-  const newActiveFilters = [...state[action.name].drafts];
+  const newActiveFilters = state[action.name]
+    .drafts.filter(({ key }) => key !== action.payload.guid);
 
-
-  delete newActiveFilters[newActiveFilters.findIndex(({ key }) => key === action.payload.guid)];
-  const newActiveFiltersFiltered = newActiveFilters.filter(Boolean);
-
-  if (!newActiveFiltersFiltered.length) {
-    newActiveFiltersFiltered.push({ ...newFilter, key: guid() });
+  if (!newActiveFilters.length) {
+    newActiveFilters.push({ ...newFilter, key: guid() });
   }
 
   const applied = state[action.name].applied ? state[action.name].applied : [];
   return {
     ...state,
     [action.name]: {
-      drafts: newActiveFiltersFiltered,
+      drafts: newActiveFilters,
       applied,
     },
   };
