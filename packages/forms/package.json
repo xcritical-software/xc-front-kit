@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/forms",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "The simple way to manage your form state in Redux",
 	"main": "src/index.ts",
 	"scripts": {
@@ -26,11 +26,11 @@
 	},
 	"private": false,
 	"devDependencies": {
-		"redux": "^4.0.4",
+		"@xcritical/button": "^1.1.2",
+		"@xcritical/input": "^0.0.1",
+		"@xcritical/select": "^0.1.1",
 		"react-redux": "^7.0.2",
-		"@xcritical/input": "^0.0.0",
-		"@xcritical/select": "^0.1.0",
-		"@xcritical/button": "^1.1.1"
+		"redux": "^4.0.4"
 	},
 	"peerDependencies": {
 		"react": "^16.8.3",

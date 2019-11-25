@@ -49,8 +49,3 @@ export const buttonThemeStyle: ButtonTheme = {
   fontSize: '14px',
   borderRadius: '3px',
 };
-
-
-export const staticStyles = {
-
-};
