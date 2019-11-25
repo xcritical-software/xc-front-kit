@@ -39,6 +39,13 @@ export interface IFilterRowProps {
   filterItems: any;
 }
 
+export interface ISelectedFilterComponent {
+  filters?: IFilter[];
+  currentFilter?: IFilter;
+  filterData?: IFilterFromStore;
+  onChange: ({ value }: OptionTypeBase) => void;
+}
+
 export interface IStateRecivedFilter {
   column: string;
   condition: string;

@@ -1,10 +1,10 @@
 import React, {
-  useMemo, ReactElement, useCallback,
+  useMemo, ReactElement, useCallback, useRef,
 } from 'react';
 import Button from '@xcritical/button';
-import Select from '@xcritical/select';
 import Input from '@xcritical/input';
 import { OptionTypeBase } from 'react-select';
+
 import {
   FilterField,
   RowWrapper,
@@ -12,6 +12,8 @@ import {
 import {
   IFilterRow,
 } from './interfaces';
+
+import { FilterSelect, ConditionSelect } from './components';
 
 
 const FilterRow: React.FC<IFilterRow> = React.memo(
@@ -21,86 +23,65 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
     removeFilter,
     guid,
     changeFilter,
-    filterItems,
   }): ReactElement => {
+    const cachedFilterData = useRef(filters.find((f) => f.field === filter.column));
     const currentFilter = useMemo(() => {
       if (
-        (filter.column && !currentFilter)
-        || (currentFilter && currentFilter.field !== filter.column)
+        (filter.column && !cachedFilterData.current)
+        || (cachedFilterData.current && cachedFilterData.current.field !== filter.column)
       ) {
-        return filters.find((f) => f.field === filter.column);
+        cachedFilterData.current = filters.find((f) => f.field === filter.column);
       }
-      return null;
+
+      return cachedFilterData.current;
     }, [filter, filters]);
 
-    const selectedFilterName = useMemo(() => {
-      const $filter = filters.find((f) => f.field === filter.column);
-      if ($filter) {
-        return {
-          value: $filter.field,
-          label: $filter.displayName,
-        };
-      }
-      return null;
-    }, [filter.column, filters]);
-
-    const conditions: OptionTypeBase[] = useMemo(() => (currentFilter
-      ? Object.keys(currentFilter.conditions).map((key) => ({
-        ...currentFilter.conditions[key],
-        value: key,
-        label: currentFilter.conditions[key].name,
-      }))
-      : []), [currentFilter]);
-
-    const selectedConditions = useMemo(() => conditions.find((f) => f.value === filter.condition),
-      [conditions, filter]);
 
     const Element = currentFilter ? currentFilter.Element || Input : null;
 
-    const changeColumn = useCallback(
+    const onChangeColumn = useCallback(
       ({ value }: OptionTypeBase) => {
         changeFilter({ field: 'column', value, guid });
-      },
-      [changeFilter, guid],
+      }, [changeFilter, guid],
     );
-    const changeCondition = useCallback(
-      ({ value }: OptionTypeBase) => changeFilter({ field: 'condition', value, guid }),
-      [changeFilter, guid],
+
+    const onChangeCondition = useCallback(
+      ({ value }: OptionTypeBase) => {
+        changeFilter({ field: 'condition', value, guid });
+      }, [changeFilter, guid],
     );
-    const changeValue = useCallback(
-      (value) => changeFilter({ field: 'value', value, guid }),
-      [changeFilter, guid],
+
+    const onChangeValue = useCallback(
+      ({ value }: OptionTypeBase) => {
+        changeFilter({ field: 'value', value, guid });
+      }, [changeFilter, guid],
     );
 
 
     return (
       <RowWrapper>
         <FilterField>
-          <Select
-            shouldFitContainer
-            onChange={ changeColumn }
-            options={ filterItems }
-            value={ selectedFilterName }
+          <FilterSelect
+            onChange={ onChangeColumn }
+            filters={ filters }
+            currentFilter={ currentFilter }
             key={ filter.column }
           />
         </FilterField>
 
         <FilterField>
-          <Select
-            shouldFitContainer
-            onChange={ changeCondition }
-            disabled={ !filter.column }
-            options={ conditions }
-            value={ selectedConditions }
+          <ConditionSelect
+            onChange={ onChangeCondition }
+            currentFilter={ currentFilter }
+            filterData={ filter }
             key={ filter.condition }
           />
         </FilterField>
         <FilterField>
           { Element
-            && selectedConditions
-            && selectedConditions.hasValue && (
+            && filter.condition && (
             <Element
-              onChange={ changeValue }
+              onChange={ onChangeValue }
               value={ filter.value }
               key={ filter.column }
               isEdit
