@@ -9,6 +9,7 @@ export interface IPopover {
   content: any;
   position: Position;
   autoFlip?: boolean;
+  positionFixed?: boolean;
   shouldFitContainer?: boolean;
   withArrow?: boolean;
   visible?: boolean;
