@@ -2,7 +2,7 @@ import React, {
   useMemo, ReactElement, useCallback, useRef,
 } from 'react';
 import Button from '@xcritical/button';
-import Input from '@xcritical/input';
+
 import { OptionTypeBase } from 'react-select';
 
 import {
@@ -13,7 +13,7 @@ import {
   IFilterRow,
 } from './interfaces';
 
-import { FilterSelect, ConditionSelect } from './components';
+import { FilterSelect, ConditionSelect, FilterValueElement } from './components';
 
 
 const FilterRow: React.FC<IFilterRow> = React.memo(
@@ -28,7 +28,7 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
     const currentFilter = useMemo(() => {
       if (
         (filter.column && !cachedFilterData.current)
-        || (cachedFilterData.current && cachedFilterData.current.field !== filter.column)
+        || (cachedFilterData?.current?.field !== filter.column)
       ) {
         cachedFilterData.current = filters.find((f) => f.field === filter.column);
       }
@@ -36,8 +36,6 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
       return cachedFilterData.current;
     }, [filter, filters]);
 
-
-    const Element = currentFilter ? currentFilter.Element || Input : null;
 
     const onChangeColumn = useCallback(
       ({ value }: OptionTypeBase) => {
@@ -78,15 +76,12 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
           />
         </FilterField>
         <FilterField>
-          { Element
-            && filter.condition && (
-            <Element
-              onChange={ onChangeValue }
-              value={ filter.value }
-              key={ filter.column }
-              isEdit
-            />
-          ) }
+          <FilterValueElement
+            onChange={ onChangeValue }
+            currentFilter={ currentFilter }
+            filterData={ filter }
+            key={ filter.column }
+          />
         </FilterField>
         <div style={ { float: 'right' } }>
           <Button appearance="filter-delete-button-appearance" onClick={ removeFilter }>Delete</Button>

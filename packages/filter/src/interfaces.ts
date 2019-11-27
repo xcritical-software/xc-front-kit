@@ -1,6 +1,6 @@
-import { IThemeNamespace } from '@xcritical/theme';
+import { IThemeNamespace, ITheme } from '@xcritical/theme';
 import { OptionTypeBase } from 'react-select';
-import { IFilterTheme } from './utils';
+import { CSSProperties } from 'styled-components';
 
 
 export interface IFilter {
@@ -36,7 +36,6 @@ export interface IFilterRowProps {
   filter: IFilterFromStore;
   name: string;
   key: string;
-  filterItems: any;
 }
 
 export interface ISelectedFilterComponent {
@@ -75,14 +74,13 @@ export interface IFilterRow extends IFilterRowProps {
   removeFilter: any;
   guid: string;
   changeFilter: Function;
-  filterItems: OptionTypeBase[];
 }
 
 export interface IFilterProps {
   filters: IFilter[];
   activeFilters: IStateFilter[];
   addFilter: any;
-  apply: any;
+  onApply: any;
   openFilters: any;
   name: string;
   resetFilters: any;
@@ -147,3 +145,13 @@ export interface IWrapperFilters {
   top: number;
   theme: IFilterTheme;
 }
+
+
+export interface IFilterTheme extends ITheme {
+  tag: CSSProperties;
+  topPanel: CSSProperties;
+  filtersPanel: CSSProperties;
+  filterPanelButtons: CSSProperties;
+}
+
+export type IThemeProp<T> = T;

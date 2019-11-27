@@ -124,7 +124,7 @@ export const createElement = ({
   switch (type) {
     case 'Enum':
       return ({
-        handleChange, value, isEdit, inTag,
+        handleChange, value, isEdit = true, inTag,
       }: IElementProps) => DictionarySelector({
         name,
         dictionaries,

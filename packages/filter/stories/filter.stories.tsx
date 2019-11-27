@@ -13,16 +13,15 @@ import { IThemeNamespace } from '@xcritical/theme';
 import { buttonThemeNamespace } from '@xcritical/button';
 import { darken, lighten } from 'polished';
 import {
-  PageOneContainer,
   PageTwoContainer,
   PageThreeContainer,
 } from './pages';
-
-import { filters, xcriticalFiltersInit, xcriticalFiltersAdd } from '../src';
+import Filter, { filters, xcriticalFiltersInit, xcriticalFiltersAdd } from '../src';
 import { config } from './configReducer';
 import { data } from './dummyData';
 import { getConfigSuccess } from './actions';
 import { filterThemeNamespace } from '../src/theme';
+import { simpleData } from './data/simpleData';
 
 
 const store = createStore(
@@ -114,21 +113,22 @@ const themeTwo: IThemeNamespace = {
   },
 };
 
+const withProvider = (story) => (
+  <Provider store={ store }>
+    { story() }
+  </Provider>
+);
+
 storiesOf('Filter', module)
-  .add('One', () => (
-    <Provider store={ store }>
-      <PageOneContainer theme={ themeOne } />
-    </Provider>
+  .addDecorator(withProvider)
+  .add('Simple Filter', () => (
+    <Filter filters={ simpleData } name="one" />
   ))
-  .add('Two', () => (
+  .add('With Theme', () => (
     <ThemeProvider theme={ themeTwo }>
-      <Provider store={ store }>
-        <PageTwoContainer />
-      </Provider>
+      <PageTwoContainer />
     </ThemeProvider>
   ))
-  .add('Three, with content', () => (
-    <Provider store={ store }>
-      <PageThreeContainer />
-    </Provider>
+  .add('With custom element', () => (
+    <PageThreeContainer />
   ));

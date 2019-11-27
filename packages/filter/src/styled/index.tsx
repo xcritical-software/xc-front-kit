@@ -22,15 +22,26 @@ export const RowWrapper = styled.div`
   width: 80%;
   align-items: center;
   margin: 0 auto;
-  margin-top: 35px;
+  margin-top: 15px;
 `;
 
 export const TopPanel = styled.div`
   ${({ theme }) => theme.topPanel}
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
   justify-content: flex-end;
 `;
+
+export const RootPanel = styled.div`
+  ${({ theme }) => theme.topPanel}
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+  justify-content: flex-end;
+`;
+
 export const TopPanelTags = styled.div`
   display: flex;
   flex-wrap: wrap;

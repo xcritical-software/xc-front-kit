@@ -12,7 +12,6 @@ import { ThemeContext } from 'styled-components';
 
 import Button from '@xcritical/button';
 
-import { OptionTypeBase } from 'react-select';
 import {
   TopPanel,
   WrapperFilters,
@@ -21,6 +20,7 @@ import {
   WrapperFilterButtons,
   RowWrapper,
   FilterField,
+  RootPanel,
 } from './styled';
 import FilterRowContainer from './filterRowContainer';
 // import TagContainer from './tagContainer';
@@ -36,7 +36,7 @@ const Filter: React.SFC<IFilterProps> = ({
   filters,
   activeFilters = [],
   addFilter,
-  apply,
+  onApply,
   openFilters,
   name,
   resetFilters,
@@ -44,30 +44,19 @@ const Filter: React.SFC<IFilterProps> = ({
 }): ReactElement => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(filterTheme<IFilterTheme>(theme || contextTheme));
-  const [isOpen, changeIsOpen] = useState(true);
+  const [isOpen, changeIsOpen] = useState(false);
   const buttonsRef: MutableRefObject<any> = useRef();
 
   useEffect(() => {
     openFilters();
   }, [openFilters]);
 
-  const $filters = useMemo(
-    () => filters.reduce(
-      (acc: OptionTypeBase[], { field, displayName }) => ([
-        ...acc,
-        { label: displayName, value: field },
-      ]),
-      [],
-    ),
-    [filters],
-  );
-
-  const handleOpen = useCallback(() => {
+  const onOpen = useCallback(() => {
     changeIsOpen(!isOpen);
   }, [isOpen]);
 
   return (
-    <div>
+    <RootPanel>
       <TopPanel theme={ themeRef.current }>
         <TopPanelTags>
           { /* { activeFilters.map((filter) => (
@@ -86,13 +75,13 @@ const Filter: React.SFC<IFilterProps> = ({
         <TopPanelButtons ref={ buttonsRef }>
           <Button
             appearance="filters-more-button-appearance"
-            onClick={ handleOpen }
+            onClick={ onOpen }
           >
             { isOpen ? 'Close filters' : 'More filters' }
           </Button>
           <Button
             appearance="filters-apply-button-appearance"
-            onClick={ apply }
+            onClick={ onApply }
           >
             Apply
           </Button>
@@ -115,9 +104,8 @@ const Filter: React.SFC<IFilterProps> = ({
             <h3>Value</h3>
           </FilterField>
         </RowWrapper>
-        { activeFilters.map((filter: IStateFilter) => (
+        { activeFilters.map((filter) => (
           <FilterRowContainer
-            filterItems={ $filters }
             guid={ filter.key }
             filters={ filters }
             filter={ filter }
@@ -141,7 +129,7 @@ const Filter: React.SFC<IFilterProps> = ({
           </Button>
         </WrapperFilterButtons>
       </WrapperFilters>
-    </div>
+    </RootPanel>
   );
 };
 

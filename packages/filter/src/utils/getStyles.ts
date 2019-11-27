@@ -1,24 +1,14 @@
 import {
   getThemedState,
-  ITheme,
   IThemeNamespace,
 } from '@xcritical/theme';
 
-import { CSSProperties } from 'styled-components';
 import {
   filterThemeNamespace,
   defaultTheme,
 } from '../theme';
+import { IFilterTheme, IThemeProp } from '../interfaces';
 
-
-export interface IFilterTheme extends ITheme {
-  tag: CSSProperties;
-  topPanel: CSSProperties;
-  filtersPanel: CSSProperties;
-  filterPanelButtons: CSSProperties;
-}
-
-export type IThemeProp<T> = T;
 
 export function filterTheme<T>(
   theme: IThemeNamespace,

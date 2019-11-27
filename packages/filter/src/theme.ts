@@ -1,8 +1,8 @@
 import { darken, lighten } from 'polished';
-import { IFilterTheme } from './utils';
+import { IFilterTheme } from './interfaces';
 
 
-export const filterThemeNamespace = '@xcritical\\xc-filter';
+export const filterThemeNamespace = '@xcritical\\filter';
 
 export const defaultTheme: IFilterTheme = {
   topPanel: {
