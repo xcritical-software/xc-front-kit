@@ -16,7 +16,7 @@ import {
   PageTwoContainer,
   PageThreeContainer,
 } from './pages';
-import Filter, { filters, xcriticalFiltersInit, xcriticalFiltersAdd } from '../src';
+import Filter, { filterReducer, xcriticalFiltersInit, xcriticalFiltersAdd } from '../src';
 import { config } from './configReducer';
 import { data } from './dummyData';
 import { getConfigSuccess } from './actions';
@@ -25,7 +25,7 @@ import { simpleData } from './data/simpleData';
 
 
 const store = createStore(
-  combineReducers({ filters, config }),
+  combineReducers({ filter: filterReducer, config }),
   devToolsEnhancer({}),
 );
 setTimeout(() => store.dispatch(getConfigSuccess(data)), 10);
@@ -64,31 +64,6 @@ setTimeout(
   1000,
 );
 
-
-/* eslint no-unused-vars: "error" */
-const themeOne: IThemeNamespace = {
-  [filterThemeNamespace]: {
-    topPanel: {
-      background: 'rgb(252, 115, 3)',
-    },
-    tag: {
-      backgroundColor: darken(0.15, 'rgb(252, 115, 3)'),
-    },
-    filtersPanel: {
-      background: lighten(0.15, 'rgb(252, 115, 3)'),
-    },
-  } as IThemeNamespace,
-  [buttonThemeNamespace]: {
-    appearance: {
-      'filter-more-button-appearance': {},
-      'filter-apply-button-appearance': {},
-      'filter-delete-button-appearance': {},
-      'filter-tag-ok-button-appearance': {},
-      'filter-tag-cancel-button-appearance': {},
-      'filter-tag-delete-button-appearance': {},
-    },
-  },
-};
 const themeTwo: IThemeNamespace = {
   [filterThemeNamespace]: {
     topPanel: {

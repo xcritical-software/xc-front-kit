@@ -1,103 +1,87 @@
-const addFilters = ({
-  applied = [],
-  drafts,
-  ...rest
-}: any, action: IInitFilters): IState => ({
-  ...rest,
-  drafts: [
-    drafts,
-    ...action.payload.filters.map((filter: IStateRecivedFilter) => ({
-      ...filter,
-      key: guid(),
-    })),
-  ],
-  applied,
+import uuid from 'uuid/v1';
+
+import { setIn } from 'utilitify';
+import {
+  IFilterAction,
+  IState,
+  IStateRecivedFilter,
+  IPayloadRemoveFilter,
+  IPayloadChangeFilter,
+  IPayloadInitFilters,
+} from '../interfaces';
+
+
+export const defaultFilter = {
+  column: '',
+  condition: '',
+  value: '',
+};
+
+export const addFilters = (
+  state: any,
+  { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
+): IState => setIn(state, [
+  ...state.drafts,
+  ...filters.map((filter) => ({
+    ...filter,
+    key: uuid(),
+  })),
+], 'drafts');
+
+
+export const openFilters = (): IState => ({
+  drafts: [{ ...defaultFilter, key: uuid() }],
+  applied: [],
 });
 
-
-const openFilters = (state: IState, action: IAction): IState => {
-  if (state[action.name]) {
-    return state;
-  }
-  const newFilters = { ...state };
-  newFilters[action.name] = {
-    drafts: [{ ...newFilter, key: guid() }],
-    applied: [],
-  };
-  return {
-    ...newFilters,
-  };
+export const addFilter = (state: IState): IState => {
+  const drafts = [...state.drafts, { ...defaultFilter, key: uuid() }];
+  return setIn(state, drafts, 'drafts');
 };
 
-const addFilter = (state: IState, action: IAction): IState => {
-  const applied = state[action.name].applied ? state[action.name].applied : [];
-  return {
-    ...state,
-    [action.name]: {
-      drafts: [...state[action.name].drafts, { ...newFilter, key: guid() }],
-      applied,
-    },
-  };
-};
-
-const removeFilter = (state: IState, action: IRemoveFilter): IState => {
-  const newActiveFilters = state[action.name]
-    .drafts.filter(({ key }) => key !== action.payload.guid);
+export const removeFilter = (
+  state: IState,
+  { payload: { guid } }: IFilterAction<IPayloadRemoveFilter>,
+): IState => {
+  const newActiveFilters = state.drafts.filter(({ key }) => key !== guid);
 
   if (!newActiveFilters.length) {
-    newActiveFilters.push({ ...newFilter, key: guid() });
+    newActiveFilters.push({ ...defaultFilter, key: uuid() });
   }
 
-  const applied = state[action.name].applied ? state[action.name].applied : [];
-  return {
-    ...state,
-    [action.name]: {
-      drafts: newActiveFilters,
-      applied,
-    },
-  };
+  return setIn(state, newActiveFilters, 'drafts');
 };
 
-const changeFilter = (state: IState, action: IChangeFilter): IState => {
-  const {
-    payload: { guid: id, field, value },
-    name,
-  } = action;
+export const changeFilter = (
+  state: IState,
+  { payload }: IFilterAction<IPayloadChangeFilter>,
+): IState => {
+  const { guid: id, field, value } = payload;
 
-  const index = state[name].drafts.findIndex(({ key }: any) => key === id);
+  const index = state.drafts.findIndex(({ key }: any) => key === id);
 
   if (field === 'column') {
     return setIn(state, {
       column: value, key: id, condition: '', value: '',
-    }, [name, 'drafts', index]);
+    }, ['drafts', `${index}`]);
   }
-  return setIn(state, value, [name, 'drafts', index, field]);
+
+  return setIn(state, value, ['drafts', `${index}`, field]);
 };
 
-const initFilters = (state: IState, action: IInitFilters): IState => ({
-  ...state,
-  [action.name]: {
-    drafts: action.payload.filters.map((filter: IStateRecivedFilter) => ({
-      ...filter,
-      key: guid(),
-    })),
-    applied: [],
-  },
-});
+export const initFilters = (
+  state: IState,
+  { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
+): IState => setIn(
+  state,
+  filters.map((filter: IStateRecivedFilter) => ({
+    ...filter,
+    key: uuid(),
+  })),
+  'drafts',
+);
 
 
-const resetFilters = (state: IState, action: IAction): IState => ({
-  ...state,
-  [action.name]: {
-    drafts: [{ ...newFilter, key: guid() }],
-    applied: [],
-  },
-});
+export const resetFilters = (state: IState): IState => setIn(state, state.applied, 'drafts');
 
-const applyFilters = (state: IState, action: any): IState => ({
-  ...state,
-  [action.name]: {
-    ...state[action.name],
-    applied: action.payload,
-  },
-});
+export const applyFilters = (state: IState): IState => setIn(state, state.drafts, 'applied');

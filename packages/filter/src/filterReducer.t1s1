@@ -135,15 +135,15 @@ const filters = (state: IState | {} = {}, action: FilterActionTypes): IState => 
       return addFilter(state, action as IAction);
 
     case REMOVE_FILTER:
-      return removeFilter(state, action as IRemoveFilter);
+      return removeFilter(state, action);
 
     case CHANGE_FILTER:
-      return changeFilter(state, action as IChangeFilter);
+      return changeFilter(state, action);
 
     case INIT_FILTERS:
-      return initFilters(state, action as IInitFilters);
+      return initFilters(state, action);
     case ADD_FILTERS:
-      return addFilters(state, action as IInitFilters);
+      return addFilters(state, action);
 
     case RESET_FILTERS:
       return resetFilters(state, action as IAction);

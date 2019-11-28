@@ -5,7 +5,6 @@ import React, {
   useRef,
   MutableRefObject,
   useContext,
-  useMemo,
   useCallback,
 } from 'react';
 import { ThemeContext } from 'styled-components';
@@ -29,7 +28,7 @@ import {
   IStateFilter,
   // IFilter,
 } from './interfaces';
-import { IFilterTheme, filterTheme } from './utils';
+import { filterTheme } from './utils';
 
 
 const Filter: React.SFC<IFilterProps> = ({

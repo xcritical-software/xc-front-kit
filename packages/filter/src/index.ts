@@ -1,12 +1,10 @@
 import FilterContainer from './filterContainer';
+import filterReducer from './reducer';
 
 
+export * from './actions';
 export {
-  APPLY_FILTERS,
-  xcriticalFiltersReset,
-  xcriticalFiltersInit,
-  xcriticalFiltersAdd,
-} from './actions';
-export { filters } from './filterReducer';
+  filterReducer,
+};
 
 export default FilterContainer;

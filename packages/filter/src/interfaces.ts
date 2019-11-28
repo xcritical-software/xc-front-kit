@@ -2,6 +2,65 @@ import { IThemeNamespace, ITheme } from '@xcritical/theme';
 import { OptionTypeBase } from 'react-select';
 import { CSSProperties } from 'styled-components';
 
+import {
+  FILTERS_ADD_NEW,
+  FILTERS_ADD,
+  FILTERS_APPLY,
+  FILTERS_CHANGE_FILTER,
+  FILTERS_INIT,
+  FILTERS_OPEN,
+  FILTERS_REMOVE_FILTER,
+  FILTERS_RESET,
+} from './actions/const';
+
+
+// Actions
+
+export type FilterActionType =
+ typeof FILTERS_ADD_NEW |
+ typeof FILTERS_ADD |
+ typeof FILTERS_APPLY |
+ typeof FILTERS_CHANGE_FILTER |
+ typeof FILTERS_INIT |
+ typeof FILTERS_OPEN |
+ typeof FILTERS_REMOVE_FILTER |
+ typeof FILTERS_RESET;
+
+export interface IFilterAction<TPayload = any, T = FilterActionType> {
+  type: T;
+  meta: {
+    filterName: string;
+  };
+  payload: TPayload;
+}
+
+export interface IFilterFromStore {
+  column: string;
+  condition: string;
+  value: string;
+  key: string;
+}
+
+
+export interface IState {
+  drafts: IFilterFromStore[];
+  applied: IFilterFromStore[];
+}
+
+export interface IPayloadRemoveFilter {
+  guid: string;
+}
+export interface IPayloadChangeFilter {
+  guid: string;
+  field: string;
+  value: string;
+}
+
+export interface IPayloadInitFilters {
+  filters: IStateRecivedFilter[];
+}
+
+// Props
 
 export interface IFilter {
   field: string;
@@ -19,12 +78,6 @@ export interface IConditions {
   [key: string]: ICondition;
 }
 
-interface IFilterFromStore {
-  column: string;
-  condition: string;
-  value: string;
-  key: string;
-}
 
 export interface IFilterTagProps extends IFilterRowProps {
   theme: IFilterTheme;
@@ -55,11 +108,6 @@ export interface IStateFilter extends IStateRecivedFilter {
   key: string;
 }
 
-export interface IState {
-  // [key: string]: IStateFilter[];
-  [key: string]: any;
-
-}
 
 export interface IFilterRecivedProps {
   filters: IFilter[];
@@ -91,35 +139,6 @@ export interface IAction {
   name: string;
   type: string;
 }
-
-export interface IRemoveFilter extends IAction {
-  payload: IPayloadRemoveFilter;
-}
-export interface IPayloadRemoveFilter {
-  guid: string;
-}
-
-export interface IChangeFilter extends IAction {
-  payload: IPayloadChangeFilter;
-}
-export interface IPayloadChangeFilter {
-  guid: string;
-  field: string;
-  value: string;
-}
-
-export interface IInitFilters extends IAction {
-  payload: IPayloadInitFilters;
-}
-export interface IPayloadInitFilters {
-  filters: IStateRecivedFilter[];
-}
-
-export type FilterActionTypes =
-  | IAction
-  | IRemoveFilter
-  | IChangeFilter
-  | IInitFilters;
 
 export interface IFilterStateProps {
   filters: IFilter[];

@@ -1,72 +1,41 @@
 import get from 'lodash.get';
-import isEmpty from 'lodash.isempty';
 import { Reducer } from 'redux';
-import { setIn, difference } from 'utilitify';
 
-import {
-  ADD_FILTER,
-  ADD_FILTERS,
-  REMOVE_FILTER,
-  CHANGE_FILTER,
-  OPEN_FILTERS,
-  INIT_FILTERS,
-  RESET_FILTERS,
-  APPLY_FILTERS,
-} from '../actions/const';
+import uuid from 'uuid/v1';
+import * as actions from '../actions/const';
 
 import { reducerDictionary } from '../utils';
-import { IState } from '../interfaces';
+import { IState, FilterActionType, IFilterAction } from '../interfaces';
+import {
+  changeFilter,
+  addFilters,
+  addFilter,
+  removeFilter,
+  applyFilters,
+  initFilters,
+  resetFilters,
+  openFilters,
+  defaultFilter,
+} from './func';
 
 
-const behaviors: Record<FormActionType, Function> = {
-  [ADD_FILTER]: addFilters,
-  [XCRITICAL_FORM_PROPERTY_CHANGE]: (
-    state: IState, {
-      payload: {
-        field,
-        value,
-      },
-    }: IFormAction,
-  ) => {
-    const $value = value !== '' ? value : null;
-
-    const model = setIn(state.model, $value, field);
-    const diff = difference(model, state.source);
-    const errors = setIn(state.errors, false, field);
-
-    return {
-      ...state,
-      model,
-      errors,
-      isChanged: !isEmpty(diff),
-    };
-  },
-  [XCRITICAL_FORM_ERROR]: (state: IState, { payload }: IFormAction) => ({
-    ...state,
-    errors: {
-      ...payload,
-    },
-  }),
-  [XCRITICAL_FORM_DELETE]: () => null,
-  [XCRITICAL_FORM_RESET]: (state: IState) => ({
-    ...state,
-    isChanged: false,
-    model: state.source,
-  }),
-  [XCRITICAL_FORM_SAVED]: (state: IState) => ({
-    ...state,
-    isChanged: false,
-    source: state.model,
-  }),
+const behaviors: Record<FilterActionType, Function> = {
+  [actions.FILTERS_ADD]: addFilters,
+  [actions.FILTERS_CHANGE_FILTER]: changeFilter,
+  [actions.FILTERS_ADD_NEW]: addFilter,
+  [actions.FILTERS_APPLY]: applyFilters,
+  [actions.FILTERS_INIT]: initFilters,
+  [actions.FILTERS_RESET]: resetFilters,
+  [actions.FILTERS_REMOVE_FILTER]: removeFilter,
+  [actions.FILTERS_OPEN]: openFilters,
 };
 
-const reducer: Reducer<IState> = (state = {
-  isNew: true,
-  source: {},
-  model: {},
-  errors: {},
-  isChanged: false,
-}, action) => {
+const defaultFilterState = {
+  drafts: [{ ...defaultFilter, key: uuid() }],
+  applied: [],
+};
+
+const reducer: Reducer<IState, IFilterAction> = (state = defaultFilterState, action) => {
   const behavior = behaviors[action.type];
   return behavior ? behavior(state, action) : state;
 };

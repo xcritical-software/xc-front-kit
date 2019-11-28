@@ -1,9 +1,9 @@
 const prefix = '@xcritical-filter/';
-export const ADD_FILTER = `${prefix}ADD_FILTER`;
-export const REMOVE_FILTER = `${prefix}REMOVE_FILTER`;
-export const CHANGE_FILTER = `${prefix}CHANGE_FILTER`;
-export const OPEN_FILTERS = `${prefix}OPEN_FILTERS`;
-export const RESET_FILTERS = `${prefix}RESET_FILTERS`;
-export const INIT_FILTERS = `${prefix}INIT_FILTERS`;
-export const ADD_FILTERS = `${prefix}ADD_FILTERS`;
-export const APPLY_FILTERS = `${prefix}APPLY_FILTERS`;
+export const FILTERS_ADD_NEW = `${prefix}ADD_FILTER`;
+export const FILTERS_REMOVE_FILTER = `${prefix}REMOVE_FILTER`;
+export const FILTERS_CHANGE_FILTER = `${prefix}CHANGE_FILTER`;
+export const FILTERS_OPEN = `${prefix}OPEN_FILTERS`;
+export const FILTERS_RESET = `${prefix}RESET_FILTERS`;
+export const FILTERS_INIT = `${prefix}INIT_FILTERS`;
+export const FILTERS_ADD = `${prefix}ADD_FILTERS`;
+export const FILTERS_APPLY = `${prefix}APPLY_FILTERS`;

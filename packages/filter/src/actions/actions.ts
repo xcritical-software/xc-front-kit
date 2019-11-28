@@ -1,90 +1,91 @@
-import {
-  ADD_FILTER,
-  INIT_FILTERS,
-  ADD_FILTERS,
-  REMOVE_FILTER,
-  CHANGE_FILTER,
-  APPLY_FILTERS,
-  OPEN_FILTERS,
-  RESET_FILTERS,
-} from './const';
+import * as actions from './const';
 import {
   IStateRecivedFilter,
   IPayloadChangeFilter,
-  IChangeFilter,
-  IInitFilters,
-  IAction,
-  IRemoveFilter,
+  IFilterAction,
+  FilterActionType,
+  IPayloadRemoveFilter,
+  IPayloadInitFilters,
 } from '../interfaces';
 
 
-export function xcriticalFiltersChangeFilter(
-  changes: IPayloadChangeFilter,
-  name: string,
-): IChangeFilter {
+function actionCreator(type: FilterActionType, name: string, payload?: any): IFilterAction {
   return {
-    type: CHANGE_FILTER,
-    name,
-    payload: { ...changes },
+    type,
+    meta: {
+      filterName: name,
+    },
+    payload,
   };
 }
-export function xcriticalFiltersAddFilter(name: string): IAction {
-  return {
-    type: ADD_FILTER,
+
+export function xcriticalFiltersChangeFilter(
+  name: string,
+  changes: IPayloadChangeFilter,
+): IFilterAction<IPayloadChangeFilter> {
+  return actionCreator(
+    actions.FILTERS_CHANGE_FILTER,
     name,
-  };
+    changes,
+  );
+}
+export function xcriticalFiltersAddFilter(name: string): IFilterAction {
+  return actionCreator(
+    actions.FILTERS_ADD_NEW,
+    name,
+  );
 }
 export function xcriticalFiltersRemoveFilter(
   name: string,
   guid: string,
-): IRemoveFilter {
-  return {
-    type: REMOVE_FILTER,
+): IFilterAction<IPayloadRemoveFilter> {
+  return actionCreator(
+    actions.FILTERS_REMOVE_FILTER,
     name,
-    payload: { guid },
-  };
+    { guid },
+  );
 }
 export function xcriticalFiltersApply(
-  filters: any,
   name: string,
-): any {
-  return {
-    type: APPLY_FILTERS,
+  filters: IStateRecivedFilter[],
+): IFilterAction<IPayloadInitFilters> {
+  return actionCreator(
+    actions.FILTERS_APPLY,
     name,
-    payload: filters,
-  };
+    filters,
+  );
 }
 
-export function xcriticalFiltersOpenFilters(name: string): IAction {
-  return {
-    type: OPEN_FILTERS,
+export function xcriticalFiltersOpenFilters(name: string): IFilterAction {
+  return actionCreator(
+    actions.FILTERS_OPEN,
     name,
-  };
+  );
 }
 
-export function xcriticalFiltersReset(name: string): IAction {
-  return {
-    type: RESET_FILTERS,
+export function xcriticalFiltersReset(name: string): IFilterAction {
+  return actionCreator(
+    actions.FILTERS_RESET,
     name,
-  };
+  );
 }
 export function xcriticalFiltersInit(
   name: string,
   filters: IStateRecivedFilter[],
-): IInitFilters {
-  return {
-    type: INIT_FILTERS,
-    payload: { filters },
+): IFilterAction<IPayloadInitFilters> {
+  return actionCreator(
+    actions.FILTERS_RESET,
     name,
-  };
+    { filters },
+  );
 }
 export function xcriticalFiltersAdd(
   name: string,
   filters: IStateRecivedFilter[],
-): IInitFilters {
-  return {
-    type: ADD_FILTERS,
-    payload: { filters },
+): IFilterAction<IPayloadInitFilters> {
+  return actionCreator(
+    actions.FILTERS_ADD,
     name,
-  };
+    { filters },
+  );
 }
