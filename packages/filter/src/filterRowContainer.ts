@@ -15,8 +15,8 @@ const mapDispatchToProps = () => {
       dispatchProps = {
         changeFilter: (
           changes: IPayloadChangeFilter,
-        ): any => dispatch(xcriticalFiltersChangeFilter(changes, name)),
-        removeFilter: (): any => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
+        ) => dispatch(xcriticalFiltersChangeFilter(name, changes)),
+        removeFilter: () => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
       };
     }
     return dispatchProps;

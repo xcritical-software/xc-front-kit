@@ -26,6 +26,7 @@ import FilterRowContainer from './filterRowContainer';
 import {
   IFilterProps,
   IStateFilter,
+  IFilterTheme,
   // IFilter,
 } from './interfaces';
 import { filterTheme } from './utils';

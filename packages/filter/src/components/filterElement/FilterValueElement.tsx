@@ -5,16 +5,19 @@ import { ISelectedFilterComponent } from '../../interfaces';
 
 export const FilterValueElement: React.FC<ISelectedFilterComponent> = React.memo(({
   currentFilter,
-  filterData,
+  filterData: {
+    condition = '',
+    value = '',
+  } = {},
   onChange,
 }) => {
   const Element = currentFilter ? currentFilter.Element || Input : null;
-  if (Element && filterData?.condition) {
+  if (Element && condition) {
     return (
       <Element
         shouldFitContainer
         onChange={ onChange }
-        value={ filterData.value }
+        value={ value }
       />
     );
   }

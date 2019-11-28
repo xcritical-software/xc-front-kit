@@ -6,7 +6,10 @@ import { ISelectedFilterComponent } from '../../interfaces';
 
 export const ConditionSelect: React.FC<ISelectedFilterComponent> = React.memo(({
   currentFilter,
-  filterData,
+  filterData: {
+    condition = '',
+    column = '',
+  } = {},
   onChange,
 }) => {
   const conditions = useMemo(() => (currentFilter
@@ -18,15 +21,15 @@ export const ConditionSelect: React.FC<ISelectedFilterComponent> = React.memo(({
     : []), [currentFilter]);
 
   const selectedConditions = useMemo(() => conditions
-    .find((f) => f.value === filterData?.condition),
-  [conditions, filterData]);
+    .find(($condition) => $condition.value === condition),
+  [condition, conditions]);
 
   return (
     <Select
       shouldFitContainer
       onChange={ onChange }
       options={ conditions }
-      disabled={ !filterData?.column }
+      disabled={ !column }
       value={ selectedConditions }
     />
   );
