@@ -1,15 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+
 
 interface IHeader {
-  translateX: any,
-  width: any
+  translateX: any;
+  width: any;
 }
 
 
 export const Header = styled.div.attrs(({ translateX }: IHeader) => ({
   style: {
-    transform: `translateX(${translateX}px)`
-  }
+    transform: `translateX(${translateX}px)`,
+  },
 })) <IHeader>`
   height: 39px;
   overflow: hidden;
@@ -59,13 +60,13 @@ export const Body = styled.div`
 `;
 
 interface IBodyCell {
-  selected: any
+  selected: any;
 }
 
 export const BodyCell = styled.div.attrs(({ selected }: IBodyCell) => ({
   style: {
-    backgroundColor: selected ? 'lightblue' : 'rgba(0,0,0,0)'
-  }
+    backgroundColor: selected ? 'lightblue' : 'rgba(0,0,0,0)',
+  },
 })) <IBodyCell>`
   border-top: 1px solid black;
   display: flex;
@@ -81,13 +82,13 @@ export const BodyCell = styled.div.attrs(({ selected }: IBodyCell) => ({
 
 
 interface IHeaderCell {
-  width: any
+  width: any;
 }
 
 export const HeaderCell = styled.div.attrs(({ width }: IHeaderCell) => ({
   style: {
-    width: `${width}px`
-  }
+    width: `${width}px`,
+  },
 
 })) <IHeaderCell>`
   outline: 1px solid black;
@@ -101,34 +102,33 @@ export const HeaderCell = styled.div.attrs(({ width }: IHeaderCell) => ({
     height: 39px;
   }
 `;
-export const TotalCell = styled(HeaderCell)``
-
+export const TotalCell = styled(HeaderCell)``;
 
 
 interface IHeaderCellContent {
-  center: any,
-  isEmpty?: any
+  center: any;
+  isEmpty?: any;
 }
 
 
 export const HeaderCellContent = styled.div<IHeaderCellContent>`
   width: calc(100% - 8px);
   overflow: hidden;
-  ${({ center }) => center && `text-align: center;`};
-  background-color: ${({ isEmpty }) => isEmpty ? "lightblue" : "yellow"};
-`
+  ${({ center }) => center && 'text-align: center;'};
+  background-color: ${({ isEmpty }) => (isEmpty ? 'lightblue' : 'yellow')};
+`;
 
 interface ITotalCellContent {
-  center: any
+  center: any;
 }
 
 export const TotalCellContent = styled(HeaderCellContent)<ITotalCellContent>`
   width: 100%;
-`
+`;
 
 
 interface IRightBorder {
-  isEmpty: any
+  isEmpty: any;
 }
 
 export const RightBorder = styled.div<IRightBorder>`
@@ -137,7 +137,7 @@ export const RightBorder = styled.div<IRightBorder>`
   position: relative;
   z-index: 9999999;
   cursor: w-resize;
-  background-color: ${({ isEmpty }) => isEmpty ? "lightblue" : "yellow"};
+  background-color: ${({ isEmpty }) => (isEmpty ? 'lightblue' : 'yellow')};
   border-right: 1px solid black;
 `;
 
@@ -153,8 +153,8 @@ export const AntiSelect = styled.div`
 
 
 interface IBodyCellContent {
-  expandLevel: any,
-  center: any
+  expandLevel: any;
+  center: any;
 }
 
 export const BodyCellContent = styled.div<IBodyCellContent>`  
@@ -165,26 +165,25 @@ export const BodyCellContent = styled.div<IBodyCellContent>`
 `;
 
 
-
 interface IBodyCellOffset {
-  expandLevel: any
+  expandLevel: any;
 }
 
 export const BodyCellOffset = styled.div<IBodyCellOffset>`
   width: ${({ expandLevel }) => `${expandLevel * 20}px`};
-`
+`;
 export const ExpandButtonWrapper = styled.div`
   width: 16px;
   height: 16px;
   border: none;
   outline: none;
   margin-left: 5px ;
-`
+`;
 
 
 interface IWrapper {
-  width: any
-  isSelectable: any
+  width: any;
+  isSelectable: any;
 }
 
 export const Wrapper = styled.div<IWrapper>`
@@ -200,14 +199,9 @@ export const Wrapper = styled.div<IWrapper>`
     -ms-user-select: none; 
     user-select: none;
     `
-  }
+}
 
-`
-
-
-
-
-
+`;
 
 
 export const AntiSelectLayer = styled.div``;
@@ -223,8 +217,8 @@ interface IMovingElem {
 export const MovingElem = styled(HeaderCell).attrs(({ mouseMove, center }: IMovingElem) => ({
   style: {
     transform: `translateX(${mouseMove}px)`,
-    textAlign: center ? 'center' : undefined
-  }
+    textAlign: center ? 'center' : undefined,
+  },
 })) <IMovingElem>`
   position: absolute;
   left: ${({ startCoord: { x } }) => `${x}px`};
@@ -232,7 +226,5 @@ export const MovingElem = styled(HeaderCell).attrs(({ mouseMove, center }: IMovi
   width: ${({ width }) => `${width}px`};
   outline: "1px solid black";
   z-index: 999999999999999;
-  height: ${ ({ startCoord: { height } }) => `${height}px`};
-`
-
-
+  height: ${({ startCoord: { height } }) => `${height}px`};
+`;

@@ -1,5 +1,8 @@
-import React, { useRef, useCallback, useState, useEffect } from "react";
-import { RightBorder, HeaderCell, HeaderCellContent } from "./styleds";
+import React, {
+  useRef, useCallback, useState, useEffect,
+} from 'react';
+import { RightBorder, HeaderCell, HeaderCellContent } from './styleds';
+
 
 export const HeaderCellWrapper = ({
   text,
@@ -9,7 +12,7 @@ export const HeaderCellWrapper = ({
   onMouseDown,
   isEmpty,
   changeIsSelectable,
-  center
+  center,
 }: any) => {
   const [newWidth, changeNewWidth] = useState(width);
   const clickX = useRef(0);
@@ -20,11 +23,11 @@ export const HeaderCellWrapper = ({
   }, [width]);
 
   const handleMouseMove = useCallback(
-    e => {
+    (e) => {
       const { clientX: currentX } = e;
       const calcNewWidth = width + (currentX - clickX.current);
       if (calcNewWidth >= 1200) return;
-      else if (calcNewWidth <= 30) {
+      if (calcNewWidth <= 30) {
         changeNewWidth(30);
         widthRef.current = 30;
       } else {
@@ -32,39 +35,39 @@ export const HeaderCellWrapper = ({
         widthRef.current = calcNewWidth;
       }
     },
-    [width, clickX.current]
+    [width],
   );
 
   const handleMouseUp = useCallback(
     () => {
       onChangeWidth(index, widthRef.current);
-      document.removeEventListener("mouseup", handleMouseUp);
-      document.removeEventListener("mousemove", handleMouseMove);
-      changeIsSelectable(false)
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mousemove', handleMouseMove);
+      changeIsSelectable(false);
     },
-    [handleMouseMove, index, newWidth, onChangeWidth]
+    [changeIsSelectable, handleMouseMove, index, onChangeWidth],
   );
 
   const handleMouseDown = useCallback(
-    e => {
+    (e) => {
       clickX.current = e.clientX;
-      document.addEventListener("mouseup", handleMouseUp);
-      document.addEventListener("mousemove", handleMouseMove);
-      changeIsSelectable(true)
+      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('mousemove', handleMouseMove);
+      changeIsSelectable(true);
     },
-    [handleMouseMove, index, newWidth, onChangeWidth]
+    [changeIsSelectable, handleMouseMove, handleMouseUp],
   );
 
   return (
-    <HeaderCell width={newWidth}>
+    <HeaderCell width={ newWidth }>
       <HeaderCellContent
-        isEmpty={isEmpty}
-        onMouseDown={e => onMouseDown(e, index)}
-        center={center}
+        isEmpty={ isEmpty }
+        onMouseDown={ (e) => onMouseDown(e, index) }
+        center={ center }
       >
-        <span>{isEmpty ? null : text}</span>
+        <span>{ isEmpty ? null : text }</span>
       </HeaderCellContent>
-      <RightBorder onMouseDown={handleMouseDown} isEmpty={isEmpty} />
+      <RightBorder onMouseDown={ handleMouseDown } isEmpty={ isEmpty } />
     </HeaderCell>
   );
 };
