@@ -24,7 +24,7 @@ const App = ({
   const fullWidth = useRef(mappedColumns.reduce((acc: any, { width }: any) => (acc += width), 0));
   const [scrollLeft, changeScrollLeft] = useState(0);
   const [isSelectable, changeIsSelectable] = useState(false);
-  const gridRef = useRef();
+  const gridRef = useRef<Grid>();
   const cache = useRef(
     new CellMeasurerCache({
       fixedWidth: true,
@@ -150,7 +150,7 @@ const App = ({
   }, [onChangeColumns]);
 
   useEffect(() => {
-    // if (gridRef.current) gridRef?.current?.recomputeGridSize();
+    if (gridRef.current) gridRef?.current?.recomputeGridSize();
     if (cache.current) cache.current.clearAll();
   }, [mappedColumns, mappedRows]);
 
