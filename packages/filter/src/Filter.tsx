@@ -103,6 +103,7 @@ const Filter: React.SFC<IFilterProps> = ({
           <FilterField>
             <h3>Value</h3>
           </FilterField>
+          <FilterField />
         </RowWrapper>
         { activeFilters.map((filter) => (
           <FilterRowContainer

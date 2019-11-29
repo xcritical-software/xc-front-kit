@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import Filter from './Filter';
 import {
-  IFilterRecivedProps, IFilterStateProps, IMapDispatchFilter, IStateRecivedFilter,
+  IFilterRecivedProps, IFilterStateProps, IMapDispatchFilter, IStateRecivedFilter, IFilter,
 } from './interfaces';
 import {
   xcriticalFiltersAddFilter,
@@ -10,13 +10,14 @@ import {
   xcriticalFiltersOpenFilters,
   xcriticalFiltersReset,
 } from './actions';
+import { filterSelector } from './reducer';
 
 
 const mapStateToProps = (
   state: any,
   ownProps: IFilterRecivedProps,
 ): IFilterStateProps => {
-  const activeFilters = state.filters[ownProps.name] ? state.filters[ownProps.name].drafts : [];
+  const activeFilters = filterSelector(state, ownProps.name)?.drafts || [];
   return {
     activeFilters,
     ...ownProps,
@@ -32,7 +33,7 @@ const mapDispatchToProps = () => {
     if (!dispatchProps) {
       dispatchProps = {
         addFilter: () => dispatch(xcriticalFiltersAddFilter(name)),
-        apply: (filters: any) => dispatch(xcriticalFiltersApply(filters, name)),
+        apply: (filters) => dispatch(xcriticalFiltersApply(name, filters)),
         openFilters: () => dispatch(xcriticalFiltersOpenFilters(name)),
         resetFilters: () => dispatch(xcriticalFiltersReset(name)),
       };
@@ -41,21 +42,23 @@ const mapDispatchToProps = () => {
   };
 };
 
-const filterToApply = (activeFilters: any, filters: any) => activeFilters
-  .filter(({ column, condition, value }: IStateRecivedFilter) => {
+const filterToApply = (
+  activeFilters: IStateRecivedFilter[],
+  filters: IFilter[],
+): IStateRecivedFilter[] => activeFilters
+  .filter(({ column, condition, value }) => {
     if (value) return true;
     if (!condition) return false;
 
-    const filter = filters.find((f: any) => f.field === column);
-    if (filter && filter.conditions[condition].hasValue) {
+    const filter = filters.find((f) => f.field === column);
+    if (filter?.conditions[condition].hasValue) {
       return !!value;
     }
     return false;
-  })
-  .map(({ column, condition, value }: IStateRecivedFilter) => ({ column, condition, value }));
+  });
 
 
-const mergeProps = (stateProps: any, dispatchProps: any, ownProps: any) => ({
+const mergeProps = (stateProps: any, dispatchProps: any, ownProps: IFilterRecivedProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,

@@ -50,7 +50,7 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
     );
 
     const onChangeValue = useCallback(
-      ({ value }: OptionTypeBase) => {
+      (value: any) => {
         changeFilter({ field: 'value', value, guid });
       }, [changeFilter, guid],
     );
@@ -83,9 +83,9 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
             key={ filter.column }
           />
         </FilterField>
-        <div style={ { float: 'right' } }>
+        <FilterField>
           <Button appearance="filter-delete-button-appearance" onClick={ removeFilter }>Delete</Button>
-        </div>
+        </FilterField>
       </RowWrapper>
     );
   },

@@ -12,13 +12,19 @@ export const WrapperFilters = styled.div<IWrapperFilters>`
 `;
 
 export const FilterField = styled.div`
-  width: 30%;
-  margin-left: 10px;
-  margin-right: 10px;
+  flex: 0 0 calc(30% - 0.5em);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  :last-child {
+    flex-grow: calc(10% - 0.5em);
+    padding-right:0;
+  }
 `;
 
 export const RowWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-content: flex-start;
   width: 80%;
   align-items: center;
   margin: 0 auto;
