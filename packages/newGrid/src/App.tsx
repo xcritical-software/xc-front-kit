@@ -5,11 +5,8 @@ import { Grid, CellMeasurer, CellMeasurerCache } from 'react-virtualized';
 import { setIn } from 'utilitify';
 import {
   Body, BodyCell, BodyCellOffset, BodyCellContent, ExpandButtonWrapper, Wrapper, TotalBlock, TotalCellContent, TotalCell,
-} from './styleds';
+} from './styled';
 import { guid, addOrDeleteItemFromArray } from './utils';
-
-// import PlusBoxOutlineIcon from 'mdi-react/PlusBoxOutlineIcon';
-// import MinusBoxOutlineIcon from 'mdi-react/MinusBoxOutlineIcon';
 
 
 import { HeaderWrapper } from './HeaderWrapper';

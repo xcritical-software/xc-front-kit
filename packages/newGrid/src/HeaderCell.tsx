@@ -1,7 +1,7 @@
 import React, {
   useRef, useCallback, useState, useEffect,
 } from 'react';
-import { RightBorder, HeaderCell, HeaderCellContent } from './styleds';
+import { RightBorder, HeaderCell, HeaderCellContent } from './styled';
 
 
 export const HeaderCellWrapper = ({

@@ -2,7 +2,7 @@ import React, {
   useState, useRef, useEffect, useCallback,
 } from 'react';
 import { HeaderCellWrapper } from './HeaderCell';
-import { Header, MovingElem } from './styleds';
+import { Header, MovingElem } from './styled';
 
 
 export const HeaderWrapper = ({
