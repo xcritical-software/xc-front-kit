@@ -98,7 +98,7 @@ const App = ({
       onChangeExpand(rowIndex, mappedRows[rowIndex].children);
     };
 
-    const checkSelected = () => {
+    const checkSelected = (): any => {
       if (selectedRows.some((key: any) => key === mappedRows[rowIndex].key)) return 'lightblue';
     };
 
