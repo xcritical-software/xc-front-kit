@@ -1,4 +1,5 @@
-import { ReactElement } from "react";
+import { ReactElement } from 'react';
+
 
 export interface IItem {
   [key: string]: string | number | ReactElement | any /* сделать что то с этим */;

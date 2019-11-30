@@ -1,12 +1,14 @@
-import React, { useState, useRef, useEffect, useCallback, MutableRefObject } from "react";
+import React, {
+  useState, useRef, useEffect, useCallback, MutableRefObject,
+} from 'react';
 import {
   Grid,
   CellMeasurer,
   CellMeasurerCache,
   ScrollPosition,
-  GridCellProps
-} from "react-virtualized";
-import { setIn } from "utilitify";
+  GridCellProps,
+} from 'react-virtualized';
+import { setIn } from 'utilitify';
 import {
   Body,
   BodyCell,
@@ -16,12 +18,15 @@ import {
   Wrapper,
   TotalBlock,
   TotalCellContent,
-  TotalCell
-} from "./styled";
-import { guid, addOrDeleteItemFromArray } from "./utils";
+  TotalCell,
+} from './styled';
+import { guid, addOrDeleteItemFromArray } from './utils';
 
-import { HeaderWrapper } from "./HeaderWrapper";
-import { IItem, IColumn, IGrig, IMappedItem } from "./interfaces";
+import { HeaderWrapper } from './HeaderWrapper';
+import {
+  IItem, IColumn, IGrig, IMappedItem,
+} from './interfaces';
+
 
 const App = ({
   items,
@@ -31,15 +36,15 @@ const App = ({
   isDisableSelect = false,
   isMultiSelect = false,
   onChangeColumns = () => {},
-  totals
+  totals,
 }: IGrig) => {
   const [mappedColumns, changeMappedColumns] = useState<IColumn[]>(columns);
   const [mappedRows, changeMappedRows] = useState<IMappedItem[]>(
-    items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 }))
+    items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
   );
   const [selectedRows, changeSelectedRows] = useState<string[]>([]);
   const fullWidth = useRef(
-    mappedColumns.reduce((acc: number, { width }: IColumn) => (acc += width), 0)
+    mappedColumns.reduce((acc: number, { width }: IColumn) => (acc += width), 0),
   );
   const [scrollLeft, changeScrollLeft] = useState<number>(0);
   const [isSelectable, changeIsSelectable] = useState<boolean>(false);
@@ -47,8 +52,8 @@ const App = ({
   const cache = useRef(
     new CellMeasurerCache({
       fixedWidth: true,
-      defaultHeight: 100
-    })
+      defaultHeight: 100,
+    }),
   );
 
   useEffect(() => {
@@ -74,11 +79,11 @@ const App = ({
         }
         const newMappedRows = [
           ...mappedRows.slice(0, index + 1),
-          ...mappedRows.slice(index + 1 + childrensLength)
+          ...mappedRows.slice(index + 1 + childrensLength),
         ];
         const withNewExpand = setIn(newMappedRows, false, [
           String(index),
-          "isExpand"
+          'isExpand',
         ]); /* поменять в setIn */
         changeMappedRows(withNewExpand);
       } else {
@@ -87,34 +92,36 @@ const App = ({
           (el: IItem): IMappedItem => ({
             ...el,
             expandLevel: parentExpandLevel + 1,
-            key: guid()
-          })
+            key: guid(),
+          }),
         );
         const newMappedRows = [
           ...mappedRows.slice(0, index + 1),
           ...newChildrens,
-          ...mappedRows.slice(index + 1)
+          ...mappedRows.slice(index + 1),
         ];
-        const withNewExpand = setIn(newMappedRows, true, [String(index), "isExpand"]);
+        const withNewExpand = setIn(newMappedRows, true, [String(index), 'isExpand']);
         changeMappedRows(withNewExpand);
       }
     },
-    [mappedRows]
+    [mappedRows],
   );
 
   const handleSelect = useCallback(
     (e, key) => {
-      if (isDisableSelect || e.target.tagName === "BUTTON") return;
+      if (isDisableSelect || e.target.tagName === 'BUTTON') return;
       if (isMultiSelect) {
         changeSelectedRows(addOrDeleteItemFromArray(selectedRows, key));
         return;
       }
       selectedRows[0] === key ? changeSelectedRows([]) : changeSelectedRows([key]);
     },
-    [selectedRows, isDisableSelect, isMultiSelect]
+    [selectedRows, isDisableSelect, isMultiSelect],
   );
 
-  const cell = ({ columnIndex, key, parent, rowIndex, style }: GridCellProps) => {
+  const cell = ({
+    columnIndex, key, parent, rowIndex, style,
+  }: GridCellProps) => {
     const content = mappedRows[rowIndex][mappedColumns[columnIndex].field];
     const expandLevel = (!columnIndex && mappedRows[rowIndex].expandLevel) || 0;
     const column = mappedColumns[columnIndex];
@@ -124,37 +131,37 @@ const App = ({
     };
 
     const checkSelected = (): void | string => {
-      if (selectedRows.some((key: string) => key === mappedRows[rowIndex].key)) return "lightblue";
+      if (selectedRows.some((key: string) => key === mappedRows[rowIndex].key)) return 'lightblue';
     };
 
     return (
       <CellMeasurer
-        cache={cache.current}
-        columnIndex={columnIndex}
-        key={key}
-        parent={parent}
-        rowIndex={rowIndex}
+        cache={ cache.current }
+        columnIndex={ columnIndex }
+        key={ key }
+        parent={ parent }
+        rowIndex={ rowIndex }
       >
         <BodyCell
-          onClick={(e: MouseEvent) => handleSelect(e, mappedRows[rowIndex].key)}
-          key={key}
-          selected={checkSelected()}
-          style={{
+          onClick={ (e: MouseEvent) => handleSelect(e, mappedRows[rowIndex].key) }
+          key={ key }
+          selected={ checkSelected() }
+          style={ {
             ...style,
-            width: column.width
-          }}
+            width: column.width,
+          } }
         >
-          <BodyCellOffset expandLevel={expandLevel} />
-          {column.isExpandable && mappedRows[rowIndex].children ? (
-            <ExpandButtonWrapper onClick={handleExpand}>
-              {mappedRows[rowIndex].isExpand
-                ? /* <MinusBoxOutlineIcon size='16' /> */ "-"
-                : /* <PlusBoxOutlineIcon size='16' /> */ "+"}
+          <BodyCellOffset expandLevel={ expandLevel } />
+          { column.isExpandable && mappedRows[rowIndex].children ? (
+            <ExpandButtonWrapper onClick={ handleExpand }>
+              { mappedRows[rowIndex].isExpand
+                ? /* <MinusBoxOutlineIcon size='16' /> */ '-'
+                : /* <PlusBoxOutlineIcon size='16' /> */ '+' }
             </ExpandButtonWrapper>
-          ) : null}
+          ) : null }
 
-          <BodyCellContent expandLevel={expandLevel} center={!!column.center}>
-            <span>{content}</span>
+          <BodyCellContent expandLevel={ expandLevel } center={ !!column.center }>
+            <span>{ content }</span>
           </BodyCellContent>
         </BodyCell>
       </CellMeasurer>
@@ -163,22 +170,22 @@ const App = ({
 
   const handleChangeWidth = useCallback(
     (index, width) => {
-      const newColumns = setIn(mappedColumns, width, [index, "width"]);
+      const newColumns = setIn(mappedColumns, width, [index, 'width']);
       changeMappedColumns(newColumns);
       fullWidth.current = newColumns.reduce(
         (acc: number, { width }: IMappedItem) => (acc += width),
-        0
+        0,
       );
       onChangeColumns(newColumns);
     },
-    [mappedColumns, onChangeColumns]
+    [mappedColumns, onChangeColumns],
   );
   const handleChangeMoving = useCallback(
-    newColumns => {
+    (newColumns) => {
       changeMappedColumns(newColumns);
       onChangeColumns(newColumns);
     },
-    [onChangeColumns]
+    [onChangeColumns],
   );
 
   useEffect(() => {
@@ -187,40 +194,40 @@ const App = ({
   }, [mappedColumns, mappedRows]);
 
   return (
-    <Wrapper width={width} isSelectable={isSelectable}>
+    <Wrapper width={ width } isSelectable={ isSelectable }>
       <HeaderWrapper
-        fullWidth={fullWidth.current}
-        columns={mappedColumns}
-        translateX={scrollLeft}
-        onChangeWidth={handleChangeWidth}
-        onChangeMoving={handleChangeMoving}
-        changeIsSelectable={changeIsSelectable}
+        fullWidth={ fullWidth.current }
+        columns={ mappedColumns }
+        translateX={ scrollLeft }
+        onChangeWidth={ handleChangeWidth }
+        onChangeMoving={ handleChangeMoving }
+        changeIsSelectable={ changeIsSelectable }
       />
       <Body>
         <Grid
-          ref={gridRef as MutableRefObject<Grid>}
-          columnCount={mappedColumns.length}
-          columnWidth={({ index }) => mappedColumns[index].width}
-          deferredMeasurementCache={cache.current}
-          height={height - 39 - 39 /* выоота headerа и высота тотала */}
-          cellRenderer={cell}
-          rowCount={mappedRows.length}
-          rowHeight={cache.current.rowHeight}
-          width={width - 2}
-          onScroll={handleScroll}
+          ref={ gridRef as MutableRefObject<Grid> }
+          columnCount={ mappedColumns.length }
+          columnWidth={ ({ index }) => mappedColumns[index].width }
+          deferredMeasurementCache={ cache.current }
+          height={ height - 39 - 39 /* выоота headerа и высота тотала */ }
+          cellRenderer={ cell }
+          rowCount={ mappedRows.length }
+          rowHeight={ cache.current.rowHeight }
+          width={ width - 2 }
+          onScroll={ handleScroll }
         />
       </Body>
-      {totals && (
-        <TotalBlock width={fullWidth.current} translateX={scrollLeft}>
-          {mappedColumns.map((el: IColumn, index: number) => (
-            <TotalCell width={mappedColumns.length === index + 1 ? el.width + 9 : el.width}>
-              <TotalCellContent center={!!el.center}>
-                <span>{totals[el.field]}</span>
+      { totals && (
+        <TotalBlock width={ fullWidth.current } translateX={ scrollLeft }>
+          { mappedColumns.map((el: IColumn, index: number) => (
+            <TotalCell width={ mappedColumns.length === index + 1 ? el.width + 9 : el.width }>
+              <TotalCellContent center={ !!el.center }>
+                <span>{ totals[el.field] }</span>
               </TotalCellContent>
             </TotalCell>
-          ))}
+          )) }
         </TotalBlock>
-      )}
+      ) }
     </Wrapper>
   );
 };

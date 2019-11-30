@@ -4,11 +4,12 @@ import React, {
   useEffect,
   useCallback,
   MutableRefObject,
-  MouseEvent
-} from "react";
-import { HeaderCellWrapper } from "./HeaderCell";
-import { Header, MovingElem } from "./styled";
-import { IHeaderWrapper, IColumn } from "./interfaces";
+  MouseEvent,
+} from 'react';
+import { HeaderCellWrapper } from './HeaderCell';
+import { Header, MovingElem } from './styled';
+import { IHeaderWrapper, IColumn } from './interfaces';
+
 
 export const HeaderWrapper = ({
   fullWidth,
@@ -16,7 +17,7 @@ export const HeaderWrapper = ({
   columns,
   onChangeWidth,
   onChangeMoving,
-  changeIsSelectable
+  changeIsSelectable,
 }: IHeaderWrapper) => {
   const mappedColumns = useRef(columns);
   const [isMoving, changeIsMoving] = useState(false);
@@ -36,7 +37,7 @@ export const HeaderWrapper = ({
   }, [columns]);
 
   const handleMouseMove = useCallback(
-    e => {
+    (e) => {
       const { clientX } = e;
       const moveMouse = clientX - clickX.current;
 
@@ -51,7 +52,7 @@ export const HeaderWrapper = ({
 
             [newMappedColumns[emptyIdx], newMappedColumns[emptyIdx - 1]] = [
               newMappedColumns[emptyIdx - 1],
-              newMappedColumns[emptyIdx]
+              newMappedColumns[emptyIdx],
             ];
 
             mappedColumns.current = newMappedColumns;
@@ -66,7 +67,7 @@ export const HeaderWrapper = ({
 
             [newMappedColumns[emptyIdx], newMappedColumns[emptyIdx + 1]] = [
               newMappedColumns[emptyIdx + 1],
-              newMappedColumns[emptyIdx]
+              newMappedColumns[emptyIdx],
             ];
 
             mappedColumns.current = newMappedColumns;
@@ -76,7 +77,7 @@ export const HeaderWrapper = ({
       }
       changeMouseMove(clientX - startClickX.current);
     },
-    [emptyColumnIndex]
+    [emptyColumnIndex],
   );
 
   const handleMouseUp = () => {
@@ -86,58 +87,58 @@ export const HeaderWrapper = ({
     onChangeMoving(mappedColumns.current);
     movingColumnIndex.current = 0;
     movingColumnData.current = undefined;
-    document.removeEventListener("mouseup", handleMouseUp);
-    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+    document.removeEventListener('mousemove', handleMouseMove);
     changeIsSelectable(false);
   };
 
   const handleMouseDown = (e: MouseEvent, i: number) => {
     clickX.current = e.clientX;
     startClickX.current = e.clientX;
-    const coords = e?.currentTarget?.getBoundingClientRect() as DOMRect;
+    const coords = e?.currentTarget?.getBoundingClientRect();
     changeStartCoord({
-      x: (coords.left - +headerRef?.current?.getBoundingClientRect()?.left) as number,
+      x: (coords.left - +headerRef?.current?.getBoundingClientRect()?.left),
       y: coords.y,
-      height: coords.height
+      height: coords.height,
     });
     changeIsMoving(true);
     movingElemRect.current = e?.currentTarget?.getBoundingClientRect();
     movingColumnIndex.current = i;
     emptyColumnIndex.current = i;
     movingColumnData.current = mappedColumns.current[i];
-    document.addEventListener("mouseup", handleMouseUp);
-    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mousemove', handleMouseMove);
     changeIsSelectable(true);
   };
 
   return (
     <Header
-      ref={headerRef as MutableRefObject<HTMLDivElement>}
-      width={fullWidth}
-      translateX={translateX}
+      ref={ headerRef }
+      width={ fullWidth }
+      translateX={ translateX }
     >
-      {mappedColumns.current.map((el: IColumn, index: number) => (
+      { mappedColumns.current.map((el: IColumn, index: number) => (
         <HeaderCellWrapper
-          isEmpty={index === emptyColumnIndex.current}
-          onMouseDown={handleMouseDown}
-          width={mappedColumns.current.length === index + 1 ? el.width + 9 : el.width}
-          text={el.headerName}
-          onChangeWidth={onChangeWidth}
-          index={index}
-          changeIsSelectable={changeIsSelectable}
-          center={!!el.center}
+          isEmpty={ index === emptyColumnIndex.current }
+          onMouseDown={ handleMouseDown }
+          width={ mappedColumns.current.length === index + 1 ? el.width + 9 : el.width }
+          text={ el.headerName }
+          onChangeWidth={ onChangeWidth }
+          index={ index }
+          changeIsSelectable={ changeIsSelectable }
+          center={ !!el.center }
         />
-      ))}
-      {isMoving && (
+      )) }
+      { isMoving && (
         <MovingElem
-          startCoord={startCoord}
-          mouseMove={mouseMove}
-          width={movingColumnData?.current?.width || 0} /* можно ли исправить эти костыли? */
-          center={!!movingColumnData?.current?.center}
+          startCoord={ startCoord }
+          mouseMove={ mouseMove }
+          width={ movingColumnData?.current?.width || 0 } /* можно ли исправить эти костыли? */
+          center={ !!movingColumnData?.current?.center }
         >
-          <span>{movingColumnData?.current?.headerName}</span>
+          <span>{ movingColumnData?.current?.headerName }</span>
         </MovingElem>
-      )}
+      ) }
     </Header>
   );
 };
