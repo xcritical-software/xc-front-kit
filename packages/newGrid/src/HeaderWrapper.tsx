@@ -1,9 +1,14 @@
 import React, {
-  useState, useRef, useEffect, useCallback,
-} from 'react';
-import { HeaderCellWrapper } from './HeaderCell';
-import { Header, MovingElem } from './styled';
-
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  MutableRefObject,
+  MouseEvent
+} from "react";
+import { HeaderCellWrapper } from "./HeaderCell";
+import { Header, MovingElem } from "./styled";
+import { IHeaderWrapper, IColumn } from "./interfaces";
 
 export const HeaderWrapper = ({
   fullWidth,
@@ -11,16 +16,16 @@ export const HeaderWrapper = ({
   columns,
   onChangeWidth,
   onChangeMoving,
-  changeIsSelectable,
-}: any) => {
+  changeIsSelectable
+}: IHeaderWrapper) => {
   const mappedColumns = useRef(columns);
   const [isMoving, changeIsMoving] = useState(false);
   const clickX = useRef(0);
-  const movingColumnIndex = useRef<any>();
-  const movingColumnData = useRef();
-  const movingElemRect = useRef();
-  const headerRef = useRef() as any;
-  const emptyColumnIndex = useRef() as any;
+  const movingColumnIndex = useRef<number>();
+  const movingColumnData = useRef<IColumn>();
+  const movingElemRect = useRef<ClientRect>();
+  const headerRef = useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
+  const emptyColumnIndex = useRef<number>();
   const [mouseMove, changeMouseMove] = useState(0);
   const [startCoord, changeStartCoord] = useState({ x: 0, y: 0, height: 0 });
   const startClickX = useRef(0);
@@ -29,13 +34,13 @@ export const HeaderWrapper = ({
     mappedColumns.current = columns;
     changeStartCoord({ x: 0, y: 0, height: 0 });
   }, [columns]);
+
   const handleMouseMove = useCallback(
-    (e) => {
+    e => {
       const { clientX } = e;
       const moveMouse = clientX - clickX.current;
 
-      const emptyIdx = emptyColumnIndex.current;
-
+      const emptyIdx = emptyColumnIndex?.current || 0;
 
       if (moveMouse < 0) {
         if (mappedColumns.current[emptyIdx - 1]) {
@@ -46,7 +51,7 @@ export const HeaderWrapper = ({
 
             [newMappedColumns[emptyIdx], newMappedColumns[emptyIdx - 1]] = [
               newMappedColumns[emptyIdx - 1],
-              newMappedColumns[emptyIdx],
+              newMappedColumns[emptyIdx]
             ];
 
             mappedColumns.current = newMappedColumns;
@@ -61,7 +66,7 @@ export const HeaderWrapper = ({
 
             [newMappedColumns[emptyIdx], newMappedColumns[emptyIdx + 1]] = [
               newMappedColumns[emptyIdx + 1],
-              newMappedColumns[emptyIdx],
+              newMappedColumns[emptyIdx]
             ];
 
             mappedColumns.current = newMappedColumns;
@@ -71,70 +76,68 @@ export const HeaderWrapper = ({
       }
       changeMouseMove(clientX - startClickX.current);
     },
-    [emptyColumnIndex],
+    [emptyColumnIndex]
   );
 
   const handleMouseUp = () => {
-    emptyColumnIndex.current = null;
+    emptyColumnIndex.current = undefined;
     changeIsMoving(false);
     changeMouseMove(0);
     onChangeMoving(mappedColumns.current);
     movingColumnIndex.current = 0;
     movingColumnData.current = undefined;
-    document.removeEventListener('mouseup', handleMouseUp);
-    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+    document.removeEventListener("mousemove", handleMouseMove);
     changeIsSelectable(false);
   };
 
-  const handleMouseDown = (e: any, i: any) => {
+  const handleMouseDown = (e: MouseEvent, i: number) => {
     clickX.current = e.clientX;
     startClickX.current = e.clientX;
-    const coords = e.currentTarget.getBoundingClientRect();
+    const coords = e?.currentTarget?.getBoundingClientRect() as DOMRect;
     changeStartCoord({
-      x: coords.left - headerRef.current.getBoundingClientRect().left,
+      x: (coords.left - +headerRef?.current?.getBoundingClientRect()?.left) as number,
       y: coords.y,
-      height: coords.height,
+      height: coords.height
     });
     changeIsMoving(true);
-    movingElemRect.current = e.target.getBoundingClientRect();
+    movingElemRect.current = e?.currentTarget?.getBoundingClientRect();
     movingColumnIndex.current = i;
     emptyColumnIndex.current = i;
     movingColumnData.current = mappedColumns.current[i];
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMove);
     changeIsSelectable(true);
   };
 
   return (
     <Header
-      ref={ headerRef }
-      width={ fullWidth }
-      translateX={ translateX }
+      ref={headerRef as MutableRefObject<HTMLDivElement>}
+      width={fullWidth}
+      translateX={translateX}
     >
-      { mappedColumns.current.map((el: any, index: any) => (
+      {mappedColumns.current.map((el: IColumn, index: number) => (
         <HeaderCellWrapper
-          isEmpty={ index === emptyColumnIndex.current }
-          onMouseDown={ handleMouseDown }
-          width={ mappedColumns.current.length === index + 1 ? el.width + 9 : el.width }
-          text={ el.headerName }
-          onChangeWidth={ onChangeWidth }
-          index={ index }
-          changeIsSelectable={ changeIsSelectable }
-          center={ !!el.center }
+          isEmpty={index === emptyColumnIndex.current}
+          onMouseDown={handleMouseDown}
+          width={mappedColumns.current.length === index + 1 ? el.width + 9 : el.width}
+          text={el.headerName}
+          onChangeWidth={onChangeWidth}
+          index={index}
+          changeIsSelectable={changeIsSelectable}
+          center={!!el.center}
         />
-      )) }
-      { isMoving && (
+      ))}
+      {isMoving && (
         <MovingElem
-          startCoord={ startCoord }
-          mouseMove={ mouseMove }
-          width={ /* movingColumnData.current.width */ 150 }
-          center={ /*! !movingColumnData.current.center */ false }
+          startCoord={startCoord}
+          mouseMove={mouseMove}
+          width={movingColumnData?.current?.width || 0} /* можно ли исправить эти костыли? */
+          center={!!movingColumnData?.current?.center}
         >
-          <span>
-            lol
-          </span>
+          <span>{movingColumnData?.current?.headerName}</span>
         </MovingElem>
-      ) }
+      )}
     </Header>
   );
 };
