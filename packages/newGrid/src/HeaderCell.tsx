@@ -1,9 +1,6 @@
-import React, {
-  useRef, useCallback, useState, useEffect,
-} from 'react';
-import { RightBorder, HeaderCell, HeaderCellContent } from './styled';
-import { IHeaderCellWrapper } from './interfaces';
-
+import React, { useRef, useCallback, useState, useEffect } from "react";
+import { RightBorder, HeaderCell, HeaderCellContent } from "./styled";
+import { IHeaderCellWrapper } from "./interfaces";
 
 export const HeaderCellWrapper = ({
   text,
@@ -14,6 +11,7 @@ export const HeaderCellWrapper = ({
   isEmpty,
   changeIsSelectable,
   center,
+  theme
 }: IHeaderCellWrapper) => {
   const [newWidth, changeNewWidth] = useState(width);
   const clickX = useRef(0);
@@ -24,7 +22,7 @@ export const HeaderCellWrapper = ({
   }, [width]);
 
   const handleMouseMove = useCallback(
-    (e) => {
+    e => {
       const { clientX: currentX } = e;
       const calcNewWidth = width + (currentX - clickX.current);
       if (calcNewWidth >= 1200) return;
@@ -36,32 +34,37 @@ export const HeaderCellWrapper = ({
         widthRef.current = calcNewWidth;
       }
     },
-    [width],
+    [width]
   );
 
   const handleMouseUp = useCallback(() => {
     onChangeWidth(index, widthRef.current);
-    document.removeEventListener('mouseup', handleMouseUp);
-    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+    document.removeEventListener("mousemove", handleMouseMove);
     changeIsSelectable(false);
   }, [changeIsSelectable, handleMouseMove, index, onChangeWidth]);
 
   const handleMouseDown = useCallback(
-    (e) => {
+    e => {
       clickX.current = e.clientX;
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
+      document.addEventListener("mousemove", handleMouseMove);
       changeIsSelectable(true);
     },
-    [changeIsSelectable, handleMouseMove, handleMouseUp],
+    [changeIsSelectable, handleMouseMove, handleMouseUp]
   );
 
   return (
-    <HeaderCell width={ newWidth }>
-      <HeaderCellContent isEmpty={ isEmpty } onMouseDown={ (e) => onMouseDown(e, index) } center={ center }>
-        <span>{ isEmpty ? null : text }</span>
+    <HeaderCell theme={theme} width={newWidth}>
+      <HeaderCellContent
+        theme={theme}
+        isEmpty={isEmpty}
+        onMouseDown={e => onMouseDown(e, index)}
+        center={center}
+      >
+        <span>{isEmpty ? null : text}</span>
       </HeaderCellContent>
-      <RightBorder onMouseDown={ handleMouseDown } isEmpty={ isEmpty } />
+      <RightBorder theme={theme} onMouseDown={handleMouseDown} isEmpty={isEmpty} />
     </HeaderCell>
   );
 };
