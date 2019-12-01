@@ -6,11 +6,12 @@ export const gridThemeNamespace = "@xcritical\\grid";
 export const defaultTheme: IGridTheme = {
   evenRowBackground: "#affac3",
   selectedRowColor: "#10c942",
-  offsetExpand: "15",
-  border: "1px solid black",
+  offsetExpand: 20,
+  border: "none",
+  borderRadius: "5px",
   headerCellBorder: "1px solid black",
   totalsCellBorder: "1px solid black",
-  emptyHeaderCellBackgroung: "lightblue",
+  emptyHeaderCellBackgroung: "pink",
   movingHeaderCellBackgroung: "orange",
   header: {
     border: "1px solid black",
@@ -22,18 +23,17 @@ export const defaultTheme: IGridTheme = {
   },
   row: {
     border: "1px solid black",
-    padding: "5px",
-    fontSize: "16px",
-    fontWeight: 400,
-    color: "#000",
+    padding: "8px",
+    fontSize: "12px",
+    color: "green",
     backgroundColor: "white"
   },
   totals: {
     border: "1px solid black",
-    padding: "10px",
-    fontSize: "18px",
+    padding: "30px",
+    fontSize: "12px",
     color: "red",
-    backgroundColor: "yellow",
+    backgroundColor: "lightblue",
     height: "30px"
   }
 };

@@ -106,7 +106,7 @@ export interface IMovingElem {
 export interface IGridTheme {
   evenRowBackground?: string;
   selectedRowColor?: string;
-  offsetExpand?: string;
+  offsetExpand?: number;
   border?: string;
   headerCellBorder?: string;
   totalsCellBorder?: string;
@@ -115,4 +115,6 @@ export interface IGridTheme {
   totals?: CSSProperties;
   emptyHeaderCellBackgroung: string;
   movingHeaderCellBackgroung: string;
+  borderRadius: string;
+  rowCellBorder: string;
 }

@@ -8,69 +8,69 @@ export const totals = {
   col4: 999999999,
   col5: 132465,
   col6: 1,
-  col7: 159753,
+  col7: 159753
 };
 
 export const columns = [
   {
     center,
     width,
-    headerName: 'Number row',
-    field: 'row',
+    headerName: "Number row",
+    field: "row"
   },
   {
     center,
     width,
-    headerName: 'Make',
-    field: 'make',
+    headerName: "Make",
+    field: "make"
   },
   {
     isExpandable: true,
     width,
-    headerName: 'Model',
-    field: 'model',
+    headerName: "Model",
+    field: "model"
   },
   {
     center,
     width,
-    headerName: 'Price',
-    field: 'price',
+    headerName: "Price",
+    field: "price"
   },
-  { width, headerName: 'Col 1', field: 'col1' },
+  { width, headerName: "Col 1", field: "col1" },
   {
     center,
     width,
-    headerName: 'Col 2',
-    field: 'col2',
+    headerName: "Col 2",
+    field: "col2"
   },
-  { width, headerName: 'Col 3', field: 'col3' },
+  { width, headerName: "Col 3", field: "col3" },
   {
     center,
     width,
-    headerName: 'Col 4',
-    field: 'col4',
+    headerName: "Col 4",
+    field: "col4"
   },
-  { width, headerName: 'Col 5', field: 'col5' },
+  { width, headerName: "Col 5", field: "col5" },
   {
     center,
     width,
-    headerName: 'Col 6',
-    field: 'col6',
+    headerName: "Col 6",
+    field: "col6"
   },
-  { width, headerName: 'Col 7', field: 'col7' },
+  { width, headerName: "Col 7", field: "col7" },
   {
     center,
     width,
-    headerName: 'Col 8',
-    field: 'col7',
+    headerName: "Col 8",
+    field: "col7"
   },
-  { width, headerName: 'Col 9', field: 'col8' },
+  { width, headerName: "Col 9", field: "col8" },
   {
     center,
     width,
-    headerName: 'Col 10',
-    field: 'col10',
-  },
+    headerName: "Col 10",
+    field: "col10"
+  }
 ];
 
 export const generateLorem = (n: any) => {
@@ -83,16 +83,16 @@ export const generateLorem = (n: any) => {
      eu nunc sollicitudin tempus. Aliquam a turpis eget ex imperdiet ullamcorper vitae id nisi. 
      Donec rhoncus elit sit amet sodales efficitur. Nam iaculis, est et gravida congue, mauris nulla
       pulvinar sem, ac congue dui nisl vitae orci. Aliquam venenatis nunc sit amet dignissim viverra.`;
-  const words = text.split(' ').slice(0, 100);
-  if (n < 100) return words.slice(0, n).join(' ');
-  const mult = +String(n / 100).split('.')[0];
+  const words = text.split(" ").slice(0, 100);
+  if (n < 100) return words.slice(0, n).join(" ");
+  const mult = +String(n / 100).split(".")[0];
   const remains = n % 100;
   const res = [];
   for (let i = 0; i < mult; i++) {
     res.push(text);
   }
-  res.push(words.slice(0, remains).join(' '));
-  return res.join(' ');
+  res.push(words.slice(0, remains).join(" "));
+  return res.join(" ");
 };
 
 const createDublicateRows = (n: any) => {
@@ -100,18 +100,18 @@ const createDublicateRows = (n: any) => {
   for (let i = 0; i < n; i++) {
     res.push({
       price: Math.floor(Math.random() * 100000 + 10000),
-      make: generateLorem(Math.floor(Math.random() * 40 + 1)),
+      make: generateLorem(Math.floor(Math.random() * 10 + 1)),
       model: generateLorem(Math.floor(Math.random() * 10 + 1)),
-      col1: generateLorem(Math.floor(Math.random() * 20 + 1)),
+      col1: generateLorem(Math.floor(Math.random() * 6 + 1)),
       col2: generateLorem(Math.floor(Math.random() * 3 + 1)),
       col3: generateLorem(Math.floor(Math.random() * 5 + 1)),
-      col4: generateLorem(Math.floor(Math.random() * 15 + 1)),
-      col5: generateLorem(Math.floor(Math.random() * 10 + 1)),
-      col6: generateLorem(Math.floor(Math.random() * 15 + 1)),
+      col4: generateLorem(Math.floor(Math.random() * 10 + 1)),
+      col5: generateLorem(Math.floor(Math.random() * 3 + 1)),
+      col6: generateLorem(Math.floor(Math.random() * 7 + 1)),
       col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
       col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
       col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-      row: i,
+      row: i
     });
   }
   return res;
@@ -122,7 +122,7 @@ export const rows = createDublicateRows(100);
 export const rowsWithChildren = [
   {
     price: Math.floor(Math.random() * 100000 + 10000),
-    make: generateLorem(Math.floor(Math.random() * 40 + 1)),
+    make: generateLorem(Math.floor(Math.random() * 20 + 1)),
     model: generateLorem(Math.floor(Math.random() * 10 + 1)),
     col1: generateLorem(Math.floor(Math.random() * 20 + 1)),
     col2: generateLorem(Math.floor(Math.random() * 3 + 1)),
@@ -148,7 +148,7 @@ export const rowsWithChildren = [
         col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
         col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
         col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-        row: 1.1,
+        row: 1.1
       },
       {
         price: Math.floor(Math.random() * 100000 + 10000),
@@ -163,9 +163,9 @@ export const rowsWithChildren = [
         col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
         col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
         col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-        row: 1.2,
-      },
-    ],
+        row: 1.2
+      }
+    ]
   },
   {
     price: Math.floor(Math.random() * 100000 + 10000),
@@ -180,7 +180,7 @@ export const rowsWithChildren = [
     col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
     col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
     col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-    row: 2,
+    row: 2
   },
   {
     price: Math.floor(Math.random() * 100000 + 10000),
@@ -210,7 +210,7 @@ export const rowsWithChildren = [
         col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
         col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
         col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-        row: 3.1,
+        row: 3.1
       },
       {
         price: Math.floor(Math.random() * 100000 + 10000),
@@ -240,7 +240,7 @@ export const rowsWithChildren = [
             col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
             col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
             col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-            row: '3.2.1',
+            row: "3.2.1"
           },
           {
             price: Math.floor(Math.random() * 100000 + 10000),
@@ -255,7 +255,7 @@ export const rowsWithChildren = [
             col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
             col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
             col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-            row: '3.2.2',
+            row: "3.2.2",
             children: [
               {
                 price: Math.floor(Math.random() * 100000 + 10000),
@@ -270,7 +270,7 @@ export const rowsWithChildren = [
                 col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
                 col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
                 col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-                row: '3.2.2.1',
+                row: "3.2.2.1"
               },
               {
                 price: Math.floor(Math.random() * 100000 + 10000),
@@ -285,7 +285,7 @@ export const rowsWithChildren = [
                 col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
                 col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
                 col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-                row: '3.2.2.2',
+                row: "3.2.2.2",
                 children: [
                   {
                     price: Math.floor(Math.random() * 100000 + 10000),
@@ -300,7 +300,7 @@ export const rowsWithChildren = [
                     col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
                     col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
                     col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-                    row: '3.2.2.2.1',
+                    row: "3.2.2.2.1"
                   },
                   {
                     price: Math.floor(Math.random() * 100000 + 10000),
@@ -315,15 +315,15 @@ export const rowsWithChildren = [
                     col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
                     col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
                     col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-                    row: '3.2.2.2.2',
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
+                    row: "3.2.2.2.2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     price: Math.floor(Math.random() * 100000 + 10000),
@@ -338,7 +338,7 @@ export const rowsWithChildren = [
     col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
     col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
     col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-    row: 4,
+    row: 4
   },
   {
     price: Math.floor(Math.random() * 100000 + 10000),
@@ -353,6 +353,6 @@ export const rowsWithChildren = [
     col7: generateLorem(Math.floor(Math.random() * 2 + 1)),
     col8: generateLorem(Math.floor(Math.random() * 0 + 1)),
     col10: generateLorem(Math.floor(Math.random() * 10 + 1)),
-    row: 5,
-  },
+    row: 5
+  }
 ];

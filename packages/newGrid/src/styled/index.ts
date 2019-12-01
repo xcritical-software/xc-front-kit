@@ -92,16 +92,27 @@ export const Body = styled.div`
   }
 `;
 
-export const BodyCell = styled.div.attrs(({ selected }: any) => ({
-  style: {
-    backgroundColor: selected ? "lightblue" : "rgba(0,0,0,0)"
-  }
-}))<any>`
+export const BodyCell = styled.div<any>`
   ${({ firstRow }) => !firstRow && `border-top: 1px solid black`};
   display: flex;
   align-items: center;
+  ${({ theme: { evenRowBackground, selectedRowColor, row, rowCellBorder }, selected, even }) => {
+    let rowBorder = row.border !== "none";
+
+    let background = "";
+    let border = "";
+
+    if (selected) background = selectedRowColor;
+    else if (even) background = evenRowBackground;
+    else background = row.backgroundColor;
+    /* продолжить */
+    if (rowBorder) return border;
+    return `
+      background: ${background}
+    `;
+  }}
+
   span {
-    margin: 10px;
     display: inline-block;
   }
   button {
@@ -124,7 +135,7 @@ export const HeaderCell = styled.div.attrs(({ width }: IHeaderCell) => ({
     `;
   }}
 `;
-// export const TotalCell = styled(HeaderCell)``;
+
 export const TotalCell = styled.div.attrs(({ width }: IHeaderCell) => ({
   style: {
     width: `${width}px`
@@ -136,12 +147,17 @@ export const TotalCell = styled.div.attrs(({ width }: IHeaderCell) => ({
   overflow: hidden;
   ${({ theme }) => {
     let border = ``;
-    if (theme.border && theme.totals.border) border = `border-right: ${theme.totalsCellBorder}`;
-    else if (theme.border)
+    const wrapperBorder = theme.border !== "none";
+    const totalsBorder = theme.totals.border !== "none";
+
+    if (totalsBorder && wrapperBorder) border = `border-right: ${theme.totalsCellBorder}`;
+    else if (wrapperBorder && !totalsBorder)
       border = `border-top: ${theme.totalsCellBorder}
                 border-right: ${theme.totalsCellBorder}`;
-    else if (!theme.border && !theme.totals.border) border = `border: ${theme.totalsCellBorder}`;
-
+    else if (!totalsBorder && !wrapperBorder) border = `border: ${theme.totalsCellBorder}`;
+    else if (!wrapperBorder && totalsBorder)
+      border = `border-bottom: ${theme.totalsCellBorder}
+                border-right: ${theme.totalsCellBorder}`;
     return `
       height: ${theme.totals.height};
       ${border}
@@ -167,28 +183,24 @@ export const HeaderCellContent = styled.div<IHeaderCellContent>`
   }}
 `;
 
-// export const TotalCellContent = styled(HeaderCellContent)<ITotalCellContent>`
-//   width: 100%;
-// `;
 export const TotalCellContent = styled.div<ITotalCellContent>`
   width: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
-  ${({ theme, center }) => {
+  ${({ center }) => center && "justify-content: center;"};
+  ${({ theme }) => {
     return `
     background-color: ${theme.totals.backgroundColor};
     span {
       font-size: ${theme.totals.fontSize};
       color: ${theme.totals.color};
       padding: ${theme.totals.padding};
-      ${center ? "justify-content: center;" : ""}
       `;
   }}
 `;
 
 export const RightBorder = styled.div<IRightBorder>`
-  /* height: 38px; */
   width: 8px;
   position: relative;
   z-index: 9999999;
@@ -201,28 +213,33 @@ export const RightBorder = styled.div<IRightBorder>`
   }}
 `;
 
-export const AntiSelect = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 9999999;
-  background-color: rgba(255, 0, 0, 0.5);
-`;
-
 export const BodyCellContent = styled.div<IBodyCellContent>`
-  width: ${({ expandLevel }) => `calc(100% - ${expandLevel * 20}px)`};
+  overflow: hidden;
   ${({ center }) =>
     center &&
     `
     text-align: center;
-  `}
+    `}
+  ${({ theme: { row, offsetExpand }, expandLevel }) => {
+    return `
+    width: calc(100% - ${expandLevel * offsetExpand}px);
+    padding: ${row.padding};
+    span {
+      font-size: ${row.fontSize};
+      color: ${row.color}
+    }
+    `;
+  }}
 `;
 
 export const BodyCellOffset = styled.div<IBodyCellOffset>`
-  width: ${({ expandLevel }) => `${expandLevel * 20}px`};
+  ${({ theme: { offsetExpand }, expandLevel }) => {
+    return `
+    width: ${expandLevel * (offsetExpand * 2)}px;
+    `;
+  }}
 `;
+
 export const ExpandButtonWrapper = styled.div`
   width: 16px;
   height: 16px;
@@ -234,7 +251,6 @@ export const ExpandButtonWrapper = styled.div`
 export const Wrapper = styled.div<IWrapper>`
   width: ${({ width }) => `${width}px`};
   overflow: hidden;
-  border: 1px solid black;
   border-radius: 10px;
   ${({ isSelectable }) =>
     isSelectable &&
@@ -246,11 +262,13 @@ export const Wrapper = styled.div<IWrapper>`
     -ms-user-select: none; 
     user-select: none;
     `}
+  ${({ theme: { border, borderRadius } }) => `
+    border: ${border}
+    border-radius: ${borderRadius};
+  `}
 `;
 
-export const AntiSelectLayer = styled.div``;
-
-export const MovingElem = styled(HeaderCell).attrs(({ mouseMove, center }: IMovingElem) => ({
+export const MovingElem = styled(HeaderCell).attrs(({ mouseMove }: IMovingElem) => ({
   style: {
     transform: `translateX(${mouseMove}px)`
   }
@@ -260,7 +278,7 @@ export const MovingElem = styled(HeaderCell).attrs(({ mouseMove, center }: IMovi
   top: ${({ startCoord: { y } }) => `${y - 1}px`};
   width: ${({ width }) => `${width}px`};
   outline: "1px solid black";
-  z-index: 999999999999999;
+  z-index: 9999999999;
   border: 2px solid red;
   display: flex;
   height: ${({ startCoord: { height } }) => `${height}px`};
@@ -268,6 +286,7 @@ export const MovingElem = styled(HeaderCell).attrs(({ mouseMove, center }: IMovi
   ${({ theme }) => {
     return `
       background-color: ${theme.movingHeaderCellBackgroung};
+      border: ${theme.headerCellBorder};
       span {
         font-size: ${theme.header.fontSize};
         color: ${theme.header.color};
