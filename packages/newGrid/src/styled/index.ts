@@ -11,6 +11,16 @@ import {
   IMovingElem
 } from "../interfaces";
 
+const getHeaderStyles = ({ theme }: IHeader) => {
+  if (theme.border !== "none")
+    return `
+      border-bottom: ${theme?.header?.border}
+    `;
+  return `
+      border: ${theme?.header?.border}
+    `;
+};
+
 export const Header = styled.div.attrs(({ translateX }: IHeader) => ({
   style: {
     transform: `translateX(${translateX}px)`
@@ -20,16 +30,18 @@ export const Header = styled.div.attrs(({ translateX }: IHeader) => ({
   width: ${({ width }) => `calc(${width}px + 100%)`};
   margin: 0;
   padding: 0;
-  ${({ theme }) => {
-    if (theme.border)
-      return `
-      border-bottom: ${theme.header.border}
-    `;
-    return `
-      border: ${theme.header.border}
-    `;
-  }}
+  ${getHeaderStyles}
 `;
+
+const getTotalStyles = ({ theme }: IHeader) => {
+  if (theme.border)
+    return `
+      border-top: ${theme?.header?.border};
+    `;
+  return `
+      border: ${theme?.header?.border};
+    `;
+};
 
 export const TotalBlock = styled.div.attrs(({ translateX }: IHeader) => ({
   style: {
@@ -40,15 +52,7 @@ export const TotalBlock = styled.div.attrs(({ translateX }: IHeader) => ({
   width: ${({ width }) => `calc(${width}px + 100%)`};
   margin: 0;
   padding: 0;
-  ${({ theme }) => {
-    if (theme.border)
-      return `
-      border-top: ${theme.header.border};
-    `;
-    return `
-      border: ${theme.header.border};
-    `;
-  }}
+  ${getTotalStyles}
 `;
 
 export const Body = styled.div`
@@ -92,25 +96,37 @@ export const Body = styled.div`
   }
 `;
 
+const getBodyCellStyles = ({
+  theme: { evenRowBackground, selectedRowColor, row, rowCellBorder },
+  selected,
+  even,
+  firstRow
+}: any) => {
+  let background = "";
+  if (selected) background = selectedRowColor;
+  else if (even) background = evenRowBackground;
+  else background = row.backgroundColor;
+  const borderTop = !firstRow ? row.border : "none";
+  const cellBorder = firstRow
+    ? `border-right: ${rowCellBorder};
+       border-left: ${rowCellBorder};
+       border-bottom: ${rowCellBorder}`
+    : `border-top: ${rowCellBorder};
+       border-right: ${rowCellBorder};
+       border-left: ${rowCellBorder};
+       border-bottom: ${rowCellBorder}  `;
+
+  return `
+      background: ${background};
+      border-top: ${borderTop};
+      ${rowCellBorder !== "none" && cellBorder};
+    `;
+};
+
 export const BodyCell = styled.div<any>`
-  ${({ firstRow }) => !firstRow && `border-top: 1px solid black`};
   display: flex;
   align-items: center;
-  ${({ theme: { evenRowBackground, selectedRowColor, row, rowCellBorder }, selected, even }) => {
-    let rowBorder = row.border !== "none";
-
-    let background = "";
-    let border = "";
-
-    if (selected) background = selectedRowColor;
-    else if (even) background = evenRowBackground;
-    else background = row.backgroundColor;
-    /* продолжить */
-    if (rowBorder) return border;
-    return `
-      background: ${background}
-    `;
-  }}
+  ${getBodyCellStyles}
 
   span {
     display: inline-block;
@@ -119,6 +135,12 @@ export const BodyCell = styled.div<any>`
     margin: 10px;
   }
 `;
+
+const getHeaderCellStyles = ({ theme: { header } }: IHeaderCell) => {
+  return `
+      height: ${header?.height};
+    `;
+};
 
 export const HeaderCell = styled.div.attrs(({ width }: IHeaderCell) => ({
   style: {
@@ -129,12 +151,27 @@ export const HeaderCell = styled.div.attrs(({ width }: IHeaderCell) => ({
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-  ${({ theme: { header } }) => {
-    return `
-      height: ${header.height};
-    `;
-  }}
+  ${getHeaderCellStyles}
 `;
+
+const getTotalCellStyles = ({ theme }: IHeaderCell) => {
+  let border = ``;
+  const wrapperBorder = theme.border !== "none";
+  const totalsBorder = theme?.totals?.border !== "none";
+
+  if (totalsBorder && wrapperBorder) border = `border-right: ${theme.totalsCellBorder}`;
+  else if (wrapperBorder && !totalsBorder)
+    border = `border-top: ${theme.totalsCellBorder}
+                border-right: ${theme.totalsCellBorder}`;
+  else if (!totalsBorder && !wrapperBorder) border = `border: ${theme.totalsCellBorder}`;
+  else if (!wrapperBorder && totalsBorder)
+    border = `border-bottom: ${theme.totalsCellBorder}
+                border-right: ${theme.totalsCellBorder}`;
+  return `
+      height: ${theme?.totals?.height};
+      ${border}
+    `;
+};
 
 export const TotalCell = styled.div.attrs(({ width }: IHeaderCell) => ({
   style: {
@@ -145,25 +182,20 @@ export const TotalCell = styled.div.attrs(({ width }: IHeaderCell) => ({
   display: flex;
   justify-content: space-between;
   overflow: hidden;
-  ${({ theme }) => {
-    let border = ``;
-    const wrapperBorder = theme.border !== "none";
-    const totalsBorder = theme.totals.border !== "none";
-
-    if (totalsBorder && wrapperBorder) border = `border-right: ${theme.totalsCellBorder}`;
-    else if (wrapperBorder && !totalsBorder)
-      border = `border-top: ${theme.totalsCellBorder}
-                border-right: ${theme.totalsCellBorder}`;
-    else if (!totalsBorder && !wrapperBorder) border = `border: ${theme.totalsCellBorder}`;
-    else if (!wrapperBorder && totalsBorder)
-      border = `border-bottom: ${theme.totalsCellBorder}
-                border-right: ${theme.totalsCellBorder}`;
-    return `
-      height: ${theme.totals.height};
-      ${border}
-    `;
-  }}
+  ${getTotalCellStyles}
 `;
+
+const getHeaderCellContentStyles = ({ theme, isEmpty }: IHeaderCellContent) => {
+  return `
+      background-color: ${
+        isEmpty ? theme.emptyHeaderCellBackgroung : theme?.header?.backgroundColor
+      };
+      span {
+        font-size: ${theme?.header?.fontSize};
+        color: ${theme?.header?.color};
+        padding: ${theme?.header?.padding}
+    `;
+};
 
 export const HeaderCellContent = styled.div<IHeaderCellContent>`
   width: calc(100% - 8px);
@@ -171,17 +203,18 @@ export const HeaderCellContent = styled.div<IHeaderCellContent>`
   display: flex;
   align-items: center;
   ${({ center }) => center && "justify-content: center;"}
-
-  ${({ theme, isEmpty }) => {
-    return `
-      background-color: ${isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor};
-      span {
-        font-size: ${theme.header.fontSize};
-        color: ${theme.header.color};
-        padding: ${theme.header.padding}
-    `;
-  }}
+  ${getHeaderCellContentStyles}
 `;
+
+const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => {
+  return `
+    background-color: ${theme.totals.backgroundColor};
+    span {
+      font-size: ${theme.totals.fontSize};
+      color: ${theme.totals.color};
+      padding: ${theme.totals.padding};
+      `;
+};
 
 export const TotalCellContent = styled.div<ITotalCellContent>`
   width: 100%;
@@ -189,29 +222,37 @@ export const TotalCellContent = styled.div<ITotalCellContent>`
   display: flex;
   align-items: center;
   ${({ center }) => center && "justify-content: center;"};
-  ${({ theme }) => {
-    return `
-    background-color: ${theme.totals.backgroundColor};
-    span {
-      font-size: ${theme.totals.fontSize};
-      color: ${theme.totals.color};
-      padding: ${theme.totals.padding};
-      `;
-  }}
+  ${getTotalCellContentStyles}
 `;
+
+const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => {
+  return `
+      background-color: ${isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor};
+      border-right: ${theme.headerCellBorder};
+    `;
+};
 
 export const RightBorder = styled.div<IRightBorder>`
   width: 8px;
   position: relative;
   z-index: 9999999;
   cursor: w-resize;
-  ${({ theme, isEmpty }) => {
-    return `
-      background-color: ${isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor};
-      border-right: ${theme.headerCellBorder};
-    `;
-  }}
+  ${getRightBorderStyles}
 `;
+
+const getBodyCellContentStyles = ({
+  theme: { row, offsetExpand },
+  expandLevel
+}: IBodyCellContent) => {
+  return `
+    width: calc(100% - ${expandLevel * offsetExpand}px);
+    padding: ${row.padding};
+    span {
+      font-size: ${row.fontSize};
+      color: ${row.color}
+    }
+    `;
+};
 
 export const BodyCellContent = styled.div<IBodyCellContent>`
   overflow: hidden;
@@ -220,24 +261,17 @@ export const BodyCellContent = styled.div<IBodyCellContent>`
     `
     text-align: center;
     `}
-  ${({ theme: { row, offsetExpand }, expandLevel }) => {
-    return `
-    width: calc(100% - ${expandLevel * offsetExpand}px);
-    padding: ${row.padding};
-    span {
-      font-size: ${row.fontSize};
-      color: ${row.color}
-    }
-    `;
-  }}
+  ${getBodyCellContentStyles}
 `;
 
-export const BodyCellOffset = styled.div<IBodyCellOffset>`
-  ${({ theme: { offsetExpand }, expandLevel }) => {
-    return `
+const getBodyCellOffsetStyles = ({ theme: { offsetExpand }, expandLevel }: IBodyCellOffset) => {
+  return `
     width: ${expandLevel * (offsetExpand * 2)}px;
     `;
-  }}
+};
+
+export const BodyCellOffset = styled.div<IBodyCellOffset>`
+  ${getBodyCellOffsetStyles}
 `;
 
 export const ExpandButtonWrapper = styled.div`
@@ -247,6 +281,11 @@ export const ExpandButtonWrapper = styled.div`
   outline: none;
   margin-left: 5px;
 `;
+
+const getWrapperStyles = ({ theme: { border, borderRadius } }: IWrapper) => `
+    border: ${border}
+    border-radius: ${borderRadius};
+  `;
 
 export const Wrapper = styled.div<IWrapper>`
   width: ${({ width }) => `${width}px`};
@@ -262,11 +301,19 @@ export const Wrapper = styled.div<IWrapper>`
     -ms-user-select: none; 
     user-select: none;
     `}
-  ${({ theme: { border, borderRadius } }) => `
-    border: ${border}
-    border-radius: ${borderRadius};
-  `}
+  ${getWrapperStyles}
 `;
+
+const getMovingElemStyles = ({ theme }: IMovingElem) => {
+  return `
+      background-color: ${theme.movingHeaderCellBackgroung};
+      border: ${theme.headerCellBorder};
+      span {
+        font-size: ${theme.header.fontSize};
+        color: ${theme.header.color};
+        padding: ${theme.header.padding};
+    `;
+};
 
 export const MovingElem = styled(HeaderCell).attrs(({ mouseMove }: IMovingElem) => ({
   style: {
@@ -283,14 +330,5 @@ export const MovingElem = styled(HeaderCell).attrs(({ mouseMove }: IMovingElem) 
   display: flex;
   height: ${({ startCoord: { height } }) => `${height}px`};
   ${({ center }) => center && "justify-content: center;"}
-  ${({ theme }) => {
-    return `
-      background-color: ${theme.movingHeaderCellBackgroung};
-      border: ${theme.headerCellBorder};
-      span {
-        font-size: ${theme.header.fontSize};
-        color: ${theme.header.color};
-        padding: ${theme.header.padding};
-    `;
-  }}
+  ${getMovingElemStyles}
 `;

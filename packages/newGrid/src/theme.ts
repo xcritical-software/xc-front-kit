@@ -11,6 +11,7 @@ export const defaultTheme: IGridTheme = {
   borderRadius: "5px",
   headerCellBorder: "1px solid black",
   totalsCellBorder: "1px solid black",
+  rowCellBorder: "none",
   emptyHeaderCellBackgroung: "pink",
   movingHeaderCellBackgroung: "orange",
   header: {
@@ -23,8 +24,8 @@ export const defaultTheme: IGridTheme = {
   },
   row: {
     border: "1px solid black",
-    padding: "8px",
-    fontSize: "12px",
+    padding: "12px",
+    fontSize: "14px",
     color: "green",
     backgroundColor: "white"
   },
