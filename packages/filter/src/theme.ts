@@ -1,4 +1,6 @@
-import { darken, lighten } from 'polished';
+import { darken } from 'polished';
+import { colors } from '@xcritical/theme';
+
 import { IFilterTheme } from './interfaces';
 
 
@@ -6,7 +8,7 @@ export const filterThemeNamespace = '@xcritical\\filter';
 
 export const defaultTheme: IFilterTheme = {
   topPanel: {
-    background: 'lightblue',
+    background: 'transparent',
     paddingRight: '20px',
   },
   tag: {
@@ -19,7 +21,9 @@ export const defaultTheme: IFilterTheme = {
     fontWeight: 400,
   },
   filtersPanel: {
-    background: lighten(0.15, 'lightblue'),
+    border: `1px solid ${colors.GRAY}`,
+    background: colors.GRAY_LIGHT,
+    borderRadius: '3px',
   },
   filterPanelButtons: {
     margin: '30px auto',

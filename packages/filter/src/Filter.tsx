@@ -67,7 +67,6 @@ const Filter: React.SFC<IFilterProps> = ({
               name={ name }
               key={ filter.column + filter.condition + filter.value + filter.key }
               theme={ themeRef.current }
-              filterItems={ _filters }
             />
           )) } */ }
         </TopPanelTags>

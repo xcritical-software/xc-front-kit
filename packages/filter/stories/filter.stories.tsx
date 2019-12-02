@@ -16,9 +16,9 @@ import {
   PageTwoContainer,
   PageThreeContainer,
 } from './pages';
-import Filter, { filterReducer, xcriticalFiltersInit, xcriticalFiltersAdd } from '../src';
+import Filter, { filterReducer } from '../src';
 import { config } from './configReducer';
-import { data } from './dummyData';
+import { data } from './data/dummyData';
 import { getConfigSuccess } from './actions';
 import { filterThemeNamespace } from '../src/theme';
 import { simpleData } from './data/simpleData';
@@ -30,39 +30,6 @@ const store = createStore(
 );
 setTimeout(() => store.dispatch(getConfigSuccess(data)), 10);
 
-const threeFilters = [
-  {
-    column: 'aaid',
-    condition: 'startsWith',
-    value: '15',
-  },
-  {
-    column: 'acid',
-    condition: 'endsWith',
-    value: '20',
-  },
-];
-const threeFiltersAdd = [
-  {
-    column: 'aaid',
-    condition: 'startsWith',
-    value: '150',
-  },
-  {
-    column: 'acid',
-    condition: 'endsWith',
-    value: '200',
-  },
-];
-
-setTimeout(
-  () => store.dispatch(xcriticalFiltersInit('three', threeFilters)),
-  500,
-);
-setTimeout(
-  () => store.dispatch(xcriticalFiltersAdd('three', threeFiltersAdd)),
-  1000,
-);
 
 const themeTwo: IThemeNamespace = {
   [filterThemeNamespace]: {

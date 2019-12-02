@@ -1,10 +1,16 @@
 import { IThemeNamespace } from '@xcritical/theme';
+import { IConditions } from '../src/interfaces';
 
 
 export interface IPage {
   filters: IMappedFilter[];
   dictionaries: IDictionary[];
   theme?: IThemeNamespace;
+  onInit?: Function;
+}
+
+export interface IConditionsAll {
+  [key: string]: IConditions;
 }
 
 export interface IMappedFilter {
@@ -13,27 +19,6 @@ export interface IMappedFilter {
   type: string;
   displayName: string;
 }
-
-export interface IFilter {
-  field: string;
-  displayName: string;
-  conditions: IConditions;
-  Element?: Function;
-}
-
-export interface ICondition {
-  name: string;
-  hasValue: boolean;
-}
-
-export interface IConditions {
-  [key: string]: ICondition;
-}
-
-export interface IConditionsAll {
-  [key: string]: IConditions;
-}
-
 
 interface IColumn {
   name: string ;
