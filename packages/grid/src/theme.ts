@@ -1,44 +1,41 @@
-export const tableTheme = {
-  width: '100%',
-  height: '100%',
+// import { colors } from "@xcritical/theme";
+import { IGridTheme } from './interfaces';
 
-  header: {
-    borderBottomWidth: '1px',
-    borderBottomColor: 'rgb(223, 234, 241)',
-    borderBottomStyle: 'solid',
-  },
-  evenRowColor: 'rgb(184, 223, 240)',
-  activeRowColor: '#c3e7b7',
-  rowColor: 'white',
-  cell: {
-    borderRightWidth: '1px',
-    borderRightColor: 'rgb(223, 234, 241)',
-    borderRightStyle: 'solid',
-    paddingTop: '5px',
-    paddingBottom: '5px',
-    paddingLeft: '5px',
-    paddingRight: '5px',
-    fontSize: '12px',
-    fontWeight: 400,
-    color: '#000',
-  },
-  head: {
-    fontSize: '12px',
-    fontWeight: 400,
-    color: 'rgb(115, 115, 115)',
-    paddingTop: '5px',
-    paddingBottom: '5px',
-    paddingLeft: '5px',
-    paddingRight: '5px',
-    backgroundColor: 'white',
-    hoverColor: 'rgb(184, 223, 240)',
-  },
-  buttonShift: '32px',
-  nexLevelLineShift: '15',
-  rowSwitchButtonSize: '20',
-  tableData: {
-    textOverflow: 'ellipsis',
-  },
-};
 
 export const gridThemeNamespace = '@xcritical\\grid';
+
+export const defaultTheme: IGridTheme = {
+  evenRowBackground: '#affac3',
+  selectedRowColor: '#10c942',
+  offsetExpand: 20,
+  border: '1px solid black',
+  borderRadius: 5,
+  headerCellBorder: '1px solid black',
+  totalsCellBorder: '1px solid black',
+  rowCellBorder: 'none',
+  emptyHeaderCellBackgroung: 'pink',
+  movingHeaderCellBackgroung: 'orange',
+  header: {
+    border: '1px solid black',
+    fontSize: 16,
+    color: 'black',
+    backgroundColor: 'yellow',
+    height: 60,
+    padding: 10,
+  },
+  row: {
+    border: '1px solid black',
+    padding: 12,
+    fontSize: 14,
+    color: 'black',
+    backgroundColor: 'white',
+  },
+  totals: {
+    border: '1px solid black',
+    padding: 30,
+    fontSize: 16,
+    color: 'black',
+    backgroundColor: 'lightblue',
+    height: 30,
+  },
+};

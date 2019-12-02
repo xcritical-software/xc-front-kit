@@ -75,7 +75,7 @@ export const BodyCellOffset = styled.div<IBodyCellOffset>`
 export const ExpandButtonWrapper = styled.button`
   width: 16px;
   height: 16px;
-  /* border: none; */
-  /* outline: none; */
+  border: none;
+  outline: 1px solid black;
   margin-left: 5px;
 `;

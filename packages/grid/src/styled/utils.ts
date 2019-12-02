@@ -82,7 +82,7 @@ export const getTotalCellStyles = ({ theme }: IHeaderCell) => {
   }
 
   return `
-    height: ${theme.totals.height};
+    height: ${theme.totals.height}px;
     ${border}
     `;
 };
@@ -93,18 +93,18 @@ export const getHeaderCellContentStyles = ({ theme, isEmpty }: IHeaderCellConten
   isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor
 };
       span {
-        font-size: ${theme.header.fontSize};
+        font-size: ${theme.header.fontSize}px;
         color: ${theme.header.color};
-        padding: ${theme.header.padding}
+        padding: ${theme.header.padding}px;
     `;
 
 
 export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
     background-color: ${theme.totals.backgroundColor};
     span {
-      font-size: ${theme.totals.fontSize};
+      font-size: ${theme.totals.fontSize}px;
       color: ${theme.totals.color};
-      padding: ${theme.totals.padding};
+      padding: ${theme.totals.padding}px;
       `;
 
 
@@ -119,9 +119,9 @@ export const getBodyCellContentStyles = ({
   expandLevel,
 }: IBodyCellContent) => `
     width: calc(100% - ${expandLevel * offsetExpand}px);
-    padding: ${row.padding};
+    padding: ${row.padding}px;
     span {
-      font-size: ${row.fontSize};
+      font-size: ${row.fontSize}px;
       color: ${row.color}
     }
     `;
@@ -134,7 +134,7 @@ export const getBodyCellOffsetStyles = ({ theme: { offsetExpand }, expandLevel }
 
 export const getWrapperStyles = ({ theme: { border, borderRadius } }: IWrapper) => `
     border: ${border}
-    border-radius: ${borderRadius};
+    border-radius: ${borderRadius}px;
   `;
 
 
@@ -142,12 +142,12 @@ export const getMovingElemStyles = ({ theme }: IMovingElem) => `
       background-color: ${theme.movingHeaderCellBackgroung};
       border: ${theme.headerCellBorder};
       span {
-        font-size: ${theme.header.fontSize};
+        font-size: ${theme.header.fontSize}px;
         color: ${theme.header.color};
-        padding: ${theme.header.padding};
+        padding: ${theme.header.padding}px;
     `;
 
 
 export const getHeaderCellStyles = ({ theme: { header } }: IHeaderCell) => `
-      height: ${header.height};
+      height: ${header.height}px;
     `;
