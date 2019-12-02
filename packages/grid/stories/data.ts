@@ -78,9 +78,9 @@ export const generateLorem = (n: any) => {
     Mauris tristique tortor quam, eget iaculis dolor facilisis vitae. Aenean et blandit sapien. 
     Quisque sed placerat tortor, egestas tincidunt arcu. Quisque ac justo eu lacus imperdiet 
     vestibulum quis egestas ligula. Integer orci nunc, viverra at vehicula vel, iaculis et enim. 
-    Cras sagittis eleifend pharetra. Integer odio leo, fermentum sed odio in, faucibus ornare nisi. 
+    Cras sagittis eleifend pharetra. Integer odio leo, fermentum sed odio in, faucibus ornare nisi.
     Morbi urna enim, sollicitudin vel commodo sed, pellentesque in velit. Phasellus aliquet lectus
-     eu nunc sollicitudin tempus. Aliquam a turpis eget ex imperdiet ullamcorper vitae id nisi. 
+     eu nunc sollicitudin tempus. Aliquam a turpis eget ex imperdiet ullamcorper vitae id nisi.
      Donec rhoncus elit sit amet sodales efficitur. Nam iaculis, est et gravida congue, mauris nulla
       pulvinar sem, ac congue dui nisl vitae orci. Aliquam venenatis nunc sit amet dignissim viverra.`;
   const words = text.split(' ').slice(0, 100);
