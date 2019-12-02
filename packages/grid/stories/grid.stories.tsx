@@ -40,6 +40,31 @@ const generateTheme = (color: string) => {
   return theme;
 };
 
+const AMStheme = {
+  [gridThemeNamespace]: {
+    evenRowBackground: 'white',
+    selectedRowColor: 'white',
+    offsetExpand: 20,
+    border: 'none',
+    borderRadius: 0,
+    headerCellBorder: 'none',
+    totalsCellBorder: 'none',
+    rowCellBorder: 'none',
+    header: {
+      border: 'none',
+      fontSize: 14,
+      color: 'black',
+      backgroundColor: 'white',
+      height: 35,
+      padding: 10,
+    },
+    row: {
+      border: '1px solid #dedede',
+      padding: 10,
+      fontSize: 14,
+    },
+  },
+};
 
 storiesOf('New Grid', module)
   .add('Basic', () => {
@@ -48,12 +73,22 @@ storiesOf('New Grid', module)
     return (
       <>
         <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
-            Should moving columns
-          <input style={ { marginLeft: '30px' } } type="checkbox" checked={ shouldMovingColumns } onChange={ (e) => changeShouldMovingColumns(e.target.checked) } />
+          Should moving columns
+          <input
+            style={ { marginLeft: '30px' } }
+            type="checkbox"
+            checked={ shouldMovingColumns }
+            onChange={ (e) => changeShouldMovingColumns(e.target.checked) }
+          />
         </label>
         <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
-            Should change columns width
-          <input style={ { marginLeft: '30px' } } type="checkbox" checked={ shouldChangeColumnsWidth } onChange={ (e) => changeShouldChangeColumnsWidth(e.target.checked) } />
+          Should change columns width
+          <input
+            style={ { marginLeft: '30px' } }
+            type="checkbox"
+            checked={ shouldChangeColumnsWidth }
+            onChange={ (e) => changeShouldChangeColumnsWidth(e.target.checked) }
+          />
         </label>
         <Grid
           columns={ columns }
@@ -63,7 +98,6 @@ storiesOf('New Grid', module)
           height={ document.documentElement.clientHeight - 100 }
           shouldMovingColumns={ shouldMovingColumns }
           shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-
         />
       </>
     );
@@ -83,7 +117,11 @@ storiesOf('New Grid', module)
       <>
         <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
           Is multi select
-          <input style={ { marginLeft: '30px' } } type="checkbox" onChange={ (e) => changeIsMultySelect(e.target.checked) } />
+          <input
+            style={ { marginLeft: '30px' } }
+            type="checkbox"
+            onChange={ (e) => changeIsMultySelect(e.target.checked) }
+          />
         </label>
         <Grid
           columns={ columns }
@@ -102,7 +140,6 @@ storiesOf('New Grid', module)
     <Grid
       columns={ countries.columns }
       items={ countries.items }
-      totals={ totals }
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
     />
@@ -115,7 +152,6 @@ storiesOf('New Grid', module)
         <Grid
           columns={ countries.columns }
           items={ countries.items }
-          totals={ totals }
           width={ document.documentElement.clientWidth - 100 }
           height={ document.documentElement.clientHeight - 100 }
           theme={ generateTheme(color) }
@@ -123,4 +159,13 @@ storiesOf('New Grid', module)
         />
       </>
     );
-  });
+  })
+  .add('AMS theme', () => (
+    <Grid
+      columns={ columns.map((el) => ({ ...el, center: true })) }
+      items={ rows }
+      width={ document.documentElement.clientWidth - 100 }
+      height={ document.documentElement.clientHeight - 100 }
+      theme={ AMStheme }
+    />
+  ));
