@@ -78,4 +78,5 @@ export const ExpandButtonWrapper = styled.button`
   border: none;
   outline: 1px solid black;
   margin-left: 5px;
+  padding: 0;
 `;
