@@ -1,5 +1,6 @@
-import { ReactElement, CSSProperties } from "react";
-import { ITheme } from "@xcritical/theme";
+import { ReactElement, CSSProperties } from 'react';
+import { ITheme } from '@xcritical/theme';
+
 
 export interface IItem {
   [key: string]: string | number | ReactElement | any /* сделать что то с этим */;
@@ -24,6 +25,9 @@ export interface IGrig {
   onChangeColumns?: Function;
   totals?: ITotals;
   theme?: ITheme;
+  onSelect?: Function;
+  shouldMovingColumns?: boolean;
+  shouldChangeColumnsWidth?: boolean;
 }
 export interface IMappedItem extends IItem {
   key: string;
@@ -37,9 +41,11 @@ export interface IHeaderCellWrapper {
   index: number;
   onMouseDown: Function;
   isEmpty: boolean;
-  changeIsSelectable: Function;
+  changeChangingColumns: Function;
   center: boolean;
   theme: IGridTheme;
+  shouldChangeColumnsWidth: boolean;
+  shouldMovingColumns: boolean;
 }
 
 export interface IHeaderWrapper {
@@ -48,8 +54,10 @@ export interface IHeaderWrapper {
   columns: IColumn[];
   onChangeWidth: Function;
   onChangeMoving: Function;
-  changeIsSelectable: Function;
+  changeChangingColumns: Function;
   theme: IGridTheme;
+  shouldMovingColumns: boolean;
+  shouldChangeColumnsWidth: boolean;
 }
 
 export type StrOrNum = string | number;
@@ -60,13 +68,26 @@ export interface IHeader {
   width: number;
 }
 
+export interface ITotal {
+  theme: IGridTheme;
+  translateX: number;
+  width: number;
+}
+
 export interface IHeaderCell {
   theme: IGridTheme;
   width: number;
 }
+
+export interface ITotalCell {
+  theme: IGridTheme;
+  width: number;
+}
+
 export interface IHeaderCellContent {
   theme: IGridTheme;
   center: boolean;
+  shouldMovingColumns: boolean;
   isEmpty?: boolean;
 }
 export interface ITotalCellContent {
@@ -76,6 +97,7 @@ export interface ITotalCellContent {
 export interface IRightBorder {
   isEmpty: boolean;
   theme: IGridTheme;
+  shouldChangeColumnsWidth: boolean;
 }
 export interface IBodyCellContent {
   theme: IGridTheme;
@@ -89,7 +111,7 @@ export interface IBodyCellOffset {
 export interface IWrapper {
   theme: IGridTheme;
   width: number;
-  isSelectable: boolean;
+  changingColumns: string;
 }
 
 export interface IMovingElem {
