@@ -6,7 +6,6 @@ import { darken, lighten } from 'polished';
 
 import Grid from '../src/Grid';
 import { IColumn } from '../src/interfaces';
-import './style.css';
 import {
   columns, totals, rowsWithChildren, rows,
 } from './data';

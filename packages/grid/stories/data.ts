@@ -74,10 +74,10 @@ export const columns = [
 ];
 
 export const generateLorem = (n: any) => {
-  const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Mauris tristique tortor quam, eget iaculis dolor facilisis vitae. Aenean et blandit sapien. 
-    Quisque sed placerat tortor, egestas tincidunt arcu. Quisque ac justo eu lacus imperdiet 
-    vestibulum quis egestas ligula. Integer orci nunc, viverra at vehicula vel, iaculis et enim. 
+  const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Mauris tristique tortor quam, eget iaculis dolor facilisis vitae. Aenean et blandit sapien.
+    Quisque sed placerat tortor, egestas tincidunt arcu. Quisque ac justo eu lacus imperdiet
+    vestibulum quis egestas ligula. Integer orci nunc, viverra at vehicula vel, iaculis et enim.
     Cras sagittis eleifend pharetra. Integer odio leo, fermentum sed odio in, faucibus ornare nisi.
     Morbi urna enim, sollicitudin vel commodo sed, pellentesque in velit. Phasellus aliquet lectus
      eu nunc sollicitudin tempus. Aliquam a turpis eget ex imperdiet ullamcorper vitae id nisi.
