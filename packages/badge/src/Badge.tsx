@@ -1,22 +1,18 @@
-import React, { memo, useRef } from 'react';
-import { withTheme } from 'styled-components';
+import React, { memo, forwardRef } from 'react';
 import { IBadgeProps } from './interfaces';
 import { BadgeRoot } from './styled';
 
 
-const PureBadge: React.FC<IBadgeProps> = ({
+const PureBadge: React.FC<IBadgeProps> = forwardRef(({
   children,
   ...rest
-}) => {
-  const badgeRef = useRef<HTMLSpanElement>(null);
-  return (
-    <BadgeRoot
-      { ...rest }
-      ref={ badgeRef }
-    >
-      { children }
-    </BadgeRoot>
-  );
-};
+}, ref) => (
+  <BadgeRoot
+    { ...rest }
+    ref={ ref }
+  >
+    { children }
+  </BadgeRoot>
+));
 
-export const Badge = memo(withTheme(PureBadge));
+export const Badge = memo(PureBadge);
