@@ -11,7 +11,7 @@ import styled from 'styled-components';
 
 
 const Head = styled.h1<any>`
-  font-size: ${({ size }: any) => `${size}px`}
+  font-size: ${({ size }: any) => `${size}px`};
 `;
 
 
