@@ -101,13 +101,13 @@ export interface IRightBorder {
 }
 export interface IBodyCellContent {
   theme: IGridTheme;
-  expandLevel: number;
   center: boolean;
   selected: boolean;
 }
 export interface IBodyCellOffset {
   theme: IGridTheme;
   expandLevel: number;
+  center: boolean;
 }
 export interface IWrapper {
   theme: IGridTheme;

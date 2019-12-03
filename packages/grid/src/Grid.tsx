@@ -207,7 +207,11 @@ const Grid = ({
           even={ !!(rowIndex % 2) }
           theme={ themeRef.current }
         >
-          <BodyCellOffset expandLevel={ expandLevel } theme={ themeRef.current } />
+          <BodyCellOffset
+            center={ !!column.center }
+            expandLevel={ expandLevel }
+            theme={ themeRef.current }
+          />
           { column.isExpandable && mappedItems[rowIndex].children ? (
             <ExpandButtonWrapper onClick={ handleExpand }>
               { mappedItems[rowIndex].isExpand
@@ -218,7 +222,6 @@ const Grid = ({
 
           <BodyCellContent
             theme={ themeRef.current }
-            expandLevel={ expandLevel }
             center={ !!column.center }
             selected={ isSelected }
           >

@@ -110,11 +110,9 @@ export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
     `;
 
 export const getBodyCellContentStyles = ({
-  theme: { row, offsetExpand, selectedRowColor },
-  expandLevel,
+  theme: { row, selectedRowColor },
   selected,
 }: IBodyCellContent) => `
-    width: calc(100% - ${expandLevel * offsetExpand}px);
     padding: ${row.padding};
     span {
       font-size: ${row.fontSize};
@@ -125,8 +123,9 @@ export const getBodyCellContentStyles = ({
 export const getBodyCellOffsetStyles = ({
   theme: { offsetExpand },
   expandLevel,
+  center,
 }: IBodyCellOffset) => `
-    width: ${expandLevel * (offsetExpand * 2)}px;
+    width: ${expandLevel * (center ? offsetExpand * 2 : offsetExpand)}px;
     `;
 
 export const getWrapperStyles = ({ theme: { border, borderRadius } }: IWrapper) => `

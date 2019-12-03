@@ -42,6 +42,7 @@ export const BodyCell = styled.div<any>`
 
 export const BodyCellContent = styled.div<IBodyCellContent>`
   overflow: hidden;
+  width: 100%;
   ${({ center }) => center
     && `
     text-align: center;
@@ -50,6 +51,7 @@ export const BodyCellContent = styled.div<IBodyCellContent>`
 `;
 
 export const BodyCellOffset = styled.div<IBodyCellOffset>`
+  flex-shrink: 0;
   ${getBodyCellOffsetStyles}
 `;
 
