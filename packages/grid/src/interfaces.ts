@@ -60,7 +60,6 @@ export interface IHeaderWrapper {
   shouldChangeColumnsWidth: boolean;
 }
 
-export type StrOrNum = string | number;
 
 export interface IHeader {
   theme: IGridTheme;
@@ -77,6 +76,7 @@ export interface ITotal {
 export interface IHeaderCell {
   theme: IGridTheme;
   width: number;
+  isEmpty: boolean;
 }
 
 export interface ITotalCell {
@@ -88,7 +88,6 @@ export interface IHeaderCellContent {
   theme: IGridTheme;
   center: boolean;
   shouldMovingColumns: boolean;
-  isEmpty?: boolean;
 }
 export interface ITotalCellContent {
   theme: IGridTheme;
@@ -103,6 +102,7 @@ export interface IBodyCellContent {
   theme: IGridTheme;
   expandLevel: number;
   center: boolean;
+  selected: boolean;
 }
 export interface IBodyCellOffset {
   theme: IGridTheme;
@@ -123,11 +123,12 @@ export interface IMovingElem {
     y: number;
     height: number;
   };
+  width: number;
 }
 
 export interface IGridTheme {
   evenRowBackground: string;
-  selectedRowColor: string;
+  selectedRowBackgroundColor: string;
   offsetExpand: number;
   border: string;
   headerCellBorder: string;
@@ -136,7 +137,9 @@ export interface IGridTheme {
   row: CSSProperties;
   totals: CSSProperties;
   emptyHeaderCellBackgroung: string;
-  movingHeaderCellBackgroung: string;
+  movingHeaderCellBackgroungColor: string;
   borderRadius: number;
   rowCellBorder: string;
+  selectedRowColor: string;
+  movingHeaderCellColor: string;
 }

@@ -60,10 +60,9 @@ export const HeaderCellWrapper = ({
     [changeChangingColumns, handleMouseMove, handleMouseUp, shouldChangeColumnsWidth],
   );
   return (
-    <HeaderCell theme={ theme } width={ newWidth }>
+    <HeaderCell theme={ theme } width={ newWidth } isEmpty={ isEmpty }>
       <HeaderCellContent
         theme={ theme }
-        isEmpty={ isEmpty }
         onMouseDown={ (e) => onMouseDown(e, index) }
         center={ center }
         shouldMovingColumns={ shouldMovingColumns }

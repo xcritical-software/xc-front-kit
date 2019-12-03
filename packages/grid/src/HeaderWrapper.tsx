@@ -136,7 +136,7 @@ export const HeaderWrapper = ({
         <MovingElem
           startCoord={ startCoord }
           mouseMove={ mouseMove }
-          width={ movingColumnData?.current?.width || 0 } /* можно ли исправить эти костыли? */
+          width={ movingColumnData?.current?.width || 0 }
           center={ !!movingColumnData?.current?.center }
           theme={ theme }
         >

@@ -183,8 +183,9 @@ const Grid = ({
       onChangeExpand(rowIndex, mappedRows[rowIndex].children);
     };
 
-    const checkSelected = (): boolean => selectedRows
+    const isSelected = selectedRows
       .some((k: string) => k === mappedRows[rowIndex].key);
+
 
     return (
       <CellMeasurer
@@ -197,7 +198,7 @@ const Grid = ({
         <BodyCell
           onClick={ (e: MouseEvent) => handleSelect(e, mappedRows[rowIndex].key) }
           key={ key }
-          selected={ checkSelected() }
+          selected={ isSelected }
           style={ {
             ...style,
             width: column.width,
@@ -219,6 +220,7 @@ const Grid = ({
             theme={ themeRef.current }
             expandLevel={ expandLevel }
             center={ !!column.center }
+            selected={ isSelected }
           >
             <span>{ content }</span>
           </BodyCellContent>

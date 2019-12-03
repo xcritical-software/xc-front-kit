@@ -8,16 +8,19 @@ import {
   IWrapper,
   IMovingElem,
   IBodyCellContent,
+  ITotalCell,
 } from '../interfaces';
 
 
 export const getHeaderStyles = ({ theme }: IHeader) => {
   if (theme.border !== 'none') {
     return `
+      background-color: ${theme.header.backgroundColor}
       border-bottom: ${theme.header.border};
     `;
   }
   return `
+      background-color: ${theme.header.backgroundColor}
       border: ${theme.header.border};
     `;
 };
@@ -35,14 +38,14 @@ export const getTotalStyles = ({ theme }: IHeader) => {
 
 export const getBodyCellStyles = ({
   theme: {
-    evenRowBackground, selectedRowColor, row, rowCellBorder, header,
+    evenRowBackground, selectedRowBackgroundColor, row, rowCellBorder, header,
   },
   selected,
   even,
   firstRow,
 }: any) => {
   let background = '';
-  if (selected) background = selectedRowColor;
+  if (selected) background = selectedRowBackgroundColor;
   else if (even) background = evenRowBackground;
   else background = row.backgroundColor;
   const headerBorder = header.border !== 'none';
@@ -63,7 +66,7 @@ export const getBodyCellStyles = ({
     `;
 };
 
-export const getTotalCellStyles = ({ theme }: IHeaderCell) => {
+export const getTotalCellStyles = ({ theme }: ITotalCell) => {
   let border = '';
   const wrapperBorder = theme.border !== 'none';
   const totalsBorder = theme.totals.border !== 'none';
@@ -83,12 +86,11 @@ export const getTotalCellStyles = ({ theme }: IHeaderCell) => {
     `;
 };
 
-export const getHeaderCellContentStyles = ({ theme, isEmpty }: IHeaderCellContent) => `
-      background-color: ${isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor};
+export const getHeaderCellContentStyles = ({ theme }: IHeaderCellContent) => `
       span {
         font-size: ${theme.header.fontSize};
         color: ${theme.header.color};
-        padding: ${theme.header.padding}px;
+        padding: ${theme.header.padding};
     `;
 
 export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
@@ -96,7 +98,7 @@ export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
     span {
       font-size: ${theme.totals.fontSize};
       color: ${theme.totals.color};
-      padding: ${theme.totals.padding}px;
+      padding: ${theme.totals.padding};
       `;
 
 export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
@@ -105,14 +107,15 @@ export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
     `;
 
 export const getBodyCellContentStyles = ({
-  theme: { row, offsetExpand },
+  theme: { row, offsetExpand, selectedRowColor },
   expandLevel,
+  selected,
 }: IBodyCellContent) => `
     width: calc(100% - ${expandLevel * offsetExpand}px);
-    padding: ${row.padding}px;
+    padding: ${row.padding};
     span {
       font-size: ${row.fontSize};
-      color: ${row.color}
+      color: ${selected ? selectedRowColor : row.color}
     }
     `;
 
@@ -129,14 +132,27 @@ export const getWrapperStyles = ({ theme: { border, borderRadius } }: IWrapper) 
   `;
 
 export const getMovingElemStyles = ({ theme }: IMovingElem) => `
-      background-color: ${theme.movingHeaderCellBackgroung};
+      background-color: ${theme.movingHeaderCellBackgroungColor};
       border: ${theme.headerCellBorder};
-      color: ${theme.header.color};
       span {
+        color: ${theme.movingHeaderCellColor};
         font-size: ${theme.header.fontSize};
-        padding: ${theme.header.padding}px;
+        padding: ${theme.header.padding};
     `;
 
-export const getHeaderCellStyles = ({ theme: { header } }: IHeaderCell) => `
-      height: ${header.height}px;
-    `;
+export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
+  let border = '';
+  const wrapperBorder = theme.border !== 'none';
+  const headerBorder = theme.header.border !== 'none';
+
+  if (!wrapperBorder && !headerBorder) {
+    border = `border-top: ${theme.headerCellBorder};
+              border-bottom: ${theme.headerCellBorder};`;
+  } else if (!headerBorder) border = `border-bottom: ${theme.headerCellBorder}`;
+
+  return `
+  height: ${theme.header.height}px;
+  background-color: ${isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor};
+  ${border}
+  `;
+};

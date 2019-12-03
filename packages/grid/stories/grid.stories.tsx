@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { darken, lighten } from 'polished';
 
+import { colors } from '@xcritical/theme';
 import Grid from '../src/Grid';
 import { IColumn } from '../src/interfaces';
 import {
@@ -17,10 +18,10 @@ const generateTheme = (color: string) => {
   const theme = {
     [gridThemeNamespace]: {
       evenRowBackground: lighten(0.4, color),
-      selectedRowColor: lighten(0.1, color),
+      selectedRowBackgroundColor: lighten(0.1, color),
       borderRadius: 15,
       emptyHeaderCellBackgroung: lighten(0.4, color),
-      movingHeaderCellBackgroung: lighten(0.1, color),
+      movingHeaderCellBackgroungColor: lighten(0.1, color),
       header: {
         color: darken(0.4, color),
         backgroundColor: lighten(0.3, color),
@@ -42,26 +43,26 @@ const generateTheme = (color: string) => {
 
 const AMStheme = {
   [gridThemeNamespace]: {
-    evenRowBackground: 'white',
-    selectedRowColor: 'white',
+    evenRowBackground: colors.GRAY_LIGHT,
+    selectedRowBackgroundColor: colors.BLACK_RAISIN,
     offsetExpand: 20,
     border: 'none',
     borderRadius: 0,
-    headerCellBorder: 'none',
+    headerCellBorder: `1px solid ${colors.GRAY}`,
     totalsCellBorder: 'none',
     rowCellBorder: 'none',
     header: {
       border: 'none',
-      fontSize: 14,
+      fontSize: '14px',
       color: 'black',
       backgroundColor: 'white',
       height: 35,
-      padding: 10,
+      padding: '10px',
     },
     row: {
-      border: '1px solid #dedede',
-      padding: 10,
-      fontSize: 14,
+      border: `1px solid ${colors.GRAY}`,
+      padding: '10px',
+      fontSize: '13px',
     },
   },
 };

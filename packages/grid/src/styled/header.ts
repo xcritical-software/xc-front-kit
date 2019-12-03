@@ -35,6 +35,27 @@ export const HeaderCell = styled.div.attrs(({ width }: IHeaderCell) => ({
   ${getHeaderCellStyles}
 `;
 
+
+export const MovingElem = styled.div.attrs(({ mouseMove }: IMovingElem) => ({
+  style: {
+    transform: `translateX(${mouseMove}px)`,
+  },
+}))<IMovingElem>`
+  position: absolute;
+  left: ${({ startCoord: { x } }) => `${x - 8}px`};
+  width: ${({ width }) => `${width}px`};
+  outline: "1px solid black";
+  z-index: 9999999999;
+  cursor: grabbing;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  height: ${({ startCoord: { height } }) => `${height}px`};
+  ${({ center }) => center && 'justify-content: center;'}
+  ${getMovingElemStyles}
+`;
+
+
 export const HeaderCellContent = styled.div<IHeaderCellContent>`
   width: calc(100% - 8px);
   overflow: hidden;
@@ -54,21 +75,4 @@ export const RightBorder = styled.div<IRightBorder>`
   z-index: 9999999;
   cursor: ${({ shouldChangeColumnsWidth }) => shouldChangeColumnsWidth && 'w-resize'};
   ${getRightBorderStyles}
-`;
-
-export const MovingElem = styled(HeaderCell).attrs(({ mouseMove }: IMovingElem) => ({
-  style: {
-    transform: `translateX(${mouseMove}px)`,
-  },
-}))<IMovingElem>`
-  position: absolute;
-  left: ${({ startCoord: { x } }) => `${x}px`};
-  width: ${({ width }) => `${width}px`};
-  outline: "1px solid black";
-  z-index: 9999999999;
-  cursor: grabbing;
-  display: flex;
-  height: ${({ startCoord: { height } }) => `${height}px`};
-  ${({ center }) => center && 'justify-content: center;'}
-  ${getMovingElemStyles}
 `;

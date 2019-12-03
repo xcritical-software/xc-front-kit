@@ -21,6 +21,9 @@ export const Body = styled.div`
       }
       scrollbar-color: #888 #f1f1f1;
       scrollbar-width: thin;
+      :focus {
+        outline: none;
+      }
     }
 `;
 

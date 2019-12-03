@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {
-  IHeader, IHeaderCell, ITotalCellContent, ITotal, ITotalCell,
+  IHeader, ITotalCellContent, ITotal, ITotalCell,
 } from '../interfaces';
 import { getTotalStyles, getTotalCellStyles, getTotalCellContentStyles } from './utils';
 
@@ -22,7 +22,7 @@ export const TotalCell = styled.div.attrs(({ width }: ITotalCell) => ({
   style: {
     width: `${width}px`,
   },
-}))<IHeaderCell>`
+}))<ITotalCell>`
   float: left;
   display: flex;
   justify-content: space-between;
