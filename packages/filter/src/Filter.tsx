@@ -14,7 +14,6 @@ import Button from '@xcritical/button';
 import {
   TopPanel,
   WrapperFilters,
-  TopPanelTags,
   TopPanelButtons,
   WrapperFilterButtons,
   RowWrapper,
@@ -32,7 +31,7 @@ import {
 import { filterTheme } from './utils';
 
 
-const Filter: React.SFC<IFilterProps> = ({
+const Filter: React.FC<IFilterProps> = ({
   filters,
   activeFilters = [],
   addFilter,
@@ -58,8 +57,8 @@ const Filter: React.SFC<IFilterProps> = ({
   return (
     <RootPanel>
       <TopPanel theme={ themeRef.current }>
-        <TopPanelTags>
-          { /* { activeFilters.map((filter) => (
+        { /* <TopPanelTags>
+          { activeFilters.map((filter) => (
             <TagContainer
               guid={ filter.key }
               filters={ filters }
@@ -68,8 +67,8 @@ const Filter: React.SFC<IFilterProps> = ({
               key={ filter.column + filter.condition + filter.value + filter.key }
               theme={ themeRef.current }
             />
-          )) } */ }
-        </TopPanelTags>
+          )) }
+        </TopPanelTags> */ }
 
         <TopPanelButtons ref={ buttonsRef }>
           <Button

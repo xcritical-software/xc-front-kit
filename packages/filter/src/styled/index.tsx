@@ -4,7 +4,6 @@ import { IWrapperFilters } from '../interfaces';
 
 export const WrapperFilters = styled.div<IWrapperFilters>`
   ${({ theme }) => theme.filtersPanel}
-  min-height: ${({ open }) => (open ? '300px' : '0px')};
   display: ${({ open }) => (open ? 'block' : 'none')};
   position: absolute;
   width: 100%;
@@ -16,7 +15,7 @@ export const FilterField = styled.div`
   padding-left: 0.5em;
   padding-right: 0.5em;
   :last-child {
-    flex-grow: calc(10% - 0.5em);
+    flex-basis: calc(10% - 0.5em);
     padding-right:0;
   }
 `;

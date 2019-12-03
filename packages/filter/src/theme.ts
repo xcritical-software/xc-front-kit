@@ -9,7 +9,6 @@ export const filterThemeNamespace = '@xcritical\\filter';
 export const defaultTheme: IFilterTheme = {
   topPanel: {
     background: 'transparent',
-    paddingRight: '20px',
   },
   tag: {
     padding: '0px 0px 0px 8px',
