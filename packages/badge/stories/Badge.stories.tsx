@@ -14,6 +14,34 @@ const Head = styled.h1<any>`
   font-size: ${({ size }: any) => `${size}px`}
 `;
 
+
+const appearances = [
+  'default',
+  'primary',
+  'secondary',
+  'success',
+  'warning',
+  'danger',
+  'info',
+  'light',
+  'dark',
+];
+
+const Table = (props: any) => (
+  <div style={ { display: 'table', minWidth: '280px' } } { ...props } />
+);
+const Row = (props: any) => (
+  <div style={ { display: 'table-row' } } { ...props } />
+);
+const Cell = (props: any) => (
+  <div style={ { display: 'table-cell', padding: 4 } } { ...props } />
+);
+
+function capitalize(str: string) {
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 storiesOf('Badge', module)
   .addDecorator(withKnobs)
   .add('Basic', () => (
@@ -46,4 +74,21 @@ Example heading
         <Badge>New</Badge>
       </Head>
     </>
+  )).add('Apperance', () => (
+    <Table>
+      { appearances.map((a) => (
+        <Row key={ a }>
+          <Cell>
+            <Badge appearance={ a } key={ `${a}` }>
+              { capitalize(a) }
+            </Badge>
+          </Cell>
+          <Cell>
+            <Badge appearance={ a } inverse key={ `${a}_outline` }>
+              { capitalize(a) }
+            </Badge>
+          </Cell>
+        </Row>
+      )) }
+    </Table>
   ));
