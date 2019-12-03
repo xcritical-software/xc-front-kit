@@ -48,7 +48,7 @@ export const getBodyCellStyles = ({
   let background = '';
   if (selected) background = selectedRowBackgroundColor;
   else if (even) background = evenRowBackground;
-  else background = row?.backgroundColor;
+  else background = row.backgroundColor;
   const headerBorder = header.border !== 'none';
   const borderTop = !firstRow || !headerBorder ? row.border : 'none';
   const cellBorder = firstRow
