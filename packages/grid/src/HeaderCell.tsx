@@ -12,30 +12,30 @@ export const HeaderCellWrapper = ({
   index,
   onMouseDown,
   isEmpty,
-  changeChangingColumns,
+  setChangingColumns,
   center,
   theme,
   shouldMovingColumns,
   shouldChangeColumnsWidth,
 }: IHeaderCellWrapper) => {
-  const [newWidth, changeNewWidth] = useState(width);
-  const clickX = useRef(0);
+  const [newWidth, setNewWidth] = useState(width);
+  const clickXRef = useRef(0);
   const widthRef = useRef(width);
 
   useEffect(() => {
-    changeNewWidth(width);
+    setNewWidth(width);
   }, [width]);
 
   const handleMouseMove = useCallback(
     (e) => {
       const { clientX: currentX } = e;
-      const calcNewWidth = width + (currentX - clickX.current);
+      const calcNewWidth = width + (currentX - clickXRef.current);
       if (calcNewWidth >= 1200) return;
       if (calcNewWidth <= 30) {
-        changeNewWidth(30);
+        setNewWidth(30);
         widthRef.current = 30;
       } else {
-        changeNewWidth(calcNewWidth);
+        setNewWidth(calcNewWidth);
         widthRef.current = calcNewWidth;
       }
     },
@@ -46,18 +46,18 @@ export const HeaderCellWrapper = ({
     onChangeWidth(index, widthRef.current);
     document.removeEventListener('mouseup', handleMouseUp);
     document.removeEventListener('mousemove', handleMouseMove);
-    changeChangingColumns('');
-  }, [changeChangingColumns, handleMouseMove, index, onChangeWidth]);
+    setChangingColumns('');
+  }, [setChangingColumns, handleMouseMove, index, onChangeWidth]);
 
   const handleMouseDown = useCallback(
     (e) => {
       if (!shouldChangeColumnsWidth) return;
-      clickX.current = e.clientX;
+      clickXRef.current = e.clientX;
       document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('mousemove', handleMouseMove);
-      changeChangingColumns('resize');
+      setChangingColumns('resize');
     },
-    [changeChangingColumns, handleMouseMove, handleMouseUp, shouldChangeColumnsWidth],
+    [setChangingColumns, handleMouseMove, handleMouseUp, shouldChangeColumnsWidth],
   );
   return (
     <HeaderCell theme={ theme } width={ newWidth } isEmpty={ isEmpty }>

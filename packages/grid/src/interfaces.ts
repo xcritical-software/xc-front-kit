@@ -15,7 +15,7 @@ export interface IColumn {
 export interface ITotals {
   [key: string]: string | number;
 }
-export interface IGrig {
+export interface IGrid {
   items: IItem[];
   columns: IColumn[];
   width: number;
@@ -41,7 +41,7 @@ export interface IHeaderCellWrapper {
   index: number;
   onMouseDown: Function;
   isEmpty: boolean;
-  changeChangingColumns: Function;
+  setChangingColumns: Function;
   center: boolean;
   theme: IGridTheme;
   shouldChangeColumnsWidth: boolean;
@@ -54,7 +54,7 @@ export interface IHeaderWrapper {
   columns: IColumn[];
   onChangeWidth: Function;
   onChangeMoving: Function;
-  changeChangingColumns: Function;
+  setChangingColumns: Function;
   theme: IGridTheme;
   shouldMovingColumns: boolean;
   shouldChangeColumnsWidth: boolean;

@@ -27,14 +27,14 @@ export const defaultTheme: IGridTheme = {
   },
   row: {
     border: `1px solid ${colors.GRAY}`,
-    padding: '12px',
+    padding: '7px 5px',
     fontSize: '14px',
     color: 'black',
     backgroundColor: 'white',
   },
   totals: {
     border: '1px solid black',
-    padding: '30px',
+    padding: '12px',
     fontSize: '16px',
     color: 'black',
     backgroundColor: colors.GRAY,

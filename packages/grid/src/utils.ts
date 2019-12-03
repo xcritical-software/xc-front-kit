@@ -20,7 +20,7 @@ export const addOrDeleteItemFromArray = (array: string[], item: string) => {
   return [...array, item];
 };
 
-export function gridTheme<T>(
+export function gridTheme(
   theme: IThemeNamespace,
   propertyPath?: string | undefined,
 ): IGridTheme {
@@ -29,11 +29,12 @@ export function gridTheme<T>(
 }
 
 
-export const deletePropsFromObjects = (arr: any, ...rest: any) => arr.map((el: IMappedItem) => {
-  const newElem = { ...el };
-  rest.forEach((prop: string) => {
-    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-    delete newElem[prop];
+export const deletePropsFromObjects = (arr: IMappedItem[], ...rest: any) => arr
+  .map((el: IMappedItem) => {
+    const newElem = { ...el };
+    rest.forEach((prop: string) => {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete newElem[prop];
+    });
+    return newElem;
   });
-  return newElem;
-});

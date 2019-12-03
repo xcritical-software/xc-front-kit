@@ -9,6 +9,7 @@ import {
   IMovingElem,
   IBodyCellContent,
   ITotalCell,
+  ITotal,
 } from '../interfaces';
 
 
@@ -25,14 +26,14 @@ export const getHeaderStyles = ({ theme }: IHeader) => {
     `;
 };
 
-export const getTotalStyles = ({ theme }: IHeader) => {
+export const getTotalStyles = ({ theme }: ITotal) => {
   if (theme.border !== 'none') {
     return `
-      border-top: ${theme.header.border};
+      border-top: ${theme.totals.border};
     `;
   }
   return `
-      border: ${theme.header.border};
+      border: ${theme.totals.border};
     `;
 };
 

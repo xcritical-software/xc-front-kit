@@ -27,6 +27,7 @@ export const TotalCell = styled.div.attrs(({ width }: ITotalCell) => ({
   display: flex;
   justify-content: space-between;
   overflow: hidden;
+  box-sizing: border-box;
   ${getTotalCellStyles}
 `;
 

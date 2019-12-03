@@ -3,7 +3,6 @@ import React, {
   useRef,
   useEffect,
   useCallback,
-  MutableRefObject,
   MouseEvent,
 } from 'react';
 import { HeaderCellWrapper } from './HeaderCell';
@@ -17,115 +16,117 @@ export const HeaderWrapper = ({
   columns,
   onChangeWidth,
   onChangeMoving,
-  changeChangingColumns,
+  setChangingColumns,
   theme,
   shouldMovingColumns,
   shouldChangeColumnsWidth,
 }: IHeaderWrapper) => {
-  const mappedColumns = useRef(columns);
-  const [isMoving, changeIsMoving] = useState(false);
-  const clickX = useRef(0);
-  const movingColumnIndex = useRef<number>();
-  const movingColumnData = useRef<IColumn>();
-  const movingElemRect = useRef<ClientRect>();
-  const headerRef = useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
-  const emptyColumnIndex = useRef<number>();
-  const [mouseMove, changeMouseMove] = useState(0);
-  const [startCoord, changeStartCoord] = useState({ x: 0, y: 0, height: 0 });
-  const startClickX = useRef(0);
+  const mappedColumnsRef = useRef(columns);
+  const [isMoving, setIsMoving] = useState(false);
+  const clickXRef = useRef(0);
+  const movingColumnIndexRef = useRef<number>();
+  const movingColumnDataRef = useRef<IColumn>();
+  const movingElemRectRef = useRef<ClientRect>();
+  const headerRef = useRef<HTMLDivElement>(null);
+  const emptyColumnIndexRef = useRef<number>();
+  const [mouseMove, setMouseMove] = useState(0);
+  const [startCoord, setStartCoord] = useState({ x: 0, y: 0, height: 0 });
+  const startClickXRef = useRef(0);
 
   useEffect(() => {
-    mappedColumns.current = columns;
-    changeStartCoord({ x: 0, y: 0, height: 0 });
+    mappedColumnsRef.current = columns;
+    setStartCoord({ x: 0, y: 0, height: 0 });
   }, [columns]);
 
   const handleMouseMove = useCallback(
     (e) => {
       const { clientX } = e;
-      const moveMouse = clientX - clickX.current;
+      const moveMouse = clientX - clickXRef.current;
 
-      const emptyIdx = emptyColumnIndex?.current || 0;
+      const emptyIdx = emptyColumnIndexRef.current || 0;
+      const leftColumnIndex = emptyIdx - 1;
+      const rightColumnIndex = emptyIdx + 1;
 
       if (moveMouse < 0) {
-        if (mappedColumns.current[emptyIdx - 1]) {
-          if (-moveMouse >= mappedColumns.current[emptyIdx - 1].width / 2) {
-            clickX.current -= mappedColumns.current[emptyIdx - 1].width;
+        if (mappedColumnsRef.current[leftColumnIndex]) {
+          if (-moveMouse >= mappedColumnsRef.current[leftColumnIndex].width / 2) {
+            clickXRef.current -= mappedColumnsRef.current[leftColumnIndex].width;
 
-            const newMappedColumns = [...mappedColumns.current];
+            const newMappedColumns = [...mappedColumnsRef.current];
 
-            [newMappedColumns[emptyIdx], newMappedColumns[emptyIdx - 1]] = [
-              newMappedColumns[emptyIdx - 1],
+            [newMappedColumns[emptyIdx], newMappedColumns[leftColumnIndex]] = [
+              newMappedColumns[leftColumnIndex],
               newMappedColumns[emptyIdx],
             ];
 
-            mappedColumns.current = newMappedColumns;
-            emptyColumnIndex.current = emptyIdx - 1;
+            mappedColumnsRef.current = newMappedColumns;
+            emptyColumnIndexRef.current = leftColumnIndex;
           }
         }
       } else if (moveMouse > 0) {
-        if (mappedColumns.current[emptyIdx + 1]) {
-          if (moveMouse >= mappedColumns.current[emptyIdx + 1].width / 2) {
-            clickX.current += mappedColumns.current[emptyIdx + 1].width;
-            const newMappedColumns = [...mappedColumns.current];
+        if (mappedColumnsRef.current[rightColumnIndex]) {
+          if (moveMouse >= mappedColumnsRef.current[rightColumnIndex].width / 2) {
+            clickXRef.current += mappedColumnsRef.current[rightColumnIndex].width;
+            const newMappedColumns = [...mappedColumnsRef.current];
 
-            [newMappedColumns[emptyIdx], newMappedColumns[emptyIdx + 1]] = [
-              newMappedColumns[emptyIdx + 1],
+            [newMappedColumns[emptyIdx], newMappedColumns[rightColumnIndex]] = [
+              newMappedColumns[rightColumnIndex],
               newMappedColumns[emptyIdx],
             ];
 
-            mappedColumns.current = newMappedColumns;
-            emptyColumnIndex.current = emptyIdx + 1;
+            mappedColumnsRef.current = newMappedColumns;
+            emptyColumnIndexRef.current = rightColumnIndex;
           }
         }
       }
-      changeMouseMove(clientX - startClickX.current);
+      setMouseMove(clientX - startClickXRef.current);
     },
-    [emptyColumnIndex],
+    [emptyColumnIndexRef],
   );
 
   const handleMouseUp = () => {
-    emptyColumnIndex.current = undefined;
-    changeIsMoving(false);
-    changeMouseMove(0);
-    onChangeMoving(mappedColumns.current);
-    movingColumnIndex.current = 0;
-    movingColumnData.current = undefined;
+    emptyColumnIndexRef.current = undefined;
+    setIsMoving(false);
+    setMouseMove(0);
+    onChangeMoving(mappedColumnsRef.current);
+    movingColumnIndexRef.current = 0;
+    movingColumnDataRef.current = undefined;
     document.removeEventListener('mouseup', handleMouseUp);
     document.removeEventListener('mousemove', handleMouseMove);
-    changeChangingColumns('');
+    setChangingColumns('');
   };
 
   const handleMouseDown = (e: MouseEvent, i: number) => {
     if (!shouldMovingColumns) return;
-    clickX.current = e.clientX;
-    startClickX.current = e.clientX;
-    const coords = e?.currentTarget?.getBoundingClientRect();
-    changeStartCoord({
-      x: coords.left - +headerRef?.current?.getBoundingClientRect()?.left,
+    clickXRef.current = e.clientX;
+    startClickXRef.current = e.clientX;
+    const coords = e.currentTarget.getBoundingClientRect();
+    setStartCoord({
+      x: coords.left - Number(headerRef.current?.getBoundingClientRect()?.left),
       y: coords.y,
       height: coords.height,
     });
-    changeIsMoving(true);
-    movingElemRect.current = e?.currentTarget?.getBoundingClientRect();
-    movingColumnIndex.current = i;
-    emptyColumnIndex.current = i;
-    movingColumnData.current = mappedColumns.current[i];
+    setIsMoving(true);
+    movingElemRectRef.current = e.currentTarget?.getBoundingClientRect();
+    movingColumnIndexRef.current = i;
+    emptyColumnIndexRef.current = i;
+    movingColumnDataRef.current = mappedColumnsRef.current[i];
     document.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('mousemove', handleMouseMove);
-    changeChangingColumns('move');
+    setChangingColumns('move');
   };
 
   return (
     <Header ref={ headerRef } width={ fullWidth } translateX={ translateX } theme={ theme }>
-      { mappedColumns.current.map((el: IColumn, index: number) => (
+      { mappedColumnsRef.current.map((el: IColumn, index: number) => (
         <HeaderCellWrapper
-          isEmpty={ index === emptyColumnIndex.current }
+          isEmpty={ index === emptyColumnIndexRef.current }
           onMouseDown={ handleMouseDown }
-          width={ mappedColumns.current.length === index + 1 ? el.width + 9 : el.width }
+          width={ mappedColumnsRef.current.length === index + 1 ? el.width + 9 : el.width }
           text={ el.headerName }
           onChangeWidth={ onChangeWidth }
           index={ index }
-          changeChangingColumns={ changeChangingColumns }
+          setChangingColumns={ setChangingColumns }
           center={ !!el.center }
           theme={ theme }
           shouldMovingColumns={ shouldMovingColumns }
@@ -136,11 +137,11 @@ export const HeaderWrapper = ({
         <MovingElem
           startCoord={ startCoord }
           mouseMove={ mouseMove }
-          width={ movingColumnData?.current?.width || 0 }
-          center={ !!movingColumnData?.current?.center }
+          width={ movingColumnDataRef.current?.width || 0 }
+          center={ !!movingColumnDataRef.current?.center }
           theme={ theme }
         >
-          <span>{ movingColumnData?.current?.headerName }</span>
+          <span>{ movingColumnDataRef.current?.headerName }</span>
         </MovingElem>
       ) }
     </Header>
