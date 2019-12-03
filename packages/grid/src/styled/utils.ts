@@ -22,7 +22,6 @@ export const getHeaderStyles = ({ theme }: IHeader) => {
     `;
 };
 
-
 export const getTotalStyles = ({ theme }: IHeader) => {
   if (theme.border !== 'none') {
     return `
@@ -34,10 +33,9 @@ export const getTotalStyles = ({ theme }: IHeader) => {
     `;
 };
 
-
 export const getBodyCellStyles = ({
   theme: {
-    evenRowBackground, selectedRowColor, row, rowCellBorder,
+    evenRowBackground, selectedRowColor, row, rowCellBorder, header,
   },
   selected,
   even,
@@ -47,7 +45,8 @@ export const getBodyCellStyles = ({
   if (selected) background = selectedRowColor;
   else if (even) background = evenRowBackground;
   else background = row.backgroundColor;
-  const borderTop = !firstRow ? row.border : 'none';
+  const headerBorder = header.border !== 'none';
+  const borderTop = !firstRow || !headerBorder ? row.border : 'none';
   const cellBorder = firstRow
     ? `border-right: ${rowCellBorder};
        border-left: ${rowCellBorder};
@@ -60,10 +59,9 @@ export const getBodyCellStyles = ({
   return `
       background: ${background};
       border-top: ${borderTop};
-      ${rowCellBorder !== 'none' && cellBorder};
+      ${rowCellBorder !== 'none' ? cellBorder : ''};
     `;
 };
-
 
 export const getTotalCellStyles = ({ theme }: IHeaderCell) => {
   let border = '';
@@ -71,12 +69,10 @@ export const getTotalCellStyles = ({ theme }: IHeaderCell) => {
   const totalsBorder = theme.totals.border !== 'none';
 
   if (totalsBorder && wrapperBorder) border = `border-right: ${theme.totalsCellBorder}`;
-
   else if (wrapperBorder && !totalsBorder) {
     border = `border-top: ${theme.totalsCellBorder}
               border-right: ${theme.totalsCellBorder}`;
   } else if (!totalsBorder && !wrapperBorder) border = `border: ${theme.totalsCellBorder}`;
-
   else if (!wrapperBorder && totalsBorder) {
     border = `border-right: ${theme.totalsCellBorder}`;
   }
@@ -87,17 +83,13 @@ export const getTotalCellStyles = ({ theme }: IHeaderCell) => {
     `;
 };
 
-
 export const getHeaderCellContentStyles = ({ theme, isEmpty }: IHeaderCellContent) => `
-      background-color: ${
-  isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor
-};
+      background-color: ${isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor};
       span {
         font-size: ${theme.header.fontSize};
         color: ${theme.header.color};
         padding: ${theme.header.padding}px;
     `;
-
 
 export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
     background-color: ${theme.totals.backgroundColor};
@@ -107,12 +99,10 @@ export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
       padding: ${theme.totals.padding}px;
       `;
 
-
 export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
       background-color: ${isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor};
       border-right: ${theme.headerCellBorder};
     `;
-
 
 export const getBodyCellContentStyles = ({
   theme: { row, offsetExpand },
@@ -126,17 +116,17 @@ export const getBodyCellContentStyles = ({
     }
     `;
 
-
-export const getBodyCellOffsetStyles = ({ theme: { offsetExpand }, expandLevel }: IBodyCellOffset) => `
+export const getBodyCellOffsetStyles = ({
+  theme: { offsetExpand },
+  expandLevel,
+}: IBodyCellOffset) => `
     width: ${expandLevel * (offsetExpand * 2)}px;
     `;
-
 
 export const getWrapperStyles = ({ theme: { border, borderRadius } }: IWrapper) => `
     border: ${border}
     border-radius: ${borderRadius}px;
   `;
-
 
 export const getMovingElemStyles = ({ theme }: IMovingElem) => `
       background-color: ${theme.movingHeaderCellBackgroung};
@@ -146,7 +136,6 @@ export const getMovingElemStyles = ({ theme }: IMovingElem) => `
         font-size: ${theme.header.fontSize};
         padding: ${theme.header.padding}px;
     `;
-
 
 export const getHeaderCellStyles = ({ theme: { header } }: IHeaderCell) => `
       height: ${header.height}px;

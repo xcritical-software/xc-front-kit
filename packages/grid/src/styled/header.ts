@@ -35,7 +35,6 @@ export const HeaderCell = styled.div.attrs(({ width }: IHeaderCell) => ({
   ${getHeaderCellStyles}
 `;
 
-
 export const HeaderCellContent = styled.div<IHeaderCellContent>`
   width: calc(100% - 8px);
   overflow: hidden;
@@ -43,7 +42,9 @@ export const HeaderCellContent = styled.div<IHeaderCellContent>`
   align-items: center;
 
   cursor: ${({ shouldMovingColumns }) => shouldMovingColumns && 'grab'};
-  ${({ center }) => center && 'justify-content: center;'}
+  ${({ center }) => center
+    && `justify-content: center;
+     margin-left: 8px;`}
   ${getHeaderCellContentStyles}
 `;
 
@@ -54,7 +55,6 @@ export const RightBorder = styled.div<IRightBorder>`
   cursor: ${({ shouldChangeColumnsWidth }) => shouldChangeColumnsWidth && 'w-resize'};
   ${getRightBorderStyles}
 `;
-
 
 export const MovingElem = styled(HeaderCell).attrs(({ mouseMove }: IMovingElem) => ({
   style: {

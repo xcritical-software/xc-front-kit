@@ -24,19 +24,18 @@ export const Body = styled.div`
     }
 `;
 
-
 export const BodyCell = styled.div<any>`
   display: flex;
   align-items: center;
   ${getBodyCellStyles}
   span {
     display: inline-block;
+    font-weight: 400;
   }
   button {
     margin: 10px;
   }
 `;
-
 
 export const BodyCellContent = styled.div<IBodyCellContent>`
   overflow: hidden;
@@ -46,7 +45,6 @@ export const BodyCellContent = styled.div<IBodyCellContent>`
     `}
   ${getBodyCellContentStyles}
 `;
-
 
 export const BodyCellOffset = styled.div<IBodyCellOffset>`
   ${getBodyCellOffsetStyles}
