@@ -14,7 +14,7 @@ export const defaultTheme: IGridTheme = {
   headerCellBorder: `1px solid ${colors.BLACK_RAISIN}`,
   totalsCellBorder: `1px solid ${colors.GRAY}`,
   rowCellBorder: `1px solid ${colors.GRAY}`,
-  emptyHeaderCellBackgroung: colors.GRAY_LIGHT,
+  emptyHeaderCellBackground: colors.GRAY_LIGHT,
   movingHeaderCellBackgroungColor: colors.SECONDARY,
   movingHeaderCellColor: colors.WHITE,
   header: {

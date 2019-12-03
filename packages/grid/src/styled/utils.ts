@@ -48,7 +48,7 @@ export const getBodyCellStyles = ({
   let background = '';
   if (selected) background = selectedRowBackgroundColor;
   else if (even) background = evenRowBackground;
-  else background = row.backgroundColor;
+  else background = row?.backgroundColor;
   const headerBorder = header.border !== 'none';
   const borderTop = !firstRow || !headerBorder ? row.border : 'none';
   const cellBorder = firstRow
@@ -92,6 +92,7 @@ export const getHeaderCellContentStyles = ({ theme }: IHeaderCellContent) => `
         font-size: ${theme.header.fontSize};
         color: ${theme.header.color};
         padding: ${theme.header.padding};
+      }
     `;
 
 export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
@@ -100,10 +101,11 @@ export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
       font-size: ${theme.totals.fontSize};
       color: ${theme.totals.color};
       padding: ${theme.totals.padding};
+    }
       `;
 
 export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
-      background-color: ${isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor};
+      background-color: ${isEmpty ? theme.emptyHeaderCellBackground : theme.header.backgroundColor};
       border-right: ${theme.headerCellBorder};
     `;
 
@@ -139,6 +141,7 @@ export const getMovingElemStyles = ({ theme }: IMovingElem) => `
         color: ${theme.movingHeaderCellColor};
         font-size: ${theme.header.fontSize};
         padding: ${theme.header.padding};
+      }
     `;
 
 export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
@@ -148,12 +151,15 @@ export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
 
   if (!wrapperBorder && !headerBorder) {
     border = `border-top: ${theme.headerCellBorder};
-              border-bottom: ${theme.headerCellBorder};`;
+              border-bottom: ${theme.headerCellBorder};
+              :first-child {
+                border-left: ${theme.headerCellBorder}
+              }`;
   } else if (!headerBorder) border = `border-bottom: ${theme.headerCellBorder}`;
 
   return `
   height: ${theme.header.height}px;
-  background-color: ${isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor};
+  background-color: ${isEmpty ? theme.emptyHeaderCellBackground : theme.header.backgroundColor};
   ${border}
   `;
 };

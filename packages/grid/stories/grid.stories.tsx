@@ -20,7 +20,7 @@ const generateTheme = (color: string) => {
       evenRowBackground: lighten(0.4, color),
       selectedRowBackgroundColor: lighten(0.1, color),
       borderRadius: 15,
-      emptyHeaderCellBackgroung: lighten(0.4, color),
+      emptyHeaderCellBackground: lighten(0.4, color),
       movingHeaderCellBackgroungColor: lighten(0.1, color),
       header: {
         color: darken(0.4, color),

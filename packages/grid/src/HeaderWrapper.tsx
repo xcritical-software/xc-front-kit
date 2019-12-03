@@ -26,7 +26,6 @@ export const HeaderWrapper = ({
   const clickXRef = useRef(0);
   const movingColumnIndexRef = useRef<number>();
   const movingColumnDataRef = useRef<IColumn>();
-  const movingElemRectRef = useRef<ClientRect>();
   const headerRef = useRef<HTMLDivElement>(null);
   const emptyColumnIndexRef = useRef<number>();
   const [mouseMove, setMouseMove] = useState(0);
@@ -107,7 +106,6 @@ export const HeaderWrapper = ({
       height: coords.height,
     });
     setIsMoving(true);
-    movingElemRectRef.current = e.currentTarget?.getBoundingClientRect();
     movingColumnIndexRef.current = i;
     emptyColumnIndexRef.current = i;
     movingColumnDataRef.current = mappedColumnsRef.current[i];

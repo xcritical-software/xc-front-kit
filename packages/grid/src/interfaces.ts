@@ -3,8 +3,9 @@ import { ITheme } from '@xcritical/theme';
 
 
 export interface IItem {
-  [key: string]: string | number | ReactElement | any /* сделать что то с этим */;
+  [key: string]: string | number | ReactElement | any;
 }
+
 export interface IColumn {
   headerName: string;
   field: string;
@@ -136,7 +137,7 @@ export interface IGridTheme {
   header: CSSProperties;
   row: CSSProperties;
   totals: CSSProperties;
-  emptyHeaderCellBackgroung: string;
+  emptyHeaderCellBackground: string;
   movingHeaderCellBackgroungColor: string;
   borderRadius: number;
   rowCellBorder: string;
