@@ -93,7 +93,7 @@ export const getHeaderCellContentStyles = ({ theme, isEmpty }: IHeaderCellConten
   isEmpty ? theme.emptyHeaderCellBackgroung : theme.header.backgroundColor
 };
       span {
-        font-size: ${theme.header.fontSize}px;
+        font-size: ${theme.header.fontSize};
         color: ${theme.header.color};
         padding: ${theme.header.padding}px;
     `;
@@ -102,7 +102,7 @@ export const getHeaderCellContentStyles = ({ theme, isEmpty }: IHeaderCellConten
 export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
     background-color: ${theme.totals.backgroundColor};
     span {
-      font-size: ${theme.totals.fontSize}px;
+      font-size: ${theme.totals.fontSize};
       color: ${theme.totals.color};
       padding: ${theme.totals.padding}px;
       `;
@@ -121,7 +121,7 @@ export const getBodyCellContentStyles = ({
     width: calc(100% - ${expandLevel * offsetExpand}px);
     padding: ${row.padding}px;
     span {
-      font-size: ${row.fontSize}px;
+      font-size: ${row.fontSize};
       color: ${row.color}
     }
     `;
@@ -141,9 +141,9 @@ export const getWrapperStyles = ({ theme: { border, borderRadius } }: IWrapper) 
 export const getMovingElemStyles = ({ theme }: IMovingElem) => `
       background-color: ${theme.movingHeaderCellBackgroung};
       border: ${theme.headerCellBorder};
+      color: ${theme.header.color};
       span {
-        font-size: ${theme.header.fontSize}px;
-        color: ${theme.header.color};
+        font-size: ${theme.header.fontSize};
         padding: ${theme.header.padding}px;
     `;
 

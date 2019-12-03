@@ -4,7 +4,6 @@ import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
 
 
 export const Body = styled.div`
-  :hover {
     div {
       ::-webkit-scrollbar {
         width: 8px;
@@ -23,25 +22,6 @@ export const Body = styled.div`
       scrollbar-color: #888 #f1f1f1;
       scrollbar-width: thin;
     }
-  }
-  div {
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    ::-webkit-scrollbar-track {
-    }
-    ::-webkit-scrollbar-thumb {
-      border-radius: 5px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-    }
-    :focus {
-      outline: none;
-    }
-    scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
-    scrollbar-width: thin;
-  }
 `;
 
 
