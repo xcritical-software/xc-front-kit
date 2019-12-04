@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-autofocus */
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 
 import {
   Root,
@@ -28,6 +28,8 @@ export const PureInput: React.FC<IInputProps> = ({
   css,
   ...rest
 }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const inputOnChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (onValidate && pattern) {
@@ -40,6 +42,10 @@ export const PureInput: React.FC<IInputProps> = ({
     }, [onChange, onValidate, pattern],
   );
 
+  const handleClick = useCallback(() => {
+    inputRef?.current?.focus();
+  }, []);
+
   return (
     <Root
       className={ className }
@@ -49,6 +55,7 @@ export const PureInput: React.FC<IInputProps> = ({
       disabled={ disabled }
       invalid={ invalid }
       css={ css }
+      onClick={ handleClick }
     >
       { !!prefix && (
         <Prefix
@@ -69,6 +76,7 @@ export const PureInput: React.FC<IInputProps> = ({
         invalid={ invalid }
         onChange={ inputOnChange }
         type={ type }
+        ref={ inputRef }
         autoComplete={ autoComplete }
         { ...rest }
       />
