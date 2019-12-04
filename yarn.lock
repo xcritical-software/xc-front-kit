@@ -2974,6 +2974,16 @@
     babel-plugin-lodash "^3.3.4"
     babel-plugin-styled-components "^1.10.0"
 
+"@xcritical/button@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@xcritical/button/-/button-1.1.3.tgz#ef707747df6caef99b8455b7642926e0a41cb7de"
+  integrity sha512-PAfFUDGLqddIQibnPl9cWXz6u8tEFjvh7kTkSaCwQgW/vU4Ch9bPYlp5sIJggtsvS0wt9URCCZTBXTwdFQXlZw==
+  dependencies:
+    "@xcritical/theme" "^0.1.3"
+    lodash.get "^4.x"
+    micro-memoize "4.0.8"
+    polished "^3.0.0"
+
 "@xcritical/eslint-plugin-xcritical@^2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@xcritical/eslint-plugin-xcritical/-/eslint-plugin-xcritical-2.1.0.tgz#7482cc441af3ad92d47cad2c46469f891c88cc9b"
@@ -5429,7 +5439,7 @@ cssstyle@^1.0.0:
   dependencies:
     cssom "0.3.x"
 
-csstype@^2.2.0, csstype@^2.5.7, csstype@^2.6.7:
+csstype@2.6.7, csstype@^2.2.0, csstype@^2.5.7, csstype@^2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.7.tgz#20b0024c20b6718f4eda3853a1f5a1cce7f5e4a5"
   integrity sha512-9Mcn9sFbGBAdmimWb2gLVDtFJzeKtDGIr76TUqmjZrw9LFXBMSU70lcs+C0/7fyCd6iBDqmksUcCOUIkisPHsQ==
