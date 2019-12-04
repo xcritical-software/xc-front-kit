@@ -43,7 +43,7 @@ export const PureInput: React.FC<IInputProps> = ({
   );
 
   const handleClick = useCallback(() => {
-    inputRef?.current?.focus();
+    inputRef.current?.focus();
   }, []);
 
   return (
