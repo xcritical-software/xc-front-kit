@@ -18,4 +18,6 @@ export const Menu = styled.div`
   margin-top: 8px;
   position: absolute;
   z-index: 2;
+  padding: 10px;
+  max-width: 250px;
 `;

@@ -19,9 +19,10 @@ import {
   RowWrapper,
   FilterField,
   RootPanel,
+  TopPanelTags,
 } from './styled';
 import FilterRowContainer from './filterRowContainer';
-// import TagContainer from './tagContainer';
+import TagContainer from './tagContainer';
 import {
   IFilterProps,
   IStateFilter,
@@ -57,7 +58,7 @@ const Filter: React.FC<IFilterProps> = ({
   return (
     <RootPanel>
       <TopPanel theme={ themeRef.current }>
-        { /* <TopPanelTags>
+        <TopPanelTags>
           { activeFilters.map((filter) => (
             <TagContainer
               guid={ filter.key }
@@ -66,9 +67,11 @@ const Filter: React.FC<IFilterProps> = ({
               name={ name }
               key={ filter.column + filter.condition + filter.value + filter.key }
               theme={ themeRef.current }
+              onApply={ onApply }
+              onReset={ resetFilters }
             />
           )) }
-        </TopPanelTags> */ }
+        </TopPanelTags>
 
         <TopPanelButtons ref={ buttonsRef }>
           <Button

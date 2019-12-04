@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { IMapDispatchFilterRow, IFilterTagProps, IPayloadChangeFilter } from './interfaces';
 import { xcriticalFiltersChangeFilter, xcriticalFiltersRemoveFilter } from './actions';
-import Tag from './Tag';
+import Tag from './components/Tag';
 
 
 const mapDispatchToProps = () => {

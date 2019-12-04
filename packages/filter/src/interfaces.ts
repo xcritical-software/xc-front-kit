@@ -117,6 +117,8 @@ export interface IFilterRecivedProps {
 
 export interface IFilterTag extends IFilterRow {
   theme: IFilterTheme;
+  onApply: () => void;
+  onReset: () => void;
 }
 export interface IFilterRow extends IFilterRowProps {
   removeFilter: any;
