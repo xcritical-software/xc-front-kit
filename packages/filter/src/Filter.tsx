@@ -59,18 +59,20 @@ const Filter: React.FC<IFilterProps> = ({
     <RootPanel>
       <TopPanel theme={ themeRef.current }>
         <TopPanelTags>
-          { activeFilters.map((filter) => (
-            <TagContainer
-              guid={ filter.key }
-              filters={ filters }
-              filter={ filter }
-              name={ name }
-              key={ filter.column + filter.condition + filter.value + filter.key }
-              theme={ themeRef.current }
-              onApply={ onApply }
-              onReset={ resetFilters }
-            />
-          )) }
+          { activeFilters
+            .filter((filter) => filter.column)
+            .map((filter) => (
+              <TagContainer
+                guid={ filter.key }
+                filters={ filters }
+                filter={ filter }
+                name={ name }
+                key={ filter.column + filter.condition + filter.value + filter.key }
+                theme={ themeRef.current }
+                onApply={ onApply }
+                onReset={ resetFilters }
+              />
+            )) }
         </TopPanelTags>
 
         <TopPanelButtons ref={ buttonsRef }>

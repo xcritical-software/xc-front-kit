@@ -19,7 +19,7 @@ export const DropdownItem = styled.div`
 
 export const DropdownButtons = styled.div`
   margin-top: 10px;
-  padding-top: 10px;
+  padding-top: 20px;
   border-top: 1px solid #F0F0F0;
   & > * {
     margin-right: 10px;
