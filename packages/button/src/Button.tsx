@@ -42,6 +42,7 @@ export const PureButton = ({
   disabled,
   theme,
   textPosition,
+  component: CustomComponent,
   isRTL,
   onClick: onClickProps,
   ...rest
@@ -58,7 +59,10 @@ export const PureButton = ({
 
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const RootElement = useMemo(() => Root(getElement(disabled as boolean, href)), [disabled, href]);
+  const RootElement = useMemo(() => Root(
+    CustomComponent
+    || getElement(disabled as boolean, href),
+  ), [CustomComponent, disabled, href]);
 
   return (
     <ThemeProvider theme={ innerTheme }>
