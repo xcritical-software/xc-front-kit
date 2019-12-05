@@ -13,10 +13,10 @@ const mapDispatchToProps = () => {
   ) => {
     if (!dispatchProps) {
       dispatchProps = {
-        changeFilter: (
+        onChangeFilter: (
           changes: IPayloadChangeFilter,
         ) => dispatch(xcriticalFiltersChangeFilter(name, changes)),
-        removeFilter: () => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
+        onRemoveFilter: () => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
       };
     }
     return dispatchProps;

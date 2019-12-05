@@ -7,3 +7,4 @@ export const FILTERS_RESET = `${prefix}RESET_FILTERS`;
 export const FILTERS_INIT = `${prefix}INIT_FILTERS`;
 export const FILTERS_ADD = `${prefix}ADD_FILTERS`;
 export const FILTERS_APPLY = `${prefix}APPLY_FILTERS`;
+export const FILTERS_UPDATE_SELECTED_FILTERS = `${prefix}FILTERS_UPDATE_SELECTED_FILTERS`;

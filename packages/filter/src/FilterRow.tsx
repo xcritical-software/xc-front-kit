@@ -8,7 +8,7 @@ import { OptionTypeBase } from 'react-select';
 import {
   FilterField,
   RowWrapper,
-} from './styled';
+} from './components/styled';
 import {
   IFilterRow,
 } from './interfaces';

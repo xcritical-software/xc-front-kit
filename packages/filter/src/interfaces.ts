@@ -6,6 +6,7 @@ import {
   FILTERS_ADD_NEW,
   FILTERS_ADD,
   FILTERS_APPLY,
+  FILTERS_UPDATE_SELECTED_FILTERS,
   FILTERS_CHANGE_FILTER,
   FILTERS_INIT,
   FILTERS_OPEN,
@@ -19,11 +20,12 @@ import {
 export type FilterActionType =
  typeof FILTERS_ADD_NEW |
  typeof FILTERS_ADD |
- typeof FILTERS_APPLY |
+ typeof FILTERS_UPDATE_SELECTED_FILTERS |
  typeof FILTERS_CHANGE_FILTER |
  typeof FILTERS_INIT |
  typeof FILTERS_OPEN |
  typeof FILTERS_REMOVE_FILTER |
+ typeof FILTERS_APPLY |
  typeof FILTERS_RESET;
 
 export interface IFilterAction<TPayload = any, T = FilterActionType> {
@@ -34,17 +36,9 @@ export interface IFilterAction<TPayload = any, T = FilterActionType> {
   payload: TPayload;
 }
 
-export interface IFilterFromStore {
-  column: string;
-  condition: string;
-  value: string;
-  key: string;
-}
-
-
 export interface IState {
-  drafts: IFilterFromStore[];
-  applied: IFilterFromStore[];
+  drafts: IStateFilter[];
+  applied: IStateFilter[];
 }
 
 export interface IPayloadRemoveFilter {
@@ -86,7 +80,7 @@ export interface IFilterTagProps extends IFilterRowProps {
 export interface IFilterRowProps {
   guid: string;
   filters: IFilter[];
-  filter: IFilterFromStore;
+  filter: IStateFilter;
   name: string;
   key: string;
 }
@@ -94,7 +88,7 @@ export interface IFilterRowProps {
 export interface ISelectedFilterComponent {
   filters?: IFilter[];
   currentFilter?: IFilter;
-  filterData?: IFilterFromStore;
+  filterData?: IStateFilter;
   onChange: ({ value }: OptionTypeBase) => void;
 }
 
@@ -121,12 +115,12 @@ export interface IFilterTag extends IFilterRow {
   onReset: () => void;
 }
 export interface IFilterRow extends IFilterRowProps {
-  removeFilter: any;
+  removeFilter?: any;
   guid: string;
   changeFilter: Function;
 }
 
-export interface IFilterProps {
+export interface IFilterProps extends IMapDispatchFilter {
   filters: IFilter[];
   activeFilters: IStateFilter[];
   addFilter: any;
@@ -135,6 +129,12 @@ export interface IFilterProps {
   name: string;
   resetFilters: any;
   theme?: IThemeNamespace;
+}
+
+export interface IMoreButtonWithFilterSelectorProps {
+  selectedFilters: IStateFilter[];
+  filters: IFilter[];
+  onChange: (value: IStateRecivedFilter[]) => void;
 }
 
 export interface IAction {
@@ -150,8 +150,8 @@ export interface IFilterStateProps {
 
 
 export interface IMapDispatchFilterRow {
-  changeFilter: Function;
-  removeFilter: Function;
+  onChangeFilter: Function;
+  onRemoveFilter: Function;
 }
 
 export interface IMapDispatchFilter {
@@ -159,6 +159,8 @@ export interface IMapDispatchFilter {
   apply: any;
   openFilters: any;
   resetFilters: any;
+
+  onChangeFilters?: (values: IStateRecivedFilter[]) => void;
 }
 
 export interface IWrapperFilters {

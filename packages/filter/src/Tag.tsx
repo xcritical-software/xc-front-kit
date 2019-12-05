@@ -18,7 +18,7 @@ import {
   WrapperElement,
   WrapperFilter,
   WrapperButtons,
-} from './styled';
+} from './components/styled';
 
 
 const Tag = ({

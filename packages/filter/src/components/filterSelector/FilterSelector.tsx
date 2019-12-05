@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { OptionTypeBase } from 'react-select';
 
 import Select from '@xcritical/select';
 import { ISelectedFilterComponent } from '../../interfaces';
+import { convertFiltersToOptions } from '../../utils/mappers';
 
 
 export const FilterSelect: React.FC<ISelectedFilterComponent> = React.memo(({
@@ -21,13 +21,7 @@ export const FilterSelect: React.FC<ISelectedFilterComponent> = React.memo(({
   }, [currentFilter]);
 
   const filterItems = useMemo(
-    () => filters?.reduce(
-      (acc: OptionTypeBase[], { field, displayName }) => ([
-        ...acc,
-        { label: displayName, value: field },
-      ]),
-      [],
-    ),
+    () => convertFiltersToOptions(filters),
     [filters],
   );
 

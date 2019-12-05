@@ -3,6 +3,7 @@ import get from 'lodash.get';
 import { setIn } from 'utilitify';
 
 
+export * from './mappers';
 export * from './getStyles';
 
 

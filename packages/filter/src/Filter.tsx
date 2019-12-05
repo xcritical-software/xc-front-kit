@@ -20,7 +20,7 @@ import {
   FilterField,
   RootPanel,
   TopPanelTags,
-} from './styled';
+} from './components/styled';
 import FilterRowContainer from './filterRowContainer';
 import TagContainer from './tagContainer';
 import {

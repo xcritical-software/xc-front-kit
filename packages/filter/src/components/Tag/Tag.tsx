@@ -3,14 +3,17 @@ import React, {
 } from 'react';
 import Button from '@xcritical/button';
 import { OptionTypeBase } from 'react-select';
-import {
-  Dropdown, DropdownItem, DropdownButtons,
-} from './Dropdown';
-import {
-  ChevronDown, ChevronUp,
-} from './Icons';
-import { IFilterTag } from '../../interfaces';
 
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownButtons,
+} from '..';
+import {
+  ChevronDown,
+  ChevronUp,
+} from '../icons';
+import { IFilterTag } from '../../interfaces';
 import { ConditionSelect } from '../conditionSelect';
 import { FilterValueElement } from '../filterElement';
 

@@ -15,6 +15,7 @@ import { darken, lighten } from 'polished';
 import {
   PageTwoContainer,
   PageThreeContainer,
+  CompactFilterContainer,
 } from './pages';
 import Filter, { filterReducer } from '../src';
 import { config } from './configReducer';
@@ -73,4 +74,7 @@ storiesOf('Filter', module)
   ))
   .add('With custom element', () => (
     <PageThreeContainer />
+  ))
+  .add('Compact Filters', () => (
+    <CompactFilterContainer />
   ));
