@@ -46,7 +46,6 @@ export const PureInput: React.FC<IInputProps> = ({
     inputRef.current?.focus();
   }, []);
 
-
   return (
     <Root
       className={ className }
