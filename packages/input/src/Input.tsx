@@ -42,8 +42,9 @@ export const PureInput: React.FC<IInputProps> = ({
     }, [onChange, onValidate, pattern],
   );
 
-  const handleClick = useCallback(() => inputRef.current?.focus(), []);
-
+  const handleClick = useCallback(() => {
+    inputRef.current?.focus();
+  }, []);
 
   return (
     <Root
