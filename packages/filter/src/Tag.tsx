@@ -26,7 +26,7 @@ const Tag = ({
   removeFilter,
   guid,
   filters,
-  changeFilter,
+  onChangeFilter,
   theme,
 }: IFilterTag): ReactElement | null => {
   const [isEdit, changeIsEdit] = useState(false);
@@ -43,8 +43,8 @@ const Tag = ({
 
   const handleOk = useCallback(() => {
     changeIsEdit(false);
-    changeFilter({ field: 'value', value, guid });
-  }, [changeFilter, guid, value]);
+    onChangeFilter({ field: 'value', value, guid });
+  }, [guid, onChangeFilter, value]);
 
   const handleKeyDown = useCallback(
     (event: any): void => {
