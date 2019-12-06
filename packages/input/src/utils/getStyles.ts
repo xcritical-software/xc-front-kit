@@ -164,7 +164,7 @@ export const getRootInputInteractiveStyles = memoize(({
 
   if (invalid) {
     return css`
-      cursor: pointer;
+      cursor: text;
       ${getRootInputStatesStyle('invalid')}
 
       ${standartActive}
@@ -174,7 +174,7 @@ export const getRootInputInteractiveStyles = memoize(({
   }
 
   return css`
-    cursor: pointer;
+    cursor: text;
 
     ${standartActive}
     ${standartHover}
@@ -207,7 +207,7 @@ export const getInputInteractiveStyles = memoize(({
 
   if (invalid) {
     return css`
-      cursor: pointer;
+      cursor: text;
       ${getInputStatesStyle('invalid')}
 
       &:active {
@@ -217,7 +217,7 @@ export const getInputInteractiveStyles = memoize(({
   }
 
   return css`
-    cursor: pointer;
+    cursor: text;
 
     &:active {
       background: inherit;
