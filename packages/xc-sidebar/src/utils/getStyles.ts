@@ -50,10 +50,8 @@ export const getBaseStyle: IReturnFunctionForConcreteProp<FlattenSimpleInterpola
   const background = sidebarAppearanceTheme(theme, appearance, baseAppearance, 'background');
   const color = sidebarAppearanceTheme(theme, appearance, baseAppearance, 'color');
   const zIndex = sidebarAppearanceTheme(theme, appearance, baseAppearance, 'zIndex');
-  const styles = sidebarAppearanceTheme(theme, appearance, baseAppearance);
 
   return css`
-    ${styles}
     background: ${background};
     color: ${color};
     z-index: ${zIndex};

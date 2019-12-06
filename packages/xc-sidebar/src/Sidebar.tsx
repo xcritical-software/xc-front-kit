@@ -7,11 +7,9 @@ import React, {
   useContext,
 } from 'react';
 import { ThemeContext, withTheme, ThemeProvider } from 'styled-components';
-import { Scrollbars } from 'react-custom-scrollbars';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import Arrow from './Arrow';
-import { sidebarTheme } from './utils';
 import { ISidebarProps } from './interfaces';
 import {
   Root,
@@ -23,6 +21,7 @@ import {
   Separator,
   CloseOpenButton,
   AntiSelect,
+  Scrollbar,
 } from './styled/Sidebar';
 
 
@@ -35,12 +34,14 @@ export const PureSidebar = ({
   showScrollbar,
   withBorderArrow = false,
   isRTL = false,
+  minWidth = 30,
+  maxWidth = 400,
+  separatorWidth: separatorWidthProp = 90,
 }: ISidebarProps): ReactElement => {
   const themeContext = useContext(ThemeContext);
-  const themeRef = useRef(sidebarTheme(theme || themeContext));
 
   const [transformParams, setTransformParams] = useState({
-    width: (themeRef.current.maxWidth as number) * 0.7,
+    width: maxWidth * 0.7,
     animate: false,
     arrowToRight: false,
   });
@@ -50,9 +51,9 @@ export const PureSidebar = ({
 
   const clickX = useRef(0);
   const [offsetLeft, changeOffsetLeft] = useState(0);
-  const leftWidth = showScrollbar
-    ? themeRef.current.leftWidth
-    : (themeRef.current.leftWidth as number) + 10;
+  const separatorWidth = showScrollbar
+    ? separatorWidthProp
+    : separatorWidthProp + 10;
 
   const responsiveWrapperStyles = {
     width: transformParams.width,
@@ -76,18 +77,18 @@ export const PureSidebar = ({
         ? transformParams.width - (currentX - clickX.current)
         : transformParams.width + (currentX - clickX.current);
 
-      if (newWidth >= (themeRef.current.maxWidth as number)) return;
+      if (newWidth >= maxWidth) return;
 
       if (newWidth <= 0) {
         document.body.removeEventListener('mousemove', handleMouseMove);
         setTransformParams({
-          width: themeRef.current.minWidth as number,
+          width: minWidth,
           animate: false,
           arrowToRight: true,
         });
-      } else if (newWidth <= (themeRef.current.minWidth as number)) {
+      } else if (newWidth <= minWidth) {
         setTransformParams({
-          width: themeRef.current.minWidth as number,
+          width: minWidth,
           animate: false,
           arrowToRight: true,
         });
@@ -95,11 +96,11 @@ export const PureSidebar = ({
         setTransformParams({
           width: newWidth,
           animate: false,
-          arrowToRight: newWidth < (themeRef.current.maxWidth as number) * 0.3,
+          arrowToRight: newWidth < maxWidth * 0.3,
         });
       }
     },
-    [isRTL, transformParams.width],
+    [isRTL, maxWidth, minWidth, transformParams.width],
   );
 
   const handleMouseDown = useCallback(
@@ -112,20 +113,20 @@ export const PureSidebar = ({
 
   const handleClose = useCallback(() => {
     document.body.removeEventListener('mousemove', handleMouseMove);
-    if (transformParams.width < (themeRef.current.maxWidth as number) * 0.3) {
+    if (transformParams.width < maxWidth * 0.3) {
       setTransformParams({
-        width: themeRef.current.maxWidth as number,
+        width: maxWidth,
         animate: true,
         arrowToRight: false,
       });
     } else {
       setTransformParams({
-        width: themeRef.current.minWidth as number,
+        width: minWidth,
         animate: true,
         arrowToRight: true,
       });
     }
-  }, [handleMouseMove, transformParams.width]);
+  }, [handleMouseMove, maxWidth, minWidth, transformParams.width]);
 
   const handleRemoveMouseMove = useCallback(() => {
     document.body.removeEventListener('mousemove', handleMouseMove);
@@ -167,7 +168,7 @@ export const PureSidebar = ({
 
   return (
     <ThemeProvider theme={ theme || themeContext || {} }>
-      <Root offsetLeft={ offsetLeft }>
+      <Root offsetLeft={ offsetLeft } isRTL={ isRTL }>
         <SidebarWrapper
           ref={ sidebarRef }
           appearance={ appearance }
@@ -179,11 +180,21 @@ export const PureSidebar = ({
               appearance={ appearance }
               baseAppearance={ baseAppearance }
             >
-              <Scrollbars autoHide={ showScrollbar === 'auto' } style={ { width: leftWidth } }>{ navComponent }</Scrollbars>
+              <Scrollbar
+                appearance={ appearance }
+                baseAppearance={ baseAppearance }
+                width={ separatorWidth }
+                autoHide={ showScrollbar === 'auto' }
+                animate={ false }
+              >
+                { navComponent }
+              </Scrollbar>
             </NavComponentWrapper>
           ) }
           { children && (
             <ResponsiveWrapper
+              appearance={ appearance }
+              baseAppearance={ baseAppearance }
               animate={ transformParams.animate }
               style={ responsiveWrapperStyles }
               isRTL={ isRTL }
@@ -194,25 +205,33 @@ export const PureSidebar = ({
                 style={ { width: transformParams.width } }
                 animate={ transformParams.animate }
               >
-                <Scrollbars
-                  style={ {
-                    width: rightWidth,
-                    transition: transformParams.animate ? '0.5s' : '0s',
-                    marginLeft: '-10px',
-                  } }
+                <Scrollbar
+                  appearance={ appearance }
+                  baseAppearance={ baseAppearance }
+                  animate={ transformParams.animate }
+                  width={ rightWidth }
+                  marginLeft="-10px"
                   autoHide={ showScrollbar === 'auto' }
                 >
                   { children }
-                </Scrollbars>
+                </Scrollbar>
               </ChildWrapper>
-              { antiSelectLayer && <AntiSelect /> }
+              { antiSelectLayer && <AntiSelect isRTL={ isRTL } /> }
               <SeparatorWrapper
+                appearance={ appearance }
+                baseAppearance={ baseAppearance }
                 onMouseDown={ handleMouseDown }
                 onMouseUp={ handleRemoveMouseMove }
               >
-                <Separator isRTL={ isRTL }>
+                <Separator
+                  appearance={ appearance }
+                  baseAppearance={ baseAppearance }
+                  isRTL={ isRTL }
+                >
                   { withBorderArrow && (
                     <CloseOpenButton
+                      appearance={ appearance }
+                      baseAppearance={ baseAppearance }
                       toRight={ transformParams.arrowToRight }
                       onClick={ handleClose }
                       isRTL={ isRTL }

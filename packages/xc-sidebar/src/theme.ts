@@ -5,15 +5,10 @@ export const sidebarThemeNamespace = '@xcritical\\xc-sidebar';
 
 export const sidebarThemeStyle = {
   color: colors.CHAROCOAL,
-  minWidth: 30,
-  maxWidth: 400,
+  transition: '.5s',
   padding: 0,
-  leftWidth: 91,
   sidebarContainer: {
     color: colors.CHAROCOAL,
-    height: '100vh',
-    position: 'fixed',
-    display: 'flex',
   },
   navContainer: {
     backgroundColor: colors.GRAY_LIGHT,
@@ -31,7 +26,7 @@ export const sidebarThemeStyle = {
     width: '10px',
     height: '100vh',
     cursor: 'w-resize',
-    zIndex: 9999,
+    zIndex: 999999,
   },
   separator: {
     color: colors.CHAROCOAL,
@@ -39,14 +34,6 @@ export const sidebarThemeStyle = {
     height: '100%',
     position: 'relative',
     backgroundColor: colors.BLUE,
-  },
-  antiSelect: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100vw',
-    height: '100vh',
-    zIndex: 9999,
   },
   closeOpenButton: {
     width: '20px',
@@ -62,12 +49,5 @@ export const sidebarThemeStyle = {
     transition: '.5s',
     transitionTimingFunction: 'linear',
     cursor: 'pointer',
-  },
-  appearance: {
-    default: {
-      minWidth: 30,
-      maxWidth: 400,
-      leftWidth: 91,
-    },
   },
 };

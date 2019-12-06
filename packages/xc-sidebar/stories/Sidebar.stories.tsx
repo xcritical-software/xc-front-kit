@@ -3,7 +3,7 @@
 import React from 'react';
 import { MdiReactIconComponentType } from 'mdi-react';
 import { storiesOf } from '@storybook/react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import {
   NavLink, BrowserRouter, Switch, Route,
 } from 'react-router-dom';
@@ -12,6 +12,24 @@ import Sidebar from '../src';
 import { routerConfig } from './routerConfig';
 import { sidebarThemeNamespace } from '../src/theme';
 
+
+export const GlobalStyle = createGlobalStyle`
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  html {
+    box-sizing: border-box;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+`;
 
 const list: any = (n: number) => (
   <div>
@@ -158,6 +176,19 @@ const theme: IThemeNamespace = {
         childContainer: {
           backgroundColor: 'lightblue',
         },
+        separator: {
+          backgroundColor: '#0078FF',
+          width: '2px',
+        },
+      },
+      right: {
+        separator: {
+          right: '0',
+          width: '2px',
+        },
+        responsiveContainer: {
+          backgroundColor: 'lightblue',
+        },
       },
     },
   },
@@ -176,7 +207,7 @@ const propsTheme: IThemeNamespace = {
       backgroundColor: 'pink',
     },
     separator: {
-      color: 'rgb(150,0,0)',
+      backgroundColor: 'rgb(150,0,0)',
     },
   },
 };
@@ -190,6 +221,7 @@ const props = {
 storiesOf('Sidebar', module)
   .add('Basic', () => (
     <BrowserRouter>
+      <GlobalStyle />
       <Sidebar { ...props }>
         { list(100) }
       </Sidebar>
@@ -201,6 +233,7 @@ storiesOf('Sidebar', module)
   ))
   .add('Only left panel', () => (
     <BrowserRouter>
+      <GlobalStyle />
       <Sidebar { ...props } />
       <Switch>
         { routerConfig.map(({ path, component, exact }: any) => (
@@ -209,18 +242,22 @@ storiesOf('Sidebar', module)
     </BrowserRouter>
   ))
   .add('Right position', () => (
-    <BrowserRouter>
-      <Sidebar { ...props } isRTL>
-        { list(100) }
-      </Sidebar>
-      <Switch>
-        { routerConfig.map(({ path, component, exact }: any) => (
-          <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
-      </Switch>
-    </BrowserRouter>
+    <ThemeProvider theme={ theme }>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Sidebar { ...props } isRTL appearance="right">
+          { list(100) }
+        </Sidebar>
+        <Switch>
+          { routerConfig.map(({ path, component, exact }: any) => (
+            <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+        </Switch>
+      </BrowserRouter>
+    </ThemeProvider>
   ))
   .add('With theme provider', () => (
     <ThemeProvider theme={ theme }>
+      <GlobalStyle />
       <BrowserRouter>
         <Sidebar { ...props }>
           { list(100) }
@@ -234,6 +271,7 @@ storiesOf('Sidebar', module)
   ))
   .add('Theme in props', () => (
     <ThemeProvider theme={ theme }>
+      <GlobalStyle />
       <BrowserRouter>
         <Sidebar { ...props } theme={ propsTheme }>
           { list(100) }

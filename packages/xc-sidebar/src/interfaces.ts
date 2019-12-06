@@ -24,6 +24,9 @@ export interface ISidebarProps {
   showScrollbar?: boolean | string;
   withBorderArrow?: boolean;
   isRTL?: boolean;
+  minWidth?: number;
+  maxWidth?: number;
+  separatorWidth?: number;
 }
 
 export interface ISidebarStates {
@@ -77,3 +80,8 @@ export interface ICloseOpenButton {
 }
 
 export type IThemeProp<T> = T;
+
+export interface IScrollbarProps {
+  width?: number;
+  marginLeft?: string;
+}
