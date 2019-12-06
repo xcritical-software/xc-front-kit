@@ -1,62 +1,39 @@
 import React, {
-  useState, useCallback, useMemo, useRef,
+  useState, useCallback, useMemo,
 } from 'react';
 import Button from '@xcritical/button';
-import { OptionTypeBase } from 'react-select';
 
 import {
   Dropdown,
-  DropdownItem,
   DropdownButtons,
-  TagLabel,
 } from '..';
 import {
   ChevronDown,
   ChevronUp,
 } from '../icons';
-import { IFilterTag } from '../../interfaces';
-import { ConditionSelect } from '../conditionSelect';
-import { FilterValueElement } from '../filterElement';
+import { ICompactFilterTag, IFilter } from '../../interfaces';
+import { TagCondition } from './TagConditions';
 
 
-export const Tag: React.FC<IFilterTag> = ({
-  filter,
-  guid,
+export const Tag: React.FC<ICompactFilterTag> = ({
+  filterId,
+  conditions,
   filters,
   onChangeFilter,
+  onRemoveFilter,
   onApply,
   onReset,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const cachedFilterData = useRef(filters.find((f) => f.field === filter.column));
-  const currentFilter = useMemo(() => {
-    if (
-      (filter.column && !cachedFilterData.current)
-      || (cachedFilterData?.current?.field !== filter.column)
-    ) {
-      cachedFilterData.current = filters.find((f) => f.field === filter.column);
-    }
-
-    return cachedFilterData.current;
-  }, [filter, filters]);
-
-  const onChangeCondition = useCallback(
-    ({ value }: OptionTypeBase) => {
-      onChangeFilter({ field: 'condition', value, guid });
-    }, [guid, onChangeFilter],
+  const filterSetting = useMemo(
+    () => filters.find((f) => f.field === filterId) as IFilter,
+    [filterId, filters],
   );
 
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
   };
-
-  const onChangeValue = useCallback(
-    (value: any) => {
-      onChangeFilter({ field: 'value', value, guid });
-    }, [guid, onChangeFilter],
-  );
 
   const onTagApply = useCallback(
     () => {
@@ -72,9 +49,6 @@ export const Tag: React.FC<IFilterTag> = ({
     }, [isOpen, onReset],
   );
 
-
-  const { displayName = '', conditions } = currentFilter || {};
-
   return (
     <Dropdown
       isOpen={ isOpen }
@@ -85,42 +59,35 @@ export const Tag: React.FC<IFilterTag> = ({
           onClick={ toggleOpen }
           selected={ isOpen }
         >
-          { `${displayName} ${conditions?.[filter.condition]?.name || ''} ${filter.value}` }
+          { `${filterSetting?.displayName}` }
         </Button>
       ) }
     >
-      <DropdownItem>
-        <TagLabel>Conditions</TagLabel>
-        <ConditionSelect
-          onChange={ onChangeCondition }
-          currentFilter={ currentFilter }
-          filterData={ filter }
-          key={ filter.condition }
-        />
-      </DropdownItem>
 
-      <DropdownItem>
-        <TagLabel>Value</TagLabel>
-        <FilterValueElement
-          onChange={ onChangeValue }
-          currentFilter={ currentFilter }
-          filterData={ filter }
-          key={ filter.column }
-        />
-      </DropdownItem>
+      {
+        conditions.map((condition) => (
+          <TagCondition
+            conditions={ filterSetting.conditions }
+            onRemoveFilter={ onRemoveFilter }
+            currentFilterState={ condition }
+            filterSetting={ filterSetting }
+            onChangeFilter={ onChangeFilter }
+          />
+        ))
+      }
 
       <DropdownButtons>
         <Button
           appearance="filter-add-button-appearance"
           onClick={ onTagApply }
         >
-            Apply
+          Apply
         </Button>
         <Button
           appearance="filter-reset-button-appearance"
           onClick={ onTagReset }
         >
-            Reset
+          Reset
         </Button>
       </DropdownButtons>
     </Dropdown>

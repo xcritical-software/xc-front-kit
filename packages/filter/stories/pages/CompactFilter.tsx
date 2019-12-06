@@ -14,12 +14,22 @@ const threeFilters = [
     value: '15',
   },
   {
+    column: 'aaid',
+    condition: 'startsWith',
+    value: '15',
+  },
+  {
     column: 'acid',
     condition: 'endsWith',
     value: '20',
   },
 ];
 const threeFiltersAdd = [
+  {
+    column: 'aaid',
+    condition: 'startsWith',
+    value: '150',
+  },
   {
     column: 'aaid',
     condition: 'startsWith',

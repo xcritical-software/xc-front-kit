@@ -114,10 +114,33 @@ export interface IFilterTag extends IFilterRow {
   onApply: () => void;
   onReset: () => void;
 }
+
+export interface ICompactFilterTag {
+  theme: IFilterTheme;
+  filters: IFilter[];
+  name: string;
+  key: string;
+  filterId: string;
+  conditions: IStateFilter[];
+  onApply: () => void;
+  onReset: () => void;
+  onRemoveFilter?: any;
+  onChangeFilter: Function;
+}
+
+export interface ITagConditionProps {
+  currentFilterState: IStateFilter;
+  conditions: IConditions;
+  filterSetting?: IFilter;
+  onChangeFilter: Function;
+  onRemoveFilter: any;
+}
+
 export interface IFilterRow extends IFilterRowProps {
   removeFilter?: any;
   guid: string;
   onChangeFilter: Function;
+  onRemoveFilter: any;
 }
 
 export interface IFilterProps extends IMapDispatchFilter {

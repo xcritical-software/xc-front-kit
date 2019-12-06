@@ -4,6 +4,7 @@ import React, {
   useRef,
   MutableRefObject,
   useContext,
+  useMemo,
 } from 'react';
 import { ThemeContext } from 'styled-components';
 
@@ -25,6 +26,12 @@ import {
 import { filterTheme } from './utils';
 
 
+const groupBy = (xs: any[], key) => xs.reduce((rv, x) => {
+  (rv[x[key]] = rv[x[key]] || []).push(x);
+  return rv;
+}, {});
+
+
 const PureCompactFilter: React.FC<IFilterProps> = ({
   filters,
   activeFilters = [],
@@ -44,23 +51,31 @@ const PureCompactFilter: React.FC<IFilterProps> = ({
     openFilters();
   }, [openFilters]);
 
+  const mergedFilters = useMemo(
+    () => groupBy(
+      activeFilters.filter((filter) => filter.column),
+      'column',
+    ),
+    [activeFilters],
+  );
+
 
   return (
     <RootPanel>
       <TopPanel theme={ themeRef.current }>
         <TopPanelTags>
-          { activeFilters
-            .filter((filter) => filter.column)
-            .map((filter) => (
+          { Object.keys(mergedFilters)
+            .map((filterId) => (
               <TagContainer
-                guid={ filter.key }
-                filters={ filters }
-                filter={ filter }
                 name={ name }
-                key={ filter.key }
+                key={ filterId }
+                filters={ filters }
+                filterId={ filterId }
+                conditions={ mergedFilters[filterId] }
                 theme={ themeRef.current }
                 onApply={ onApply }
                 onReset={ resetFilters }
+                onChangeFilter={ () => {} }
               />
             )) }
         </TopPanelTags>

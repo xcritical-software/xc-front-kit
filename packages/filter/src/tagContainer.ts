@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { IMapDispatchFilterRow, IFilterTagProps, IPayloadChangeFilter } from './interfaces';
+import { IMapDispatchFilterRow, ICompactFilterTag, IPayloadChangeFilter } from './interfaces';
 import { xcriticalFiltersChangeFilter, xcriticalFiltersRemoveFilter } from './actions';
 import Tag from './components/Tag';
 
@@ -9,14 +9,14 @@ const mapDispatchToProps = () => {
   let dispatchProps: IMapDispatchFilterRow;
   return (
     dispatch: Dispatch,
-    { name, guid }: IFilterTagProps,
+    { name }: ICompactFilterTag,
   ) => {
     if (!dispatchProps) {
       dispatchProps = {
         onChangeFilter: (
           changes: IPayloadChangeFilter,
         ) => dispatch(xcriticalFiltersChangeFilter(name, changes)),
-        onRemoveFilter: () => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
+        onRemoveFilter: (guid) => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
       };
     }
     return dispatchProps;
