@@ -89,3 +89,15 @@ export function xcriticalFiltersAdd(
     { filters },
   );
 }
+
+
+export function xcriticalFiltersUpdateSelectedFilters(
+  name: string,
+  filters: IStateRecivedFilter[],
+): IFilterAction<IPayloadInitFilters> {
+  return actionCreator(
+    actions.FILTERS_UPDATE_SELECTED_FILTERS,
+    name,
+    { filters },
+  );
+}

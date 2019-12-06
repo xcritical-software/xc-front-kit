@@ -81,6 +81,24 @@ export const initFilters = (
   'drafts',
 );
 
+export const updateSelectedFilters = (
+  state: IState,
+  { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
+): IState => {
+  const { drafts } = state;
+
+  const newFilters = filters.map((filter) => {
+    const draft = drafts.find((draftItem) => draftItem.column === filter.column);
+
+    if (draft) {
+      return draft;
+    }
+    return filter;
+  });
+
+  return setIn(state, newFilters, 'drafts');
+};
+
 
 export const resetFilters = (state: IState): IState => setIn(state, state.applied, 'drafts');
 

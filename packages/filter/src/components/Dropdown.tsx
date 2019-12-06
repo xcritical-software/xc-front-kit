@@ -8,7 +8,7 @@ export const Dropdown = ({
   target,
   onClose,
 }: any) => (
-  <div style={ { position: 'relative', paddingRight: '10px' } }>
+  <div style={ { position: 'relative', paddingRight: '10px', paddingBottom: '10px' } }>
     { target }
     { isOpen ? <DropdownContent>{ children }</DropdownContent> : null }
     { isOpen ? <Blanket onClick={ onClose } /> : null }

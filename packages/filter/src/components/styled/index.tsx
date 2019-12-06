@@ -33,7 +33,7 @@ export const RowWrapper = styled.div`
 export const TopPanel = styled.div`
   ${({ theme }) => theme.topPanel}
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   width: 100%;
   justify-content: flex-start;
 `;
@@ -126,3 +126,5 @@ export const DropdownButtons = styled.div`
     margin-right: 10px;
   }
 `;
+
+export const TagLabel = styled.label``;

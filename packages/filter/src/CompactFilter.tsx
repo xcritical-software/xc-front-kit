@@ -1,11 +1,9 @@
 import React, {
   useEffect,
   ReactElement,
-  useState,
   useRef,
   MutableRefObject,
   useContext,
-  useCallback,
 } from 'react';
 import { ThemeContext } from 'styled-components';
 
@@ -13,20 +11,14 @@ import Button from '@xcritical/button';
 
 import {
   TopPanel,
-  WrapperFilters,
   TopPanelButtons,
-  WrapperFilterButtons,
-  RowWrapper,
-  FilterField,
   RootPanel,
   TopPanelTags,
   MoreFilterSelect,
 } from './components';
-import FilterRowContainer from './filterRowContainer';
 import TagContainer from './tagContainer';
 import {
   IFilterProps,
-  IStateFilter,
   IFilterTheme,
   // IFilter,
 } from './interfaces';
@@ -36,16 +28,15 @@ import { filterTheme } from './utils';
 const PureCompactFilter: React.FC<IFilterProps> = ({
   filters,
   activeFilters = [],
-  addFilter,
   onApply,
   openFilters,
   name,
   resetFilters,
+  onChangeFilters,
   theme,
 }): ReactElement => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(filterTheme<IFilterTheme>(theme || contextTheme));
-  const [isOpen, changeIsOpen] = useState(false);
   const buttonsRef: MutableRefObject<any> = useRef();
 
 
@@ -53,10 +44,6 @@ const PureCompactFilter: React.FC<IFilterProps> = ({
     openFilters();
   }, [openFilters]);
 
-
-  const onOpen = useCallback(() => {
-    changeIsOpen(!isOpen);
-  }, [isOpen]);
 
   return (
     <RootPanel>
@@ -80,7 +67,7 @@ const PureCompactFilter: React.FC<IFilterProps> = ({
 
         <TopPanelButtons ref={ buttonsRef }>
           <MoreFilterSelect
-            onChange={ onOpen }
+            onChange={ onChangeFilters }
             filters={ filters }
             selectedFilters={ activeFilters }
           >
@@ -94,49 +81,6 @@ const PureCompactFilter: React.FC<IFilterProps> = ({
           </Button>
         </TopPanelButtons>
       </TopPanel>
-
-      <WrapperFilters
-        open={ isOpen }
-        top={ buttonsRef.current && buttonsRef.current.offsetTop }
-        theme={ themeRef.current }
-      >
-        <RowWrapper>
-          <FilterField>
-            <h3>Filter name</h3>
-          </FilterField>
-          <FilterField>
-            <h3>Condition</h3>
-          </FilterField>
-          <FilterField>
-            <h3>Value</h3>
-          </FilterField>
-          <FilterField />
-        </RowWrapper>
-        { activeFilters.map((filter) => (
-          <FilterRowContainer
-            guid={ filter.key }
-            filters={ filters }
-            filter={ filter }
-            name={ name }
-            key={ filter.key }
-          />
-        )) }
-        <WrapperFilterButtons theme={ themeRef.current }>
-          <Button
-            appearance="filter-add-button-appearance"
-            onClick={ addFilter }
-          >
-            Add new filter
-          </Button>
-          <Button
-            appearance="filter-reset-button-appearance"
-            disabled={ !activeFilters.some(({ column }: IStateFilter) => column) }
-            onClick={ resetFilters }
-          >
-            Reset filters
-          </Button>
-        </WrapperFilterButtons>
-      </WrapperFilters>
     </RootPanel>
   );
 };

@@ -117,7 +117,7 @@ export interface IFilterTag extends IFilterRow {
 export interface IFilterRow extends IFilterRowProps {
   removeFilter?: any;
   guid: string;
-  changeFilter: Function;
+  onChangeFilter: Function;
 }
 
 export interface IFilterProps extends IMapDispatchFilter {
@@ -159,8 +159,7 @@ export interface IMapDispatchFilter {
   apply: any;
   openFilters: any;
   resetFilters: any;
-
-  onChangeFilters?: (values: IStateRecivedFilter[]) => void;
+  onChangeFilters: (values: IStateRecivedFilter[]) => void;
 }
 
 export interface IWrapperFilters {

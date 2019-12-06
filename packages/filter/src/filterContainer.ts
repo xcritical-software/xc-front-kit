@@ -10,7 +10,7 @@ import {
   xcriticalFiltersApply,
   xcriticalFiltersOpenFilters,
   xcriticalFiltersReset,
-  xcriticalFiltersAdd,
+  xcriticalFiltersUpdateSelectedFilters,
 } from './actions';
 import { filterSelector } from './reducer';
 
@@ -38,8 +38,9 @@ const mapDispatchToProps = () => {
         apply: (filters) => dispatch(xcriticalFiltersApply(name, filters)),
         openFilters: () => dispatch(xcriticalFiltersOpenFilters(name)),
         resetFilters: () => dispatch(xcriticalFiltersReset(name)),
-        onChangeFilters:
-        (values: IStateRecivedFilter[]) => dispatch(xcriticalFiltersAdd(name, values)),
+        onChangeFilters: (
+          values: IStateRecivedFilter[],
+        ) => dispatch(xcriticalFiltersUpdateSelectedFilters(name, values)),
       };
     }
     return dispatchProps;

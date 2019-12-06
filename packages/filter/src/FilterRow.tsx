@@ -22,7 +22,7 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
     filter,
     removeFilter,
     guid,
-    changeFilter,
+    onChangeFilter,
   }): ReactElement => {
     const cachedFilterData = useRef(filters.find((f) => f.field === filter.column));
     const currentFilter = useMemo(() => {
@@ -39,20 +39,20 @@ const FilterRow: React.FC<IFilterRow> = React.memo(
 
     const onChangeColumn = useCallback(
       ({ value }: OptionTypeBase) => {
-        changeFilter({ field: 'column', value, guid });
-      }, [changeFilter, guid],
+        onChangeFilter({ field: 'column', value, guid });
+      }, [onChangeFilter, guid],
     );
 
     const onChangeCondition = useCallback(
       ({ value }: OptionTypeBase) => {
-        changeFilter({ field: 'condition', value, guid });
-      }, [changeFilter, guid],
+        onChangeFilter({ field: 'condition', value, guid });
+      }, [onChangeFilter, guid],
     );
 
     const onChangeValue = useCallback(
       (value: any) => {
-        changeFilter({ field: 'value', value, guid });
-      }, [changeFilter, guid],
+        onChangeFilter({ field: 'value', value, guid });
+      }, [onChangeFilter, guid],
     );
 
 

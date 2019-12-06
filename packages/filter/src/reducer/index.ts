@@ -16,6 +16,7 @@ import {
   resetFilters,
   openFilters,
   defaultFilter,
+  updateSelectedFilters,
 } from './func';
 
 
@@ -28,6 +29,7 @@ const behaviors: Record<FilterActionType, Function> = {
   [actions.FILTERS_RESET]: resetFilters,
   [actions.FILTERS_REMOVE_FILTER]: removeFilter,
   [actions.FILTERS_OPEN]: openFilters,
+  [actions.FILTERS_UPDATE_SELECTED_FILTERS]: updateSelectedFilters,
 };
 
 const defaultFilterState = {

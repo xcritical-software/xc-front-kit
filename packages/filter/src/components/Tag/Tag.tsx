@@ -8,6 +8,7 @@ import {
   Dropdown,
   DropdownItem,
   DropdownButtons,
+  TagLabel,
 } from '..';
 import {
   ChevronDown,
@@ -22,7 +23,7 @@ export const Tag: React.FC<IFilterTag> = ({
   filter,
   guid,
   filters,
-  changeFilter,
+  onChangeFilter,
   onApply,
   onReset,
 }) => {
@@ -42,8 +43,8 @@ export const Tag: React.FC<IFilterTag> = ({
 
   const onChangeCondition = useCallback(
     ({ value }: OptionTypeBase) => {
-      changeFilter({ field: 'condition', value, guid });
-    }, [changeFilter, guid],
+      onChangeFilter({ field: 'condition', value, guid });
+    }, [guid, onChangeFilter],
   );
 
 
@@ -53,8 +54,22 @@ export const Tag: React.FC<IFilterTag> = ({
 
   const onChangeValue = useCallback(
     (value: any) => {
-      changeFilter({ field: 'value', value, guid });
-    }, [changeFilter, guid],
+      onChangeFilter({ field: 'value', value, guid });
+    }, [guid, onChangeFilter],
+  );
+
+  const onTagApply = useCallback(
+    () => {
+      setIsOpen(!isOpen);
+      onApply();
+    }, [isOpen, onApply],
+  );
+
+  const onTagReset = useCallback(
+    () => {
+      setIsOpen(!isOpen);
+      onReset();
+    }, [isOpen, onReset],
   );
 
 
@@ -75,6 +90,7 @@ export const Tag: React.FC<IFilterTag> = ({
       ) }
     >
       <DropdownItem>
+        <TagLabel>Conditions</TagLabel>
         <ConditionSelect
           onChange={ onChangeCondition }
           currentFilter={ currentFilter }
@@ -84,6 +100,7 @@ export const Tag: React.FC<IFilterTag> = ({
       </DropdownItem>
 
       <DropdownItem>
+        <TagLabel>Value</TagLabel>
         <FilterValueElement
           onChange={ onChangeValue }
           currentFilter={ currentFilter }
@@ -95,13 +112,13 @@ export const Tag: React.FC<IFilterTag> = ({
       <DropdownButtons>
         <Button
           appearance="filter-add-button-appearance"
-          onClick={ onApply }
+          onClick={ onTagApply }
         >
             Apply
         </Button>
         <Button
           appearance="filter-reset-button-appearance"
-          onClick={ onReset }
+          onClick={ onTagReset }
         >
             Reset
         </Button>
