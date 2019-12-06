@@ -1,4 +1,8 @@
-import { Grid } from './Grid';
+import Grid from './Grid';
+import { gridThemeNamespace } from './theme';
 
 
-export { Grid as default };
+export {
+  gridThemeNamespace,
+};
+export default Grid;

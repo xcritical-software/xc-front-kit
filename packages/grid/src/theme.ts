@@ -1,44 +1,43 @@
-export const tableTheme = {
-  width: '100%',
-  height: '100%',
+import { colors } from '@xcritical/theme';
+import { IGridTheme } from './interfaces';
 
-  header: {
-    borderBottomWidth: '1px',
-    borderBottomColor: 'rgb(223, 234, 241)',
-    borderBottomStyle: 'solid',
-  },
-  evenRowColor: 'rgb(184, 223, 240)',
-  activeRowColor: '#c3e7b7',
-  rowColor: 'white',
-  cell: {
-    borderRightWidth: '1px',
-    borderRightColor: 'rgb(223, 234, 241)',
-    borderRightStyle: 'solid',
-    paddingTop: '5px',
-    paddingBottom: '5px',
-    paddingLeft: '5px',
-    paddingRight: '5px',
-    fontSize: '12px',
-    fontWeight: 400,
-    color: '#000',
-  },
-  head: {
-    fontSize: '12px',
-    fontWeight: 400,
-    color: 'rgb(115, 115, 115)',
-    paddingTop: '5px',
-    paddingBottom: '5px',
-    paddingLeft: '5px',
-    paddingRight: '5px',
-    backgroundColor: 'white',
-    hoverColor: 'rgb(184, 223, 240)',
-  },
-  buttonShift: '32px',
-  nexLevelLineShift: '15',
-  rowSwitchButtonSize: '20',
-  tableData: {
-    textOverflow: 'ellipsis',
-  },
-};
 
 export const gridThemeNamespace = '@xcritical\\grid';
+
+export const defaultTheme: IGridTheme = {
+  evenRowBackground: colors.GRAY_LIGHT,
+  selectedRowBackgroundColor: colors.SECONDARY,
+  selectedRowColor: colors.GRAY_LIGHT,
+  offsetExpand: 20,
+  border: `1px solid ${colors.GRAY}`,
+  borderRadius: 5,
+  headerCellBorder: `1px solid ${colors.BLACK_RAISIN}`,
+  totalsCellBorder: `1px solid ${colors.GRAY}`,
+  rowCellBorder: `1px solid ${colors.GRAY}`,
+  emptyHeaderCellBackground: colors.GRAY_LIGHT,
+  movingHeaderCellBackgroungColor: colors.SECONDARY,
+  movingHeaderCellColor: colors.WHITE,
+  header: {
+    border: `1px solid ${colors.GRAY}`,
+    fontSize: '16px',
+    color: 'black',
+    backgroundColor: colors.GRAY,
+    height: 30,
+    padding: '12px',
+  },
+  row: {
+    border: `1px solid ${colors.GRAY}`,
+    padding: '7px 5px',
+    fontSize: '14px',
+    color: 'black',
+    backgroundColor: 'white',
+  },
+  totals: {
+    border: '1px solid black',
+    padding: '12px',
+    fontSize: '16px',
+    color: 'black',
+    backgroundColor: colors.GRAY,
+    height: 30,
+  },
+};
