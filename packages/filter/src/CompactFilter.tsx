@@ -75,7 +75,6 @@ const PureCompactFilter: React.FC<IFilterProps> = ({
                 theme={ themeRef.current }
                 onApply={ onApply }
                 onReset={ resetFilters }
-                onChangeFilter={ () => {} }
               />
             )) }
         </TopPanelTags>

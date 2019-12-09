@@ -1,8 +1,15 @@
 import React, { useCallback } from 'react';
 import { OptionTypeBase } from 'react-select';
 import {
-  DropdownItem, TagLabel, ConditionSelect, FilterValueElement,
+  ConditionSelect,
+  FilterValueElement,
 } from '..';
+
+import {
+  TagLabel,
+  TagConditionsWrapper,
+  DropdownItem,
+} from './styled';
 
 import { ITagConditionProps } from '../../interfaces';
 
@@ -30,7 +37,7 @@ export const TagCondition: React.FC<ITagConditionProps> = (
 
 
   return (
-    <>
+    <TagConditionsWrapper>
       <DropdownItem>
         <TagLabel>Conditions</TagLabel>
         <ConditionSelect
@@ -48,6 +55,6 @@ export const TagCondition: React.FC<ITagConditionProps> = (
           filterData={ currentFilterState }
         />
       </DropdownItem>
-    </>
+    </TagConditionsWrapper>
   );
 };

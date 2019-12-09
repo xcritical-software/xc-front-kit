@@ -115,7 +115,7 @@ export interface IFilterTag extends IFilterRow {
   onReset: () => void;
 }
 
-export interface ICompactFilterTag {
+export interface ITagContainerProps {
   theme: IFilterTheme;
   filters: IFilter[];
   name: string;
@@ -124,8 +124,9 @@ export interface ICompactFilterTag {
   conditions: IStateFilter[];
   onApply: () => void;
   onReset: () => void;
-  onRemoveFilter?: any;
-  onChangeFilter: Function;
+}
+
+export interface ITagProps extends ITagContainerProps, IMapDispatchFilterTag {
 }
 
 export interface ITagConditionProps {
@@ -175,6 +176,12 @@ export interface IFilterStateProps {
 export interface IMapDispatchFilterRow {
   onChangeFilter: Function;
   onRemoveFilter: Function;
+}
+
+export interface IMapDispatchFilterTag {
+  onChangeFilter: Function;
+  onRemoveFilter: Function;
+  onAddCondition: Function;
 }
 
 export interface IMapDispatchFilter {

@@ -13,8 +13,14 @@ import {
   DropdownIndicator,
   Plus,
 } from '../icons';
-import { IMoreButtonWithFilterSelectorProps, IStateRecivedFilter } from '../../interfaces';
-import { convertFiltersToOptions, convertSelectedFiltersToOptions } from '../../utils';
+import {
+  IMoreButtonWithFilterSelectorProps,
+  IStateRecivedFilter,
+} from '../../interfaces';
+import {
+  convertFiltersToOptions,
+  convertSelectedFiltersToOptions,
+} from '../../utils';
 
 
 const selectStyles = {

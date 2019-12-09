@@ -34,8 +34,15 @@ export const openFilters = (): IState => ({
   applied: [],
 });
 
-export const addFilter = (state: IState): IState => {
-  const drafts = [...state.drafts, { ...defaultFilter, key: uuid() }];
+export const addFilter = (
+  state: IState,
+  { payload }: IFilterAction<IStateRecivedFilter>,
+): IState => {
+  const drafts = [
+    ...state.drafts,
+    { ...(payload || defaultFilter), key: uuid() },
+  ];
+
   return setIn(state, drafts, 'drafts');
 };
 
@@ -62,7 +69,10 @@ export const changeFilter = (
 
   if (field === 'column') {
     return setIn(state, {
-      column: value, key: id, condition: '', value: '',
+      column: value,
+      key: id,
+      condition: '',
+      value: '',
     }, ['drafts', `${index}`]);
   }
 

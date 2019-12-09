@@ -1,15 +1,23 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { IMapDispatchFilterRow, ICompactFilterTag, IPayloadChangeFilter } from './interfaces';
-import { xcriticalFiltersChangeFilter, xcriticalFiltersRemoveFilter } from './actions';
+import {
+  IMapDispatchFilterTag,
+  IPayloadChangeFilter,
+  ITagContainerProps,
+} from './interfaces';
+import {
+  xcriticalFiltersChangeFilter,
+  xcriticalFiltersRemoveFilter,
+  xcriticalFiltersAddFilter,
+} from './actions';
 import Tag from './components/Tag';
 
 
 const mapDispatchToProps = () => {
-  let dispatchProps: IMapDispatchFilterRow;
+  let dispatchProps: IMapDispatchFilterTag;
   return (
     dispatch: Dispatch,
-    { name }: ICompactFilterTag,
+    { name }: ITagContainerProps,
   ) => {
     if (!dispatchProps) {
       dispatchProps = {
@@ -17,13 +25,20 @@ const mapDispatchToProps = () => {
           changes: IPayloadChangeFilter,
         ) => dispatch(xcriticalFiltersChangeFilter(name, changes)),
         onRemoveFilter: (guid) => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
+        onAddCondition: (
+          filterName: string,
+        ) => dispatch(xcriticalFiltersAddFilter(name, {
+          column: filterName,
+          condition: '',
+          value: '',
+        })),
       };
     }
     return dispatchProps;
   };
 };
 
-export default connect(
+export default connect<any, IMapDispatchFilterTag, ITagContainerProps>(
   null,
   mapDispatchToProps,
 )(Tag);

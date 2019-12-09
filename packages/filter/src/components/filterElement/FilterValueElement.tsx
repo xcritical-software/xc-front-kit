@@ -12,9 +12,10 @@ export const FilterValueElement: React.FC<ISelectedFilterComponent> = React.memo
   onChange,
 }) => {
   const Element = currentFilter ? currentFilter.Element || Input : null;
-  if (Element && condition) {
+  if (Element) {
     return (
       <Element
+        disabled={ !condition }
         shouldFitContainer
         onChange={ onChange }
         value={ value }

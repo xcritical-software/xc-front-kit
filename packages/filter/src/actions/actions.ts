@@ -29,10 +29,14 @@ export function xcriticalFiltersChangeFilter(
     changes,
   );
 }
-export function xcriticalFiltersAddFilter(name: string): IFilterAction {
+export function xcriticalFiltersAddFilter(
+  name: string,
+  filter?: IStateRecivedFilter,
+): IFilterAction<IStateRecivedFilter> {
   return actionCreator(
     actions.FILTERS_ADD_NEW,
     name,
+    filter,
   );
 }
 export function xcriticalFiltersRemoveFilter(

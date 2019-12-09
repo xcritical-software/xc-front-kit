@@ -113,18 +113,3 @@ export const DropdownContent = styled.div`
   position: absolute;
   z-index: 2;
 `;
-
-export const DropdownItem = styled.div`
-  padding: 10px 10px 0 10px;
-`;
-
-export const DropdownButtons = styled.div`
-  margin-top: 20px;
-  padding: 20px 10px 10px 10px;
-  border-top: 1px solid #F0F0F0;
-  & > * {
-    margin-right: 10px;
-  }
-`;
-
-export const TagLabel = styled.label``;

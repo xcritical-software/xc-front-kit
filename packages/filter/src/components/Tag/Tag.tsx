@@ -5,22 +5,26 @@ import Button from '@xcritical/button';
 
 import {
   Dropdown,
-  DropdownButtons,
 } from '..';
+import {
+  DropdownFooter,
+  ButtonBlock,
+} from './styled';
 import {
   ChevronDown,
   ChevronUp,
 } from '../icons';
-import { ICompactFilterTag, IFilter } from '../../interfaces';
+import { ITagProps, IFilter } from '../../interfaces';
 import { TagCondition } from './TagConditions';
 
 
-export const Tag: React.FC<ICompactFilterTag> = ({
+export const Tag: React.FC<ITagProps> = ({
   filterId,
   conditions,
   filters,
   onChangeFilter,
   onRemoveFilter,
+  onAddCondition,
   onApply,
   onReset,
 }) => {
@@ -47,6 +51,12 @@ export const Tag: React.FC<ICompactFilterTag> = ({
       setIsOpen(!isOpen);
       onReset();
     }, [isOpen, onReset],
+  );
+
+  const onTagAddCondition = useCallback(
+    () => {
+      onAddCondition(filterId);
+    }, [filterId, onAddCondition],
   );
 
   return (
@@ -76,20 +86,32 @@ export const Tag: React.FC<ICompactFilterTag> = ({
         ))
       }
 
-      <DropdownButtons>
-        <Button
-          appearance="filter-add-button-appearance"
-          onClick={ onTagApply }
-        >
-          Apply
-        </Button>
-        <Button
-          appearance="filter-reset-button-appearance"
-          onClick={ onTagReset }
-        >
-          Reset
-        </Button>
-      </DropdownButtons>
+      <DropdownFooter>
+        <ButtonBlock position="left">
+          <Button
+            appearance="filter-add-button-appearance"
+            onClick={ onTagAddCondition }
+          >
+          Add condition
+          </Button>
+        </ButtonBlock>
+        <ButtonBlock>
+          <Button
+            appearance="filter-reset-button-appearance"
+            onClick={ onTagReset }
+          >
+            Reset
+          </Button>
+
+          <Button
+            appearance="filter-add-button-appearance"
+            onClick={ onTagApply }
+          >
+            Apply
+          </Button>
+        </ButtonBlock>
+
+      </DropdownFooter>
     </Dropdown>
   );
 };
