@@ -90,6 +90,7 @@
     "styled-css-grid": "^1.2.1"
   },
   "resolutions": {
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.2",
+    "micro-memoize": "4.0.8"
   }
 }

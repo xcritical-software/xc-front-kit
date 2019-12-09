@@ -55,7 +55,7 @@ export interface IOnlyButtonProps {
   selected?: boolean;
   textPosition?: string;
   height?: string;
-  component?: React.ReactNode;
+  component?: React.ElementType;
 }
 
 export interface IButtonProps

@@ -15,6 +15,7 @@ export const Popover: React.FC<IPopover> = ({
   position,
   content,
   autoFlip,
+  positionFixed,
   children,
   visible,
   onVisibleChange,
@@ -103,6 +104,7 @@ export const Popover: React.FC<IPopover> = ({
     <Popper
       position={ position }
       autoFlip={ autoFlip }
+      positionFixed={ positionFixed }
       visible={ visible === undefined ? _visible : visible }
     >
       { (popperProps: IRenderPopperProps) => (

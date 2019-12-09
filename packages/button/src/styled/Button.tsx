@@ -25,7 +25,9 @@ ${({ css: cssInner }) => (cssInner || null)}
 direction: ${({ isRTL }) => (isRTL ? 'rtl' : 'ltr')};
 `;
 
-export const Root = (tag: string) => styled[tag]`
+export const Root = (tag: string | React.ElementType) => (typeof tag === 'string'
+  ? styled[tag]
+  : styled(tag))`
   align-items: center;
   border-width: 0;
   box-sizing: border-box;
