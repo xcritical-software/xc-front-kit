@@ -32,6 +32,7 @@ export const addFilters = (
 export const openFilters = (): IState => ({
   drafts: [{ ...defaultFilter, key: uuid() }],
   applied: [],
+  search: '',
 });
 
 export const addFilter = (
@@ -108,6 +109,11 @@ export const updateSelectedFilters = (
 
   return setIn(state, newFilters, 'drafts');
 };
+
+export const updateSearchInput = (
+  state: IState,
+  { payload }: IFilterAction<string>,
+): IState => setIn(state, payload, 'search');
 
 
 export const resetFilters = (state: IState): IState => setIn(state, state.applied, 'drafts');

@@ -5,7 +5,7 @@ import Button from '@xcritical/button';
 
 import {
   Dropdown,
-} from '..';
+} from '../Dropdown';
 import {
   DropdownFooter,
   ButtonBlock,

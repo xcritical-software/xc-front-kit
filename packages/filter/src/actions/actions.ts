@@ -6,6 +6,7 @@ import {
   FilterActionType,
   IPayloadRemoveFilter,
   IPayloadInitFilters,
+  IPayloadApplyFilters,
 } from '../interfaces';
 
 
@@ -52,11 +53,15 @@ export function xcriticalFiltersRemoveFilter(
 export function xcriticalFiltersApply(
   name: string,
   filters: IStateRecivedFilter[],
-): IFilterAction<IPayloadInitFilters> {
+  search: string,
+): IFilterAction<IPayloadApplyFilters> {
   return actionCreator(
     actions.FILTERS_APPLY,
     name,
-    filters,
+    {
+      filters,
+      search,
+    },
   );
 }
 
@@ -103,5 +108,16 @@ export function xcriticalFiltersUpdateSelectedFilters(
     actions.FILTERS_UPDATE_SELECTED_FILTERS,
     name,
     { filters },
+  );
+}
+
+export function xcriticalFiltersSearchUpdate(
+  name: string,
+  value: string,
+): IFilterAction<string> {
+  return actionCreator(
+    actions.FILTERS_SEARCH_UPDATE,
+    name,
+    value,
   );
 }

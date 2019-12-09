@@ -11,6 +11,7 @@ import {
   xcriticalFiltersOpenFilters,
   xcriticalFiltersReset,
   xcriticalFiltersUpdateSelectedFilters,
+  xcriticalFiltersSearchUpdate,
 } from './actions';
 import { filterSelector } from './reducer';
 
@@ -19,9 +20,13 @@ const mapStateToProps = (
   state: any,
   ownProps: IFilterRecivedProps,
 ): IFilterStateProps => {
-  const activeFilters = filterSelector(state, ownProps.name)?.drafts || [];
+  const {
+    drafts = [],
+    search,
+  } = filterSelector(state, ownProps.name);
   return {
-    activeFilters,
+    activeFilters: drafts,
+    searchInput: search,
     ...ownProps,
   };
 };
@@ -35,12 +40,13 @@ const mapDispatchToProps = () => {
     if (!dispatchProps) {
       dispatchProps = {
         addFilter: () => dispatch(xcriticalFiltersAddFilter(name)),
-        apply: (filters) => dispatch(xcriticalFiltersApply(name, filters)),
+        apply: (filters, search) => dispatch(xcriticalFiltersApply(name, filters, search)),
         openFilters: () => dispatch(xcriticalFiltersOpenFilters(name)),
         resetFilters: () => dispatch(xcriticalFiltersReset(name)),
         onChangeFilters: (
           values: IStateRecivedFilter[],
         ) => dispatch(xcriticalFiltersUpdateSelectedFilters(name, values)),
+        onSearchInputChange: (value) => dispatch(xcriticalFiltersSearchUpdate(name, value)),
       };
     }
     return dispatchProps;

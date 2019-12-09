@@ -39,7 +39,7 @@
 	},
 	"dependencies": {
 		"@xcritical/button": "^1.1.2",
-		"@xcritical/input": "^0.0.1",
+		"@xcritical/input": "^0.0.2",
 		"@xcritical/select": "^0.1.1",
 		"@xcritical/theme": "^0.1.3",
 		"lodash.get": "4.x",

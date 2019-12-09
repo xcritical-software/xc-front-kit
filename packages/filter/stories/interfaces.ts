@@ -7,6 +7,7 @@ export interface IPage {
   dictionaries: IDictionary[];
   theme?: IThemeNamespace;
   onInit?: Function;
+  isSearchable?: boolean;
 }
 
 export interface IConditionsAll {

@@ -12,6 +12,7 @@ import {
   FILTERS_OPEN,
   FILTERS_REMOVE_FILTER,
   FILTERS_RESET,
+  FILTERS_SEARCH_UPDATE,
 } from './actions/const';
 
 
@@ -26,6 +27,7 @@ export type FilterActionType =
  typeof FILTERS_OPEN |
  typeof FILTERS_REMOVE_FILTER |
  typeof FILTERS_APPLY |
+ typeof FILTERS_SEARCH_UPDATE |
  typeof FILTERS_RESET;
 
 export interface IFilterAction<TPayload = any, T = FilterActionType> {
@@ -39,6 +41,7 @@ export interface IFilterAction<TPayload = any, T = FilterActionType> {
 export interface IState {
   drafts: IStateFilter[];
   applied: IStateFilter[];
+  search: string;
 }
 
 export interface IPayloadRemoveFilter {
@@ -52,6 +55,11 @@ export interface IPayloadChangeFilter {
 
 export interface IPayloadInitFilters {
   filters: IStateRecivedFilter[];
+}
+
+export interface IPayloadApplyFilters {
+  filters: IStateRecivedFilter[];
+  search: string;
 }
 
 // Props
@@ -107,6 +115,7 @@ export interface IFilterRecivedProps {
   filters: IFilter[];
   name: string;
   theme?: IThemeNamespace;
+  isSearchable?: boolean;
 }
 
 export interface IFilterTag extends IFilterRow {
@@ -144,15 +153,14 @@ export interface IFilterRow extends IFilterRowProps {
   onRemoveFilter: any;
 }
 
-export interface IFilterProps extends IMapDispatchFilter {
-  filters: IFilter[];
+export interface IFilterProps extends IMapDispatchFilter, IFilterRecivedProps {
   activeFilters: IStateFilter[];
+  searchInput: string;
+  isSearchable: boolean;
   addFilter: any;
   onApply: any;
   openFilters: any;
-  name: string;
   resetFilters: any;
-  theme?: IThemeNamespace;
 }
 
 export interface IMoreButtonWithFilterSelectorProps {
@@ -170,6 +178,7 @@ export interface IFilterStateProps {
   filters: IFilter[];
   name: string;
   activeFilters: IStateFilter[];
+  searchInput: string;
 }
 
 
@@ -190,6 +199,7 @@ export interface IMapDispatchFilter {
   openFilters: any;
   resetFilters: any;
   onChangeFilters: (values: IStateRecivedFilter[]) => void;
+  onSearchInputChange: (value: string) => void;
 }
 
 export interface IWrapperFilters {

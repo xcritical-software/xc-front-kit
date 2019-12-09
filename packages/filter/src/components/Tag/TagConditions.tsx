@@ -1,9 +1,8 @@
 import React, { useCallback } from 'react';
 import { OptionTypeBase } from 'react-select';
-import {
-  ConditionSelect,
-  FilterValueElement,
-} from '..';
+
+import { ConditionSelect } from '../conditionSelect';
+import { FilterValueElement } from '../filterElement';
 
 import {
   TagLabel,
@@ -18,11 +17,11 @@ export const TagCondition: React.FC<ITagConditionProps> = (
   {
     currentFilterState,
     filterSetting,
-
     onChangeFilter,
   },
 ) => {
   const { key: guid } = currentFilterState;
+
   const onChangeValue = useCallback(
     (value: any) => {
       onChangeFilter({ field: 'value', value, guid });

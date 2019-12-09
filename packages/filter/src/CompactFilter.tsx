@@ -7,8 +7,8 @@ import React, {
   useMemo,
 } from 'react';
 import { ThemeContext } from 'styled-components';
-
 import Button from '@xcritical/button';
+import Input from '@xcritical/input';
 
 import {
   TopPanel,
@@ -16,8 +16,10 @@ import {
   RootPanel,
   TopPanelTags,
   MoreFilterSelect,
+  SearchInputWrapper,
+  Tag,
 } from './components';
-import TagContainer from './tagContainer';
+
 import {
   IFilterProps,
   IFilterTheme,
@@ -36,10 +38,13 @@ const PureCompactFilter: React.FC<IFilterProps> = ({
   filters,
   activeFilters = [],
   onApply,
+  searchInput,
+  isSearchable = true,
   openFilters,
   name,
   resetFilters,
   onChangeFilters,
+  onSearchInputChange,
   theme,
 }): ReactElement => {
   const contextTheme = useContext(ThemeContext);
@@ -63,10 +68,23 @@ const PureCompactFilter: React.FC<IFilterProps> = ({
   return (
     <RootPanel>
       <TopPanel theme={ themeRef.current }>
+        {
+          isSearchable
+            ? (
+              <SearchInputWrapper>
+                <Input
+                  value={ searchInput }
+                  onChange={ onSearchInputChange }
+                  appearance="filters-search"
+                />
+              </SearchInputWrapper>
+            )
+            : null
+        }
         <TopPanelTags>
           { Object.keys(mergedFilters)
             .map((filterId) => (
-              <TagContainer
+              <Tag
                 name={ name }
                 key={ filterId }
                 filters={ filters }

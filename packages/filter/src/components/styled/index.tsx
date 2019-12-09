@@ -113,3 +113,10 @@ export const DropdownContent = styled.div`
   position: absolute;
   z-index: 2;
 `;
+
+
+export const SearchInputWrapper = styled.div`
+  height: 37px;
+  margin: 4px 0;
+  padding-right: 10px;  
+`;

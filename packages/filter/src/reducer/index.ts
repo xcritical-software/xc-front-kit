@@ -17,6 +17,7 @@ import {
   openFilters,
   defaultFilter,
   updateSelectedFilters,
+  updateSearchInput,
 } from './func';
 
 
@@ -30,11 +31,13 @@ const behaviors: Record<FilterActionType, Function> = {
   [actions.FILTERS_REMOVE_FILTER]: removeFilter,
   [actions.FILTERS_OPEN]: openFilters,
   [actions.FILTERS_UPDATE_SELECTED_FILTERS]: updateSelectedFilters,
+  [actions.FILTERS_SEARCH_UPDATE]: updateSearchInput,
 };
 
 const defaultFilterState = {
   drafts: [{ ...defaultFilter, key: uuid() }],
   applied: [],
+  search: '',
 };
 
 const reducer: Reducer<IState, IFilterAction> = (state = defaultFilterState, action) => {
@@ -42,12 +45,12 @@ const reducer: Reducer<IState, IFilterAction> = (state = defaultFilterState, act
   return behavior ? behavior(state, action) : state;
 };
 
-export const filterSelector = (state: any, filterName: string): any => {
+export const filterSelector = (state: any, filterName: string): IState => {
   if (!filterName) {
     return state;
   }
 
-  return get(state.filter, filterName);
+  return get(state.filter, filterName, defaultFilterState);
 };
 
 export default reducerDictionary(reducer, 'filterName');

@@ -13,16 +13,13 @@ import { IThemeNamespace } from '@xcritical/theme';
 import { buttonThemeNamespace } from '@xcritical/button';
 import { darken, lighten } from 'polished';
 import {
-  PageTwoContainer,
-  PageThreeContainer,
   CompactFilterContainer,
 } from './pages';
-import Filter, { filterReducer } from '../src';
+import { filterReducer } from '../src';
 import { config } from './configReducer';
 import { data } from './data/dummyData';
 import { getConfigSuccess } from './actions';
 import { filterThemeNamespace } from '../src/theme';
-import { simpleData } from './data/simpleData';
 
 
 const store = createStore(
@@ -63,18 +60,13 @@ const withProvider = (story) => (
 );
 
 storiesOf('Filter', module)
+
   .addDecorator(withProvider)
   .add('Simple Filter', () => (
-    <Filter filters={ simpleData } name="one" />
+    <CompactFilterContainer />
   ))
   .add('With Theme', () => (
     <ThemeProvider theme={ themeTwo }>
-      <PageTwoContainer />
+      <CompactFilterContainer />
     </ThemeProvider>
-  ))
-  .add('With custom element', () => (
-    <PageThreeContainer />
-  ))
-  .add('Compact Filters', () => (
-    <CompactFilterContainer />
   ));
