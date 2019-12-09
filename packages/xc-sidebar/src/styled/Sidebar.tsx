@@ -18,9 +18,12 @@ import {
 } from '../interfaces';
 
 
-export const Root = styled.div<ISidebarProps & ISidebarStates>`
+export const Root = styled.div.attrs(({ offsetLeft }: ISidebarStates) => ({
+  style: {
+    width: `${offsetLeft}px`,
+  },
+}))<ISidebarProps & ISidebarStates>`
   ${({ theme, appearance, baseAppearance }) => getBaseStyle(theme, appearance, baseAppearance)};
-  width: ${({ offsetLeft }) => offsetLeft}px;
   float: ${({ isRTL }) => (isRTL ? 'right' : 'left')};
 `;
 
