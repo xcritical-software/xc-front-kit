@@ -34,3 +34,15 @@ export const ButtonBlock = styled.div<any>`
     margin-right: 10px;
   }
 `;
+
+export const RemoveButton = styled.button<any>`
+  outline: 0;
+  background: transparent;
+  padding: 5px;
+  padding-bottom: 0;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 0;
+  border: 0;
+`;

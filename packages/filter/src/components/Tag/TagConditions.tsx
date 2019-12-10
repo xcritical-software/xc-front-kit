@@ -8,9 +8,11 @@ import {
   TagLabel,
   TagConditionsWrapper,
   DropdownItem,
+  RemoveButton,
 } from './styled';
 
 import { ITagConditionProps } from '../../interfaces';
+import { Remove } from '../icons';
 
 
 export const TagCondition: React.FC<ITagConditionProps> = (
@@ -18,6 +20,7 @@ export const TagCondition: React.FC<ITagConditionProps> = (
     currentFilterState,
     filterSetting,
     onChangeFilter,
+    onRemoveFilter,
   },
 ) => {
   const { key: guid } = currentFilterState;
@@ -34,9 +37,19 @@ export const TagCondition: React.FC<ITagConditionProps> = (
     }, [guid, onChangeFilter],
   );
 
+  const onRemoveCondition = useCallback(
+    () => {
+      onRemoveFilter(guid);
+    }, [guid, onRemoveFilter],
+  );
+
 
   return (
     <TagConditionsWrapper>
+      <RemoveButton onClick={ onRemoveCondition }>
+        <Remove />
+      </RemoveButton>
+
       <DropdownItem>
         <TagLabel>Conditions</TagLabel>
         <ConditionSelect
