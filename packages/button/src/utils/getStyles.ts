@@ -112,7 +112,7 @@ const getButtonStatesStyle = (stateName: string) => ({
 
   return css`
     ${styles}
-    ${_outline}
+    ${outline ? _outline : {}}
     
     cursor: ${getCursor(stateName)};
     transition: ${getTransition(stateName)};
@@ -189,8 +189,6 @@ export const getButtonStyles = memoize((
     background, borderColor, outline, hover, active, disabled, selected, ...styles
   } = buttonAppearanceTheme(theme, appearance, baseAppearance);
   return {
-    ...rootStyles,
-    ...styles,
     background,
     fill: background,
     border: '1px solid transparent',
@@ -204,6 +202,8 @@ export const getButtonStyles = memoize((
     height: 'auto',
     verticalAlign: getVerticalAlign(spacing),
     width: getWidth(shouldFitContent),
+    ...rootStyles,
+    ...styles,
     ...outlineEnable && (outline || {
       background: 'white',
       color: background,

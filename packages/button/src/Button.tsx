@@ -40,6 +40,8 @@ export const PureButton = ({
   children,
   href,
   disabled,
+  appearance,
+  baseAppearance,
   theme,
   textPosition,
   component: CustomComponent,
@@ -71,11 +73,21 @@ export const PureButton = ({
         ref={ buttonRef }
         disabled={ disabled }
         onClick={ onClick }
+        appearance={ appearance }
+        baseAppearance={ baseAppearance }
         { ...(href ? { href } : null) }
         { ...rest }
       >
 
-        { !!prefix && (<Prefix isRTL={ isRTL }>{ prefix }</Prefix>) }
+        { !!prefix && (
+          <Prefix
+            isRTL={ isRTL }
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
+          >
+            { prefix }
+          </Prefix>
+        ) }
 
         <ContentWrapper>
           <Content textPosition={ textPosition } isRTL={ isRTL }>
@@ -83,7 +95,15 @@ export const PureButton = ({
           </Content>
         </ContentWrapper>
 
-        { !!postfix && (<Postfix isRTL={ isRTL }>{ postfix }</Postfix>) }
+        { !!postfix && (
+          <Postfix
+            isRTL={ isRTL }
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
+          >
+            { postfix }
+          </Postfix>
+        ) }
       </RootElement>
     </ThemeProvider>
   );
