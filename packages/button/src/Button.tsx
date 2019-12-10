@@ -15,7 +15,7 @@ import {
   Postfix,
   ContentWrapper,
   Content,
-} from './styled/Button';
+} from './styled';
 
 import { IButtonProps, ButtonTheme } from './interfaces';
 import { getElement } from './utils';
