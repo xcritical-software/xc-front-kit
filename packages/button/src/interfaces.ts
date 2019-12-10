@@ -42,7 +42,7 @@ export interface IOnlyButtonProps {
   prefix?: React.ReactNode;
   postfix?: React.ReactNode;
   shouldAllowMultiline?: boolean;
-  outline?: boolean;
+  ghost?: boolean;
   href?: string;
   selected?: boolean;
   textPosition?: string;
@@ -57,4 +57,12 @@ export interface IButtonProps extends
   IShouldFitContent,
   IOnlyButtonProps {
   [key: string]: any;
+}
+
+export interface IStyledButtonProps extends IButtonProps {
+  baseAppearance: string;
+  appearance: string;
+  spacing: 'compact' | 'default' | 'none';
+  ghost: boolean;
+  shouldFitContent: boolean;
 }

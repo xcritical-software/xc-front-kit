@@ -160,7 +160,7 @@ storiesOf('Button', module)
     <Button
       key="button"
       disabled={ boolean('Disabled', false) }
-      outline={ boolean('Outline', false) }
+      ghost={ boolean('Ghost', false) }
     >
       { text('Button Text', 'Button') }
     </Button>
@@ -318,7 +318,7 @@ storiesOf('Button', module)
               </Button>
             </Cell>
             <Cell>
-              <Button appearance={ a } outline key={ `${a}_outline` }>
+              <Button appearance={ a } ghost key={ `${a}_ghost` }>
                 { capitalize(a) }
               </Button>
             </Cell>
@@ -326,8 +326,8 @@ storiesOf('Button', module)
             <Cell>
               <Button
                 appearance={ a }
-                outline
-                key={ `${a}_outline_disabled` }
+                ghost
+                key={ `${a}_ghost_disabled` }
                 disabled
               >
                   Disabled
@@ -336,9 +336,9 @@ storiesOf('Button', module)
             <Cell>
               <Button
                 appearance={ a }
-                outline
+                ghost
                 selected
-                key={ `${a}_outline_selected` }
+                key={ `${a}_ghost_selected` }
               >
                   Selected
               </Button>

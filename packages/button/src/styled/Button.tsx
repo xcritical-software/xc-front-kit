@@ -6,13 +6,13 @@ import {
   getButtonStyles,
   getItemInteractiveStyles,
 } from '../utils';
-import { IPrefixProps, IButtonProps, IContentProps } from '../interfaces';
+import { IPrefixProps, IStyledButtonProps, IContentProps } from '../interfaces';
 
 
-const style = css<IButtonProps>`
+const style = css<IStyledButtonProps>`
 ${({
-    theme, appearance, baseAppearance, outline, shouldFitContent, spacing,
-  }) => getButtonStyles(theme, appearance, baseAppearance, outline, shouldFitContent, spacing)};
+    theme, baseAppearance, appearance, spacing, ghost, shouldFitContent,
+  }) => getButtonStyles(theme, baseAppearance, appearance, spacing, ghost, shouldFitContent)};
 ${({
     disabled,
     selected,
