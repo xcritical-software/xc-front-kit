@@ -36,7 +36,7 @@ export const removeFilter = (
   const newActiveFilters = state.drafts.filter(({
     key,
     column,
-  }) => key !== guid || column !== name);
+  }) => !((guid && key === guid) || (name && column === name)));
 
   if (!newActiveFilters.length) {
     newActiveFilters.push({ ...defaultFilter, key: uuid() });

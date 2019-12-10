@@ -1,5 +1,5 @@
 import React, {
-  useState, useCallback, useMemo,
+  useState, useCallback, useMemo, MouseEvent,
 } from 'react';
 import Button from '@xcritical/button';
 
@@ -48,10 +48,10 @@ export const Tag: React.FC<ITagProps> = ({
   );
 
   const onTagRemove = useCallback(
-    () => {
-      setIsOpen(!isOpen);
+    (e: MouseEvent<any>) => {
+      e.stopPropagation();
       onRemoveFilter({ name: filterId });
-    }, [filterId, isOpen, onRemoveFilter],
+    }, [filterId, onRemoveFilter],
   );
 
   const onTagAddCondition = useCallback(
