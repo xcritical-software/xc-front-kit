@@ -30,16 +30,7 @@ export function xcriticalFiltersChangeFilter(
     changes,
   );
 }
-export function xcriticalFiltersAddFilter(
-  name: string,
-  filter?: IStateRecivedFilter,
-): IFilterAction<IStateRecivedFilter> {
-  return actionCreator(
-    actions.FILTERS_ADD_NEW,
-    name,
-    filter,
-  );
-}
+
 export function xcriticalFiltersRemoveFilter(
   name: string,
   filter: IPayloadRemoveFilter,
@@ -83,12 +74,18 @@ export function xcriticalFiltersInit(
 }
 export function xcriticalFiltersAdd(
   name: string,
-  filters: IStateRecivedFilter[],
+  filters: IStateRecivedFilter[] | IStateRecivedFilter,
 ): IFilterAction<IPayloadInitFilters> {
+  let $filters: IStateRecivedFilter[];
+
+  if (!Array.isArray(filters)) {
+    $filters = [filters];
+  } else $filters = filters;
+
   return actionCreator(
     actions.FILTERS_ADD,
     name,
-    { filters },
+    { filters: $filters },
   );
 }
 

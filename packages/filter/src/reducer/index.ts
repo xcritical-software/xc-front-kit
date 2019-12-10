@@ -9,7 +9,6 @@ import { IFilterStore, FilterActionType, IFilterAction } from '../interfaces';
 import {
   changeFilter,
   addFilters,
-  addFilter,
   removeFilter,
   applyFilters,
   initFilters,
@@ -23,7 +22,6 @@ import {
 const behaviors: Record<FilterActionType, Function> = {
   [actions.FILTERS_ADD]: addFilters,
   [actions.FILTERS_CHANGE_FILTER]: changeFilter,
-  [actions.FILTERS_ADD_NEW]: addFilter,
   [actions.FILTERS_APPLY]: applyFilters,
   [actions.FILTERS_INIT]: initFilters,
   [actions.FILTERS_RESET]: resetFilters,

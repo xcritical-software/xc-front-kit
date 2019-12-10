@@ -3,7 +3,6 @@ import { OptionTypeBase } from 'react-select';
 import { CSSProperties } from 'styled-components';
 
 import {
-  FILTERS_ADD_NEW,
   FILTERS_ADD,
   FILTERS_APPLY,
   FILTERS_UPDATE_SELECTED_FILTERS,
@@ -18,7 +17,6 @@ import {
 // Actions
 
 export type FilterActionType =
- typeof FILTERS_ADD_NEW |
  typeof FILTERS_ADD |
  typeof FILTERS_UPDATE_SELECTED_FILTERS |
  typeof FILTERS_CHANGE_FILTER |
@@ -146,7 +144,6 @@ export interface IApplyAction {
 }
 
 export interface IMapDispatchFilter {
-  onAddFilter: () => void;
   onApply: IApplyAction;
   onResetFilters: () => void;
   onChangeFilters: (values: IStateRecivedFilter[]) => void;

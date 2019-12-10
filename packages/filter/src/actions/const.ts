@@ -1,8 +1,7 @@
-export const FILTERS_ADD_NEW = '@xcritical-filter/ADD_FILTER';
 export const FILTERS_REMOVE_FILTER = '@xcritical-filter/REMOVE_FILTER';
 export const FILTERS_CHANGE_FILTER = '@xcritical-filter/CHANGE_FILTER';
-export const FILTERS_RESET = '@xcritical-filter/RESET_FILTERS';
-export const FILTERS_INIT = '@xcritical-filter/INIT_FILTERS';
+export const FILTERS_RESET = '@xcritical-filter/RESET';
+export const FILTERS_INIT = '@xcritical-filter/INIT';
 export const FILTERS_ADD = '@xcritical-filter/ADD_FILTERS';
 export const FILTERS_APPLY = '@xcritical-filter/APPLY_FILTERS';
 export const FILTERS_UPDATE_SELECTED_FILTERS = '@xcritical-filter/FILTERS_UPDATE_SELECTED_FILTERS';

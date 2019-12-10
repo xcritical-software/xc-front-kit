@@ -10,7 +10,7 @@ import {
 import {
   xcriticalFiltersChangeFilter,
   xcriticalFiltersRemoveFilter,
-  xcriticalFiltersAddFilter,
+  xcriticalFiltersAdd,
 } from '../../actions';
 import { Tag } from './Tag';
 
@@ -29,7 +29,7 @@ const mapDispatchToProps = () => {
         onRemoveFilter: (guid) => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
         onAddCondition: (
           filterName: string,
-        ) => dispatch(xcriticalFiltersAddFilter(name, {
+        ) => dispatch(xcriticalFiltersAdd(name, {
           column: filterName,
           condition: '',
           value: '',

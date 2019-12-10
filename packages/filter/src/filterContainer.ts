@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PureCompactFilter from './CompactFilter';
 
 import {
-  xcriticalFiltersAddFilter,
   xcriticalFiltersApply,
   xcriticalFiltersReset,
   xcriticalFiltersUpdateSelectedFilters,
@@ -46,7 +45,6 @@ const mapDispatchToProps = () => {
   ) => {
     if (!dispatchProps) {
       dispatchProps = {
-        onAddFilter: () => dispatch(xcriticalFiltersAddFilter(name)),
         onApply: (filters, search) => dispatch(xcriticalFiltersApply(name, filters || [], search || '')),
         onResetFilters: () => dispatch(xcriticalFiltersReset(name)),
         onChangeFilters: (

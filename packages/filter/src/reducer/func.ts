@@ -29,18 +29,6 @@ export const addFilters = (
 ], 'drafts');
 
 
-export const addFilter = (
-  state: IFilterStore,
-  { payload }: IFilterAction<IStateRecivedFilter>,
-): IFilterStore => {
-  const drafts = [
-    ...state.drafts,
-    { ...(payload || defaultFilter), key: uuid() },
-  ];
-
-  return setIn(state, drafts, 'drafts');
-};
-
 export const removeFilter = (
   state: IFilterStore,
   { payload: { guid, name } }: IFilterAction<IPayloadRemoveFilter>,
