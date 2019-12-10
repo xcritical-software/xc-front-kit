@@ -18,12 +18,12 @@ import {
   MoreFilterSelect,
   SearchInputWrapper,
   Tag,
+  Search,
 } from './components';
 
 import {
   IFilterProps,
   IFilterTheme,
-  // IFilter,
 } from './interfaces';
 import { filterTheme } from './utils';
 
@@ -73,6 +73,7 @@ const PureCompactFilter: React.FC<IFilterProps> = ({
             ? (
               <SearchInputWrapper>
                 <Input
+                  prefix={ <Search /> }
                   value={ searchInput }
                   onChange={ onSearchInputChange }
                   appearance="filters-search"
