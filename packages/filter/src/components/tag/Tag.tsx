@@ -75,6 +75,7 @@ export const Tag: React.FC<ITagProps> = ({
               </RemoveButton>
             </>
           ) }
+          appearance="filter-tag"
           onClick={ toggleOpen }
           selected={ isOpen }
         >
@@ -107,6 +108,7 @@ export const Tag: React.FC<ITagProps> = ({
         <ButtonBlock>
           <Button
             appearance="filter-tag-remove"
+            baseAppearance="link"
             onClick={ onTagRemove }
           >
             Remove
@@ -114,6 +116,7 @@ export const Tag: React.FC<ITagProps> = ({
 
           <Button
             appearance="filter-tag-apply"
+            baseAppearance="primary"
             onClick={ onTagApply }
           >
             Apply

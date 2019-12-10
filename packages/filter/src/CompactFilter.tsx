@@ -92,14 +92,16 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
           </MoreFilterSelect>
 
           <Button
-            appearance="filters-reset-button"
+            appearance="filters-reset"
+            baseAppearance="link"
             onClick={ onResetFilters }
           >
             Reset
           </Button>
 
           <Button
-            appearance="filters-apply-button"
+            appearance="filters-apply"
+            baseAppearance="primary"
             onClick={ onApply }
           >
             Search

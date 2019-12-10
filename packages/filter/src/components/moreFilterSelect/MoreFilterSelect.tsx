@@ -66,7 +66,8 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
       onClose={ toggleOpen }
       target={ (
         <Button
-          appearance="filters-more-select-filter"
+          appearance="filters-more"
+          baseAppearance="link"
           postfix={ isOpen ? <ChevronUp /> : <ChevronDown /> }
           prefix={ <Plus /> }
           onClick={ toggleOpen }

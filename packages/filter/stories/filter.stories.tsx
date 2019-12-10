@@ -9,9 +9,10 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 import { ThemeProvider } from 'styled-components';
-import { IThemeNamespace } from '@xcritical/theme';
+import { IThemeNamespace, colors } from '@xcritical/theme';
 import { buttonThemeNamespace } from '@xcritical/button';
-import { darken, lighten } from 'polished';
+import { ButtonTheme } from '@xcritical/button/src/interfaces';
+import { darken } from 'polished';
 import {
   CompactFilterContainer,
 } from './pages';
@@ -19,7 +20,6 @@ import { filterReducer } from '../src';
 import { config } from './configReducer';
 import { data } from './data/dummyData';
 import { getConfigSuccess } from './actions';
-import { filterThemeNamespace } from '../src/theme';
 
 
 const store = createStore(
@@ -30,27 +30,55 @@ setTimeout(() => store.dispatch(getConfigSuccess(data)), 10);
 
 
 const themeTwo: IThemeNamespace = {
-  [filterThemeNamespace]: {
-    topPanel: {
-      background: 'rgb(4, 219, 90)',
-    },
-    tag: {
-      backgroundColor: darken(0.15, 'rgb(4, 219, 90)'),
-    },
-    filtersPanel: {
-      background: lighten(0.15, 'rgb(4, 219, 90)'),
-    },
-  } as IThemeNamespace,
   [buttonThemeNamespace]: {
     appearance: {
-      'filter-more-button-appearance': {},
-      'filter-apply-button-appearance': {},
-      'filter-delete-button-appearance': {},
-      'filter-tag-ok-button-appearance': {},
+      'filter-tag': {
+        paddingRight: 0,
+        selected: {
+          background: colors.PRIMARY,
+          borderColor: colors.PRIMARY,
+          boxShadowColor: darken(0.1, colors.PRIMARY),
+          color: colors.WHITE,
+          fill: colors.WHITE,
+        },
+      },
+      'filters-more': {
+        paddingRight: 10,
+        paddingLeft: 10,
+        prefixSpacing: 10,
+        selected: {
+          background: colors.PRIMARY,
+          borderColor: colors.PRIMARY,
+          boxShadowColor: darken(0.1, colors.PRIMARY),
+          color: colors.WHITE,
+          fill: colors.WHITE,
+        },
+      },
+      'filters-apply': {},
+      'filters-reset': {
+        background: 'transparent',
+        color: colors.PRIMARY,
+        fontWeight: 'inherit',
+        borderColor: 'transparent',
+        padding: 5,
+        marginLeft: 20,
+        hover: {
+          background: 'transparent',
+          color: colors.PRIMARY,
+          borderColor: 'transparent',
+          textDecoration: 'underline',
+          textDecorationColor: colors.PRIMARY,
+        },
+        _outline: {
+          background: 'transparent',
+          color: colors.PRIMARY,
+          borderColor: 'transparent',
+        },
+      },
       'filter-tag-cancel-button-appearance': {},
       'filter-tag-delete-button-appearance': {},
     },
-  },
+  } as ButtonTheme,
 };
 
 const withProvider = (story) => (
