@@ -51,6 +51,10 @@ export const TopPanelButtons = styled.div`
   justify-content: space-between;
   margin-top: 4px;
   margin-bottom: 4px;
+
+  & > * {
+    margin-right: 10px;
+  }
 `;
 export const WrapperButtons = styled.div`
   margin-left: 10px;

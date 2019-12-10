@@ -9,7 +9,6 @@ import {
   FILTERS_UPDATE_SELECTED_FILTERS,
   FILTERS_CHANGE_FILTER,
   FILTERS_INIT,
-  FILTERS_OPEN,
   FILTERS_REMOVE_FILTER,
   FILTERS_RESET,
   FILTERS_SEARCH_UPDATE,
@@ -24,7 +23,6 @@ export type FilterActionType =
  typeof FILTERS_UPDATE_SELECTED_FILTERS |
  typeof FILTERS_CHANGE_FILTER |
  typeof FILTERS_INIT |
- typeof FILTERS_OPEN |
  typeof FILTERS_REMOVE_FILTER |
  typeof FILTERS_APPLY |
  typeof FILTERS_SEARCH_UPDATE |
@@ -47,7 +45,8 @@ export interface IFilterStore {
 // Action payloads
 
 export interface IPayloadRemoveFilter {
-  guid: string;
+  guid?: string;
+  name?: string;
 }
 export interface IPayloadChangeFilter {
   guid: string;
@@ -82,12 +81,10 @@ export interface IConditions {
   [key: string]: ICondition;
 }
 
-export interface IFilterRowProps {
-  guid: string;
-  filters: IFilter[];
-  filter: IStateFilter;
-  name: string;
-  key: string;
+export interface IMapDispatchFilterTag {
+  onChangeFilter: (changes: IPayloadChangeFilter) => void;
+  onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
+  onAddCondition: (filterId: string) => void;
 }
 
 export interface ISelectedFilterComponent {
@@ -108,19 +105,6 @@ export interface IStateFilter extends IStateRecivedFilter {
 }
 
 
-export interface IFilterRecivedProps {
-  filters: IFilter[];
-  name: string;
-  theme?: IThemeNamespace;
-  isSearchable?: boolean;
-}
-
-export interface IFilterTag extends IFilterRow {
-  theme: IFilterTheme;
-  onApply: () => void;
-  onReset: () => void;
-}
-
 export interface ITagContainerProps {
   theme: IFilterTheme;
   filters: IFilter[];
@@ -129,7 +113,18 @@ export interface ITagContainerProps {
   filterId: string;
   conditions: IStateFilter[];
   onApply: () => void;
-  onReset: () => void;
+}
+
+export interface IApplyAction {
+  (filters?: IStateRecivedFilter[], search?: string): void;
+}
+
+export interface IMapDispatchFilter {
+  onAddFilter: () => void;
+  onApply: IApplyAction;
+  onResetFilters: () => void;
+  onChangeFilters: (values: IStateRecivedFilter[]) => void;
+  onSearchInputChange: (value: string) => void;
 }
 
 export interface ITagProps extends ITagContainerProps, IMapDispatchFilterTag {
@@ -139,25 +134,26 @@ export interface ITagConditionProps {
   currentFilterState: IStateFilter;
   conditions: IConditions;
   filterSetting?: IFilter;
-  onChangeFilter: Function;
-  onRemoveFilter: any;
+  onChangeFilter: (changes: IPayloadChangeFilter) => void;
+  onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
 }
 
-export interface IFilterRow extends IFilterRowProps {
-  removeFilter?: any;
-  guid: string;
-  onChangeFilter: Function;
-  onRemoveFilter: any;
-}
-
-export interface IFilterProps extends IMapDispatchFilter, IFilterRecivedProps {
+export interface IFilterContainerProps {
   activeFilters: IStateFilter[];
   searchInput: string;
-  isSearchable: boolean;
-  addFilter: any;
-  onApply: any;
-  openFilters: any;
-  resetFilters: any;
+}
+
+export interface IFilterRecivedProps {
+  filters: IFilter[];
+  name: string;
+  theme?: IThemeNamespace;
+  isSearchable?: boolean;
+}
+
+export interface IFilterProps extends IMapDispatchFilter,
+  IFilterRecivedProps,
+  IFilterContainerProps {
+  onApply: () => void;
 }
 
 export interface IMoreButtonWithFilterSelectorProps {
@@ -176,22 +172,6 @@ export interface IFilterStateProps {
   name: string;
   activeFilters: IStateFilter[];
   searchInput: string;
-}
-
-
-export interface IMapDispatchFilterTag {
-  onChangeFilter: Function;
-  onRemoveFilter: Function;
-  onAddCondition: Function;
-}
-
-export interface IMapDispatchFilter {
-  addFilter: any;
-  apply: any;
-  openFilters: any;
-  resetFilters: any;
-  onChangeFilters: (values: IStateRecivedFilter[]) => void;
-  onSearchInputChange: (value: string) => void;
 }
 
 

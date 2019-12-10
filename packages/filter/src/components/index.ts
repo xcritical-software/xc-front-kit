@@ -1,4 +1,4 @@
-import Tag from './Tag';
+import Tag from './tag';
 
 
 export * from './filterSelector';
@@ -7,7 +7,7 @@ export * from './filterElement';
 export * from './icons';
 export * from './Dropdown';
 export * from './styled';
-export * from './popout';
+export * from './moreFilterSelect';
 
 export {
   Tag,

@@ -6,7 +6,6 @@ import PureCompactFilter from './CompactFilter';
 import {
   xcriticalFiltersAddFilter,
   xcriticalFiltersApply,
-  xcriticalFiltersOpenFilters,
   xcriticalFiltersReset,
   xcriticalFiltersUpdateSelectedFilters,
   xcriticalFiltersSearchUpdate,
@@ -21,6 +20,7 @@ import {
   IStateRecivedFilter,
   IFilter,
   IFilterProps,
+  IFilterContainerProps,
 } from './interfaces';
 
 
@@ -47,10 +47,9 @@ const mapDispatchToProps = () => {
   ) => {
     if (!dispatchProps) {
       dispatchProps = {
-        addFilter: () => dispatch(xcriticalFiltersAddFilter(name)),
-        apply: (filters, search) => dispatch(xcriticalFiltersApply(name, filters, search)),
-        openFilters: () => dispatch(xcriticalFiltersOpenFilters(name)),
-        resetFilters: () => dispatch(xcriticalFiltersReset(name)),
+        onAddFilter: () => dispatch(xcriticalFiltersAddFilter(name)),
+        onApply: (filters, search) => dispatch(xcriticalFiltersApply(name, filters || [], search || '')),
+        onResetFilters: () => dispatch(xcriticalFiltersReset(name)),
         onChangeFilters: (
           values: IStateRecivedFilter[],
         ) => dispatch(xcriticalFiltersUpdateSelectedFilters(name, values)),
@@ -78,14 +77,17 @@ const filterToApply = (
 
 
 const mergeProps = (
-  stateProps: any,
-  dispatchProps: any,
+  stateProps: IFilterContainerProps,
+  dispatchProps: IMapDispatchFilter,
   ownProps: IFilterRecivedProps,
-): React.FC<IFilterProps> => ({
+): IFilterProps => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  onApply: () => dispatchProps.apply(filterToApply(stateProps.activeFilters, ownProps.filters)),
+  onApply: () => dispatchProps.onApply(
+    filterToApply(stateProps.activeFilters, ownProps.filters),
+    stateProps.searchInput,
+  ),
 });
 
 export const CompactFilter = connect(

@@ -29,12 +29,6 @@ export const addFilters = (
 ], 'drafts');
 
 
-export const openFilters = (): IFilterStore => ({
-  drafts: [{ ...defaultFilter, key: uuid() }],
-  applied: [],
-  search: '',
-});
-
 export const addFilter = (
   state: IFilterStore,
   { payload }: IFilterAction<IStateRecivedFilter>,
@@ -49,9 +43,12 @@ export const addFilter = (
 
 export const removeFilter = (
   state: IFilterStore,
-  { payload: { guid } }: IFilterAction<IPayloadRemoveFilter>,
+  { payload: { guid, name } }: IFilterAction<IPayloadRemoveFilter>,
 ): IFilterStore => {
-  const newActiveFilters = state.drafts.filter(({ key }) => key !== guid);
+  const newActiveFilters = state.drafts.filter(({
+    key,
+    column,
+  }) => key !== guid || column !== name);
 
   if (!newActiveFilters.length) {
     newActiveFilters.push({ ...defaultFilter, key: uuid() });

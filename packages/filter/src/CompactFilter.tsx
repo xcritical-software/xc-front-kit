@@ -1,8 +1,6 @@
 import React, {
-  useEffect,
   ReactElement,
   useRef,
-  MutableRefObject,
   useContext,
   useMemo,
 } from 'react';
@@ -34,21 +32,14 @@ const PureCompactFilter: React.FC<IFilterProps> = ({
   onApply,
   searchInput,
   isSearchable = true,
-  openFilters,
   name,
-  resetFilters,
+  onResetFilters,
   onChangeFilters,
   onSearchInputChange,
   theme,
 }): ReactElement => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(filterTheme<IFilterTheme>(theme || contextTheme));
-  const buttonsRef: MutableRefObject<any> = useRef();
-
-
-  useEffect(() => {
-    openFilters();
-  }, [openFilters]);
 
   const mergedFilters = useMemo(
     () => groupBy(
@@ -87,12 +78,11 @@ const PureCompactFilter: React.FC<IFilterProps> = ({
                 conditions={ mergedFilters[filterId] }
                 theme={ themeRef.current }
                 onApply={ onApply }
-                onReset={ resetFilters }
               />
             )) }
         </TopPanelTags>
 
-        <TopPanelButtons ref={ buttonsRef }>
+        <TopPanelButtons>
           <MoreFilterSelect
             onChange={ onChangeFilters }
             filters={ filters }
@@ -100,8 +90,16 @@ const PureCompactFilter: React.FC<IFilterProps> = ({
           >
             More
           </MoreFilterSelect>
+
           <Button
-            appearance="filters-apply-button-appearance"
+            appearance="filters-reset-button"
+            onClick={ onResetFilters }
+          >
+            Reset
+          </Button>
+
+          <Button
+            appearance="filters-apply-button"
             onClick={ onApply }
           >
             Search

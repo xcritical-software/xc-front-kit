@@ -42,12 +42,12 @@ export function xcriticalFiltersAddFilter(
 }
 export function xcriticalFiltersRemoveFilter(
   name: string,
-  guid: string,
+  filter: IPayloadRemoveFilter,
 ): IFilterAction<IPayloadRemoveFilter> {
   return actionCreator(
     actions.FILTERS_REMOVE_FILTER,
     name,
-    { guid },
+    filter,
   );
 }
 export function xcriticalFiltersApply(
@@ -62,13 +62,6 @@ export function xcriticalFiltersApply(
       filters,
       search,
     },
-  );
-}
-
-export function xcriticalFiltersOpenFilters(name: string): IFilterAction {
-  return actionCreator(
-    actions.FILTERS_OPEN,
-    name,
   );
 }
 

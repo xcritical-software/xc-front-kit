@@ -1,7 +1,6 @@
 export const FILTERS_ADD_NEW = '@xcritical-filter/ADD_FILTER';
 export const FILTERS_REMOVE_FILTER = '@xcritical-filter/REMOVE_FILTER';
 export const FILTERS_CHANGE_FILTER = '@xcritical-filter/CHANGE_FILTER';
-export const FILTERS_OPEN = '@xcritical-filter/OPEN_FILTERS';
 export const FILTERS_RESET = '@xcritical-filter/RESET_FILTERS';
 export const FILTERS_INIT = '@xcritical-filter/INIT_FILTERS';
 export const FILTERS_ADD = '@xcritical-filter/ADD_FILTERS';

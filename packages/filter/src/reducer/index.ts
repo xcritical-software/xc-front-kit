@@ -14,7 +14,6 @@ import {
   applyFilters,
   initFilters,
   resetFilters,
-  openFilters,
   defaultFilter,
   updateSelectedFilters,
   updateSearchInput,
@@ -29,7 +28,6 @@ const behaviors: Record<FilterActionType, Function> = {
   [actions.FILTERS_INIT]: initFilters,
   [actions.FILTERS_RESET]: resetFilters,
   [actions.FILTERS_REMOVE_FILTER]: removeFilter,
-  [actions.FILTERS_OPEN]: openFilters,
   [actions.FILTERS_UPDATE_SELECTED_FILTERS]: updateSelectedFilters,
   [actions.FILTERS_SEARCH_UPDATE]: updateSearchInput,
 };
