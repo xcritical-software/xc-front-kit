@@ -1,4 +1,4 @@
-import Tag from './tag';
+import Tag from './tag1';
 
 
 export * from './filterSelector';
