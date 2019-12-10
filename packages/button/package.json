@@ -31,7 +31,8 @@
 	"private": false,
 	"peerDependencies": {
 		"react": "^16.9.0",
-		"styled-components": "^4.4.1"
+		"styled-components": "^4.4.1",
+		"fast-equals": "2.0.0"
 	},
 	"dependencies": {
 		"@xcritical/theme": "^0.1.3",
