@@ -1,14 +1,5 @@
 import styled from 'styled-components';
-import { IWrapperFilters } from '../../interfaces';
 
-
-export const WrapperFilters = styled.div<IWrapperFilters>`
-  ${({ theme }) => theme.filtersPanel}
-  display: ${({ open }) => (open ? 'block' : 'none')};
-  position: absolute;
-  width: 100%;
-  top: ${({ top }) => (top ? `${top + 40}px` : 'none')};
-`;
 
 export const FilterField = styled.div`
   flex: 0 0 calc(30% - 0.5em);

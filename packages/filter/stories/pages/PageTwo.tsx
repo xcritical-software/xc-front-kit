@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Filter from '../../src';
+import { CompactFilter } from '../../src';
 import { conditions } from '../conditions';
 import { createElement } from '../createValueElement';
 import { IPage, IMappedFilter } from '../interfaces';
@@ -26,7 +26,7 @@ const PageTwo: React.FC<IPage> = ({ filters, dictionaries }) => {
         Page
         { pageName }
       </h1>
-      <Filter filters={ mappedFilters } name={ pageName } />
+      <CompactFilter filters={ mappedFilters } name={ pageName } />
     </>
   );
 };

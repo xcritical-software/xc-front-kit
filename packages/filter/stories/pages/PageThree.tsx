@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import Filter, { xcriticalFiltersInit, xcriticalFiltersAdd } from '../../src';
+import { xcriticalFiltersInit, xcriticalFiltersAdd, CompactFilter } from '../../src';
 import { conditions } from '../conditions';
 import { createElement } from '../createValueElement';
 import { IPage, IMappedFilter } from '../interfaces';
@@ -53,7 +53,7 @@ const PageThree: React.FC<IPage> = ({ filters, dictionaries, onInit }) => {
     : [];
   return (
     <>
-      <Filter filters={ mappedFilters } name={ pageName } />
+      <CompactFilter filters={ mappedFilters } name={ pageName } />
     </>
   );
 };

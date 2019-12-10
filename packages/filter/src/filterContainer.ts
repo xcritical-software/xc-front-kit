@@ -1,10 +1,8 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import Filter from './Filter';
+
 import PureCompactFilter from './CompactFilter';
-import {
-  IFilterRecivedProps, IFilterStateProps, IMapDispatchFilter, IStateRecivedFilter, IFilter,
-} from './interfaces';
+
 import {
   xcriticalFiltersAddFilter,
   xcriticalFiltersApply,
@@ -13,7 +11,17 @@ import {
   xcriticalFiltersUpdateSelectedFilters,
   xcriticalFiltersSearchUpdate,
 } from './actions';
+
 import { filterSelector } from './reducer';
+
+import {
+  IFilterRecivedProps,
+  IFilterStateProps,
+  IMapDispatchFilter,
+  IStateRecivedFilter,
+  IFilter,
+  IFilterProps,
+} from './interfaces';
 
 
 const mapStateToProps = (
@@ -69,19 +77,16 @@ const filterToApply = (
   });
 
 
-const mergeProps = (stateProps: any, dispatchProps: any, ownProps: IFilterRecivedProps) => ({
+const mergeProps = (
+  stateProps: any,
+  dispatchProps: any,
+  ownProps: IFilterRecivedProps,
+): React.FC<IFilterProps> => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
   onApply: () => dispatchProps.apply(filterToApply(stateProps.activeFilters, ownProps.filters)),
 });
-
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  mergeProps,
-)(Filter);
 
 export const CompactFilter = connect(
   mapStateToProps,

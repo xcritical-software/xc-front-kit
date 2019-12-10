@@ -3,7 +3,7 @@ import uuid from 'uuid/v1';
 import { setIn } from 'utilitify';
 import {
   IFilterAction,
-  IState,
+  IFilterStore,
   IStateRecivedFilter,
   IPayloadRemoveFilter,
   IPayloadChangeFilter,
@@ -20,7 +20,7 @@ export const defaultFilter = {
 export const addFilters = (
   state: any,
   { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
-): IState => setIn(state, [
+): IFilterStore => setIn(state, [
   ...state.drafts,
   ...filters.map((filter) => ({
     ...filter,
@@ -29,16 +29,16 @@ export const addFilters = (
 ], 'drafts');
 
 
-export const openFilters = (): IState => ({
+export const openFilters = (): IFilterStore => ({
   drafts: [{ ...defaultFilter, key: uuid() }],
   applied: [],
   search: '',
 });
 
 export const addFilter = (
-  state: IState,
+  state: IFilterStore,
   { payload }: IFilterAction<IStateRecivedFilter>,
-): IState => {
+): IFilterStore => {
   const drafts = [
     ...state.drafts,
     { ...(payload || defaultFilter), key: uuid() },
@@ -48,9 +48,9 @@ export const addFilter = (
 };
 
 export const removeFilter = (
-  state: IState,
+  state: IFilterStore,
   { payload: { guid } }: IFilterAction<IPayloadRemoveFilter>,
-): IState => {
+): IFilterStore => {
   const newActiveFilters = state.drafts.filter(({ key }) => key !== guid);
 
   if (!newActiveFilters.length) {
@@ -61,9 +61,9 @@ export const removeFilter = (
 };
 
 export const changeFilter = (
-  state: IState,
+  state: IFilterStore,
   { payload }: IFilterAction<IPayloadChangeFilter>,
-): IState => {
+): IFilterStore => {
   const { guid: id, field, value } = payload;
 
   const index = state.drafts.findIndex(({ key }: any) => key === id);
@@ -81,9 +81,9 @@ export const changeFilter = (
 };
 
 export const initFilters = (
-  state: IState,
+  state: IFilterStore,
   { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
-): IState => setIn(
+): IFilterStore => setIn(
   state,
   filters.map((filter: IStateRecivedFilter) => ({
     ...filter,
@@ -93,9 +93,9 @@ export const initFilters = (
 );
 
 export const updateSelectedFilters = (
-  state: IState,
+  state: IFilterStore,
   { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
-): IState => {
+): IFilterStore => {
   const { drafts } = state;
 
   const newFilters = filters.map((filter) => {
@@ -104,18 +104,22 @@ export const updateSelectedFilters = (
     if (draft) {
       return draft;
     }
-    return filter;
+
+    return {
+      ...filter,
+      key: uuid(),
+    };
   });
 
   return setIn(state, newFilters, 'drafts');
 };
 
 export const updateSearchInput = (
-  state: IState,
+  state: IFilterStore,
   { payload }: IFilterAction<string>,
-): IState => setIn(state, payload, 'search');
+): IFilterStore => setIn(state, payload, 'search');
 
 
-export const resetFilters = (state: IState): IState => setIn(state, state.applied, 'drafts');
+export const resetFilters = (state: IFilterStore): IFilterStore => setIn(state, state.applied, 'drafts');
 
-export const applyFilters = (state: IState): IState => setIn(state, state.drafts, 'applied');
+export const applyFilters = (state: IFilterStore): IFilterStore => setIn(state, state.drafts, 'applied');

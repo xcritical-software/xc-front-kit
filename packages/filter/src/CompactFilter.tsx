@@ -25,13 +25,7 @@ import {
   IFilterProps,
   IFilterTheme,
 } from './interfaces';
-import { filterTheme } from './utils';
-
-
-const groupBy = (xs: any[], key) => xs.reduce((rv, x) => {
-  (rv[x[key]] = rv[x[key]] || []).push(x);
-  return rv;
-}, {});
+import { filterTheme, groupBy } from './utils';
 
 
 const PureCompactFilter: React.FC<IFilterProps> = ({

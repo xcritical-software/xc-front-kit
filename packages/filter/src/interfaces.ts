@@ -38,11 +38,13 @@ export interface IFilterAction<TPayload = any, T = FilterActionType> {
   payload: TPayload;
 }
 
-export interface IState {
+export interface IFilterStore {
   drafts: IStateFilter[];
   applied: IStateFilter[];
   search: string;
 }
+
+// Action payloads
 
 export interface IPayloadRemoveFilter {
   guid: string;
@@ -78,11 +80,6 @@ export interface ICondition {
 
 export interface IConditions {
   [key: string]: ICondition;
-}
-
-
-export interface IFilterTagProps extends IFilterRowProps {
-  theme: IFilterTheme;
 }
 
 export interface IFilterRowProps {
@@ -182,11 +179,6 @@ export interface IFilterStateProps {
 }
 
 
-export interface IMapDispatchFilterRow {
-  onChangeFilter: Function;
-  onRemoveFilter: Function;
-}
-
 export interface IMapDispatchFilterTag {
   onChangeFilter: Function;
   onRemoveFilter: Function;
@@ -200,12 +192,6 @@ export interface IMapDispatchFilter {
   resetFilters: any;
   onChangeFilters: (values: IStateRecivedFilter[]) => void;
   onSearchInputChange: (value: string) => void;
-}
-
-export interface IWrapperFilters {
-  open: boolean;
-  top: number;
-  theme: IFilterTheme;
 }
 
 

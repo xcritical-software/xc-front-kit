@@ -5,7 +5,7 @@ import uuid from 'uuid/v1';
 import * as actions from '../actions/const';
 
 import { reducerDictionary } from '../utils';
-import { IState, FilterActionType, IFilterAction } from '../interfaces';
+import { IFilterStore, FilterActionType, IFilterAction } from '../interfaces';
 import {
   changeFilter,
   addFilters,
@@ -40,12 +40,12 @@ const defaultFilterState = {
   search: '',
 };
 
-const reducer: Reducer<IState, IFilterAction> = (state = defaultFilterState, action) => {
+const reducer: Reducer<IFilterStore, IFilterAction> = (state = defaultFilterState, action) => {
   const behavior = behaviors[action.type];
   return behavior ? behavior(state, action) : state;
 };
 
-export const filterSelector = (state: any, filterName: string): IState => {
+export const filterSelector = (state: any, filterName: string): IFilterStore => {
   if (!filterName) {
     return state;
   }

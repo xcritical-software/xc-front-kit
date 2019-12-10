@@ -1,4 +1,4 @@
-import FilterContainer, { CompactFilter } from './filterContainer';
+import { CompactFilter } from './filterContainer';
 import filterReducer from './reducer';
 
 
@@ -7,5 +7,3 @@ export {
   filterReducer,
   CompactFilter,
 };
-
-export default FilterContainer;
