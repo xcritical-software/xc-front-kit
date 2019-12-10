@@ -14,20 +14,19 @@ import {
 import { filterSelector } from './reducer';
 
 import {
-  IFilterRecivedProps,
-  IFilterStateProps,
+  IFilterProps,
   IMapDispatchFilter,
   IStateRecivedFilter,
   IFilter,
-  IFilterProps,
+  IFilterComponentProps,
   IFilterContainerProps,
 } from './interfaces';
 
 
 const mapStateToProps = (
   state: any,
-  ownProps: IFilterRecivedProps,
-): IFilterStateProps => {
+  ownProps: IFilterProps,
+): IFilterContainerProps => {
   const {
     drafts = [],
     search,
@@ -79,8 +78,8 @@ const filterToApply = (
 const mergeProps = (
   stateProps: IFilterContainerProps,
   dispatchProps: IMapDispatchFilter,
-  ownProps: IFilterRecivedProps,
-): IFilterProps => ({
+  ownProps: IFilterProps,
+): IFilterComponentProps => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,

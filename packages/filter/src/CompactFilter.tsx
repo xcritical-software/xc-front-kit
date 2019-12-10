@@ -20,13 +20,13 @@ import {
 } from './components';
 
 import {
-  IFilterProps,
+  IFilterComponentProps,
   IFilterTheme,
 } from './interfaces';
 import { filterTheme, groupBy } from './utils';
 
 
-const PureCompactFilter: React.FC<IFilterProps> = ({
+const PureCompactFilter: React.FC<IFilterComponentProps> = ({
   filters,
   activeFilters = [],
   onApply,

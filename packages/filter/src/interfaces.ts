@@ -81,11 +81,6 @@ export interface IConditions {
   [key: string]: ICondition;
 }
 
-export interface IMapDispatchFilterTag {
-  onChangeFilter: (changes: IPayloadChangeFilter) => void;
-  onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
-  onAddCondition: (filterId: string) => void;
-}
 
 export interface ISelectedFilterComponent {
   filters?: IFilter[];
@@ -115,17 +110,13 @@ export interface ITagContainerProps {
   onApply: () => void;
 }
 
-export interface IApplyAction {
-  (filters?: IStateRecivedFilter[], search?: string): void;
+
+export interface IMapDispatchFilterTag {
+  onChangeFilter: (changes: IPayloadChangeFilter) => void;
+  onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
+  onAddCondition: (filterId: string) => void;
 }
 
-export interface IMapDispatchFilter {
-  onAddFilter: () => void;
-  onApply: IApplyAction;
-  onResetFilters: () => void;
-  onChangeFilters: (values: IStateRecivedFilter[]) => void;
-  onSearchInputChange: (value: string) => void;
-}
 
 export interface ITagProps extends ITagContainerProps, IMapDispatchFilterTag {
 }
@@ -138,20 +129,32 @@ export interface ITagConditionProps {
   onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
 }
 
-export interface IFilterContainerProps {
+export interface IFilterContainerProps extends IFilterProps {
   activeFilters: IStateFilter[];
   searchInput: string;
 }
 
-export interface IFilterRecivedProps {
+export interface IFilterProps {
   filters: IFilter[];
   name: string;
   theme?: IThemeNamespace;
   isSearchable?: boolean;
 }
 
-export interface IFilterProps extends IMapDispatchFilter,
-  IFilterRecivedProps,
+export interface IApplyAction {
+  (filters?: IStateRecivedFilter[], search?: string): void;
+}
+
+export interface IMapDispatchFilter {
+  onAddFilter: () => void;
+  onApply: IApplyAction;
+  onResetFilters: () => void;
+  onChangeFilters: (values: IStateRecivedFilter[]) => void;
+  onSearchInputChange: (value: string) => void;
+}
+
+
+export interface IFilterComponentProps extends IMapDispatchFilter,
   IFilterContainerProps {
   onApply: () => void;
 }
@@ -162,18 +165,7 @@ export interface IMoreButtonWithFilterSelectorProps {
   onChange: (value: IStateRecivedFilter[]) => void;
 }
 
-export interface IAction {
-  name: string;
-  type: string;
-}
-
-export interface IFilterStateProps {
-  filters: IFilter[];
-  name: string;
-  activeFilters: IStateFilter[];
-  searchInput: string;
-}
-
+// Theme interfaces
 
 export interface IFilterTheme extends ITheme {
   tag: CSSProperties;
