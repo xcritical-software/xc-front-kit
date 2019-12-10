@@ -4,7 +4,7 @@ import { generateApperance } from './utils/themeTools';
 import { ButtonTheme } from './interfaces';
 
 
-export const buttonThemeNamespace = '@xcritical\\xc-button';
+export const buttonThemeNamespace = '@xcritical\\button';
 
 export const buttonThemeStyle: ButtonTheme = {
   paddingBottom: '7px',

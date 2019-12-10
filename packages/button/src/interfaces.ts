@@ -1,11 +1,8 @@
-import {
-  ITheme, IThemeNamespace, ICSSProperties,
-} from '@xcritical/theme';
-import {
-  FlattenInterpolation, ThemedStyledProps,
-} from 'styled-components';
+import React from 'react';
+import { ITheme, IThemeNamespace, ICSSProperties } from '@xcritical/theme';
 
 
+export type ButtonTags= 'button' | 'span' | 'a';
 export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
 
 export interface IBaseButtonTheme extends ICSSProperties {
@@ -17,7 +14,7 @@ export interface IBaseButtonTheme extends ICSSProperties {
 
 export type ButtonTheme = ITheme<IBaseButtonTheme>;
 
-export interface IButtonApperanceProps {
+export interface IButtonAppearanceProps {
   theme?: IThemeNamespace<ButtonTheme>;
   appearance?: string;
   baseAppearance?: string;
@@ -27,8 +24,7 @@ export interface IIsRTL {
   isRTL?: boolean;
 }
 
-export interface IPrefixProps extends IButtonApperanceProps, IIsRTL {
-}
+export interface IPrefixProps extends IButtonAppearanceProps, IIsRTL {}
 
 export interface IContentProps extends IIsRTL {
   textPosition?: string;
@@ -42,10 +38,6 @@ export interface ISpacing {
   spacing?: 'compact' | 'default' | 'none';
 }
 
-type HtmlAttributes = Pick<React.AllHTMLAttributes<HTMLElement>,
-Exclude<keyof React.AllHTMLAttributes<HTMLElement>, keyof IOnlyButtonProps | 'css'>
-> & { css?: FlattenInterpolation<ThemedStyledProps<IButtonProps, any>> };
-
 export interface IOnlyButtonProps {
   prefix?: React.ReactNode;
   postfix?: React.ReactNode;
@@ -58,12 +50,11 @@ export interface IOnlyButtonProps {
   component?: React.ElementType;
 }
 
-export interface IButtonProps
-  extends HtmlAttributes,
-  IButtonApperanceProps,
+export interface IButtonProps extends
+  IButtonAppearanceProps,
   IIsRTL,
   ISpacing,
   IShouldFitContent,
   IOnlyButtonProps {
-
+  [key: string]: any;
 }
