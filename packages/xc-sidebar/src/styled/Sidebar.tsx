@@ -91,8 +91,7 @@ export const Separator = styled.div<ISidebarProps>`
 export const AntiSelect = styled.div<ISidebarProps>`
   position: absolute;
   top: 0;
-  left: ${({ isRTL }) => (isRTL ? 'none' : '0')};
-  right: ${({ isRTL }) => (isRTL ? '0' : 'none')};
+  left: 0;
   width: 100vw;
   height: 100vh;
   z-index: 999999;

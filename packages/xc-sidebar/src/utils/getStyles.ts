@@ -174,17 +174,46 @@ IReturnWithArgsFunction<any, FlattenSimpleInterpolation>
     const elementPadding = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'padding']);
     const padding = !isNil(elementPadding) ? elementPadding : commonPadding;
 
-    const elementPaddingLeft = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'paddingLeft']);
-    const elementPaddingRight = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'paddingRight']);
-    const elementPaddingBottom = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'paddingBottom']);
-    const elementPaddingTop = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'paddingTop']);
+    if (padding) {
+      const elementPaddingLeft = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'paddingLeft']);
+      const elementPaddingRight = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'paddingRight']);
+      const elementPaddingBottom = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'paddingBottom']);
+      const elementPaddingTop = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'paddingTop']);
 
-    return css`
-      padding-left: ${!isNil(elementPaddingLeft) ? elementPaddingLeft : padding};
-      padding-right: ${!isNil(elementPaddingRight) ? elementPaddingRight : padding};
-      padding-bottom: ${!isNil(elementPaddingBottom) ? elementPaddingBottom : padding};
-      padding-top: ${!isNil(elementPaddingTop) ? elementPaddingTop : padding};
-    `;
+      if ([elementPaddingLeft, elementPaddingRight, elementPaddingBottom, elementPaddingTop]
+        .every((item: string): boolean => isNil(item))) {
+        return css`padding: ${padding};`;
+      }
+
+      const paddings = padding.split(' ');
+
+      if (paddings.length === 2) {
+        return css`
+          padding-left: ${!isNil(elementPaddingLeft) ? elementPaddingLeft : paddings[1]};
+          padding-right: ${!isNil(elementPaddingRight) ? elementPaddingRight : paddings[1]};
+          padding-bottom: ${!isNil(elementPaddingBottom) ? elementPaddingBottom : paddings[0]};
+          padding-top: ${!isNil(elementPaddingTop) ? elementPaddingTop : paddings[0]};
+        `;
+      }
+
+      if (paddings.length === 4) {
+        return css`
+          padding-left: ${!isNil(elementPaddingLeft) ? elementPaddingLeft : paddings[3]};
+          padding-right: ${!isNil(elementPaddingRight) ? elementPaddingRight : paddings[1]};
+          padding-bottom: ${!isNil(elementPaddingBottom) ? elementPaddingBottom : paddings[2]};
+          padding-top: ${!isNil(elementPaddingTop) ? elementPaddingTop : paddings[0]};
+        `;
+      }
+
+      return css`
+        padding-left: ${!isNil(elementPaddingLeft) ? elementPaddingLeft : padding};
+        padding-right: ${!isNil(elementPaddingRight) ? elementPaddingRight : padding};
+        padding-bottom: ${!isNil(elementPaddingBottom) ? elementPaddingBottom : padding};
+        padding-top: ${!isNil(elementPaddingTop) ? elementPaddingTop : padding};
+      `;
+    }
+
+    return css``;
   });
 });
 
@@ -205,17 +234,46 @@ IReturnWithArgsFunction<any, FlattenSimpleInterpolation>
     const elementMargin = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'margin']);
     const margin = !isNil(elementMargin) ? elementMargin : commonMargin;
 
-    const elementMarginLeft = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'marginLeft']);
-    const elementMarginRight = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'marginRight']);
-    const elementMarginBottom = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'marginBottom']);
-    const elementMarginTop = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'marginTop']);
+    if (margin) {
+      const elementMarginLeft = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'marginLeft']);
+      const elementMarginRight = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'marginRight']);
+      const elementMarginBottom = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'marginBottom']);
+      const elementMarginTop = sidebarAppearanceTheme(theme, appearance, baseAppearance, [elementName, 'marginTop']);
 
-    return css`
-      margin-left: ${!isNil(elementMarginLeft) ? elementMarginLeft : margin};
-      margin-right: ${!isNil(elementMarginRight) ? elementMarginRight : margin};
-      margin-bottom: ${!isNil(elementMarginBottom) ? elementMarginBottom : margin};
-      margin-top: ${!isNil(elementMarginTop) ? elementMarginTop : margin};
-    `;
+      if ([elementMarginLeft, elementMarginRight, elementMarginBottom, elementMarginTop]
+        .every((item: string): boolean => isNil(item))) {
+        return css`margin: ${margin};`;
+      }
+
+      const margins = margin.split(' ');
+
+      if (margins.length === 2) {
+        return css`
+          margin-left: ${!isNil(elementMarginLeft) ? elementMarginLeft : margins[1]};
+          margin-right: ${!isNil(elementMarginRight) ? elementMarginRight : margins[1]};
+          margin-bottom: ${!isNil(elementMarginBottom) ? elementMarginBottom : margins[0]};
+          margin-top: ${!isNil(elementMarginTop) ? elementMarginTop : margins[0]};
+        `;
+      }
+
+      if (margins.length === 4) {
+        return css`
+          margin-left: ${!isNil(elementMarginLeft) ? elementMarginLeft : margins[3]};
+          margin-right: ${!isNil(elementMarginRight) ? elementMarginRight : margins[1]};
+          margin-bottom: ${!isNil(elementMarginBottom) ? elementMarginBottom : margins[2]};
+          margin-top: ${!isNil(elementMarginTop) ? elementMarginTop : margins[0]};
+        `;
+      }
+
+      return css`
+        margin-left: ${!isNil(elementMarginLeft) ? elementMarginLeft : margin};
+        margin-right: ${!isNil(elementMarginRight) ? elementMarginRight : margin};
+        margin-bottom: ${!isNil(elementMarginBottom) ? elementMarginBottom : margin};
+        margin-top: ${!isNil(elementMarginTop) ? elementMarginTop : margin};
+      `;
+    }
+
+    return css``;
   });
 });
 
