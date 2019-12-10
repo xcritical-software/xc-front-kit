@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import get from 'lodash.get';
 import memoize from 'micro-memoize';
+import { shallowEqual } from 'fast-equals';
 import {
   css,
   FlattenInterpolation,
@@ -28,6 +29,8 @@ export const buttonTheme = memoize((
 ): ButtonTheme | any => {
   const func = getThemedState(buttonThemeNamespace, buttonThemeStyle);
   return func(theme, propertyPath);
+}, {
+  isEqual: shallowEqual,
 });
 
 
@@ -39,6 +42,8 @@ export const buttonAppearanceTheme = memoize((
 ): ButtonTheme | any => {
   const func = getAppearanceTheme(buttonThemeNamespace, buttonThemeStyle);
   return func(theme, appearanceName, propertyPath, baseAppearance);
+}, {
+  isEqual: shallowEqual,
 });
 
 
@@ -77,6 +82,8 @@ const getApperanceStyleProperty = memoize((
     };
   }
   return statesTheme();
+}, {
+  isEqual: shallowEqual,
 });
 
 
@@ -85,7 +92,7 @@ const getVerticalAlign = (spacing = 'default'): string => (spacing === 'none' ? 
 const getWidth = (shouldFitContent = false): string => (shouldFitContent ? '100%' : 'auto');
 
 
-export const getButtonStatesStyle = (stateName: string) => ({
+const getButtonStatesStyle = (stateName: string) => ({
   theme,
   appearance = 'default',
   baseAppearance = 'default',
@@ -161,6 +168,8 @@ export const getItemInteractiveStyles = memoize((
     }
     ${standardFocus}
   `;
+}, {
+  isEqual: shallowEqual,
 });
 
 export const getButtonStyles = memoize((
@@ -200,4 +209,6 @@ export const getButtonStyles = memoize((
       color: background,
     }),
   };
+}, {
+  isEqual: shallowEqual,
 });

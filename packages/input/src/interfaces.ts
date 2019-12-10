@@ -35,6 +35,7 @@ export interface IInputProps
   IIsRTL,
   IBaseItemProps {
   css?: any;
+  shouldFitContainer?: boolean;
 }
 export interface IStyledInput extends HtmlAttributes, ISubComponentProps {
 
@@ -43,6 +44,7 @@ export interface IStyledInput extends HtmlAttributes, ISubComponentProps {
 export interface ISubComponentProps extends IIsRTL {
   theme: IThemeNamespace<InputTheme>;
   appearance: string;
+  shouldFitContainer?: boolean;
   baseAppearance: string;
   isDivided?: boolean;
   invalid?: boolean;
