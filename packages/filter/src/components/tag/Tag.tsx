@@ -36,9 +36,9 @@ export const Tag: React.FC<ITagProps> = ({
   );
 
 
-  const toggleOpen = () => {
+  const toggleOpen = useCallback(() => {
     setIsOpen(!isOpen);
-  };
+  }, [isOpen]);
 
   const onTagApply = useCallback(
     () => {
