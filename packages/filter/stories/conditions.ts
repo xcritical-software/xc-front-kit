@@ -42,7 +42,6 @@ export const conditions: IConditionsAll = {
   },
 
   Numeric: {
-    // числа, везде просто ввод одного числа
     equals: {
       name: 'Equals',
       hasValue: true,
@@ -85,7 +84,6 @@ export const conditions: IConditionsAll = {
     },
   },
   Currency: {
-    // числа, везде просто ввод одного числа
     equals: {
       name: 'Equals',
       hasValue: true,
@@ -131,15 +129,15 @@ export const conditions: IConditionsAll = {
     lessOrEquals: {
       name: 'Less or equals',
       hasValue: true,
-    }, // одна дата
+    },
     greaterOrEquals: {
       name: 'Greater or equals',
       hasValue: true,
-    }, // одна дата
+    },
     notEquals: {
       name: 'Not equals',
       hasValue: true,
-    }, // одна дата
+    },
     isEmpty: {
       name: 'Is empty',
       hasValue: false,
@@ -215,11 +213,11 @@ export const conditions: IConditionsAll = {
     equalsTo: {
       name: 'Equals to',
       hasValue: true,
-    }, // один вариант
+    },
     contains: {
       name: 'Contains',
       hasValue: true,
-    }, // содержит часть слова
+    },
     isEmpty: {
       name: 'Is empty',
       hasValue: false,
@@ -227,15 +225,15 @@ export const conditions: IConditionsAll = {
     notEquals: {
       name: 'Not equals',
       hasValue: true,
-    }, // один вариант, не равно
+    },
     in: {
       name: 'In',
       hasValue: true,
-    }, // мультиселектор, одно из
+    },
     notIn: {
       name: 'Not in',
       hasValue: true,
-    }, // мультиселектор, не одно из
+    },
     notEmpty: {
       name: 'Not empty',
       hasValue: false,
@@ -243,7 +241,6 @@ export const conditions: IConditionsAll = {
   },
 
   Boolean: {
-    // да нет
     equalsTo: {
       name: 'Equals to',
       hasValue: true,
