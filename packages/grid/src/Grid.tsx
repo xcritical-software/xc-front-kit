@@ -14,6 +14,7 @@ import {
   ScrollPosition,
   GridCellProps,
 } from 'react-virtualized';
+import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
 import {
   Body,
@@ -50,9 +51,12 @@ const Grid = ({
   onSelect = () => {},
   shouldMovingColumns = true,
   shouldChangeColumnsWidth = true,
+  shouldFitContainer = false,
 }: IGrid) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme || contextTheme));
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
     items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
@@ -263,6 +267,103 @@ const Grid = ({
     header: { height: headerHeight = 0 },
     totals: { height: totalsHeight = 0 },
   } = themeRef.current;
+
+
+  const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
+
+  const createObserver = (): ResizeObserver | undefined => {
+    if (wrapperRef.current === null) {
+      return undefined;
+    }
+    const observer = new ResizeObserver((): undefined => {
+      if (wrapperRef.current === null) {
+        return undefined;
+      }
+      setWrapperSize({
+        width: wrapperRef.current.clientWidth,
+        height: wrapperRef.current.clientHeight,
+      });
+      return undefined;
+    });
+    observer.observe(wrapperRef.current);
+    return observer;
+  };
+
+  const observerRef: React.MutableRefObject<ResizeObserver | undefined> = useRef();
+  useEffect(() => {
+    observerRef.current = createObserver();
+  }, []);
+
+
+  useEffect(
+    () => () => {
+      if (observerRef.current && wrapperRef.current) {
+        observerRef.current.unobserve(wrapperRef.current);
+        if (observerRef.current.disconnect) {
+          observerRef.current.disconnect();
+        }
+      }
+    },
+    [observerRef],
+  );
+
+
+  if (shouldFitContainer) {
+    return (
+      <div ref={ wrapperRef } style={ { width: '100%', height: '100%' } }>
+        <Wrapper
+          theme={ themeRef.current }
+          width={ wrapperSize.width }
+          changingColumns={ changingColumns }
+        >
+          <HeaderWrapper
+            fullWidth={ fullWidthRef.current }
+            columns={ mappedColumns }
+            translateX={ scrollLeft }
+            onChangeWidth={ handleChangeWidth }
+            onChangeMoving={ handleChangeMoving }
+            setChangingColumns={ setChangingColumns }
+            theme={ themeRef.current }
+            shouldMovingColumns={ shouldMovingColumns }
+            shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+          />
+          <Body>
+            <VirtualisedGrid
+              ref={ gridRef as MutableRefObject<VirtualisedGrid> }
+              columnCount={ mappedColumns.length }
+              columnWidth={ ({ index }: any) => mappedColumns[index].width }
+              deferredMeasurementCache={ cacheRef.current }
+              height={ wrapperSize.height - Number(headerHeight) - Number(totalsHeight) }
+              cellRenderer={ cellRenderer }
+              rowCount={ mappedItems.length }
+              rowHeight={ cacheRef.current.rowHeight }
+              width={ wrapperSize.width - 2 }
+              onScroll={ handleScroll }
+            />
+          </Body>
+          { totals && (
+            <TotalBlock
+              width={ fullWidthRef.current }
+              translateX={ scrollLeft }
+              theme={ themeRef.current }
+            >
+              { mappedColumns.map((el: IColumn, index: number) => (
+                <TotalCell
+                  theme={ themeRef.current }
+                  width={ mappedColumns.length === index + 1 ? el.width + 9 : el.width }
+                >
+                  <TotalCellContent center={ !!el.center } theme={ themeRef.current }>
+                    <span>{ totals[el.field] }</span>
+                  </TotalCellContent>
+                </TotalCell>
+              )) }
+            </TotalBlock>
+          ) }
+        </Wrapper>
+      </div>
+    );
+  }
+
 
   return (
     <Wrapper theme={ themeRef.current } width={ width } changingColumns={ changingColumns }>

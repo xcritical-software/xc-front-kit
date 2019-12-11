@@ -169,4 +169,15 @@ storiesOf('New Grid', module)
       height={ document.documentElement.clientHeight - 100 }
       theme={ AMStheme }
     />
+  ))
+  .add('Dinamic width', () => (
+    <div style={ { width: '100%', height: '600px' } }>
+      <Grid
+        columns={ columns.map((el) => ({ ...el, center: true })) }
+        items={ rows }
+        height={ document.documentElement.clientHeight - 100 }
+        theme={ AMStheme }
+        shouldFitContainer
+      />
+    </div>
   ));
