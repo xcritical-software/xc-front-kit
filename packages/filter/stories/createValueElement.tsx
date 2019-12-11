@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React, { useState, ReactElement } from 'react';
 import { SingleDatePicker } from 'react-dates';
 import {
@@ -9,22 +10,6 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import Select from '../../select/src';
 
-
-// const Input = ({
-//   handleChange,
-//   value,
-//   isEdit,
-// }: IElementProps): ReactElement => {
-//   if (!isEdit) return <span>{ value }</span>;
-//   return (
-//     <input
-//       style={ { width: '100%' } }
-//       value={ value }
-//       onChange={ (e) => handleChange(e.target.value) }
-//       defaultValue=""
-//     />
-//   );
-// };
 
 const DictionarySelector = ({
   name,
@@ -66,15 +51,6 @@ const DictionarySelector = ({
       onChange={ handleChange }
       value={ value }
     />
-    // <select defaultValue={ 0 } onChange={ (e) => handleChange(e.target.value) }>
-    //   { !value && <option selected>Please select...</option> }
-    //   { dictionaries[name]
-    //     && dictionaries[name].map(({ id, name: n }: IDictionary) => (
-    //       <option key={ id } value={ id } selected={ +value === id }>
-    //         { n }
-    //       </option>
-    //     )) }
-    // </select>
   );
 };
 

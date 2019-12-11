@@ -1,3 +1,3 @@
 const createTasks = require('@xcritical/gulpify');
 
-createTasks('@xcritical/item');
+createTasks('@xcritical/filter');
