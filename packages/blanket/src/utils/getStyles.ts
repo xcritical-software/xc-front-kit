@@ -1,12 +1,14 @@
+import { css, CSSObject, FlattenSimpleInterpolation } from 'styled-components';
+import get from 'lodash.get';
+import { mergeDeep } from 'utilitify';
+
 import {
-  getAppearanceTheme,
   getThemedState,
   ITheme,
   AllType,
 } from '@xcritical/theme';
-import { css, FlattenSimpleInterpolation } from 'styled-components';
 
-import { blanketThemeNamespace, blanketThemeStyle } from '../theme';
+import { blanketThemeNamespace, defaultBlanketTheme } from '../theme';
 import { IBlanketTheme, IBlanketProps } from '../interfaces';
 
 
@@ -14,36 +16,25 @@ export const blanketTheme = (
   theme: ITheme<IBlanketTheme>,
   propertyPath?: string | string[],
 ): AllType => {
-  const func = getThemedState(blanketThemeNamespace, blanketThemeStyle);
+  const func = getThemedState(blanketThemeNamespace, defaultBlanketTheme);
   return func(theme, propertyPath);
 };
 
-export const blanketAppearanceTheme = (
-  theme: ITheme<IBlanketTheme>,
-  appearanceName: string,
-  baseAppearance: string,
-  propertyPath?: string | string[],
-): AllType => {
-  const func = getAppearanceTheme(blanketThemeNamespace, blanketThemeStyle);
-  return func(theme, appearanceName, propertyPath, baseAppearance);
+export const getBlanketThemeStylesByProperty = (
+  { theme }: ITheme<IBlanketTheme>,
+) => (propertyPath: string[]): CSSObject => {
+  const customBlanketTheme = get(theme, blanketThemeNamespace);
+  const mergedTheme = mergeDeep(defaultBlanketTheme, customBlanketTheme);
+
+  return get(mergedTheme, propertyPath);
 };
 
 export const getBaseStyle = ({
   theme,
-  appearance = 'default',
-  baseAppearance = 'default',
 }: IBlanketProps): FlattenSimpleInterpolation => {
-  const background: string = blanketAppearanceTheme(theme, appearance, baseAppearance, 'background');
-  const color = blanketAppearanceTheme(theme, appearance, baseAppearance, 'color');
   const baseStyles = blanketTheme(theme);
-  const styles = blanketAppearanceTheme(theme, appearance, baseAppearance);
-  const zIndex = blanketAppearanceTheme(theme, appearance, baseAppearance, 'zIndex');
 
   return css`
     ${baseStyles}
-    ${styles}
-    background: ${background};
-    color: ${color};
-    z-index: ${zIndex};
   `;
 };

@@ -5,7 +5,7 @@ import { DrawerTheme } from './interfaces';
 
 export const drawerThemeNamespace = '@xcritical\\drawer';
 
-export const drawerThemeStyle: DrawerTheme = {
+export const defaultDrawerTheme: DrawerTheme = {
   paddingBottom: 0,
   paddingLeft: 0,
   paddingRight: 0,

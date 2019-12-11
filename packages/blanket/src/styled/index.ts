@@ -1,19 +1,17 @@
 import styled from 'styled-components';
 
 import {
-  blanketAppearanceTheme,
+  getBlanketThemeStylesByProperty,
   getBaseStyle,
 } from '../utils';
 import { IBlanketProps } from '../interfaces';
 
 
 export const Root = styled.div<IBlanketProps>`
-  ${getBaseStyle}
+  ${({ theme }: IBlanketProps) => getBaseStyle({ theme })}
   opacity: ${({
     theme,
-    appearance = 'default',
-    baseAppearance = 'default',
     isTinted,
-  }) => (isTinted ? blanketAppearanceTheme(theme, appearance, baseAppearance, 'opacity') : 0)};
-  pointer-events: ${({ canClickThrough }) => (canClickThrough ? 'none' : 'initial')};
+  }: IBlanketProps) => (isTinted ? getBlanketThemeStylesByProperty({ theme }).opacity : 0)};
+  pointer-events: ${({ canClickThrough }: IBlanketProps) => (canClickThrough ? 'none' : 'initial')};
 `;

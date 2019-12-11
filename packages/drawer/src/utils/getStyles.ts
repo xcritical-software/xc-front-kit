@@ -8,7 +8,7 @@ import {
   AllType,
 } from '@xcritical/theme';
 
-import { drawerThemeNamespace, drawerThemeStyle } from '../theme';
+import { drawerThemeNamespace, defaultDrawerTheme } from '../theme';
 import {
   DrawerTheme,
   IDrawerProps,
@@ -22,7 +22,7 @@ export const drawerTheme = (
   theme: DrawerTheme,
   propertyPath?: string | string[],
 ): AllType => {
-  const func = getThemedState(drawerThemeNamespace, drawerThemeStyle);
+  const func = getThemedState(drawerThemeNamespace, defaultDrawerTheme);
   return func(theme, propertyPath);
 };
 
@@ -32,7 +32,7 @@ export const drawerAppearanceTheme = (
   baseAppearance: string,
   propertyPath?: string | string[],
 ): AllType => {
-  const func = getAppearanceTheme(drawerThemeNamespace, drawerThemeStyle);
+  const func = getAppearanceTheme(drawerThemeNamespace, defaultDrawerTheme);
   return func(theme, appearanceName, propertyPath, baseAppearance);
 };
 

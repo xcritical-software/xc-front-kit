@@ -81,7 +81,7 @@ export const PureDrawer: React.FC<IDrawerProps> = React.memo<IDrawerProps>(({
     [handleMouseMove],
   );
 
-  const handleRemoveMouseMove = useCallback(() => {
+  const handleMouseUp = useCallback(() => {
     document.body.removeEventListener('mousemove', handleMouseMove);
   }, [handleMouseMove]);
 
@@ -111,9 +111,13 @@ export const PureDrawer: React.FC<IDrawerProps> = React.memo<IDrawerProps>(({
                 offsetSide={ children && (width || 0) }
                 isRTL={ isRTL }
               >
-                <IconWrapper onClick={ onOutsideClick }>
-                  { withCloseButton && (isRTL ? <ArrowRight /> : <ArrowLeft />) }
-                </IconWrapper>
+                {
+                  withCloseButton && (
+                    <IconWrapper onClick={ onOutsideClick }>
+                      { isRTL ? <ArrowRight /> : <ArrowLeft /> }
+                    </IconWrapper>
+                  )
+                }
                 <Content
                   appearance={ appearance }
                   baseAppearance={ baseAppearance }
@@ -128,7 +132,7 @@ export const PureDrawer: React.FC<IDrawerProps> = React.memo<IDrawerProps>(({
                   appearance={ appearance }
                   baseAppearance={ baseAppearance }
                   onMouseDown={ handleMouseDown }
-                  onMouseUp={ handleRemoveMouseMove }
+                  onMouseUp={ handleMouseUp }
                   isMovable={ isMovable }
                 >
                   <Separator
