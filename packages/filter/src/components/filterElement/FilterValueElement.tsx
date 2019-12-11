@@ -10,18 +10,14 @@ export const FilterValueElement: React.FC<ISelectedFilterComponent> = React.memo
     value = '',
   } = {},
   onChange,
-}) => {
-  const Element = currentFilter ? currentFilter.Element || Input : null;
-  if (Element) {
-    return (
-      <Element
+}) => (
+  currentFilter?.Element
+    ? currentFilter.Element(value, onChange)
+    : (
+      <Input
         disabled={ !condition }
         shouldFitContainer
         onChange={ onChange }
         value={ value }
       />
-    );
-  }
-
-  return null;
-});
+    )));

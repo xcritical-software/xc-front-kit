@@ -2,41 +2,40 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { CompactFilter, xcriticalFiltersInit, xcriticalFiltersAdd } from '../../src';
-import { conditions } from '../conditions';
-import { createElement } from '../createValueElement';
-import { IPage, IMappedFilter } from '../interfaces';
+import { simpleData } from '../data/simpleData';
+import { IPage } from '../interfaces';
 
 
 const threeFilters = [
   {
-    column: 'aaid',
+    column: 'userName',
     condition: 'startsWith',
     value: '15',
   },
   {
-    column: 'aaid',
+    column: 'userName',
     condition: 'startsWith',
     value: '15',
   },
   {
-    column: 'acid',
+    column: 'country',
     condition: 'endsWith',
     value: '20',
   },
 ];
 const threeFiltersAdd = [
   {
-    column: 'aaid',
+    column: 'userName',
     condition: 'startsWith',
     value: '150',
   },
   {
-    column: 'aaid',
-    condition: 'startsWith',
+    column: 'userName',
+    condition: 'endsWith',
     value: '150',
   },
   {
-    column: 'acid',
+    column: 'country',
     condition: 'endsWith',
     value: '200',
   },
@@ -45,35 +44,16 @@ const threeFiltersAdd = [
 
 const pageName = 'compactFilter';
 const CompactFilterPage: React.FC<IPage> = ({
-  filters, dictionaries, onInit, isSearchable,
+  onInit, isSearchable,
 }) => {
   useEffect(() => {
     onInit?.();
   });
-
-  const mappedFilters: any[] = filters
-    ? filters
-      .sort((a: IMappedFilter, b: IMappedFilter) => (a.displayName > b.displayName ? 1 : -1))
-      .map(({
-        field, name, type, displayName,
-      }: IMappedFilter) => ({
-        field,
-        displayName,
-        conditions: conditions[type],
-        Element: createElement({ name, type, dictionaries }),
-      }))
-    : [];
   return (
-    <CompactFilter filters={ mappedFilters } name={ pageName } isSearchable={ isSearchable } />
+    <CompactFilter filters={ simpleData } name={ pageName } isSearchable={ isSearchable } />
   );
 };
 
-
-const mapStateToProps = (state: any, { theme }: any): IPage => ({
-  filters: state.config.columns,
-  dictionaries: state.config.dictionaries,
-  theme,
-});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onInit: () => {
@@ -83,6 +63,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export const CompactFilterContainer = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(CompactFilterPage);

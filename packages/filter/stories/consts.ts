@@ -1,1 +1,0 @@
-export const GET_CONFIG_SUCCESS = 'GET_CONFIG_SUCCESS';

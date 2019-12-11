@@ -1,5 +1,4 @@
 import { IThemeNamespace, ITheme } from '@xcritical/theme';
-import { OptionTypeBase } from 'react-select';
 import { CSSProperties } from 'styled-components';
 
 import {
@@ -67,7 +66,7 @@ export interface IFilter {
   field: string;
   displayName: string;
   conditions: IConditions;
-  Element: Function;
+  Element?: (value: any, onChange: (value: any) => void) => React.ReactElement;
 }
 
 export interface ICondition {
@@ -84,7 +83,7 @@ export interface ISelectedFilterComponent {
   filters?: IFilter[];
   currentFilter?: IFilter;
   filterData?: IStateFilter;
-  onChange: ({ value }: OptionTypeBase) => void;
+  onChange: (value: any) => void;
 }
 
 export interface IStateRecivedFilter {

@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { OptionTypeBase } from 'react-select';
 
-import { ConditionSelect } from '../conditionSelect';
+import Select from '@xcritical/select';
 import { FilterValueElement } from '../filterElement';
 
 import {
@@ -23,7 +23,20 @@ export const TagCondition: React.FC<ITagConditionProps> = (
     onRemoveFilter,
   },
 ) => {
-  const { key: guid } = currentFilterState;
+  const { key: guid, condition, column } = currentFilterState;
+
+  const conditions = useMemo(() => (filterSetting
+    ? Object.keys(filterSetting.conditions).map((key) => ({
+      ...filterSetting.conditions[key],
+      value: key,
+      label: filterSetting.conditions[key].name,
+    }))
+    : []), [filterSetting]);
+
+  const selectedConditions = useMemo(() => conditions
+    .find(($condition) => $condition.value === condition),
+  [condition, conditions]);
+
 
   const onChangeValue = useCallback(
     (value: any) => {
@@ -52,21 +65,30 @@ export const TagCondition: React.FC<ITagConditionProps> = (
 
       <DropdownItem>
         <TagLabel>Conditions</TagLabel>
-        <ConditionSelect
+        <Select
+          shouldFitContainer
           onChange={ onChangeCondition }
-          currentFilter={ filterSetting }
-          filterData={ currentFilterState }
+          options={ conditions }
+          disabled={ !column }
+          value={ selectedConditions }
         />
       </DropdownItem>
+      {
+        (!selectedConditions || selectedConditions?.hasValue)
+          ? (
+            <DropdownItem>
+              <TagLabel>Value</TagLabel>
+              <div>
+                <FilterValueElement
+                  onChange={ onChangeValue }
+                  currentFilter={ filterSetting }
+                  filterData={ currentFilterState }
+                />
+              </div>
+            </DropdownItem>
+          ) : null
+      }
 
-      <DropdownItem>
-        <TagLabel>Value</TagLabel>
-        <FilterValueElement
-          onChange={ onChangeValue }
-          currentFilter={ filterSetting }
-          filterData={ currentFilterState }
-        />
-      </DropdownItem>
     </TagConditionsWrapper>
   );
 };

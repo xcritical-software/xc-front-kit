@@ -17,16 +17,12 @@ import {
   CompactFilterContainer,
 } from './pages';
 import { filterReducer } from '../src';
-import { config } from './configReducer';
-import { data } from './data/dummyData';
-import { getConfigSuccess } from './actions';
 
 
 const store = createStore(
-  combineReducers({ filter: filterReducer, config }),
+  combineReducers({ filter: filterReducer }),
   devToolsEnhancer({}),
 );
-setTimeout(() => store.dispatch(getConfigSuccess(data)), 10);
 
 
 const themeTwo: IThemeNamespace = {

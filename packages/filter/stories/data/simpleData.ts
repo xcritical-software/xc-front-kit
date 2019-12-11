@@ -1,4 +1,88 @@
-export const simpleData = [{
+import { IFilter } from '../../src/interfaces';
+import { DictionarySelector } from '../createValueElement';
+import { IDictionary } from '../interfaces';
+
+
+export const salesStatus: IDictionary[] = [
+  {
+    value: 3,
+    label: 'New',
+    order: 1,
+  },
+  {
+    value: 4,
+    label: 'Call To Close',
+    order: 2,
+  },
+  {
+    value: 13,
+    label: 'Free Money Trading',
+    order: 3,
+  },
+  {
+    value: 5,
+    label: 'High Priority',
+    order: 4,
+  },
+  {
+    value: 6,
+    label: 'Medium Priority',
+    order: 5,
+  },
+  {
+    value: 9,
+    label: 'No Response',
+    order: 6,
+  },
+  {
+    value: 10,
+    label: 'Partially Activated',
+    order: 7,
+  },
+  {
+    value: 8,
+    label: 'Failed Expectation',
+    order: 8,
+  },
+  {
+    value: 11,
+    label: 'Fully Activated',
+    order: 9,
+  },
+  {
+    value: 7,
+    label: 'No Potential',
+    order: 10,
+  },
+  {
+    value: 12,
+    label: 'Not Valid',
+    order: 11,
+  },
+  {
+    value: 498,
+    label: 'Unreachable',
+    order: 12,
+  },
+  {
+    value: 868,
+    label: 'PGX',
+    order: 13,
+  },
+  {
+    value: 1671753,
+    label: 'Auto Call',
+    order: 14,
+  },
+  {
+    value: 1671755,
+    label: 'AutoCall Answered',
+    order: 16,
+  },
+];
+
+
+export const simpleData: IFilter[] = [{
   field: 'userName',
   displayName: 'User Name',
   conditions: {
@@ -40,8 +124,8 @@ export const simpleData = [{
     },
   },
 }, {
-  field: 'city',
-  displayName: 'City',
+  field: 'status',
+  displayName: 'Sale Status',
   conditions: {
     equalsTo: {
       name: 'Equals to',
@@ -60,6 +144,7 @@ export const simpleData = [{
       hasValue: true,
     },
   },
+  Element: DictionarySelector(salesStatus),
 }, {
   field: 'country',
   displayName: 'Country',
@@ -80,6 +165,7 @@ export const simpleData = [{
       name: 'Contains',
       hasValue: true,
     },
+
   },
 }, {
   field: 'firstName',
