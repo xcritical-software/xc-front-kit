@@ -5,24 +5,21 @@ import { BadgeTheme } from './interfaces';
 
 export const badgeThemeNamespace = '@xcritical\\badge';
 
-export const badgeThemeStyle: BadgeTheme = {
+export const defaultBadgeTheme: BadgeTheme = {
   backgroundColor: colors.GRAY,
   color: 'inherit',
   border: '1px solid transparent',
-  inverse: {
+  ghost: {
     color: 'inherit',
     borderColor: colors.GRAY,
     background: colors.WHITE,
   },
   appearance: {
-    default: {
-
-    },
+    default: {},
     primary: {
       background: colors.PRIMARY,
       color: colors.WHITE,
-      inverse: {
-
+      ghost: {
         color: colors.PRIMARY,
         borderColor: colors.PRIMARY,
         background: colors.WHITE,
@@ -31,8 +28,7 @@ export const badgeThemeStyle: BadgeTheme = {
     secondary: {
       background: colors.SECONDARY,
       color: colors.WHITE,
-      inverse: {
-
+      ghost: {
         color: colors.SECONDARY,
         borderColor: colors.SECONDARY,
         background: colors.WHITE,
@@ -41,8 +37,7 @@ export const badgeThemeStyle: BadgeTheme = {
     success: {
       background: colors.SUCCESS,
       color: colors.WHITE,
-      inverse: {
-
+      ghost: {
         color: colors.SUCCESS,
         borderColor: colors.SUCCESS,
         background: colors.WHITE,
@@ -51,8 +46,7 @@ export const badgeThemeStyle: BadgeTheme = {
     danger: {
       background: colors.DANGER,
       color: colors.WHITE,
-      inverse: {
-
+      ghost: {
         color: colors.DANGER,
         borderColor: colors.DANGER,
         background: colors.WHITE,
@@ -61,8 +55,7 @@ export const badgeThemeStyle: BadgeTheme = {
     warning: {
       background: colors.WARNING,
       color: colors.WHITE,
-      inverse: {
-
+      ghost: {
         color: colors.WARNING,
         borderColor: colors.WARNING,
         background: colors.WHITE,
@@ -71,8 +64,7 @@ export const badgeThemeStyle: BadgeTheme = {
     info: {
       background: colors.INFO,
       color: colors.WHITE,
-      inverse: {
-
+      ghost: {
         color: colors.INFO,
         borderColor: colors.INFO,
         background: colors.WHITE,
@@ -81,8 +73,7 @@ export const badgeThemeStyle: BadgeTheme = {
     dark: {
       background: colors.DARK,
       color: colors.WHITE,
-      inverse: {
-
+      ghost: {
         color: colors.DARK,
         borderColor: colors.DARK,
         background: colors.WHITE,
@@ -91,7 +82,7 @@ export const badgeThemeStyle: BadgeTheme = {
     light: {
       background: colors.LIGHT,
       color: colors.CHAROCOAL,
-      inverse: {
+      ghost: {
         borderWidth: 1,
         color: colors.LIGHT,
         borderColor: colors.LIGHT,

@@ -84,7 +84,7 @@ Example heading
             </Badge>
           </Cell>
           <Cell>
-            <Badge appearance={ a } inverse key={ `${a}_outline` }>
+            <Badge appearance={ a } ghost key={ `${a}_outline` }>
               { capitalize(a) }
             </Badge>
           </Cell>

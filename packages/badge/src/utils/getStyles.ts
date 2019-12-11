@@ -9,7 +9,7 @@ import {
 
 import {
   badgeThemeNamespace,
-  badgeThemeStyle,
+  defaultBadgeTheme,
 } from '../theme';
 import {
   BadgeTheme,
@@ -20,7 +20,7 @@ const badgeTheme = memoize((
   theme: IThemeNamespace<BadgeTheme> = {},
   propertyPath?: string | string[],
 ): BadgeTheme | any => {
-  const func = getThemedState(badgeThemeNamespace, badgeThemeStyle);
+  const func = getThemedState(badgeThemeNamespace, defaultBadgeTheme);
   return func(theme, propertyPath);
 });
 
@@ -31,7 +31,7 @@ const badgeApperanceTheme = memoize((
   baseAppearance: string,
   propertyPath?: string | string[],
 ): BadgeTheme | any => {
-  const func = getAppearanceTheme(badgeThemeNamespace, badgeThemeStyle);
+  const func = getAppearanceTheme(badgeThemeNamespace, defaultBadgeTheme);
   return func(theme, appearanceName, propertyPath, baseAppearance);
 });
 
@@ -55,7 +55,7 @@ export const getRootBadgeInteractiveStyles = memoize((
   theme: IThemeNamespace<BadgeTheme>,
   appearance: string,
   baseAppearance: string,
-  inverse: boolean = false,
+  ghost: boolean = false,
 ): any => {
   const standartFocus = css`
     &:focus {
@@ -75,9 +75,9 @@ export const getRootBadgeInteractiveStyles = memoize((
     }
   `;
 
-  if (inverse) {
+  if (ghost) {
     return css`
-      ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'inverse')}
+      ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'ghost')}
 
       ${standartHover}
       ${standartFocus};

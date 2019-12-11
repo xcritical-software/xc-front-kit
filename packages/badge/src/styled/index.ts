@@ -15,6 +15,6 @@ export const BadgeRoot = styled.span<IThemeBadgeProps>`
     border-radius: .25rem;
     ${({ theme, appearance = 'default', baseAppearance = 'default' }) => getRootBadgeStyles(theme, appearance, baseAppearance)}
     ${({
-    theme, appearance = 'default', baseAppearance = 'default', inverse,
-  }) => getRootBadgeInteractiveStyles(theme, appearance, baseAppearance, inverse)}
+    theme, appearance = 'default', baseAppearance = 'default', ghost,
+  }) => getRootBadgeInteractiveStyles(theme, appearance, baseAppearance, ghost)}
 `;
