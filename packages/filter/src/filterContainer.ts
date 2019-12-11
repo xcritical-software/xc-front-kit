@@ -33,7 +33,6 @@ const mapStateToProps = (
   return {
     activeFilters: drafts,
     searchInput: search,
-    ...ownProps,
   };
 };
 
@@ -41,7 +40,7 @@ const mapDispatchToProps = () => {
   let dispatchProps: IMapDispatchFilter;
   return (
     dispatch: Dispatch,
-    { name }: any,
+    { name }: IFilterProps,
   ) => {
     if (!dispatchProps) {
       dispatchProps = {

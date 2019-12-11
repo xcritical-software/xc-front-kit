@@ -127,7 +127,7 @@ export interface ITagConditionProps {
   onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
 }
 
-export interface IFilterContainerProps extends IFilterProps {
+export interface IFilterContainerProps {
   activeFilters: IStateFilter[];
   searchInput: string;
 }
@@ -152,7 +152,8 @@ export interface IMapDispatchFilter {
 
 
 export interface IFilterComponentProps extends IMapDispatchFilter,
-  IFilterContainerProps {
+  IFilterContainerProps,
+  IFilterProps {
   onApply: () => void;
 }
 
