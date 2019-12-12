@@ -20,7 +20,7 @@ export const ConditionSelect: React.FC<ISelectedFilterComponent> = React.memo(({
     }))
     : []), [currentFilter]);
 
-  const selectedConditions = useMemo(() => conditions
+  const selectedCondition = useMemo(() => conditions
     .find(($condition) => $condition.value === condition),
   [condition, conditions]);
 
@@ -30,7 +30,7 @@ export const ConditionSelect: React.FC<ISelectedFilterComponent> = React.memo(({
       onChange={ onChange }
       options={ conditions }
       disabled={ !column }
-      value={ selectedConditions }
+      value={ selectedCondition }
     />
   );
 });

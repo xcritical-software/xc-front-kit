@@ -1,5 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import { Blanket, DropdownContent } from './styled';
+
+
+export const DropdownRoot = styled.div`
+  position: relative;
+  padding-right: 10px; 
+  padding-bottom: 10px;
+`;
 
 
 export const Dropdown = ({
@@ -8,7 +17,7 @@ export const Dropdown = ({
   target,
   onClose,
 }: any) => (
-  <div style={ { position: 'relative', paddingRight: '10px', paddingBottom: '10px' } }>
+  <DropdownRoot>
     { target }
     { isOpen
       ? (
@@ -17,5 +26,5 @@ export const Dropdown = ({
           <Blanket onClick={ onClose } />
         </>
       ) : null }
-  </div>
+  </DropdownRoot>
 );
