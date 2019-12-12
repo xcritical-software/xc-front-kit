@@ -79,7 +79,7 @@ export const Tag: React.FC<ITagProps> = ({
           onClick={ toggleOpen }
           selected={ isOpen }
         >
-          { `${filterSetting?.displayName}` }
+          { `${filterSetting.displayName}` }
         </Button>
       ) }
     >
@@ -87,7 +87,7 @@ export const Tag: React.FC<ITagProps> = ({
       {
         conditions.map((condition) => (
           <TagCondition
-            conditions={ filterSetting?.conditions }
+            conditions={ filterSetting.conditions }
             onRemoveFilter={ onRemoveFilter }
             currentFilterState={ condition }
             filterSetting={ filterSetting }

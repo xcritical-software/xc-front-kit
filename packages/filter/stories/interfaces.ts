@@ -1,6 +1,6 @@
 
 export interface IPage {
-  onInit?: Function;
+  onInit: Function;
   isSearchable?: boolean;
 }
 

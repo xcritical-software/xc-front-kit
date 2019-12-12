@@ -10,7 +10,7 @@ export const FilterSelect: React.FC<ISelectedFilterComponent> = React.memo(({
   currentFilter,
   onChange,
 }) => {
-  const selectedFilterName = useMemo(() => {
+  const selectedFilter = useMemo(() => {
     if (currentFilter) {
       return {
         value: currentFilter.field,
@@ -30,7 +30,7 @@ export const FilterSelect: React.FC<ISelectedFilterComponent> = React.memo(({
       shouldFitContainer
       onChange={ onChange }
       options={ filterItems }
-      value={ selectedFilterName }
+      value={ selectedFilter }
     />
   );
 });

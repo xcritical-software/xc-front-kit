@@ -33,7 +33,7 @@ export const TagCondition: React.FC<ITagConditionProps> = (
     }))
     : []), [filterSetting]);
 
-  const selectedConditions = useMemo(() => conditions
+  const selectedCondition = useMemo(() => conditions
     .find(($condition) => $condition.value === condition),
   [condition, conditions]);
 
@@ -70,11 +70,11 @@ export const TagCondition: React.FC<ITagConditionProps> = (
           onChange={ onChangeCondition }
           options={ conditions }
           disabled={ !column }
-          value={ selectedConditions }
+          value={ selectedCondition }
         />
       </DropdownItem>
       {
-        (!selectedConditions || selectedConditions?.hasValue)
+        (!selectedCondition || selectedCondition?.hasValue)
           ? (
             <DropdownItem>
               <TagLabel>Value</TagLabel>
