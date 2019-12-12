@@ -81,12 +81,17 @@ const Grid = ({
     themeRef.current = gridTheme(theme || contextTheme);
 
     if (newFullWidth < width && columns.length) {
-      const lastElemIdx = columns.length - 1;
-      const widthLast = columns[lastElemIdx].width;
-      const newColumns = setIn(columns, widthLast + (width - newFullWidth), [String(lastElemIdx), 'width']);
-      newFullWidth = newColumns.reduce(
-        (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
+      const lastColIdx = columns.length - 1;
+      const newColumns: IColumn[] = setIn(
+        columns,
+        columns[lastColIdx].width + (width - newFullWidth),
+        [String(lastColIdx), 'width'],
       );
+
+      newFullWidth = newColumns.reduce(
+        (acc: number, { width: colWidth }): number => (acc + colWidth), 0,
+      );
+
       setMappedColumns(newColumns);
       fullWidthRef.current = newFullWidth;
       return;
@@ -240,18 +245,22 @@ const Grid = ({
 
   const handleChangeWidth = useCallback(
     (index, newWidth) => {
-      let newColumns = setIn(mappedColumns, newWidth, [index, 'width']);
+      let newColumns: IColumn[] = setIn(mappedColumns, newWidth, [index, 'width']);
       let newFullWidth: number = newColumns.reduce(
-        (acc: number, { width: colWidth }: IMappedItem) => (acc + Number(colWidth)),
+        (acc, { width: colWidth }) => (acc + colWidth),
         0,
       );
 
       if (newFullWidth < width) {
-        const lastElemIdx = newColumns.length - 1;
-        const widthLast = newColumns[lastElemIdx].width;
-        newColumns = setIn(newColumns, Number(widthLast) + (width - newFullWidth), [String(lastElemIdx), 'width']);
+        const lastColIdx = newColumns.length - 1;
+        newColumns = setIn(
+          newColumns,
+          newColumns[lastColIdx].width + (width - newFullWidth),
+          [String(lastColIdx), 'width'],
+        );
+
         newFullWidth = newColumns.reduce(
-          (acc: number, { width: colWidth }: IMappedItem) => (acc + Number(colWidth)),
+          (acc, { width: colWidth }) => (acc + colWidth),
           0,
         );
       }
