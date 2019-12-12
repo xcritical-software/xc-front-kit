@@ -1,26 +1,6 @@
 import styled from 'styled-components';
 
 
-export const FilterField = styled.div`
-  flex: 0 0 calc(30% - 0.5em);
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  :last-child {
-    flex-basis: calc(10% - 0.5em);
-    padding-right:0;
-  }
-`;
-
-export const RowWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-content: flex-start;
-  width: 80%;
-  align-items: center;
-  margin: 0 auto;
-  margin-top: 15px;
-`;
-
 export const TopPanel = styled.div`
   ${({ theme }) => theme.topPanel}
   display: flex;
@@ -56,39 +36,6 @@ export const TopPanelButtons = styled.div`
     margin-right: 10px;
   }
 `;
-export const WrapperButtons = styled.div`
-  margin-left: 10px;
-  height: 36px;
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const WrapperFilterButtons = styled.div`
-  ${({ theme }) => theme.filterPanelButtons}
-  display: flex;
-  justify-content: space-between;
-  width: 300px;
-`;
-
-
-export const WrapperTag = styled.div`
-  ${({ theme }) => theme.tag};
-  height: 36px ;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-`;
-
-export const WrapperElement = styled.div`
-  padding-right: 5px;
-  padding-left: 5px;
-`;
-
-export const WrapperFilter = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 
 export const Blanket = styled.div`
   bottom: 0;

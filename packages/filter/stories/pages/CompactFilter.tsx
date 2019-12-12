@@ -47,7 +47,7 @@ const CompactFilterPage: React.FC<IPage> = ({
   onInit, isSearchable,
 }) => {
   useEffect(() => {
-    onInit?.();
+    onInit();
   });
   return (
     <CompactFilter filters={ simpleData } name={ pageName } isSearchable={ isSearchable } />

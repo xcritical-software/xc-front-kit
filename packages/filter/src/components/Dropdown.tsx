@@ -10,7 +10,12 @@ export const Dropdown = ({
 }: any) => (
   <div style={ { position: 'relative', paddingRight: '10px', paddingBottom: '10px' } }>
     { target }
-    { isOpen ? <DropdownContent>{ children }</DropdownContent> : null }
-    { isOpen ? <Blanket onClick={ onClose } /> : null }
+    { isOpen
+      ? (
+        <>
+          <DropdownContent>{ children }</DropdownContent>
+          <Blanket onClick={ onClose } />
+        </>
+      ) : null }
   </div>
 );
