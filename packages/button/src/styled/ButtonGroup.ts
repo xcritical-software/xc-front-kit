@@ -7,7 +7,6 @@ import { StyledButton } from './Button';
 export const StyledButtonGroup = styled.div`
   ${StyledButton} {
     border-radius: 0;
-    float: left;
   }
   
   ${StyledButton}:first-child {
@@ -25,10 +24,4 @@ export const StyledButtonGroup = styled.div`
   }
 
   ${({ theme }) => getButtonGroupStyles(theme)};
-  
-  &:after {
-    content: '';
-    clear: both;
-    display: table;
-  }
 `;
