@@ -74,7 +74,15 @@ export const PureButton: React.FC<IButtonProps> = ({
         { ...(href ? { href } : null) }
         { ...rest }
       >
-        { !!prefix && (<Prefix isRTL={ isRTL }>{ prefix }</Prefix>) }
+        { !!prefix && (
+          <Prefix
+            isRTL={ isRTL }
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
+          >
+            { prefix }
+          </Prefix>
+        ) }
 
         <ContentWrapper>
           <Content textPosition={ textPosition } isRTL={ isRTL }>
@@ -82,7 +90,15 @@ export const PureButton: React.FC<IButtonProps> = ({
           </Content>
         </ContentWrapper>
 
-        { !!postfix && (<Postfix isRTL={ isRTL }>{ postfix }</Postfix>) }
+        { !!postfix && (
+          <Postfix
+            isRTL={ isRTL }
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
+          >
+            { postfix }
+          </Postfix>
+        ) }
       </StyledButton>
     </ThemeProvider>
   );
