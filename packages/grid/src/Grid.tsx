@@ -75,18 +75,24 @@ const Grid = ({
 
 
   useEffect(() => {
-    const newFullWidth = columns.reduce(
+    let newFullWidth = columns.reduce(
       (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
     );
     themeRef.current = gridTheme(theme || contextTheme);
-    fullWidthRef.current = newFullWidth;
-    if (newFullWidth < width) {
+
+    if (newFullWidth < width && columns.length) {
       const lastElemIdx = columns.length - 1;
       const widthLast = columns[lastElemIdx].width;
       const newColumns = setIn(columns, widthLast + (width - newFullWidth), [String(lastElemIdx), 'width']);
+      newFullWidth = newColumns.reduce(
+        (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
+      );
       setMappedColumns(newColumns);
+      fullWidthRef.current = newFullWidth;
       return;
     }
+
+    fullWidthRef.current = newFullWidth;
     setMappedColumns(columns);
   }, [columns, contextTheme, theme, width]);
 
@@ -234,15 +240,26 @@ const Grid = ({
 
   const handleChangeWidth = useCallback(
     (index, newWidth) => {
-      const newColumns = setIn(mappedColumns, newWidth, [index, 'width']);
-      setMappedColumns(newColumns);
-      fullWidthRef.current = newColumns.reduce(
+      let newColumns = setIn(mappedColumns, newWidth, [index, 'width']);
+      let newFullWidth: number = newColumns.reduce(
         (acc: number, { width: colWidth }: IMappedItem) => (acc + Number(colWidth)),
         0,
       );
+
+      if (newFullWidth < width) {
+        const lastElemIdx = newColumns.length - 1;
+        const widthLast = newColumns[lastElemIdx].width;
+        newColumns = setIn(newColumns, Number(widthLast) + (width - newFullWidth), [String(lastElemIdx), 'width']);
+        newFullWidth = newColumns.reduce(
+          (acc: number, { width: colWidth }: IMappedItem) => (acc + Number(colWidth)),
+          0,
+        );
+      }
+      fullWidthRef.current = newFullWidth;
+      setMappedColumns(newColumns);
       onChangeColumns(newColumns);
     },
-    [mappedColumns, onChangeColumns],
+    [mappedColumns, onChangeColumns, width],
   );
 
 
