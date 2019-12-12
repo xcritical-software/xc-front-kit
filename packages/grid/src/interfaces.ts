@@ -31,6 +31,8 @@ export interface IGrid {
   shouldChangeColumnsWidth?: boolean;
   shouldFitContainer?: boolean;
 }
+
+
 export interface IMappedItem extends IItem {
   key: string;
   expandLevel: number;

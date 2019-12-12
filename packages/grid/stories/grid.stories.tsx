@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 import { darken, lighten } from 'polished';
 
 import { colors } from '@xcritical/theme';
-import Grid from '../src/Grid';
+import Grid from '../src';
 import { IColumn } from '../src/interfaces';
 import {
   columns, totals, rowsWithChildren, rows,
