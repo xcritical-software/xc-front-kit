@@ -1,6 +1,5 @@
 import React, { ComponentType, forwardRef, RefAttributes } from 'react';
 import { Transition } from 'react-transition-group';
-import { ThemeProvider } from 'styled-components';
 
 import { transitionDurationMs, transitionTimingFunction } from '../consts';
 import {
@@ -26,7 +25,6 @@ HTMLElement, ITransitionProps & IDrawerProps & IHandlerProps
   defaultStyles,
   transitionStyles,
   transitionProps = defaultTransitionProps,
-  theme,
   ...rest
 }: ITransitionProps & IHandlerProps, ref) => {
   const timeout = { enter: 0, exit: transitionDurationMs };
@@ -46,11 +44,7 @@ HTMLElement, ITransitionProps & IDrawerProps & IHandlerProps
 
         const Tag: ComponentType<any> | string = component;
 
-        return (
-          <ThemeProvider theme={ theme }>
-            <Tag ref={ ref } style={ style } { ...rest } />
-          </ThemeProvider>
-        );
+        return <Tag ref={ ref } style={ style } { ...rest } />;
       } }
     </Transition>
   );

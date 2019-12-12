@@ -2,7 +2,7 @@ import React, {
   useRef, useContext, useState, useCallback,
 } from 'react';
 import { withTheme, ThemeContext, ThemeProvider } from 'styled-components';
-import { TransitionGroup, Transition } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 
 import { IThemeNamespace } from '@xcritical/theme';
 import Portal from '@xcritical/portal';
@@ -24,6 +24,7 @@ import { ArrowLeft, ArrowRight } from './Icons';
 
 export const PureDrawer: React.FC<IDrawerProps> = React.memo<IDrawerProps>(({
   children,
+  // TODO Maybe 'appearance' and 'baseAppearance' doesn't need in future
   appearance = 'default',
   baseAppearance = 'default',
   isOpen = false,
@@ -37,7 +38,7 @@ export const PureDrawer: React.FC<IDrawerProps> = React.memo<IDrawerProps>(({
 }: IDrawerProps) => {
   const themeContext = useContext<IThemeNamespace<DrawerTheme>>(ThemeContext);
 
-  const clickX = useRef(0);
+  const clickXRef = useRef(0);
   const drawerRef = useRef<HTMLElement>(null);
 
   const [width, setWidth] = useState(maxWidth);
@@ -48,16 +49,10 @@ export const PureDrawer: React.FC<IDrawerProps> = React.memo<IDrawerProps>(({
     (e) => {
       if (!isMovable) return;
 
-      setAntiSelectLayer(true);
-      document.body.addEventListener('mouseup', () => {
-        document.body.removeEventListener('mousemove', handleMouseMove);
-        setAntiSelectLayer(false);
-      });
-
       const { clientX: currentX } = e;
       const newWidth = isRTL
-        ? width - (currentX - clickX.current)
-        : width + (currentX - clickX.current);
+        ? width - (currentX - clickXRef.current)
+        : width + (currentX - clickXRef.current);
 
       if (newWidth >= maxWidth) return;
 
@@ -75,8 +70,14 @@ export const PureDrawer: React.FC<IDrawerProps> = React.memo<IDrawerProps>(({
 
   const handleMouseDown = useCallback(
     (e) => {
-      clickX.current = e.clientX;
+      clickXRef.current = e.clientX;
+      setAntiSelectLayer(true);
+
       document.body.addEventListener('mousemove', handleMouseMove);
+      document.body.addEventListener('mouseup', () => {
+        document.body.removeEventListener('mousemove', handleMouseMove);
+        setAntiSelectLayer(false);
+      });
     },
     [handleMouseMove],
   );
@@ -94,56 +95,50 @@ export const PureDrawer: React.FC<IDrawerProps> = React.memo<IDrawerProps>(({
         unmountOnExit
       >
         <Portal id="drawer" zIndex="unset">
-          <TransitionGroup>
-            <>
-              <Fade in={ isOpen } theme={ theme || themeContext || {} }>
-                <Blanket isTinted onBlanketClicked={ onOutsideClick } />
-              </Fade>
-              { antiSelectLayer && <AntiSelect /> }
-              <Slide
-                ref={ drawerRef }
-                in={ isOpen }
-                component={ Wrapper }
-                theme={ (theme || themeContext || {}) }
+          <Fade in={ isOpen } theme={ theme || themeContext || {} }>
+            <Blanket isTinted onBlanketClicked={ onOutsideClick } />
+          </Fade>
+          { antiSelectLayer && <AntiSelect /> }
+          <Slide
+            ref={ drawerRef }
+            in={ isOpen }
+            component={ Wrapper }
+            theme={ (theme || themeContext || {}) }
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
+            width={ width }
+            isRTL={ isRTL }
+          >
+            {
+              withCloseButton && (
+                <IconWrapper onClick={ onOutsideClick }>
+                  { isRTL ? <ArrowRight /> : <ArrowLeft /> }
+                </IconWrapper>
+              )
+            }
+            <Content
+              appearance={ appearance }
+              baseAppearance={ baseAppearance }
+              isOpen={ isOpen }
+              width={ width }
+              isRTL={ isRTL }
+            >
+              { children }
+            </Content>
+            <SeparatorWrapper
+              appearance={ appearance }
+              baseAppearance={ baseAppearance }
+              onMouseDown={ handleMouseDown }
+              onMouseUp={ handleMouseUp }
+              isMovable={ isMovable }
+            >
+              <Separator
                 appearance={ appearance }
                 baseAppearance={ baseAppearance }
-                width={ width }
-                offsetSide={ children && (width || 0) }
                 isRTL={ isRTL }
-              >
-                {
-                  withCloseButton && (
-                    <IconWrapper onClick={ onOutsideClick }>
-                      { isRTL ? <ArrowRight /> : <ArrowLeft /> }
-                    </IconWrapper>
-                  )
-                }
-                <Content
-                  appearance={ appearance }
-                  baseAppearance={ baseAppearance }
-                  isOpen={ isOpen }
-                  width={ width }
-                  offsetSide={ children && (width || 0) }
-                  isRTL={ isRTL }
-                >
-                  { children }
-                </Content>
-                <SeparatorWrapper
-                  appearance={ appearance }
-                  baseAppearance={ baseAppearance }
-                  onMouseDown={ handleMouseDown }
-                  onMouseUp={ handleMouseUp }
-                  isMovable={ isMovable }
-                >
-                  <Separator
-                    appearance={ appearance }
-                    baseAppearance={ baseAppearance }
-                    isRTL={ isRTL }
-                  />
-                </SeparatorWrapper>
-              </Slide>
-            </>
-          </TransitionGroup>
+              />
+            </SeparatorWrapper>
+          </Slide>
         </Portal>
       </Transition>
     </ThemeProvider>

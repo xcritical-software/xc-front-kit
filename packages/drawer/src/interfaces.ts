@@ -28,7 +28,6 @@ export interface IDrawerProps {
 
 export interface IDrawerStates {
   width?: number | string;
-  offsetSide?: number;
   ref?: RefObject<HTMLElement>;
 }
 

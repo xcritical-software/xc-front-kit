@@ -12,6 +12,6 @@ export const Root = styled.div<IBlanketProps>`
   opacity: ${({
     theme,
     isTinted,
-  }: IBlanketProps) => (isTinted ? getBlanketThemeStylesByProperty({ theme }).opacity : 0)};
+  }: IBlanketProps) => (isTinted ? getBlanketThemeStylesByProperty({ theme })(['opacity']) : 0)};
   pointer-events: ${({ canClickThrough }: IBlanketProps) => (canClickThrough ? 'none' : 'initial')};
 `;
