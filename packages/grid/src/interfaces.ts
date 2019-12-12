@@ -20,7 +20,7 @@ export interface IGrid {
   items: IItem[];
   columns: IColumn[];
   width?: number;
-  height: number;
+  height?: number;
   isDisableSelect?: boolean;
   isMultiSelect?: boolean;
   onChangeColumns?: Function;

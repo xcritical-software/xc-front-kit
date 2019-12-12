@@ -12,7 +12,23 @@ import {
 } from './data';
 import * as countries from './countries';
 import { gridThemeNamespace } from '../src/theme';
+import { Sidebar } from '../../xc-sidebar/src/index';
 
+
+const list: any = (n: number) => (
+  <div>
+    <ul style={ { listStyleType: 'none' } }>
+      { new Array(n).fill(true).map((el, i) => `This is list item number ${i}`).map((el) => (
+        <li
+          key={ el }
+          style={ { padding: '10px 10px 10px 10px' } }
+        >
+          { el }
+        </li>
+      )) }
+    </ul>
+  </div>
+);
 
 const generateTheme = (color: string) => {
   const theme = {
@@ -172,12 +188,14 @@ storiesOf('New Grid', module)
   ))
   .add('Dinamic width', () => (
     <div style={ { width: '100%', height: '600px' } }>
-      <Grid
-        columns={ columns.map((el) => ({ ...el, center: true })) }
-        items={ rows }
-        height={ document.documentElement.clientHeight - 100 }
-        theme={ AMStheme }
-        shouldFitContainer
-      />
+      <Sidebar>{ list(100) }</Sidebar>
+      <div style={ { display: 'flex', height: '100vh', padding: '0 30px' } }>
+        <Grid
+          columns={ columns.map((el) => ({ ...el, center: true })) }
+          items={ rows }
+          theme={ AMStheme }
+          shouldFitContainer
+        />
+      </div>
     </div>
   ));

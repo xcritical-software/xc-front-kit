@@ -290,21 +290,19 @@ const Grid = ({
   };
 
   const observerRef: React.MutableRefObject<ResizeObserver | undefined> = useRef();
-  useEffect(() => {
-    observerRef.current = createObserver();
-  }, []);
 
+  useEffect(() => {
+    if (shouldFitContainer) observerRef.current = createObserver();
+  }, [shouldFitContainer]);
 
   useEffect(
     () => () => {
-      if (observerRef.current && wrapperRef.current) {
+      if (shouldFitContainer && observerRef.current && wrapperRef.current) {
         observerRef.current.unobserve(wrapperRef.current);
-        if (observerRef.current.disconnect) {
-          observerRef.current.disconnect();
-        }
+        observerRef.current.disconnect();
       }
     },
-    [observerRef],
+    [observerRef, shouldFitContainer],
   );
 
 
