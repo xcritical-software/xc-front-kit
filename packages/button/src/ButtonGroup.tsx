@@ -1,20 +1,14 @@
 import React from 'react';
 
 import { StyledButtonGroup } from './styled';
-import { IButtonGroupProps } from './interfaces';
+import { IButtonGroup } from './interfaces';
 
 
-export const ButtonGroup: React.FC<IButtonGroupProps> = ({
+export const ButtonGroup: React.FC<IButtonGroup> = ({
   children,
   theme,
-  baseAppearance = 'default',
-  appearance = 'default',
 }) => (
-  <StyledButtonGroup
-    theme={ theme }
-    baseAppearance={ baseAppearance }
-    appearance={ appearance }
-  >
+  <StyledButtonGroup theme={ theme }>
     { children }
   </StyledButtonGroup>
 );

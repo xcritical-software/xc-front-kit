@@ -1,7 +1,7 @@
 import { colors } from '@xcritical/theme';
 
 import { generateApperance } from './utils/themeTools';
-import { ButtonTheme, IButtonGroupTheme } from './interfaces';
+import { ButtonTheme, ButtonGroupTheme } from './interfaces';
 
 
 export const buttonThemeNamespace = '@xcritical\\button';
@@ -51,10 +51,7 @@ export const buttonThemeStyle: ButtonTheme = {
   borderRadius: '3px',
 };
 
-export const defaultButtonGroupTheme: IButtonGroupTheme = {
-  _border: `1px solid ${colors.PRIMARY}`,
-  _borderRadius: '5px',
-  buttonGroup: {
-    display: 'inline-block',
-  },
+export const defaultButtonGroupTheme: ButtonGroupTheme = {
+  display: 'inline-block',
+  borderRadius: '5px',
 };

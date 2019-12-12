@@ -15,7 +15,6 @@ export interface IBaseButtonTheme extends ICSSProperties {
 
 export type ButtonTheme = ITheme<IBaseButtonTheme>;
 
-// TODO Replace it with IThemed<T>.
 export interface IButtonAppearanceProps {
   theme?: IThemeNamespace<ButtonTheme>;
   appearance?: string;
@@ -70,20 +69,9 @@ export interface IStyledButtonProps extends IButtonProps {
 }
 
 /* BUTTON GROUP */
-export interface IThemed {
-  theme: IThemeNamespace<IButtonGroupTheme>;
-  appearance: string;
-  baseAppearance: string;
-}
+// TODO ITheme unnecessary here but without it getButtonGroupStyles throw linter error.
+export type ButtonGroupTheme = ITheme<CSSObject>;
 
-export interface IButtonGroupTheme {
-  _border?: string;
-  _borderRadius?: string;
-  buttonGroup?: CSSObject;
-}
-
-export interface IButtonGroupProps {
-  theme?: IThemeNamespace<IButtonGroupTheme>;
-  baseAppearance?: string;
-  appearance?: string;
+export interface IButtonGroup {
+  theme?: IThemeNamespace<ButtonGroupTheme>;
 }

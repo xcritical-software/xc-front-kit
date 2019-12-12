@@ -1,34 +1,42 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { AllHTMLAttributes, forwardRef } from 'react';
+import React, { forwardRef, RefObject } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import { Link, MemoryRouter } from 'react-router-dom';
 import { colors } from '@xcritical/theme';
 
-import Button, { ButtonGroup, buttonGroupThemeNamespace } from '../src';
+import Button, { ButtonGroup, buttonGroupThemeNamespace, buttonThemeNamespace } from '../src';
 
 
-const theme = {
-  [buttonGroupThemeNamespace]: {
-    appearance: {
-      default: {
-        _border: `1px solid ${colors.GREEN}`,
-        _borderRadius: '0',
+const buttonTheme = {
+  appearance: {
+    pagination: {
+      borderColor: colors.PRIMARY,
+      disabled: {
+        borderColor: colors.PRIMARY,
       },
-      primary: {
-        _border: `1px solid ${colors.PRIMARY}`,
-      },
-      rounded: {
-        _borderRadius: '15px',
-      },
-      general: {
-        buttonGroup: {
-          display: 'inline-flex',
-          padding: '5px',
-          border: '1px solid black',
-        },
+      selected: {
+        borderColor: colors.PRIMARY,
       },
     },
+  },
+};
+
+const themeWithButton = {
+  [buttonThemeNamespace]: buttonTheme,
+};
+
+const complexTheme = {
+  [buttonThemeNamespace]: buttonTheme,
+  [buttonGroupThemeNamespace]: {
+    borderRadius: '0',
+  },
+};
+
+const specificButtonGroupTheme = {
+  [buttonGroupThemeNamespace]: {
+    borderRadius: '15px',
+    boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
   },
 };
 
@@ -38,64 +46,60 @@ const Wrapper = styled.div`
 
 storiesOf('ButtonGroup', module)
   .add('One button', () => (
-    <ButtonGroup>
-      <Button>1</Button>
-    </ButtonGroup>
+    <ThemeProvider theme={ themeWithButton }>
+      <ButtonGroup>
+        <Button appearance="pagination">1</Button>
+      </ButtonGroup>
+    </ThemeProvider>
   ))
   .add('Two buttons (with states)', () => (
-    <ButtonGroup>
-      <Button disabled>1</Button>
-      <Button selected>2</Button>
-    </ButtonGroup>
+    <ThemeProvider theme={ themeWithButton }>
+      <ButtonGroup>
+        <Button appearance="pagination" disabled>1</Button>
+        <Button appearance="pagination" selected>2</Button>
+      </ButtonGroup>
+    </ThemeProvider>
   ))
   .add('Three buttons (with links)', () => (
     <MemoryRouter>
-      <ButtonGroup>
-        <Button>1</Button>
-        <Button href="/2">2</Button>
-        <Button
-          href="/3"
-          component={
-            forwardRef<HTMLAnchorElement, Link & AllHTMLAttributes<HTMLAnchorElement>>(({ href = '', children, ...rest }, ref) => (
-              <Link { ...rest } to={ href } innerRef={ ref }>
-                { children }
-              </Link>
-            ))
-          }
-        >
+      <ThemeProvider theme={ themeWithButton }>
+        <ButtonGroup>
+          <Button appearance="pagination">1</Button>
+          <Button appearance="pagination" href="/2">2</Button>
+          <Button
+            appearance="pagination"
+            component={
+              forwardRef(({ children, className }, ref: RefObject<HTMLAnchorElement>) => (
+                <Link
+                  innerRef={ ref }
+                  className={ className }
+                  to="/3"
+                >
+                  { children }
+                </Link>
+              ))
+            }
+          >
           3
-        </Button>
-      </ButtonGroup>
+          </Button>
+        </ButtonGroup>
+      </ThemeProvider>
     </MemoryRouter>
   ))
   .add('Themed', () => (
-    <ThemeProvider theme={ theme }>
+    <ThemeProvider theme={ complexTheme }>
       <Wrapper>
-        <ButtonGroup appearance="rounded">
-          <Button>1</Button>
-          <Button>2</Button>
-          <Button>3</Button>
+        <ButtonGroup>
+          <Button appearance="pagination">1</Button>
+          <Button appearance="pagination">2</Button>
+          <Button appearance="pagination">3</Button>
         </ButtonGroup>
       </Wrapper>
       <Wrapper>
-        <ButtonGroup appearance="primary">
-          <Button>1</Button>
-          <Button>2</Button>
-          <Button>3</Button>
-        </ButtonGroup>
-      </Wrapper>
-      <Wrapper>
-        <ButtonGroup baseAppearance="primary" appearance="rounded">
-          <Button>1</Button>
-          <Button>2</Button>
-          <Button>3</Button>
-        </ButtonGroup>
-      </Wrapper>
-      <Wrapper>
-        <ButtonGroup appearance="general">
-          <Button>1</Button>
-          <Button>2</Button>
-          <Button>3</Button>
+        <ButtonGroup theme={ specificButtonGroupTheme }>
+          <Button appearance="pagination">1</Button>
+          <Button appearance="pagination">2</Button>
+          <Button appearance="pagination">3</Button>
         </ButtonGroup>
       </Wrapper>
     </ThemeProvider>

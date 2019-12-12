@@ -1,15 +1,14 @@
-import { getAppearanceTheme } from '@xcritical/theme';
+import memoize from 'micro-memoize';
+import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
-import { IThemed } from '../interfaces';
+import { ButtonGroupTheme } from '../interfaces';
 import { buttonGroupThemeNamespace, defaultButtonGroupTheme } from '../theme';
 
 
-export const getButtonGroupProperty = ({
-  theme,
-  baseAppearance,
-  appearance,
-}: IThemed): (propertyPath: string[]) => any => {
-  const func = getAppearanceTheme(buttonGroupThemeNamespace, defaultButtonGroupTheme);
-
-  return (propertyPath) => func(theme, appearance, propertyPath, baseAppearance);
-};
+export const getButtonGroupStyles = memoize((
+  theme: IThemeNamespace<ButtonGroupTheme> = {},
+  propertyPath?: string | string[],
+): ButtonGroupTheme => {
+  const func = getThemedState(buttonGroupThemeNamespace, defaultButtonGroupTheme);
+  return func(theme, propertyPath);
+});
