@@ -25,6 +25,7 @@ export const PureInput: React.FC<IInputProps> = ({
   onValidate,
   type = 'text',
   autoComplete = 'on',
+  shouldFitContainer = false,
   css,
   ...rest
 }) => {
@@ -55,6 +56,7 @@ export const PureInput: React.FC<IInputProps> = ({
       disabled={ disabled }
       invalid={ invalid }
       css={ css }
+      shouldFitContainer={ shouldFitContainer }
       onClick={ handleClick }
     >
       { !!prefix && (
