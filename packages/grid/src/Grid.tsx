@@ -60,7 +60,7 @@ const Grid = ({
   );
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const fullWidthRef = useRef(
-    mappedColumns.reduce(
+    mappedColumns.filter(({ visible }: IColumn) => visible).reduce(
       (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
     ),
   );
@@ -79,7 +79,7 @@ const Grid = ({
   ), [mappedColumns]);
 
   useEffect(() => {
-    const newFullWidth = columns.reduce(
+    const newFullWidth = columns.filter(({ visible }: IColumn) => visible).reduce(
       (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
     );
     themeRef.current = gridTheme(theme || contextTheme);
@@ -240,7 +240,7 @@ const Grid = ({
     (index, newWidth) => {
       const newColumns = setIn(mappedColumns, newWidth, [index, 'width']);
       setMappedColumns(newColumns);
-      fullWidthRef.current = newColumns.reduce(
+      fullWidthRef.current = newColumns.filter(({ visible }: IColumn) => visible).reduce(
         (acc: number, { width: colWidth }: IMappedItem) => (acc + Number(colWidth)),
         0,
       );
@@ -301,10 +301,10 @@ const Grid = ({
           translateX={ scrollLeft }
           theme={ themeRef.current }
         >
-          { mappedColumns.map((el: IColumn, index: number) => (
+          { filteredColums.map((el: IColumn, index: number) => (
             <TotalCell
               theme={ themeRef.current }
-              width={ mappedColumns.length === index + 1 ? el.width + 9 : el.width }
+              width={ filteredColums.length === index + 1 ? el.width + 9 : el.width }
             >
               <TotalCellContent center={ !!el.center } theme={ themeRef.current }>
                 <span>{ totals[el.field] }</span>

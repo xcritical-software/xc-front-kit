@@ -205,8 +205,9 @@ storiesOf('New Grid', module)
           columns={ mappedColumns.map((el) => ({ ...el, center: true })) }
           items={ rows }
           width={ document.documentElement.clientWidth - 20 }
-          height={ document.documentElement.clientHeight - 20 }
+          height={ document.documentElement.clientHeight - 350 }
           theme={ AMStheme }
+          totals={ totals }
           onChangeColumns={ handleChangeColumns }
         />
       </>
