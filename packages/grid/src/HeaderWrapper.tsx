@@ -124,7 +124,9 @@ export const HeaderWrapper = ({
   return (
     <Header ref={ headerRef } width={ fullWidth } translateX={ translateX } theme={ theme }>
       { mappedColumnsRef.current.map((el: IColumn, index: number) => (
+        el.visible && 
         <HeaderCellWrapper
+          key={el.field}
           isEmpty={ index === emptyColumnIndexRef.current }
           onMouseDown={ handleMouseDown }
           width={ getColumnWidth(el, index) }

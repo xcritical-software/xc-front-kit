@@ -62,9 +62,9 @@ export const columns = [
     center,
     width,
     headerName: 'Col 8',
-    field: 'col7',
+    field: 'col8',
   },
-  { width, headerName: 'Col 9', field: 'col8' },
+  { width, headerName: 'Col 9', field: 'col9' },
   {
     center,
     width,
