@@ -5,6 +5,7 @@ import React, {
   useCallback,
   MutableRefObject,
   useContext,
+  useMemo,
 } from 'react';
 import { ThemeContext } from 'styled-components';
 import {
@@ -254,6 +255,27 @@ const Grid = ({
     [onChangeColumns],
   );
 
+  // const handleChangeVisibleColumns = useCallback(i => {
+  //   const newVisible = !mappedColumns[i].visible;
+  //   const newColumn = {
+  //     ...mappedColumns[i],
+  //     visible: newVisible,
+  //     lastWidth: newVisible ? null : mappedColumns[i].width,
+  //     width: newVisible ? mappedColumns[i].lastWidth : 0
+  //   }
+  //   const newColumns = setIn(mappedColumns, newColumn, [String(i)])
+
+  //   setMappedColumns(newColumns);
+  //   onChangeColumns(newColumns);
+  // }, [mappedColumns])
+
+  const filteradColums = useMemo(() => (
+    mappedColumns.filter((filter) => filter.visible)
+  ), [mappedColumns]);
+  const virtualizedGridData = useMemo(() => {
+
+  }, []);
+
   useEffect(() => {
     if (gridRef.current) gridRef.current.recomputeGridSize();
     if (cacheRef.current) cacheRef.current.clearAll();
@@ -276,6 +298,7 @@ const Grid = ({
         theme={ themeRef.current }
         shouldMovingColumns={ shouldMovingColumns }
         shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+        // handleChangeVisibleColumns={handleChangeVisibleColumns}
       />
       <Body>
         <VirtualisedGrid

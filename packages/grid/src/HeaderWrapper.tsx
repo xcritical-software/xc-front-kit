@@ -20,6 +20,7 @@ export const HeaderWrapper = ({
   theme,
   shouldMovingColumns,
   shouldChangeColumnsWidth,
+  // handleChangeVisibleColumns
 }: IHeaderWrapper) => {
   const mappedColumnsRef = useRef(columns);
   const [isMoving, setIsMoving] = useState(false);
@@ -113,7 +114,6 @@ export const HeaderWrapper = ({
     document.addEventListener('mousemove', handleMouseMove);
     setChangingColumns('move');
   };
-
   return (
     <Header ref={ headerRef } width={ fullWidth } translateX={ translateX } theme={ theme }>
       { mappedColumnsRef.current.map((el: IColumn, index: number) => (

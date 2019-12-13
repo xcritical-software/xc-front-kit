@@ -10,8 +10,10 @@ export interface IColumn {
   headerName: string;
   field: string;
   width: number;
+  visible: boolean;
   center?: boolean;
   isExpandable?: boolean;
+  lastWidth?: number;
 }
 export interface ITotals {
   [key: string]: string | number;
