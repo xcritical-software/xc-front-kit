@@ -74,6 +74,9 @@ const Grid = ({
     }),
   );
 
+  const filteredColums = useMemo(() => (
+    mappedColumns.filter(({ visible }) => visible)
+  ), [mappedColumns]);
 
   useEffect(() => {
     const newFullWidth = columns.reduce(
@@ -174,11 +177,11 @@ const Grid = ({
   const cellRenderer = ({
     columnIndex, key, parent, rowIndex, style,
   }: GridCellProps) => {
-    const content = mappedItems[rowIndex][mappedColumns[columnIndex].field];
+    const content = mappedItems[rowIndex][filteredColums[columnIndex].field];
     const isFirstColumn = columnIndex === 0;
     const expandLevel = isFirstColumn ? mappedItems[rowIndex].expandLevel : 0;
 
-    const column = mappedColumns[columnIndex];
+    const column = filteredColums[columnIndex];
 
     const handleExpand = () => {
       onChangeExpand(rowIndex, mappedItems[rowIndex].children);
@@ -255,27 +258,6 @@ const Grid = ({
     [onChangeColumns],
   );
 
-  // const handleChangeVisibleColumns = useCallback(i => {
-  //   const newVisible = !mappedColumns[i].visible;
-  //   const newColumn = {
-  //     ...mappedColumns[i],
-  //     visible: newVisible,
-  //     lastWidth: newVisible ? null : mappedColumns[i].width,
-  //     width: newVisible ? mappedColumns[i].lastWidth : 0
-  //   }
-  //   const newColumns = setIn(mappedColumns, newColumn, [String(i)])
-
-  //   setMappedColumns(newColumns);
-  //   onChangeColumns(newColumns);
-  // }, [mappedColumns])
-
-  const filteradColums = useMemo(() => (
-    mappedColumns.filter((filter) => filter.visible)
-  ), [mappedColumns]);
-  const virtualizedGridData = useMemo(() => {
-
-  }, []);
-
   useEffect(() => {
     if (gridRef.current) gridRef.current.recomputeGridSize();
     if (cacheRef.current) cacheRef.current.clearAll();
@@ -298,13 +280,12 @@ const Grid = ({
         theme={ themeRef.current }
         shouldMovingColumns={ shouldMovingColumns }
         shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-        // handleChangeVisibleColumns={handleChangeVisibleColumns}
       />
       <Body>
         <VirtualisedGrid
           ref={ gridRef as MutableRefObject<VirtualisedGrid> }
-          columnCount={ mappedColumns.length }
-          columnWidth={ ({ index }: any) => mappedColumns[index].width }
+          columnCount={ filteredColums.length }
+          columnWidth={ ({ index }: any) => filteredColums[index].width }
           deferredMeasurementCache={ cacheRef.current }
           height={ height - Number(headerHeight) - Number(totalsHeight) }
           cellRenderer={ cellRenderer }

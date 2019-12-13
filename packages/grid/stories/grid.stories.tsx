@@ -172,35 +172,22 @@ storiesOf('New Grid', module)
     />
   ))
   .add('Selector columns', () => {
-    const [mappedColumns, setMappedColumns] = useState(columns);
+    const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
 
     const handleChangeVisibleColumns = useCallback((i) => {
-      const newVisible = !mappedColumns[i].visible;
-      const newColumn = {
-        ...mappedColumns[i],
-        visible: newVisible,
-        width: newVisible ? columns.find(({ field }: any) => field === mappedColumns[i].field)?.width : 0,
-      };
-      const newColumns = setIn(mappedColumns, newColumn, [String(i)]);
-
+      const newColumns = setIn(mappedColumns, !mappedColumns[i].visible, [String(i), 'visible']);
+      console.log(newColumns);
       setMappedColumns(newColumns);
     }, [mappedColumns]);
 
-    // const handleChangeVisibleColumns = useCallback(i => {
-    //       const newVisible = !mappedColumns[i].visible;
-    //       const newColumn = {
-    //         ...mappedColumns[i],
-    //         visible: newVisible,
-    //         width: newVisible ? columns.find(({ field }: any) => field === mappedColumns[i].field)?.width : 0
-    //       }
-    //       const newColumns = setIn(mappedColumns, newColumn, [String(i)])
-
-    //       setMappedColumns(newColumns);
-    //     }, [mappedColumns])
+    const handleChangeColumns = (newColumns: IColumn[]) => {
+      setMappedColumns(newColumns);
+      console.log(newColumns);
+    };
 
     return (
       <>
-        <div style={ { width: '120px', border: '1px solid black', backgroundColor: 'white' } }>
+        <div>
           {
             mappedColumns.map((col, i) => (
               <div>
@@ -220,7 +207,7 @@ storiesOf('New Grid', module)
           width={ document.documentElement.clientWidth - 20 }
           height={ document.documentElement.clientHeight - 20 }
           theme={ AMStheme }
-          onChangeColumns={ setMappedColumns }
+          onChangeColumns={ handleChangeColumns }
         />
       </>
     );
