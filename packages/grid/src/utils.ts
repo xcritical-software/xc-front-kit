@@ -1,7 +1,7 @@
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
 import { gridThemeNamespace, defaultTheme } from './theme';
-import { IGridTheme, IMappedItem } from './interfaces';
+import { IGridTheme, IMappedItem, IColumn } from './interfaces';
 
 
 export const guid = () => {
@@ -38,3 +38,25 @@ export const deletePropsFromObjects = (arr: IMappedItem[], ...rest: any) => arr
     });
     return newElem;
   });
+
+
+export const searchLastVisible = (arr: IColumn[], idx: number) => {
+  let lastVisible = 0;
+  for (let i = idx - 1; i >= 0; i--) {
+    if (arr[i].visible) {
+      lastVisible = i;
+      break;
+    }
+  }
+  return lastVisible;
+};
+export const searchNextVisible = (arr: IColumn[], idx: number) => {
+  let nextVisible = arr.length - 1;
+  for (let i = idx + 1; i < arr.length; i++) {
+    if (arr[i].visible) {
+      nextVisible = i;
+      break;
+    }
+  }
+  return nextVisible;
+};
