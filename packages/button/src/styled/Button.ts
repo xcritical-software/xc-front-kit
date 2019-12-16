@@ -6,13 +6,13 @@ import {
   getButtonStyles,
   getItemInteractiveStyles,
 } from '../utils';
-import { IPrefixProps, IButtonProps, IContentProps } from '../interfaces';
+import { IPrefixProps, IStyledButtonProps, IContentProps } from '../interfaces';
 
 
-const style = css<IButtonProps>`
+const style = css<IStyledButtonProps>`
 ${({
-    theme, appearance, baseAppearance, outline, shouldFitContent, spacing,
-  }) => getButtonStyles(theme, appearance, baseAppearance, outline, shouldFitContent, spacing)};
+    theme, baseAppearance, appearance, spacing, ghost, shouldFitContent,
+  }) => getButtonStyles(theme, baseAppearance, appearance, spacing, ghost, shouldFitContent)};
 ${({
     disabled,
     selected,
@@ -25,11 +25,8 @@ ${({ css: cssInner }) => (cssInner || null)}
 direction: ${({ isRTL }) => (isRTL ? 'rtl' : 'ltr')};
 `;
 
-export const Root = (tag: string | React.ElementType) => (typeof tag === 'string'
-  ? styled[tag]
-  : styled(tag))`
+export const StyledButton = styled.div`
   align-items: center;
-  border-width: 0;
   box-sizing: border-box;
   display: inline-flex;
   font-size: inherit;
@@ -78,13 +75,12 @@ export const ContentWrapper = styled.span`
   }
 `;
 
-
 export const Content = styled.span<IContentProps>`
   direction: inherit;
   display: block;
   flex: 1 1 auto;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: 'nowrap';
+  white-space: nowrap;
   text-align: ${({ isRTL, textPosition = 'center' }) => rtlSide(isRTL || false, textPosition)};
 `;
