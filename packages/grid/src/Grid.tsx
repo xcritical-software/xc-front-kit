@@ -89,8 +89,11 @@ const Grid = ({
       const widthLast = columns[lastElemIdx].width;
       const newColumns = setIn(columns, widthLast + (width - newFullWidth), [String(lastElemIdx), 'width']);
       setMappedColumns(newColumns);
+      fullWidthRef.current = newFullWidth;
       return;
     }
+
+    fullWidthRef.current = newFullWidth;
     setMappedColumns(columns);
   }, [columns, contextTheme, theme, width]);
 
@@ -238,15 +241,30 @@ const Grid = ({
 
   const handleChangeWidth = useCallback(
     (index, newWidth) => {
-      const newColumns = setIn(mappedColumns, newWidth, [index, 'width']);
-      setMappedColumns(newColumns);
-      fullWidthRef.current = newColumns.filter(({ visible }: IColumn) => visible).reduce(
-        (acc: number, { width: colWidth }: IMappedItem) => (acc + Number(colWidth)),
+      let newColumns: IColumn[] = setIn(mappedColumns, newWidth, [index, 'width']);
+      let newFullWidth: number = newColumns.reduce(
+        (acc, { width: colWidth }) => (acc + colWidth),
         0,
       );
+
+      if (newFullWidth < width) {
+        const lastColIdx = searchLastVisible(newColumns, newColumns.length);
+        newColumns = setIn(
+          newColumns,
+          newColumns[lastColIdx].width + (width - newFullWidth),
+          [String(lastColIdx), 'width'],
+        );
+
+        newFullWidth = newColumns.reduce(
+          (acc, { width: colWidth }) => (acc + colWidth),
+          0,
+        );
+      }
+      fullWidthRef.current = newFullWidth;
+      setMappedColumns(newColumns);
       onChangeColumns(newColumns);
     },
-    [mappedColumns, onChangeColumns],
+    [mappedColumns, onChangeColumns, width],
   );
 
 

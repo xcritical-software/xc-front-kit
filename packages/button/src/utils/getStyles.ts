@@ -2,6 +2,7 @@
 import get from 'lodash.get';
 import memoize from 'micro-memoize';
 import { css, FlattenInterpolation } from 'styled-components';
+import { shallowEqual } from 'fast-equals';
 
 import {
   getAppearanceTheme,
@@ -20,6 +21,8 @@ export const buttonTheme = memoize((
 ): ButtonTheme | any => {
   const func = getThemedState(buttonThemeNamespace, buttonThemeStyle);
   return func(theme, propertyPath);
+}, {
+  isEqual: shallowEqual,
 });
 
 
@@ -31,6 +34,8 @@ export const buttonAppearanceTheme = memoize((
 ): ButtonTheme | any => {
   const func = getAppearanceTheme(buttonThemeNamespace, buttonThemeStyle);
   return func(theme, appearanceName, propertyPath, baseAppearance);
+}, {
+  isEqual: shallowEqual,
 });
 
 
@@ -70,6 +75,8 @@ const getAppearanceStyleProperty = memoize((
   }
 
   return statesTheme();
+}, {
+  isEqual: shallowEqual,
 });
 
 
@@ -78,7 +85,7 @@ const getVerticalAlign = (spacing = 'default'): string => (spacing === 'none' ? 
 const getWidth = (shouldFitContent = false): string => (shouldFitContent ? '100%' : 'auto');
 
 
-export const getButtonStatesStyle = (stateName: string) => ({
+const getButtonStatesStyle = (stateName: string) => ({
   theme,
   baseAppearance,
   appearance,
@@ -98,7 +105,7 @@ export const getButtonStatesStyle = (stateName: string) => ({
 
   return css`
     ${styles}
-    ${_outline}
+    ${ghost ? _outline : {}}
     
     cursor: ${getCursor(stateName)};
     transition: ${getTransition(stateName)};
@@ -154,6 +161,8 @@ export const getItemInteractiveStyles = memoize((
     }
     ${standardFocus}
   `;
+}, {
+  isEqual: shallowEqual,
 });
 
 export const getButtonStyles = memoize((
@@ -175,8 +184,6 @@ export const getButtonStyles = memoize((
   } = buttonAppearanceTheme(theme, appearance, baseAppearance);
 
   return {
-    ...rootStyles,
-    ...styles,
     background,
     fill: background,
     border: '1px solid transparent',
@@ -190,9 +197,13 @@ export const getButtonStyles = memoize((
     height: 'auto',
     verticalAlign: getVerticalAlign(spacing),
     width: getWidth(shouldFitContent),
+    ...rootStyles,
+    ...styles,
     ...ghost && (outline || {
       background: 'white',
       color: background,
     }),
   };
+}, {
+  isEqual: shallowEqual,
 });
