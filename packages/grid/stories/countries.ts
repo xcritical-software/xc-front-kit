@@ -6,7 +6,7 @@ export const columns = [
   { field: 'counry', headerName: 'Страна', width: 150 },
   { field: 'billion2017', headerName: 'ВВП 2017 млрд $', width: 150 },
   { field: 'billion2018', headerName: 'ВВП 2018 млрд $', width: 150 },
-];
+].map((el) => ({ ...el, visible: true }));
 
 const mvf = [
   {
