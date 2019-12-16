@@ -18,8 +18,10 @@ export const Root = styled.div<ISubComponentProps>`
   display: inline-flex;
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   flex-wrap: nowrap;
+  box-sizing: border-box;
   align-items: center;
   justify-content: flex-start;
+  width: ${({ shouldFitContainer }) => (shouldFitContainer ? '100%' : 'auto')};
   ${getRootInputStyles}
   ${getRootInputInteractiveStyles}
   ${({ css: cssInner }: any) => (cssInner || null)}

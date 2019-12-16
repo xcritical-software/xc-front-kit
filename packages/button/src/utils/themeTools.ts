@@ -23,6 +23,7 @@ export const generateApperance = ({
 }: IGenApperance): IThemeBase<IBaseButtonTheme> => ({
   background,
   color,
+  fill: color,
   boxShadowColor: boxShadowColor || darken(0.1, background),
   ...fontWeight && { fontWeight },
   _outline,

@@ -17,8 +17,9 @@ module.exports = {
   },
   collectCoverage: true,
   verbose: true,
+  name: '@xcritical/xc-front-kit',
   displayName: {
-    name: '@xcritical/theme',
+    name: '@xcritical/xc-front-kit',
     color: 'blue',
   },
   errorOnDeprecated: true,
