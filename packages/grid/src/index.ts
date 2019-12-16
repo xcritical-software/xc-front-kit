@@ -1,4 +1,4 @@
-import Grid from './Grid';
+import Grid from './GridHOC';
 import { gridThemeNamespace } from './theme';
 
 

@@ -20,8 +20,8 @@ export interface ITotals {
 export interface IGrid {
   items: IItem[];
   columns: IColumn[];
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   isDisableSelect?: boolean;
   isMultiSelect?: boolean;
   onChangeColumns?: Function;
@@ -30,7 +30,10 @@ export interface IGrid {
   onSelect?: Function;
   shouldMovingColumns?: boolean;
   shouldChangeColumnsWidth?: boolean;
+  shouldFitContainer?: boolean;
 }
+
+
 export interface IMappedItem extends IItem {
   key: string;
   expandLevel: number;

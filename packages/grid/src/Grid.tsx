@@ -54,6 +54,7 @@ const Grid = ({
 }: IGrid) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme || contextTheme));
+
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
     items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
@@ -285,6 +286,7 @@ const Grid = ({
     header: { height: headerHeight = 0 },
     totals: { height: totalsHeight = 0 },
   } = themeRef.current;
+
 
   return (
     <Wrapper theme={ themeRef.current } width={ width } changingColumns={ changingColumns }>
