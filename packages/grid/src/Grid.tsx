@@ -29,7 +29,7 @@ import {
 } from './styled';
 import { AddIcon, RemoveIcon } from './icons';
 import {
-  guid, addOrDeleteItemFromArray, gridTheme, deletePropsFromObjects,
+  guid, addOrDeleteItemFromArray, gridTheme, deletePropsFromObjects, searchLastVisible,
 } from './utils';
 
 import { HeaderWrapper } from './HeaderWrapper';
@@ -85,7 +85,7 @@ const Grid = ({
     themeRef.current = gridTheme(theme || contextTheme);
     fullWidthRef.current = newFullWidth;
     if (newFullWidth < width) {
-      const lastElemIdx = columns.length - 1;
+      const lastElemIdx = searchLastVisible(columns, columns.length);
       const widthLast = columns[lastElemIdx].width;
       const newColumns = setIn(columns, widthLast + (width - newFullWidth), [String(lastElemIdx), 'width']);
       setMappedColumns(newColumns);
