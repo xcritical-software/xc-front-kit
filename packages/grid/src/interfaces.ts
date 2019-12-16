@@ -10,6 +10,7 @@ export interface IColumn {
   headerName: string;
   field: string;
   width: number;
+  visible: boolean;
   center?: boolean;
   isExpandable?: boolean;
 }

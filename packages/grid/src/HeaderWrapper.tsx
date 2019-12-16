@@ -8,6 +8,7 @@ import React, {
 import { HeaderCellWrapper } from './HeaderCell';
 import { Header, MovingElem } from './styled';
 import { IHeaderWrapper, IColumn } from './interfaces';
+import { searchLastVisible, searchNextVisible } from './utils';
 
 
 export const HeaderWrapper = ({
@@ -43,8 +44,8 @@ export const HeaderWrapper = ({
       const moveMouse = clientX - clickXRef.current;
 
       const emptyIdx = emptyColumnIndexRef.current || 0;
-      const leftColumnIndex = emptyIdx - 1;
-      const rightColumnIndex = emptyIdx + 1;
+      const leftColumnIndex = searchLastVisible(mappedColumnsRef.current, emptyIdx);
+      const rightColumnIndex = searchNextVisible(mappedColumnsRef.current, emptyIdx);
 
       if (moveMouse < 0) {
         if (mappedColumnsRef.current[leftColumnIndex]) {
@@ -114,22 +115,31 @@ export const HeaderWrapper = ({
     setChangingColumns('move');
   };
 
+  const getColumnWidth = useCallback((column: IColumn, index: number): number => {
+    if (mappedColumnsRef.current.length === index + 1) return column.width + 9;
+    return column.width;
+  }, []);
+
   return (
     <Header ref={ headerRef } width={ fullWidth } translateX={ translateX } theme={ theme }>
       { mappedColumnsRef.current.map((el: IColumn, index: number) => (
-        <HeaderCellWrapper
-          isEmpty={ index === emptyColumnIndexRef.current }
-          onMouseDown={ handleMouseDown }
-          width={ mappedColumnsRef.current.length === index + 1 ? el.width + 9 : el.width }
-          text={ el.headerName }
-          onChangeWidth={ onChangeWidth }
-          index={ index }
-          setChangingColumns={ setChangingColumns }
-          center={ !!el.center }
-          theme={ theme }
-          shouldMovingColumns={ shouldMovingColumns }
-          shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-        />
+        el.visible
+        && (
+          <HeaderCellWrapper
+            key={ el.field }
+            isEmpty={ index === emptyColumnIndexRef.current }
+            onMouseDown={ handleMouseDown }
+            width={ getColumnWidth(el, index) }
+            text={ el.headerName }
+            onChangeWidth={ onChangeWidth }
+            index={ index }
+            setChangingColumns={ setChangingColumns }
+            center={ !!el.center }
+            theme={ theme }
+            shouldMovingColumns={ shouldMovingColumns }
+            shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+          />
+        )
       )) }
       { isMoving && (
         <MovingElem
