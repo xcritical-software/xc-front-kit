@@ -116,7 +116,6 @@ export const HeaderWrapper = ({
   };
 
   const getColumnWidth = useCallback((column: IColumn, index: number): number => {
-    if (!column.visible) return 0;
     if (mappedColumnsRef.current.length === index + 1) return column.width + 9;
     return column.width;
   }, []);
@@ -124,21 +123,23 @@ export const HeaderWrapper = ({
   return (
     <Header ref={ headerRef } width={ fullWidth } translateX={ translateX } theme={ theme }>
       { mappedColumnsRef.current.map((el: IColumn, index: number) => (
-        el.visible && 
-        <HeaderCellWrapper
-          key={el.field}
-          isEmpty={ index === emptyColumnIndexRef.current }
-          onMouseDown={ handleMouseDown }
-          width={ getColumnWidth(el, index) }
-          text={ el.headerName }
-          onChangeWidth={ onChangeWidth }
-          index={ index }
-          setChangingColumns={ setChangingColumns }
-          center={ !!el.center }
-          theme={ theme }
-          shouldMovingColumns={ shouldMovingColumns }
-          shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-        />
+        el.visible
+        && (
+          <HeaderCellWrapper
+            key={ el.field }
+            isEmpty={ index === emptyColumnIndexRef.current }
+            onMouseDown={ handleMouseDown }
+            width={ getColumnWidth(el, index) }
+            text={ el.headerName }
+            onChangeWidth={ onChangeWidth }
+            index={ index }
+            setChangingColumns={ setChangingColumns }
+            center={ !!el.center }
+            theme={ theme }
+            shouldMovingColumns={ shouldMovingColumns }
+            shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+          />
+        )
       )) }
       { isMoving && (
         <MovingElem
