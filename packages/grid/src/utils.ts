@@ -41,22 +41,22 @@ export const deletePropsFromObjects = (arr: IMappedItem[], ...rest: any) => arr
 
 
 export const searchLastVisible = (arr: IColumn[], idx: number) => {
-  let lastVisible = null;
+  let lastVisible = 0;
   for (let i = idx - 1; i >= 0; i--) {
     if (arr[i].visible) {
       lastVisible = i;
       break;
     }
   }
-  return lastVisible || 0;
+  return lastVisible;
 };
 export const searchNextVisible = (arr: IColumn[], idx: number) => {
-  let nextVisible = null;
+  let nextVisible = arr.length - 1;
   for (let i = idx + 1; i < arr.length; i++) {
     if (arr[i].visible) {
       nextVisible = i;
       break;
     }
   }
-  return nextVisible || arr.length - 1;
+  return nextVisible;
 };
