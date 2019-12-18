@@ -30,13 +30,13 @@ export const columns = [
     headerName: 'Model',
     field: 'model',
   },
+  { width, headerName: 'Col 1', field: 'col1' },
   {
     center,
     width,
     headerName: 'Price',
     field: 'price',
   },
-  { width, headerName: 'Col 1', field: 'col1' },
   {
     center,
     width,
@@ -62,16 +62,16 @@ export const columns = [
     center,
     width,
     headerName: 'Col 8',
-    field: 'col7',
+    field: 'col8',
   },
-  { width, headerName: 'Col 9', field: 'col8' },
+  { width, headerName: 'Col 9', field: 'col9' },
   {
     center,
     width,
     headerName: 'Col 10',
     field: 'col10',
   },
-];
+].map((el) => ({ ...el, visible: true }));
 
 export const generateLorem = (n: any) => {
   const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -87,7 +87,7 @@ export const generateLorem = (n: any) => {
   if (n < 100) return words.slice(0, n).join(' ');
   const mult = +String(n / 100).split('.')[0];
   const remains = n % 100;
-  const res = [];
+  const res: any[] = [];
   for (let i = 0; i < mult; i++) {
     res.push(text);
   }
@@ -96,7 +96,7 @@ export const generateLorem = (n: any) => {
 };
 
 const createDublicateRows = (n: any) => {
-  const res = [];
+  const res: any[] = [];
   for (let i = 0; i < n; i++) {
     res.push({
       price: Math.floor(Math.random() * 100000 + 10000),

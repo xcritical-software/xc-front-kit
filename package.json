@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/front-kit",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Front Kit for XCritical projects",
   "workspaces": [
     "packages/*"
@@ -13,7 +13,7 @@
   "scripts": {
     "test": "jest --config=jest.config.js",
     "lint": "eslint packages/**/{src,stories,test}/**/*.{js,jsx,ts,tsx}",
-    "lint:fix": "yarn lint --fix",
+    "lint:fix": "yarn lint --fix --quiet",
     "compile": "yarn boltify run build",
     "build": "yarn clean && yarn compile",
     "build:storybook": "build-storybook -c .storybook -o .storybook-static --quiet",
@@ -31,7 +31,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
+      "eslint --fix --quiet",
       "git add"
     ]
   },
@@ -64,9 +64,8 @@
     "@types/styled-components": "^4.4.0",
     "@xcritical/eslint-plugin-xcritical": "^2.1.0",
     "@xcritical/gulpify": "^2.0.0",
-    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
-    "boltify": "1.1.4",
+    "boltify": "^1.1.3",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.18.2",
     "husky": "^3.1.0",
@@ -84,11 +83,11 @@
   },
   "dependencies": {
     "@types/react-redux": "^7.1.5",
+    "csstype":"^2.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "styled-components": "4.4.1",
-    "styled-css-grid": "^1.2.1",
-    "micro-memoize": "4.0.8"
+    "styled-css-grid": "^1.2.1"
   },
   "resolutions": {
     "typescript": "^3.7.2",
