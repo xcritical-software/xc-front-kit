@@ -74,12 +74,13 @@ const AMStheme = {
       color: 'black',
       backgroundColor: 'white',
       height: 35,
-      padding: '10px',
+      padding: '20px',
     },
     row: {
       border: `1px solid ${colors.GRAY}`,
-      padding: '10px',
+      padding: '5px 10px',
       fontSize: '13px',
+      height: '20px',
     },
   },
 };
