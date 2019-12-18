@@ -2776,6 +2776,17 @@
     through2 "^3.0.0"
     vinyl "^2.2.0"
 
+"@xcritical/sidebar@latest":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@xcritical/sidebar/-/sidebar-0.1.1.tgz#f27cb4bffd60295b605f9f19097182ab8c4be327"
+  integrity sha512-H/8DGo52mH0MiOtCN7a50+xD0D0Sr6Gc1ykkGQSDmx/H7b/DwleEvBu3qhFL9dqnIhNtkT5h2zjP549u/D5NfQ==
+  dependencies:
+    "@xcritical/theme" "^0.1.3"
+    lodash.get "^4.x"
+    polished "^3.0.0"
+    react-custom-scrollbars "^4.2.1"
+    resize-observer-polyfill "^1.5.1"
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -12799,7 +12810,7 @@ requires-port@^1.0.0:
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
 
-resize-observer-polyfill@^1.5.1:
+resize-observer-polyfill@^1.5.1, resize-observer-polyfill@latest:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
   integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
