@@ -67,7 +67,7 @@ export function xcriticalFiltersInit(
   filters: IStateRecivedFilter[],
 ): IFilterAction<IPayloadInitFilters> {
   return actionCreator(
-    actions.FILTERS_RESET,
+    actions.FILTERS_INIT,
     name,
     { filters },
   );
