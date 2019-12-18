@@ -1,7 +1,7 @@
 {
 	"name": "@xcritical/pagination",
-	"version": "0.0.0",
-	"description": "",
+	"version": "0.0.1",
+	"description": "Pagination component",
 	"main": "src/index.ts",
 	"scripts": {
 		"test": "exit 0",
