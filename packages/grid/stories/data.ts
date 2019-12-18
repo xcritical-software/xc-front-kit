@@ -30,13 +30,13 @@ export const columns = [
     headerName: 'Model',
     field: 'model',
   },
+  { width, headerName: 'Col 1', field: 'col1' },
   {
     center,
     width,
     headerName: 'Price',
     field: 'price',
   },
-  { width, headerName: 'Col 1', field: 'col1' },
   {
     center,
     width,
@@ -62,16 +62,16 @@ export const columns = [
     center,
     width,
     headerName: 'Col 8',
-    field: 'col7',
+    field: 'col8',
   },
-  { width, headerName: 'Col 9', field: 'col8' },
+  { width, headerName: 'Col 9', field: 'col9' },
   {
     center,
     width,
     headerName: 'Col 10',
     field: 'col10',
   },
-];
+].map((el) => ({ ...el, visible: true }));
 
 export const generateLorem = (n: any) => {
   const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.

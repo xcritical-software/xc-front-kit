@@ -1,18 +1,35 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { storiesOf } from '@storybook/react';
 import { darken, lighten } from 'polished';
 
 import { colors } from '@xcritical/theme';
-import Grid from '../src/Grid';
+import { setIn } from 'utilitify';
+import Grid from '../src';
 import { IColumn } from '../src/interfaces';
 import {
   columns, totals, rowsWithChildren, rows,
 } from './data';
 import * as countries from './countries';
 import { gridThemeNamespace } from '../src/theme';
+import { Sidebar } from '../../xc-sidebar/src/index';
 
+
+const list: any = (n: number) => (
+  <div>
+    <ul style={ { listStyleType: 'none' } }>
+      { new Array(n).fill(true).map((el, i) => `This is list item number ${i}`).map((el) => (
+        <li
+          key={ el }
+          style={ { padding: '10px 10px 10px 10px' } }
+        >
+          { el }
+        </li>
+      )) }
+    </ul>
+  </div>
+);
 
 const generateTheme = (color: string) => {
   const theme = {
@@ -149,7 +166,7 @@ storiesOf('New Grid', module)
     const [color, changeColor] = useState('#023fa1');
     return (
       <>
-        <input type="color" onChange={ (e) => changeColor(e.target.value) } />
+        <input type="color" value={ color } onChange={ (e) => changeColor(e.target.value) } />
         <Grid
           columns={ countries.columns }
           items={ countries.items }
@@ -169,4 +186,59 @@ storiesOf('New Grid', module)
       height={ document.documentElement.clientHeight - 100 }
       theme={ AMStheme }
     />
-  ));
+  ))
+  .add('Dinamic width', () => (
+    <div style={ { width: '100%', height: '600px' } }>
+      <Sidebar>{ list(100) }</Sidebar>
+      <div style={ { display: 'flex', height: '100vh', padding: '0 30px' } }>
+        <Grid
+          columns={ columns.map((el) => ({ ...el, center: true })) }
+          items={ rows }
+          theme={ AMStheme }
+          shouldFitContainer
+        />
+      </div>
+    </div>
+  ))
+  .add('Selector columns', () => {
+    const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
+
+    const handleChangeVisibleColumns = useCallback((i) => {
+      const newColumns = setIn(mappedColumns, !mappedColumns[i].visible, [String(i), 'visible']);
+      console.log(newColumns);
+      setMappedColumns(newColumns);
+    }, [mappedColumns]);
+
+    const handleChangeColumns = (newColumns: IColumn[]) => {
+      setMappedColumns(newColumns);
+      console.log(newColumns);
+    };
+
+    return (
+      <>
+        <div>
+          {
+            mappedColumns.map((col, i) => (
+              <div>
+                <label htmlFor={ col.field }>
+
+                  { col.headerName }
+
+                </label>
+                <input type="checkbox" checked={ col.visible } onChange={ () => handleChangeVisibleColumns(i) } />
+              </div>
+            ))
+          }
+        </div>
+        <Grid
+          columns={ mappedColumns.map((el) => ({ ...el, center: true })) }
+          items={ rows }
+          width={ document.documentElement.clientWidth - 20 }
+          height={ document.documentElement.clientHeight - 350 }
+          theme={ AMStheme }
+          totals={ totals }
+          onChangeColumns={ handleChangeColumns }
+        />
+      </>
+    );
+  });
