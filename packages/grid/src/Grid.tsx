@@ -307,11 +307,11 @@ const Grid = ({
           columnCount={ filteredColums.length }
           columnWidth={ ({ index }: any) => filteredColums[index].width }
           deferredMeasurementCache={ cacheRef.current }
-          height={ height - Number(headerHeight) - Number(totalsHeight) }
+          height={ height - Number(headerHeight) - Number(totals ? totalsHeight : 0) }
           cellRenderer={ cellRenderer }
           rowCount={ mappedItems.length }
           rowHeight={ cacheRef.current.rowHeight }
-          width={ width - 2 }
+          width={ width }
           onScroll={ handleScroll }
         />
       </Body>
