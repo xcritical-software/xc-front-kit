@@ -17,7 +17,3 @@ export interface IThemeBadgeProps {
   baseAppearance?: string;
   ghost?: boolean;
 }
-
-type SpanProps = JSX.IntrinsicElements['span'];
-export interface IBadgeProps extends IThemeBadgeProps, SpanProps {
-}
