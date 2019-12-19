@@ -1,7 +1,7 @@
 {
-	"name": "@xcritical/grid",
-	"version": "0.1.3",
-	"description": "XCritical Grid Component",
+	"name": "@xcritical/badge",
+	"version": "0.0.1",
+	"description": "Small count and labeling component",
 	"main": "src/index.ts",
 	"scripts": {
 		"test": "exit 0",
@@ -16,26 +16,21 @@
 	"keywords": [],
 	"author": "XCritical Software",
 	"license": "MIT",
-	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/grid#readme",
+	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/badge#readme",
 	"publishConfig": {
 		"access": "public"
 	},
 	"private": false,
 	"peerDependencies": {
-		"react": "^16.8.3",
-		"styled-components": "^4.4.1",
-		"lodash.get": "^4.x",
+		"react": "^16.9.0",
+		"styled-components": "^4.4.1"
+	},
+	"devDependencies": {
 		"polished": "^3.0.0"
 	},
 	"dependencies": {
-		"mdi-react": "^6.3.0",
-		"react-virtualized": "^9.21.2",
-		"utilitify": "^1.0.2",
 		"@xcritical/theme": "^0.1.3",
-		"resize-observer-polyfill": "latest"
-	},
-	"devDependencies": {
-		"@types/react-virtualized": "^9.21.5",
-		"@xcritical/sidebar": "latest"
+		"lodash.get": "^4.x",
+		"micro-memoize": "4.0.8"
 	}
 }
