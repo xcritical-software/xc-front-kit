@@ -19,7 +19,7 @@ import {
 import { filterReducer } from '../src';
 
 
-const store = createStore(
+export const store = createStore(
   combineReducers({ filter: filterReducer }),
   devToolsEnhancer({}),
 );
