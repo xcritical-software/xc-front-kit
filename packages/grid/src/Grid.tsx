@@ -201,7 +201,6 @@ const Grid = ({
     const isSelected = selectedRows
       .some((k: string) => k === mappedItems[rowIndex].key);
 
-
     return (
       <CellMeasurer
         cache={ cacheRef.current }
