@@ -148,4 +148,5 @@ export interface IGridTheme {
   rowCellBorder: string;
   selectedRowColor: string;
   movingHeaderCellColor: string;
+  expandButtonMargin: string;
 }

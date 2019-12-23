@@ -26,6 +26,7 @@ import {
   TotalBlock,
   TotalCellContent,
   TotalCell,
+  ShiftInsteadButton,
 } from './styled';
 import { AddIcon, RemoveIcon } from './icons';
 import {
@@ -226,19 +227,26 @@ const Grid = ({
             expandLevel={ expandLevel }
             theme={ themeRef.current }
           />
-          { column.isExpandable && mappedItems[rowIndex].children ? (
-            <ExpandButtonWrapper onClick={ handleExpand }>
-              { mappedItems[rowIndex].isExpand
-                ? <RemoveIcon />
-                : <AddIcon /> }
-            </ExpandButtonWrapper>
-          ) : null }
+
 
           <BodyCellContent
             theme={ themeRef.current }
             center={ !!column.center }
             selected={ isSelected }
           >
+
+            { column.isExpandable && mappedItems[rowIndex].children ? (
+              <ExpandButtonWrapper onClick={ handleExpand } theme={ themeRef.current }>
+                { mappedItems[rowIndex].isExpand
+                  ? <RemoveIcon />
+                  : <AddIcon /> }
+              </ExpandButtonWrapper>
+            ) : null }
+
+            { column.isExpandable && !mappedItems[rowIndex].children ? (
+              <ShiftInsteadButton theme={ themeRef.current } />
+            ) : null }
+
             <span>{ cellContent }</span>
           </BodyCellContent>
         </BodyCell>

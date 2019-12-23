@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { getBodyCellStyles, getBodyCellContentStyles, getBodyCellOffsetStyles } from './utils';
+import {
+  getBodyCellStyles, getBodyCellContentStyles, getBodyCellOffsetStyles, getExpandButtonStyles,
+} from './utils';
 import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
 
 
@@ -35,9 +37,6 @@ export const BodyCell = styled.div<any>`
     display: inline-block;
     font-weight: 400;
   }
-  button {
-    margin: 10px;
-  }
 `;
 
 export const BodyCellContent = styled.div<IBodyCellContent>`
@@ -60,6 +59,13 @@ export const ExpandButtonWrapper = styled.button`
   height: 16px;
   border: none;
   outline: 1px solid black;
-  margin-left: 5px;
   padding: 0;
+  ${getExpandButtonStyles}
+`;
+
+
+export const ShiftInsteadButton = styled.div`
+  width: 18px;
+  float: left;
+  ${getExpandButtonStyles}
 `;
