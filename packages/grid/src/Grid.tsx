@@ -181,11 +181,18 @@ const Grid = ({
   const cellRenderer = ({
     columnIndex, key, parent, rowIndex, style,
   }: GridCellProps) => {
-    const content = mappedItems[rowIndex][filteredColums[columnIndex].field];
     const isFirstColumn = columnIndex === 0;
-    const expandLevel = isFirstColumn ? mappedItems[rowIndex].expandLevel : 0;
 
+    const row = mappedItems[rowIndex];
     const column = filteredColums[columnIndex];
+
+    const expandLevel = isFirstColumn ? row.expandLevel : 0;
+
+    const renderFunction = column.render;
+
+    const content = row[column.field];
+
+    const cellContent = renderFunction ? renderFunction(content) : content;
 
     const handleExpand = () => {
       onChangeExpand(rowIndex, mappedItems[rowIndex].children);
@@ -233,7 +240,7 @@ const Grid = ({
             center={ !!column.center }
             selected={ isSelected }
           >
-            <span>{ content }</span>
+            <span>{ cellContent }</span>
           </BodyCellContent>
         </BodyCell>
       </CellMeasurer>
