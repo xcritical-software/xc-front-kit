@@ -192,7 +192,7 @@ const Grid = ({
 
     const content = row[column.field];
 
-    const cellContent = renderFunction ? renderFunction(content) : content;
+    const cellContent = renderFunction ? renderFunction(content, column.field, row) : content;
 
     const handleExpand = () => {
       onChangeExpand(rowIndex, mappedItems[rowIndex].children);
