@@ -7,6 +7,9 @@ import { storiesOf } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { lighten } from 'polished';
 
+import Input from '@xcritical/input';
+import Select from '@xcritical/select';
+
 import InlineEdit, { inlineEditThemeNamespace } from '../src';
 
 import { InlineEditTheme } from '../src/interfaces';
@@ -18,54 +21,8 @@ const generateTheme = (
 ): InlineEditTheme => ({
   backgroundColor: baseBgColor,
   color: textColor,
-  borderRadius: 20,
-  boxSizing: 'border-box',
-  border: '2px solid transparent',
-  display: 'inline-block',
-  maxWidth: '100%',
-  transition: 'background 0.2s',
   appearance: {
     default: {
-      editButton: {
-        appearance: 'none',
-        background: 'transparent',
-        border: 0,
-        display: 'inline-block',
-        lineHeight: 1,
-        margin: 0,
-        padding: 0,
-        outline: 0,
-        focus: {
-          border: `2px solid ${lighten(0.6, baseBgColor)}`,
-          backgroundColor: baseBgColor,
-        },
-      },
-      actionButtonsWrapper: {
-        display: 'flex',
-        flexShrink: 0,
-        marginTop: '10px',
-        position: 'absolute',
-        right: 0,
-        top: '100%',
-      },
-      actionButtonWrapper: {
-        backgroundColor: '#ccc',
-        borderRadius: '10px',
-        boxShadow: '0 5px 5px -5px black, 0 0 1px black',
-        boxSizing: 'border-box',
-        fontSize: '14px',
-        zIndex: 200,
-      },
-      button: {
-        backgroundColor: '#ccc',
-        borderRadius: 'inherit',
-        boxSizing: 'border-box',
-        outline: 0,
-      },
-      contentWrapper: {
-        maxWidth: '100%',
-        position: 'relative',
-      },
       hover: {
         backgroundColor: lighten(0.6, baseBgColor),
       },
@@ -79,7 +36,6 @@ const generateTheme = (
       },
       actionButtonWrapper: {
         backgroundColor: '#003e6c',
-        boxShadow: '0 5px 5px -5px black, 0 0 1px #003e6c',
       },
       button: {
         backgroundColor: 'white',
@@ -94,8 +50,17 @@ const generateTheme = (
 
 const theme = generateTheme('#575857', '#A7A7A7');
 
+const options = [
+  { value: 'firstCard', label: '1234 1234 1234 1234' },
+  { value: 'secondCard', label: '4321 4321 4321 4321' },
+  { value: 'thirdCard', label: '4567 4567 4567 4567' },
+  { value: 'fourthCard', label: '0123 0123 0123 0123' },
+];
+
 const BasicInlineEdit: React.FC<any> = ({
+  readView: Component,
   appearance = 'default',
+  ...rest
 }) => {
   const [value, setValue] = React.useState('');
 
@@ -106,11 +71,20 @@ const BasicInlineEdit: React.FC<any> = ({
   ), [value]);
 
   const getEditView = React.useCallback((fieldProps) => (
-    <input type="text" { ...fieldProps } autoFocus />
-  ), []);
+    <Component
+      { ...fieldProps }
+      { ...rest }
+      autoFocus
+      shouldFitContainer
+    />
+  ), [rest]);
 
-  const handleConfirm = React.useCallback((v: string) => {
-    setValue(v);
+  const handleConfirm = React.useCallback((v: any) => {
+    if (v.label) {
+      setValue(v.label);
+    } else {
+      setValue(v);
+    }
   }, []);
 
   return (
@@ -130,11 +104,23 @@ const BasicInlineEdit: React.FC<any> = ({
 storiesOf('InlineEdit', module)
   .add('Basic', () => (
     <div style={ { width: '200px' } }>
-      <BasicInlineEdit />
+      <BasicInlineEdit readView={ Input } />
     </div>
   ))
   .add('Themed', () => (
     <div style={ { width: '200px' } }>
-      <BasicInlineEdit appearance="crm" />
+      <BasicInlineEdit
+        readView={ Input }
+        appearance="crm"
+      />
+    </div>
+  ))
+  .add('Select', () => (
+    <div style={ { width: '200px' } }>
+      <BasicInlineEdit
+        readView={ Select }
+        options={ options }
+        appearance="crm"
+      />
     </div>
   ));

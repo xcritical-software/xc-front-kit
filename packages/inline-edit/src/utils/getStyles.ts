@@ -1,4 +1,9 @@
-import { css, CSSObject, FlattenSimpleInterpolation } from 'styled-components';
+import {
+  css,
+  CSSObject,
+  FlattenSimpleInterpolation,
+  FlattenInterpolation,
+} from 'styled-components';
 import get from 'lodash.get';
 import { mergeDeep } from 'utilitify';
 import memoize from 'micro-memoize';
@@ -11,7 +16,12 @@ import {
 } from '@xcritical/theme';
 
 import { inlineEditThemeNamespace, defaultInlineEditTheme } from '../theme';
-import { IInlineEditTheme, ICommonProps, IReturnFunction } from '../interfaces';
+import {
+  IInlineEditTheme,
+  ICommonProps,
+  IReturnFunction,
+  GetPropStyles,
+} from '../interfaces';
 
 
 export const inlineEditTheme = memoize((
@@ -55,7 +65,10 @@ export const getInlineEditStatesStyle = (stateName: string): any => memoize((
   theme: ITheme<IInlineEditTheme> = {},
   appearance: string,
   baseAppearance: string,
-): any => inlineEditAppearanceTheme(theme, appearance || '', baseAppearance || '', [stateName]));
+): any => {
+  const styles = inlineEditAppearanceTheme(theme, appearance || '', baseAppearance || '', [stateName]);
+  return styles;
+});
 
 export const getElementStyles: IReturnFunction<any> = memoize((
   theme,
@@ -65,4 +78,28 @@ export const getElementStyles: IReturnFunction<any> = memoize((
 ) => {
   const styles = inlineEditAppearanceTheme(theme, appearance, baseAppearance, elementName);
   return styles;
+});
+
+export const getPropertyStyles: GetPropStyles<FlattenInterpolation<any>> = memoize((
+  theme,
+  propertyPath,
+  appearance = 'default',
+  baseAppearance = 'default',
+  defaultPropertyValue = 'inherit',
+) => {
+  let property = inlineEditAppearanceTheme(theme, appearance, baseAppearance, [propertyPath]);
+
+  if (!property) {
+    property = defaultPropertyValue;
+  }
+
+  return memoize((
+    elementName: string,
+  ) => {
+    const element = inlineEditAppearanceTheme(theme, appearance, baseAppearance, elementName);
+
+    return css`
+      ${() => `${propertyPath}: ${get(element, [propertyPath], property)}`};
+    `;
+  });
 });

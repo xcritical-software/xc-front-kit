@@ -81,7 +81,11 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
     ), []);
 
     const handleEditValueChange = useCallback((e) => {
-      setValue(e.target.value);
+      if (e.target && e.target.value) {
+        setValue(e.target.value);
+      } else {
+        setValue(e);
+      }
     }, []);
 
     const handleReadViewMouseDown = useCallback((e) => {

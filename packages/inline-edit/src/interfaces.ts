@@ -80,3 +80,10 @@ export interface IReturnFunction<TValue> {
     baseAppearance?: string,
   ): TValue;
 }
+
+export interface IReturnWithArgsFunction<TProp, TValue> {
+  (elementName: string, ...props: TProp[]): TValue;
+}
+
+export type GetPropStyles<TResult> =
+  IReturnFunction<IReturnWithArgsFunction<any, TResult>>;
