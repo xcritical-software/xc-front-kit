@@ -22,8 +22,8 @@ import { IInlineEditUncontrolledProps } from './interfaces';
 export const getInlineEditUncontrolled: <TFieldValue = string>() => FC<
 IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
   return ({
-    appearance,
-    baseAppearance,
+    appearance = 'default',
+    baseAppearance = 'default',
     defaultValue,
     readView,
     editView,
@@ -37,8 +37,6 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
     const confirmButtonRef = createRef<HTMLButtonElement>();
     const cancelButtonRef = createRef<HTMLButtonElement>();
 
-    const startX = useRef(0);
-    const startY = useRef(0);
     const prevIsEditing = useRef(isEditing);
     const removeMouseDown: React.MutableRefObject<void | null> = useRef(null);
 
@@ -76,10 +74,6 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
       );
     }, [cancelButtonRef, confirmButtonRef, onCancel, onConfirm, value]);
 
-    const mouseHasMoved = useCallback((event: { clientX: number; clientY: number }): boolean => (
-      Math.abs(startX.current - event.clientX) >= 5 || Math.abs(startY.current - event.clientY) >= 5
-    ), []);
-
     const handleEditValueChange = useCallback((e) => {
       if (e.target && e.target.value) {
         setValue(e.target.value);
@@ -88,21 +82,13 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
       }
     }, []);
 
-    const handleReadViewMouseDown = useCallback((e) => {
-      startX.current = e.clientX;
-      startY.current = e.clientY;
-    }, []);
-
     const handleReadViewClick = useCallback((
       event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>,
     ): void => {
-      const element = event.target as HTMLElement;
-      if (element.tagName.toLowerCase() !== 'a' && !mouseHasMoved(event)) {
-        event.preventDefault();
-        onEditRequested();
-        setPreventFocusOnEditButton(true);
-      }
-    }, [mouseHasMoved, onEditRequested]);
+      event.preventDefault();
+      onEditRequested();
+      setPreventFocusOnEditButton(true);
+    }, [onEditRequested]);
 
     const handleConfirmClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
       e.preventDefault();
@@ -119,7 +105,6 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
         <EditButton
           appearance={ appearance }
           baseAppearance={ baseAppearance }
-          type="button"
           onClick={ onEditRequested }
           ref={ editButtonRef }
         />
@@ -127,7 +112,6 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
           appearance={ appearance }
           baseAppearance={ baseAppearance }
           onClick={ handleReadViewClick }
-          onMouseDown={ handleReadViewMouseDown }
           readViewFitContainerWidth={ readViewFitContainerWidth }
         >
           { readView() }
@@ -138,7 +122,6 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
       baseAppearance,
       editButtonRef,
       handleReadViewClick,
-      handleReadViewMouseDown,
       onEditRequested,
       readView,
       readViewFitContainerWidth,
@@ -157,7 +140,6 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
             appearance={ appearance }
             baseAppearance={ baseAppearance }
             ref={ confirmButtonRef }
-            type="button"
             onClick={ handleConfirmClick }
             onMouseDown={ () => {
               setPreventFocusOnEditButton(true);

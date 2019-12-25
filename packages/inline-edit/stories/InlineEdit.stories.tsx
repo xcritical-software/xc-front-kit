@@ -9,6 +9,7 @@ import { lighten } from 'polished';
 
 import Input from '@xcritical/input';
 import Select from '@xcritical/select';
+import { AllType } from '@xcritical/theme';
 
 import InlineEdit, { inlineEditThemeNamespace } from '../src';
 
@@ -22,11 +23,6 @@ const generateTheme = (
   backgroundColor: baseBgColor,
   color: textColor,
   appearance: {
-    default: {
-      hover: {
-        backgroundColor: lighten(0.6, baseBgColor),
-      },
-    },
     crm: {
       editButton: {
         focus: {
@@ -48,7 +44,7 @@ const generateTheme = (
   },
 });
 
-const theme = generateTheme('#575857', '#A7A7A7');
+const theme = generateTheme('#fff', '#A7A7A7');
 
 const options = [
   { value: 'firstCard', label: '1234 1234 1234 1234' },
@@ -57,8 +53,8 @@ const options = [
   { value: 'fourthCard', label: '0123 0123 0123 0123' },
 ];
 
-const BasicInlineEdit: React.FC<any> = ({
-  readView: Component,
+const BasicInlineEdit: React.FC<AllType> = ({
+  editView: Component,
   appearance = 'default',
   ...rest
 }) => {
@@ -79,7 +75,7 @@ const BasicInlineEdit: React.FC<any> = ({
     />
   ), [rest]);
 
-  const handleConfirm = React.useCallback((v: any) => {
+  const handleConfirm = React.useCallback((v: AllType) => {
     if (v.label) {
       setValue(v.label);
     } else {
@@ -104,13 +100,13 @@ const BasicInlineEdit: React.FC<any> = ({
 storiesOf('InlineEdit', module)
   .add('Basic', () => (
     <div style={ { width: '200px' } }>
-      <BasicInlineEdit readView={ Input } />
+      <BasicInlineEdit editView={ Input } />
     </div>
   ))
   .add('Themed', () => (
     <div style={ { width: '200px' } }>
       <BasicInlineEdit
-        readView={ Input }
+        editView={ Input }
         appearance="crm"
       />
     </div>
@@ -118,7 +114,7 @@ storiesOf('InlineEdit', module)
   .add('Select', () => (
     <div style={ { width: '200px' } }>
       <BasicInlineEdit
-        readView={ Select }
+        editView={ Select }
         options={ options }
         appearance="crm"
       />

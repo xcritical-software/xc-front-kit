@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { ICommonProps } from '../interfaces';
 import {
-  getBaseStyle,
+  inlineEditTheme,
   getInlineEditStatesStyle,
   getElementStyles,
 } from '../utils';
@@ -15,7 +15,7 @@ export const ReadViewWrapper = styled.div`
 
 export const ReadViewContentWrapper = styled.div<ICommonProps>`
   width: ${({ readViewFitContainerWidth }) => (readViewFitContainerWidth ? '100%' : 'auto')};
-  ${({ theme }) => getBaseStyle(theme)}
+  ${({ theme }) => inlineEditTheme(theme)}
   :hover {
     ${({ theme, appearance, baseAppearance }) => getInlineEditStatesStyle('hover')(theme, appearance, baseAppearance)}
   }
@@ -40,8 +40,4 @@ export const ButtonWrapper = styled.div<ICommonProps>`
 
 export const Button = styled.button<ICommonProps>`
   ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'button', appearance, baseAppearance)}
-`;
-
-export const HiddenButton = styled.button`
-  display: none;
 `;

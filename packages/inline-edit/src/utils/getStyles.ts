@@ -1,11 +1,5 @@
-import {
-  css,
-  CSSObject,
-  FlattenSimpleInterpolation,
-  FlattenInterpolation,
-} from 'styled-components';
+import { css, FlattenInterpolation } from 'styled-components';
 import get from 'lodash.get';
-import { mergeDeep } from 'utilitify';
 import memoize from 'micro-memoize';
 
 import {
@@ -18,7 +12,6 @@ import {
 import { inlineEditThemeNamespace, defaultInlineEditTheme } from '../theme';
 import {
   IInlineEditTheme,
-  ICommonProps,
   IReturnFunction,
   GetPropStyles,
 } from '../interfaces';
@@ -37,57 +30,42 @@ const inlineEditAppearanceTheme = memoize((
   appearanceName: string,
   baseAppearance: string,
   propertyPath?: string | string[],
-): ITheme<IInlineEditTheme> | any => {
+): ITheme<IInlineEditTheme> | AllType => {
   const func = getAppearanceTheme(inlineEditThemeNamespace, defaultInlineEditTheme);
   return func(theme, appearanceName, propertyPath, baseAppearance);
 });
 
-export const getInlineEditThemeStylesByProperty = memoize((
-  theme: ITheme<IInlineEditTheme>,
-) => (propertyPath: string[]): CSSObject => {
-  const customBlanketTheme = get(theme, inlineEditThemeNamespace);
-  const mergedTheme = mergeDeep(defaultInlineEditTheme, customBlanketTheme);
-
-  return get(mergedTheme, propertyPath);
-});
-
-export const getBaseStyle = memoize(({
-  theme,
-}: ICommonProps): FlattenSimpleInterpolation => {
-  const baseStyles = inlineEditTheme(theme);
-
-  return css`
-    ${baseStyles}
-  `;
-});
-
-export const getInlineEditStatesStyle = (stateName: string): any => memoize((
+export const getInlineEditStatesStyle = (stateName: string): AllType => memoize((
   theme: ITheme<IInlineEditTheme> = {},
   appearance: string,
   baseAppearance: string,
-): any => {
+): AllType => {
   const styles = inlineEditAppearanceTheme(theme, appearance || '', baseAppearance || '', [stateName]);
   return styles;
 });
 
-export const getElementStyles: IReturnFunction<any> = memoize((
+export const getElementStyles: IReturnFunction<AllType> = memoize((
   theme,
   elementName,
-  appearance = 'default',
-  baseAppearance = 'default',
+  appearance,
+  baseAppearance,
 ) => {
-  const styles = inlineEditAppearanceTheme(theme, appearance, baseAppearance, elementName);
+  const styles = inlineEditAppearanceTheme(
+    theme, appearance as string, baseAppearance as string, elementName,
+  );
   return styles;
 });
 
-export const getPropertyStyles: GetPropStyles<FlattenInterpolation<any>> = memoize((
+export const getPropertyStyles: GetPropStyles<FlattenInterpolation<AllType>> = memoize((
   theme,
   propertyPath,
-  appearance = 'default',
-  baseAppearance = 'default',
+  appearance,
+  baseAppearance,
   defaultPropertyValue = 'inherit',
 ) => {
-  let property = inlineEditAppearanceTheme(theme, appearance, baseAppearance, [propertyPath]);
+  let property = inlineEditAppearanceTheme(
+    theme, appearance as string, baseAppearance as string, [propertyPath],
+  );
 
   if (!property) {
     property = defaultPropertyValue;
@@ -96,7 +74,9 @@ export const getPropertyStyles: GetPropStyles<FlattenInterpolation<any>> = memoi
   return memoize((
     elementName: string,
   ) => {
-    const element = inlineEditAppearanceTheme(theme, appearance, baseAppearance, elementName);
+    const element = inlineEditAppearanceTheme(
+      theme, appearance as string, baseAppearance as string, elementName,
+    );
 
     return css`
       ${() => `${propertyPath}: ${get(element, [propertyPath], property)}`};

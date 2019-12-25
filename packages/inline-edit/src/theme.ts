@@ -50,7 +50,6 @@ export const defaultInlineEditTheme: InlineEditTheme = {
         backgroundColor: '#f8f9fa',
         borderRadius: '3px',
         boxSizing: 'border-box',
-        zIndex: 200,
         margin: '0 2px',
       },
       button: {
@@ -64,6 +63,9 @@ export const defaultInlineEditTheme: InlineEditTheme = {
       contentWrapper: {
         maxWidth: '100%',
         position: 'relative',
+      },
+      hover: {
+        backgroundColor: lighten(0.15, '#ccc'),
       },
     },
   },
