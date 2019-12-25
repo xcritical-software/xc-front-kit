@@ -44,7 +44,7 @@ const generateTheme = (
   },
 });
 
-const theme = generateTheme('#fff', '#A7A7A7');
+const theme = generateTheme('#fff', '#000');
 
 const options = [
   { value: 'firstCard', label: '1234 1234 1234 1234' },

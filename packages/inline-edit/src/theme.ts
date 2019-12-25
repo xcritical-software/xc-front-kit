@@ -6,24 +6,22 @@ import { InlineEditTheme } from './interfaces';
 export const inlineEditThemeNamespace = '@xcritical\\inline-edit';
 
 export const defaultInlineEditTheme: InlineEditTheme = {
-  background: 'transparent',
+  backgroundColor: '#ccc',
   borderRadius: 3,
   boxSizing: 'border-box',
   border: '2px solid transparent',
   display: 'inline-block',
   maxWidth: '100%',
-  transition: 'background 0.2s',
+  transition: 'background-color 0.2s',
   paddingBottom: '7px',
   paddingLeft: '20px',
   paddingRight: '20px',
   paddingTop: '7px',
   lineHeight: 1.69,
   cursor: 'pointer',
+  color: 'black',
   appearance: {
     default: {
-      readViewContentWrapper: {
-        backgroundColor: '#ccc',
-      },
       editButton: {
         appearance: 'none',
         background: 'transparent',
@@ -35,7 +33,7 @@ export const defaultInlineEditTheme: InlineEditTheme = {
         outline: 0,
         focus: {
           border: `2px solid ${lighten(0.6, '#ccc')}`,
-          background: '#ccc',
+          backgroundColor: '#ccc',
         },
       },
       actionButtonsWrapper: {
