@@ -83,6 +83,14 @@ const BasicInlineEdit: React.FC<AllType> = ({
     }
   }, []);
 
+  const handleCancel = React.useCallback((defaultValue: AllType) => {
+    if (defaultValue.label) {
+      setValue(defaultValue.label || '');
+    } else {
+      setValue(defaultValue || '');
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
       <InlineEdit
@@ -91,6 +99,7 @@ const BasicInlineEdit: React.FC<AllType> = ({
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
+        onCancel={ handleCancel }
       />
     </ThemeProvider>
   );

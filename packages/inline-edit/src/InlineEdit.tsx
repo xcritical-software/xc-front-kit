@@ -1,5 +1,5 @@
 import React, {
-  FC, createRef, useState, useEffect, useCallback, memo,
+  FC, createRef, useState, useEffect, useCallback, memo, useRef,
 } from 'react';
 import { withTheme } from 'styled-components';
 
@@ -17,6 +17,7 @@ IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
   return ({
     startWithEditViewOpen = false,
     onConfirm,
+    onCancel,
     defaultValue,
     readView,
     editView,
@@ -24,6 +25,7 @@ IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
   }: IInlineEditProps<TFieldValue>) => {
     const editViewRef = createRef<HTMLElement>();
     const [isEditing, setIsEditing] = useState(startWithEditViewOpen);
+    const defaultValueRef = useRef(defaultValue);
 
     useEffect(() => {
       if (startWithEditViewOpen && editViewRef.current) {
@@ -40,12 +42,13 @@ IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
     const handleConfirm = useCallback((value: string): void => {
       setIsEditing(false);
       onConfirm(value);
+      defaultValueRef.current = value;
     }, [onConfirm]);
 
     const handleCancel = useCallback((): void => {
       setIsEditing(false);
-      onConfirm('');
-    }, [onConfirm]);
+      onCancel(defaultValueRef.current);
+    }, [onCancel]);
 
     const handleEditRequested = useCallback((): void => {
       setIsEditing(true);

@@ -59,15 +59,16 @@ export interface IInlineEditProps<TFieldValue> extends ICommonProps {
   /** Component to be shown when editing. */
   editView: (
     fieldProps: IFieldProps<TFieldValue>,
-    ref: RefObject<any>,
+    ref: RefObject<AllType>,
   ) => ReactNode;
   /**
    * Handler called editView is closed and changes are confirmed.
    * Field value is passed as an argument to this function.
    */
-  onConfirm: (value: any) => void;
+  onConfirm: (value: AllType) => void;
+  onCancel: (defaultValue?: AllType) => void;
   /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
-  defaultValue: any;
+  defaultValue: AllType;
   /** Determines whether isEditing begins as true. */
   startWithEditViewOpen?: boolean;
 }
@@ -86,4 +87,4 @@ export interface IReturnWithArgsFunction<TProp, TValue> {
 }
 
 export type GetPropStyles<TResult> =
-  IReturnFunction<IReturnWithArgsFunction<any, TResult>>;
+  IReturnFunction<IReturnWithArgsFunction<AllType, TResult>>;
