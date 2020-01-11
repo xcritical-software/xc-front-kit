@@ -5,7 +5,7 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"test": "exit 0",
-		"compile": "gulp --cwd . compile",
+		"compile": "gulp --cwd ../sidebar compile",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},

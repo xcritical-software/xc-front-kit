@@ -1,45 +1,25 @@
 import styled from 'styled-components';
 
-
-interface ISidebarTheme {
-  leftBackground: string;
-  rightBackground: string;
-  color: string;
-  separatorColor: string;
-  minWidth: number;
-  maxWidth: number;
-  leftWidth: number;
-}
-
-interface IProps {
-  theme: ISidebarTheme;
-}
-
-
-interface IResponsiveWrapper {
-  animate: boolean;
-}
-interface IChildWrapper extends IProps {
-  animate: boolean;
-}
-
-
-interface ICloseOpenButton {
-  toRight: boolean;
-}
+import {
+  IProps,
+  IChildWrapper,
+  IResponsiveWrapper,
+  ICloseOpenButton,
+} from './interfaces';
 
 
 export const RightBorder = styled.div<IProps>`
-  background-color: ${({ theme: { separatorColor } }: IProps): string => separatorColor};
+  background-color: ${({ theme: { separatorColor } }: IProps) => separatorColor};
   width: 2px;
   height: 100% ;
   float: right;
   position: relative;
   right: 10px;
-
 `;
+
 export const SidebarWrapper = styled.div<IProps>`
-  color: ${({ theme: { color } }: IProps): string => color};
+  color: ${({ theme: { color } }: IProps) => color};
+  z-index: ${({ theme: { zIndex } }: IProps) => zIndex};
   height: 100vh ;
   position: fixed;
   top: 0;
@@ -47,14 +27,13 @@ export const SidebarWrapper = styled.div<IProps>`
 `;
 
 export const NavComponentWrapper = styled.div<IProps>`
-  background-color: ${({ theme: { leftBackground } }: IProps): string => leftBackground};
+  background-color: ${({ theme: { leftBackground } }: IProps) => leftBackground};
   height: calc(100vh + 10px);
   float: left;
 `;
 
-
 export const ChildWrapper = styled.div<IChildWrapper>`
-  background-color: ${({ theme: { rightBackground } }: IProps): string => rightBackground};
+  background-color: ${({ theme: { rightBackground } }: IProps) => rightBackground};
   top: 0;
   bottom:0;
   position: fixed;
@@ -67,24 +46,18 @@ export const ChildWrapper = styled.div<IChildWrapper>`
 export const ResponsiveWrapper = styled.div<IResponsiveWrapper>`
   min-height: 100vh ;
   display: inline-block;
-  ${({ animate }: IResponsiveWrapper): string | null => (animate ? 'transition: .5s' : null)}
+  ${({ animate }: IResponsiveWrapper) => (animate ? 'transition: .5s' : null)}
 `;
 
-export const CloseOpenButton = styled.button`
-  width: 20px;
-  height: 20px;
+export const CloseOpenButton = styled.button<ICloseOpenButton>`
   position: relative;
-  top: 10%;
-  color: black;
-  right: 9px;
-  border-radius: 50%;
-  border: 1px solid gray;
-  padding: 3px;
-  background-color: white;
-  transform: ${({ toRight }: ICloseOpenButton): string => (toRight ? 'rotateZ(-360deg)' : 'rotateZ(180deg)')};
+  transform: translateX(-50%) ${({ toRight }: ICloseOpenButton) => (toRight ? 'rotateZ(-360deg)' : 'rotateZ(180deg)')};
   transition: .5s;
   transition-timing-function: linear;
   cursor: pointer;
+ 
+  ${({ cssStyles }: ICloseOpenButton) => cssStyles}
+
   &:focus {
     outline: none;
   }

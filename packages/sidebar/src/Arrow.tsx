@@ -1,7 +1,7 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 
-const Arrow = (): ReactElement => (
+export const Arrow: React.FC = () => (
   <svg
     version="1.1"
     id="Capa_1"
@@ -19,6 +19,3 @@ s-0.053,0.26-0.146,0.354L19.951,29.206C19.854,29.304,19.726,29.353,19.598,29.353
     </g>
   </svg>
 );
-
-
-export default Arrow;

@@ -2,16 +2,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { MdiReactIconComponentType } from 'mdi-react';
+import ChevronLeftIcon from 'mdi-react/ChevronLeftIcon';
 import { storiesOf } from '@storybook/react';
 import styled, { ThemeProvider } from 'styled-components';
 import {
   NavLink, BrowserRouter, Switch, Route,
 } from 'react-router-dom';
-import { IThemeNamespace } from '@xcritical/theme';
+import { IThemeNamespace, colors } from '@xcritical/theme';
 import { Sidebar } from '../src';
 import { routerConfig } from './routerConfig';
 import { sidebarThemeNamespace } from '../src/theme';
-import { ISidebarTheme } from '../src/utils';
+import { ISidebarTheme } from '../src/interfaces';
 
 
 const list: any = (n: number) => (
@@ -156,6 +157,7 @@ const theme: IThemeNamespace = {
     maxWidth: 400,
   } as ISidebarTheme,
 };
+
 const propsTheme: IThemeNamespace = {
   [sidebarThemeNamespace]: {
     leftBackground: 'red',
@@ -168,6 +170,18 @@ const propsTheme: IThemeNamespace = {
   } as ISidebarTheme,
 };
 
+const arrowTheme: IThemeNamespace = {
+  [sidebarThemeNamespace]: {
+    closeOpenButton: {
+      width: '25px',
+      height: '25px',
+      padding: 0,
+      border: 0,
+      color: colors.GRAY_BLUE,
+      boxShadow: '0 0 0 1px rgba(9,30,66,0.1), 0 2px 4px 1px rgba(9,30,66,0.1)',
+    },
+  } as ISidebarTheme,
+};
 
 const props = {
   navComponent: <NavPanel />,
@@ -190,6 +204,17 @@ storiesOf('Sidebar', module)
   .add('Only left panel', () => (
     <BrowserRouter>
       <Sidebar { ...props } />
+      <Switch>
+        { routerConfig.map(({ path, component, exact }: any) => (
+          <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+      </Switch>
+    </BrowserRouter>
+  ))
+  .add('With custom arrow', () => (
+    <BrowserRouter>
+      <Sidebar { ...props } theme={ arrowTheme } arrowComponent={ <ChevronLeftIcon size="100%" /> }>
+        { list(100) }
+      </Sidebar>
       <Switch>
         { routerConfig.map(({ path, component, exact }: any) => (
           <Route key={ path } path={ path } component={ component } exact={ exact } />)) }

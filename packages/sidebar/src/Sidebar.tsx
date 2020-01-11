@@ -1,18 +1,19 @@
 import React, {
   useState,
   useCallback,
-  ReactElement,
   useRef,
   useEffect,
-  ReactNode,
   useContext,
 } from 'react';
+
 import { ThemeContext } from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
 import ResizeObserver from 'resize-observer-polyfill';
-import { IThemeNamespace } from '@xcritical/theme';
-import Arrow from './Arrow';
-import { sidebarTheme, ISidebarTheme } from './utils';
+
+import { Arrow } from './Arrow';
+import { sidebarTheme } from './utils';
+import { IWrapperProps, ISidebarTheme } from './interfaces';
+
 import {
   ResponsiveWrapper,
   RightBorder,
@@ -22,24 +23,18 @@ import {
   ChildWrapper,
   SidebarWrapper,
   NavComponentWrapper,
-} from './styled/Sidebar';
+} from './styles';
 
 
-interface IWrapperProps {
-  navComponent?: ReactNode;
-  children?: ReactNode;
-  theme?: IThemeNamespace;
-  showScrollbar?: boolean | string;
-}
-
-export const Sidebar = ({
+export const Sidebar: React.FC<IWrapperProps> = ({
   theme,
   children,
   navComponent,
+  arrowComponent,
   showScrollbar,
-}: IWrapperProps): ReactElement => {
+}) => {
   const themeContext = useContext(ThemeContext);
-  const themeRef = useRef(sidebarTheme<ISidebarTheme>(theme || themeContext));
+  const themeRef = useRef<ISidebarTheme>(sidebarTheme(theme || themeContext));
   const [transformParams, setTransformParams] = useState({
     width: themeRef.current.maxWidth * 0.7,
     animate: false,
@@ -186,10 +181,11 @@ export const Sidebar = ({
             >
               <RightBorder theme={ themeRef.current }>
                 <CloseOpenButton
+                  cssStyles={ themeRef.current.closeOpenButton }
                   toRight={ transformParams.arrowToRight }
                   onClick={ handleClose }
                 >
-                  <Arrow />
+                  { arrowComponent || <Arrow /> }
                 </CloseOpenButton>
               </RightBorder>
             </RightBorderWrapper>
