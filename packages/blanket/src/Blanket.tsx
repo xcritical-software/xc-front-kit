@@ -1,23 +1,21 @@
 import React from 'react';
 import { withTheme } from 'styled-components';
 
-import { Root } from './styled';
+import { Root } from './styles';
 import { IBlanketProps } from './interfaces';
 
 
-export const PureBlanket = ({
-  appearance,
-  baseAppearance,
+export const PureBlanket: React.FC<IBlanketProps> = ({
+  theme,
   canClickThrough = false,
   isTinted = false,
   onBlanketClicked = () => {},
-}: IBlanketProps) => {
+}) => {
   const onClick = canClickThrough ? undefined : onBlanketClicked;
 
   return (
     <Root
-      appearance={ appearance }
-      baseAppearance={ baseAppearance }
+      theme={ theme }
       canClickThrough={ canClickThrough }
       isTinted={ isTinted }
       onClick={ onClick }
