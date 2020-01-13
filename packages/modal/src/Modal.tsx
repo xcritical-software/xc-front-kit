@@ -8,7 +8,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalIconClose,
-} from './styles';
+} from './styled';
 
 import { IModalProps } from './interfaces';
 import { getModalBlanketTheme } from './utils';

@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { withTheme } from 'styled-components';
-import isEmpty from 'lodash.isempty';
 
 import { xcriticalModalClose } from './actions';
 import { getModal } from './selectors';
@@ -24,7 +23,7 @@ const mapStateToProps = (
   const modal = getModal(state);
 
   return {
-    isOpen: isEmpty(modal[name]) ? false : modal[name].isOpen,
+    isOpen: modal[name]?.isOpen || false,
   };
 };
 

@@ -35,7 +35,6 @@
 	"dependencies": {
 		"@xcritical/theme": "^0.1.3",
 		"@xcritical/blanket": "^0.0.1",
-		"mdi-react": "^6.3.0",
-		"lodash.isempty": "4.x"
+		"mdi-react": "^6.3.0"
 	}
 }

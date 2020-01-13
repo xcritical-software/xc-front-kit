@@ -6,24 +6,23 @@ export const modalReducer = (state: IModalStore = {}, action: ModalActions): IMo
   switch (action.type) {
     case XCRITICAL_MODAL_OPEN: {
       const { name } = action.payload;
-      const stateCopy = { ...state };
 
-      if (!stateCopy[name]) {
-        stateCopy[name] = { isOpen: true };
-      }
-
-      return stateCopy;
+      return {
+        ...state,
+        [name]: { isOpen: true },
+      };
     }
     case XCRITICAL_MODAL_CLOSE: {
       const { name } = action.payload;
-      const stateCopy = { ...state };
 
-      if (stateCopy[name]) {
+      if (state[name]) {
+        const newState = { ...state };
         // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-        delete stateCopy[name];
+        delete newState[name];
+        return newState;
       }
 
-      return stateCopy;
+      return state;
     }
     default:
       return state;

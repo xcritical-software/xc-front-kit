@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTheme } from 'styled-components';
 
-import { Root } from './styles';
+import { Root } from './styled';
 import { IBlanketProps } from './interfaces';
 
 
