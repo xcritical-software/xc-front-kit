@@ -38,6 +38,7 @@ export interface IModalOwnProps {
   name: string;
   title: any;
   children: any;
+  iconClose?: any;
   onCancel?: () => void;
   theme?: IThemeNamespace<IModalTheme>;
 }

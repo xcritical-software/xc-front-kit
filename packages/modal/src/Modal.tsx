@@ -1,5 +1,4 @@
 import React from 'react';
-import IconClose from 'mdi-react/CloseIcon';
 import Blanket from '@xcritical/blanket';
 
 import {
@@ -12,12 +11,14 @@ import {
 
 import { IModalProps } from './interfaces';
 import { getModalBlanketTheme } from './utils';
+import { IconClose } from './IconClose';
 
 
 export const PureModal: React.FC<IModalProps> = ({
   isOpen,
   title,
   children,
+  iconClose,
   theme,
   onModalCancel,
 }) => {
@@ -36,7 +37,7 @@ export const PureModal: React.FC<IModalProps> = ({
             { title }
           </ModalHeader>
           <ModalIconClose onClick={ onModalCancel }>
-            <IconClose size="100%" />
+            { iconClose || <IconClose /> }
           </ModalIconClose>
         </ModalHeaderWrapper>
         <ModalBody>

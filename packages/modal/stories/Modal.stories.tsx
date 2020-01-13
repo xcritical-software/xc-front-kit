@@ -3,6 +3,7 @@ import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
+import CloseCircleOutlineIcon from 'mdi-react/CloseCircleOutlineIcon';
 import { colors } from '@xcritical/theme';
 
 import {
@@ -66,6 +67,24 @@ storiesOf('Modal', module)
         </StyledButton>
 
         <Modal title="Default Modal" name="defaultModal">
+          <div>Body example</div>
+          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
+        </Modal>
+      </ThemeProvider>
+    </Provider>
+  ))
+  .add('With custom icon close', () => (
+    <Provider store={ store }>
+      <ThemeProvider theme={ emptyTheme }>
+        <StyledButton onClick={ () => store.dispatch(xcriticalModalOpen('withCustomIconClose')) }>
+          Open Modal With Custom Close Icon
+        </StyledButton>
+
+        <Modal
+          title="Modal With Custom Icon Close"
+          name="withCustomIconClose"
+          iconClose={ <CloseCircleOutlineIcon size="100%" /> }
+        >
           <div>Body example</div>
           <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
         </Modal>
