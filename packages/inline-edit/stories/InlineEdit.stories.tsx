@@ -53,8 +53,7 @@ const options = [
   { value: 'fourthCard', label: '0123 0123 0123 0123' },
 ];
 
-const BasicInlineEdit: React.FC<AllType> = ({
-  editView: Component,
+const BasicInlineEditInput: React.FC<AllType> = ({
   appearance = 'default',
   ...rest
 }) => {
@@ -67,7 +66,7 @@ const BasicInlineEdit: React.FC<AllType> = ({
   ), [value]);
 
   const getEditView = React.useCallback((fieldProps) => (
-    <Component
+    <Input
       { ...fieldProps }
       { ...rest }
       autoFocus
@@ -76,26 +75,61 @@ const BasicInlineEdit: React.FC<AllType> = ({
   ), [rest]);
 
   const handleConfirm = React.useCallback((v: AllType) => {
-    if (v.label) {
-      setValue(v.label);
-    } else {
-      setValue(v);
-    }
+    setValue(v);
   }, []);
 
   const handleCancel = React.useCallback((defaultValue: AllType) => {
-    if (defaultValue.label) {
-      setValue(defaultValue.label || '');
-    } else {
-      setValue(defaultValue || '');
-    }
+    setValue(defaultValue || '');
   }, []);
 
   return (
     <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
       <InlineEdit
         appearance={ appearance }
-        defaultValue={ Component === Select ? { value, label: value } : value }
+        defaultValue={ value }
+        readView={ getReadView }
+        editView={ getEditView }
+        onConfirm={ handleConfirm }
+        onCancel={ handleCancel }
+      />
+    </ThemeProvider>
+  );
+};
+
+const BasicInlineEditSelect: React.FC<AllType> = ({
+  appearance = 'default',
+  ...rest
+}) => {
+  const [selectValue, setSelectValue] = React.useState({ value: 0, label: 'Select value' });
+
+  const getReadView = React.useCallback(() => (
+    <div>
+      { selectValue.label || 'Click to enter value' }
+    </div>
+  ), [selectValue]);
+
+  const getEditView = React.useCallback((fieldProps) => (
+    <Select
+      { ...fieldProps }
+      { ...rest }
+      autoFocus
+      shouldFitContainer
+    />
+  ), [rest]);
+
+  const handleConfirm = React.useCallback((v: AllType) => {
+    setSelectValue(v);
+  }, []);
+
+  const handleCancel = React.useCallback((defaultValue: AllType) => {
+    setSelectValue(defaultValue);
+  }, []);
+
+  return (
+    <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
+      <InlineEdit
+        appearance={ appearance }
+        defaultValue={ selectValue }
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
@@ -109,12 +143,12 @@ const BasicInlineEdit: React.FC<AllType> = ({
 storiesOf('InlineEdit', module)
   .add('Basic', () => (
     <div style={ { width: '200px' } }>
-      <BasicInlineEdit editView={ Input } />
+      <BasicInlineEditInput editView={ Input } />
     </div>
   ))
   .add('Themed', () => (
     <div style={ { width: '200px' } }>
-      <BasicInlineEdit
+      <BasicInlineEditInput
         editView={ Input }
         appearance="crm"
       />
@@ -122,8 +156,7 @@ storiesOf('InlineEdit', module)
   ))
   .add('Select', () => (
     <div style={ { width: '200px' } }>
-      <BasicInlineEdit
-        editView={ Select }
+      <BasicInlineEditSelect
         options={ options }
         appearance="crm"
       />
