@@ -95,7 +95,7 @@ const BasicInlineEdit: React.FC<AllType> = ({
     <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
       <InlineEdit
         appearance={ appearance }
-        defaultValue={ value }
+        defaultValue={ Component === Select ? { value, label: value } : value }
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }

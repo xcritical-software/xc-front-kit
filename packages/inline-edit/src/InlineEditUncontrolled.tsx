@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React, {
-  FC, ReactNode, useRef, useCallback, createRef, useState, useEffect,
+  FC, ReactNode, useCallback, createRef, useState,
 } from 'react';
 
 import {
@@ -37,42 +37,7 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
     const confirmButtonRef = createRef<HTMLButtonElement>();
     const cancelButtonRef = createRef<HTMLButtonElement>();
 
-    const prevIsEditing = useRef(isEditing);
-    const removeMouseDown: React.MutableRefObject<void | null> = useRef(null);
-
     const [value, setValue] = useState(defaultValue);
-    const [preventFocusOnEditButton, setPreventFocusOnEditButton] = useState(false);
-
-    useEffect(() => {
-      if (prevIsEditing.current && !isEditing) {
-        if (preventFocusOnEditButton) {
-          setPreventFocusOnEditButton(false);
-        } else if (editButtonRef && editButtonRef.current) {
-          editButtonRef.current.focus();
-        }
-      }
-    }, [editButtonRef, isEditing, preventFocusOnEditButton]);
-
-    useEffect(() => {
-      function handleMouseDown(this: Document, e: MouseEvent): void {
-        if (confirmButtonRef.current?.contains(e.target as Node)) {
-          onConfirm(value);
-        } else if (cancelButtonRef.current?.contains(e.target as Node)) {
-          onCancel();
-        }
-      }
-
-      if (typeof removeMouseDown.current === 'function') {
-        document.removeEventListener('mousedown', handleMouseDown);
-        removeMouseDown.current = null;
-      }
-
-      removeMouseDown.current = document.addEventListener(
-        'mousedown',
-        handleMouseDown,
-        { capture: true },
-      );
-    }, [cancelButtonRef, confirmButtonRef, onCancel, onConfirm, value]);
 
     const handleEditValueChange = useCallback((e) => {
       if (e.target && e.target.value) {
@@ -87,7 +52,6 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
     ): void => {
       event.preventDefault();
       onEditRequested();
-      setPreventFocusOnEditButton(true);
     }, [onEditRequested]);
 
     const handleConfirmClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
@@ -141,9 +105,6 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
             baseAppearance={ baseAppearance }
             ref={ confirmButtonRef }
             onClick={ handleConfirmClick }
-            onMouseDown={ () => {
-              setPreventFocusOnEditButton(true);
-            } }
           >
             <ConfirmIcon />
           </Button>
@@ -154,9 +115,6 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
             baseAppearance={ baseAppearance }
             ref={ cancelButtonRef }
             onClick={ handleCancelClick }
-            onMouseDown={ () => {
-              setPreventFocusOnEditButton(true);
-            } }
           >
             <CancelIcon />
           </Button>

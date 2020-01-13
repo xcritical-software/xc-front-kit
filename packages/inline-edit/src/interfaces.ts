@@ -20,17 +20,9 @@ export interface ICommonProps {
   appearance?: string;
   baseAppearance?: string;
   label?: string;
-  /** Set whether onConfirm should be called on blur. */
-  keepEditViewOpenOnBlur?: boolean;
-  /** Sets whether the checkmark and cross are displayed in the bottom right of the field. */
-  hideActionButtons?: boolean;
-  /** Determines whether the input value can be confirmed as empty. */
-  isRequired?: boolean;
   /** Determines whether the read view has 100%
    * width within its container, or whether it fits the content. */
   readViewFitContainerWidth?: boolean;
-  onBlur?: (e: React.FocusEvent<HTMLElement>) => void;
-  onFocus?: () => void;
 }
 
 export interface IInlineEditUncontrolledProps<TFieldValue> extends ICommonProps {
