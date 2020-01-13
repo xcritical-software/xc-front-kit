@@ -13,6 +13,7 @@ export interface IColumn {
   visible: boolean;
   center?: boolean;
   isExpandable?: boolean;
+  render?: Function;
 }
 export interface ITotals {
   [key: string]: string | number;

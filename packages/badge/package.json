@@ -1,7 +1,7 @@
 {
-	"name": "@xcritical/pagination",
+	"name": "@xcritical/badge",
 	"version": "0.0.1",
-	"description": "Pagination component",
+	"description": "Small count and labeling component",
 	"main": "src/index.ts",
 	"scripts": {
 		"test": "exit 0",
@@ -13,29 +13,24 @@
 		"type": "git",
 		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
 	},
-	"keywords": [
-		"pagination",
-		"style-components",
-		"themed"
-	],
+	"keywords": [],
+	"author": "XCritical Software",
+	"license": "MIT",
+	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/badge#readme",
 	"publishConfig": {
 		"access": "public"
 	},
-	"author": "XCritical Software",
-	"license": "MIT",
-	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/pagination#readme",
 	"private": false,
 	"peerDependencies": {
-		"react": "^16.8.3",
+		"react": "^16.9.0",
 		"styled-components": "^4.4.1"
 	},
 	"devDependencies": {
-		"@types/lodash.range": "^3.2.6"
+		"polished": "^3.0.0"
 	},
 	"dependencies": {
 		"@xcritical/theme": "^0.1.3",
-		"@xcritical/button": "^1.1.5",
-		"@xcritical/select": "^0.1.2",
-		"lodash.range": "^3.2.0"
+		"lodash.get": "^4.x",
+		"micro-memoize": "4.0.8"
 	}
 }

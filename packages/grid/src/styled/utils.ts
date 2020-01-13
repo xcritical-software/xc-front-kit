@@ -114,9 +114,17 @@ export const getBodyCellContentStyles = ({
   selected,
 }: IBodyCellContent) => `
     padding: ${row.padding};
+    ${row.height ? `height: ${row.height}` : null};
+
     span {
       font-size: ${row.fontSize};
-      color: ${selected ? selectedRowColor : row.color}
+      color: ${selected ? selectedRowColor : row.color};
+      ${row.height ? `
+          white-space: nowrap;
+          overflow: hidden;
+          display: block;
+          text-overflow: ellipsis;` : null
+}
     }
     `;
 
