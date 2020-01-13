@@ -1,4 +1,5 @@
 import { ReactNode, RefObject } from 'react';
+import { CSSObject } from 'styled-components';
 
 
 import { ITheme, ICSSProperties, AllType } from '@xcritical/theme';
@@ -6,6 +7,11 @@ import { ITheme, ICSSProperties, AllType } from '@xcritical/theme';
 
 export interface IInlineEditTheme extends ICSSProperties {
   borderRadius?: number;
+  contentWrapper?: CSSObject;
+  editButton?: CSSObject;
+  actionButtonsWrapper?: CSSObject;
+  actionButtonWrapper?: CSSObject;
+  button?: CSSObject;
 }
 
 export type InlineEditTheme = ITheme<IInlineEditTheme>;
