@@ -1,4 +1,3 @@
 export { Blanket as default, PureBlanket } from './Blanket';
-export {
-  blanketThemeNamespace,
-} from './theme';
+export { IBlanketTheme } from './interfaces';
+export { blanketThemeNamespace } from './theme';
