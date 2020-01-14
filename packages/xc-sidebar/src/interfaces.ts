@@ -22,11 +22,12 @@ export interface ISidebarProps {
   appearance?: string;
   baseAppearance?: string;
   showScrollbar?: boolean | string;
-  withBorderArrow?: boolean;
+  withArrow?: boolean;
   isRTL?: boolean;
   minWidth?: number;
   maxWidth?: number;
   separatorWidth?: number;
+  arrowComponent?: ReactNode;
 }
 
 export interface ISidebarStates {

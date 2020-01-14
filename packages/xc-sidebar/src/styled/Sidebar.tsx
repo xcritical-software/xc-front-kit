@@ -3,9 +3,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import {
   getBaseStyle,
-  getWidthStyles,
   getPropertyStyles,
-  getBackgroundColorStyles,
   getElementStyles,
 } from '../utils';
 import {
@@ -28,11 +26,7 @@ export const Root = styled.div.attrs(({ offsetLeft }: ISidebarStates) => ({
 `;
 
 export const SidebarWrapper = styled.div<ISidebarProps>`
-  ${({ theme, appearance, baseAppearance }) => getPropertyStyles(theme, 'color', appearance, baseAppearance)('sidebarContainer')};
-  ${({ theme, appearance, baseAppearance }) => getPropertyStyles(theme, 'height', appearance, baseAppearance, '100vh')('sidebarContainer')};
-  ${({ theme, appearance, baseAppearance }) => getPropertyStyles(theme, 'position', appearance, baseAppearance, 'fixed')('sidebarContainer')};
-  ${({ theme, appearance, baseAppearance }) => getPropertyStyles(theme, 'display', appearance, baseAppearance, 'flex')('sidebarContainer')};
-  flex-wrap: nowrap;
+  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'sidebarContainer', appearance, baseAppearance)}
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   right: ${({ isRTL }) => (isRTL ? 0 : 'none')};
 `;
@@ -42,18 +36,14 @@ export const NavComponentWrapper = styled.div<ISidebarProps>`
 `;
 
 export const ChildWrapper = styled.div<IChildWrapper>`
-  ${({ theme, appearance, baseAppearance }) => getBackgroundColorStyles(theme, appearance, baseAppearance)('childContainer')};
-  overflow-y: auto;
-  overflow-x: hidden;
+  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'childContainer', appearance, baseAppearance)}
   ${({
     theme, appearance, baseAppearance, animate,
   }) => (animate ? getPropertyStyles(theme, 'transition', appearance, baseAppearance)('childContainer') : null)};
 `;
 
 export const ResponsiveWrapper = styled.div<ISidebarProps & IResponsiveWrapper>`
-  ${({ theme, appearance, baseAppearance }) => getBackgroundColorStyles(theme, appearance, baseAppearance)('responsiveContainer')};
-  ${({ theme, appearance, baseAppearance }) => getPropertyStyles(theme, 'display', appearance, baseAppearance, 'flex')('responsiveContainer')};
-  flex-wrap: nowrap;
+  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'responsiveContainer', appearance, baseAppearance)}
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   ${({
     theme, appearance, baseAppearance, animate,
@@ -81,11 +71,6 @@ export const SeparatorWrapper = styled.div<ISidebarProps>`
 
 export const Separator = styled.div<ISidebarProps>`
   ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'separator', appearance, baseAppearance)}
-  ${({ theme, appearance, baseAppearance }) => getPropertyStyles(theme, 'color', appearance, baseAppearance)('separator')};
-  ${({ theme, appearance, baseAppearance }) => getPropertyStyles(theme, 'right', appearance, baseAppearance)('separator')};
-  ${({ theme, appearance, baseAppearance }) => getPropertyStyles(theme, 'height', appearance, baseAppearance)('separator')};
-  ${({ theme, appearance, baseAppearance }) => getBackgroundColorStyles(theme, appearance, baseAppearance)('separator')};
-  ${({ theme, appearance, baseAppearance }) => getWidthStyles(theme, appearance, baseAppearance)('separator')};
 `;
 
 export const AntiSelect = styled.div<ISidebarProps>`

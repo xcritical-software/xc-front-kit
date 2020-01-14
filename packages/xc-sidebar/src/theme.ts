@@ -8,7 +8,12 @@ export const sidebarThemeStyle = {
   transition: '.5s',
   padding: 0,
   sidebarContainer: {
+    display: 'flex',
+    flexFlow: 'row nowrap',
     color: colors.CHAROCOAL,
+    height: '100vh',
+    position: 'fixed',
+    zIndex: 100,
   },
   navContainer: {
     backgroundColor: colors.GRAY_LIGHT,
@@ -17,10 +22,13 @@ export const sidebarThemeStyle = {
   },
   childContainer: {
     backgroundColor: colors.GRAY_LIGHT,
+    overflowY: 'auto',
+    overflowX: 'hidden',
   },
   responsiveContainer: {
     minHeight: '100vh',
     display: 'flex',
+    flexWrap: 'nowrap',
   },
   separatorContainer: {
     width: '10px',
@@ -34,6 +42,7 @@ export const sidebarThemeStyle = {
     height: '100%',
     position: 'relative',
     backgroundColor: colors.BLUE,
+    right: '0',
   },
   closeOpenButton: {
     width: '20px',

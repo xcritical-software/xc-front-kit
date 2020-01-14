@@ -32,7 +32,8 @@ export const PureSidebar = ({
   children,
   navComponent,
   showScrollbar,
-  withBorderArrow = false,
+  arrowComponent = <Arrow />,
+  withArrow = false,
   isRTL = false,
   minWidth = 30,
   maxWidth = 400,
@@ -41,7 +42,7 @@ export const PureSidebar = ({
   const themeContext = useContext(ThemeContext);
 
   const [transformParams, setTransformParams] = useState({
-    width: maxWidth * 0.7,
+    width: maxWidth,
     animate: false,
     arrowToRight: false,
   });
@@ -166,6 +167,8 @@ export const PureSidebar = ({
     [observerRef],
   );
 
+  console.log(arrowComponent);
+
   return (
     <ThemeProvider theme={ theme || themeContext || {} }>
       <Root offsetLeft={ offsetLeft } isRTL={ isRTL }>
@@ -228,7 +231,7 @@ export const PureSidebar = ({
                   baseAppearance={ baseAppearance }
                   isRTL={ isRTL }
                 >
-                  { withBorderArrow && (
+                  { withArrow && (
                     <CloseOpenButton
                       appearance={ appearance }
                       baseAppearance={ baseAppearance }
@@ -236,7 +239,7 @@ export const PureSidebar = ({
                       onClick={ handleClose }
                       isRTL={ isRTL }
                     >
-                      <Arrow />
+                      { arrowComponent }
                     </CloseOpenButton>
                   ) }
                 </Separator>

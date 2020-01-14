@@ -179,15 +179,19 @@ const theme: IThemeNamespace = {
         separator: {
           backgroundColor: '#0078FF',
           width: '2px',
+          height: '100%',
         },
       },
       right: {
         separator: {
           right: '0',
           width: '2px',
+          height: '100%',
         },
         responsiveContainer: {
           backgroundColor: 'lightblue',
+          minHeight: '100vh',
+          display: 'flex',
         },
       },
     },
@@ -215,7 +219,7 @@ const propsTheme: IThemeNamespace = {
 const props = {
   navComponent: <NavPanel />,
   showScrollbar: 'auto',
-  withBorderArrow: true,
+  withArrow: true,
 };
 
 storiesOf('Sidebar', module)
