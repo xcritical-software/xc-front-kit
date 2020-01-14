@@ -1,7 +1,7 @@
 import { colors } from '@xcritical/theme';
 
 
-export const sidebarThemeNamespace = '@xcritical\\xc-sidebar';
+export const sidebarThemeNamespace = '@xcritical\\sidebar';
 
 export const sidebarThemeStyle = {
   color: colors.CHAROCOAL,
