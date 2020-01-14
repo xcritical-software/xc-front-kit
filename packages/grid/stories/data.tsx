@@ -1,3 +1,18 @@
+import React from 'react';
+import EqualIcon from 'mdi-react/EqualIcon';
+import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon';
+import KeyboardArrowUpIcon from 'mdi-react/KeyboardArrowUpIcon';
+
+
+const renderFunc = (field) => (
+  <>
+    { field.current }
+    { field.diff > 0 ? <KeyboardArrowUpIcon color="green" size="16px" className="color-jungle-green" /> : null }
+    { field.diff < 0 ? <KeyboardArrowDownIcon color="red" size="16px" className="color-rose-madder" /> : null }
+    { !(field.diff < 0 || field.diff > 0) ? <EqualIcon size="16px" color="transparent" /> : null }
+  </>
+);
+
 const width = 150;
 const center = true;
 export const totals = {
@@ -356,3 +371,68 @@ export const rowsWithChildren = [
     row: 5,
   },
 ];
+
+
+export const columnsWithRender = [
+  {
+    field: 'zero', headerName: 'zero'.toUpperCase(), width: 300, visible: true, isExpandable: true,
+  },
+  {
+    render: renderFunc, field: 'one', headerName: 'one'.toUpperCase(), width: 100, visible: true, center: true,
+  },
+  {
+    render: renderFunc, field: 'two', headerName: 'two'.toUpperCase(), width: 100, visible: true, center: true,
+  },
+  {
+    render: renderFunc, field: 'three', headerName: 'three'.toUpperCase(), width: 100, visible: true, center: true,
+  },
+  {
+    render: renderFunc, field: 'four', headerName: 'four'.toUpperCase(), width: 100, visible: true, center: true,
+  },
+  {
+    render: renderFunc, field: 'five', headerName: 'five'.toUpperCase(), width: 100, visible: true, center: true,
+  },
+  {
+    render: renderFunc, field: 'six', headerName: 'six'.toUpperCase(), width: 100, visible: true, center: true,
+  },
+  {
+    render: renderFunc, field: 'saven', headerName: 'saven'.toUpperCase(), width: 100, visible: true, center: true,
+  },
+  {
+    render: renderFunc, field: 'eight', headerName: 'eight'.toUpperCase(), width: 100, visible: true, center: true,
+  },
+  {
+    render: renderFunc, field: 'nine', headerName: 'nine'.toUpperCase(), width: 100, visible: true, center: true,
+  },
+  {
+    render: renderFunc, field: 'ten', headerName: 'ten'.toUpperCase(), width: 100, visible: true, center: true,
+  },
+];
+
+
+const createObject = () => ({
+  current: Math.floor(Math.random() * 100),
+  diff: Math.random() - 0.5,
+});
+const createItem = (x) => ({
+  zero: 'Not render',
+  one: createObject(),
+  two: createObject(),
+  three: createObject(),
+  four: createObject(),
+  five: createObject(),
+  six: createObject(),
+  saven: createObject(),
+  eight: createObject(),
+  nine: createObject(),
+  ten: createObject(),
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  children: Math.random() > 0.8 && !!x ? createRowsWithRender(x) : null,
+});
+
+
+export function createRowsWithRender (x = 3) {
+  x -= 1;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return new Array(Math.floor(Math.random() * 5 + 5)).fill(true).map((_el) => createItem(x));
+}
