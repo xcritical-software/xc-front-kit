@@ -27,13 +27,11 @@ import {
 
 export const PureSidebar = ({
   theme,
-  appearance = 'default',
-  baseAppearance = 'default',
   children,
   navComponent,
   showScrollbar,
   arrowComponent = <Arrow />,
-  withArrow = false,
+  withArrow = true,
   isRTL = false,
   minWidth = 30,
   maxWidth = 400,
@@ -167,25 +165,16 @@ export const PureSidebar = ({
     [observerRef],
   );
 
-  console.log(arrowComponent);
-
   return (
     <ThemeProvider theme={ theme || themeContext || {} }>
       <Root offsetLeft={ offsetLeft } isRTL={ isRTL }>
         <SidebarWrapper
           ref={ sidebarRef }
-          appearance={ appearance }
-          baseAppearance={ baseAppearance }
           isRTL={ isRTL }
         >
           { navComponent && (
-            <NavComponentWrapper
-              appearance={ appearance }
-              baseAppearance={ baseAppearance }
-            >
+            <NavComponentWrapper>
               <Scrollbar
-                appearance={ appearance }
-                baseAppearance={ baseAppearance }
                 width={ separatorWidth }
                 autoHide={ showScrollbar === 'auto' }
                 animate={ false }
@@ -196,21 +185,15 @@ export const PureSidebar = ({
           ) }
           { children && (
             <ResponsiveWrapper
-              appearance={ appearance }
-              baseAppearance={ baseAppearance }
               animate={ transformParams.animate }
               style={ responsiveWrapperStyles }
               isRTL={ isRTL }
             >
               <ChildWrapper
-                appearance={ appearance }
-                baseAppearance={ baseAppearance }
                 style={ { width: transformParams.width } }
                 animate={ transformParams.animate }
               >
                 <Scrollbar
-                  appearance={ appearance }
-                  baseAppearance={ baseAppearance }
                   animate={ transformParams.animate }
                   width={ rightWidth }
                   marginLeft="-10px"
@@ -221,20 +204,14 @@ export const PureSidebar = ({
               </ChildWrapper>
               { antiSelectLayer && <AntiSelect isRTL={ isRTL } /> }
               <SeparatorWrapper
-                appearance={ appearance }
-                baseAppearance={ baseAppearance }
                 onMouseDown={ handleMouseDown }
                 onMouseUp={ handleRemoveMouseMove }
               >
                 <Separator
-                  appearance={ appearance }
-                  baseAppearance={ baseAppearance }
                   isRTL={ isRTL }
                 >
                   { withArrow && (
                     <CloseOpenButton
-                      appearance={ appearance }
-                      baseAppearance={ baseAppearance }
                       toRight={ transformParams.arrowToRight }
                       onClick={ handleClose }
                       isRTL={ isRTL }

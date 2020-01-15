@@ -19,8 +19,6 @@ export interface ISidebarProps {
   navComponent?: ReactNode;
   children?: ReactNode;
   theme: SidebarTheme;
-  appearance?: string;
-  baseAppearance?: string;
   showScrollbar?: boolean | string;
   withArrow?: boolean;
   isRTL?: boolean;
@@ -37,8 +35,6 @@ export interface ISidebarStates {
 export interface IReturnFunctionForConcreteProp<TValue> {
   (
     theme: SidebarTheme,
-    appearance?: string,
-    baseAppearance?: string,
   ): TValue;
 }
 
@@ -46,8 +42,6 @@ export interface IReturnFunctionForProp<TValue> {
   (
     theme: SidebarTheme,
     propertyPath: string,
-    appearance?: string,
-    baseAppearance?: string,
     defaultPropertyValue?: string,
   ): TValue;
 }
@@ -56,8 +50,6 @@ export interface IReturnFunctionForElementStyles<TValue> {
   (
     theme: SidebarTheme,
     elementName: string,
-    appearance?: string,
-    baseAppearance?: string,
   ): TValue;
 }
 

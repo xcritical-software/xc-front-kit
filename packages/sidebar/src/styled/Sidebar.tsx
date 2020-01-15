@@ -21,37 +21,37 @@ export const Root = styled.div.attrs(({ offsetLeft }: ISidebarStates) => ({
     width: `${offsetLeft}px`,
   },
 }))<ISidebarProps & ISidebarStates>`
-  ${({ theme, appearance, baseAppearance }) => getBaseStyle(theme, appearance, baseAppearance)};
+  ${({ theme }) => getBaseStyle(theme)};
   float: ${({ isRTL }) => (isRTL ? 'right' : 'left')};
 `;
 
 export const SidebarWrapper = styled.div<ISidebarProps>`
-  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'sidebarContainer', appearance, baseAppearance)}
+  ${({ theme }) => getElementStyles(theme, 'sidebarContainer')}
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   right: ${({ isRTL }) => (isRTL ? 0 : 'none')};
 `;
 
 export const NavComponentWrapper = styled.div<ISidebarProps>`
-  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'navContainer', appearance, baseAppearance)}
+  ${({ theme }) => getElementStyles(theme, 'navContainer')}
 `;
 
 export const ChildWrapper = styled.div<IChildWrapper>`
-  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'childContainer', appearance, baseAppearance)}
+  ${({ theme }) => getElementStyles(theme, 'childContainer')}
   ${({
-    theme, appearance, baseAppearance, animate,
-  }) => (animate ? getPropertyStyles(theme, 'transition', appearance, baseAppearance)('childContainer') : null)};
+    theme, animate,
+  }) => (animate ? getPropertyStyles(theme, 'transition')('childContainer') : null)};
 `;
 
 export const ResponsiveWrapper = styled.div<ISidebarProps & IResponsiveWrapper>`
-  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'responsiveContainer', appearance, baseAppearance)}
+  ${({ theme }) => getElementStyles(theme, 'responsiveContainer')}
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   ${({
-    theme, appearance, baseAppearance, animate,
-  }) => (animate ? getPropertyStyles(theme, 'transition', appearance, baseAppearance)('responsiveContainer') : null)};
+    theme, animate,
+  }) => (animate ? getPropertyStyles(theme, 'transition')('responsiveContainer') : null)};
 `;
 
 export const CloseOpenButton = styled.button<ISidebarProps & ICloseOpenButton>`
-  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'closeOpenButton', appearance, baseAppearance)}
+  ${({ theme }) => getElementStyles(theme, 'closeOpenButton')}
   transform: ${({ toRight, isRTL }) => {
     if (isRTL) {
       return toRight ? 'rotateZ(180deg)' : 'rotateZ(-360deg)';
@@ -66,11 +66,11 @@ export const CloseOpenButton = styled.button<ISidebarProps & ICloseOpenButton>`
 `;
 
 export const SeparatorWrapper = styled.div<ISidebarProps>`
-  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'separatorContainer', appearance, baseAppearance)}
+  ${({ theme }) => getElementStyles(theme, 'separatorContainer')}
 `;
 
 export const Separator = styled.div<ISidebarProps>`
-  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'separator', appearance, baseAppearance)}
+  ${({ theme }) => getElementStyles(theme, 'separator')}
 `;
 
 export const AntiSelect = styled.div<ISidebarProps>`
@@ -89,6 +89,6 @@ export const Scrollbar = styled(Scrollbars).attrs(({ width, marginLeft }: IScrol
   },
 }))<ISidebarProps & IResponsiveWrapper & IScrollbarProps>`
   ${({
-    theme, appearance, baseAppearance, animate,
-  }) => (animate ? getPropertyStyles(theme, 'transition', appearance, baseAppearance)('scrollbar') : null)};
+    theme, animate,
+  }) => (animate ? getPropertyStyles(theme, 'transition')('scrollbar') : null)};
 `;

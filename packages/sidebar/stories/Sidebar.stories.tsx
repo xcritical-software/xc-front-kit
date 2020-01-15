@@ -171,29 +171,34 @@ const theme: IThemeNamespace = {
   [sidebarThemeNamespace]: {
     minWidth: 20,
     maxWidth: 400,
-    appearance: {
-      default: {
-        childContainer: {
-          backgroundColor: 'lightblue',
-        },
-        separator: {
-          backgroundColor: '#0078FF',
-          width: '2px',
-          height: '100%',
-        },
-      },
-      right: {
-        separator: {
-          right: '0',
-          width: '2px',
-          height: '100%',
-        },
-        responsiveContainer: {
-          backgroundColor: 'lightblue',
-          minHeight: '100vh',
-          display: 'flex',
-        },
-      },
+    childContainer: {
+      backgroundColor: 'lightblue',
+    },
+    separator: {
+      backgroundColor: '#0078FF',
+      width: '2px',
+      height: '100%',
+    },
+  },
+};
+
+const rightTheme: IThemeNamespace = {
+  [sidebarThemeNamespace]: {
+    minWidth: 20,
+    maxWidth: 400,
+    childContainer: {
+      backgroundColor: 'lightblue',
+    },
+    separator: {
+      right: '0',
+      width: '2px',
+      height: '100%',
+      backgroundColor: '#0078FF',
+    },
+    responsiveContainer: {
+      backgroundColor: 'lightblue',
+      minHeight: '100vh',
+      display: 'flex',
     },
   },
 };
@@ -246,10 +251,10 @@ storiesOf('Sidebar', module)
     </BrowserRouter>
   ))
   .add('Right position', () => (
-    <ThemeProvider theme={ theme }>
+    <ThemeProvider theme={ rightTheme }>
       <BrowserRouter>
         <GlobalStyle />
-        <Sidebar { ...props } isRTL appearance="right">
+        <Sidebar { ...props } isRTL>
           { list(100) }
         </Sidebar>
         <Switch>

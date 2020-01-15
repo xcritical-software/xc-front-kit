@@ -42,12 +42,10 @@ export const sidebarAppearanceTheme = (
 
 export const getBaseStyle: IReturnFunctionForConcreteProp<FlattenSimpleInterpolation> = memoizee((
   theme,
-  appearance = 'default',
-  baseAppearance = 'default',
 ) => {
-  const background = sidebarAppearanceTheme(theme, appearance, baseAppearance, 'background');
-  const color = sidebarAppearanceTheme(theme, appearance, baseAppearance, 'color');
-  const zIndex = sidebarAppearanceTheme(theme, appearance, baseAppearance, 'zIndex');
+  const background = sidebarTheme(theme, 'background');
+  const color = sidebarTheme(theme, 'color');
+  const zIndex = sidebarTheme(theme, 'zIndex');
 
   return css`
     background: ${background};
@@ -85,10 +83,8 @@ export const getPropertyStyles: GetPropStyles<FlattenInterpolation<any>> = memoi
 export const getElementStyles: IReturnFunctionForElementStyles<any> = memoizee((
   theme,
   elementName,
-  appearance = 'default',
-  baseAppearance = 'default',
 ) => {
-  const styles = sidebarAppearanceTheme(theme, appearance, baseAppearance, elementName);
+  const styles = sidebarTheme(theme, elementName);
 
   return styles;
 });
