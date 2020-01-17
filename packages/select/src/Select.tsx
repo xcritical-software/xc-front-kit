@@ -29,6 +29,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   placeholder,
   theme,
   components,
+  onChange,
   ...rest
 }) => {
   const themeContext = useContext<IThemeNamespace<ISelectBaseTheme>>(ThemeContext);
@@ -80,6 +81,11 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
         ClearIndicator,
         MultiValueRemove,
         ...components,
+      } }
+      onChange={ (value, action) => {
+        // Fixed react-select behaviour: https://github.com/JedWatson/react-select/issues/3632
+        if (isMulti && value === null) onChange([], action);
+        else onChange(value, action);
       } }
       { ...rest }
     />
