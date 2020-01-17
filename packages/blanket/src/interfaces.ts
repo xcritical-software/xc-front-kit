@@ -11,8 +11,6 @@ export type BlanketTheme = ITheme<IBlanketTheme>;
 
 export interface IBlanketProps {
   children?: AllType;
-  appearance?: string;
-  baseAppearance?: string;
   theme: BlanketTheme;
   /** Whether mouse events can pierce the blanket. If true, onBlanketClicked will not be fired */
   canClickThrough?: boolean;
