@@ -1,6 +1,4 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable import/no-unresolved */
 import React, { useEffect } from 'react';
 import Input from '@xcritical/input';
 import Button from '@xcritical/button';
@@ -14,7 +12,11 @@ import { formSelector } from '../src/reducer';
 
 const FORM_NAME = 'connectedForm';
 
-const selectItems = [{ value: 'ff0000', label: 'Red' }, { value: '00ff00', label: 'Green' }, { value: '0000ff', label: 'Blue' }];
+const selectItems = [
+  { value: 'ff0000', label: 'Red' },
+  { value: '00ff00', label: 'Green' },
+  { value: '0000ff', label: 'Blue' },
+];
 
 const validate = (values) => {
   let errors = {};
@@ -64,21 +66,28 @@ const SimpleForm = ({
           />
         </div>
       </div>
-
       <div>
         <label>Favorite Colors</label>
         <div>
-          <Form.Field name="favoriteColors" isMulti component={ Select } options={ selectItems } />
+          <Form.Field
+            isMulti
+            name="favoriteColors"
+            component={ Select }
+            options={ selectItems }
+          />
         </div>
       </div>
-
       <div>
         <label>Least Favorite Color</label>
         <div>
-          <Form.Field name="leastFavoriteColor" isClearable component={ Select } options={ selectItems } />
+          <Form.Field
+            name="leastFavoriteColor"
+            isClearable
+            component={ Select }
+            options={ selectItems }
+          />
         </div>
       </div>
-
       <div>
         <Button
           type="submit"
@@ -86,12 +95,13 @@ const SimpleForm = ({
             e.preventDefault();
 
             const errors = validate(formData.model);
+            const isValid = Object.entries(errors).length === 0;
 
-            if (formData.model && Object.entries(errors).length === 0) init(formData.model);
+            if (isValid) init(formData.model);
             else setErrors(errors);
           } }
         >
-        Submit
+            Submit
         </Button>
         <Button type="button" disabled={ !formData.isChanged } onClick={ reset }>Reset</Button>
       </div>
