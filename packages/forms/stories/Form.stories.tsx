@@ -7,6 +7,7 @@ import store from './store';
 import SimpleForm from './SimpleForm';
 import MultipleForm from './MultipleForm';
 import MirroringForm from './MirroringForm';
+import ConnectedForm from './ConnectedForm';
 
 
 storiesOf('Form', module)
@@ -23,5 +24,10 @@ storiesOf('Form', module)
   .add('Mirror Form', () => (
     <Provider store={ store }>
       <MirroringForm />
+    </Provider>
+  ))
+  .add('Connected Form', () => (
+    <Provider store={ store }>
+      <ConnectedForm />
     </Provider>
   ));

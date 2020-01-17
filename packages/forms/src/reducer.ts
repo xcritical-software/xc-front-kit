@@ -1,7 +1,6 @@
 import get from 'lodash.get';
-import isEmpty from 'lodash.isempty';
 import { Reducer } from 'redux';
-import { setIn, difference } from 'utilitify';
+import { setIn, isDifference } from 'utilitify';
 
 import {
   XCRITICAL_FORM_INIT,
@@ -40,14 +39,14 @@ const behaviors: Record<FormActionType, Function> = {
     const $value = value !== '' ? value : null;
 
     const model = setIn(state.model, $value, field);
-    const diff = difference(model, state.source);
+    const isChanged = isDifference(model, state.source);
     const errors = setIn(state.errors, false, field);
 
     return {
       ...state,
       model,
       errors,
-      isChanged: !isEmpty(diff),
+      isChanged,
     };
   },
   [XCRITICAL_FORM_ERROR]: (state: IFormState, { payload }: IFormAction) => ({
@@ -86,7 +85,7 @@ export const formSelector = (state: any, formName: string): any => {
     return state;
   }
 
-  return get(state.form, formName);
+  return get(state.form, formName, state);
 };
 
 export default reducerDictionary(reducer, 'formName');
