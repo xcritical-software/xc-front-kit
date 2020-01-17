@@ -8,8 +8,8 @@ import {
   AllType,
 } from '@xcritical/theme';
 
-import { blanketThemeNamespace, defaultBlanketTheme } from '../theme';
-import { IBlanketTheme, IBlanketProps } from '../interfaces';
+import { blanketThemeNamespace, defaultBlanketTheme } from './theme';
+import { IBlanketTheme, IBlanketProps } from './interfaces';
 
 
 export const blanketTheme = (
@@ -29,9 +29,7 @@ export const getBlanketThemeStylesByProperty = (
   return get(mergedTheme, propertyPath);
 };
 
-export const getBaseStyle = ({
-  theme,
-}: IBlanketProps): FlattenSimpleInterpolation => {
+export const getBaseStyle = ({ theme }: IBlanketProps): FlattenSimpleInterpolation => {
   const baseStyles = blanketTheme(theme);
 
   return css`

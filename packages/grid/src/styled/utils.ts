@@ -118,7 +118,7 @@ export const getBodyCellContentStyles = ({
 
     span {
       font-size: ${row.fontSize};
-      color: ${selected ? selectedRowColor : row.color}
+      color: ${selected ? selectedRowColor : row.color};
       ${row.height ? `
           white-space: nowrap;
           overflow: hidden;

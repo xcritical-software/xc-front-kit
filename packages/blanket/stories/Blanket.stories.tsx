@@ -5,28 +5,22 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 
-import Blanket, { blanketThemeNamespace } from '../src';
-import { BlanketTheme } from '../src/interfaces';
+import Blanket, { blanketThemeNamespace, IBlanketTheme } from '../src';
 
 
-const generateTheme = (
-  baseBgColor: string,
-  textColor: string,
-): BlanketTheme => ({
-  appearance: {
-    myaccount: {
-      background: baseBgColor,
-      color: textColor,
-      fontWeight: 600,
-      opacity: 0.5,
-      zIndex: 100,
-    },
-  },
-});
+const emptyTheme = {};
 
-const theme = generateTheme('#575857', '#A7A7A7');
+const theme = {
+  [blanketThemeNamespace]: {
+    background: '#575857',
+    color: '#A7A7A7',
+    fontWeight: 600,
+    opacity: 0.7,
+    zIndex: 100,
+  } as IBlanketTheme,
+};
 
-const BasicBlanket = () => {
+const BasicBlanket: React.FC<any> = ({ blanketTheme }) => {
   const [isTinted, setIsTinted] = React.useState(false);
 
   const handleClick = (): void => {
@@ -34,7 +28,7 @@ const BasicBlanket = () => {
   };
 
   return (
-    <ThemeProvider theme={ { [blanketThemeNamespace]: theme } }>
+    <ThemeProvider theme={ blanketTheme }>
       <Blanket isTinted={ isTinted } onBlanketClicked={ handleClick } />
       <div>Click to any place for show/hide Blanket</div>
     </ThemeProvider>
@@ -43,5 +37,8 @@ const BasicBlanket = () => {
 
 storiesOf('Blanket', module)
   .add('Basic', () => (
-    <BasicBlanket />
+    <BasicBlanket blanketTheme={ emptyTheme } />
+  ))
+  .add('With Theme', () => (
+    <BasicBlanket blanketTheme={ theme } />
   ));

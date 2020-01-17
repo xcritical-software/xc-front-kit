@@ -10,7 +10,7 @@ import { setIn } from 'utilitify';
 import Grid from '../src';
 import { IColumn } from '../src/interfaces';
 import {
-  columns, totals, rowsWithChildren, rows,
+  columns, totals, rowsWithChildren, rows, columnsWithRender, createRowsWithRender,
 } from './data';
 import * as countries from './countries';
 import { gridThemeNamespace } from '../src/theme';
@@ -270,4 +270,12 @@ storiesOf('New Grid', module)
         />
       </>
     );
-  });
+  })
+  .add('Render cell function', () => (
+    <Grid
+      columns={ columnsWithRender }
+      items={ createRowsWithRender() }
+      width={ document.documentElement.clientWidth - 100 }
+      height={ document.documentElement.clientHeight - 100 }
+    />
+  ));
