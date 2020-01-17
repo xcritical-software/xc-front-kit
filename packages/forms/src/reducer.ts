@@ -61,6 +61,7 @@ const behaviors: Record<FormActionType, Function> = {
     ...state,
     isChanged: false,
     model: state.source,
+    errors: {},
   }),
   [XCRITICAL_FORM_SAVED]: (state: IFormState) => ({
     ...state,
