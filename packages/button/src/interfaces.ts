@@ -1,11 +1,9 @@
-import {
-  ITheme, IThemeNamespace, ICSSProperties,
-} from '@xcritical/theme';
-import {
-  FlattenInterpolation, ThemedStyledProps,
-} from 'styled-components';
+import React from 'react';
+import { ITheme, IThemeNamespace, ICSSProperties } from '@xcritical/theme';
+import { CSSObject } from 'styled-components';
 
-
+/* BUTTON */
+export type ButtonTags= 'button' | 'span' | 'a';
 export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
 
 export interface IBaseButtonTheme extends ICSSProperties {
@@ -17,7 +15,7 @@ export interface IBaseButtonTheme extends ICSSProperties {
 
 export type ButtonTheme = ITheme<IBaseButtonTheme>;
 
-export interface IButtonApperanceProps {
+export interface IButtonAppearanceProps {
   theme?: IThemeNamespace<ButtonTheme>;
   appearance?: string;
   baseAppearance?: string;
@@ -27,8 +25,7 @@ export interface IIsRTL {
   isRTL?: boolean;
 }
 
-export interface IPrefixProps extends IButtonApperanceProps, IIsRTL {
-}
+export interface IPrefixProps extends IButtonAppearanceProps, IIsRTL {}
 
 export interface IContentProps extends IIsRTL {
   textPosition?: string;
@@ -42,15 +39,11 @@ export interface ISpacing {
   spacing?: 'compact' | 'default' | 'none';
 }
 
-type HtmlAttributes = Pick<React.AllHTMLAttributes<HTMLElement>,
-Exclude<keyof React.AllHTMLAttributes<HTMLElement>, keyof IOnlyButtonProps | 'css'>
-> & { css?: FlattenInterpolation<ThemedStyledProps<IButtonProps, any>> };
-
 export interface IOnlyButtonProps {
   prefix?: React.ReactNode;
   postfix?: React.ReactNode;
   shouldAllowMultiline?: boolean;
-  outline?: boolean;
+  ghost?: boolean;
   href?: string;
   selected?: boolean;
   textPosition?: string;
@@ -58,12 +51,27 @@ export interface IOnlyButtonProps {
   component?: React.ElementType;
 }
 
-export interface IButtonProps
-  extends HtmlAttributes,
-  IButtonApperanceProps,
+export interface IButtonProps extends
+  IButtonAppearanceProps,
   IIsRTL,
   ISpacing,
   IShouldFitContent,
   IOnlyButtonProps {
+  [key: string]: any;
+}
 
+export interface IStyledButtonProps extends IButtonProps {
+  baseAppearance: string;
+  appearance: string;
+  spacing: 'compact' | 'default' | 'none';
+  ghost: boolean;
+  shouldFitContent: boolean;
+}
+
+/* BUTTON GROUP */
+// TODO ITheme unnecessary here but without it getButtonGroupStyles throw linter error.
+export type ButtonGroupTheme = ITheme<CSSObject>;
+
+export interface IButtonGroup {
+  theme?: IThemeNamespace<ButtonGroupTheme>;
 }

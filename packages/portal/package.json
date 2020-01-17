@@ -1,0 +1,30 @@
+{
+	"name": "@xcritical/portal",
+	"version": "0.0.1",
+	"description": "XCritical Portal Component",
+	"main": "src/index.ts",
+	"scripts": {
+		"test": "exit 0",
+		"compile": "gulp --cwd . compile",
+		"build": "yarn clean && yarn compile",
+		"clean": "rimraf dist lib .publish"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+	},
+	"keywords": [
+		"portal"
+	],
+	"author": "XCritical Software",
+	"license": "MIT",
+	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/portal#readme",
+	"publishConfig": {
+		"access": "public"
+	},
+	"private": false,
+	"peerDependencies": {
+		"react": "^16.8.3",
+		"react-dom": "^16.12.0"
+	}
+}

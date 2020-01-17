@@ -5,6 +5,7 @@ import React, {
   useCallback,
   MutableRefObject,
   useContext,
+  useMemo,
 } from 'react';
 import { ThemeContext } from 'styled-components';
 import {
@@ -28,7 +29,7 @@ import {
 } from './styled';
 import { AddIcon, RemoveIcon } from './icons';
 import {
-  guid, addOrDeleteItemFromArray, gridTheme, deletePropsFromObjects,
+  guid, addOrDeleteItemFromArray, gridTheme, deletePropsFromObjects, searchLastVisible,
 } from './utils';
 
 import { HeaderWrapper } from './HeaderWrapper';
@@ -53,13 +54,14 @@ const Grid = ({
 }: IGrid) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme || contextTheme));
+
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
     items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
   );
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const fullWidthRef = useRef(
-    mappedColumns.reduce(
+    mappedColumns.filter(({ visible }: IColumn) => visible).reduce(
       (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
     ),
   );
@@ -73,20 +75,26 @@ const Grid = ({
     }),
   );
 
+  const filteredColums = useMemo(() => (
+    mappedColumns.filter(({ visible }) => visible)
+  ), [mappedColumns]);
 
   useEffect(() => {
-    const newFullWidth = columns.reduce(
+    const newFullWidth = columns.filter(({ visible }: IColumn) => visible).reduce(
       (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
     );
     themeRef.current = gridTheme(theme || contextTheme);
     fullWidthRef.current = newFullWidth;
     if (newFullWidth < width) {
-      const lastElemIdx = columns.length - 1;
+      const lastElemIdx = searchLastVisible(columns, columns.length);
       const widthLast = columns[lastElemIdx].width;
       const newColumns = setIn(columns, widthLast + (width - newFullWidth), [String(lastElemIdx), 'width']);
       setMappedColumns(newColumns);
+      fullWidthRef.current = newFullWidth;
       return;
     }
+
+    fullWidthRef.current = newFullWidth;
     setMappedColumns(columns);
   }, [columns, contextTheme, theme, width]);
 
@@ -173,11 +181,18 @@ const Grid = ({
   const cellRenderer = ({
     columnIndex, key, parent, rowIndex, style,
   }: GridCellProps) => {
-    const content = mappedItems[rowIndex][mappedColumns[columnIndex].field];
     const isFirstColumn = columnIndex === 0;
-    const expandLevel = isFirstColumn ? mappedItems[rowIndex].expandLevel : 0;
 
-    const column = mappedColumns[columnIndex];
+    const row = mappedItems[rowIndex];
+    const column = filteredColums[columnIndex];
+
+    const expandLevel = isFirstColumn ? row.expandLevel : 0;
+
+    const renderFunction = column.render;
+
+    const content = row[column.field];
+
+    const cellContent = renderFunction ? renderFunction(content, column.field, row) : content;
 
     const handleExpand = () => {
       onChangeExpand(rowIndex, mappedItems[rowIndex].children);
@@ -185,7 +200,6 @@ const Grid = ({
 
     const isSelected = selectedRows
       .some((k: string) => k === mappedItems[rowIndex].key);
-
 
     return (
       <CellMeasurer
@@ -225,7 +239,7 @@ const Grid = ({
             center={ !!column.center }
             selected={ isSelected }
           >
-            <span>{ content }</span>
+            <span>{ cellContent }</span>
           </BodyCellContent>
         </BodyCell>
       </CellMeasurer>
@@ -234,15 +248,30 @@ const Grid = ({
 
   const handleChangeWidth = useCallback(
     (index, newWidth) => {
-      const newColumns = setIn(mappedColumns, newWidth, [index, 'width']);
-      setMappedColumns(newColumns);
-      fullWidthRef.current = newColumns.reduce(
-        (acc: number, { width: colWidth }: IMappedItem) => (acc + Number(colWidth)),
+      let newColumns: IColumn[] = setIn(mappedColumns, newWidth, [index, 'width']);
+      let newFullWidth: number = newColumns.reduce(
+        (acc, { width: colWidth }) => (acc + colWidth),
         0,
       );
+
+      if (newFullWidth < width) {
+        const lastColIdx = searchLastVisible(newColumns, newColumns.length);
+        newColumns = setIn(
+          newColumns,
+          newColumns[lastColIdx].width + (width - newFullWidth),
+          [String(lastColIdx), 'width'],
+        );
+
+        newFullWidth = newColumns.reduce(
+          (acc, { width: colWidth }) => (acc + colWidth),
+          0,
+        );
+      }
+      fullWidthRef.current = newFullWidth;
+      setMappedColumns(newColumns);
       onChangeColumns(newColumns);
     },
-    [mappedColumns, onChangeColumns],
+    [mappedColumns, onChangeColumns, width],
   );
 
 
@@ -264,6 +293,7 @@ const Grid = ({
     totals: { height: totalsHeight = 0 },
   } = themeRef.current;
 
+
   return (
     <Wrapper theme={ themeRef.current } width={ width } changingColumns={ changingColumns }>
       <HeaderWrapper
@@ -280,8 +310,8 @@ const Grid = ({
       <Body>
         <VirtualisedGrid
           ref={ gridRef as MutableRefObject<VirtualisedGrid> }
-          columnCount={ mappedColumns.length }
-          columnWidth={ ({ index }: any) => mappedColumns[index].width }
+          columnCount={ filteredColums.length }
+          columnWidth={ ({ index }: any) => filteredColums[index].width }
           deferredMeasurementCache={ cacheRef.current }
           height={ height - Number(headerHeight) - Number(totalsHeight) }
           cellRenderer={ cellRenderer }
@@ -297,10 +327,10 @@ const Grid = ({
           translateX={ scrollLeft }
           theme={ themeRef.current }
         >
-          { mappedColumns.map((el: IColumn, index: number) => (
+          { filteredColums.map((el: IColumn, index: number) => (
             <TotalCell
               theme={ themeRef.current }
-              width={ mappedColumns.length === index + 1 ? el.width + 9 : el.width }
+              width={ filteredColums.length === index + 1 ? el.width + 9 : el.width }
             >
               <TotalCellContent center={ !!el.center } theme={ themeRef.current }>
                 <span>{ totals[el.field] }</span>
