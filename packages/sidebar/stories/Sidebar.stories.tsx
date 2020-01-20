@@ -3,16 +3,33 @@
 import React from 'react';
 import { MdiReactIconComponentType } from 'mdi-react';
 import { storiesOf } from '@storybook/react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import {
   NavLink, BrowserRouter, Switch, Route,
 } from 'react-router-dom';
 import { IThemeNamespace } from '@xcritical/theme';
-import { Sidebar } from '../src';
+import Sidebar from '../src';
 import { routerConfig } from './routerConfig';
 import { sidebarThemeNamespace } from '../src/theme';
-import { ISidebarTheme } from '../src/utils';
 
+
+export const GlobalStyle = createGlobalStyle`
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  html {
+    box-sizing: border-box;
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+`;
 
 const list: any = (n: number) => (
   <div>
@@ -83,11 +100,13 @@ const NavPanelWrapper = styled.div`
   width: 90px;
   border-right: 1px solid #47536C;
 `;
+
 const NavPanelContent = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 20px;
 `;
+
 const NavPanelLogo = styled.div`
   height: 90px;
   width: 90px;
@@ -148,36 +167,70 @@ const NavPanel: React.FC = () => (
   </NavPanelWrapper>
 );
 
-
 const theme: IThemeNamespace = {
   [sidebarThemeNamespace]: {
-    rightBackground: 'lightblue',
     minWidth: 20,
     maxWidth: 400,
-  } as ISidebarTheme,
+    childContainer: {
+      backgroundColor: 'lightblue',
+    },
+    separator: {
+      backgroundColor: '#0078FF',
+      width: '2px',
+      height: '100%',
+    },
+  },
 };
+
+const rightTheme: IThemeNamespace = {
+  [sidebarThemeNamespace]: {
+    minWidth: 20,
+    maxWidth: 400,
+    childContainer: {
+      backgroundColor: 'lightblue',
+    },
+    separator: {
+      right: '0',
+      width: '2px',
+      height: '100%',
+      backgroundColor: '#0078FF',
+    },
+    responsiveContainer: {
+      backgroundColor: 'lightblue',
+      minHeight: '100vh',
+      display: 'flex',
+    },
+  },
+};
+
 const propsTheme: IThemeNamespace = {
   [sidebarThemeNamespace]: {
-    leftBackground: 'red',
-    rightBackground: 'pink',
     color: 'indigo',
-    separatorColor: 'rgb(150,0,0)',
     minWidth: 60,
     maxWidth: 400,
     leftWidth: 90,
-  } as ISidebarTheme,
+    navContainer: {
+      backgroundColor: 'red',
+    },
+    childContainer: {
+      backgroundColor: 'pink',
+    },
+    separator: {
+      backgroundColor: 'rgb(150,0,0)',
+    },
+  },
 };
-
 
 const props = {
   navComponent: <NavPanel />,
   showScrollbar: 'auto',
+  withArrow: true,
 };
-
 
 storiesOf('Sidebar', module)
   .add('Basic', () => (
     <BrowserRouter>
+      <GlobalStyle />
       <Sidebar { ...props }>
         { list(100) }
       </Sidebar>
@@ -189,6 +242,7 @@ storiesOf('Sidebar', module)
   ))
   .add('Only left panel', () => (
     <BrowserRouter>
+      <GlobalStyle />
       <Sidebar { ...props } />
       <Switch>
         { routerConfig.map(({ path, component, exact }: any) => (
@@ -196,8 +250,23 @@ storiesOf('Sidebar', module)
       </Switch>
     </BrowserRouter>
   ))
+  .add('Right position', () => (
+    <ThemeProvider theme={ rightTheme }>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Sidebar { ...props } isRTL>
+          { list(100) }
+        </Sidebar>
+        <Switch>
+          { routerConfig.map(({ path, component, exact }: any) => (
+            <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+        </Switch>
+      </BrowserRouter>
+    </ThemeProvider>
+  ))
   .add('With theme provider', () => (
     <ThemeProvider theme={ theme }>
+      <GlobalStyle />
       <BrowserRouter>
         <Sidebar { ...props }>
           { list(100) }
@@ -211,6 +280,7 @@ storiesOf('Sidebar', module)
   ))
   .add('Theme in props', () => (
     <ThemeProvider theme={ theme }>
+      <GlobalStyle />
       <BrowserRouter>
         <Sidebar { ...props } theme={ propsTheme }>
           { list(100) }
