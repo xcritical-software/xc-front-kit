@@ -4,44 +4,43 @@ import React, {
   ReactElement,
   useRef,
   useEffect,
-  ReactNode,
   useContext,
 } from 'react';
-import { ThemeContext } from 'styled-components';
-import { Scrollbars } from 'react-custom-scrollbars';
+import { ThemeContext, withTheme, ThemeProvider } from 'styled-components';
 import ResizeObserver from 'resize-observer-polyfill';
-import { IThemeNamespace } from '@xcritical/theme';
+
 import Arrow from './Arrow';
-import { sidebarTheme, ISidebarTheme } from './utils';
+import { ISidebarProps } from './interfaces';
 import {
+  Root,
   ResponsiveWrapper,
-  RightBorder,
-  CloseOpenButton,
-  RightBorderWrapper,
-  AntiSelect,
   ChildWrapper,
   SidebarWrapper,
   NavComponentWrapper,
+  SeparatorWrapper,
+  Separator,
+  CloseOpenButton,
+  AntiSelect,
+  Scrollbar,
 } from './styled/Sidebar';
 
 
-interface IWrapperProps {
-  navComponent?: ReactNode;
-  children?: ReactNode;
-  theme?: IThemeNamespace;
-  showScrollbar?: boolean | string;
-}
-
-export const Sidebar = ({
+export const PureSidebar = ({
   theme,
   children,
   navComponent,
   showScrollbar,
-}: IWrapperProps): ReactElement => {
+  arrowComponent = <Arrow />,
+  withArrow = true,
+  isRTL = false,
+  minWidth = 30,
+  maxWidth = 400,
+  separatorWidth: separatorWidthProp = 90,
+}: ISidebarProps): ReactElement => {
   const themeContext = useContext(ThemeContext);
-  const themeRef = useRef(sidebarTheme<ISidebarTheme>(theme || themeContext));
+
   const [transformParams, setTransformParams] = useState({
-    width: themeRef.current.maxWidth * 0.7,
+    width: maxWidth,
     animate: false,
     arrowToRight: false,
   });
@@ -51,9 +50,9 @@ export const Sidebar = ({
 
   const clickX = useRef(0);
   const [offsetLeft, changeOffsetLeft] = useState(0);
-  const leftWidth = showScrollbar
-    ? themeRef.current.leftWidth
-    : themeRef.current.leftWidth + 10;
+  const separatorWidth = showScrollbar
+    ? separatorWidthProp
+    : separatorWidthProp + 10;
 
   const responsiveWrapperStyles = {
     width: transformParams.width,
@@ -73,19 +72,22 @@ export const Sidebar = ({
       });
 
       const { clientX: currentX } = e;
-      const newWidth = transformParams.width + (currentX - clickX.current);
+      const newWidth = isRTL
+        ? transformParams.width - (currentX - clickX.current)
+        : transformParams.width + (currentX - clickX.current);
 
-      if (newWidth >= themeRef.current.maxWidth) return;
+      if (newWidth >= maxWidth) return;
+
       if (newWidth <= 0) {
         document.body.removeEventListener('mousemove', handleMouseMove);
         setTransformParams({
-          width: themeRef.current.minWidth,
+          width: minWidth,
           animate: false,
           arrowToRight: true,
         });
-      } else if (newWidth <= themeRef.current.minWidth) {
+      } else if (newWidth <= minWidth) {
         setTransformParams({
-          width: themeRef.current.minWidth,
+          width: minWidth,
           animate: false,
           arrowToRight: true,
         });
@@ -93,11 +95,11 @@ export const Sidebar = ({
         setTransformParams({
           width: newWidth,
           animate: false,
-          arrowToRight: newWidth < themeRef.current.maxWidth * 0.3,
+          arrowToRight: newWidth < maxWidth * 0.3,
         });
       }
     },
-    [transformParams.width],
+    [isRTL, maxWidth, minWidth, transformParams.width],
   );
 
   const handleMouseDown = useCallback(
@@ -110,20 +112,20 @@ export const Sidebar = ({
 
   const handleClose = useCallback(() => {
     document.body.removeEventListener('mousemove', handleMouseMove);
-    if (transformParams.width < themeRef.current.maxWidth * 0.3) {
+    if (transformParams.width < maxWidth * 0.3) {
       setTransformParams({
-        width: themeRef.current.maxWidth,
+        width: maxWidth,
         animate: true,
         arrowToRight: false,
       });
     } else {
       setTransformParams({
-        width: themeRef.current.minWidth,
+        width: minWidth,
         animate: true,
         arrowToRight: true,
       });
     }
-  }, [handleMouseMove, transformParams.width]);
+  }, [handleMouseMove, maxWidth, minWidth, transformParams.width]);
 
   const handleRemoveMouseMove = useCallback(() => {
     document.body.removeEventListener('mousemove', handleMouseMove);
@@ -163,55 +165,68 @@ export const Sidebar = ({
     [observerRef],
   );
 
-
   return (
-    <div style={ {
-      height: '100%', width: `${offsetLeft}px`, minHeight: '100vh', float: 'left',
-    } }
-    >
-      <SidebarWrapper ref={ sidebarRef } theme={ themeRef.current }>
-        { navComponent && (
-          <NavComponentWrapper theme={ themeRef.current }>
-            <Scrollbars autoHide={ showScrollbar === 'auto' } style={ { width: leftWidth } }>{ navComponent }</Scrollbars>
-          </NavComponentWrapper>
-        ) }
-        { children && (
-          <ResponsiveWrapper
-            animate={ transformParams.animate }
-            style={ responsiveWrapperStyles }
-          >
-            <RightBorderWrapper
-              onMouseDown={ handleMouseDown }
-              onMouseUp={ handleRemoveMouseMove }
-            >
-              <RightBorder theme={ themeRef.current }>
-                <CloseOpenButton
-                  toRight={ transformParams.arrowToRight }
-                  onClick={ handleClose }
-                >
-                  <Arrow />
-                </CloseOpenButton>
-              </RightBorder>
-            </RightBorderWrapper>
-            { antiSelectLayer && <AntiSelect /> }
-            <ChildWrapper
-              theme={ themeRef.current }
-              style={ { width: transformParams.width } }
-              animate={ transformParams.animate }
-            >
-              <Scrollbars
-                style={ {
-                  width: rightWidth,
-                  transition: transformParams.animate ? '0.5s' : '0s',
-                } }
+    <ThemeProvider theme={ theme || themeContext || {} }>
+      <Root offsetLeft={ offsetLeft } isRTL={ isRTL }>
+        <SidebarWrapper
+          ref={ sidebarRef }
+          isRTL={ isRTL }
+        >
+          { navComponent && (
+            <NavComponentWrapper>
+              <Scrollbar
+                width={ separatorWidth }
                 autoHide={ showScrollbar === 'auto' }
+                animate={ false }
               >
-                { children }
-              </Scrollbars>
-            </ChildWrapper>
-          </ResponsiveWrapper>
-        ) }
-      </SidebarWrapper>
-    </div>
+                { navComponent }
+              </Scrollbar>
+            </NavComponentWrapper>
+          ) }
+          { children && (
+            <ResponsiveWrapper
+              animate={ transformParams.animate }
+              style={ responsiveWrapperStyles }
+              isRTL={ isRTL }
+            >
+              <ChildWrapper
+                style={ { width: transformParams.width } }
+                animate={ transformParams.animate }
+              >
+                <Scrollbar
+                  animate={ transformParams.animate }
+                  width={ rightWidth }
+                  marginLeft="-10px"
+                  autoHide={ showScrollbar === 'auto' }
+                >
+                  { children }
+                </Scrollbar>
+              </ChildWrapper>
+              { antiSelectLayer && <AntiSelect isRTL={ isRTL } /> }
+              <SeparatorWrapper
+                onMouseDown={ handleMouseDown }
+                onMouseUp={ handleRemoveMouseMove }
+              >
+                <Separator
+                  isRTL={ isRTL }
+                >
+                  { withArrow && (
+                    <CloseOpenButton
+                      toRight={ transformParams.arrowToRight }
+                      onClick={ handleClose }
+                      isRTL={ isRTL }
+                    >
+                      { arrowComponent }
+                    </CloseOpenButton>
+                  ) }
+                </Separator>
+              </SeparatorWrapper>
+            </ResponsiveWrapper>
+          ) }
+        </SidebarWrapper>
+      </Root>
+    </ThemeProvider>
   );
 };
+
+export const Sidebar = React.memo(withTheme(PureSidebar));

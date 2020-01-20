@@ -13,7 +13,7 @@ import {
 } from './data';
 import * as countries from './countries';
 import { gridThemeNamespace } from '../src/theme';
-import { Sidebar } from '../../xc-sidebar/src/index';
+import Sidebar from '../../sidebar/src';
 
 
 const list: any = (n: number) => (
