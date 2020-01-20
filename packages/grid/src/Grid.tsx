@@ -235,17 +235,17 @@ const Grid = ({
             selected={ isSelected }
           >
 
-            { column.isExpandable && mappedItems[rowIndex].children ? (
+            { column.isExpandable && mappedItems[rowIndex].children && (
               <ExpandButtonWrapper onClick={ handleExpand } theme={ themeRef.current }>
                 { mappedItems[rowIndex].isExpand
                   ? <RemoveIcon />
                   : <AddIcon /> }
               </ExpandButtonWrapper>
-            ) : null }
+            ) }
 
-            { column.isExpandable && !mappedItems[rowIndex].children ? (
+            { column.isExpandable && !mappedItems[rowIndex].children && (
               <ShiftInsteadButton theme={ themeRef.current } />
-            ) : null }
+            ) }
 
             <span>{ cellContent }</span>
           </BodyCellContent>
