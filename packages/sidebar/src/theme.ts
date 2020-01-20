@@ -4,9 +4,6 @@ import { colors } from '@xcritical/theme';
 export const sidebarThemeNamespace = '@xcritical\\sidebar';
 
 export const sidebarThemeStyle = {
-  color: colors.CHAROCOAL,
-  transition: '.5s',
-  padding: 0,
   sidebarContainer: {
     display: 'flex',
     flexFlow: 'row nowrap',
@@ -14,6 +11,8 @@ export const sidebarThemeStyle = {
     height: '100vh',
     position: 'fixed',
     zIndex: 100,
+    transition: '.5s',
+    padding: 0,
   },
   navContainer: {
     backgroundColor: colors.GRAY_LIGHT,
@@ -24,11 +23,15 @@ export const sidebarThemeStyle = {
     backgroundColor: colors.GRAY_LIGHT,
     overflowY: 'auto',
     overflowX: 'hidden',
+    color: colors.CHAROCOAL,
+    transition: '.5s',
   },
   responsiveContainer: {
     minHeight: '100vh',
     display: 'flex',
     flexWrap: 'nowrap',
+    color: colors.CHAROCOAL,
+    transition: '.5s',
   },
   separatorContainer: {
     width: '10px',
@@ -58,5 +61,8 @@ export const sidebarThemeStyle = {
     transition: '.5s',
     transitionTimingFunction: 'linear',
     cursor: 'pointer',
+  },
+  scrollbar: {
+    transition: '.5s',
   },
 };

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 import {
+  sidebarTheme,
   getBaseStyle,
-  getPropertyStyles,
   getElementStyles,
 } from '../utils';
 import {
@@ -39,7 +39,7 @@ export const ChildWrapper = styled.div<IChildWrapper>`
   ${({ theme }) => getElementStyles(theme, 'childContainer')}
   ${({
     theme, animate,
-  }) => (animate ? getPropertyStyles(theme, 'transition')('childContainer') : null)};
+  }) => (animate ? sidebarTheme(theme, 'childContainer').transition : null)};
 `;
 
 export const ResponsiveWrapper = styled.div<ISidebarProps & IResponsiveWrapper>`
@@ -47,7 +47,7 @@ export const ResponsiveWrapper = styled.div<ISidebarProps & IResponsiveWrapper>`
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   ${({
     theme, animate,
-  }) => (animate ? getPropertyStyles(theme, 'transition')('responsiveContainer') : null)};
+  }) => (animate ? sidebarTheme(theme, 'responsiveContainer').transition : null)};
 `;
 
 export const CloseOpenButton = styled.button<ISidebarProps & ICloseOpenButton>`
@@ -90,5 +90,5 @@ export const Scrollbar = styled(Scrollbars).attrs(({ width, marginLeft }: IScrol
 }))<ISidebarProps & IResponsiveWrapper & IScrollbarProps>`
   ${({
     theme, animate,
-  }) => (animate ? getPropertyStyles(theme, 'transition')('scrollbar') : null)};
+  }) => (animate ? sidebarTheme(theme, 'scrollbar').transition : null)};
 `;
