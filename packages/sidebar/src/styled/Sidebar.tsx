@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-import {
-  sidebarTheme,
-  getBaseStyle,
-  getElementStyles,
-} from '../utils';
+import { sidebarTheme } from '../utils';
 import {
   ISidebarProps,
   ISidebarStates,
@@ -21,37 +17,37 @@ export const Root = styled.div.attrs(({ offsetLeft }: ISidebarStates) => ({
     width: `${offsetLeft}px`,
   },
 }))<ISidebarProps & ISidebarStates>`
-  ${({ theme }) => getBaseStyle(theme)};
+  ${({ theme }) => sidebarTheme(theme, ['rootContainer'])};
   float: ${({ isRTL }) => (isRTL ? 'right' : 'left')};
 `;
 
 export const SidebarWrapper = styled.div<ISidebarProps>`
-  ${({ theme }) => getElementStyles(theme, 'sidebarContainer')}
+  ${({ theme }) => sidebarTheme(theme, ['sidebarContainer'])}
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   right: ${({ isRTL }) => (isRTL ? 0 : 'none')};
 `;
 
 export const NavComponentWrapper = styled.div<ISidebarProps>`
-  ${({ theme }) => getElementStyles(theme, 'navContainer')}
+  ${({ theme }) => sidebarTheme(theme, ['navContainer'])}
 `;
 
 export const ChildWrapper = styled.div<IChildWrapper>`
-  ${({ theme }) => getElementStyles(theme, 'childContainer')}
+  ${({ theme }) => sidebarTheme(theme, ['childContainer'])}
   ${({
     theme, animate,
-  }) => (animate ? sidebarTheme(theme, 'childContainer').transition : null)};
+  }) => (animate ? sidebarTheme(theme, ['childContainer', 'transition']) : null)};
 `;
 
 export const ResponsiveWrapper = styled.div<ISidebarProps & IResponsiveWrapper>`
-  ${({ theme }) => getElementStyles(theme, 'responsiveContainer')}
+  ${({ theme }) => sidebarTheme(theme, ['responsiveContainer'])}
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   ${({
     theme, animate,
-  }) => (animate ? sidebarTheme(theme, 'responsiveContainer').transition : null)};
+  }) => (animate ? sidebarTheme(theme, ['responsiveContainer', 'transition']) : null)};
 `;
 
 export const CloseOpenButton = styled.button<ISidebarProps & ICloseOpenButton>`
-  ${({ theme }) => getElementStyles(theme, 'closeOpenButton')}
+  ${({ theme }) => sidebarTheme(theme, ['closeOpenButton'])}
   transform: ${({ toRight, isRTL }) => {
     if (isRTL) {
       return toRight ? 'rotateZ(180deg)' : 'rotateZ(-360deg)';
@@ -66,11 +62,11 @@ export const CloseOpenButton = styled.button<ISidebarProps & ICloseOpenButton>`
 `;
 
 export const SeparatorWrapper = styled.div<ISidebarProps>`
-  ${({ theme }) => getElementStyles(theme, 'separatorContainer')}
+  ${({ theme }) => sidebarTheme(theme, ['separatorContainer'])}
 `;
 
 export const Separator = styled.div<ISidebarProps>`
-  ${({ theme }) => getElementStyles(theme, 'separator')}
+  ${({ theme }) => sidebarTheme(theme, ['separator'])}
 `;
 
 export const AntiSelect = styled.div<ISidebarProps>`
@@ -90,5 +86,5 @@ export const Scrollbar = styled(Scrollbars).attrs(({ width, marginLeft }: IScrol
 }))<ISidebarProps & IResponsiveWrapper & IScrollbarProps>`
   ${({
     theme, animate,
-  }) => (animate ? sidebarTheme(theme, 'scrollbar').transition : null)};
+  }) => (animate ? sidebarTheme(theme, ['scrollbar', 'transition']) : null)};
 `;

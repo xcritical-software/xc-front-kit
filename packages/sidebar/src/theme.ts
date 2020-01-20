@@ -4,6 +4,11 @@ import { colors } from '@xcritical/theme';
 export const sidebarThemeNamespace = '@xcritical\\sidebar';
 
 export const sidebarThemeStyle = {
+  rootContainer: {
+    zIndex: 1000,
+    height: '100%',
+    minHeight: '100vh',
+  },
   sidebarContainer: {
     display: 'flex',
     flexFlow: 'row nowrap',
