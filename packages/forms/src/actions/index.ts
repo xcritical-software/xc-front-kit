@@ -39,7 +39,18 @@ export function xcriticalFormPropertyChange(name: string,
   };
 }
 
+// Deprecated
 export function xcriticalFormChange(name: string, model: any): IFormAction {
+  return {
+    type: XCRITICAL_FORM_INIT,
+    payload: model,
+    meta: {
+      formName: name,
+    },
+  };
+}
+
+export function xcriticalFormInit(name: string, model: any): IFormAction {
   return {
     type: XCRITICAL_FORM_INIT,
     payload: model,
