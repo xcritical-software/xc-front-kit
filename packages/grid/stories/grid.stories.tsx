@@ -3,6 +3,7 @@
 import React, { useState, useCallback } from 'react';
 import { storiesOf } from '@storybook/react';
 import { darken, lighten } from 'polished';
+import { Provider } from 'react-redux';
 
 import { colors } from '@xcritical/theme';
 import { setIn } from 'utilitify';
@@ -14,6 +15,15 @@ import {
 import * as countries from './countries';
 import { gridThemeNamespace } from '../src/theme';
 import Sidebar from '../../sidebar/src';
+import { CompactFilterContainer } from '../../filter/stories/pages';
+import { store } from '../../filter/stories/filter.stories';
+import {
+  Page,
+  Content,
+  GridWrapper,
+  SomeBlock,
+} from './styled';
+import './reset.css';
 
 
 const list: any = (n: number) => (
@@ -80,7 +90,7 @@ const AMStheme = {
       border: `1px solid ${colors.GRAY}`,
       padding: '5px 10px',
       fontSize: '13px',
-      height: '20px',
+      height: '28px',
     },
   },
 };
@@ -188,19 +198,37 @@ storiesOf('New Grid', module)
       theme={ AMStheme }
     />
   ))
-  .add('Dinamic width', () => (
-    <div style={ { width: '100%', height: '600px' } }>
-      <Sidebar>{ list(100) }</Sidebar>
-      <div style={ { display: 'flex', height: '100vh', padding: '0 30px' } }>
-        <Grid
-          columns={ columns.map((el) => ({ ...el, center: true })) }
-          items={ rows }
-          theme={ AMStheme }
-          shouldFitContainer
-        />
-      </div>
-    </div>
-  ))
+  .add('Dinamic size', () => {
+    const [someBlockHeight, setSomeBlockHeight] = useState(100);
+
+    const handleChangeHeight = ({ target: { value } }) => {
+      if (value < 300) setSomeBlockHeight(value);
+      else setSomeBlockHeight(300);
+    };
+
+    return (
+      <Provider store={ store }>
+        <Page>
+          <Sidebar>{ list(100) }</Sidebar>
+          <Content>
+            <div>
+              <CompactFilterContainer />
+            </div>
+            <GridWrapper>
+              <Grid
+                columns={ columns.map((el) => ({ ...el, center: true })) }
+                items={ rows }
+                theme={ AMStheme }
+                shouldFitContainer
+              />
+            </GridWrapper>
+            <input placeholder="some block height (max 300)" value={ someBlockHeight } onChange={ handleChangeHeight } />
+            <SomeBlock height={ someBlockHeight }> max height =  300px  </SomeBlock>
+          </Content>
+        </Page>
+      </Provider>
+    );
+  })
   .add('Selector columns', () => {
     const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
 
