@@ -8,7 +8,7 @@ import { XCRITICAL_MODAL_OPEN, XCRITICAL_MODAL_CLOSE } from './consts';
 /* ACTIONS */
 export interface IModalOpen {
   type: typeof XCRITICAL_MODAL_OPEN;
-  payload?: any;
+  payload?: Record<string, any>;
   meta: {
     name: string;
   };
