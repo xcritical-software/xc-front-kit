@@ -1,4 +1,6 @@
-import { IStoreWithModal, IModalStore } from './interfaces';
+import { IStoreWithModal, IModal } from './interfaces';
 
 
-export const getModal = (state: IStoreWithModal): IModalStore => state.modal;
+export const getModalByName = (state: IStoreWithModal, name: string): IModal => (
+  state.modal[name] || { isOpen: false }
+);

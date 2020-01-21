@@ -24,11 +24,13 @@
 	"license": "MIT",
 	"private": false,
 	"peerDependencies": {
+		"micro-memoize": "4.0.8",
 		"prop-types": "^15.0.0",
 		"react": "^16.9.0",
 		"styled-components": "^4.4.1"
 	},
 	"devDependencies": {
+		"micro-memoize": "4.0.8",
 		"mdi-react": "^6.2.0",
 		"react-router": "^5.0.1",
 		"react-router-dom": "^5.0.1"
@@ -38,6 +40,7 @@
 		"lodash.get": "^4.x",
 		"polished": "^3.0.0",
 		"react-custom-scrollbars": "^4.2.1",
-		"resize-observer-polyfill": "^1.5.1"
+		"resize-observer-polyfill": "^1.5.1",
+		"utilitify": "^1.0.2"
 	}
 }

@@ -8,14 +8,15 @@ import { XCRITICAL_MODAL_OPEN, XCRITICAL_MODAL_CLOSE } from './consts';
 /* ACTIONS */
 export interface IModalOpen {
   type: typeof XCRITICAL_MODAL_OPEN;
-  payload: {
+  payload?: Record<string, any>;
+  meta: {
     name: string;
   };
 }
 
 export interface IModalClose {
   type: typeof XCRITICAL_MODAL_CLOSE;
-  payload: {
+  meta: {
     name: string;
   };
 }
@@ -28,9 +29,12 @@ export interface IStoreWithModal {
 }
 
 export interface IModalStore {
-  [name: string]: {
-    isOpen: boolean;
-  };
+  [name: string]: IModal;
+}
+
+export interface IModal {
+  isOpen: boolean;
+  [key: string]: any;
 }
 
 /* COMPONENT */
