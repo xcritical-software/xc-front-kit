@@ -10,6 +10,9 @@ export * from './totals';
 
 export const Wrapper = styled.div<IWrapper>`
   width: ${({ width }) => `${width}px`};
+  * {
+    box-sizing: border-box;
+  }
   overflow: hidden;
   border-radius: 10px;
   ${({ changingColumns }) => {
