@@ -3,7 +3,7 @@ import { IFormContext } from '../interfaces';
 
 
 export const FormContext = React.createContext<IFormContext>({
-  formName: 'defaultFrom',
+  formName: 'defaultForm',
   fields: [],
 });
 export const FormProvider = FormContext.Provider;

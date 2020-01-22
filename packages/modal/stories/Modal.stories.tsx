@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import CloseCircleOutlineIcon from 'mdi-react/CloseCircleOutlineIcon';
 import { colors } from '@xcritical/theme';
@@ -10,6 +10,7 @@ import {
   Modal,
   modalThemeNamespace,
   xcriticalModalOpen,
+  getModalByName,
   IModalTheme,
 } from '../src';
 
@@ -58,6 +59,31 @@ const StyledButton = styled.button`
   border-radius: 5px;
 `;
 
+const ModalWithPayload: React.FC<{id?: number}> = ({ id }) => (
+  <>
+    <StyledButton
+      onClick={ () => store.dispatch(xcriticalModalOpen('modalWithPayload', {
+        id: 1,
+      })) }
+    >
+      Open Modal With Payload
+    </StyledButton>
+
+    <Modal title="Modal With Payload" name="modalWithPayload">
+      <div>{ `Payload value: ${id}` }</div>
+    </Modal>
+  </>
+);
+
+const mapStateToProps = (state) => {
+  const modal = getModalByName(state, 'modalWithPayload');
+  return {
+    id: modal.id,
+  };
+};
+
+const ConnectedModalWithPayload = connect(mapStateToProps)(ModalWithPayload);
+
 storiesOf('Modal', module)
   .add('Default', () => (
     <Provider store={ store }>
@@ -88,6 +114,13 @@ storiesOf('Modal', module)
           <div>Body example</div>
           <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
         </Modal>
+      </ThemeProvider>
+    </Provider>
+  ))
+  .add('With payload', () => (
+    <Provider store={ store }>
+      <ThemeProvider theme={ emptyTheme }>
+        <ConnectedModalWithPayload />
       </ThemeProvider>
     </Provider>
   ))
