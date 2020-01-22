@@ -36,6 +36,6 @@
 	},
 	"devDependencies": {
 		"@types/react-virtualized": "^9.21.5",
-		"@xcritical/sidebar": "latest"
+		"@xcritical/sidebar": "0.1.1"
 	}
 }
