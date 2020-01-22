@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React, {
-  FC, ReactNode, useCallback, createRef, useState,
+  FC, ReactNode, useCallback, createRef, useState, useEffect,
 } from 'react';
 
 import {
@@ -25,8 +25,8 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
     appearance = 'default',
     baseAppearance = 'default',
     defaultValue,
-    readView,
-    editView,
+    readView: ReadView,
+    editView: EditView,
     readViewFitContainerWidth,
     isEditing,
     onEditRequested,
@@ -38,6 +38,10 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
     const cancelButtonRef = createRef<HTMLButtonElement>();
 
     const [value, setValue] = useState(defaultValue);
+
+    useEffect(() => {
+      setValue(defaultValue);
+    }, [defaultValue]);
 
     const handleEditValueChange = useCallback((e) => {
       if (e.target && e.target.value) {
@@ -61,7 +65,7 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
 
     const handleCancelClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
       e.preventDefault();
-      onCancel();
+      onCancel?.();
     }, [onCancel]);
 
     const renderReadView = useCallback((): ReactNode => (
@@ -78,7 +82,7 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
           onClick={ handleReadViewClick }
           readViewFitContainerWidth={ readViewFitContainerWidth }
         >
-          { readView() }
+          <ReadView value={ value } />
         </ReadViewContentWrapper>
       </ReadViewWrapper>
     ), [
@@ -87,8 +91,8 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
       editButtonRef,
       handleReadViewClick,
       onEditRequested,
-      readView,
       readViewFitContainerWidth,
+      value,
     ]);
 
     const renderActionButtons = useCallback((): ReactNode => (
@@ -137,7 +141,7 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
         {
           isEditing ? (
             <>
-              { editView({ value, onChange: handleEditValueChange }) }
+              <EditView value={ value } onChange={ handleEditValueChange } />
               { renderActionButtons() }
             </>
           ) : renderReadView()

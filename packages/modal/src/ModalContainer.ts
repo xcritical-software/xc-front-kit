@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import { withTheme } from 'styled-components';
 
 import { xcriticalModalClose } from './actions';
-import { getModal } from './selectors';
+import { getModalByName } from './selectors';
 
 import {
   IStoreWithModal,
@@ -20,10 +20,10 @@ const mapStateToProps = (
   state: IStoreWithModal,
   { name }: IModalOwnProps,
 ): IModalStoreProps => {
-  const modal = getModal(state);
+  const modal = getModalByName(state, name);
 
   return {
-    isOpen: modal[name]?.isOpen || false,
+    isOpen: modal.isOpen,
   };
 };
 

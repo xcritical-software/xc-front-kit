@@ -47,7 +47,7 @@ IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
 
     const handleCancel = useCallback((): void => {
       setIsEditing(false);
-      onCancel(defaultValueRef.current);
+      onCancel?.(defaultValueRef.current);
     }, [onCancel]);
 
     const handleEditRequested = useCallback((): void => {
@@ -60,7 +60,7 @@ IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
       <InlineEditUncontrolled
         { ...rest }
         defaultValue={ defaultValue }
-        editView={ (fieldProps) => editView(fieldProps, editViewRef) }
+        editView={ editView }
         readView={ readView }
         onConfirm={ handleConfirm }
         onCancel={ handleCancel }
