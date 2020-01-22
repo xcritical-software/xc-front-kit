@@ -44,3 +44,6 @@ package-lock.json
 .eslintcache
 
 # Optional REPL history
+
+# VS Code folder
+.vscode/

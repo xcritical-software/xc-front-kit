@@ -1,7 +1,7 @@
 {
 	"name": "@xcritical/input",
-	"version": "0.0.2",
-	"description": "<>",
+	"version": "0.0.3",
+	"description": "",
 	"main": "src/index.ts",
 	"scripts": {
 		"test": "exit 0",

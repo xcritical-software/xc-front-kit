@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/notification",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "",
 	"main": "src/index.ts",
 	"scripts": {
@@ -31,7 +31,7 @@
 	},
 	"dependencies": {
 		"lodash.get": "4.x",
-		"react-toastify": "5.4.1",
+		"react-toastify": "5.5.0",
 		"utilitify": "^1.0.2"
 	}
 }
