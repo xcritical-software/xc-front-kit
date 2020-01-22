@@ -375,7 +375,7 @@ export const rowsWithChildren = [
 
 export const columnsWithRender = [
   {
-    field: 'zero', headerName: 'zero'.toUpperCase(), width: 300, visible: true, isExpandable: true,
+    field: 'zero', headerName: 'zero'.toUpperCase(), width: 300, visible: true, isExpandable: true, center: false,
   },
   {
     render: renderFunc, field: 'one', headerName: 'one'.toUpperCase(), width: 100, visible: true, center: true,

@@ -170,3 +170,7 @@ export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
   ${border}
   `;
 };
+
+export const getExpandButtonStyles = ({ theme }) => `
+    margin: ${theme.expandButtonMargin}
+  `;
