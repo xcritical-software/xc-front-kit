@@ -65,7 +65,7 @@ export const ExpandButtonWrapper = styled.button`
 
 
 export const ShiftInsteadButton = styled.div`
-  width: 18px;
+  width: 16px;
   float: left;
   ${getExpandButtonStyles}
 `;
