@@ -17,6 +17,7 @@ export const defaultTheme: IGridTheme = {
   emptyHeaderCellBackground: colors.GRAY_LIGHT,
   movingHeaderCellBackgroungColor: colors.SECONDARY,
   movingHeaderCellColor: colors.WHITE,
+  expandButtonMargin: '7px',
   header: {
     border: `1px solid ${colors.GRAY}`,
     fontSize: '16px',
@@ -27,7 +28,7 @@ export const defaultTheme: IGridTheme = {
   },
   row: {
     border: `1px solid ${colors.GRAY}`,
-    padding: '7px 5px',
+    padding: '7px',
     fontSize: '14px',
     color: 'black',
     backgroundColor: 'white',
