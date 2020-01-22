@@ -1,4 +1,3 @@
-import { ReactNode, RefObject } from 'react';
 import { CSSObject } from 'styled-components';
 
 
@@ -18,7 +17,7 @@ export type InlineEditTheme = ITheme<IInlineEditTheme>;
 
 export interface IFieldProps<T> {
   value: T;
-  onChange: (e) => void;
+  onChange: (e: T) => void;
 }
 
 export interface ICommonProps {
@@ -33,9 +32,9 @@ export interface ICommonProps {
 
 export interface IInlineEditUncontrolledProps<TFieldValue> extends ICommonProps {
   /** Component to be shown when not in edit view. */
-  readView: () => ReactNode;
+  readView: React.FC<{ value?: TFieldValue }>;
   /** Component to be shown when editing. */
-  editView: (fieldProps: IFieldProps<TFieldValue>) => ReactNode;
+  editView: React.FC<IFieldProps<TFieldValue>>;
   /** Whether the component shows the readView or the editView. */
   isEditing: boolean;
   /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
@@ -48,23 +47,20 @@ export interface IInlineEditUncontrolledProps<TFieldValue> extends ICommonProps 
    */
   onConfirm: (value: AllType) => void;
   /** Handler called when checkmark is. */
-  onCancel: () => void;
+  onCancel?: () => void;
 }
 
 export interface IInlineEditProps<TFieldValue> extends ICommonProps {
   /** Component to be shown when not in edit view. */
-  readView: () => ReactNode;
+  readView: React.FC<{ value?: TFieldValue }>;
   /** Component to be shown when editing. */
-  editView: (
-    fieldProps: IFieldProps<TFieldValue>,
-    ref: RefObject<AllType>,
-  ) => ReactNode;
+  editView: React.FC<IFieldProps<TFieldValue>>;
   /**
    * Handler called editView is closed and changes are confirmed.
    * Field value is passed as an argument to this function.
    */
   onConfirm: (value: AllType) => void;
-  onCancel: (defaultValue?: AllType) => void;
+  onCancel?: (defaultValue?: AllType) => void;
   /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
   defaultValue: AllType;
   /** Determines whether isEditing begins as true. */
