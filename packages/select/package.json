@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/select",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "XCritical Select Component",
 	"main": "src/index.ts",
 	"scripts": {
