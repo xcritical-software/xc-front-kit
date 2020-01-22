@@ -45,7 +45,7 @@ const GridHOC = ({ shouldFitContainer, ...rest }: IGrid) => {
 
   if (shouldFitContainer) {
     return (
-      <div ref={ wrapperRef } style={ { width: '100%', height: '100%' } }>
+      <div ref={ wrapperRef } style={ { height: '100%' } }>
         <Grid { ...rest } width={ wrapperSize.width } height={ wrapperSize.height } />
       </div>
     );

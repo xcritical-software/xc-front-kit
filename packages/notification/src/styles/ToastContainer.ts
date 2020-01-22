@@ -37,6 +37,10 @@ export const ToastContainer = (containerStyles: CSSObject): FlattenSimpleInterpo
     bottom: 1em;
     right: 1em;
   }
+  
+  .Toastify__toast:last-child {
+    margin-bottom: 0;
+  }
 
   @media only screen and (max-width: 480px) {
     .Toastify__toast-container {

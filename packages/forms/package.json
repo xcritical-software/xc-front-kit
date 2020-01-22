@@ -39,7 +39,6 @@
 	},
 	"dependencies": {
 		"utilitify": "^1.0.2",
-		"lodash.get": "4.x",
-		"lodash.isempty": "4.x"
+		"lodash.get": "4.x"
 	}
 }

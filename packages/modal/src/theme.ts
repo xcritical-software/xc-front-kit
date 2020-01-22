@@ -11,6 +11,7 @@ export const defaultModalTheme: IModalTheme = {
     left: '50%',
     transform: 'translateX(-50%)',
     top: '20%',
+    minWidth: '500px',
     maxWidth: '700px',
     zIndex: 999,
     borderRadius: '5px',
