@@ -1,9 +1,11 @@
 import { colors } from '@xcritical/theme';
 
+import { ISidebarTheme } from './interfaces';
+
 
 export const sidebarThemeNamespace = '@xcritical\\sidebar';
 
-export const sidebarThemeStyle = {
+export const defaultSidebarTheme: ISidebarTheme = {
   rootContainer: {
     zIndex: 1000,
     height: '100%',
@@ -22,7 +24,6 @@ export const sidebarThemeStyle = {
   navContainer: {
     backgroundColor: colors.GRAY_LIGHT,
     height: 'calc(100vh + 10px)',
-    width: '90px',
   },
   childContainer: {
     backgroundColor: colors.GRAY_LIGHT,
@@ -39,7 +40,6 @@ export const sidebarThemeStyle = {
     transition: '.5s',
   },
   separatorContainer: {
-    width: '10px',
     height: '100vh',
     cursor: 'w-resize',
     zIndex: 999999,
@@ -48,9 +48,7 @@ export const sidebarThemeStyle = {
     color: colors.CHAROCOAL,
     width: '2px',
     height: '100%',
-    position: 'relative',
     backgroundColor: colors.BLUE,
-    right: '0',
   },
   closeOpenButton: {
     width: '20px',
@@ -58,7 +56,6 @@ export const sidebarThemeStyle = {
     position: 'relative',
     top: '10%',
     color: 'black',
-    right: '9px',
     borderRadius: '50%',
     border: '1px solid gray',
     padding: '3px',
@@ -66,8 +63,5 @@ export const sidebarThemeStyle = {
     transition: '.5s',
     transitionTimingFunction: 'linear',
     cursor: 'pointer',
-  },
-  scrollbar: {
-    transition: '.5s',
   },
 };

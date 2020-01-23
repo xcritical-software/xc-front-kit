@@ -8,9 +8,8 @@ import {
   NavLink, BrowserRouter, Switch, Route,
 } from 'react-router-dom';
 import { IThemeNamespace } from '@xcritical/theme';
-import Sidebar from '../src';
+import Sidebar, { sidebarThemeNamespace } from '../src';
 import { routerConfig } from './routerConfig';
-import { sidebarThemeNamespace } from '../src/theme';
 
 
 export const GlobalStyle = createGlobalStyle`
@@ -97,8 +96,6 @@ const SidebarNavigate = styled.div`
 const NavPanelWrapper = styled.div`
   background-color: #31394C;
   min-height: 100%;
-  width: 90px;
-  border-right: 1px solid #47536C;
 `;
 
 const NavPanelContent = styled.div`

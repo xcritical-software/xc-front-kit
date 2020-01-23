@@ -1,16 +1,18 @@
 import React, {
   useState,
   useCallback,
-  ReactElement,
   useRef,
   useEffect,
   useContext,
 } from 'react';
-import { ThemeContext, withTheme, ThemeProvider } from 'styled-components';
+
+import { ThemeContext, ThemeProvider } from 'styled-components';
+import { Scrollbars } from 'react-custom-scrollbars';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import Arrow from './Arrow';
 import { ISidebarProps } from './interfaces';
+
 import {
   Root,
   ResponsiveWrapper,
@@ -21,11 +23,10 @@ import {
   Separator,
   CloseOpenButton,
   AntiSelect,
-  Scrollbar,
-} from './styled/Sidebar';
+} from './styled';
 
 
-export const PureSidebar = ({
+export const PureSidebar: React.FC<ISidebarProps> = ({
   theme,
   children,
   navComponent,
@@ -35,8 +36,9 @@ export const PureSidebar = ({
   isRTL = false,
   minWidth = 30,
   maxWidth = 400,
-  separatorWidth: separatorWidthProp = 90,
-}: ISidebarProps): ReactElement => {
+  navWidth = 90,
+  separatorWidth = 10,
+}) => {
   const themeContext = useContext(ThemeContext);
 
   const [transformParams, setTransformParams] = useState({
@@ -45,32 +47,15 @@ export const PureSidebar = ({
     arrowToRight: false,
   });
 
-  const [antiSelectLayer, changeAntiSelectLayer] = useState(false);
-  const sidebarRef = useRef<HTMLDivElement>(null);
-
-  const clickX = useRef(0);
+  const [antiSelectLayer, setAntiSelectLayer] = useState(false);
   const [offsetLeft, changeOffsetLeft] = useState(0);
-  const separatorWidth = showScrollbar
-    ? separatorWidthProp
-    : separatorWidthProp + 10;
 
-  const responsiveWrapperStyles = {
-    width: transformParams.width,
-    marginLeft: showScrollbar ? 0 : '-10px',
-  };
-
-  const rightWidth = showScrollbar
-    ? transformParams.width
-    : transformParams.width + 10;
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const observerRef: React.MutableRefObject<ResizeObserver | undefined> = useRef();
+  const clickX = useRef(0);
 
   const handleMouseMove = useCallback(
     (e) => {
-      changeAntiSelectLayer(true);
-      document.body.addEventListener('mouseup', () => {
-        document.body.removeEventListener('mousemove', handleMouseMove);
-        changeAntiSelectLayer(false);
-      });
-
       const { clientX: currentX } = e;
       const newWidth = isRTL
         ? transformParams.width - (currentX - clickX.current)
@@ -79,7 +64,6 @@ export const PureSidebar = ({
       if (newWidth >= maxWidth) return;
 
       if (newWidth <= 0) {
-        document.body.removeEventListener('mousemove', handleMouseMove);
         setTransformParams({
           width: minWidth,
           animate: false,
@@ -102,16 +86,23 @@ export const PureSidebar = ({
     [isRTL, maxWidth, minWidth, transformParams.width],
   );
 
+  const handleMouseUp = useCallback(() => {
+    document.removeEventListener('mouseup', handleMouseUp);
+    document.removeEventListener('mousemove', handleMouseMove);
+    setAntiSelectLayer(false);
+  }, [handleMouseMove]);
+
   const handleMouseDown = useCallback(
     (e) => {
       clickX.current = e.clientX;
-      document.body.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('mousemove', handleMouseMove);
+      setAntiSelectLayer(true);
     },
-    [handleMouseMove],
+    [handleMouseUp, handleMouseMove],
   );
 
   const handleClose = useCallback(() => {
-    document.body.removeEventListener('mousemove', handleMouseMove);
     if (transformParams.width < maxWidth * 0.3) {
       setTransformParams({
         width: maxWidth,
@@ -125,12 +116,7 @@ export const PureSidebar = ({
         arrowToRight: true,
       });
     }
-  }, [handleMouseMove, maxWidth, minWidth, transformParams.width]);
-
-  const handleRemoveMouseMove = useCallback(() => {
-    document.body.removeEventListener('mousemove', handleMouseMove);
-  }, [handleMouseMove]);
-
+  }, [maxWidth, minWidth, transformParams.width]);
 
   const createObserver = (): ResizeObserver | undefined => {
     if (sidebarRef.current === null) {
@@ -147,11 +133,9 @@ export const PureSidebar = ({
     return observer;
   };
 
-  const observerRef: React.MutableRefObject<ResizeObserver | undefined> = useRef();
   useEffect(() => {
     observerRef.current = createObserver();
   }, []);
-
 
   useEffect(
     () => () => {
@@ -168,48 +152,43 @@ export const PureSidebar = ({
   return (
     <ThemeProvider theme={ theme || themeContext || {} }>
       <Root offsetLeft={ offsetLeft } isRTL={ isRTL }>
-        <SidebarWrapper
-          ref={ sidebarRef }
-          isRTL={ isRTL }
-        >
+        <SidebarWrapper ref={ sidebarRef } isRTL={ isRTL }>
           { navComponent && (
             <NavComponentWrapper>
-              <Scrollbar
-                width={ separatorWidth }
+              <Scrollbars
+                style={ { width: navWidth } }
                 autoHide={ showScrollbar === 'auto' }
-                animate={ false }
               >
                 { navComponent }
-              </Scrollbar>
+              </Scrollbars>
             </NavComponentWrapper>
           ) }
           { children && (
             <ResponsiveWrapper
               animate={ transformParams.animate }
-              style={ responsiveWrapperStyles }
+              style={ { width: transformParams.width } }
               isRTL={ isRTL }
             >
               <ChildWrapper
                 style={ { width: transformParams.width } }
                 animate={ transformParams.animate }
               >
-                <Scrollbar
-                  animate={ transformParams.animate }
-                  width={ rightWidth }
-                  marginLeft="-10px"
+                <Scrollbars
+                  style={ { width: transformParams.width } }
                   autoHide={ showScrollbar === 'auto' }
                 >
                   { children }
-                </Scrollbar>
+                </Scrollbars>
               </ChildWrapper>
+
               { antiSelectLayer && <AntiSelect isRTL={ isRTL } /> }
+
               <SeparatorWrapper
+                isRTL={ isRTL }
+                separatorWidth={ separatorWidth }
                 onMouseDown={ handleMouseDown }
-                onMouseUp={ handleRemoveMouseMove }
               >
-                <Separator
-                  isRTL={ isRTL }
-                >
+                <Separator isRTL={ isRTL }>
                   { withArrow && (
                     <CloseOpenButton
                       toRight={ transformParams.arrowToRight }
@@ -229,4 +208,4 @@ export const PureSidebar = ({
   );
 };
 
-export const Sidebar = React.memo(withTheme(PureSidebar));
+export const Sidebar = React.memo(PureSidebar);
