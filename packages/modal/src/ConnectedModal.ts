@@ -13,7 +13,7 @@ import {
   ModalActions,
 } from './interfaces';
 
-import { PureModal } from './Modal';
+import { Modal } from './Modal';
 
 
 const mapStateToProps = (
@@ -40,7 +40,7 @@ const mapDispatchToProps = (
   },
 });
 
-export const ModalContainer = connect(
+export const ConnectedModal = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withTheme(PureModal));
+)(withTheme(Modal));
