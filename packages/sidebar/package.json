@@ -27,7 +27,7 @@
 		"micro-memoize": "4.0.8",
 		"prop-types": "^15.0.0",
 		"react": "^16.9.0",
-		"styled-components": "^4.4.1"
+		"styled-components": "^5.0.0"
 	},
 	"devDependencies": {
 		"micro-memoize": "4.0.8",
