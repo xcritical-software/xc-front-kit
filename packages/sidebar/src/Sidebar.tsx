@@ -32,6 +32,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   navComponent,
   showScrollbar,
   arrowComponent = <Arrow />,
+  isResponsive = false,
   withArrow = true,
   isRTL = false,
   minWidth = 30,
@@ -41,82 +42,86 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
 }) => {
   const themeContext = useContext(ThemeContext);
 
-  const [transformParams, setTransformParams] = useState({
-    width: maxWidth,
-    animate: false,
-    arrowToRight: false,
-  });
-
+  const [width, setWidth] = useState(maxWidth);
+  const [animate, setAnimate] = useState(false);
+  const [arrowToRight, setArrowToRight] = useState(false);
   const [antiSelectLayer, setAntiSelectLayer] = useState(false);
   const [offsetLeft, changeOffsetLeft] = useState(0);
 
   const sidebarRef = useRef<HTMLDivElement>(null);
   const observerRef: React.MutableRefObject<ResizeObserver | undefined> = useRef();
-  const clickX = useRef(0);
+  const clickXRef = useRef(0);
+  const widthRef = useRef(maxWidth);
 
   const handleMouseMove = useCallback(
     (e) => {
       const { clientX: currentX } = e;
-      const newWidth = isRTL
-        ? transformParams.width - (currentX - clickX.current)
-        : transformParams.width + (currentX - clickX.current);
 
-      if (newWidth >= maxWidth) return;
+      const newWidth = isRTL
+        ? width - (currentX - clickXRef.current)
+        : width + (currentX - clickXRef.current);
+
+      if (newWidth > maxWidth) {
+        if (widthRef.current < maxWidth) {
+          widthRef.current = maxWidth;
+          setWidth(maxWidth);
+          setArrowToRight(false);
+        }
+
+        return;
+      }
 
       if (newWidth <= 0) {
-        setTransformParams({
-          width: minWidth,
-          animate: false,
-          arrowToRight: true,
-        });
+        widthRef.current = minWidth;
+        setWidth(minWidth);
+        setArrowToRight(true);
       } else if (newWidth <= minWidth) {
-        setTransformParams({
-          width: minWidth,
-          animate: false,
-          arrowToRight: true,
-        });
+        widthRef.current = minWidth;
+        setWidth(minWidth);
+        setArrowToRight(true);
       } else {
-        setTransformParams({
-          width: newWidth,
-          animate: false,
-          arrowToRight: newWidth < maxWidth * 0.3,
-        });
+        widthRef.current = newWidth;
+        setWidth(newWidth);
+        setArrowToRight(newWidth < maxWidth * 0.3);
       }
     },
-    [isRTL, maxWidth, minWidth, transformParams.width],
+    [isRTL, maxWidth, minWidth, width],
   );
 
+  const handleSelectStart = useCallback((e) => {
+    e.preventDefault();
+  }, []);
+
   const handleMouseUp = useCallback(() => {
+    document.removeEventListener('selectstart', handleSelectStart);
     document.removeEventListener('mouseup', handleMouseUp);
     document.removeEventListener('mousemove', handleMouseMove);
     setAntiSelectLayer(false);
-  }, [handleMouseMove]);
+  }, [handleSelectStart, handleMouseMove]);
 
   const handleMouseDown = useCallback(
     (e) => {
-      clickX.current = e.clientX;
+      clickXRef.current = e.clientX;
+      document.addEventListener('selectstart', handleSelectStart);
       document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('mousemove', handleMouseMove);
       setAntiSelectLayer(true);
+      setAnimate(false);
     },
-    [handleMouseUp, handleMouseMove],
+    [handleSelectStart, handleMouseUp, handleMouseMove],
   );
 
   const handleClose = useCallback(() => {
-    if (transformParams.width < maxWidth * 0.3) {
-      setTransformParams({
-        width: maxWidth,
-        animate: true,
-        arrowToRight: false,
-      });
+    setAnimate(true);
+
+    if (arrowToRight) {
+      setWidth(maxWidth);
+      setArrowToRight(false);
     } else {
-      setTransformParams({
-        width: minWidth,
-        animate: true,
-        arrowToRight: true,
-      });
+      setWidth(minWidth);
+      setArrowToRight(true);
     }
-  }, [maxWidth, minWidth, transformParams.width]);
+  }, [arrowToRight, maxWidth, minWidth]);
 
   const createObserver = (): ResizeObserver | undefined => {
     if (sidebarRef.current === null) {
@@ -165,16 +170,16 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
           ) }
           { children && (
             <ResponsiveWrapper
-              animate={ transformParams.animate }
-              style={ { width: transformParams.width } }
+              animate={ animate }
+              style={ { width } }
               isRTL={ isRTL }
             >
-              <ChildWrapper
-                style={ { width: transformParams.width } }
-                animate={ transformParams.animate }
-              >
+              <ChildWrapper animate={ animate }>
                 <Scrollbars
-                  style={ { width: transformParams.width } }
+                  style={ {
+                    width: isResponsive ? width : maxWidth,
+                    transition: isResponsive && animate ? '0.5s' : 'none',
+                  } }
                   autoHide={ showScrollbar === 'auto' }
                 >
                   { children }
@@ -191,7 +196,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
                 <Separator isRTL={ isRTL }>
                   { withArrow && (
                     <CloseOpenButton
-                      toRight={ transformParams.arrowToRight }
+                      toRight={ arrowToRight }
                       onClick={ handleClose }
                       isRTL={ isRTL }
                     >

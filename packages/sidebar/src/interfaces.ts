@@ -22,6 +22,7 @@ export interface ISidebarProps {
   arrowComponent?: ReactNode;
   theme?: SidebarTheme;
   showScrollbar?: boolean | string;
+  isResponsive?: boolean;
   withArrow?: boolean;
   isRTL?: boolean;
   minWidth?: number;
