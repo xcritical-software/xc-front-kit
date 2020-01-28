@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/modal",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Modal component",
 	"main": "src/index.ts",
 	"scripts": {
