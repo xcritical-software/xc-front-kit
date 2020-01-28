@@ -133,20 +133,20 @@ export interface IMovingElem {
 }
 
 export interface IGridTheme {
-  evenRowBackground: string;
-  selectedRowBackgroundColor: string;
-  offsetExpand: number;
-  border: string;
-  headerCellBorder: string;
-  totalsCellBorder: string;
-  header: CSSProperties;
-  row: CSSProperties;
-  totals: CSSProperties;
-  emptyHeaderCellBackground: string;
-  movingHeaderCellBackgroungColor: string;
-  borderRadius: number;
-  rowCellBorder: string;
-  selectedRowColor: string;
-  movingHeaderCellColor: string;
-  expandButtonMargin: string;
+  evenRowBackground?: string;
+  selectedRowBackgroundColor?: string;
+  offsetExpand?: number;
+  border?: string;
+  headerCellBorder?: string;
+  totalsCellBorder?: string;
+  header?: CSSProperties;
+  row?: CSSProperties;
+  totals?: CSSProperties;
+  emptyHeaderCellBackground?: string;
+  movingHeaderCellBackgroungColor?: string;
+  borderRadius?: number;
+  rowCellBorder?: string;
+  selectedRowColor?: string;
+  movingHeaderCellColor?: string;
+  expandButtonMargin?: string;
 }

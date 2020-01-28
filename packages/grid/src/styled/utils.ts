@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   IHeader,
   IHeaderCell,
@@ -16,24 +17,24 @@ import {
 export const getHeaderStyles = ({ theme }: IHeader) => {
   if (theme.border !== 'none') {
     return `
-      background-color: ${theme.header.backgroundColor}
-      border-bottom: ${theme.header.border};
+      background-color: ${theme.header?.backgroundColor}
+      border-bottom: ${theme.header?.border};
     `;
   }
   return `
-      background-color: ${theme.header.backgroundColor}
-      border: ${theme.header.border};
+      background-color: ${theme.header?.backgroundColor}
+      border: ${theme.header?.border};
     `;
 };
 
 export const getTotalStyles = ({ theme }: ITotal) => {
   if (theme.border !== 'none') {
     return `
-      border-top: ${theme.totals.border};
+      border-top: ${theme.totals?.border};
     `;
   }
   return `
-      border: ${theme.totals.border};
+      border: ${theme.totals?.border};
     `;
 };
 
@@ -70,7 +71,7 @@ export const getBodyCellStyles = ({
 export const getTotalCellStyles = ({ theme }: ITotalCell) => {
   let border = '';
   const wrapperBorder = theme.border !== 'none';
-  const totalsBorder = theme.totals.border !== 'none';
+  const totalsBorder = theme.totals?.border !== 'none';
 
   if (totalsBorder && wrapperBorder) border = `border-right: ${theme.totalsCellBorder}`;
   else if (wrapperBorder && !totalsBorder) {
@@ -82,30 +83,30 @@ export const getTotalCellStyles = ({ theme }: ITotalCell) => {
   }
 
   return `
-    height: ${theme.totals.height}px;
+    height: ${theme.totals?.height}px;
     ${border}
     `;
 };
 
 export const getHeaderCellContentStyles = ({ theme }: IHeaderCellContent) => `
       span {
-        font-size: ${theme.header.fontSize};
-        color: ${theme.header.color};
-        padding: ${theme.header.padding};
+        font-size: ${theme.header?.fontSize};
+        color: ${theme.header?.color};
+        padding: ${theme.header?.padding};
       }
     `;
 
 export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
-    background-color: ${theme.totals.backgroundColor};
+    background-color: ${theme.totals?.backgroundColor};
     span {
-      font-size: ${theme.totals.fontSize};
-      color: ${theme.totals.color};
-      padding: ${theme.totals.padding};
+      font-size: ${theme.totals?.fontSize};
+      color: ${theme.totals?.color};
+      padding: ${theme.totals?.padding};
     }
       `;
 
 export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
-      background-color: ${isEmpty ? theme.emptyHeaderCellBackground : theme.header.backgroundColor};
+      background-color: ${isEmpty ? theme.emptyHeaderCellBackground : theme.header?.backgroundColor};
       border-right: ${theme.headerCellBorder};
     `;
 
@@ -113,13 +114,13 @@ export const getBodyCellContentStyles = ({
   theme: { row, selectedRowColor },
   selected,
 }: IBodyCellContent) => `
-    padding: ${row.padding};
-    ${row.height ? `height: ${row.height}` : null};
+    padding: ${row?.padding};
+    ${row?.height ? `height: ${row?.height}` : null};
 
     span {
-      font-size: ${row.fontSize};
-      color: ${selected ? selectedRowColor : row.color};
-      ${row.height ? `
+      font-size: ${row?.fontSize};
+      color: ${selected ? selectedRowColor : row?.color};
+      ${row?.height ? `
           white-space: nowrap;
           overflow: hidden;
           display: block;
@@ -133,7 +134,7 @@ export const getBodyCellOffsetStyles = ({
   expandLevel,
   center,
 }: IBodyCellOffset) => `
-    width: ${expandLevel * (center ? offsetExpand * 2 : offsetExpand)}px;
+    width: ${expandLevel * (center ? offsetExpand! * 2 : offsetExpand!)}px;
     `;
 
 export const getWrapperStyles = ({ theme: { border, borderRadius } }: IWrapper) => `
@@ -146,15 +147,15 @@ export const getMovingElemStyles = ({ theme }: IMovingElem) => `
       border: ${theme.headerCellBorder};
       span {
         color: ${theme.movingHeaderCellColor};
-        font-size: ${theme.header.fontSize};
-        padding: ${theme.header.padding};
+        font-size: ${theme.header?.fontSize};
+        padding: ${theme.header?.padding};
       }
     `;
 
 export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
   let border = '';
   const wrapperBorder = theme.border !== 'none';
-  const headerBorder = theme.header.border !== 'none';
+  const headerBorder = theme.header?.border !== 'none';
 
   if (!wrapperBorder && !headerBorder) {
     border = `border-top: ${theme.headerCellBorder};
@@ -165,8 +166,8 @@ export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
   } else if (!headerBorder) border = `border-bottom: ${theme.headerCellBorder}`;
 
   return `
-  height: ${theme.header.height}px;
-  background-color: ${isEmpty ? theme.emptyHeaderCellBackground : theme.header.backgroundColor};
+  height: ${theme.header?.height}px;
+  background-color: ${isEmpty ? theme.emptyHeaderCellBackground : theme.header?.backgroundColor};
   ${border}
   `;
 };
