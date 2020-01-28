@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { Scrollbars } from 'react-custom-scrollbars';
 import { sidebarTheme, getStylesWithoutTransition, getTransition } from './utils';
 
 import {
@@ -9,6 +10,7 @@ import {
   IChildWrapper,
   ICloseOpenButton,
   ISeparatorWrapper,
+  IScrollbarProps,
 } from './interfaces';
 
 
@@ -36,7 +38,11 @@ export const ChildWrapper = styled.div<IChildWrapper>`
   ${({ theme, animate }) => getTransition(theme, animate, ['childContainer', 'transition'])};
 `;
 
-export const ResponsiveWrapper = styled.div<ISidebarProps & IResponsiveWrapper>`
+export const ResponsiveWrapper = styled.div.attrs<IResponsiveWrapper>(({ width }) => ({
+  style: {
+    width,
+  },
+}))<IResponsiveWrapper>`
   ${({ theme }) => getStylesWithoutTransition(theme, ['responsiveContainer'])};
   ${({ theme, animate }) => getTransition(theme, animate, ['responsiveContainer', 'transition'])};
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
@@ -82,3 +88,11 @@ export const AntiSelect = styled.div<ISidebarProps>`
   height: 100vh;
   z-index: 999999;
 `;
+
+export const Scrollbar = styled(Scrollbars)
+  .attrs<IScrollbarProps>(({ width, animate }) => ({
+  style: {
+    width,
+    transition: animate ? '0.5s' : 'none',
+  },
+}))<IScrollbarProps>``;

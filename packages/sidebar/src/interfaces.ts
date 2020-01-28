@@ -36,6 +36,9 @@ export interface ISidebarStates {
 
 export interface IResponsiveWrapper {
   animate: boolean;
+  width?: number;
+  theme?: SidebarTheme;
+  isRTL?: boolean;
 }
 
 export interface IChildWrapper extends ISidebarProps {
@@ -48,4 +51,9 @@ export interface ISeparatorWrapper extends ISidebarProps {
 
 export interface ICloseOpenButton {
   toRight: boolean;
+}
+
+export interface IScrollbarProps {
+  width?: number;
+  animate?: boolean;
 }

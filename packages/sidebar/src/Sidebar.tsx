@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 
 import { ThemeContext, ThemeProvider } from 'styled-components';
-import { Scrollbars } from 'react-custom-scrollbars';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import Arrow from './Arrow';
@@ -23,6 +22,7 @@ import {
   Separator,
   CloseOpenButton,
   AntiSelect,
+  Scrollbar,
 } from './styled';
 
 
@@ -159,30 +159,29 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
         <SidebarWrapper ref={ sidebarRef } isRTL={ isRTL }>
           { navComponent && (
             <NavComponentWrapper>
-              <Scrollbars
-                style={ { width: navWidth } }
+              <Scrollbar
+                width={ navWidth }
+                animate={ animate }
                 autoHide={ isScrollbarAutoHide }
               >
                 { navComponent }
-              </Scrollbars>
+              </Scrollbar>
             </NavComponentWrapper>
           ) }
           { children && (
             <ResponsiveWrapper
               animate={ animate }
-              style={ { width } }
+              width={ width }
               isRTL={ isRTL }
             >
               <ChildWrapper animate={ animate }>
-                <Scrollbars
-                  style={ {
-                    width,
-                    transition: animate ? '0.5s' : 'none',
-                  } }
+                <Scrollbar
+                  width={ width }
+                  animate={ animate }
                   autoHide={ isScrollbarAutoHide }
                 >
                   { children }
-                </Scrollbars>
+                </Scrollbar>
               </ChildWrapper>
 
               { antiSelectLayer && <AntiSelect isRTL={ isRTL } /> }
