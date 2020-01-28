@@ -7,7 +7,7 @@ import CloseCircleOutlineIcon from 'mdi-react/CloseCircleOutlineIcon';
 import { colors } from '@xcritical/theme';
 
 import {
-  Modal,
+  ConnectedModal,
   modalThemeNamespace,
   xcriticalModalOpen,
   getModalByName,
@@ -69,9 +69,9 @@ const ModalWithPayload: React.FC<{id?: number}> = ({ id }) => (
       Open Modal With Payload
     </StyledButton>
 
-    <Modal title="Modal With Payload" name="modalWithPayload">
+    <ConnectedModal title="Modal With Payload" name="modalWithPayload">
       <div>{ `Payload value: ${id}` }</div>
-    </Modal>
+    </ConnectedModal>
   </>
 );
 
@@ -84,7 +84,7 @@ const mapStateToProps = (state) => {
 
 const ConnectedModalWithPayload = connect(mapStateToProps)(ModalWithPayload);
 
-storiesOf('Modal', module)
+storiesOf('ConnectedModal', module)
   .add('Default', () => (
     <Provider store={ store }>
       <ThemeProvider theme={ emptyTheme }>
@@ -92,10 +92,10 @@ storiesOf('Modal', module)
             Open Default Modal
         </StyledButton>
 
-        <Modal title="Default Modal" name="defaultModal">
+        <ConnectedModal title="Default Modal" name="defaultModal">
           <div>Body example</div>
           <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
-        </Modal>
+        </ConnectedModal>
       </ThemeProvider>
     </Provider>
   ))
@@ -106,14 +106,14 @@ storiesOf('Modal', module)
           Open Modal With Custom Close Icon
         </StyledButton>
 
-        <Modal
+        <ConnectedModal
           title="Modal With Custom Icon Close"
           name="withCustomIconClose"
           iconClose={ <CloseCircleOutlineIcon size="100%" /> }
         >
           <div>Body example</div>
           <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
-        </Modal>
+        </ConnectedModal>
       </ThemeProvider>
     </Provider>
   ))
@@ -131,10 +131,10 @@ storiesOf('Modal', module)
           Open Themed Modal
         </StyledButton>
 
-        <Modal title="Themed Modal" name="themedModal">
+        <ConnectedModal title="Themed Modal" name="themedModal">
           <div>Body example</div>
           <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
-        </Modal>
+        </ConnectedModal>
       </ThemeProvider>
     </Provider>
   ));

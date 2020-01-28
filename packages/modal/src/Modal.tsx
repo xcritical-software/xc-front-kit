@@ -14,7 +14,7 @@ import { getModalBlanketTheme } from './utils';
 import { IconClose } from './IconClose';
 
 
-export const PureModal: React.FC<IModalProps> = ({
+export const Modal: React.FC<IModalProps> = ({
   isOpen,
   title,
   children,
