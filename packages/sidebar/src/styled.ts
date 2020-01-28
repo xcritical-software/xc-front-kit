@@ -1,15 +1,17 @@
 import styled from 'styled-components';
-import { Scrollbars } from 'react-custom-scrollbars';
 
-import { sidebarTheme } from '../utils';
+import { Scrollbars } from 'react-custom-scrollbars';
+import { sidebarTheme, getStylesWithoutTransition, getTransition } from './utils';
+
 import {
   ISidebarProps,
   ISidebarStates,
   IResponsiveWrapper,
   IChildWrapper,
   ICloseOpenButton,
+  ISeparatorWrapper,
   IScrollbarProps,
-} from '../interfaces';
+} from './interfaces';
 
 
 export const Root = styled.div.attrs(({ offsetLeft }: ISidebarStates) => ({
@@ -22,7 +24,7 @@ export const Root = styled.div.attrs(({ offsetLeft }: ISidebarStates) => ({
 `;
 
 export const SidebarWrapper = styled.div<ISidebarProps>`
-  ${({ theme }) => sidebarTheme(theme, ['sidebarContainer'])}
+  ${({ theme }) => sidebarTheme(theme, ['sidebarContainer'])};
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   right: ${({ isRTL }) => (isRTL ? 0 : 'none')};
 `;
@@ -32,41 +34,50 @@ export const NavComponentWrapper = styled.div<ISidebarProps>`
 `;
 
 export const ChildWrapper = styled.div<IChildWrapper>`
-  ${({ theme }) => sidebarTheme(theme, ['childContainer'])}
-  ${({
-    theme, animate,
-  }) => (animate ? sidebarTheme(theme, ['childContainer', 'transition']) : null)};
+  ${({ theme }) => getStylesWithoutTransition(theme, ['childContainer'])};
+  ${({ theme, animate }) => getTransition(theme, animate, ['childContainer', 'transition'])};
 `;
 
-export const ResponsiveWrapper = styled.div<ISidebarProps & IResponsiveWrapper>`
-  ${({ theme }) => sidebarTheme(theme, ['responsiveContainer'])}
+export const ResponsiveWrapper = styled.div.attrs<IResponsiveWrapper>(({ width }) => ({
+  style: {
+    width,
+  },
+}))<IResponsiveWrapper>`
+  ${({ theme }) => getStylesWithoutTransition(theme, ['responsiveContainer'])};
+  ${({ theme, animate }) => getTransition(theme, animate, ['responsiveContainer', 'transition'])};
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
-  ${({
-    theme, animate,
-  }) => (animate ? sidebarTheme(theme, ['responsiveContainer', 'transition']) : null)};
 `;
 
 export const CloseOpenButton = styled.button<ISidebarProps & ICloseOpenButton>`
-  ${({ theme }) => sidebarTheme(theme, ['closeOpenButton'])}
-  transform: ${({ toRight, isRTL }) => {
+  ${({ theme }) => sidebarTheme(theme, ['closeOpenButton'])};
+  
+  transform: translateX(-50%) ${({ toRight, isRTL }) => {
     if (isRTL) {
       return toRight ? 'rotateZ(180deg)' : 'rotateZ(-360deg)';
     }
 
     return toRight ? 'rotateZ(-360deg)' : 'rotateZ(180deg)';
   }};
-  transition-timing-function: 'linear';
+
   &:focus {
     outline: none;
   }
 `;
 
-export const SeparatorWrapper = styled.div<ISidebarProps>`
-  ${({ theme }) => sidebarTheme(theme, ['separatorContainer'])}
+export const SeparatorWrapper = styled.div<ISeparatorWrapper>`
+  ${({ theme }) => sidebarTheme(theme, ['separatorContainer'])};
+
+  position: absolute;
+  top: 0;
+  ${({ isRTL, separatorWidth }) => (isRTL ? `left: -${separatorWidth}px` : `right: -${separatorWidth}px`)};
+  width: ${({ separatorWidth }) => `${separatorWidth}px`};
 `;
 
 export const Separator = styled.div<ISidebarProps>`
-  ${({ theme }) => sidebarTheme(theme, ['separator'])}
+  ${({ theme }) => sidebarTheme(theme, ['separator'])};
+  
+  position: absolute;
+  ${({ isRTL }) => (isRTL ? 'right: 0' : 'left: 0')};
 `;
 
 export const AntiSelect = styled.div<ISidebarProps>`
@@ -78,13 +89,10 @@ export const AntiSelect = styled.div<ISidebarProps>`
   z-index: 999999;
 `;
 
-export const Scrollbar = styled(Scrollbars).attrs(({ width, marginLeft }: IScrollbarProps) => ({
+export const Scrollbar = styled(Scrollbars)
+  .attrs<IScrollbarProps>(({ width, animate }) => ({
   style: {
     width,
-    marginLeft,
+    transition: animate ? '0.5s' : 'none',
   },
-}))<ISidebarProps & IResponsiveWrapper & IScrollbarProps>`
-  ${({
-    theme, animate,
-  }) => (animate ? sidebarTheme(theme, ['scrollbar', 'transition']) : null)};
-`;
+}))<IScrollbarProps>``;
