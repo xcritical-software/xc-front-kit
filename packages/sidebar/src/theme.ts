@@ -33,7 +33,6 @@ export const defaultSidebarTheme: ISidebarTheme = {
     transition: '.5s',
   },
   childContainer: {
-    width: '100%',
     backgroundColor: colors.GRAY_LIGHT,
     overflowY: 'auto',
     overflowX: 'hidden',

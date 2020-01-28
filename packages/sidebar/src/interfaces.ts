@@ -21,8 +21,7 @@ export interface ISidebarProps {
   navComponent?: ReactNode;
   arrowComponent?: ReactNode;
   theme?: SidebarTheme;
-  showScrollbar?: boolean | string;
-  isResponsive?: boolean;
+  isScrollbarAutoHide?: boolean;
   withArrow?: boolean;
   isRTL?: boolean;
   minWidth?: number;

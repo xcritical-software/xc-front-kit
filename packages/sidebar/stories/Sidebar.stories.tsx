@@ -220,7 +220,6 @@ const propsTheme: IThemeNamespace = {
 
 const props = {
   navComponent: <NavPanel />,
-  showScrollbar: 'auto',
   withArrow: true,
 };
 
@@ -260,18 +259,6 @@ storiesOf('Sidebar', module)
         </Switch>
       </BrowserRouter>
     </ThemeProvider>
-  ))
-  .add('Responsive', () => (
-    <BrowserRouter>
-      <GlobalStyle />
-      <Sidebar { ...props } isResponsive>
-        { list(100) }
-      </Sidebar>
-      <Switch>
-        { routerConfig.map(({ path, component, exact }: any) => (
-          <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
-      </Switch>
-    </BrowserRouter>
   ))
   .add('With theme provider', () => (
     <ThemeProvider theme={ theme }>

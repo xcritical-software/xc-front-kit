@@ -30,10 +30,9 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   theme,
   children,
   navComponent,
-  showScrollbar,
   arrowComponent = <Arrow />,
-  isResponsive = false,
   withArrow = true,
+  isScrollbarAutoHide = true,
   isRTL = false,
   minWidth = 30,
   maxWidth = 400,
@@ -162,7 +161,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
             <NavComponentWrapper>
               <Scrollbars
                 style={ { width: navWidth } }
-                autoHide={ showScrollbar === 'auto' }
+                autoHide={ isScrollbarAutoHide }
               >
                 { navComponent }
               </Scrollbars>
@@ -177,10 +176,10 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
               <ChildWrapper animate={ animate }>
                 <Scrollbars
                   style={ {
-                    width: isResponsive ? width : maxWidth,
-                    transition: isResponsive && animate ? '0.5s' : 'none',
+                    width,
+                    transition: animate ? '0.5s' : 'none',
                   } }
-                  autoHide={ showScrollbar === 'auto' }
+                  autoHide={ isScrollbarAutoHide }
                 >
                   { children }
                 </Scrollbars>
