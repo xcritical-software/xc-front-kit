@@ -297,8 +297,8 @@ const Grid = ({
   }, [mappedColumns, mappedItems]);
 
   const {
-    header: { height: headerHeight = 0 },
-    totals: { height: totalsHeight = 0 },
+    header: { height: headerHeight = 0 } = {},
+    totals: { height: totalsHeight = 0 } = {},
   } = themeRef.current;
 
 

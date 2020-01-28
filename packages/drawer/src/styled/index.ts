@@ -22,7 +22,7 @@ export const Wrapper = styled.div.attrs((
   },
 }))<IDrawerProps & IDrawerWrapperProps & IDrawerStates>`
   ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'drawerWrapper', appearance, baseAppearance)}
-  ${({ isRTL }) => (isRTL ? 'right: 0' : 'left: 0')}
+  ${({ isRTL }) => (isRTL ? 'right: 0;' : 'left: 0;')}
   display: flex;
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
 `;
