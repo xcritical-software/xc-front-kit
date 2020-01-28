@@ -4,14 +4,14 @@ import { IThemeNamespace } from '@xcritical/theme';
 
 
 export interface ISidebarTheme {
-  rootContainer: CSSObject;
-  sidebarContainer: CSSObject;
-  navContainer: CSSObject;
-  childContainer: CSSObject;
-  responsiveContainer: CSSObject;
-  separatorContainer: CSSObject;
-  separator: CSSObject;
-  closeOpenButton: CSSObject;
+  rootContainer?: CSSObject;
+  sidebarContainer?: CSSObject;
+  navContainer?: CSSObject;
+  childContainer?: CSSObject;
+  responsiveContainer?: CSSObject;
+  separatorContainer?: CSSObject;
+  separator?: CSSObject;
+  closeOpenButton?: CSSObject;
 }
 
 export type SidebarTheme = IThemeNamespace<ISidebarTheme>;
