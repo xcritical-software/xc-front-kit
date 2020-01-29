@@ -1,6 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState, useEffect, useRef,
+} from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
+import { ScrollSync } from 'react-virtualized';
+import { CSSProperties } from 'styled-components';
 import Grid from './Grid';
 import { IGrid } from './interfaces';
 
@@ -42,6 +46,58 @@ const GridHOC = ({ shouldFitContainer, ...rest }: IGrid) => {
     },
     [observerRef, shouldFitContainer],
   );
+
+  if (rest.columns.some(({ isFixed }: any) => isFixed)) {
+    const {
+      columns, items, width: $width, height, theme,
+    } = rest;
+    const fixedColumns = columns.filter(({ isFixed }: any) => isFixed);
+    const notFixedColumns = columns.filter(({ isFixed }: any) => !isFixed);
+    const fixedWidth = fixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
+
+    const styles: CSSProperties = {
+      display: 'flex',
+      width: `${$width || wrapperSize.width}px`,
+    };
+    if (shouldFitContainer) {
+      styles.height = '100%';
+    }
+
+    return (
+
+      <ScrollSync>
+        { ({
+          onScroll,
+          scrollTop,
+        }) => (
+          <div style={ styles }>
+            <Grid
+              columns={ fixedColumns }
+              items={ items }
+              width={ fixedWidth }
+              height={ height }
+              shouldMovingColumns={ false }
+              shouldChangeColumnsWidth={ false }
+              theme={ theme }
+              fixedSection
+              scrollTop={ scrollTop }
+              onScrollsyncScroll={ onScroll }
+            />
+            <Grid
+              scrollTop={ scrollTop }
+              columns={ notFixedColumns }
+              items={ items }
+              width={ ($width || wrapperSize.width) - fixedWidth }
+              height={ height }
+              theme={ theme }
+              onScrollsyncScroll={ onScroll }
+            />
+          </div>
+        ) }
+      </ScrollSync>
+    );
+  }
+
 
   if (shouldFitContainer) {
     return (

@@ -1,12 +1,35 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   getBodyCellStyles, getBodyCellContentStyles, getBodyCellOffsetStyles, getExpandButtonStyles,
 } from './utils';
 import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
 
 
-export const Body = styled.div`
-    div {
+export const Body = styled.div<any>`
+  ${({ fixedSection }) => (fixedSection ? css`
+  div {
+      ::-webkit-scrollbar {
+        width: 2px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0);
+      }
+      ::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: rgba(0,0,0,0);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(0,0,0,0);
+      }
+      scrollbar-color: rgba(0,0,0,0) rgba(0,0,0,0);
+      scrollbar-width: thin;
+      :focus {
+        outline: none;
+      }
+    }
+  ` : css`
+  div {
       ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
@@ -27,6 +50,8 @@ export const Body = styled.div`
         outline: none;
       }
     }
+  `)}
+    
 `;
 
 export const BodyCell = styled.div<any>`

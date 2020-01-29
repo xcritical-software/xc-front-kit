@@ -52,6 +52,9 @@ const Grid = ({
   onSelect = () => {},
   shouldMovingColumns = true,
   shouldChangeColumnsWidth = true,
+  fixedSection = false,
+  scrollTop,
+  onScrollsyncScroll,
 }: IGrid) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme || contextTheme));
@@ -105,6 +108,9 @@ const Grid = ({
 
   const handleScroll = (e: ScrollPosition) => {
     setScrollLeft(-e.scrollLeft);
+    if (onScrollsyncScroll) {
+      onScrollsyncScroll(e);
+    }
   };
 
   const onChangeExpand = useCallback(
@@ -315,7 +321,7 @@ const Grid = ({
         shouldMovingColumns={ shouldMovingColumns }
         shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
       />
-      <Body>
+      <Body fixedSection={ fixedSection }>
         <VirtualisedGrid
           ref={ gridRef as MutableRefObject<VirtualisedGrid> }
           columnCount={ filteredColums.length }
@@ -327,6 +333,7 @@ const Grid = ({
           rowHeight={ cacheRef.current.rowHeight }
           width={ width }
           onScroll={ handleScroll }
+          scrollTop={ scrollTop }
         />
       </Body>
       { totals && (

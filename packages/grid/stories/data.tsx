@@ -436,3 +436,31 @@ export function createRowsWithRender (x = 3) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return new Array(Math.floor(Math.random() * 5 + 5)).fill(true).map((_el) => createItem(x));
 }
+
+
+const items = [
+  'one',
+  'two',
+  'three',
+  'four',
+  'five',
+  'siz',
+  'saven',
+  'eight',
+  'nine',
+  'ten',
+  'eleven',
+  'twelve',
+  'thirteen',
+  'fourteen',
+  'fiveteen',
+];
+
+
+export const columnsFixed = items
+  .map((el, i) => ({
+    field: el, headerName: el, visible: true, center: true, width: 200, isFixed: !i || i === 1,
+  }));
+
+export const rowsFixed = new Array(100).fill(true)
+  .map((_el, i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {}));

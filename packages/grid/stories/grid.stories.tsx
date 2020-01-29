@@ -10,7 +10,14 @@ import { setIn } from 'utilitify';
 import Grid from '../src';
 import { IColumn } from '../src/interfaces';
 import {
-  columns, totals, rowsWithChildren, rows, columnsWithRender, createRowsWithRender,
+  columns,
+  totals,
+  rowsWithChildren,
+  rows,
+  columnsWithRender,
+  createRowsWithRender,
+  columnsFixed,
+  rowsFixed,
 } from './data';
 import * as countries from './countries';
 import { gridThemeNamespace } from '../src/theme';
@@ -277,5 +284,14 @@ storiesOf('New Grid', module)
       items={ createRowsWithRender() }
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
+    />
+  ))
+  .add('Fixed one column', () => (
+    <Grid
+      columns={ columnsFixed }
+      items={ rowsFixed }
+      width={ document.documentElement.clientWidth - 100 }
+      height={ document.documentElement.clientHeight - 100 }
+      theme={ AMStheme }
     />
   ));
