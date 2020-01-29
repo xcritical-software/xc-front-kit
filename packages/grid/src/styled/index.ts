@@ -14,7 +14,7 @@ export const Wrapper = styled.div<IWrapper>`
     box-sizing: border-box;
   }
   overflow: hidden;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   ${({ changingColumns }) => {
     if (changingColumns === 'move') {
       return `

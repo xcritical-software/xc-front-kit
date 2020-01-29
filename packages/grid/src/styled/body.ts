@@ -16,7 +16,7 @@ export const Body = styled.div<any>`
         background: rgba(0,0,0,0);
       }
       ::-webkit-scrollbar-thumb {
-        border-radius: 5px;
+        /* border-radius: 5px; */
         background: rgba(0,0,0,0);
       }
       ::-webkit-scrollbar-thumb:hover {
@@ -38,7 +38,7 @@ export const Body = styled.div<any>`
         background: #f1f1f1;
       }
       ::-webkit-scrollbar-thumb {
-        border-radius: 5px;
+        /* border-radius: 5px; */
         background: #888;
       }
       ::-webkit-scrollbar-thumb:hover {
