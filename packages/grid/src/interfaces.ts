@@ -32,9 +32,10 @@ export interface IGrid {
   shouldMovingColumns?: boolean;
   shouldChangeColumnsWidth?: boolean;
   shouldFitContainer?: boolean;
-  fixedSection?: boolean;
   onScrollsyncScroll?: any;
   scrollTop?: number;
+  rightScroll?: boolean
+  bottomScroll?: boolean
 }
 
 

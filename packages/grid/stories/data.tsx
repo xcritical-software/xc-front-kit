@@ -456,10 +456,15 @@ const items = [
   'fiveteen',
 ];
 
+const getFixed = i => {
+  if (i === 2 || i === 4) return 'left'
+  if (i === 5 || i === 1) return 'right';
+  return false
+}
 
 export const columnsFixed = items
   .map((el, i) => ({
-    field: el, headerName: el, visible: true, center: true, width: 200, isFixed: !i || i === 1,
+    field: el, headerName: el, visible: true, center: true, width: 200, fixedPosition: getFixed(i),
   }));
 
 export const rowsFixed = new Array(100).fill(true)

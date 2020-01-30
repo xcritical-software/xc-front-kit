@@ -52,7 +52,8 @@ const Grid = ({
   onSelect = () => {},
   shouldMovingColumns = true,
   shouldChangeColumnsWidth = true,
-  fixedSection = false,
+  rightScroll = true,
+  bottomScroll = true,
   scrollTop,
   onScrollsyncScroll,
 }: IGrid) => {
@@ -321,7 +322,10 @@ const Grid = ({
         shouldMovingColumns={ shouldMovingColumns }
         shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
       />
-      <Body fixedSection={ fixedSection }>
+      <Body 
+        rightScroll={rightScroll}
+        bottomScroll={bottomScroll}
+      >
         <VirtualisedGrid
           ref={ gridRef as MutableRefObject<VirtualisedGrid> }
           columnCount={ filteredColums.length }

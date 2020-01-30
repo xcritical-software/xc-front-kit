@@ -286,7 +286,7 @@ storiesOf('New Grid', module)
       height={ document.documentElement.clientHeight - 100 }
     />
   ))
-  .add('Fixed one column', () => (
+  .add('Fixed columns', () => (
     <Grid
       columns={ columnsFixed }
       items={ rowsFixed }

@@ -5,53 +5,112 @@ import {
 import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
 
 
+const hiddenScrollbar = css`
+  div {
+    ::-webkit-scrollbar {
+      width: 2px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0,0,0,0);
+    }
+    scrollbar-color: rgba(0,0,0,0) rgba(0,0,0,0);
+    scrollbar-width: thin;
+    :focus {
+      outline: none;
+    }
+  }
+`
+const rightScrollbar = css`
+  div {
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 2px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.2);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0,0,0,0.8);
+    }
+    scrollbar-color: rgba(0,0,0,0.2) rgba(0,0,0,0);
+    scrollbar-width: thin;
+    :focus {
+      outline: none;
+    }
+  }
+`
+const bottomScrollbar = css`
+  div {
+    ::-webkit-scrollbar {
+      width: 2px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.2);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0,0,0,0.8);
+    }
+    scrollbar-color: rgba(0,0,0,0.2) rgba(0,0,0,0);
+    scrollbar-width: thin;
+    :focus {
+      outline: none;
+    }
+  }
+`
+const fullScrollbar = css`
+ div {
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.2);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0,0,0,0.8);
+    }
+    scrollbar-color: rgba(0,0,0,0.2) rgba(0,0,0,0);
+    scrollbar-width: thin;
+    :focus {
+      outline: none;
+    }
+  }
+`
+
+
+
+
+
+
+
+const getScrollbar = ({ 
+  rightScroll,
+  bottomScroll }) => {
+  if (rightScroll && bottomScroll) return fullScrollbar;
+  if (rightScroll) return rightScrollbar;
+  if (bottomScroll) return bottomScrollbar;
+  return hiddenScrollbar 
+}
+
 export const Body = styled.div<any>`
-  ${({ fixedSection }) => (fixedSection ? css`
-  div {
-      ::-webkit-scrollbar {
-        width: 2px;
-        height: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: rgba(0,0,0,0);
-      }
-      ::-webkit-scrollbar-thumb {
-        /* border-radius: 5px; */
-        background: rgba(0,0,0,0);
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: rgba(0,0,0,0);
-      }
-      scrollbar-color: rgba(0,0,0,0) rgba(0,0,0,0);
-      scrollbar-width: thin;
-      :focus {
-        outline: none;
-      }
-    }
-  ` : css`
-  div {
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      ::-webkit-scrollbar-thumb {
-        /* border-radius: 5px; */
-        background: #888;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-      }
-      scrollbar-color: #888 #f1f1f1;
-      scrollbar-width: thin;
-      :focus {
-        outline: none;
-      }
-    }
-  `)}
-    
+  ${getScrollbar}
 `;
 
 export const BodyCell = styled.div<any>`

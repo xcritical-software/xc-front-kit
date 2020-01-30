@@ -47,13 +47,22 @@ const GridHOC = ({ shouldFitContainer, ...rest }: IGrid) => {
     [observerRef, shouldFitContainer],
   );
 
-  if (rest.columns.some(({ isFixed }: any) => isFixed)) {
+  if (rest.columns.some(({ fixedPosition }: any) => !!fixedPosition)) {
     const {
       columns, items, width: $width, height, theme,
     } = rest;
-    const fixedColumns = columns.filter(({ isFixed }: any) => isFixed);
-    const notFixedColumns = columns.filter(({ isFixed }: any) => !isFixed);
-    const fixedWidth = fixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
+   
+    const leftFixedColumns = columns.filter(({ fixedPosition }: any) => fixedPosition === 'left');
+    const rightFixedColumns = columns.filter(({ fixedPosition }: any) => fixedPosition === 'right');
+    const notFixedColumns = columns.filter(({ fixedPosition }: any) => !fixedPosition);
+    
+    
+    const leftFixedWidth = leftFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
+    const rightFixedWidth = rightFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
+    const noFixedWidth = notFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0)
+
+
+
 
     const styles: CSSProperties = {
       display: 'flex',
@@ -71,27 +80,50 @@ const GridHOC = ({ shouldFitContainer, ...rest }: IGrid) => {
           scrollTop,
         }) => (
           <div style={ styles }>
-            <Grid
-              columns={ fixedColumns }
+            { leftFixedColumns.length && (
+              <Grid
+              columns={ leftFixedColumns }
               items={ items }
-              width={ fixedWidth }
+              width={ leftFixedWidth }
               height={ height }
               shouldMovingColumns={ false }
               shouldChangeColumnsWidth={ false }
               theme={ theme }
-              fixedSection
               scrollTop={ scrollTop }
               onScrollsyncScroll={ onScroll }
-            />
-            <Grid
+              rightScroll={false}
+              bottomScroll={false}
+              />
+            ) }
+            
+            {
+              notFixedColumns.length && (
+                <Grid
               scrollTop={ scrollTop }
               columns={ notFixedColumns }
               items={ items }
-              width={ ($width || wrapperSize.width) - fixedWidth }
+              width={ ($width || wrapperSize.width) - leftFixedWidth - rightFixedWidth }
               height={ height }
               theme={ theme }
               onScrollsyncScroll={ onScroll }
+              rightScroll={ false }
             />
+              )
+            }
+            { rightFixedColumns.length && (
+              <Grid
+              columns={ rightFixedColumns }
+              items={ items }
+              width={ rightFixedWidth }
+              height={ height }
+              shouldMovingColumns={ false }
+              shouldChangeColumnsWidth={ false }
+              theme={ theme }
+              scrollTop={ scrollTop }
+              onScrollsyncScroll={ onScroll }
+              bottomScroll={false}
+              />
+            ) }
           </div>
         ) }
       </ScrollSync>
