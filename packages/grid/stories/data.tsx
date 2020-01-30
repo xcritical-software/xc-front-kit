@@ -464,8 +464,13 @@ const getFixed = i => {
 
 export const columnsFixed = items
   .map((el, i) => ({
-    field: el, headerName: el, visible: true, center: true, width: 200, fixedPosition: getFixed(i),
+    field: el, headerName: el, visible: true, center: true, width: 200, fixedPosition: getFixed(i), isExpandable: i === 2
   }));
 
 export const rowsFixed = new Array(100).fill(true)
-  .map((_el, i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {}));
+  .map((_el, i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {
+    children: Math.random() > 0.8 ? 
+    new Array(5).fill(true)
+    .map((_el, i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {} ))
+    : null,
+  }));

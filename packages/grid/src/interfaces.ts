@@ -19,7 +19,7 @@ export interface ITotals {
   [key: string]: string | number;
 }
 export interface IGrid {
-  items: IItem[];
+  mappedItems: IMappedItem[];
   columns: IColumn[];
   width?: number;
   height?: number;
@@ -34,10 +34,29 @@ export interface IGrid {
   shouldFitContainer?: boolean;
   onScrollsyncScroll?: any;
   scrollTop?: number;
-  rightScroll?: boolean
-  bottomScroll?: boolean
+  rightScroll?: boolean;
+  bottomScroll?: boolean;
+  onChangeExpand: any;
+  selectedRows: any;
+  handleSelect: any;
 }
 
+
+export interface IGridHOC {
+  items: IItem[];
+  columns: IColumn[];
+  width?: number;
+  height?: number;
+  isDisableSelect?: boolean;
+  isMultiSelect?: boolean;
+  onChangeColumns?: Function;
+  totals?: ITotals;
+  theme?: ITheme;
+  onSelect?: Function;
+  shouldMovingColumns?: boolean;
+  shouldChangeColumnsWidth?: boolean;
+  shouldFitContainer?: boolean;
+} 
 
 export interface IMappedItem extends IItem {
   key: string;

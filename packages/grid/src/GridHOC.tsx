@@ -1,17 +1,31 @@
 import React, {
-  useState, useEffect, useRef,
+  useState, useEffect, useRef, useCallback
 } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
+import { setIn } from 'utilitify';
 
 import { ScrollSync } from 'react-virtualized';
 import { CSSProperties } from 'styled-components';
 import Grid from './Grid';
-import { IGrid } from './interfaces';
+import { IGrid, IMappedItem, IItem, IGridHOC } from './interfaces';
+import { guid, addOrDeleteItemFromArray, deletePropsFromObjects } from './utils';
 
 
-const GridHOC = ({ shouldFitContainer, ...rest }: IGrid) => {
+const GridHOC = ({ shouldFitContainer, 
+  items, 
+
+  isDisableSelect = false,
+  isMultiSelect = false,
+  onSelect = () => {},
+  
+  ...rest }: IGridHOC) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
+  const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
+    items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
+  );
+
+  const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
   const createObserver = (): ResizeObserver | undefined => {
     if (wrapperRef.current === null) {
@@ -47,9 +61,87 @@ const GridHOC = ({ shouldFitContainer, ...rest }: IGrid) => {
     [observerRef, shouldFitContainer],
   );
 
+  const onChangeExpand = useCallback(
+    (index: number, childrens: IItem[]) => {
+      if (mappedItems[index].isExpand) {
+        let childrensLength = 0;
+        for (let i = index + 1; i < mappedItems.length; i++) {
+          if (mappedItems[i].expandLevel) childrensLength += 1;
+          else break;
+        }
+        const newMappedItems = [
+          ...mappedItems.slice(0, index + 1),
+          ...mappedItems.slice(index + 1 + childrensLength),
+        ];
+        const withNewExpand = setIn(newMappedItems, false, [
+          String(index),
+          'isExpand',
+        ]);
+        setMappedItems(withNewExpand);
+      } else {
+        const parentExpandLevel = mappedItems[index].expandLevel || 0;
+        const newChildrens = childrens.map(
+          (el: IItem): IMappedItem => ({
+            ...el,
+            expandLevel: parentExpandLevel + 1,
+            key: guid(),
+          }),
+        );
+        const newMappedItems = [
+          ...mappedItems.slice(0, index + 1),
+          ...newChildrens,
+          ...mappedItems.slice(index + 1),
+        ];
+        const withNewExpand = setIn(newMappedItems, true, [String(index), 'isExpand']);
+        setMappedItems(withNewExpand);
+      }
+    },
+    [mappedItems],
+    );
+
+    const handleSelect = useCallback(
+      (e, key) => {
+        if (isDisableSelect
+             || e.target.tagName === 'svg'
+             || e.target.tagName === 'path'
+             || e.target.tagName === 'BUTTON'
+        ) return;
+        if (isMultiSelect) {
+          const newSelectedRows = addOrDeleteItemFromArray(selectedRows, key);
+          onSelect(
+            deletePropsFromObjects(
+              mappedItems.filter((el: IMappedItem) => newSelectedRows.some((id) => id === el.key)), 'key', 'expandLevel',
+            ),
+          );
+          setSelectedRows(newSelectedRows);
+          return;
+        }
+        if (selectedRows[0] === key) {
+          onSelect({});
+          setSelectedRows([]);
+        } else {
+          const selectedRow = {
+            ...mappedItems
+              .find((el: IMappedItem) => el.key === key),
+          } as IMappedItem;
+          delete selectedRow.key;
+          delete selectedRow.expandLevel;
+          onSelect(selectedRow);
+          setSelectedRows([key]);
+        }
+      },
+      [isDisableSelect, isMultiSelect, selectedRows, onSelect, mappedItems],
+    );
+
+
+    
+  useEffect(() => {
+    setMappedItems(items.map((el: IItem) => ({ ...el, key: guid(), expandLevel: 0 })));
+  }, [items]);
+
   if (rest.columns.some(({ fixedPosition }: any) => !!fixedPosition)) {
     const {
-      columns, items, width: $width, height, theme,
+      columns, width: $width, height, theme,
     } = rest;
    
     const leftFixedColumns = columns.filter(({ fixedPosition }: any) => fixedPosition === 'left');
@@ -59,7 +151,7 @@ const GridHOC = ({ shouldFitContainer, ...rest }: IGrid) => {
     
     const leftFixedWidth = leftFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
     const rightFixedWidth = rightFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
-    const noFixedWidth = notFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0)
+    // const noFixedWidth = notFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0)
 
 
 
@@ -82,8 +174,13 @@ const GridHOC = ({ shouldFitContainer, ...rest }: IGrid) => {
           <div style={ styles }>
             { leftFixedColumns.length && (
               <Grid
+              isDisableSelect={isDisableSelect}
+              isMultiSelect={isMultiSelect}
+              onSelect={onSelect}
+              selectedRows={selectedRows}
+              onChangeExpand={onChangeExpand}
+              mappedItems={mappedItems}
               columns={ leftFixedColumns }
-              items={ items }
               width={ leftFixedWidth }
               height={ height }
               shouldMovingColumns={ false }
@@ -93,27 +190,39 @@ const GridHOC = ({ shouldFitContainer, ...rest }: IGrid) => {
               onScrollsyncScroll={ onScroll }
               rightScroll={false}
               bottomScroll={false}
+              handleSelect={handleSelect}
               />
             ) }
             
             {
               notFixedColumns.length && (
                 <Grid
+                isDisableSelect={isDisableSelect}
+                isMultiSelect={isMultiSelect}
+                onSelect={onSelect}
+                selectedRows={selectedRows}
+                onChangeExpand={onChangeExpand}
+                mappedItems={mappedItems}
               scrollTop={ scrollTop }
               columns={ notFixedColumns }
-              items={ items }
               width={ ($width || wrapperSize.width) - leftFixedWidth - rightFixedWidth }
               height={ height }
               theme={ theme }
               onScrollsyncScroll={ onScroll }
               rightScroll={ false }
+              handleSelect={handleSelect}
             />
               )
             }
             { rightFixedColumns.length && (
               <Grid
+              isDisableSelect={isDisableSelect}
+isMultiSelect={isMultiSelect}
+onSelect={onSelect}
+selectedRows={selectedRows}
+              onChangeExpand={onChangeExpand}
+              mappedItems={mappedItems}
               columns={ rightFixedColumns }
-              items={ items }
               width={ rightFixedWidth }
               height={ height }
               shouldMovingColumns={ false }
@@ -122,6 +231,7 @@ const GridHOC = ({ shouldFitContainer, ...rest }: IGrid) => {
               scrollTop={ scrollTop }
               onScrollsyncScroll={ onScroll }
               bottomScroll={false}
+              handleSelect={handleSelect}
               />
             ) }
           </div>
@@ -134,11 +244,23 @@ const GridHOC = ({ shouldFitContainer, ...rest }: IGrid) => {
   if (shouldFitContainer) {
     return (
       <div ref={ wrapperRef } style={ { height: '100%' } }>
-        <Grid { ...rest } width={ wrapperSize.width } height={ wrapperSize.height } />
+        <Grid
+        isDisableSelect={isDisableSelect}
+        handleSelect={handleSelect}
+        isMultiSelect={isMultiSelect}
+        onSelect={onSelect}
+        selectedRows={selectedRows}
+        onChangeExpand={onChangeExpand} { ...rest } mappedItems={mappedItems} width={ wrapperSize.width } height={ wrapperSize.height } />
       </div>
     );
   }
-  return <Grid { ...rest } />;
+  return <Grid
+  isDisableSelect={isDisableSelect}
+  handleSelect={handleSelect}
+  isMultiSelect={isMultiSelect}
+  onSelect={onSelect}
+  selectedRows={selectedRows}
+  onChangeExpand={onChangeExpand} { ...rest } mappedItems={mappedItems}/>;
 };
 
 
