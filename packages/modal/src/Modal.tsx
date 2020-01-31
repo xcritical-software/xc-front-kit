@@ -21,7 +21,7 @@ export const Modal: React.FC<IModalProps> = ({
   iconClose,
   theme,
   onModalCancel,
-  maxZIndex = 1,
+  maxZIndex,
 }) => {
   if (!isOpen) {
     return null;

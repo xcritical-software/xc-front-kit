@@ -4,7 +4,7 @@ import { getModalStyles } from './utils';
 import { IModalTheme } from './interfaces';
 
 
-export const ModalContent = styled.div<{ theme: IModalTheme; maxZIndex: number }>`
+export const ModalContent = styled.div<{ theme: IModalTheme; maxZIndex: number | undefined }>`
   ${({ theme }) => getModalStyles(theme, ['content'])};
   z-index: ${({ theme, maxZIndex }) => (maxZIndex ? maxZIndex + 1 : getModalStyles(theme, ['zIndex']))};
 `;
