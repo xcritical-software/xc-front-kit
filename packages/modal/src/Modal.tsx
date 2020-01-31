@@ -21,6 +21,7 @@ export const Modal: React.FC<IModalProps> = ({
   iconClose,
   theme,
   onModalCancel,
+  maxZIndex = 1,
 }) => {
   if (!isOpen) {
     return null;
@@ -30,8 +31,13 @@ export const Modal: React.FC<IModalProps> = ({
 
   return (
     <>
-      <Blanket isTinted theme={ modalBlanketTheme } onBlanketClicked={ onModalCancel } />
-      <ModalContent>
+      <Blanket
+        isTinted
+        maxZIndex={ maxZIndex }
+        theme={ modalBlanketTheme }
+        onBlanketClicked={ onModalCancel }
+      />
+      <ModalContent maxZIndex={ maxZIndex }>
         <ModalHeaderWrapper>
           <ModalHeader>
             { title }

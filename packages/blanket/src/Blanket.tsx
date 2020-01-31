@@ -9,6 +9,7 @@ export const PureBlanket: React.FC<IBlanketProps> = ({
   theme,
   canClickThrough = false,
   isTinted = false,
+  maxZIndex,
   onBlanketClicked = () => {},
 }) => {
   const onClick = canClickThrough ? undefined : onBlanketClicked;
@@ -18,6 +19,7 @@ export const PureBlanket: React.FC<IBlanketProps> = ({
       theme={ theme }
       canClickThrough={ canClickThrough }
       isTinted={ isTinted }
+      maxZIndex={ maxZIndex }
       onClick={ onClick }
     />
   );

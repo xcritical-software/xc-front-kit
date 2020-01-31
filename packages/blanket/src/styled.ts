@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { getBlanketThemeStylesByProperty, getBaseStyle } from './utils';
+import { blanketTheme, getBlanketThemeStylesByProperty, getBaseStyle } from './utils';
 import { IBlanketProps } from './interfaces';
 
 
@@ -9,4 +9,5 @@ export const Root = styled.div<IBlanketProps>`
 
   opacity: ${({ theme, isTinted }: IBlanketProps) => (isTinted ? getBlanketThemeStylesByProperty({ theme })(['opacity']) : 0)};
   pointer-events: ${({ canClickThrough }: IBlanketProps) => (canClickThrough ? 'none' : 'initial')};
+  z-index: ${({ theme, maxZIndex }) => (maxZIndex ? maxZIndex + 1 : blanketTheme(theme, ['zIndex']))};
 `;
