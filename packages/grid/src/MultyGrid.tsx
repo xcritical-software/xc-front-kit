@@ -6,11 +6,12 @@ export const MultyGrid = ({
   width,
   height,
   theme,
+  totals,
 
-  isDisableSelect,
-  isMultiSelect,
+  shouldMovingColumns,
+  shouldChangeColumnsWidth,
 
-  onSelect,
+
   onChangeExpand,
   handleSelect,
 
@@ -32,63 +33,74 @@ export const MultyGrid = ({
   <>
     { leftFixedColumns.length && (
       <Grid
-        isDisableSelect={ isDisableSelect }
-        isMultiSelect={ isMultiSelect }
-        onSelect={ onSelect }
-        selectedRows={ selectedRows }
-        onChangeExpand={ onChangeExpand }
-        mappedItems={ mappedItems }
-        columns={ leftFixedColumns }
-        width={ leftFixedWidth }
-        height={ height }
-        shouldMovingColumns={ false }
-        shouldChangeColumnsWidth={ false }
-        theme={ theme }
-        scrollTop={ scrollTop }
-        onScrollsyncScroll={ onScroll }
         rightScroll={ false }
         bottomScroll={ false }
+        height={ height }
+        width={ leftFixedWidth }
+        theme={ theme }
+        totals={ totals }
+
+        shouldMovingColumns={ false }
+        shouldChangeColumnsWidth={ false }
+
+        onChangeExpand={ onChangeExpand }
         handleSelect={ handleSelect }
+
+        selectedRows={ selectedRows }
+        mappedItems={ mappedItems }
+
+        columns={ leftFixedColumns }
+
+        scrollTop={ scrollTop }
+        onScrollsyncScroll={ onScroll }
       />
     ) }
     {
       notFixedColumns.length && (
         <Grid
-          isDisableSelect={ isDisableSelect }
-          isMultiSelect={ isMultiSelect }
-          onSelect={ onSelect }
-          selectedRows={ selectedRows }
-          onChangeExpand={ onChangeExpand }
-          mappedItems={ mappedItems }
-          scrollTop={ scrollTop }
-          columns={ notFixedColumns }
+          rightScroll={ false }
           width={ (width || wrapperSize.width) - leftFixedWidth - rightFixedWidth }
           height={ height }
           theme={ theme }
-          onScrollsyncScroll={ onScroll }
-          rightScroll={ false }
+          totals={ totals }
+
+          shouldMovingColumns={ shouldMovingColumns }
+          shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+
+          onChangeExpand={ onChangeExpand }
           handleSelect={ handleSelect }
+
+          selectedRows={ selectedRows }
+          mappedItems={ mappedItems }
+
+          columns={ notFixedColumns }
+
+          onScrollsyncScroll={ onScroll }
+          scrollTop={ scrollTop }
         />
       )
     }
     { rightFixedColumns.length && (
       <Grid
-        isDisableSelect={ isDisableSelect }
-        isMultiSelect={ isMultiSelect }
-        onSelect={ onSelect }
-        selectedRows={ selectedRows }
-        onChangeExpand={ onChangeExpand }
-        mappedItems={ mappedItems }
-        columns={ rightFixedColumns }
         width={ rightFixedWidth }
         height={ height }
+        theme={ theme }
+        bottomScroll={ false }
+        totals={ totals }
+
         shouldMovingColumns={ false }
         shouldChangeColumnsWidth={ false }
-        theme={ theme }
-        scrollTop={ scrollTop }
-        onScrollsyncScroll={ onScroll }
-        bottomScroll={ false }
+
+        onChangeExpand={ onChangeExpand }
         handleSelect={ handleSelect }
+
+        selectedRows={ selectedRows }
+        mappedItems={ mappedItems }
+
+        columns={ rightFixedColumns }
+
+        onScrollsyncScroll={ onScroll }
+        scrollTop={ scrollTop }
       />
     ) }
   </>

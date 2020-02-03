@@ -18,6 +18,7 @@ import {
   createRowsWithRender,
   columnsFixed,
   rowsFixed,
+  totalsFixed,
 } from './data';
 import * as countries from './countries';
 import { gridThemeNamespace } from '../src/theme';
@@ -315,6 +316,7 @@ storiesOf('New Grid', module)
               <Grid
                 columns={ columnsFixed }
                 items={ rowsFixed }
+                totals={ totalsFixed }
                 theme={ AMStheme }
                 shouldFitContainer
               />

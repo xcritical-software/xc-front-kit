@@ -2,6 +2,7 @@ import React from 'react';
 import EqualIcon from 'mdi-react/EqualIcon';
 import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon';
 import KeyboardArrowUpIcon from 'mdi-react/KeyboardArrowUpIcon';
+import { IColumn } from '../src/interfaces';
 
 
 const renderFunc = (field) => (
@@ -456,12 +457,6 @@ const items = [
   'fiveteen',
 ];
 
-const getFixed = (i) => {
-  if (i === 2 || i === 4) return 'left';
-  if (i === 5 || i === 1) return 'right';
-  return false;
-};
-
 const getWidth = (i) => {
   if (i === 2 || i === 4) return 100;
   if (i === 5 || i === 1) return 100;
@@ -469,15 +464,24 @@ const getWidth = (i) => {
 };
 
 export const columnsFixed = items
-  .map((el, i) => ({
-    field: el,
-    headerName: el,
-    visible: true,
-    center: true,
-    width: getWidth(i),
-    fixedPosition: getFixed(i),
-    isExpandable: i === 2,
-  }));
+  .map((el, i) => {
+    const column: IColumn = {
+      headerName: el,
+      field: el,
+      width: getWidth(i),
+      visible: true,
+      center: true,
+      isExpandable: i === 2,
+    };
+
+    if (i === 2 || i === 4) column.fixedPosition = 'left';
+    if (i === 5 || i === 1) column.fixedPosition = 'right';
+
+    return column;
+  });
+
+export const totalsFixed = items
+  .reduce((acc, el) => ({ ...acc, [el]: Math.floor(Math.random() * 100 + 50) }), {});
 
 export const rowsFixed = new Array(100).fill(true)
   .map((_el, i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {

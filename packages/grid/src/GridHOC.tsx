@@ -8,7 +8,7 @@ import { ScrollSync } from 'react-virtualized';
 import { CSSProperties } from 'styled-components';
 import Grid from './Grid';
 import {
-  IMappedItem, IItem, IGridHOC,
+  IMappedItem, IItem, IGridHOC, IColumn,
 } from './interfaces';
 import { guid, addOrDeleteItemFromArray, deletePropsFromObjects } from './utils';
 import { MultyGrid } from './MultyGrid';
@@ -149,7 +149,7 @@ const GridHOC = ({
   }, [items]);
 
   const isMultiGrid = useMemo(() => rest.columns
-    .some(({ fixedPosition }: any) => !!fixedPosition), [rest.columns]);
+    .some(({ fixedPosition }: IColumn) => Boolean(fixedPosition)), [rest.columns]);
 
   const {
     leftFixedColumns,
@@ -186,15 +186,15 @@ const GridHOC = ({
 
     const multyGridProps = {
       theme: rest.theme,
+      totals: rest.totals,
+
+      shouldMovingColumns: rest.shouldMovingColumns,
+      shouldChangeColumnsWidth: rest.shouldChangeColumnsWidth,
+
 
       width: 0,
       height: 0,
 
-
-      isDisableSelect,
-      isMultiSelect,
-
-      onSelect,
       onChangeExpand,
       handleSelect,
 
@@ -260,9 +260,9 @@ const GridHOC = ({
       <div ref={ wrapperRef } style={ { height: '100%' } }>
         <Grid
           handleSelect={ handleSelect }
-          selectedRows={ selectedRows }
           onChangeExpand={ onChangeExpand }
           mappedItems={ mappedItems }
+          selectedRows={ selectedRows }
           width={ wrapperSize.width }
           height={ wrapperSize.height }
           { ...rest }
@@ -279,6 +279,10 @@ const GridHOC = ({
       onChangeExpand={ onChangeExpand }
       mappedItems={ mappedItems }
       { ...rest }
+      /* eslint-disable @typescript-eslint/no-non-null-assertion  */
+      width={ rest.width! }
+      height={ rest.height! }
+      /* eslint-enable @typescript-eslint/no-non-null-assertion  */
     />
   );
 };

@@ -6,6 +6,7 @@ export interface IItem {
   [key: string]: string | number | ReactElement | any;
 }
 
+type fixedPositionType = 'left' | 'right';
 export interface IColumn {
   headerName: string;
   field: string;
@@ -14,33 +15,11 @@ export interface IColumn {
   center?: boolean;
   isExpandable?: boolean;
   render?: Function;
+  fixedPosition?: fixedPositionType;
 }
 export interface ITotals {
   [key: string]: string | number;
 }
-export interface IGrid {
-  mappedItems: IMappedItem[];
-  columns: IColumn[];
-  width?: number;
-  height?: number;
-  isDisableSelect?: boolean;
-  isMultiSelect?: boolean;
-  onChangeColumns?: Function;
-  totals?: ITotals;
-  theme?: ITheme;
-  onSelect?: Function;
-  shouldMovingColumns?: boolean;
-  shouldChangeColumnsWidth?: boolean;
-  shouldFitContainer?: boolean;
-  onScrollsyncScroll?: any;
-  scrollTop?: number;
-  rightScroll?: boolean;
-  bottomScroll?: boolean;
-  onChangeExpand: any;
-  selectedRows: any;
-  handleSelect: any;
-}
-
 
 export interface IGridHOC {
   items: IItem[];
@@ -56,6 +35,25 @@ export interface IGridHOC {
   shouldMovingColumns?: boolean;
   shouldChangeColumnsWidth?: boolean;
   shouldFitContainer?: boolean;
+}
+
+export interface IGrid {
+  mappedItems: IMappedItem[];
+  columns: IColumn[];
+  width: number;
+  height: number;
+  onChangeColumns?: Function;
+  totals?: ITotals;
+  theme?: ITheme;
+  shouldMovingColumns?: boolean;
+  shouldChangeColumnsWidth?: boolean;
+  onScrollsyncScroll?: Function;
+  scrollTop?: number;
+  rightScroll?: boolean;
+  bottomScroll?: boolean;
+  onChangeExpand: Function;
+  handleSelect: Function;
+  selectedRows: string[];
 }
 
 export interface IMappedItem extends IItem {

@@ -38,6 +38,7 @@ import {
 
 
 const Grid = ({
+  mappedItems = [],
   columns = [],
   width = 0,
   height = 0,
@@ -51,7 +52,6 @@ const Grid = ({
   scrollTop,
   onScrollsyncScroll,
   onChangeExpand,
-  mappedItems,
   handleSelect,
   selectedRows,
 }: IGrid) => {
