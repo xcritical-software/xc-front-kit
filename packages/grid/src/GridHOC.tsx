@@ -17,11 +17,9 @@ import { MultyGrid } from './MultyGrid';
 const GridHOC = ({
   shouldFitContainer,
   items,
-
   isDisableSelect = false,
   isMultiSelect = false,
   onSelect,
-
   ...rest
 }: IGridHOC) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -188,60 +186,72 @@ const GridHOC = ({
 
     const multyGridProps = {
       theme: rest.theme,
-      width: rest.width,
-      height: rest.height,
-      leftFixedColumns: leftFixedColumns,
-      isDisableSelect: isDisableSelect,
-      isMultiSelect: isMultiSelect,
-      onSelect: onSelect,
-      selectedRows: selectedRows,
-      onChangeExpand: onChangeExpand,
-      mappedItems: mappedItems,
-      leftFixedWidth: leftFixedWidth,
-      handleSelect: handleSelect,
-      notFixedColumns: notFixedColumns,
-      rightFixedColumns: rightFixedColumns,
-      wrapperSize: wrapperSize,
-      rightFixedWidth: rightFixedWidth,
-    }
 
+      width: 0,
+      height: 0,
+
+
+      isDisableSelect,
+      isMultiSelect,
+
+      onSelect,
+      onChangeExpand,
+      handleSelect,
+
+      selectedRows,
+      mappedItems,
+
+      leftFixedColumns,
+      leftFixedWidth,
+
+      rightFixedColumns,
+      rightFixedWidth,
+
+      wrapperSize,
+      notFixedColumns,
+    };
 
     if (shouldFitContainer) {
-      styles.height = '100%'
+      styles.height = '100%';
+      multyGridProps.width = wrapperSize.width;
+      multyGridProps.height = wrapperSize.height;
+
       return (
         <ScrollSync>
-        { ({
-          onScroll,
-          scrollTop,
-        }) => (
-          <div style={ styles } ref={ wrapperRef }  >
-            <MultyGrid
-              { ...multyGridProps }
-              onScroll={onScroll}
-              scrollTop={scrollTop}
-            />
-          </div>
-        ) }
-      </ScrollSync>
-      )
+          { ({
+            onScroll,
+            scrollTop,
+          }) => (
+            <div style={ styles } ref={ wrapperRef }>
+              <MultyGrid
+                { ...multyGridProps }
+                onScroll={ onScroll }
+                scrollTop={ scrollTop }
+              />
+            </div>
+          ) }
+        </ScrollSync>
+      );
     }
 
+    multyGridProps.width = rest.width as number;
+    multyGridProps.height = rest.height as number;
     return (
       <ScrollSync>
         { ({
           onScroll,
           scrollTop,
         }) => (
-          <div style={ styles } ref={ wrapperRef }  >
+          <div style={ styles } ref={ wrapperRef }>
             <MultyGrid
               { ...multyGridProps }
-              onScroll={onScroll}
-              scrollTop={scrollTop}
+              onScroll={ onScroll }
+              scrollTop={ scrollTop }
             />
           </div>
         ) }
       </ScrollSync>
-      )
+    );
   }
 
 
@@ -249,16 +259,13 @@ const GridHOC = ({
     return (
       <div ref={ wrapperRef } style={ { height: '100%' } }>
         <Grid
-          isDisableSelect={ isDisableSelect }
           handleSelect={ handleSelect }
-          isMultiSelect={ isMultiSelect }
-          onSelect={ onSelect }
           selectedRows={ selectedRows }
           onChangeExpand={ onChangeExpand }
-          { ...rest }
           mappedItems={ mappedItems }
           width={ wrapperSize.width }
           height={ wrapperSize.height }
+          { ...rest }
         />
       </div>
     );
@@ -267,14 +274,11 @@ const GridHOC = ({
 
   return (
     <Grid
-      isDisableSelect={ isDisableSelect }
       handleSelect={ handleSelect }
-      isMultiSelect={ isMultiSelect }
-      onSelect={ onSelect }
       selectedRows={ selectedRows }
       onChangeExpand={ onChangeExpand }
-      { ...rest }
       mappedItems={ mappedItems }
+      { ...rest }
     />
   );
 };

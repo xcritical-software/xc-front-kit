@@ -462,13 +462,19 @@ const getFixed = (i) => {
   return false;
 };
 
+const getWidth = (i) => {
+  if (i === 2 || i === 4) return 100;
+  if (i === 5 || i === 1) return 100;
+  return 200;
+};
+
 export const columnsFixed = items
   .map((el, i) => ({
     field: el,
     headerName: el,
     visible: true,
     center: true,
-    width: 200,
+    width: getWidth(i),
     fixedPosition: getFixed(i),
     isExpandable: i === 2,
   }));

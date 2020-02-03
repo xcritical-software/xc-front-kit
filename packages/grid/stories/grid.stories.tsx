@@ -294,4 +294,35 @@ storiesOf('New Grid', module)
       height={ document.documentElement.clientHeight - 100 }
       theme={ AMStheme }
     />
-  ));
+  ))
+  .add('Fixed columns + Dinamic size', () => {
+    const [someBlockHeight, setSomeBlockHeight] = useState(100);
+
+    const handleChangeHeight = ({ target: { value } }) => {
+      if (value < 300) setSomeBlockHeight(value);
+      else setSomeBlockHeight(300);
+    };
+
+    return (
+      <Provider store={ store }>
+        <Page>
+          <Sidebar maxWidth={ 150 }>{ list(100) }</Sidebar>
+          <Content>
+            <div>
+              <CompactFilterContainer />
+            </div>
+            <GridWrapper>
+              <Grid
+                columns={ columnsFixed }
+                items={ rowsFixed }
+                theme={ AMStheme }
+                shouldFitContainer
+              />
+            </GridWrapper>
+            <input placeholder="some block height (max 300)" value={ someBlockHeight } onChange={ handleChangeHeight } />
+            <SomeBlock height={ someBlockHeight }> max height =  300px  </SomeBlock>
+          </Content>
+        </Page>
+      </Provider>
+    );
+  });
