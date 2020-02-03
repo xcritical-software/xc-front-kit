@@ -44,10 +44,10 @@ export const MultyGrid = ({
 
 
   filteredColumsLeft,
-filteredColumsRight,
+  filteredColumsRight,
 
-cellRendererLeft,
-cellRendererRight
+  cellRendererLeft,
+  cellRendererRight,
 
 }: any) => (
   <>
@@ -73,11 +73,11 @@ cellRendererRight
 
         scrollTop={ scrollTop }
         onScrollsyncScroll={ onScroll }
-        cacheRef={cacheRef}
-        setMappedColumns={setLeftMappedColumns}
-        mappedColumns={leftMappedColumns}
-        filteredColums={filteredColumsLeft}
-        cellRenderer={cellRendererLeft}
+        cacheRef={ cacheRef }
+        setMappedColumns={ setLeftMappedColumns }
+        mappedColumns={ leftMappedColumns }
+        filteredColums={ filteredColumsLeft }
+        cellRenderer={ cellRendererLeft }
       />
     ) }
     {
@@ -102,11 +102,11 @@ cellRendererRight
 
           onScrollsyncScroll={ onScroll }
           scrollTop={ scrollTop }
-          cacheRef={cacheRef}
-          setMappedColumns={setMappedColumns}
-          mappedColumns={mappedColumns}
-          filteredColums={filteredColums}
-          cellRenderer={cellRenderer}
+          cacheRef={ cacheRef }
+          setMappedColumns={ setMappedColumns }
+          mappedColumns={ mappedColumns }
+          filteredColums={ filteredColums }
+          cellRenderer={ cellRenderer }
         />
       )
     }
@@ -131,11 +131,11 @@ cellRendererRight
 
         onScrollsyncScroll={ onScroll }
         scrollTop={ scrollTop }
-        cacheRef={cacheRef}
-        mappedColumns={rightMappedColumns}
-        setMappedColumns={setRightMappedColumns}
-        filteredColums={filteredColumsRight}
-        cellRenderer={cellRendererRight}
+        cacheRef={ cacheRef }
+        mappedColumns={ rightMappedColumns }
+        setMappedColumns={ setRightMappedColumns }
+        filteredColums={ filteredColumsRight }
+        cellRenderer={ cellRendererRight }
       />
     ) }
   </>

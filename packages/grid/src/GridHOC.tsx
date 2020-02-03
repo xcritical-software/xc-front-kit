@@ -4,15 +4,21 @@ import React, {
 import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
 
-import { ScrollSync, CellMeasurerCache, GridCellProps, CellMeasurer } from 'react-virtualized';
+import {
+  ScrollSync, CellMeasurerCache, GridCellProps, CellMeasurer,
+} from 'react-virtualized';
 import { CSSProperties, ThemeContext } from 'styled-components';
 import Grid from './Grid';
 import {
   IMappedItem, IItem, IGridHOC, IColumn,
 } from './interfaces';
-import { guid, addOrDeleteItemFromArray, deletePropsFromObjects, gridTheme } from './utils';
+import {
+  guid, addOrDeleteItemFromArray, deletePropsFromObjects, gridTheme,
+} from './utils';
 import { MultyGrid } from './MultyGrid';
-import { BodyCell, BodyCellOffset, BodyCellContent, ExpandButtonWrapper, ShiftInsteadButton } from './styled';
+import {
+  BodyCell, BodyCellOffset, BodyCellContent, ExpandButtonWrapper, ShiftInsteadButton,
+} from './styled';
 import { RemoveIcon, AddIcon } from './icons';
 
 
@@ -209,7 +215,6 @@ const GridHOC = ({
   }, [items]);
 
 
-  
   const filteredColums = useMemo(() => (
     mappedColumns.filter(({ visible }) => visible)
   ), [mappedColumns]);
@@ -448,7 +453,7 @@ const GridHOC = ({
     );
   };
 
-  
+
   if (isMultiGrid) {
     const styles: CSSProperties = {
       display: 'flex',
@@ -517,8 +522,8 @@ const GridHOC = ({
                 { ...multyGridProps }
                 onScroll={ onScroll }
                 scrollTop={ scrollTop }
-                cacheRef={cacheRef}
-                
+                cacheRef={ cacheRef }
+
               />
             </div>
           ) }
@@ -539,7 +544,7 @@ const GridHOC = ({
               { ...multyGridProps }
               onScroll={ onScroll }
               scrollTop={ scrollTop }
-              cacheRef={cacheRef}
+              cacheRef={ cacheRef }
             />
           </div>
         ) }
@@ -558,11 +563,11 @@ const GridHOC = ({
           selectedRows={ selectedRows }
           width={ wrapperSize.width }
           height={ wrapperSize.height }
-          cacheRef={cacheRef}
-          setMappedColumns={setMappedColumns}
-          mappedColumns={mappedColumns}
-          filteredColums={filteredColums}
-          cellRenderer={cellRenderer}
+          cacheRef={ cacheRef }
+          setMappedColumns={ setMappedColumns }
+          mappedColumns={ mappedColumns }
+          filteredColums={ filteredColums }
+          cellRenderer={ cellRenderer }
           { ...rest }
         />
       </div>
@@ -579,12 +584,12 @@ const GridHOC = ({
       { ...rest }
       /* eslint-disable @typescript-eslint/no-non-null-assertion  */
       width={ rest.width! }
-      cacheRef={cacheRef}
+      cacheRef={ cacheRef }
       height={ rest.height! }
-      setMappedColumns={setMappedColumns}
-      mappedColumns={mappedColumns}
-      filteredColums={filteredColums}
-      cellRenderer={cellRenderer}
+      setMappedColumns={ setMappedColumns }
+      mappedColumns={ mappedColumns }
+      filteredColums={ filteredColums }
+      cellRenderer={ cellRenderer }
       /* eslint-enable @typescript-eslint/no-non-null-assertion  */
     />
   );
