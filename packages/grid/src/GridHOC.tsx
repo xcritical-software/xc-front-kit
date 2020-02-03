@@ -11,6 +11,7 @@ import {
   IMappedItem, IItem, IGridHOC,
 } from './interfaces';
 import { guid, addOrDeleteItemFromArray, deletePropsFromObjects } from './utils';
+import { MultyGrid } from './MultyGrid';
 
 
 const GridHOC = ({
@@ -181,93 +182,66 @@ const GridHOC = ({
 
 
   if (isMultiGrid) {
-    const {
-      width: $width, height, theme,
-    } = rest;
-
-
     const styles: CSSProperties = {
       display: 'flex',
-      width: `${$width || wrapperSize.width}px`,
     };
+
+    const multyGridProps = {
+      theme: rest.theme,
+      width: rest.width,
+      height: rest.height,
+      leftFixedColumns: leftFixedColumns,
+      isDisableSelect: isDisableSelect,
+      isMultiSelect: isMultiSelect,
+      onSelect: onSelect,
+      selectedRows: selectedRows,
+      onChangeExpand: onChangeExpand,
+      mappedItems: mappedItems,
+      leftFixedWidth: leftFixedWidth,
+      handleSelect: handleSelect,
+      notFixedColumns: notFixedColumns,
+      rightFixedColumns: rightFixedColumns,
+      wrapperSize: wrapperSize,
+      rightFixedWidth: rightFixedWidth,
+    }
+
+
     if (shouldFitContainer) {
-      styles.height = '100%';
+      styles.height = '100%'
+      return (
+        <ScrollSync>
+        { ({
+          onScroll,
+          scrollTop,
+        }) => (
+          <div style={ styles } ref={ wrapperRef }  >
+            <MultyGrid
+              { ...multyGridProps }
+              onScroll={onScroll}
+              scrollTop={scrollTop}
+            />
+          </div>
+        ) }
+      </ScrollSync>
+      )
     }
 
     return (
-
       <ScrollSync>
         { ({
           onScroll,
           scrollTop,
         }) => (
-          <div style={ styles }>
-            { leftFixedColumns.length && (
-              <Grid
-                isDisableSelect={ isDisableSelect }
-                isMultiSelect={ isMultiSelect }
-                onSelect={ onSelect }
-                selectedRows={ selectedRows }
-                onChangeExpand={ onChangeExpand }
-                mappedItems={ mappedItems }
-                columns={ leftFixedColumns }
-                width={ leftFixedWidth }
-                height={ height }
-                shouldMovingColumns={ false }
-                shouldChangeColumnsWidth={ false }
-                theme={ theme }
-                scrollTop={ scrollTop }
-                onScrollsyncScroll={ onScroll }
-                rightScroll={ false }
-                bottomScroll={ false }
-                handleSelect={ handleSelect }
-              />
-            ) }
-
-            {
-              notFixedColumns.length && (
-                <Grid
-                  isDisableSelect={ isDisableSelect }
-                  isMultiSelect={ isMultiSelect }
-                  onSelect={ onSelect }
-                  selectedRows={ selectedRows }
-                  onChangeExpand={ onChangeExpand }
-                  mappedItems={ mappedItems }
-                  scrollTop={ scrollTop }
-                  columns={ notFixedColumns }
-                  width={ ($width || wrapperSize.width) - leftFixedWidth - rightFixedWidth }
-                  height={ height }
-                  theme={ theme }
-                  onScrollsyncScroll={ onScroll }
-                  rightScroll={ false }
-                  handleSelect={ handleSelect }
-                />
-              )
-            }
-            { rightFixedColumns.length && (
-              <Grid
-                isDisableSelect={ isDisableSelect }
-                isMultiSelect={ isMultiSelect }
-                onSelect={ onSelect }
-                selectedRows={ selectedRows }
-                onChangeExpand={ onChangeExpand }
-                mappedItems={ mappedItems }
-                columns={ rightFixedColumns }
-                width={ rightFixedWidth }
-                height={ height }
-                shouldMovingColumns={ false }
-                shouldChangeColumnsWidth={ false }
-                theme={ theme }
-                scrollTop={ scrollTop }
-                onScrollsyncScroll={ onScroll }
-                bottomScroll={ false }
-                handleSelect={ handleSelect }
-              />
-            ) }
+          <div style={ styles } ref={ wrapperRef }  >
+            <MultyGrid
+              { ...multyGridProps }
+              onScroll={onScroll}
+              scrollTop={scrollTop}
+            />
           </div>
         ) }
       </ScrollSync>
-    );
+      )
   }
 
 
