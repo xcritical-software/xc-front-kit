@@ -120,16 +120,16 @@ export const getBodyCellContentStyles = ({
     padding: ${row?.padding};
     ${row?.height ? `height: ${row?.height}` : null};
 
-    > span {
+    span {
       font-size: ${row?.fontSize};
       color: ${selected ? selectedRowColor : row?.color};
       ${row?.height ? css`
           white-space: nowrap;
           overflow: hidden;
-          /* display: block; */
-          /* text-overflow: ellipsis; */
+          display: block;
+          text-overflow: ellipsis;
           ` : null
-}
+      }
     }
     `;
 

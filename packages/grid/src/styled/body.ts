@@ -8,7 +8,7 @@ import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
 const hiddenScrollbar = css`
   div {
     ::-webkit-scrollbar {
-      width: 2px;
+      width: 1px;
       height: 8px;
     }
     ::-webkit-scrollbar-track {
@@ -31,7 +31,7 @@ const rightScrollbar = css`
   div {
     ::-webkit-scrollbar {
       width: 8px;
-      height: 2px;
+      height: 8px;
     }
     ::-webkit-scrollbar-track {
       background: rgba(0,0,0,0);
@@ -52,7 +52,7 @@ const rightScrollbar = css`
 const bottomScrollbar = css`
   div {
     ::-webkit-scrollbar {
-      width: 2px;
+      width: 0px;
       height: 8px;
     }
     ::-webkit-scrollbar-track {
@@ -106,7 +106,7 @@ const getScrollbar = ({
 };
 
 export const Body = styled.div<any>`
-  ${getScrollbar}
+  ${getScrollbar};
 `;
 
 export const BodyCell = styled.div<any>`

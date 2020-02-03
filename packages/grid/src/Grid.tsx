@@ -267,7 +267,7 @@ const Grid = ({
           { filteredColums.map((el: IColumn, index: number) => (
             <TotalCell
               theme={ themeRef.current }
-              width={ filteredColums.length === index + 1 ? el.width + 9 : el.width }
+              width={ filteredColums.length === index + 1 ? el.width + 8 : el.width }
             >
               <TotalCellContent center={ !!el.center } theme={ themeRef.current }>
                 <span>{ totals[el.field] }</span>

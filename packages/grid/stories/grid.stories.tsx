@@ -315,7 +315,7 @@ storiesOf('New Grid', module)
             <GridWrapper>
               <Grid
                 columns={ columnsFixed }
-                items={ rowsFixed }
+                items={ rowsFixed.slice(0, 15) }
                 totals={ totalsFixed }
                 theme={ AMStheme }
                 shouldFitContainer
