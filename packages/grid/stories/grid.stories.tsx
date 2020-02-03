@@ -97,7 +97,7 @@ const AMStheme = {
       border: `1px solid ${colors.GRAY}`,
       padding: '5px 10px',
       fontSize: '13px',
-      height: '50px'
+      height: '50px',
     },
   },
 };

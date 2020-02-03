@@ -456,21 +456,27 @@ const items = [
   'fiveteen',
 ];
 
-const getFixed = i => {
-  if (i === 2 || i === 4) return 'left'
+const getFixed = (i) => {
+  if (i === 2 || i === 4) return 'left';
   if (i === 5 || i === 1) return 'right';
-  return false
-}
+  return false;
+};
 
 export const columnsFixed = items
   .map((el, i) => ({
-    field: el, headerName: el, visible: true, center: true, width: 200, fixedPosition: getFixed(i), isExpandable: i === 2
+    field: el,
+    headerName: el,
+    visible: true,
+    center: true,
+    width: 200,
+    fixedPosition: getFixed(i),
+    isExpandable: i === 2,
   }));
 
 export const rowsFixed = new Array(100).fill(true)
   .map((_el, i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {
-    children: Math.random() > 0.8 ? 
-    new Array(5).fill(true)
-    .map((_el, i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {} ))
-    : null,
+    children: Math.random() > 0.8
+      ? new Array(5).fill(true)
+        .map((_$el, $i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${$i}` }), {}))
+      : null,
   }));

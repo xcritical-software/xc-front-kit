@@ -1,5 +1,5 @@
 import React, {
-  useState, useEffect, useRef, useCallback
+  useState, useEffect, useRef, useCallback, useMemo,
 } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
@@ -7,18 +7,22 @@ import { setIn } from 'utilitify';
 import { ScrollSync } from 'react-virtualized';
 import { CSSProperties } from 'styled-components';
 import Grid from './Grid';
-import { IGrid, IMappedItem, IItem, IGridHOC } from './interfaces';
+import {
+  IMappedItem, IItem, IGridHOC,
+} from './interfaces';
 import { guid, addOrDeleteItemFromArray, deletePropsFromObjects } from './utils';
 
 
-const GridHOC = ({ shouldFitContainer, 
-  items, 
+const GridHOC = ({
+  shouldFitContainer,
+  items,
 
   isDisableSelect = false,
   isMultiSelect = false,
-  onSelect = () => {},
-  
-  ...rest }: IGridHOC) => {
+  onSelect,
+
+  ...rest
+}: IGridHOC) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
@@ -97,63 +101,89 @@ const GridHOC = ({ shouldFitContainer,
       }
     },
     [mappedItems],
-    );
+  );
 
-    const handleSelect = useCallback(
-      (e, key) => {
-        if (isDisableSelect
+  const handleSelect = useCallback(
+    (e, key) => {
+      if (isDisableSelect
              || e.target.tagName === 'svg'
              || e.target.tagName === 'path'
              || e.target.tagName === 'BUTTON'
-        ) return;
-        if (isMultiSelect) {
-          const newSelectedRows = addOrDeleteItemFromArray(selectedRows, key);
+      ) return;
+      if (isMultiSelect) {
+        const newSelectedRows = addOrDeleteItemFromArray(selectedRows, key);
+        if (onSelect) {
           onSelect(
             deletePropsFromObjects(
               mappedItems.filter((el: IMappedItem) => newSelectedRows.some((id) => id === el.key)), 'key', 'expandLevel',
             ),
           );
-          setSelectedRows(newSelectedRows);
-          return;
         }
-        if (selectedRows[0] === key) {
+        setSelectedRows(newSelectedRows);
+        return;
+      }
+      if (selectedRows[0] === key) {
+        if (onSelect) {
           onSelect({});
-          setSelectedRows([]);
-        } else {
-          const selectedRow = {
-            ...mappedItems
-              .find((el: IMappedItem) => el.key === key),
-          } as IMappedItem;
-          delete selectedRow.key;
-          delete selectedRow.expandLevel;
-          onSelect(selectedRow);
-          setSelectedRows([key]);
         }
-      },
-      [isDisableSelect, isMultiSelect, selectedRows, onSelect, mappedItems],
-    );
+
+        setSelectedRows([]);
+      } else {
+        const selectedRow = {
+          ...mappedItems
+            .find((el: IMappedItem) => el.key === key),
+        } as IMappedItem;
+        delete selectedRow.key;
+        delete selectedRow.expandLevel;
+        if (onSelect) {
+          onSelect(selectedRow);
+        }
+        setSelectedRows([key]);
+      }
+    },
+    [isDisableSelect, isMultiSelect, selectedRows, onSelect, mappedItems],
+  );
 
 
-    
   useEffect(() => {
     setMappedItems(items.map((el: IItem) => ({ ...el, key: guid(), expandLevel: 0 })));
   }, [items]);
 
-  if (rest.columns.some(({ fixedPosition }: any) => !!fixedPosition)) {
+  const isMultiGrid = useMemo(() => rest.columns
+    .some(({ fixedPosition }: any) => !!fixedPosition), [rest.columns]);
+
+  const {
+    leftFixedColumns,
+    rightFixedColumns,
+    notFixedColumns,
+    leftFixedWidth,
+    rightFixedWidth,
+  } = useMemo(() => {
+    const $leftFixedColumns = rest.columns.filter(({ fixedPosition }: any) => fixedPosition === 'left');
+    const $rightFixedColumns = rest.columns.filter(({ fixedPosition }: any) => fixedPosition === 'right');
+    const $notFixedColumns = rest.columns.filter(({ fixedPosition }: any) => !fixedPosition);
+
+    /* eslint-disable max-len */
+    const $leftFixedWidth = $leftFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
+    const $rightFixedWidth = $rightFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
+    /* eslint-enable max-len */
+
+    /* eslint-disable key-spacing */
+    return {
+      leftFixedColumns:  $leftFixedColumns,
+      rightFixedColumns: $rightFixedColumns,
+      notFixedColumns:   $notFixedColumns,
+      leftFixedWidth:    $leftFixedWidth,
+      rightFixedWidth:   $rightFixedWidth,
+    };
+    /* eslint-enable key-spacing */
+  }, [isMultiGrid]);
+
+
+  if (isMultiGrid) {
     const {
-      columns, width: $width, height, theme,
+      width: $width, height, theme,
     } = rest;
-   
-    const leftFixedColumns = columns.filter(({ fixedPosition }: any) => fixedPosition === 'left');
-    const rightFixedColumns = columns.filter(({ fixedPosition }: any) => fixedPosition === 'right');
-    const notFixedColumns = columns.filter(({ fixedPosition }: any) => !fixedPosition);
-    
-    
-    const leftFixedWidth = leftFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
-    const rightFixedWidth = rightFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
-    // const noFixedWidth = notFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0)
-
-
 
 
     const styles: CSSProperties = {
@@ -174,64 +204,64 @@ const GridHOC = ({ shouldFitContainer,
           <div style={ styles }>
             { leftFixedColumns.length && (
               <Grid
-              isDisableSelect={isDisableSelect}
-              isMultiSelect={isMultiSelect}
-              onSelect={onSelect}
-              selectedRows={selectedRows}
-              onChangeExpand={onChangeExpand}
-              mappedItems={mappedItems}
-              columns={ leftFixedColumns }
-              width={ leftFixedWidth }
-              height={ height }
-              shouldMovingColumns={ false }
-              shouldChangeColumnsWidth={ false }
-              theme={ theme }
-              scrollTop={ scrollTop }
-              onScrollsyncScroll={ onScroll }
-              rightScroll={false}
-              bottomScroll={false}
-              handleSelect={handleSelect}
+                isDisableSelect={ isDisableSelect }
+                isMultiSelect={ isMultiSelect }
+                onSelect={ onSelect }
+                selectedRows={ selectedRows }
+                onChangeExpand={ onChangeExpand }
+                mappedItems={ mappedItems }
+                columns={ leftFixedColumns }
+                width={ leftFixedWidth }
+                height={ height }
+                shouldMovingColumns={ false }
+                shouldChangeColumnsWidth={ false }
+                theme={ theme }
+                scrollTop={ scrollTop }
+                onScrollsyncScroll={ onScroll }
+                rightScroll={ false }
+                bottomScroll={ false }
+                handleSelect={ handleSelect }
               />
             ) }
-            
+
             {
               notFixedColumns.length && (
                 <Grid
-                isDisableSelect={isDisableSelect}
-                isMultiSelect={isMultiSelect}
-                onSelect={onSelect}
-                selectedRows={selectedRows}
-                onChangeExpand={onChangeExpand}
-                mappedItems={mappedItems}
-              scrollTop={ scrollTop }
-              columns={ notFixedColumns }
-              width={ ($width || wrapperSize.width) - leftFixedWidth - rightFixedWidth }
-              height={ height }
-              theme={ theme }
-              onScrollsyncScroll={ onScroll }
-              rightScroll={ false }
-              handleSelect={handleSelect}
-            />
+                  isDisableSelect={ isDisableSelect }
+                  isMultiSelect={ isMultiSelect }
+                  onSelect={ onSelect }
+                  selectedRows={ selectedRows }
+                  onChangeExpand={ onChangeExpand }
+                  mappedItems={ mappedItems }
+                  scrollTop={ scrollTop }
+                  columns={ notFixedColumns }
+                  width={ ($width || wrapperSize.width) - leftFixedWidth - rightFixedWidth }
+                  height={ height }
+                  theme={ theme }
+                  onScrollsyncScroll={ onScroll }
+                  rightScroll={ false }
+                  handleSelect={ handleSelect }
+                />
               )
             }
             { rightFixedColumns.length && (
               <Grid
-              isDisableSelect={isDisableSelect}
-isMultiSelect={isMultiSelect}
-onSelect={onSelect}
-selectedRows={selectedRows}
-              onChangeExpand={onChangeExpand}
-              mappedItems={mappedItems}
-              columns={ rightFixedColumns }
-              width={ rightFixedWidth }
-              height={ height }
-              shouldMovingColumns={ false }
-              shouldChangeColumnsWidth={ false }
-              theme={ theme }
-              scrollTop={ scrollTop }
-              onScrollsyncScroll={ onScroll }
-              bottomScroll={false}
-              handleSelect={handleSelect}
+                isDisableSelect={ isDisableSelect }
+                isMultiSelect={ isMultiSelect }
+                onSelect={ onSelect }
+                selectedRows={ selectedRows }
+                onChangeExpand={ onChangeExpand }
+                mappedItems={ mappedItems }
+                columns={ rightFixedColumns }
+                width={ rightFixedWidth }
+                height={ height }
+                shouldMovingColumns={ false }
+                shouldChangeColumnsWidth={ false }
+                theme={ theme }
+                scrollTop={ scrollTop }
+                onScrollsyncScroll={ onScroll }
+                bottomScroll={ false }
+                handleSelect={ handleSelect }
               />
             ) }
           </div>
@@ -245,22 +275,34 @@ selectedRows={selectedRows}
     return (
       <div ref={ wrapperRef } style={ { height: '100%' } }>
         <Grid
-        isDisableSelect={isDisableSelect}
-        handleSelect={handleSelect}
-        isMultiSelect={isMultiSelect}
-        onSelect={onSelect}
-        selectedRows={selectedRows}
-        onChangeExpand={onChangeExpand} { ...rest } mappedItems={mappedItems} width={ wrapperSize.width } height={ wrapperSize.height } />
+          isDisableSelect={ isDisableSelect }
+          handleSelect={ handleSelect }
+          isMultiSelect={ isMultiSelect }
+          onSelect={ onSelect }
+          selectedRows={ selectedRows }
+          onChangeExpand={ onChangeExpand }
+          { ...rest }
+          mappedItems={ mappedItems }
+          width={ wrapperSize.width }
+          height={ wrapperSize.height }
+        />
       </div>
     );
   }
-  return <Grid
-  isDisableSelect={isDisableSelect}
-  handleSelect={handleSelect}
-  isMultiSelect={isMultiSelect}
-  onSelect={onSelect}
-  selectedRows={selectedRows}
-  onChangeExpand={onChangeExpand} { ...rest } mappedItems={mappedItems}/>;
+
+
+  return (
+    <Grid
+      isDisableSelect={ isDisableSelect }
+      handleSelect={ handleSelect }
+      isMultiSelect={ isMultiSelect }
+      onSelect={ onSelect }
+      selectedRows={ selectedRows }
+      onChangeExpand={ onChangeExpand }
+      { ...rest }
+      mappedItems={ mappedItems }
+    />
+  );
 };
 
 

@@ -26,7 +26,7 @@ const hiddenScrollbar = css`
       outline: none;
     }
   }
-`
+`;
 const rightScrollbar = css`
   div {
     ::-webkit-scrollbar {
@@ -48,7 +48,7 @@ const rightScrollbar = css`
       outline: none;
     }
   }
-`
+`;
 const bottomScrollbar = css`
   div {
     ::-webkit-scrollbar {
@@ -70,7 +70,7 @@ const bottomScrollbar = css`
       outline: none;
     }
   }
-`
+`;
 const fullScrollbar = css`
  div {
     ::-webkit-scrollbar {
@@ -92,22 +92,18 @@ const fullScrollbar = css`
       outline: none;
     }
   }
-`
+`;
 
 
-
-
-
-
-
-const getScrollbar = ({ 
+const getScrollbar = ({
   rightScroll,
-  bottomScroll }) => {
+  bottomScroll,
+}) => {
   if (rightScroll && bottomScroll) return fullScrollbar;
   if (rightScroll) return rightScrollbar;
   if (bottomScroll) return bottomScrollbar;
-  return hiddenScrollbar 
-}
+  return hiddenScrollbar;
+};
 
 export const Body = styled.div<any>`
   ${getScrollbar}

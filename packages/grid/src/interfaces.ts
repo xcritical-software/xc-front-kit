@@ -56,7 +56,7 @@ export interface IGridHOC {
   shouldMovingColumns?: boolean;
   shouldChangeColumnsWidth?: boolean;
   shouldFitContainer?: boolean;
-} 
+}
 
 export interface IMappedItem extends IItem {
   key: string;

@@ -29,13 +29,11 @@ import {
   ShiftInsteadButton,
 } from './styled';
 import { AddIcon, RemoveIcon } from './icons';
-import {
-  guid, addOrDeleteItemFromArray, gridTheme, deletePropsFromObjects, searchLastVisible,
-} from './utils';
+import { gridTheme, searchLastVisible } from './utils';
 
 import { HeaderWrapper } from './HeaderWrapper';
 import {
-  IItem, IColumn, IGrid, IMappedItem,
+  IColumn, IGrid,
 } from './interfaces';
 
 
@@ -43,12 +41,9 @@ const Grid = ({
   columns = [],
   width = 0,
   height = 0,
-  isDisableSelect = false,
-  isMultiSelect = false,
   onChangeColumns = () => {},
   totals,
   theme,
-  onSelect = () => {},
   shouldMovingColumns = true,
   shouldChangeColumnsWidth = true,
   rightScroll = true,
@@ -58,16 +53,12 @@ const Grid = ({
   onChangeExpand,
   mappedItems,
   handleSelect,
-  selectedRows
+  selectedRows,
 }: IGrid) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme || contextTheme));
 
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
-  // const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
-  //   items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
-  // );
-  // const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const fullWidthRef = useRef(
     mappedColumns.filter(({ visible }: IColumn) => visible).reduce(
       (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
@@ -106,88 +97,12 @@ const Grid = ({
     setMappedColumns(columns);
   }, [columns, contextTheme, theme, width]);
 
-  // useEffect(() => {
-  //   setMappedItems(items.map((el: IItem) => ({ ...el, key: guid(), expandLevel: 0 })));
-  // }, [items]);
-
   const handleScroll = (e: ScrollPosition) => {
     setScrollLeft(-e.scrollLeft);
     if (onScrollsyncScroll) {
       onScrollsyncScroll(e);
     }
   };
-  
-  // const onChangeExpand = useCallback(
-  //   (index: number, childrens: IItem[]) => {
-  //     if (mappedItems[index].isExpand) {
-  //       let childrensLength = 0;
-  //       for (let i = index + 1; i < mappedItems.length; i++) {
-  //         if (mappedItems[i].expandLevel) childrensLength += 1;
-  //         else break;
-  //       }
-  //       const newMappedItems = [
-  //         ...mappedItems.slice(0, index + 1),
-  //         ...mappedItems.slice(index + 1 + childrensLength),
-  //       ];
-  //       const withNewExpand = setIn(newMappedItems, false, [
-  //         String(index),
-  //         'isExpand',
-  //       ]);
-  //       setMappedItems(withNewExpand);
-  //     } else {
-  //       const parentExpandLevel = mappedItems[index].expandLevel || 0;
-  //       const newChildrens = childrens.map(
-  //         (el: IItem): IMappedItem => ({
-  //           ...el,
-  //           expandLevel: parentExpandLevel + 1,
-  //           key: guid(),
-  //         }),
-  //       );
-  //       const newMappedItems = [
-  //         ...mappedItems.slice(0, index + 1),
-  //         ...newChildrens,
-  //         ...mappedItems.slice(index + 1),
-  //       ];
-  //       const withNewExpand = setIn(newMappedItems, true, [String(index), 'isExpand']);
-  //       setMappedItems(withNewExpand);
-  //     }
-  //   },
-  //   [mappedItems],
-  // );
-
-  // const handleSelect = useCallback(
-  //   (e, key) => {
-  //     if (isDisableSelect
-  //          || e.target.tagName === 'svg'
-  //          || e.target.tagName === 'path'
-  //          || e.target.tagName === 'BUTTON'
-  //     ) return;
-  //     if (isMultiSelect) {
-  //       const newSelectedRows = addOrDeleteItemFromArray(selectedRows, key);
-  //       onSelect(
-  //         deletePropsFromObjects(
-  //           mappedItems.filter((el: IMappedItem) => newSelectedRows.some((id) => id === el.key)), 'key', 'expandLevel',
-  //         ),
-  //       );
-  //       setSelectedRows(newSelectedRows);
-  //       return;
-  //     }
-  //     if (selectedRows[0] === key) {
-  //       onSelect({});
-  //       setSelectedRows([]);
-  //     } else {
-  //       const selectedRow = {
-  //         ...mappedItems
-  //           .find((el: IMappedItem) => el.key === key),
-  //       } as IMappedItem;
-  //       delete selectedRow.key;
-  //       delete selectedRow.expandLevel;
-  //       onSelect(selectedRow);
-  //       setSelectedRows([key]);
-  //     }
-  //   },
-  //   [isDisableSelect, isMultiSelect, selectedRows, onSelect, mappedItems],
-  // );
 
   const cellRenderer = ({
     columnIndex, key, parent, rowIndex, style,
@@ -325,9 +240,9 @@ const Grid = ({
         shouldMovingColumns={ shouldMovingColumns }
         shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
       />
-      <Body 
-        rightScroll={rightScroll}
-        bottomScroll={bottomScroll}
+      <Body
+        rightScroll={ rightScroll }
+        bottomScroll={ bottomScroll }
       >
         <VirtualisedGrid
           ref={ gridRef as MutableRefObject<VirtualisedGrid> }
