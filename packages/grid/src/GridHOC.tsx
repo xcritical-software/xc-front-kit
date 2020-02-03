@@ -1,17 +1,19 @@
 import React, {
-  useState, useEffect, useRef, useCallback, useMemo,
+  useState, useEffect, useRef, useCallback, useMemo, useContext,
 } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
 
-import { ScrollSync } from 'react-virtualized';
-import { CSSProperties } from 'styled-components';
+import { ScrollSync, CellMeasurerCache, GridCellProps, CellMeasurer } from 'react-virtualized';
+import { CSSProperties, ThemeContext } from 'styled-components';
 import Grid from './Grid';
 import {
   IMappedItem, IItem, IGridHOC, IColumn,
 } from './interfaces';
-import { guid, addOrDeleteItemFromArray, deletePropsFromObjects } from './utils';
+import { guid, addOrDeleteItemFromArray, deletePropsFromObjects, gridTheme } from './utils';
 import { MultyGrid } from './MultyGrid';
+import { BodyCell, BodyCellOffset, BodyCellContent, ExpandButtonWrapper, ShiftInsteadButton } from './styled';
+import { RemoveIcon, AddIcon } from './icons';
 
 
 const GridHOC = ({
@@ -27,6 +29,14 @@ const GridHOC = ({
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
     items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
   );
+
+  const cacheRef = useRef(
+    new CellMeasurerCache({
+      fixedWidth: true,
+      defaultHeight: 100,
+    }),
+  );
+
 
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
@@ -144,9 +154,9 @@ const GridHOC = ({
   );
 
 
-  useEffect(() => {
-    setMappedItems(items.map((el: IItem) => ({ ...el, key: guid(), expandLevel: 0 })));
-  }, [items]);
+  // useEffect(() => {
+  //   setMappedItems(items.map((el: IItem) => ({ ...el, key: guid(), expandLevel: 0 })));
+  // }, [items]);
 
   const isMultiGrid = useMemo(() => rest.columns
     .some(({ fixedPosition }: IColumn) => Boolean(fixedPosition)), [rest.columns]);
@@ -179,6 +189,266 @@ const GridHOC = ({
   }, [isMultiGrid]);
 
 
+  /* !!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+  useEffect(() => {
+    setMappedItems(items.map((el: IItem) => ({ ...el, key: guid(), expandLevel: 0 })));
+  }, [items]);
+
+  const contextTheme = useContext(ThemeContext);
+  const themeRef = useRef(gridTheme(rest.theme || contextTheme));
+
+
+  const [mappedColumns, setMappedColumns] = useState<IColumn[]>(notFixedColumns);
+  const [leftMappedColumns, setLeftMappedColumns] = useState<IColumn[]>(leftFixedColumns);
+  const [rightMappedColumns, setRightMappedColumns] = useState<IColumn[]>(rightFixedColumns);
+
+
+  useEffect(() => {
+    setMappedItems(items.map((el: IItem) => ({ ...el, key: guid(), expandLevel: 0 })));
+  }, [items]);
+
+
+  
+  const filteredColums = useMemo(() => (
+    mappedColumns.filter(({ visible }) => visible)
+  ), [mappedColumns]);
+  const filteredColumsLeft = useMemo(() => (
+    leftMappedColumns.filter(({ visible }) => visible)
+  ), [leftMappedColumns]);
+  const filteredColumsRight = useMemo(() => (
+    rightMappedColumns.filter(({ visible }) => visible)
+  ), [rightMappedColumns]);
+
+
+  const cellRenderer = ({
+    columnIndex, key, parent, rowIndex, style,
+  }: GridCellProps) => {
+    const isFirstColumn = columnIndex === 0;
+
+    const row = mappedItems[rowIndex];
+    const column = filteredColums[columnIndex];
+
+    const expandLevel = isFirstColumn ? row.expandLevel : 0;
+
+    const renderFunction = column.render;
+
+    const content = row[column.field];
+
+    const cellContent = renderFunction ? renderFunction(content, column.field, row) : content;
+
+    const handleExpand = () => {
+      onChangeExpand(rowIndex, mappedItems[rowIndex].children);
+    };
+
+    const isSelected = selectedRows
+      .some((k: string) => k === mappedItems[rowIndex].key);
+
+    return (
+      <CellMeasurer
+        cache={ cacheRef.current }
+        columnIndex={ columnIndex }
+        key={ key }
+        parent={ parent }
+        rowIndex={ rowIndex }
+      >
+        <BodyCell
+          onClick={ (e: MouseEvent) => handleSelect(e, mappedItems[rowIndex].key) }
+          key={ key }
+          selected={ isSelected }
+          style={ {
+            ...style,
+            width: column.width,
+          } }
+          firstRow={ rowIndex === 0 }
+          even={ !!(rowIndex % 2) }
+          theme={ themeRef.current }
+        >
+          <BodyCellOffset
+            center={ !!column.center }
+            expandLevel={ expandLevel }
+            theme={ themeRef.current }
+          />
+
+
+          <BodyCellContent
+            theme={ themeRef.current }
+            center={ !!column.center }
+            selected={ isSelected }
+          >
+
+            { column.isExpandable && mappedItems[rowIndex].children && (
+              <ExpandButtonWrapper onClick={ handleExpand } theme={ themeRef.current }>
+                { mappedItems[rowIndex].isExpand
+                  ? <RemoveIcon />
+                  : <AddIcon /> }
+              </ExpandButtonWrapper>
+            ) }
+
+            { column.isExpandable && !mappedItems[rowIndex].children && (
+              <ShiftInsteadButton theme={ themeRef.current } />
+            ) }
+
+            <span>{ cellContent }</span>
+          </BodyCellContent>
+        </BodyCell>
+      </CellMeasurer>
+    );
+  };
+
+
+  const cellRendererLeft = ({
+    columnIndex, key, parent, rowIndex, style,
+  }: GridCellProps) => {
+    const isFirstColumn = columnIndex === 0;
+
+    const row = mappedItems[rowIndex];
+    const column = filteredColumsLeft[columnIndex];
+
+    const expandLevel = isFirstColumn ? row.expandLevel : 0;
+
+    const renderFunction = column.render;
+
+    const content = row[column.field];
+
+    const cellContent = renderFunction ? renderFunction(content, column.field, row) : content;
+
+    const handleExpand = () => {
+      onChangeExpand(rowIndex, mappedItems[rowIndex].children);
+    };
+
+    const isSelected = selectedRows
+      .some((k: string) => k === mappedItems[rowIndex].key);
+
+    return (
+      <CellMeasurer
+        cache={ cacheRef.current }
+        columnIndex={ columnIndex }
+        key={ key }
+        parent={ parent }
+        rowIndex={ rowIndex }
+      >
+        <BodyCell
+          onClick={ (e: MouseEvent) => handleSelect(e, mappedItems[rowIndex].key) }
+          key={ key }
+          selected={ isSelected }
+          style={ {
+            ...style,
+            width: column.width,
+          } }
+          firstRow={ rowIndex === 0 }
+          even={ !!(rowIndex % 2) }
+          theme={ themeRef.current }
+        >
+          <BodyCellOffset
+            center={ !!column.center }
+            expandLevel={ expandLevel }
+            theme={ themeRef.current }
+          />
+
+
+          <BodyCellContent
+            theme={ themeRef.current }
+            center={ !!column.center }
+            selected={ isSelected }
+          >
+
+            { column.isExpandable && mappedItems[rowIndex].children && (
+              <ExpandButtonWrapper onClick={ handleExpand } theme={ themeRef.current }>
+                { mappedItems[rowIndex].isExpand
+                  ? <RemoveIcon />
+                  : <AddIcon /> }
+              </ExpandButtonWrapper>
+            ) }
+
+            { column.isExpandable && !mappedItems[rowIndex].children && (
+              <ShiftInsteadButton theme={ themeRef.current } />
+            ) }
+
+            <span>{ cellContent }</span>
+          </BodyCellContent>
+        </BodyCell>
+      </CellMeasurer>
+    );
+  };
+
+
+  const cellRendererRight = ({
+    columnIndex, key, parent, rowIndex, style,
+  }: GridCellProps) => {
+    const isFirstColumn = columnIndex === 0;
+
+    const row = mappedItems[rowIndex];
+    const column = filteredColumsRight[columnIndex];
+
+    const expandLevel = isFirstColumn ? row.expandLevel : 0;
+
+    const renderFunction = column.render;
+
+    const content = row[column.field];
+
+    const cellContent = renderFunction ? renderFunction(content, column.field, row) : content;
+
+    const handleExpand = () => {
+      onChangeExpand(rowIndex, mappedItems[rowIndex].children);
+    };
+
+    const isSelected = selectedRows
+      .some((k: string) => k === mappedItems[rowIndex].key);
+
+    return (
+      <CellMeasurer
+        cache={ cacheRef.current }
+        columnIndex={ columnIndex }
+        key={ key }
+        parent={ parent }
+        rowIndex={ rowIndex }
+      >
+        <BodyCell
+          onClick={ (e: MouseEvent) => handleSelect(e, mappedItems[rowIndex].key) }
+          key={ key }
+          selected={ isSelected }
+          style={ {
+            ...style,
+            width: column.width,
+          } }
+          firstRow={ rowIndex === 0 }
+          even={ !!(rowIndex % 2) }
+          theme={ themeRef.current }
+        >
+          <BodyCellOffset
+            center={ !!column.center }
+            expandLevel={ expandLevel }
+            theme={ themeRef.current }
+          />
+
+
+          <BodyCellContent
+            theme={ themeRef.current }
+            center={ !!column.center }
+            selected={ isSelected }
+          >
+
+            { column.isExpandable && mappedItems[rowIndex].children && (
+              <ExpandButtonWrapper onClick={ handleExpand } theme={ themeRef.current }>
+                { mappedItems[rowIndex].isExpand
+                  ? <RemoveIcon />
+                  : <AddIcon /> }
+              </ExpandButtonWrapper>
+            ) }
+
+            { column.isExpandable && !mappedItems[rowIndex].children && (
+              <ShiftInsteadButton theme={ themeRef.current } />
+            ) }
+
+            <span>{ cellContent }</span>
+          </BodyCellContent>
+        </BodyCell>
+      </CellMeasurer>
+    );
+  };
+
+  
   if (isMultiGrid) {
     const styles: CSSProperties = {
       display: 'flex',
@@ -209,6 +479,26 @@ const GridHOC = ({
 
       wrapperSize,
       notFixedColumns,
+
+      setMappedColumns,
+      cellRenderer,
+      mappedColumns,
+      filteredColums,
+
+
+      leftMappedColumns,
+      setLeftMappedColumns,
+      rightMappedColumns,
+      setRightMappedColumns,
+
+      filteredColumsLeft,
+      filteredColumsRight,
+
+
+      cellRendererLeft,
+      cellRendererRight,
+
+
     };
 
     if (shouldFitContainer) {
@@ -227,6 +517,8 @@ const GridHOC = ({
                 { ...multyGridProps }
                 onScroll={ onScroll }
                 scrollTop={ scrollTop }
+                cacheRef={cacheRef}
+                
               />
             </div>
           ) }
@@ -247,6 +539,7 @@ const GridHOC = ({
               { ...multyGridProps }
               onScroll={ onScroll }
               scrollTop={ scrollTop }
+              cacheRef={cacheRef}
             />
           </div>
         ) }
@@ -265,6 +558,11 @@ const GridHOC = ({
           selectedRows={ selectedRows }
           width={ wrapperSize.width }
           height={ wrapperSize.height }
+          cacheRef={cacheRef}
+          setMappedColumns={setMappedColumns}
+          mappedColumns={mappedColumns}
+          filteredColums={filteredColums}
+          cellRenderer={cellRenderer}
           { ...rest }
         />
       </div>
@@ -281,7 +579,12 @@ const GridHOC = ({
       { ...rest }
       /* eslint-disable @typescript-eslint/no-non-null-assertion  */
       width={ rest.width! }
+      cacheRef={cacheRef}
       height={ rest.height! }
+      setMappedColumns={setMappedColumns}
+      mappedColumns={mappedColumns}
+      filteredColums={filteredColums}
+      cellRenderer={cellRenderer}
       /* eslint-enable @typescript-eslint/no-non-null-assertion  */
     />
   );

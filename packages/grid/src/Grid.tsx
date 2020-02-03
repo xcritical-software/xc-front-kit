@@ -54,11 +54,16 @@ const Grid = ({
   onChangeExpand,
   handleSelect,
   selectedRows,
-}: IGrid) => {
+  cacheRef,
+  setMappedColumns,
+  mappedColumns,
+  filteredColums,
+  cellRenderer
+}: any) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme || contextTheme));
 
-  const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
+  // const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
   const fullWidthRef = useRef(
     mappedColumns.filter(({ visible }: IColumn) => visible).reduce(
       (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
@@ -67,17 +72,16 @@ const Grid = ({
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [changingColumns, setChangingColumns] = useState<string>('');
   const gridRef = useRef<VirtualisedGrid>();
-  const cacheRef = useRef(
-    new CellMeasurerCache({
-      fixedWidth: true,
-      defaultHeight: 100,
-    }),
-  );
+  // const cacheRef = useRef(
+  //   new CellMeasurerCache({
+  //     fixedWidth: true,
+  //     defaultHeight: 100,
+  //   }),
+  // );
 
-  const filteredColums = useMemo(() => (
-    mappedColumns.filter(({ visible }) => visible)
-  ), [mappedColumns]);
-
+  // const filteredColums = useMemo(() => (
+  //   mappedColumns.filter(({ visible }) => visible)
+  // ), [mappedColumns]);
   useEffect(() => {
     const newFullWidth = columns.filter(({ visible }: IColumn) => visible).reduce(
       (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
@@ -104,80 +108,80 @@ const Grid = ({
     }
   };
 
-  const cellRenderer = ({
-    columnIndex, key, parent, rowIndex, style,
-  }: GridCellProps) => {
-    const isFirstColumn = columnIndex === 0;
+  // const cellRenderer = ({
+  //   columnIndex, key, parent, rowIndex, style,
+  // }: GridCellProps) => {
+  //   const isFirstColumn = columnIndex === 0;
 
-    const row = mappedItems[rowIndex];
-    const column = filteredColums[columnIndex];
+  //   const row = mappedItems[rowIndex];
+  //   const column = filteredColums[columnIndex];
 
-    const expandLevel = isFirstColumn ? row.expandLevel : 0;
+  //   const expandLevel = isFirstColumn ? row.expandLevel : 0;
 
-    const renderFunction = column.render;
+  //   const renderFunction = column.render;
 
-    const content = row[column.field];
+  //   const content = row[column.field];
 
-    const cellContent = renderFunction ? renderFunction(content, column.field, row) : content;
+  //   const cellContent = renderFunction ? renderFunction(content, column.field, row) : content;
 
-    const handleExpand = () => {
-      onChangeExpand(rowIndex, mappedItems[rowIndex].children);
-    };
+  //   const handleExpand = () => {
+  //     onChangeExpand(rowIndex, mappedItems[rowIndex].children);
+  //   };
 
-    const isSelected = selectedRows
-      .some((k: string) => k === mappedItems[rowIndex].key);
+  //   const isSelected = selectedRows
+  //     .some((k: string) => k === mappedItems[rowIndex].key);
 
-    return (
-      <CellMeasurer
-        cache={ cacheRef.current }
-        columnIndex={ columnIndex }
-        key={ key }
-        parent={ parent }
-        rowIndex={ rowIndex }
-      >
-        <BodyCell
-          onClick={ (e: MouseEvent) => handleSelect(e, mappedItems[rowIndex].key) }
-          key={ key }
-          selected={ isSelected }
-          style={ {
-            ...style,
-            width: column.width,
-          } }
-          firstRow={ rowIndex === 0 }
-          even={ !!(rowIndex % 2) }
-          theme={ themeRef.current }
-        >
-          <BodyCellOffset
-            center={ !!column.center }
-            expandLevel={ expandLevel }
-            theme={ themeRef.current }
-          />
+  //   return (
+  //     <CellMeasurer
+  //       cache={ cacheRef.current }
+  //       columnIndex={ columnIndex }
+  //       key={ key }
+  //       parent={ parent }
+  //       rowIndex={ rowIndex }
+  //     >
+  //       <BodyCell
+  //         onClick={ (e: MouseEvent) => handleSelect(e, mappedItems[rowIndex].key) }
+  //         key={ key }
+  //         selected={ isSelected }
+  //         style={ {
+  //           ...style,
+  //           width: column.width,
+  //         } }
+  //         firstRow={ rowIndex === 0 }
+  //         even={ !!(rowIndex % 2) }
+  //         theme={ themeRef.current }
+  //       >
+  //         <BodyCellOffset
+  //           center={ !!column.center }
+  //           expandLevel={ expandLevel }
+  //           theme={ themeRef.current }
+  //         />
 
 
-          <BodyCellContent
-            theme={ themeRef.current }
-            center={ !!column.center }
-            selected={ isSelected }
-          >
+  //         <BodyCellContent
+  //           theme={ themeRef.current }
+  //           center={ !!column.center }
+  //           selected={ isSelected }
+  //         >
 
-            { column.isExpandable && mappedItems[rowIndex].children && (
-              <ExpandButtonWrapper onClick={ handleExpand } theme={ themeRef.current }>
-                { mappedItems[rowIndex].isExpand
-                  ? <RemoveIcon />
-                  : <AddIcon /> }
-              </ExpandButtonWrapper>
-            ) }
+  //           { column.isExpandable && mappedItems[rowIndex].children && (
+  //             <ExpandButtonWrapper onClick={ handleExpand } theme={ themeRef.current }>
+  //               { mappedItems[rowIndex].isExpand
+  //                 ? <RemoveIcon />
+  //                 : <AddIcon /> }
+  //             </ExpandButtonWrapper>
+  //           ) }
 
-            { column.isExpandable && !mappedItems[rowIndex].children && (
-              <ShiftInsteadButton theme={ themeRef.current } />
-            ) }
+  //           { column.isExpandable && !mappedItems[rowIndex].children && (
+  //             <ShiftInsteadButton theme={ themeRef.current } />
+  //           ) }
 
-            <span>{ cellContent }</span>
-          </BodyCellContent>
-        </BodyCell>
-      </CellMeasurer>
-    );
-  };
+  //           <span>{ cellContent }</span>
+  //         </BodyCellContent>
+  //       </BodyCell>
+  //     </CellMeasurer>
+  //   );
+  // };
 
   const handleChangeWidth = useCallback(
     (index, newWidth) => {

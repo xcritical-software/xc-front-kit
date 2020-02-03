@@ -29,6 +29,26 @@ export const MultyGrid = ({
 
   scrollTop,
   onScroll,
+  cacheRef,
+
+  setMappedColumns,
+  mappedColumns,
+  filteredColums,
+  cellRenderer,
+
+
+  leftMappedColumns,
+  setLeftMappedColumns,
+  rightMappedColumns,
+  setRightMappedColumns,
+
+
+  filteredColumsLeft,
+filteredColumsRight,
+
+cellRendererLeft,
+cellRendererRight
+
 }: any) => (
   <>
     { leftFixedColumns.length && (
@@ -53,6 +73,11 @@ export const MultyGrid = ({
 
         scrollTop={ scrollTop }
         onScrollsyncScroll={ onScroll }
+        cacheRef={cacheRef}
+        setMappedColumns={setLeftMappedColumns}
+        mappedColumns={leftMappedColumns}
+        filteredColums={filteredColumsLeft}
+        cellRenderer={cellRendererLeft}
       />
     ) }
     {
@@ -77,6 +102,11 @@ export const MultyGrid = ({
 
           onScrollsyncScroll={ onScroll }
           scrollTop={ scrollTop }
+          cacheRef={cacheRef}
+          setMappedColumns={setMappedColumns}
+          mappedColumns={mappedColumns}
+          filteredColums={filteredColums}
+          cellRenderer={cellRenderer}
         />
       )
     }
@@ -101,6 +131,11 @@ export const MultyGrid = ({
 
         onScrollsyncScroll={ onScroll }
         scrollTop={ scrollTop }
+        cacheRef={cacheRef}
+        mappedColumns={rightMappedColumns}
+        setMappedColumns={setRightMappedColumns}
+        filteredColums={filteredColumsRight}
+        cellRenderer={cellRendererRight}
       />
     ) }
   </>
