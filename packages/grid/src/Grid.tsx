@@ -58,7 +58,7 @@ const Grid = ({
   setMappedColumns,
   mappedColumns,
   filteredColums,
-  cellRenderer,
+  cellRenderer
 }: any) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme || contextTheme));
