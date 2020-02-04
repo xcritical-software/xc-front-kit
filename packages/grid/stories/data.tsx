@@ -470,6 +470,7 @@ export const columnsFixed = items
       field: el,
       width: getWidth(i),
       visible: true,
+      center: i !== 2,
       isExpandable: i === 2,
     };
 

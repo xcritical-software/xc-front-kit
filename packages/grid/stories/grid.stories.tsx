@@ -77,30 +77,30 @@ const generateTheme = (color: string) => {
 };
 
 const AMStheme = {
-  // [gridThemeNamespace]: {
-  //   evenRowBackground: colors.GRAY_LIGHT,
-  //   selectedRowBackgroundColor: colors.BLACK_RAISIN,
-  //   offsetExpand: 20,
-  //   border: 'none',
-  //   borderRadius: 0,
-  //   headerCellBorder: `1px solid ${colors.GRAY}`,
-  //   totalsCellBorder: 'none',
-  //   rowCellBorder: 'none',
-  //   header: {
-  //     border: 'none',
-  //     fontSize: '14px',
-  //     color: 'black',
-  //     backgroundColor: 'white',
-  //     height: 35,
-  //     padding: '20px',
-  //   },
-  //   row: {
-  //     border: `1px solid ${colors.GRAY}`,
-  //     padding: '5px 10px',
-  //     fontSize: '13px',
-  //     height: '50px',
-  //   },
-  // },
+  [gridThemeNamespace]: {
+    evenRowBackground: colors.GRAY_LIGHT,
+    selectedRowBackgroundColor: colors.BLACK_RAISIN,
+    offsetExpand: 20,
+    border: 'none',
+    borderRadius: 0,
+    headerCellBorder: `1px solid ${colors.GRAY}`,
+    totalsCellBorder: 'none',
+    rowCellBorder: 'none',
+    header: {
+      border: 'none',
+      fontSize: '14px',
+      color: 'black',
+      backgroundColor: 'white',
+      height: 35,
+      padding: '20px',
+    },
+    row: {
+      border: `1px solid ${colors.GRAY}`,
+      padding: '5px 10px',
+      fontSize: '13px',
+      height: '50px',
+    },
+  },
 };
 
 storiesOf('New Grid', module)
