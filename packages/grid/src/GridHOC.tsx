@@ -4,7 +4,7 @@ import React, {
 import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
 
-import { ScrollSync } from 'react-virtualized';
+import { ScrollSync, CellMeasurerCache } from 'react-virtualized';
 import { CSSProperties } from 'styled-components';
 import Grid from './Grid';
 import {
@@ -26,6 +26,13 @@ const GridHOC = ({
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
     items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
+  );
+
+  const cacheRef = useRef(
+    new CellMeasurerCache({
+      fixedWidth: true,
+      defaultHeight: 100,
+    }),
   );
 
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
@@ -209,6 +216,7 @@ const GridHOC = ({
 
       wrapperSize,
       notFixedColumns,
+      cacheRef
     };
 
     if (shouldFitContainer) {
@@ -264,6 +272,7 @@ const GridHOC = ({
           mappedItems={ mappedItems }
           selectedRows={ selectedRows }
           width={ wrapperSize.width }
+          cacheRef={cacheRef}
           height={ wrapperSize.height }
           { ...rest }
         />
@@ -278,6 +287,7 @@ const GridHOC = ({
       selectedRows={ selectedRows }
       onChangeExpand={ onChangeExpand }
       mappedItems={ mappedItems }
+      cacheRef={cacheRef}
       { ...rest }
       /* eslint-disable @typescript-eslint/no-non-null-assertion  */
       width={ rest.width! }

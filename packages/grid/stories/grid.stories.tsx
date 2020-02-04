@@ -293,7 +293,7 @@ storiesOf('New Grid', module)
       items={ rowsFixed }
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
-      theme={ AMStheme }
+      // theme={ AMStheme }
     />
   ))
   .add('Fixed columns + Dinamic size', () => {
@@ -317,7 +317,7 @@ storiesOf('New Grid', module)
                 columns={ columnsFixed }
                 items={ rowsFixed.slice(0, 15) }
                 totals={ totalsFixed }
-                theme={ AMStheme }
+                // theme={ AMStheme }
                 shouldFitContainer
               />
             </GridWrapper>

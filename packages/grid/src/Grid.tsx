@@ -11,7 +11,6 @@ import { ThemeContext } from 'styled-components';
 import {
   Grid as VirtualisedGrid,
   CellMeasurer,
-  CellMeasurerCache,
   ScrollPosition,
   GridCellProps,
 } from 'react-virtualized';
@@ -54,6 +53,7 @@ const Grid = ({
   onChangeExpand,
   handleSelect,
   selectedRows,
+  cacheRef
 }: IGrid) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme || contextTheme));
@@ -67,12 +67,6 @@ const Grid = ({
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [changingColumns, setChangingColumns] = useState<string>('');
   const gridRef = useRef<VirtualisedGrid>();
-  const cacheRef = useRef(
-    new CellMeasurerCache({
-      fixedWidth: true,
-      defaultHeight: 100,
-    }),
-  );
 
   const filteredColums = useMemo(() => (
     mappedColumns.filter(({ visible }) => visible)

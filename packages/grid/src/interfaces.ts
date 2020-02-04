@@ -54,6 +54,7 @@ export interface IGrid {
   onChangeExpand: Function;
   handleSelect: Function;
   selectedRows: string[];
+  cacheRef: any;
 }
 
 export interface IMappedItem extends IItem {

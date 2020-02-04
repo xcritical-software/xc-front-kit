@@ -29,6 +29,7 @@ export const MultyGrid = ({
 
   scrollTop,
   onScroll,
+  cacheRef
 }: any) => (
   <>
     { leftFixedColumns.length && (
@@ -53,6 +54,7 @@ export const MultyGrid = ({
 
         scrollTop={ scrollTop }
         onScrollsyncScroll={ onScroll }
+        cacheRef={cacheRef}
       />
     ) }
     {
@@ -77,6 +79,7 @@ export const MultyGrid = ({
 
           onScrollsyncScroll={ onScroll }
           scrollTop={ scrollTop }
+          cacheRef={cacheRef}
         />
       )
     }
@@ -101,6 +104,7 @@ export const MultyGrid = ({
 
         onScrollsyncScroll={ onScroll }
         scrollTop={ scrollTop }
+        cacheRef={cacheRef}
       />
     ) }
   </>
