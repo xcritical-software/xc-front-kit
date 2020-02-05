@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { FC, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Provider, connect } from 'react-redux';
 import { storiesOf } from '@storybook/react';
