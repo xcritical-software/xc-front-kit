@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Blanket from '@xcritical/blanket';
 
 import {
@@ -8,6 +8,8 @@ import {
   ModalBody,
   ModalIconClose,
 } from './styled';
+
+import { ZIndexContext } from './ModalProvider';
 
 import { IModalProps } from './interfaces';
 import { getModalBlanketTheme } from './utils';
@@ -21,8 +23,10 @@ export const Modal: React.FC<IModalProps> = ({
   iconClose,
   theme,
   onModalCancel,
-  maxZIndex,
+  maxZIndex: maxZIndexProp,
 }) => {
+  const maxZIndex = useContext(ZIndexContext);
+
   if (!isOpen) {
     return null;
   }
@@ -33,7 +37,7 @@ export const Modal: React.FC<IModalProps> = ({
     <>
       <Blanket
         isTinted
-        maxZIndex={ maxZIndex }
+        maxZIndex={ maxZIndex || maxZIndexProp }
         theme={ modalBlanketTheme }
         onBlanketClicked={ onModalCancel }
       />

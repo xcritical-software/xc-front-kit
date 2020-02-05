@@ -29,6 +29,7 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
     editView: EditView,
     readViewFitContainerWidth,
     isEditing,
+    disabled,
     onEditRequested,
     onCancel,
     onConfirm,
@@ -55,8 +56,10 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
       event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>,
     ): void => {
       event.preventDefault();
-      onEditRequested();
-    }, [onEditRequested]);
+      if (!disabled) {
+        onEditRequested();
+      }
+    }, [disabled, onEditRequested]);
 
     const handleConfirmClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
       e.preventDefault();
@@ -81,6 +84,7 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
           baseAppearance={ baseAppearance }
           onClick={ handleReadViewClick }
           readViewFitContainerWidth={ readViewFitContainerWidth }
+          disabled={ disabled }
         >
           <ReadView value={ value } />
         </ReadViewContentWrapper>
@@ -93,6 +97,7 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
       onEditRequested,
       readViewFitContainerWidth,
       value,
+      disabled,
     ]);
 
     const renderActionButtons = useCallback((): ReactNode => (

@@ -1,13 +1,18 @@
 import React, { FC, useEffect, useState } from 'react';
 
 
+export interface IZIndexManager {
+  ZIndexContext: React.Context<number>;
+  Provider: FC;
+}
+
 export const getMaxZIndex = (): number | undefined => Array.from(document.querySelectorAll('body *'))
   .map((a: Element) => parseFloat(window.getComputedStyle(a).zIndex))
   .filter((a: number) => !Number.isNaN(a))
   .sort((a, b) => a - b)
   .pop();
 
-export const ZIndexManager = (): { Provider: FC; Consumer: FC } => {
+export const ZIndexManager = (): IZIndexManager => {
   const ZIndexContext = React.createContext(1);
 
   const Provider: FC = ({
@@ -28,18 +33,7 @@ export const ZIndexManager = (): { Provider: FC; Consumer: FC } => {
     );
   };
 
-  const Consumer: FC = ({
-    children,
-  }) => (
-    <ZIndexContext.Consumer>
-      {
-        (value: number) => React.Children.map(children,
-          (child: any) => React.cloneElement(child, { maxZIndex: value }))
-      }
-    </ZIndexContext.Consumer>
-  );
-
   return {
-    Provider, Consumer,
+    ZIndexContext, Provider,
   };
 };

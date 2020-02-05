@@ -1,9 +1,9 @@
 import { ZIndexManager } from '@xcritical/utils';
 
 
-const { Provider: ModalProvider, Consumer: ModalConsumer } = ZIndexManager();
+const { Provider: ModalProvider, ZIndexContext } = ZIndexManager();
 
 export {
   ModalProvider,
-  ModalConsumer,
+  ZIndexContext,
 };
