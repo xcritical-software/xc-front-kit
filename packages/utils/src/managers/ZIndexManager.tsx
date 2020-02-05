@@ -7,8 +7,8 @@ export interface IZIndexManager {
 }
 
 export const getMaxZIndex = (): number | undefined => Array.from(document.querySelectorAll('body *'))
-  .map((a: Element) => parseFloat(window.getComputedStyle(a).zIndex))
-  .filter((a: number) => !Number.isNaN(a))
+  .map((node: Element) => parseFloat(window.getComputedStyle(node).zIndex))
+  .filter((zIndex: number) => !Number.isNaN(zIndex))
   .sort((a, b) => a - b)
   .pop();
 
@@ -18,16 +18,16 @@ export const ZIndexManager = (): IZIndexManager => {
   const Provider: FC = ({
     children,
   }) => {
-    const [value, setValue] = useState<number | null>(null);
+    const [zIndex, setZIndex] = useState<number | null>(null);
 
     useEffect(() => {
-      if (!value) {
-        setValue(getMaxZIndex() || 1);
+      if (!zIndex) {
+        setZIndex(getMaxZIndex() || 1);
       }
-    }, [value]);
+    }, [zIndex]);
 
     return (
-      <ZIndexContext.Provider value={ value || 1 }>
+      <ZIndexContext.Provider value={ zIndex || 1 }>
         { children }
       </ZIndexContext.Provider>
     );

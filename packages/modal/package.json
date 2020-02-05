@@ -38,6 +38,6 @@
 		"@xcritical/blanket": "1.0.0",
 		"@xcritical/theme": "^1.0.0",
 		"@xcritical/utils": "^0.1.0",
-		"micro-memoize": "4.0.8"
+		"micro-memoize": "^4.0.8"
 	}
 }
