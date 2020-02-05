@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { FC, useState, useCallback } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Provider, connect } from 'react-redux';
 import { storiesOf } from '@storybook/react';
@@ -7,7 +7,9 @@ import CloseCircleOutlineIcon from 'mdi-react/CloseCircleOutlineIcon';
 import { colors } from '@xcritical/theme';
 
 import {
+  Modal,
   ConnectedModal,
+  ModalProvider,
   modalThemeNamespace,
   xcriticalModalOpen,
   getModalByName,
@@ -84,6 +86,39 @@ const mapStateToProps = (state) => {
 
 const ConnectedModalWithPayload = connect(mapStateToProps)(ModalWithPayload);
 
+const Modals = (): React.ReactElement => {
+  const [isFirstOpen, setIsFirstOpen] = useState(false);
+  const [isSecondOpen, setIsSecondOpen] = useState(false);
+
+  const handleFirstOpen = useCallback(() => {
+    setIsFirstOpen(true);
+  }, []);
+
+  const handleSecondOpen = useCallback(() => {
+    setIsSecondOpen(true);
+  }, []);
+
+  const handleFirstClose = useCallback(() => {
+    setIsFirstOpen(false);
+  }, []);
+
+  const handleSecondClose = useCallback(() => {
+    setIsSecondOpen(false);
+  }, []);
+
+  return (
+    <>
+      <button type="button" onClick={ handleFirstOpen }>Open first</button>
+      <Modal isOpen={ isFirstOpen } title="First Modal" name="first" onModalCancel={ handleFirstClose }>
+        <button type="button" onClick={ handleSecondOpen }>Open second</button>
+      </Modal>
+      <Modal isOpen={ isSecondOpen } title="Second Modal" name="second" onModalCancel={ handleSecondClose }>
+        Second
+      </Modal>
+    </>
+  );
+};
+
 storiesOf('ConnectedModal', module)
   .add('Default', () => (
     <Provider store={ store }>
@@ -137,4 +172,11 @@ storiesOf('ConnectedModal', module)
         </ConnectedModal>
       </ThemeProvider>
     </Provider>
+  ))
+  .add('Two Modals', () => (
+    <ThemeProvider theme={ emptyTheme }>
+      <ModalProvider>
+        <Modals />
+      </ModalProvider>
+    </ThemeProvider>
   ));
