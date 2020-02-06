@@ -120,7 +120,11 @@ const Grid = ({
 
     const isSelected = selectedRows
       .some((k: string) => k === mappedItems[rowIndex].key);
-
+    if (content.includes('siz')) {
+      style.height = '50px'
+      style.top = rowIndex * 50
+      console.log(rowIndex, style, content)
+    }
     return (
       <CellMeasurer
         cache={ cacheRef.current }

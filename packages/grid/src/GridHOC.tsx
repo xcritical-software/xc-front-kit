@@ -35,6 +35,11 @@ const GridHOC = ({
     }),
   );
 
+  // useEffect(() => {
+  //   cacheRef.current.clearAll()
+  //   console.log('!!!', cacheRef.current);
+  // }, [])
+
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
   const createObserver = (): ResizeObserver | undefined => {

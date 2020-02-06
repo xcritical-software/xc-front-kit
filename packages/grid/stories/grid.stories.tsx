@@ -287,9 +287,18 @@ storiesOf('New Grid', module)
       height={ document.documentElement.clientHeight - 100 }
     />
   ))
-  .add('Fixed columns', () => (
+  .add('fixed columns (left+right)', () => (
     <Grid
-      columns={ columnsFixed }
+      columns={ columnsFixed('both') }
+      items={ rowsFixed }
+      width={ document.documentElement.clientWidth - 100 }
+      height={ document.documentElement.clientHeight - 100 }
+      // theme={ AMStheme }
+    />
+  ))
+  .add('fixed columns (left)', () => (
+    <Grid
+      columns={ columnsFixed('left') }
       items={ rowsFixed }
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
@@ -314,7 +323,7 @@ storiesOf('New Grid', module)
             </div>
             <GridWrapper>
               <Grid
-                columns={ columnsFixed }
+                columns={ columnsFixed('both') }
                 items={ rowsFixed.slice(0, 15) }
                 totals={ totalsFixed }
                 // theme={ AMStheme }

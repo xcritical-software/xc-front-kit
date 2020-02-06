@@ -463,7 +463,7 @@ const getWidth = (i) => {
   return 200;
 };
 
-export const columnsFixed = items
+export const columnsFixed = (fixeds) => items
   .map((el, i) => {
     const column: IColumn = {
       headerName: el,
@@ -474,8 +474,8 @@ export const columnsFixed = items
       isExpandable: i === 2,
     };
 
-    if (i === 2 || i === 4) column.fixedPosition = 'left';
-    if (i === 5 || i === 1) column.fixedPosition = 'right';
+    if ((fixeds ==='both' || fixeds === 'left') && i === 2) column.fixedPosition = 'left';
+    if ((fixeds ==='both' || fixeds === 'right') && i === 5) column.fixedPosition = 'right';
 
     return column;
   });
@@ -485,7 +485,7 @@ export const totalsFixed = items
 
 export const rowsFixed = new Array(100).fill(true)
   .map((_el, i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {
-    children: Math.random() > 0.8
+    children: i === 3 || i === 10 || i === 40
       ? new Array(5).fill(true)
         .map((_$el, $i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${$i}` }), {}))
       : null,
