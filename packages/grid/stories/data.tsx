@@ -474,8 +474,8 @@ export const columnsFixed = (fixeds) => items
       isExpandable: i === 2,
     };
 
-    if ((fixeds ==='both' || fixeds === 'left') && i === 2) column.fixedPosition = 'left';
-    if ((fixeds ==='both' || fixeds === 'right') && i === 5) column.fixedPosition = 'right';
+    if ((fixeds === 'both' || fixeds === 'left') && i === 2) column.fixedPosition = 'left';
+    if ((fixeds === 'both' || fixeds === 'right') && i === 5) column.fixedPosition = 'right';
 
     return column;
   });

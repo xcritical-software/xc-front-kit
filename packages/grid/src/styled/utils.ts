@@ -129,7 +129,7 @@ export const getBodyCellContentStyles = ({
           display: block;
           text-overflow: ellipsis;
           ` : null
-      }
+}
     }
     `;
 

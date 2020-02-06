@@ -221,7 +221,7 @@ const GridHOC = ({
 
       wrapperSize,
       notFixedColumns,
-      cacheRef
+      cacheRef,
     };
 
     if (shouldFitContainer) {
@@ -277,7 +277,7 @@ const GridHOC = ({
           mappedItems={ mappedItems }
           selectedRows={ selectedRows }
           width={ wrapperSize.width }
-          cacheRef={cacheRef}
+          cacheRef={ cacheRef }
           height={ wrapperSize.height }
           { ...rest }
         />
@@ -292,7 +292,7 @@ const GridHOC = ({
       selectedRows={ selectedRows }
       onChangeExpand={ onChangeExpand }
       mappedItems={ mappedItems }
-      cacheRef={cacheRef}
+      cacheRef={ cacheRef }
       { ...rest }
       /* eslint-disable @typescript-eslint/no-non-null-assertion  */
       width={ rest.width! }

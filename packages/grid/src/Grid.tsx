@@ -53,7 +53,7 @@ const Grid = ({
   onChangeExpand,
   handleSelect,
   selectedRows,
-  cacheRef
+  cacheRef,
 }: IGrid) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme || contextTheme));
@@ -91,12 +91,13 @@ const Grid = ({
     setMappedColumns(columns);
   }, [columns, contextTheme, theme, width]);
 
-  const handleScroll = (e: ScrollPosition) => {
+  const handleScroll = useCallback((e: ScrollPosition) => {
+    if (gridRef.current) gridRef.current.recomputeGridSize();
     setScrollLeft(-e.scrollLeft);
     if (onScrollsyncScroll) {
       onScrollsyncScroll(e);
     }
-  };
+  }, [setScrollLeft, onScrollsyncScroll]);
 
   const cellRenderer = ({
     columnIndex, key, parent, rowIndex, style,
@@ -117,14 +118,9 @@ const Grid = ({
     const handleExpand = () => {
       onChangeExpand(rowIndex, mappedItems[rowIndex].children);
     };
-
     const isSelected = selectedRows
       .some((k: string) => k === mappedItems[rowIndex].key);
-    if (content.includes('siz')) {
-      style.height = '50px'
-      style.top = rowIndex * 50
-      console.log(rowIndex, style, content)
-    }
+
     return (
       <CellMeasurer
         cache={ cacheRef.current }
@@ -216,7 +212,8 @@ const Grid = ({
 
   useEffect(() => {
     if (gridRef.current) gridRef.current.recomputeGridSize();
-    if (cacheRef.current) cacheRef.current.clearAll();
+    // if (gridRef.current) gridRef.current.measureAllCells();
+    // if (cacheRef.current) cacheRef.current.clearAll();
   }, [mappedColumns, mappedItems]);
 
   const {
