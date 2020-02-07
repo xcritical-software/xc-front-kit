@@ -25,22 +25,6 @@ export const checkboxAppearanceTheme = (
   return func(theme, appearanceName, propertyPath, baseAppearance);
 };
 
-export const getCheckboxStatesStyle = (stateName: string) => ({
-  theme,
-  baseAppearance = 'default',
-  appearance = 'default',
-}: ICheckboxProps): FlattenInterpolation<any> => {
-  const styles = checkboxAppearanceTheme(theme, appearance, baseAppearance, stateName);
-
-  return css`
-    ${styles}
-
-    &:focus {
-      color: inherit;
-    }
-  `;
-};
-
 export const getCheckboxInteractiveStyles = ({
   theme,
   appearance = 'default',
@@ -56,18 +40,19 @@ export const getCheckboxInteractiveStyles = ({
   if (disabled) {
     return css`
       cursor: not-allowed;
-      ${getCheckboxStatesStyle('disabled')}
+      opacity: 0.5;
+      ${checkboxAppearanceTheme(theme, appearance, baseAppearance, 'disabled')}
       ${standardFocus};
     `;
   }
 
   return css`
     &:hover {
-      ${getCheckboxStatesStyle('hover')};
+      ${checkboxAppearanceTheme(theme, appearance, baseAppearance, 'hover')};
     }
 
     &:active {
-      ${getCheckboxStatesStyle('active')};
+      ${checkboxAppearanceTheme(theme, appearance, baseAppearance, 'active')};
     }
 
     ${standardFocus};

@@ -12,7 +12,9 @@ import {
 
 
 export const PureCheckbox: React.FC<ICheckboxProps> = ({
-  theme,
+  appearance = 'default',
+  baseAppearance = 'default',
+  type = 'checkbox',
   checked = false,
   disabled = false,
   label,
@@ -24,23 +26,39 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
   }, [onChange]);
 
   return (
-    <CheckboxLabel theme={ theme }>
+    <CheckboxLabel
+      appearance={ appearance }
+      baseAppearance={ baseAppearance }
+      disabled={ disabled }
+    >
       <HiddenCheckbox
-        type="checkbox"
+        type={ type }
         checked={ checked }
         disabled={ disabled }
         onChange={ handleInputChange }
       />
-      <CheckboxWrapper theme={ theme }>
+      <CheckboxWrapper
+        appearance={ appearance }
+        baseAppearance={ baseAppearance }
+        type={ type }
+      >
         {
           checkIcon ? (
-            <StyledCheckbox>
+            <StyledCheckbox
+              appearance={ appearance }
+              baseAppearance={ baseAppearance }
+            >
               {
                 checked && checkIcon
               }
             </StyledCheckbox>
           ) : (
-            <DefaultCheckbox theme={ theme } checked={ checked } />
+            <DefaultCheckbox
+              appearance={ appearance }
+              baseAppearance={ baseAppearance }
+              checked={ checked }
+              type={ type }
+            />
           )
         }
       </CheckboxWrapper>

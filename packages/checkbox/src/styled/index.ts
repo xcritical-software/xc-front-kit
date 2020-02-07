@@ -1,29 +1,60 @@
 import styled from 'styled-components';
 
-import { checkboxTheme } from '../utils';
+import { checkboxAppearanceTheme, getCheckboxInteractiveStyles } from '../utils';
 
-import { ICheckboxProps } from '../interfaces';
+import { IStyledCheckboxProps } from '../interfaces';
 
 
-export const CheckboxLabel = styled.label<ICheckboxProps>`
-  ${({ theme }) => checkboxTheme(theme, 'checkboxLabel')}
+export const CheckboxLabel = styled.label<IStyledCheckboxProps>`
+  ${({ theme, appearance, baseAppearance }) => checkboxAppearanceTheme(theme, appearance, baseAppearance, 'checkboxLabel')}
+  ${({
+    disabled,
+    theme,
+    appearance,
+    baseAppearance,
+  }) => getCheckboxInteractiveStyles({
+    disabled, theme, appearance, baseAppearance,
+  })};
 `;
 
-export const CheckboxWrapper = styled.div<ICheckboxProps>`
-  ${({ theme }) => checkboxTheme(theme, 'checkboxWrapper')}
+export const CheckboxWrapper = styled.div<IStyledCheckboxProps>`
+  ${({ theme, appearance, baseAppearance }) => checkboxAppearanceTheme(theme, appearance, baseAppearance, 'checkboxWrapper')}
+  border-radius: ${({
+    theme,
+    appearance,
+    baseAppearance,
+    type,
+  }) => (type === 'radio'
+    ? '50%' : checkboxAppearanceTheme(theme, appearance, baseAppearance, ['checkboxWrapper', 'borderRadius']))};
 `;
 
-export const DefaultCheckbox = styled.div<ICheckboxProps>`
-  ${({ theme }) => checkboxTheme(theme, 'checkbox')}
-  background-color: ${({ theme, checked }) => (checked
-    ? checkboxTheme(theme, ['checkbox', 'backgroundColor']) : 'transparent')};
+export const DefaultCheckbox = styled.div<IStyledCheckboxProps>`
+  ${({ theme, appearance, baseAppearance }) => checkboxAppearanceTheme(theme, appearance, baseAppearance, 'checkbox')}
+  background-color: ${({
+    theme,
+    appearance,
+    baseAppearance,
+    checked,
+  }) => (checked
+    ? checkboxAppearanceTheme(theme, appearance, baseAppearance, ['checkbox', 'backgroundColor']) : 'transparent')};
+  border-radius: ${({
+    theme,
+    appearance,
+    baseAppearance,
+    type,
+  }) => (type === 'radio'
+    ? '50%' : checkboxAppearanceTheme(theme, appearance, baseAppearance, ['checkbox', 'borderRadius']))};
 `;
 
-export const Checkbox = styled.div<ICheckboxProps>`
-  width: ${({ theme }) => checkboxTheme(theme, ['checkbox', 'width'])};
-  height: ${({ theme }) => checkboxTheme(theme, ['checkbox', 'height'])};
+export const Checkbox = styled.div<IStyledCheckboxProps>`
+  width: ${({ theme, appearance, baseAppearance }) => checkboxAppearanceTheme(theme, appearance, baseAppearance, ['checkbox', 'width'])};
+  height: ${({ theme, appearance, baseAppearance }) => checkboxAppearanceTheme(theme, appearance, baseAppearance, ['checkbox', 'height'])};
 `;
 
 export const HiddenCheckbox = styled.input`
   display: none;
+`;
+
+export const SwitchGroupWrapper = styled.div<IStyledCheckboxProps>`
+  ${({ theme, appearance, baseAppearance }) => checkboxAppearanceTheme(theme, appearance, baseAppearance, 'switchGroupWrapper')}
 `;
