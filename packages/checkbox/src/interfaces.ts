@@ -42,7 +42,5 @@ export interface ISwitchGroupProps extends IStyledProps {
   values: (string | number)[];
   options: IOption[];
   disabled?: boolean;
-  withAllSwitcher?: boolean;
-  allLabel?: string;
   onChange: (values: (string | number)[]) => void;
 }

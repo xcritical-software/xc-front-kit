@@ -6,7 +6,7 @@ import { storiesOf } from '@storybook/react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 import Checkbox, { SwitchGroup, checkboxThemeNamespace } from '../src';
-import { CheckboxTheme, ICheckboxProps } from '../src/interfaces';
+import { CheckboxTheme, ICheckboxProps, IOption } from '../src/interfaces';
 import { Check } from '../src/Icons';
 
 
@@ -187,17 +187,39 @@ const BasicSwitchGroup = ({
   appearance,
   options,
   disabled = false,
-  withAllSwitcher = false,
-  allLabel = 'Choose all',
+  withAllGroup = false,
 }): React.ReactElement => {
   const [values, setValues] = React.useState([options[0].value]);
+  const [isAll, setIsAll] = React.useState(false);
 
   const handleChange = (value: (string | number)[]): void => {
     setValues(value);
+    setIsAll(false);
   };
+
+  const handleAllChange = React.useCallback((checked: boolean) => {
+    if (checked) {
+      setValues(options.map((option: IOption) => option.value));
+    } else {
+      setValues([]);
+    }
+
+    setIsAll(checked);
+  }, [options]);
 
   return (
     <ThemeProvider theme={ innerTheme }>
+      {
+        type === 'checkbox' && withAllGroup && (
+          <Checkbox
+            appearance={ appearance }
+            label="Choose all"
+            checked={ isAll }
+            disabled={ disabled }
+            onChange={ handleAllChange }
+          />
+        )
+      }
       <SwitchGroup
         type={ type }
         appearance={ appearance }
@@ -205,8 +227,6 @@ const BasicSwitchGroup = ({
         options={ options }
         values={ values }
         disabled={ disabled }
-        withAllSwitcher={ withAllSwitcher }
-        allLabel={ allLabel }
       />
     </ThemeProvider>
   );
@@ -283,7 +303,7 @@ storiesOf('Checkbox', module)
         type="checkbox"
         options={ groupOptions }
         appearance="default"
-        withAllSwitcher
+        withAllGroup
       />
     </div>
   ))
