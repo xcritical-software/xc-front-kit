@@ -1,7 +1,7 @@
-import { getMaxZIndex, ZIndexManager } from './ZIndexManager';
+import { getMaxZIndex, maxZIndexManager } from './MaxZIndexManager';
 
 
 export {
   getMaxZIndex,
-  ZIndexManager,
+  maxZIndexManager,
 };

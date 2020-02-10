@@ -1,9 +1,9 @@
-import { ZIndexManager } from '@xcritical/utils';
+import { maxZIndexManager } from '@xcritical/utils';
 
 
-const { Provider: ModalProvider, ZIndexContext } = ZIndexManager();
+const { Provider: ModalProvider, MaxZIndexContext } = maxZIndexManager();
 
 export {
   ModalProvider,
-  ZIndexContext,
+  MaxZIndexContext,
 };

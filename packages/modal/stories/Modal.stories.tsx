@@ -10,6 +10,7 @@ import {
   Modal,
   ConnectedModal,
   ModalProvider,
+  ModalPortal,
   modalThemeNamespace,
   xcriticalModalOpen,
   getModalByName,
@@ -86,7 +87,7 @@ const mapStateToProps = (state) => {
 
 const ConnectedModalWithPayload = connect(mapStateToProps)(ModalWithPayload);
 
-const Modals = (): React.ReactElement => {
+const Modals = ({ component: ModalComponent }): React.ReactElement => {
   const [isFirstOpen, setIsFirstOpen] = useState(false);
   const [isSecondOpen, setIsSecondOpen] = useState(false);
 
@@ -109,12 +110,12 @@ const Modals = (): React.ReactElement => {
   return (
     <>
       <button type="button" onClick={ handleFirstOpen }>Open first</button>
-      <Modal isOpen={ isFirstOpen } title="First Modal" name="first" onModalCancel={ handleFirstClose }>
+      <ModalComponent isOpen={ isFirstOpen } title="First Modal" name="first" onModalCancel={ handleFirstClose }>
         <button type="button" onClick={ handleSecondOpen }>Open second</button>
-      </Modal>
-      <Modal isOpen={ isSecondOpen } title="Second Modal" name="second" onModalCancel={ handleSecondClose }>
+      </ModalComponent>
+      <ModalComponent isOpen={ isSecondOpen } title="Second Modal" name="second" onModalCancel={ handleSecondClose }>
         Second
-      </Modal>
+      </ModalComponent>
     </>
   );
 };
@@ -176,7 +177,12 @@ storiesOf('ConnectedModal', module)
   .add('Two Modals', () => (
     <ThemeProvider theme={ emptyTheme }>
       <ModalProvider>
-        <Modals />
+        <Modals component={ Modal } />
       </ModalProvider>
+    </ThemeProvider>
+  ))
+  .add('Two Modals Portal', () => (
+    <ThemeProvider theme={ emptyTheme }>
+      <Modals component={ ModalPortal } />
     </ThemeProvider>
   ));
