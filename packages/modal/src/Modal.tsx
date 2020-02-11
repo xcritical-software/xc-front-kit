@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import Blanket from '@xcritical/blanket';
 
 import {
@@ -26,6 +26,7 @@ export const Modal: React.FC<IModalProps> = ({
   zIndex: zIndexProp,
 }) => {
   const maxZIndex: number = useContext(MaxZIndexContext);
+  const zIndex = useMemo(() => (maxZIndex ? maxZIndex + 1 : zIndexProp), [maxZIndex, zIndexProp]);
 
   if (!isOpen) {
     return null;
@@ -37,11 +38,11 @@ export const Modal: React.FC<IModalProps> = ({
     <>
       <Blanket
         isTinted
-        zIndex={ maxZIndex + 1 || zIndexProp }
+        zIndex={ zIndex }
         theme={ modalBlanketTheme }
         onBlanketClicked={ onModalCancel }
       />
-      <ModalContent zIndex={ maxZIndex + 1 || zIndexProp }>
+      <ModalContent zIndex={ zIndex }>
         <ModalHeaderWrapper>
           <ModalHeader>
             { title }
