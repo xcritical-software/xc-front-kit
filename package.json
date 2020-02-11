@@ -46,7 +46,7 @@
     "@storybook/addon-backgrounds": "^5.2.6",
     "@storybook/addon-docs": "^5.2.6",
     "@storybook/addon-info": "^5.2.6",
-    "@storybook/addon-knobs": "^5.2.6",
+    "@storybook/addon-knobs": "^5.3.12",
     "@storybook/addon-storysource": "^5.2.6",
     "@storybook/addon-viewport": "^5.2.6",
     "@storybook/addons": "^5.2.6",
@@ -75,10 +75,10 @@
     "react-docgen-typescript-loader": "^3.4.0",
     "redux-devtools-extension": "^2.13.8",
     "rimraf": "^3.0.0",
-    "storybook": "^5.1.11",
+    "storybook": "^5.3.12",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.2.0",
-    "typescript": "^3.7.2",
+    "typescript": "^3.7.5",
     "typescript-plugin-styled-components": "1.4.4"
   },
   "dependencies": {
