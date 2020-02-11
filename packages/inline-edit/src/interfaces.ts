@@ -28,6 +28,7 @@ export interface ICommonProps {
   /** Determines whether the read view has 100%
    * width within its container, or whether it fits the content. */
   readViewFitContainerWidth?: boolean;
+  disabled?: boolean;
 }
 
 export interface IInlineEditUncontrolledProps<TFieldValue> extends ICommonProps {

@@ -18,6 +18,7 @@ export const ReadViewContentWrapper = styled.div<ICommonProps>`
   ${({ theme }) => inlineEditTheme(theme)}
   :hover {
     ${({ theme, appearance, baseAppearance }) => getInlineEditStatesStyle('hover')(theme, appearance, baseAppearance)}
+    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   }
 `;
 

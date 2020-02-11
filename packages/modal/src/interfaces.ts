@@ -45,6 +45,7 @@ export interface IModalOwnProps {
   iconClose?: any;
   onCancel?: () => void;
   theme?: IThemeNamespace<IModalTheme>;
+  zIndex?: number;
 }
 
 export interface IModalStoreProps {
