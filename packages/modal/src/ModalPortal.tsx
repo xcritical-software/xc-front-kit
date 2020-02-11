@@ -1,5 +1,7 @@
-import React, { useContext, useMemo } from 'react';
+import React from 'react';
+
 import Blanket from '@xcritical/blanket';
+import Portal from '@xcritical/portal';
 
 import {
   ModalHeaderWrapper,
@@ -9,25 +11,20 @@ import {
   ModalIconClose,
 } from './styled';
 
-import { MaxZIndexContext } from './ModalProvider';
-
 import { IModalProps } from './interfaces';
 import { getModalBlanketTheme } from './utils';
 import { IconClose } from './IconClose';
 
 
-export const Modal: React.FC<IModalProps> = ({
+export const ModalPortal: React.FC<IModalProps> = ({
+  name,
   isOpen,
   title,
   children,
   iconClose,
   theme,
   onModalCancel,
-  zIndex: zIndexProp,
 }) => {
-  const maxZIndex: number = useContext(MaxZIndexContext);
-  const zIndex = useMemo(() => (maxZIndex ? maxZIndex + 1 : zIndexProp), [maxZIndex, zIndexProp]);
-
   if (!isOpen) {
     return null;
   }
@@ -35,14 +32,13 @@ export const Modal: React.FC<IModalProps> = ({
   const modalBlanketTheme = getModalBlanketTheme(theme);
 
   return (
-    <>
+    <Portal id={ name } zIndex="unset">
       <Blanket
         isTinted
-        zIndex={ zIndex }
         theme={ modalBlanketTheme }
         onBlanketClicked={ onModalCancel }
       />
-      <ModalContent zIndex={ zIndex }>
+      <ModalContent>
         <ModalHeaderWrapper>
           <ModalHeader>
             { title }
@@ -55,6 +51,6 @@ export const Modal: React.FC<IModalProps> = ({
           { children }
         </ModalBody>
       </ModalContent>
-    </>
+    </Portal>
   );
 };

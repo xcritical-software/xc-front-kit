@@ -27,8 +27,8 @@
 	"private": false,
 	"peerDependencies": {
 		"react": "^16.8.3",
-		"redux": "^4.0.4",
 		"react-redux": "^7.0.2",
+		"redux": "^4.0.4",
 		"styled-components": "^5.0.0"
 	},
 	"devDependencies": {
@@ -36,7 +36,9 @@
 	},
 	"dependencies": {
 		"@xcritical/blanket": "1.0.0",
+		"@xcritical/portal": "^0.0.1",
 		"@xcritical/theme": "^1.0.0",
-		"micro-memoize": "4.0.8"
+		"@xcritical/utils": "^0.1.0",
+		"micro-memoize": "^4.0.8"
 	}
 }
