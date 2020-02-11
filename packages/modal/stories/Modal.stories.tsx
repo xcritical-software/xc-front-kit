@@ -6,11 +6,10 @@ import { storiesOf } from '@storybook/react';
 import CloseCircleOutlineIcon from 'mdi-react/CloseCircleOutlineIcon';
 import { colors } from '@xcritical/theme';
 
-import {
+import ModalPortal, {
   Modal,
   ConnectedModal,
   ModalProvider,
-  ModalPortal,
   modalThemeNamespace,
   xcriticalModalOpen,
   getModalByName,
