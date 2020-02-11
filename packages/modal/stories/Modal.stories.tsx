@@ -112,9 +112,19 @@ const Modals = ({ component: ModalComponent }): React.ReactElement => {
       <ModalComponent isOpen={ isFirstOpen } title="First Modal" name="first" onModalCancel={ handleFirstClose }>
         <button type="button" onClick={ handleSecondOpen }>Open second</button>
       </ModalComponent>
-      <ModalComponent isOpen={ isSecondOpen } title="Second Modal" name="second" onModalCancel={ handleSecondClose }>
-        Second
-      </ModalComponent>
+      {
+        ModalComponent === Modal ? (
+          <ModalProvider>
+            <ModalComponent isOpen={ isSecondOpen } title="Second Modal" name="second" onModalCancel={ handleSecondClose }>
+              Second
+            </ModalComponent>
+          </ModalProvider>
+        ) : (
+          <ModalComponent isOpen={ isSecondOpen } title="Second Modal" name="second" onModalCancel={ handleSecondClose }>
+            Second
+          </ModalComponent>
+        )
+      }
     </>
   );
 };
@@ -175,9 +185,7 @@ storiesOf('ConnectedModal', module)
   ))
   .add('Two Modals', () => (
     <ThemeProvider theme={ emptyTheme }>
-      <ModalProvider>
-        <Modals component={ Modal } />
-      </ModalProvider>
+      <Modals component={ Modal } />
     </ThemeProvider>
   ))
   .add('Two Modals Portal', () => (
