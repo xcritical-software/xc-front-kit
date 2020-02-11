@@ -78,7 +78,7 @@
     "storybook": "^5.3.12",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.2.0",
-    "typescript": "^3.7.2",
+    "typescript": "^3.7.5",
     "typescript-plugin-styled-components": "1.4.4"
   },
   "dependencies": {
