@@ -63,12 +63,16 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
           )
         }
       </CheckboxWrapper>
-      <LabelWrapper
-        appearance={ appearance }
-        baseAppearance={ baseAppearance }
-      >
-        { label }
-      </LabelWrapper>
+      {
+        label && (
+          <LabelWrapper
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
+          >
+            { label }
+          </LabelWrapper>
+        )
+      }
     </CheckboxLabel>
   );
 };
