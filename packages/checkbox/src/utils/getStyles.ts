@@ -1,19 +1,11 @@
 import { css, FlattenInterpolation } from 'styled-components';
 
 
-import { getThemedState, AllType, getAppearanceTheme } from '@xcritical/theme';
+import { AllType, getAppearanceTheme } from '@xcritical/theme';
 
 import { checkboxThemeNamespace, defaultCheckboxTheme } from '../theme';
 import { CheckboxTheme, ICheckboxProps } from '../interfaces';
 
-
-export const checkboxTheme = (
-  theme: CheckboxTheme,
-  propertyPath?: string | string[],
-): AllType => {
-  const func = getThemedState(checkboxThemeNamespace, defaultCheckboxTheme);
-  return func(theme, propertyPath);
-};
 
 export const checkboxAppearanceTheme = (
   theme: CheckboxTheme,

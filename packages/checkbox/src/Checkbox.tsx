@@ -5,6 +5,7 @@ import { ICheckboxProps } from './interfaces';
 import {
   CheckboxLabel,
   CheckboxWrapper,
+  LabelWrapper,
   DefaultCheckbox,
   Checkbox as StyledCheckbox,
   HiddenCheckbox,
@@ -62,7 +63,12 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
           )
         }
       </CheckboxWrapper>
-      { label }
+      <LabelWrapper
+        appearance={ appearance }
+        baseAppearance={ baseAppearance }
+      >
+        { label }
+      </LabelWrapper>
     </CheckboxLabel>
   );
 };

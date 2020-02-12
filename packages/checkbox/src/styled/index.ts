@@ -55,6 +55,10 @@ export const HiddenCheckbox = styled.input`
   display: none;
 `;
 
+export const LabelWrapper = styled.div<IStyledCheckboxProps>`
+  ${({ theme, appearance, baseAppearance }) => checkboxAppearanceTheme(theme, appearance, baseAppearance, 'labelWrapper')}
+`;
+
 export const SwitchGroupWrapper = styled.div<IStyledCheckboxProps>`
   ${({ theme, appearance, baseAppearance }) => checkboxAppearanceTheme(theme, appearance, baseAppearance, 'switchGroupWrapper')}
 `;

@@ -3,7 +3,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 
 import Checkbox, { SwitchGroup, checkboxThemeNamespace } from '../src';
 import { CheckboxTheme, ICheckboxProps, IOption } from '../src/interfaces';
@@ -58,6 +58,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const TextBlock = styled.div`
+  margin-top: 15px;
+  margin-left: 15px;
+`;
+
 const generateTheme = (
   padding: string,
   baseBgColor: string,
@@ -86,6 +91,22 @@ const generateTheme = (
         borderRadius: '4px',
         width: '16px',
         height: '16px',
+      },
+    },
+    customCheckbox: {
+      checkboxLabel: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        cursor: 'pointer',
+        color: 'red',
+      },
+      checkboxWrapper: {
+        backgroundColor: baseBgColor,
+        color: textColor,
+        border: '1px solid red',
+      },
+      checkbox: {
+        backgroundColor: 'red',
       },
     },
     customRadio: {
@@ -262,17 +283,6 @@ storiesOf('Checkbox', module)
       />
     </div>
   ))
-  .add('Themed Radio', () => (
-    <div>
-      <GlobalStyle />
-      <BasicCheckbox
-        theme={ { [checkboxThemeNamespace]: theme } }
-        label="Themed Radio"
-        type="radio"
-        appearance="customRadio"
-      />
-    </div>
-  ))
   .add('Radio Group', () => (
     <div>
       <GlobalStyle />
@@ -280,7 +290,7 @@ storiesOf('Checkbox', module)
         theme={ { [checkboxThemeNamespace]: theme } }
         type="radio"
         options={ groupOptions }
-        appearance="customRadio"
+        appearance="default"
       />
     </div>
   ))
@@ -307,17 +317,6 @@ storiesOf('Checkbox', module)
       />
     </div>
   ))
-  .add('Themed Checkbox Group', () => (
-    <div>
-      <GlobalStyle />
-      <BasicSwitchGroup
-        theme={ { [checkboxThemeNamespace]: theme } }
-        type="checkbox"
-        options={ groupOptions }
-        appearance="horizontal"
-      />
-    </div>
-  ))
   .add('Disabled Checkbox', () => (
     <div>
       <GlobalStyle />
@@ -325,6 +324,38 @@ storiesOf('Checkbox', module)
         theme={ { [checkboxThemeNamespace]: theme } }
         label="Disabled Checkbox"
         disabled
+      />
+    </div>
+  ))
+  .add('Themed', () => (
+    <div>
+      <GlobalStyle />
+      <BasicCheckbox
+        theme={ { [checkboxThemeNamespace]: theme } }
+        label="Themed Checkbox"
+        appearance="customCheckbox"
+      />
+      <div>
+        <BasicCheckbox
+          theme={ { [checkboxThemeNamespace]: theme } }
+          label="Themed Radio"
+          type="radio"
+          appearance="customRadio"
+        />
+      </div>
+      <TextBlock>Themed Radio Group</TextBlock>
+      <BasicSwitchGroup
+        theme={ { [checkboxThemeNamespace]: theme } }
+        type="radio"
+        options={ groupOptions }
+        appearance="customRadio"
+      />
+      <TextBlock>Themed Checkbox Group</TextBlock>
+      <BasicSwitchGroup
+        theme={ { [checkboxThemeNamespace]: theme } }
+        type="checkbox"
+        options={ groupOptions }
+        appearance="horizontal"
       />
     </div>
   ));

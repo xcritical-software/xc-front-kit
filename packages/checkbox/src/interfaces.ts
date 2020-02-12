@@ -2,8 +2,11 @@ import { ITheme, ICSSProperties } from '@xcritical/theme';
 
 
 export interface ICheckboxTheme extends ICSSProperties {
-  borderRadius?: number;
-  outline?: string;
+  checkboxLabel?: ICSSProperties;
+  checkboxWrapper?: ICSSProperties;
+  checkbox?: ICSSProperties;
+  labelWrapper?: ICSSProperties;
+  switchGroupWrapper?: ICSSProperties;
 }
 
 export type CheckboxTheme = ITheme<ICheckboxTheme>;
