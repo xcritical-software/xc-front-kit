@@ -51,7 +51,7 @@
     "@storybook/addon-viewport": "^5.2.6",
     "@storybook/addons": "^5.2.6",
     "@storybook/react": "^5.2.6",
-    "@storybook/theming": "^5.2.6",
+    "@storybook/theming": "^5.3.13",
     "@types/history": "^4.7.3",
     "@types/jest": "^24.0.23",
     "@types/kind-of": "^6.0.0",
