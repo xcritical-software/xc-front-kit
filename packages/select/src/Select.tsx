@@ -83,6 +83,8 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
         ...components,
       } }
       onChange={ (value, action) => {
+        if (!onChange) return;
+
         // Fixed react-select behaviour: https://github.com/JedWatson/react-select/issues/3632
         if (isMulti && value === null) onChange([], action);
         else onChange(value, action);
