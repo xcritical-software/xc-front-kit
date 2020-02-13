@@ -74,7 +74,7 @@
     "prop-types": "^15.7.2",
     "react-docgen-typescript-loader": "^3.4.0",
     "redux-devtools-extension": "^2.13.8",
-    "rimraf": "^3.0.0",
+    "rimraf": "^3.0.2",
     "storybook": "^5.3.12",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.2.0",
