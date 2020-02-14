@@ -54,6 +54,8 @@ const Grid = ({
   cacheRef,
   themeRef,
   rowHeight,
+  gridHOCMappedColumns,
+  setGridHOCMappedColumns,
 }: IGrid) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
   const fullWidthRef = useRef(
@@ -192,6 +194,7 @@ const Grid = ({
         );
       }
       fullWidthRef.current = newFullWidth;
+      setGridHOCMappedColumns(newColumns)
       setMappedColumns(newColumns);
       onChangeColumns(newColumns);
     },

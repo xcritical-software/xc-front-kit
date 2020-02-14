@@ -60,6 +60,8 @@ export interface IGrid {
   cacheRef: any;
   themeRef: any;
   rowHeight?: number;
+  setGridHOCMappedColumns: any;
+  gridHOCMappedColumns: any;
 }
 
 export interface IMappedItem extends IItem {

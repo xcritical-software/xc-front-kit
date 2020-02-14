@@ -12,6 +12,16 @@ export const MultyGrid = ({
   shouldChangeRightColumnsWidth,
 
 
+
+  leftMappedColumns,
+  centerMappedColumns,
+  rightMappedColumns,
+
+  setLeftMappedColumns,
+  setCenterMappedColumns,
+  setRightMappedColumns,
+
+
   leftFixedColumns,
   leftFixedWidth,
 
@@ -26,7 +36,7 @@ export const MultyGrid = ({
   allGridsProps,
 }: any) => (
   <>
-    { leftFixedColumns.length && (
+    { leftFixedColumns.length ? (
       <Grid
         rightScroll={ false }
         bottomScroll={ false }
@@ -42,12 +52,15 @@ export const MultyGrid = ({
         scrollTop={ scrollTop }
         onScrollsyncScroll={ onScroll }
 
+        gridHOCMappedColumns={leftMappedColumns}
+      setGridHOCMappedColumns={setLeftMappedColumns}
+
         { ...allGridsProps }
 
       />
-    ) }
+    ) : null }
     {
-      notFixedColumns.length && (
+      notFixedColumns.length ? (
         <Grid
           rightScroll={ false }
           width={ (width || wrapperSize.width) - leftFixedWidth - rightFixedWidth }
@@ -61,12 +74,15 @@ export const MultyGrid = ({
           onScrollsyncScroll={ onScroll }
           scrollTop={ scrollTop }
 
+          gridHOCMappedColumns={centerMappedColumns}
+        setGridHOCMappedColumns={setCenterMappedColumns}
+
           { ...allGridsProps }
 
         />
-      )
+      ) : null
     }
-    { rightFixedColumns.length && (
+    { rightFixedColumns.length ? (
       <Grid
         width={ rightFixedWidth }
         height={ height }
@@ -79,9 +95,12 @@ export const MultyGrid = ({
 
         onScrollsyncScroll={ onScroll }
         scrollTop={ scrollTop }
+        gridHOCMappedColumns={rightMappedColumns}
+      setGridHOCMappedColumns={setRightMappedColumns}
+
         { ...allGridsProps }
 
       />
-    ) }
+    ) : null }
   </>
 );

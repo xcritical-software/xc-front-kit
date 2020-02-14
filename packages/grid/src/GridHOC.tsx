@@ -182,8 +182,8 @@ const GridHOC = ({
     leftFixedColumns,
     rightFixedColumns,
     notFixedColumns,
-    leftFixedWidth,
-    rightFixedWidth,
+    // leftFixedWidth,
+    // rightFixedWidth,
   } = useMemo(() => {
     const $leftFixedColumns = rest.columns.filter(({ fixedPosition }: any) => fixedPosition === 'left');
     const $rightFixedColumns = rest.columns.filter(({ fixedPosition }: any) => fixedPosition === 'right');
@@ -193,7 +193,6 @@ const GridHOC = ({
     const $leftFixedWidth = $leftFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
     const $rightFixedWidth = $rightFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
     /* eslint-enable max-len */
-
     /* eslint-disable key-spacing */
     return {
       leftFixedColumns:  $leftFixedColumns,
@@ -205,6 +204,23 @@ const GridHOC = ({
     /* eslint-enable key-spacing */
   }, [isMultiGrid]);
 
+  const [leftMappedColumns, setLeftMappedColumns] = useState<any>(leftFixedColumns);
+  const [centerMappedColumns, setCenterMappedColumns] = useState<any>(notFixedColumns);
+  const [rightMappedColumns, setRightMappedColumns] = useState<any>(rightFixedColumns);
+
+  const [leftFixedWidth, setLeftFixedWidth] = useState(0)
+  const [rightFixedWidth, setRightFixedWidth] = useState(0)
+
+  useEffect(() => {
+    setLeftFixedWidth(
+      leftMappedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0)
+      )
+      setRightFixedWidth(
+        rightMappedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0)
+        )
+      }, [leftMappedColumns, rightMappedColumns])
+
+  console.log('!!!!!!!', rightFixedWidth, leftFixedWidth)
 
   if (isMultiGrid) {
     const styles: CSSProperties = {
@@ -227,6 +243,19 @@ const GridHOC = ({
 
       wrapperSize,
       notFixedColumns,
+
+      leftMappedColumns,
+      centerMappedColumns,
+      rightMappedColumns,
+
+
+      setLeftMappedColumns,
+      setCenterMappedColumns,
+      setRightMappedColumns,
+
+
+
+
 
       allGridsProps: {
         totals: rest.totals,
@@ -298,6 +327,8 @@ const GridHOC = ({
           themeRef={ themeRef }
           rowHeight={ rowHeight }
           shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+          gridHOCMappedColumns={centerMappedColumns}
+          setGridHOCMappedColumns={setCenterMappedColumns}
           { ...rest }
         />
       </div>
@@ -315,6 +346,8 @@ const GridHOC = ({
       themeRef={ themeRef }
       rowHeight={ rowHeight }
       shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+      gridHOCMappedColumns={centerMappedColumns}
+      setGridHOCMappedColumns={setCenterMappedColumns}
       { ...rest }
       /* eslint-disable @typescript-eslint/no-non-null-assertion  */
       width={ rest.width! }
