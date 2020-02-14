@@ -116,14 +116,15 @@ export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
 export const getBodyCellContentStyles = ({
   theme: { row, selectedRowColor },
   selected,
+  rowHeight,
 }: IBodyCellContent) => css`
     padding: ${row?.padding};
-    ${row?.height ? `height: ${row?.height}` : null};
+    ${rowHeight ? `height: ${rowHeight}px` : null};
 
     span {
       font-size: ${row?.fontSize};
       color: ${selected ? selectedRowColor : row?.color};
-      ${row?.height ? css`
+      ${rowHeight ? css`
           white-space: nowrap;
           overflow: hidden;
           display: block;

@@ -34,7 +34,10 @@ export interface IGridHOC {
   onSelect?: Function;
   shouldMovingColumns?: boolean;
   shouldChangeColumnsWidth?: boolean;
+  shouldChangeLeftColumnsWidth?: boolean;
+  shouldChangeRightColumnsWidth?: boolean;
   shouldFitContainer?: boolean;
+  rowHeight?: number;
 }
 
 export interface IGrid {
@@ -55,6 +58,8 @@ export interface IGrid {
   handleSelect: Function;
   selectedRows: string[];
   cacheRef: any;
+  themeRef: any;
+  rowHeight?: number;
 }
 
 export interface IMappedItem extends IItem {
@@ -130,6 +135,7 @@ export interface IBodyCellContent {
   theme: IGridTheme;
   center: boolean;
   selected: boolean;
+  rowHeight?: number;
 }
 export interface IBodyCellOffset {
   theme: IGridTheme;

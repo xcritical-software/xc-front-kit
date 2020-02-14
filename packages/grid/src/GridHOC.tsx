@@ -1,16 +1,21 @@
 import React, {
-  useState, useEffect, useRef, useCallback, useMemo,
+  useState, useEffect, useRef, useCallback, useMemo, useContext,
 } from 'react';
+
+
+import { ThemeContext, CSSProperties } from 'styled-components';
 import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
 
 import { ScrollSync, CellMeasurerCache } from 'react-virtualized';
-import { CSSProperties } from 'styled-components';
+
 import Grid from './Grid';
 import {
   IMappedItem, IItem, IGridHOC, IColumn,
 } from './interfaces';
-import { guid, addOrDeleteItemFromArray, deletePropsFromObjects } from './utils';
+import {
+  guid, addOrDeleteItemFromArray, deletePropsFromObjects, gridTheme,
+} from './utils';
 import { MultyGrid } from './MultyGrid';
 
 
@@ -20,6 +25,11 @@ const GridHOC = ({
   isDisableSelect = false,
   isMultiSelect = false,
   onSelect,
+  theme,
+  rowHeight,
+  shouldChangeColumnsWidth = true,
+  shouldChangeLeftColumnsWidth = true,
+  shouldChangeRightColumnsWidth = true,
   ...rest
 }: IGridHOC) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -28,17 +38,22 @@ const GridHOC = ({
     items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
   );
 
+  const contextTheme = useContext(ThemeContext);
+  const themeRef = useRef(gridTheme(theme || contextTheme));
+  themeRef.current = gridTheme(theme || contextTheme);
+
+
+  useEffect(() => {
+    themeRef.current = gridTheme(theme || contextTheme);
+  }, [theme, contextTheme]);
+
   const cacheRef = useRef(
     new CellMeasurerCache({
       fixedWidth: true,
-      defaultHeight: 100,
+      fixedHeight: Boolean(rowHeight),
+      defaultHeight: rowHeight || 100,
     }),
   );
-
-  // useEffect(() => {
-  //   cacheRef.current.clearAll()
-  //   console.log('!!!', cacheRef.current);
-  // }, [])
 
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
@@ -197,21 +212,12 @@ const GridHOC = ({
     };
 
     const multyGridProps = {
-      theme: rest.theme,
-      totals: rest.totals,
-
       shouldMovingColumns: rest.shouldMovingColumns,
-      shouldChangeColumnsWidth: rest.shouldChangeColumnsWidth,
-
-
+      shouldChangeColumnsWidth,
+      shouldChangeLeftColumnsWidth,
+      shouldChangeRightColumnsWidth,
       width: 0,
       height: 0,
-
-      onChangeExpand,
-      handleSelect,
-
-      selectedRows,
-      mappedItems,
 
       leftFixedColumns,
       leftFixedWidth,
@@ -221,7 +227,17 @@ const GridHOC = ({
 
       wrapperSize,
       notFixedColumns,
-      cacheRef,
+
+      allGridsProps: {
+        totals: rest.totals,
+        onChangeExpand,
+        handleSelect,
+        selectedRows,
+        mappedItems,
+        cacheRef,
+        themeRef: themeRef || {},
+        rowHeight,
+      },
     };
 
     if (shouldFitContainer) {
@@ -279,6 +295,9 @@ const GridHOC = ({
           width={ wrapperSize.width }
           cacheRef={ cacheRef }
           height={ wrapperSize.height }
+          themeRef={ themeRef }
+          rowHeight={ rowHeight }
+          shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
           { ...rest }
         />
       </div>
@@ -293,6 +312,9 @@ const GridHOC = ({
       onChangeExpand={ onChangeExpand }
       mappedItems={ mappedItems }
       cacheRef={ cacheRef }
+      themeRef={ themeRef }
+      rowHeight={ rowHeight }
+      shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
       { ...rest }
       /* eslint-disable @typescript-eslint/no-non-null-assertion  */
       width={ rest.width! }

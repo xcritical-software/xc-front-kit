@@ -122,6 +122,8 @@ export const BodyCell = styled.div<any>`
 export const BodyCellContent = styled.div<IBodyCellContent>`
   overflow: hidden;
   width: 100%;
+  display: flex;
+  align-items: center;
   ${({ center }) => center
     && `
     text-align: center;

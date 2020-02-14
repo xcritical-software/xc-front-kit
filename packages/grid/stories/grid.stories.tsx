@@ -98,7 +98,6 @@ const AMStheme = {
       border: `1px solid ${colors.GRAY}`,
       padding: '5px 10px',
       fontSize: '13px',
-      height: '50px',
     },
   },
 };
@@ -204,6 +203,7 @@ storiesOf('New Grid', module)
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
       theme={ AMStheme }
+      rowHeight={ 40 }
     />
   ))
   .add('Dinamic size', () => {
@@ -285,6 +285,7 @@ storiesOf('New Grid', module)
       items={ createRowsWithRender() }
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
+      rowHeight={ 30 }
     />
   ))
   .add('fixed columns (left+right)', () => (
@@ -293,7 +294,8 @@ storiesOf('New Grid', module)
       items={ rowsFixed }
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
-      // theme={ AMStheme }
+      rowHeight={ 30 }
+      theme={ AMStheme }
     />
   ))
   .add('fixed columns (left)', () => (
@@ -302,7 +304,8 @@ storiesOf('New Grid', module)
       items={ rowsFixed }
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
-      // theme={ AMStheme }
+      rowHeight={ 30 }
+      theme={ AMStheme }
     />
   ))
   .add('Fixed columns + Dinamic size', () => {
@@ -326,7 +329,8 @@ storiesOf('New Grid', module)
                 columns={ columnsFixed('both') }
                 items={ rowsFixed.slice(0, 15) }
                 totals={ totalsFixed }
-                // theme={ AMStheme }
+                theme={ AMStheme }
+                rowHeight={ 30 }
                 shouldFitContainer
               />
             </GridWrapper>

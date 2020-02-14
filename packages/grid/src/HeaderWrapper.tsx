@@ -116,7 +116,7 @@ export const HeaderWrapper = ({
   };
 
   const getColumnWidth = useCallback((column: IColumn, index: number): number => {
-    if (mappedColumnsRef.current.length === index + 1) return column.width + 9;
+    if (mappedColumnsRef.current.length === index + 1) return column.width;
     return column.width;
   }, []);
 

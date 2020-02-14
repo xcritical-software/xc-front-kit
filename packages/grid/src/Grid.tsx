@@ -4,10 +4,8 @@ import React, {
   useEffect,
   useCallback,
   MutableRefObject,
-  useContext,
   useMemo,
 } from 'react';
-import { ThemeContext } from 'styled-components';
 import {
   Grid as VirtualisedGrid,
   CellMeasurer,
@@ -28,7 +26,7 @@ import {
   ShiftInsteadButton,
 } from './styled';
 import { AddIcon, RemoveIcon } from './icons';
-import { gridTheme, searchLastVisible } from './utils';
+import { searchLastVisible } from './utils';
 
 import { HeaderWrapper } from './HeaderWrapper';
 import {
@@ -54,10 +52,9 @@ const Grid = ({
   handleSelect,
   selectedRows,
   cacheRef,
+  themeRef,
+  rowHeight,
 }: IGrid) => {
-  const contextTheme = useContext(ThemeContext);
-  const themeRef = useRef(gridTheme(theme || contextTheme));
-
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
   const fullWidthRef = useRef(
     mappedColumns.filter(({ visible }: IColumn) => visible).reduce(
@@ -76,7 +73,7 @@ const Grid = ({
     const newFullWidth = columns.filter(({ visible }: IColumn) => visible).reduce(
       (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
     );
-    themeRef.current = gridTheme(theme || contextTheme);
+
     fullWidthRef.current = newFullWidth;
     if (newFullWidth < width) {
       const lastElemIdx = searchLastVisible(columns, columns.length);
@@ -89,10 +86,9 @@ const Grid = ({
 
     fullWidthRef.current = newFullWidth;
     setMappedColumns(columns);
-  }, [columns, contextTheme, theme, width]);
+  }, [columns, theme, width]);
 
   const handleScroll = useCallback((e: ScrollPosition) => {
-    if (gridRef.current) gridRef.current.recomputeGridSize();
     setScrollLeft(-e.scrollLeft);
     if (onScrollsyncScroll) {
       onScrollsyncScroll(e);
@@ -152,6 +148,7 @@ const Grid = ({
             theme={ themeRef.current }
             center={ !!column.center }
             selected={ isSelected }
+            rowHeight={ rowHeight }
           >
 
             { column.isExpandable && mappedItems[rowIndex].children && (
@@ -212,8 +209,7 @@ const Grid = ({
 
   useEffect(() => {
     if (gridRef.current) gridRef.current.recomputeGridSize();
-    // if (gridRef.current) gridRef.current.measureAllCells();
-    // if (cacheRef.current) cacheRef.current.clearAll();
+    if (cacheRef.current && !rowHeight) cacheRef.current.clearAll();
   }, [mappedColumns, mappedItems]);
 
   const {
