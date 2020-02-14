@@ -194,7 +194,7 @@ const Grid = ({
         );
       }
       fullWidthRef.current = newFullWidth;
-      setGridHOCMappedColumns(newColumns)
+      setGridHOCMappedColumns(newColumns);
       setMappedColumns(newColumns);
       onChangeColumns(newColumns);
     },

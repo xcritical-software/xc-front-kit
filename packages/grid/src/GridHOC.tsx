@@ -208,19 +208,19 @@ const GridHOC = ({
   const [centerMappedColumns, setCenterMappedColumns] = useState<any>(notFixedColumns);
   const [rightMappedColumns, setRightMappedColumns] = useState<any>(rightFixedColumns);
 
-  const [leftFixedWidth, setLeftFixedWidth] = useState(0)
-  const [rightFixedWidth, setRightFixedWidth] = useState(0)
+  const [leftFixedWidth, setLeftFixedWidth] = useState(0);
+  const [rightFixedWidth, setRightFixedWidth] = useState(0);
 
   useEffect(() => {
     setLeftFixedWidth(
-      leftMappedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0)
-      )
-      setRightFixedWidth(
-        rightMappedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0)
-        )
-      }, [leftMappedColumns, rightMappedColumns])
+      leftMappedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0),
+    );
+    setRightFixedWidth(
+      rightMappedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0),
+    );
+  }, [leftMappedColumns, rightMappedColumns]);
 
-  console.log('!!!!!!!', rightFixedWidth, leftFixedWidth)
+  console.log('!!!!!!!', rightFixedWidth, leftFixedWidth);
 
   if (isMultiGrid) {
     const styles: CSSProperties = {
@@ -252,9 +252,6 @@ const GridHOC = ({
       setLeftMappedColumns,
       setCenterMappedColumns,
       setRightMappedColumns,
-
-
-
 
 
       allGridsProps: {
@@ -327,8 +324,8 @@ const GridHOC = ({
           themeRef={ themeRef }
           rowHeight={ rowHeight }
           shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-          gridHOCMappedColumns={centerMappedColumns}
-          setGridHOCMappedColumns={setCenterMappedColumns}
+          gridHOCMappedColumns={ centerMappedColumns }
+          setGridHOCMappedColumns={ setCenterMappedColumns }
           { ...rest }
         />
       </div>
@@ -346,8 +343,8 @@ const GridHOC = ({
       themeRef={ themeRef }
       rowHeight={ rowHeight }
       shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-      gridHOCMappedColumns={centerMappedColumns}
-      setGridHOCMappedColumns={setCenterMappedColumns}
+      gridHOCMappedColumns={ centerMappedColumns }
+      setGridHOCMappedColumns={ setCenterMappedColumns }
       { ...rest }
       /* eslint-disable @typescript-eslint/no-non-null-assertion  */
       width={ rest.width! }

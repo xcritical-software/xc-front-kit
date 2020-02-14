@@ -12,7 +12,6 @@ export const MultyGrid = ({
   shouldChangeRightColumnsWidth,
 
 
-
   leftMappedColumns,
   centerMappedColumns,
   rightMappedColumns,
@@ -52,8 +51,8 @@ export const MultyGrid = ({
         scrollTop={ scrollTop }
         onScrollsyncScroll={ onScroll }
 
-        gridHOCMappedColumns={leftMappedColumns}
-      setGridHOCMappedColumns={setLeftMappedColumns}
+        gridHOCMappedColumns={ leftMappedColumns }
+        setGridHOCMappedColumns={ setLeftMappedColumns }
 
         { ...allGridsProps }
 
@@ -74,8 +73,8 @@ export const MultyGrid = ({
           onScrollsyncScroll={ onScroll }
           scrollTop={ scrollTop }
 
-          gridHOCMappedColumns={centerMappedColumns}
-        setGridHOCMappedColumns={setCenterMappedColumns}
+          gridHOCMappedColumns={ centerMappedColumns }
+          setGridHOCMappedColumns={ setCenterMappedColumns }
 
           { ...allGridsProps }
 
@@ -95,8 +94,8 @@ export const MultyGrid = ({
 
         onScrollsyncScroll={ onScroll }
         scrollTop={ scrollTop }
-        gridHOCMappedColumns={rightMappedColumns}
-      setGridHOCMappedColumns={setRightMappedColumns}
+        gridHOCMappedColumns={ rightMappedColumns }
+        setGridHOCMappedColumns={ setRightMappedColumns }
 
         { ...allGridsProps }
 
