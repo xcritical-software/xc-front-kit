@@ -66,7 +66,11 @@ export interface IFilter {
   field: string;
   displayName: string;
   conditions: IConditions;
-  Element?: (value: any, onChange: (value: any) => void) => React.ReactElement;
+  Element?: (
+    value: any,
+    onChange: (value: any) => void,
+    condition?: string
+  ) => React.ReactElement;
 }
 
 export interface ICondition {
