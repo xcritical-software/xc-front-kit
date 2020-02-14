@@ -46,7 +46,6 @@ export const MultyGrid = ({
 
       />
     ) }
-    { console.log(allGridsProps) }
     {
       notFixedColumns.length && (
         <Grid
