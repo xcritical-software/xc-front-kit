@@ -319,7 +319,7 @@ storiesOf('New Grid', module)
     return (
       <Provider store={ store }>
         <Page>
-          <Sidebar maxWidth={ 150 }>{ list(100) }</Sidebar>
+          <Sidebar maxWidth={ 300 }>{ list(100) }</Sidebar>
           <Content>
             <div>
               <CompactFilterContainer />
@@ -327,7 +327,7 @@ storiesOf('New Grid', module)
             <GridWrapper>
               <Grid
                 columns={ columnsFixed('both') }
-                items={ rowsFixed.slice(0, 15) }
+                items={ rowsFixed }
                 totals={ totalsFixed }
                 theme={ AMStheme }
                 rowHeight={ 30 }

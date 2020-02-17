@@ -45,7 +45,6 @@ export const MultyGrid = ({
         shouldMovingColumns={ false }
         shouldChangeColumnsWidth={ shouldChangeLeftColumnsWidth }
 
-
         columns={ leftFixedColumns }
 
         scrollTop={ scrollTop }
@@ -53,7 +52,7 @@ export const MultyGrid = ({
 
         gridHOCMappedColumns={ leftMappedColumns }
         setGridHOCMappedColumns={ setLeftMappedColumns }
-
+        resizeGridAfterResizeLastColumn
         { ...allGridsProps }
 
       />
@@ -96,7 +95,7 @@ export const MultyGrid = ({
         scrollTop={ scrollTop }
         gridHOCMappedColumns={ rightMappedColumns }
         setGridHOCMappedColumns={ setRightMappedColumns }
-
+        resizeGridAfterResizeLastColumn
         { ...allGridsProps }
 
       />

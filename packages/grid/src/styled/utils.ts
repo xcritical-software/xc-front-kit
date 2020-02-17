@@ -124,13 +124,14 @@ export const getBodyCellContentStyles = ({
     span {
       font-size: ${row?.fontSize};
       color: ${selected ? selectedRowColor : row?.color};
+      display: flex;
       ${rowHeight ? css`
           white-space: nowrap;
           overflow: hidden;
           display: block;
           text-overflow: ellipsis;
           ` : null
-}
+      }
     }
     `;
 

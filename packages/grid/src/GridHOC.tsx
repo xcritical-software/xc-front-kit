@@ -30,6 +30,7 @@ const GridHOC = ({
   shouldChangeColumnsWidth = true,
   shouldChangeLeftColumnsWidth = true,
   shouldChangeRightColumnsWidth = true,
+  columns,
   ...rest
 }: IGridHOC) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -175,33 +176,23 @@ const GridHOC = ({
     setMappedItems(items.map((el: IItem) => ({ ...el, key: guid(), expandLevel: 0 })));
   }, [items]);
 
-  const isMultiGrid = useMemo(() => rest.columns
-    .some(({ fixedPosition }: IColumn) => Boolean(fixedPosition)), [rest.columns]);
+  const isMultiGrid = useMemo(() => columns
+    .some(({ fixedPosition }: IColumn) => Boolean(fixedPosition)), [columns]);
 
   const {
     leftFixedColumns,
     rightFixedColumns,
     notFixedColumns,
-    // leftFixedWidth,
-    // rightFixedWidth,
   } = useMemo(() => {
-    const $leftFixedColumns = rest.columns.filter(({ fixedPosition }: any) => fixedPosition === 'left');
-    const $rightFixedColumns = rest.columns.filter(({ fixedPosition }: any) => fixedPosition === 'right');
-    const $notFixedColumns = rest.columns.filter(({ fixedPosition }: any) => !fixedPosition);
+    const $leftFixedColumns = columns.filter(({ fixedPosition }: any) => fixedPosition === 'left');
+    const $rightFixedColumns = columns.filter(({ fixedPosition }: any) => fixedPosition === 'right');
+    const $notFixedColumns = columns.filter(({ fixedPosition }: any) => !fixedPosition);
 
-    /* eslint-disable max-len */
-    const $leftFixedWidth = $leftFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
-    const $rightFixedWidth = $rightFixedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0);
-    /* eslint-enable max-len */
-    /* eslint-disable key-spacing */
     return {
       leftFixedColumns:  $leftFixedColumns,
       rightFixedColumns: $rightFixedColumns,
       notFixedColumns:   $notFixedColumns,
-      leftFixedWidth:    $leftFixedWidth,
-      rightFixedWidth:   $rightFixedWidth,
     };
-    /* eslint-enable key-spacing */
   }, [isMultiGrid]);
 
   const [leftMappedColumns, setLeftMappedColumns] = useState<any>(leftFixedColumns);
@@ -219,8 +210,6 @@ const GridHOC = ({
       rightMappedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0),
     );
   }, [leftMappedColumns, rightMappedColumns]);
-
-  console.log('!!!!!!!', rightFixedWidth, leftFixedWidth);
 
   if (isMultiGrid) {
     const styles: CSSProperties = {
@@ -252,7 +241,6 @@ const GridHOC = ({
       setLeftMappedColumns,
       setCenterMappedColumns,
       setRightMappedColumns,
-
 
       allGridsProps: {
         totals: rest.totals,

@@ -36,7 +36,6 @@ import {
 
 const Grid = ({
   mappedItems = [],
-  columns = [],
   width = 0,
   height = 0,
   onChangeColumns = () => {},
@@ -56,8 +55,9 @@ const Grid = ({
   rowHeight,
   gridHOCMappedColumns,
   setGridHOCMappedColumns,
+  resizeGridAfterResizeLastColumn
 }: IGrid) => {
-  const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
+  const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(
     mappedColumns.filter(({ visible }: IColumn) => visible).reduce(
       (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
@@ -72,23 +72,23 @@ const Grid = ({
   ), [mappedColumns]);
 
   useEffect(() => {
-    const newFullWidth = columns.filter(({ visible }: IColumn) => visible).reduce(
+    const newFullWidth = gridHOCMappedColumns.filter(({ visible }: IColumn) => visible).reduce(
       (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
     );
 
     fullWidthRef.current = newFullWidth;
     if (newFullWidth < width) {
-      const lastElemIdx = searchLastVisible(columns, columns.length);
-      const widthLast = columns[lastElemIdx].width;
-      const newColumns = setIn(columns, widthLast + (width - newFullWidth), [String(lastElemIdx), 'width']);
+      const lastElemIdx = searchLastVisible(gridHOCMappedColumns, gridHOCMappedColumns.length);
+      const widthLast = gridHOCMappedColumns[lastElemIdx].width;
+      const newColumns = setIn(gridHOCMappedColumns, widthLast + (width - newFullWidth), [String(lastElemIdx), 'width']);
       setMappedColumns(newColumns);
       fullWidthRef.current = newFullWidth;
       return;
     }
 
     fullWidthRef.current = newFullWidth;
-    setMappedColumns(columns);
-  }, [columns, theme, width]);
+    setMappedColumns(gridHOCMappedColumns);
+  }, [gridHOCMappedColumns, theme, width]);
 
   const handleScroll = useCallback((e: ScrollPosition) => {
     setScrollLeft(-e.scrollLeft);
@@ -180,7 +180,7 @@ const Grid = ({
         0,
       );
 
-      if (newFullWidth < width) {
+      if (newFullWidth < width && !resizeGridAfterResizeLastColumn) {
         const lastColIdx = searchLastVisible(newColumns, newColumns.length);
         newColumns = setIn(
           newColumns,
@@ -193,6 +193,7 @@ const Grid = ({
           0,
         );
       }
+
       fullWidthRef.current = newFullWidth;
       setGridHOCMappedColumns(newColumns);
       setMappedColumns(newColumns);
@@ -250,7 +251,8 @@ const Grid = ({
           width={ width }
           onScroll={ handleScroll }
           scrollTop={ scrollTop }
-        />
+          scrollingResetTimeInterval={2000}
+/>
       </Body>
       { totals && (
         <TotalBlock

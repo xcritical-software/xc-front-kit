@@ -42,7 +42,6 @@ export interface IGridHOC {
 
 export interface IGrid {
   mappedItems: IMappedItem[];
-  columns: IColumn[];
   width: number;
   height: number;
   onChangeColumns?: Function;
@@ -62,6 +61,7 @@ export interface IGrid {
   rowHeight?: number;
   setGridHOCMappedColumns: any;
   gridHOCMappedColumns: any;
+  resizeGridAfterResizeLastColumn?: boolean;
 }
 
 export interface IMappedItem extends IItem {
