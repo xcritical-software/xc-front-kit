@@ -8,8 +8,8 @@ import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
 const hiddenScrollbar = css`
   div {
     ::-webkit-scrollbar {
-      width: 1px;
-      height: 8px;
+      width: 0px;
+      height: 0px;
     }
     ::-webkit-scrollbar-track {
       background: rgba(0,0,0,0);
@@ -31,7 +31,7 @@ const rightScrollbar = css`
   div {
     ::-webkit-scrollbar {
       width: 8px;
-      height: 8px;
+      height: 0px;
     }
     ::-webkit-scrollbar-track {
       background: rgba(0,0,0,0);

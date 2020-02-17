@@ -458,8 +458,7 @@ const items = [
 ];
 
 const getWidth = (i) => {
-  if (i === 2 || i === 4) return 100;
-  if (i === 5 || i === 1) return 100;
+  if (i >= 2 && i <= 5) return 100;
   return 200;
 };
 
@@ -474,8 +473,8 @@ export const columnsFixed = (fixeds) => items
       isExpandable: i === 2,
     };
 
-    if ((fixeds === 'both' || fixeds === 'left') && i === 2) column.fixedPosition = 'left';
-    if ((fixeds === 'both' || fixeds === 'right') && i === 5) column.fixedPosition = 'right';
+    if ((fixeds === 'both' || fixeds === 'left') && i === 2 || i === 3) column.fixedPosition = 'left';
+    if ((fixeds === 'both' || fixeds === 'right') && i === 5 || i === 4) column.fixedPosition = 'right';
 
     return column;
   });

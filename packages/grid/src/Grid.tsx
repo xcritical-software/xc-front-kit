@@ -244,15 +244,14 @@ const Grid = ({
           columnCount={ filteredColums.length }
           columnWidth={ ({ index }: any) => filteredColums[index].width }
           deferredMeasurementCache={ cacheRef.current }
-          height={ height - Number(headerHeight) - Number(totals ? totalsHeight : 0) }
+          height={ height - Number(headerHeight) - Number(totals ? totalsHeight : 0) - (resizeGridAfterResizeLastColumn ? 8 : 0) }
           cellRenderer={ cellRenderer }
           rowCount={ mappedItems.length }
           rowHeight={ cacheRef.current.rowHeight }
           width={ width }
           onScroll={ handleScroll }
           scrollTop={ scrollTop }
-          scrollingResetTimeInterval={2000}
-/>
+        />
       </Body>
       { totals && (
         <TotalBlock
