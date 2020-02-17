@@ -55,7 +55,7 @@ const Grid = ({
   rowHeight,
   gridHOCMappedColumns,
   setGridHOCMappedColumns,
-  resizeGridAfterResizeLastColumn
+  resizeGridAfterResizeLastColumn,
 }: IGrid) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(
@@ -80,7 +80,7 @@ const Grid = ({
     if (newFullWidth < width) {
       const lastElemIdx = searchLastVisible(gridHOCMappedColumns, gridHOCMappedColumns.length);
       const widthLast = gridHOCMappedColumns[lastElemIdx].width;
-      const newColumns = setIn(gridHOCMappedColumns, widthLast + (width - newFullWidth), [String(lastElemIdx), 'width']);
+      const newColumns = setIn(gridHOCMappedColumns, Number(widthLast) + (width - newFullWidth), [String(lastElemIdx), 'width']);
       setMappedColumns(newColumns);
       fullWidthRef.current = newFullWidth;
       return;
@@ -221,6 +221,16 @@ const Grid = ({
     totals: { height: totalsHeight = 0 } = {},
   } = themeRef.current;
 
+  const gridHeight = useMemo(() => Number(
+    height
+      - Number(headerHeight)
+      - Number(totals ? totalsHeight : 0)
+      - (resizeGridAfterResizeLastColumn ? 8 : 0),
+  ), [height,
+    headerHeight,
+    totals,
+    totalsHeight,
+    resizeGridAfterResizeLastColumn]);
 
   return (
     <Wrapper theme={ themeRef.current } width={ width } changingColumns={ changingColumns }>
@@ -244,7 +254,7 @@ const Grid = ({
           columnCount={ filteredColums.length }
           columnWidth={ ({ index }: any) => filteredColums[index].width }
           deferredMeasurementCache={ cacheRef.current }
-          height={ height - Number(headerHeight) - Number(totals ? totalsHeight : 0) - (resizeGridAfterResizeLastColumn ? 8 : 0) }
+          height={ gridHeight }
           cellRenderer={ cellRenderer }
           rowCount={ mappedItems.length }
           rowHeight={ cacheRef.current.rowHeight }

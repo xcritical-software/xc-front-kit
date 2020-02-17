@@ -189,15 +189,15 @@ const GridHOC = ({
     const $notFixedColumns = columns.filter(({ fixedPosition }: any) => !fixedPosition);
 
     return {
-      leftFixedColumns:  $leftFixedColumns,
+      leftFixedColumns: $leftFixedColumns,
       rightFixedColumns: $rightFixedColumns,
-      notFixedColumns:   $notFixedColumns,
+      notFixedColumns: $notFixedColumns,
     };
   }, [isMultiGrid]);
 
-  const [leftMappedColumns, setLeftMappedColumns] = useState<any>(leftFixedColumns);
-  const [centerMappedColumns, setCenterMappedColumns] = useState<any>(notFixedColumns);
-  const [rightMappedColumns, setRightMappedColumns] = useState<any>(rightFixedColumns);
+  const [leftMappedColumns, setLeftMappedColumns] = useState<IColumn[]>(leftFixedColumns);
+  const [centerMappedColumns, setCenterMappedColumns] = useState<IColumn[]>(notFixedColumns);
+  const [rightMappedColumns, setRightMappedColumns] = useState<IColumn[]>(rightFixedColumns);
 
   const [leftFixedWidth, setLeftFixedWidth] = useState(0);
   const [rightFixedWidth, setRightFixedWidth] = useState(0);
