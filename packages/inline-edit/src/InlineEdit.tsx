@@ -21,6 +21,7 @@ IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
     defaultValue,
     readView,
     editView,
+    disabled = false,
     ...rest
   }: IInlineEditProps<TFieldValue>) => {
     const editViewRef = createRef<HTMLElement>();
@@ -65,6 +66,7 @@ IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
         onConfirm={ handleConfirm }
         onCancel={ handleCancel }
         isEditing={ isEditing }
+        disabled={ disabled }
         onEditRequested={ handleEditRequested }
       />
     );

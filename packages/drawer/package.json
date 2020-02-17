@@ -31,7 +31,7 @@
 		"styled-components": "^5.0.0"
 	},
 	"dependencies": {
-		"@xcritical/blanket": "1.0.0",
+		"@xcritical/blanket": "^1.0.0",
 		"@xcritical/portal": "^0.0.1",
 		"@xcritical/theme": "^1.0.0",
 		"lodash.get": "4.x",

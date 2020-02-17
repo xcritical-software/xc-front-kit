@@ -1,0 +1,43 @@
+{
+	"name": "@xcritical/checkbox",
+	"version": "1.0.1",
+	"description": "XCritical Checkbox Component",
+	"module": "esm/index.js",
+	"main": "src/index.ts",
+	"scripts": {
+		"test": "exit 0",
+		"compile": "gulp --cwd . compile",
+		"publish-files": "gulp --cwd . publish-files",
+		"build:cjs": "tsc --project ./tsconfig.json --outDir ./.publish/ --module commonjs -d",
+		"build:esm": "tsc --project ./tsconfig.json --outDir ./.publish/esm --module esnext",
+		"build": "yarn clean && yarn compile && yarn build:esm",
+		"clean": "rimraf dist lib .publish"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+	},
+	"keywords": [
+		"checkbox",
+		"style-components",
+		"themed"
+	],
+	"author": "XCritical Software",
+	"license": "MIT",
+	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/checkbox#readme",
+	"publishConfig": {
+		"access": "public"
+	},
+	"private": false,
+	"peerDependencies": {
+		"fast-equals": "2.0.0",
+		"react": "^16.9.0",
+		"styled-components": "^5.0.0"
+	},
+	"dependencies": {
+		"@xcritical/theme": "^1.0.0",
+		"lodash.get": "^4.x",
+		"micro-memoize": "^4.0.9",
+		"polished": "^3.0.0"
+	}
+}
