@@ -42,7 +42,7 @@ export interface IGridHOC {
 }
 
 
-export interface IMultyGrid {
+export interface IMultiGrid {
   width: number;
   height: number;
   shouldMovingColumns?: boolean;
@@ -97,6 +97,7 @@ export interface IGrid {
   setGridHOCMappedColumns: any;
   gridHOCMappedColumns: any;
   resizeGridAfterResizeLastColumn?: boolean;
+  gridPosition: 'left' | 'center' | 'right';
 }
 
 export interface IMappedItem extends IItem {

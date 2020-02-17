@@ -1,9 +1,9 @@
 import React from 'react';
 import Grid from './Grid';
-import { IMultyGrid } from './interfaces';
+import { IMultiGrid } from './interfaces';
 
 
-export const MultyGrid = ({
+export const MultiGrid = ({
   width,
   height,
 
@@ -29,7 +29,7 @@ export const MultyGrid = ({
   scrollTop,
   onScroll,
   allGridsProps,
-}: IMultyGrid) => (
+}: IMultiGrid) => (
   <>
     { leftMappedColumns.length ? (
       <Grid
@@ -48,9 +48,9 @@ export const MultyGrid = ({
         setGridHOCMappedColumns={ setLeftMappedColumns }
 
         resizeGridAfterResizeLastColumn
+        gridPosition="left"
 
         { ...allGridsProps }
-
       />
     ) : null }
     {
@@ -67,9 +67,9 @@ export const MultyGrid = ({
 
           gridHOCMappedColumns={ centerMappedColumns }
           setGridHOCMappedColumns={ setCenterMappedColumns }
+          gridPosition="center"
 
           { ...allGridsProps }
-
         />
       ) : null
     }
@@ -86,9 +86,9 @@ export const MultyGrid = ({
         gridHOCMappedColumns={ rightMappedColumns }
         setGridHOCMappedColumns={ setRightMappedColumns }
         resizeGridAfterResizeLastColumn
+        gridPosition="right"
 
         { ...allGridsProps }
-
       />
     ) : null }
   </>

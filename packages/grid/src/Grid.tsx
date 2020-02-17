@@ -57,6 +57,7 @@ const Grid = ({
   gridHOCMappedColumns,
   setGridHOCMappedColumns,
   resizeGridAfterResizeLastColumn,
+  gridPosition,
 }: IGrid) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(
@@ -198,18 +199,18 @@ const Grid = ({
       fullWidthRef.current = newFullWidth;
       setGridHOCMappedColumns(newColumns);
       setMappedColumns(newColumns);
-      onChangeColumns(newColumns);
+      onChangeColumns(newColumns, gridPosition);
     },
-    [mappedColumns, onChangeColumns, width],
+    [mappedColumns, onChangeColumns, width, gridPosition],
   );
 
 
   const handleChangeMoving = useCallback(
     (newColumns) => {
       setMappedColumns(newColumns);
-      onChangeColumns(newColumns);
+      onChangeColumns(newColumns, gridPosition);
     },
-    [onChangeColumns],
+    [onChangeColumns, gridPosition],
   );
 
   useEffect(() => {

@@ -16,7 +16,7 @@ import {
 import {
   guid, addOrDeleteItemFromArray, deletePropsFromObjects, gridTheme,
 } from './utils';
-import { MultyGrid } from './MultyGrid';
+import { MultiGrid } from './MultiGrid';
 
 
 const GridHOC = ({
@@ -31,7 +31,11 @@ const GridHOC = ({
   shouldChangeLeftColumnsWidth = true,
   shouldChangeRightColumnsWidth = true,
   columns,
-  ...rest
+  totals,
+  onChangeColumns: onChangeColumnsFromProps = () => {},
+  shouldMovingColumns,
+  width,
+  height,
 }: IGridHOC) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
@@ -186,15 +190,15 @@ const GridHOC = ({
 
 
   const [leftMappedColumns, setLeftMappedColumns] = useState<IColumn[]>(
-    mappedColumns.filter(({ fixedPosition }: any) => fixedPosition === 'left'),
+    mappedColumns.filter(({ fixedPosition }: IColumn) => fixedPosition === 'left'),
   );
 
   const [centerMappedColumns, setCenterMappedColumns] = useState<IColumn[]>(
-    mappedColumns.filter(({ fixedPosition }: any) => !fixedPosition),
+    mappedColumns.filter(({ fixedPosition }: IColumn) => !fixedPosition),
   );
 
   const [rightMappedColumns, setRightMappedColumns] = useState<IColumn[]>(
-    mappedColumns.filter(({ fixedPosition }: any) => fixedPosition === 'right'),
+    mappedColumns.filter(({ fixedPosition }: IColumn) => fixedPosition === 'right'),
   );
 
   const [leftFixedWidth, setLeftFixedWidth] = useState(0);
@@ -202,25 +206,52 @@ const GridHOC = ({
 
 
   useEffect(() => {
-    setLeftMappedColumns(mappedColumns.filter(({ fixedPosition }: any) => fixedPosition === 'left'));
+    setLeftMappedColumns(mappedColumns.filter(({ fixedPosition }: IColumn) => fixedPosition === 'left'));
 
-    setCenterMappedColumns(mappedColumns.filter(({ fixedPosition }: any) => !fixedPosition));
+    setCenterMappedColumns(mappedColumns.filter(({ fixedPosition }: IColumn) => !fixedPosition));
 
-    setRightMappedColumns(mappedColumns.filter(({ fixedPosition }: any) => fixedPosition === 'right'));
+    setRightMappedColumns(mappedColumns.filter(({ fixedPosition }: IColumn) => fixedPosition === 'right'));
   }, [mappedColumns]);
 
   useEffect(() => {
     setLeftFixedWidth(
       leftMappedColumns
-        .filter(({ visible }: any) => visible)
-        .reduce((acc, { width }) => Number(acc) + Number(width), 0),
+        .filter(({ visible }: IColumn) => visible)
+        .reduce((acc, { width: $width }) => Number(acc) + Number($width), 0),
     );
     setRightFixedWidth(
       rightMappedColumns
-        .filter(({ visible }: any) => visible)
-        .reduce((acc, { width }) => Number(acc) + Number(width), 0),
+        .filter(({ visible }: IColumn) => visible)
+        .reduce((acc, { width: $width }) => Number(acc) + Number($width), 0),
     );
   }, [leftMappedColumns, rightMappedColumns]);
+
+  const onChangeColumns = useCallback((cols, gridPosition) => {
+    if (gridPosition === 'left') {
+      onChangeColumnsFromProps([
+        ...cols,
+        ...centerMappedColumns,
+        ...rightMappedColumns,
+      ]);
+    } else if (gridPosition === 'center') {
+      onChangeColumnsFromProps([
+        ...leftMappedColumns,
+        ...cols,
+        ...rightMappedColumns,
+      ]);
+    } else {
+      onChangeColumnsFromProps([
+        ...leftMappedColumns,
+        ...centerMappedColumns,
+        ...rightMappedColumns,
+      ]);
+    }
+  }, [
+    leftMappedColumns,
+    centerMappedColumns,
+    rightMappedColumns,
+  ]);
+
 
   if (isMultiGrid) {
     const styles: CSSProperties = {
@@ -228,7 +259,7 @@ const GridHOC = ({
     };
 
     const multyGridProps = {
-      shouldMovingColumns: rest.shouldMovingColumns,
+      shouldMovingColumns,
       shouldChangeColumnsWidth,
       shouldChangeLeftColumnsWidth,
       shouldChangeRightColumnsWidth,
@@ -250,14 +281,15 @@ const GridHOC = ({
       setRightMappedColumns,
 
       allGridsProps: {
-        totals: rest.totals,
-        onChangeExpand,
         handleSelect,
-        selectedRows,
+        onChangeExpand,
         mappedItems,
+        selectedRows,
         cacheRef,
         themeRef: themeRef || {},
         rowHeight,
+        totals,
+        onChangeColumns,
       },
     };
 
@@ -273,7 +305,7 @@ const GridHOC = ({
             scrollTop,
           }) => (
             <div style={ styles } ref={ wrapperRef }>
-              <MultyGrid
+              <MultiGrid
                 { ...multyGridProps }
                 onScroll={ onScroll }
                 scrollTop={ scrollTop }
@@ -284,8 +316,8 @@ const GridHOC = ({
       );
     }
 
-    multyGridProps.width = rest.width as number;
-    multyGridProps.height = rest.height as number;
+    multyGridProps.width = width as number;
+    multyGridProps.height = height as number;
     return (
       <ScrollSync>
         { ({
@@ -293,7 +325,7 @@ const GridHOC = ({
           scrollTop,
         }) => (
           <div style={ styles } ref={ wrapperRef }>
-            <MultyGrid
+            <MultiGrid
               { ...multyGridProps }
               onScroll={ onScroll }
               scrollTop={ scrollTop }
@@ -314,14 +346,16 @@ const GridHOC = ({
           mappedItems={ mappedItems }
           selectedRows={ selectedRows }
           width={ wrapperSize.width }
-          cacheRef={ cacheRef }
           height={ wrapperSize.height }
+          cacheRef={ cacheRef }
           themeRef={ themeRef }
           rowHeight={ rowHeight }
           shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
           gridHOCMappedColumns={ centerMappedColumns }
           setGridHOCMappedColumns={ setCenterMappedColumns }
-          { ...rest }
+          totals={ totals }
+          onChangeColumns={ onChangeColumns }
+          gridPosition="center"
         />
       </div>
     );
@@ -331,20 +365,22 @@ const GridHOC = ({
   return (
     <Grid
       handleSelect={ handleSelect }
-      selectedRows={ selectedRows }
       onChangeExpand={ onChangeExpand }
       mappedItems={ mappedItems }
+      selectedRows={ selectedRows }
+      /* eslint-disable @typescript-eslint/no-non-null-assertion  */
+      width={ width! }
+      height={ height! }
+      /* eslint-enable @typescript-eslint/no-non-null-assertion  */
       cacheRef={ cacheRef }
       themeRef={ themeRef }
       rowHeight={ rowHeight }
       shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
       gridHOCMappedColumns={ centerMappedColumns }
       setGridHOCMappedColumns={ setCenterMappedColumns }
-      { ...rest }
-      /* eslint-disable @typescript-eslint/no-non-null-assertion  */
-      width={ rest.width! }
-      height={ rest.height! }
-      /* eslint-enable @typescript-eslint/no-non-null-assertion  */
+      totals={ totals }
+      onChangeColumns={ onChangeColumns }
+      gridPosition="center"
     />
   );
 };
