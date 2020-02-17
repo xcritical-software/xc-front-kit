@@ -41,8 +41,6 @@ const GridHOC = ({
 
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme || contextTheme));
-  themeRef.current = gridTheme(theme || contextTheme);
-
 
   useEffect(() => {
     themeRef.current = gridTheme(theme || contextTheme);

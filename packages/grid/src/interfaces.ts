@@ -1,5 +1,6 @@
-import { ReactElement, CSSProperties } from 'react';
+import { ReactElement, CSSProperties, RefObject } from 'react';
 import { ITheme } from '@xcritical/theme';
+import { CellMeasurerCache } from 'react-virtualized';
 
 
 export interface IItem {
@@ -42,27 +43,35 @@ export interface IGridHOC {
 
 
 export interface IMultyGrid {
-  width: number ;
-  height: number ;
-  shouldMovingColumns?: boolean ;
-  shouldChangeColumnsWidth?: boolean ;
-  shouldChangeLeftColumnsWidth: boolean ;
-  shouldChangeRightColumnsWidth: boolean ;
-  leftMappedColumns?: IColumn[] ;
-  centerMappedColumns: IColumn[] ;
-  rightMappedColumns?: IColumn[] ;
-  setLeftMappedColumns: Function ;
-  setCenterMappedColumns: Function ;
-  setRightMappedColumns: Function ;
-  leftFixedColumns: any ;
-  leftFixedWidth: any ;
-  rightFixedColumns: any ;
-  rightFixedWidth: any ;
-  wrapperSize: any ;
-  notFixedColumns: any ;
-  scrollTop: any ;
-  onScroll: any ;
-  allGridsProps: any ;
+  width: number;
+  height: number;
+  shouldMovingColumns?: boolean;
+  shouldChangeColumnsWidth?: boolean;
+  shouldChangeLeftColumnsWidth?: boolean;
+  shouldChangeRightColumnsWidth?: boolean;
+  leftMappedColumns: IColumn[];
+  centerMappedColumns: IColumn[];
+  rightMappedColumns: IColumn[];
+  setLeftMappedColumns: Function;
+  setCenterMappedColumns: Function;
+  setRightMappedColumns: Function;
+  leftFixedWidth: number;
+  rightFixedWidth: number;
+  wrapperSize: { width: number; height: number };
+  scrollTop: number;
+  onScroll: Function;
+  allGridsProps: IAllGridsProps;
+}
+
+interface IAllGridsProps {
+  totals?: any;
+  onChangeExpand: Function;
+  handleSelect: Function;
+  selectedRows: string[];
+  mappedItems: IMappedItem[];
+  cacheRef: RefObject<CellMeasurerCache>;
+  themeRef: RefObject<IGridTheme>;
+  rowHeight?: number;
 }
 
 

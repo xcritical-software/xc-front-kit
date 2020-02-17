@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from './Grid';
-
-// import { IMultyGrid } from './interfaces';
+import { IMultyGrid } from './interfaces';
 
 
 export const MultyGrid = ({
@@ -30,7 +29,7 @@ export const MultyGrid = ({
   scrollTop,
   onScroll,
   allGridsProps,
-}: any) => (
+}: IMultyGrid) => (
   <>
     { leftMappedColumns.length ? (
       <Grid
