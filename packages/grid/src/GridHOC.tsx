@@ -179,35 +179,48 @@ const GridHOC = ({
   const isMultiGrid = useMemo(() => columns
     .some(({ fixedPosition }: IColumn) => Boolean(fixedPosition)), [columns]);
 
-  const {
-    leftFixedColumns,
-    rightFixedColumns,
-    notFixedColumns,
-  } = useMemo(() => {
-    const $leftFixedColumns = columns.filter(({ fixedPosition }: any) => fixedPosition === 'left');
-    const $rightFixedColumns = columns.filter(({ fixedPosition }: any) => fixedPosition === 'right');
-    const $notFixedColumns = columns.filter(({ fixedPosition }: any) => !fixedPosition);
 
-    return {
-      leftFixedColumns: $leftFixedColumns,
-      rightFixedColumns: $rightFixedColumns,
-      notFixedColumns: $notFixedColumns,
-    };
-  }, [isMultiGrid]);
+  const [mappedColumns, setMappedColumns] = useState(columns);
 
-  const [leftMappedColumns, setLeftMappedColumns] = useState<IColumn[]>(leftFixedColumns);
-  const [centerMappedColumns, setCenterMappedColumns] = useState<IColumn[]>(notFixedColumns);
-  const [rightMappedColumns, setRightMappedColumns] = useState<IColumn[]>(rightFixedColumns);
+  useEffect(() => {
+    setMappedColumns(columns);
+  }, [columns]);
+
+
+  const [leftMappedColumns, setLeftMappedColumns] = useState<IColumn[]>(
+    mappedColumns.filter(({ fixedPosition }: any) => fixedPosition === 'left'),
+  );
+
+  const [centerMappedColumns, setCenterMappedColumns] = useState<IColumn[]>(
+    mappedColumns.filter(({ fixedPosition }: any) => !fixedPosition),
+  );
+
+  const [rightMappedColumns, setRightMappedColumns] = useState<IColumn[]>(
+    mappedColumns.filter(({ fixedPosition }: any) => fixedPosition === 'right'),
+  );
 
   const [leftFixedWidth, setLeftFixedWidth] = useState(0);
   const [rightFixedWidth, setRightFixedWidth] = useState(0);
 
+
+  useEffect(() => {
+    setLeftMappedColumns(mappedColumns.filter(({ fixedPosition }: any) => fixedPosition === 'left'));
+
+    setCenterMappedColumns(mappedColumns.filter(({ fixedPosition }: any) => !fixedPosition));
+
+    setRightMappedColumns(mappedColumns.filter(({ fixedPosition }: any) => fixedPosition === 'right'));
+  }, [mappedColumns]);
+
   useEffect(() => {
     setLeftFixedWidth(
-      leftMappedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0),
+      leftMappedColumns
+        .filter(({ visible }: any) => visible)
+        .reduce((acc, { width }) => Number(acc) + Number(width), 0),
     );
     setRightFixedWidth(
-      rightMappedColumns.reduce((acc, { width }) => Number(acc) + Number(width), 0),
+      rightMappedColumns
+        .filter(({ visible }: any) => visible)
+        .reduce((acc, { width }) => Number(acc) + Number(width), 0),
     );
   }, [leftMappedColumns, rightMappedColumns]);
 
@@ -224,14 +237,10 @@ const GridHOC = ({
       width: 0,
       height: 0,
 
-      leftFixedColumns,
       leftFixedWidth,
-
-      rightFixedColumns,
       rightFixedWidth,
 
       wrapperSize,
-      notFixedColumns,
 
       leftMappedColumns,
       centerMappedColumns,

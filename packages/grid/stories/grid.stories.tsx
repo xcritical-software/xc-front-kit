@@ -340,4 +340,46 @@ storiesOf('New Grid', module)
         </Page>
       </Provider>
     );
+  })
+  .add('Selector columns + fixeds', () => {
+    const [mappedColumns, setMappedColumns] = useState(columnsFixed('both'));
+
+    const handleChangeVisibleColumns = useCallback((i) => {
+      const newColumns = setIn(mappedColumns, !mappedColumns[i].visible, [String(i), 'visible']);
+      console.log(newColumns);
+      setMappedColumns(newColumns);
+    }, [mappedColumns]);
+
+    const handleChangeColumns = (newColumns) => {
+      setMappedColumns(newColumns);
+      console.log(newColumns);
+    };
+    console.log(mappedColumns);
+    return (
+      <>
+        <div>
+          {
+            mappedColumns.map((col, i) => (
+              <div>
+                <label htmlFor={ col.field }>
+
+                  { col.headerName }
+
+                </label>
+                <input type="checkbox" checked={ col.visible } onChange={ () => handleChangeVisibleColumns(i) } />
+              </div>
+            ))
+          }
+        </div>
+        <Grid
+          columns={ mappedColumns }
+          items={ rowsFixed }
+          width={ document.documentElement.clientWidth - 100 }
+          height={ document.documentElement.clientHeight - 100 }
+          rowHeight={ 30 }
+          theme={ AMStheme }
+          onChangeColumns={ handleChangeColumns }
+        />
+      </>
+    );
   });

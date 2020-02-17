@@ -473,8 +473,8 @@ export const columnsFixed = (fixeds) => items
       isExpandable: i === 2,
     };
     /* eslint-disable no-mixed-operators */
-    if ((fixeds === 'both' || fixeds === 'left') && i === 2 || i === 3) column.fixedPosition = 'left';
-    if ((fixeds === 'both' || fixeds === 'right') && i === 5 || i === 4) column.fixedPosition = 'right';
+    if ((fixeds === 'both' || fixeds === 'left') && i === 2) column.fixedPosition = 'left';
+    if ((fixeds === 'both' || fixeds === 'right') && i === 5) column.fixedPosition = 'right';
     /* eslint-enable no-mixed-operators */
 
     return column;

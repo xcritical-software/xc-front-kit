@@ -1,6 +1,8 @@
 import React from 'react';
 import Grid from './Grid';
 
+// import { IMultyGrid } from './interfaces';
+
 
 export const MultyGrid = ({
   width,
@@ -21,21 +23,16 @@ export const MultyGrid = ({
   setRightMappedColumns,
 
 
-  leftFixedColumns,
   leftFixedWidth,
-
-  rightFixedColumns,
   rightFixedWidth,
-
   wrapperSize,
-  notFixedColumns,
 
   scrollTop,
   onScroll,
   allGridsProps,
 }: any) => (
   <>
-    { leftFixedColumns.length ? (
+    { leftMappedColumns.length ? (
       <Grid
         rightScroll={ false }
         bottomScroll={ false }
@@ -45,29 +42,26 @@ export const MultyGrid = ({
         shouldMovingColumns={ false }
         shouldChangeColumnsWidth={ shouldChangeLeftColumnsWidth }
 
-        columns={ leftFixedColumns }
-
         scrollTop={ scrollTop }
         onScrollsyncScroll={ onScroll }
 
         gridHOCMappedColumns={ leftMappedColumns }
         setGridHOCMappedColumns={ setLeftMappedColumns }
+
         resizeGridAfterResizeLastColumn
+
         { ...allGridsProps }
 
       />
     ) : null }
     {
-      notFixedColumns.length ? (
+      centerMappedColumns.length ? (
         <Grid
           rightScroll={ false }
           width={ (width || wrapperSize.width) - leftFixedWidth - rightFixedWidth }
           height={ height }
           shouldMovingColumns={ shouldMovingColumns }
           shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-
-
-          columns={ notFixedColumns }
 
           onScrollsyncScroll={ onScroll }
           scrollTop={ scrollTop }
@@ -80,7 +74,7 @@ export const MultyGrid = ({
         />
       ) : null
     }
-    { rightFixedColumns.length ? (
+    { rightMappedColumns.length ? (
       <Grid
         width={ rightFixedWidth }
         height={ height }
@@ -88,14 +82,12 @@ export const MultyGrid = ({
         shouldMovingColumns={ false }
         shouldChangeColumnsWidth={ shouldChangeRightColumnsWidth }
 
-
-        columns={ rightFixedColumns }
-
         onScrollsyncScroll={ onScroll }
         scrollTop={ scrollTop }
         gridHOCMappedColumns={ rightMappedColumns }
         setGridHOCMappedColumns={ setRightMappedColumns }
         resizeGridAfterResizeLastColumn
+
         { ...allGridsProps }
 
       />

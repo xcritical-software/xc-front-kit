@@ -40,6 +40,32 @@ export interface IGridHOC {
   rowHeight?: number;
 }
 
+
+export interface IMultyGrid {
+  width: number ;
+  height: number ;
+  shouldMovingColumns?: boolean ;
+  shouldChangeColumnsWidth?: boolean ;
+  shouldChangeLeftColumnsWidth: boolean ;
+  shouldChangeRightColumnsWidth: boolean ;
+  leftMappedColumns?: IColumn[] ;
+  centerMappedColumns: IColumn[] ;
+  rightMappedColumns?: IColumn[] ;
+  setLeftMappedColumns: Function ;
+  setCenterMappedColumns: Function ;
+  setRightMappedColumns: Function ;
+  leftFixedColumns: any ;
+  leftFixedWidth: any ;
+  rightFixedColumns: any ;
+  rightFixedWidth: any ;
+  wrapperSize: any ;
+  notFixedColumns: any ;
+  scrollTop: any ;
+  onScroll: any ;
+  allGridsProps: any ;
+}
+
+
 export interface IGrid {
   mappedItems: IMappedItem[];
   width: number;
