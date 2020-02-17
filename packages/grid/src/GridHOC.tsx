@@ -243,7 +243,7 @@ const GridHOC = ({
       onChangeColumnsFromProps([
         ...leftMappedColumns,
         ...centerMappedColumns,
-        ...rightMappedColumns,
+        ...cols,
       ]);
     }
   }, [
