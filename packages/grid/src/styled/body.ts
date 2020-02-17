@@ -5,6 +5,13 @@ import {
 import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
 
 
+const scrollbarSize = 8;
+
+export const TotalsShift = styled.div`
+  height: ${scrollbarSize}px;
+`;
+
+
 const hiddenScrollbar = css`
   div {
     ::-webkit-scrollbar {
@@ -30,7 +37,7 @@ const hiddenScrollbar = css`
 const rightScrollbar = css`
   div {
     ::-webkit-scrollbar {
-      width: 8px;
+      width: ${scrollbarSize}px;
       height: 0px;
     }
     ::-webkit-scrollbar-track {
@@ -53,7 +60,7 @@ const bottomScrollbar = css`
   div {
     ::-webkit-scrollbar {
       width: 0px;
-      height: 8px;
+      height: ${scrollbarSize}px;
     }
     ::-webkit-scrollbar-track {
       background: rgba(0,0,0,0);
@@ -74,8 +81,8 @@ const bottomScrollbar = css`
 const fullScrollbar = css`
  div {
     ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+      width: ${scrollbarSize}px;
+      height: ${scrollbarSize}px;
     }
     ::-webkit-scrollbar-track {
       background: rgba(0,0,0,0);

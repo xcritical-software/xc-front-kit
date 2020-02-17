@@ -24,6 +24,7 @@ import {
   TotalCellContent,
   TotalCell,
   ShiftInsteadButton,
+  TotalsShift,
 } from './styled';
 import { AddIcon, RemoveIcon } from './icons';
 import { searchLastVisible } from './utils';
@@ -263,6 +264,11 @@ const Grid = ({
           scrollTop={ scrollTop }
         />
       </Body>
+      {
+        resizeGridAfterResizeLastColumn && (
+          <TotalsShift />
+        )
+      }
       { totals && (
         <TotalBlock
           width={ fullWidthRef.current }

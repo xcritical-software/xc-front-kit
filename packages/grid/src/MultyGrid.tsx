@@ -56,7 +56,7 @@ export const MultyGrid = ({
     {
       centerMappedColumns.length ? (
         <Grid
-          rightScroll={ false }
+          rightScroll={ !rightMappedColumns.length }
           width={ (width || wrapperSize.width) - leftFixedWidth - rightFixedWidth }
           height={ height }
           shouldMovingColumns={ shouldMovingColumns }

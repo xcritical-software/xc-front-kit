@@ -354,7 +354,7 @@ storiesOf('New Grid', module)
       setMappedColumns(newColumns);
       console.log(newColumns);
     };
-    console.log(mappedColumns);
+
     return (
       <>
         <div>
