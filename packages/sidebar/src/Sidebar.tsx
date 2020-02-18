@@ -36,21 +36,29 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   isRTL = false,
   minWidth = 30,
   maxWidth = 400,
+  rollWidth = 10,
+  defaultWidth = maxWidth,
   navWidth = 90,
   separatorWidth = 10,
+  onChangeWidth = () => {},
 }) => {
   const themeContext = useContext(ThemeContext);
 
-  const [width, setWidth] = useState(maxWidth);
+  const [width, setWidth] = useState(defaultWidth);
   const [animate, setAnimate] = useState(false);
-  const [arrowToRight, setArrowToRight] = useState(false);
+  const [arrowToRight, setArrowToRight] = useState(defaultWidth < maxWidth * 0.3);
   const [antiSelectLayer, setAntiSelectLayer] = useState(false);
   const [offsetLeft, changeOffsetLeft] = useState(0);
 
   const sidebarRef = useRef<HTMLDivElement>(null);
   const observerRef: React.MutableRefObject<ResizeObserver | undefined> = useRef();
   const clickXRef = useRef(0);
-  const widthRef = useRef(maxWidth);
+  const widthRef = useRef(defaultWidth);
+
+  useEffect(() => {
+    setWidth(defaultWidth);
+    widthRef.current = defaultWidth;
+  }, [defaultWidth]);
 
   const handleMouseMove = useCallback(
     (e) => {
@@ -65,26 +73,35 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
           widthRef.current = maxWidth;
           setWidth(maxWidth);
           setArrowToRight(false);
+          onChangeWidth(maxWidth);
         }
 
         return;
       }
 
       if (newWidth <= 0) {
-        widthRef.current = minWidth;
-        setWidth(minWidth);
+        widthRef.current = rollWidth;
+        setWidth(rollWidth);
         setArrowToRight(true);
+        onChangeWidth(rollWidth);
       } else if (newWidth <= minWidth) {
-        widthRef.current = minWidth;
-        setWidth(minWidth);
+        widthRef.current = rollWidth;
+        setWidth(rollWidth);
         setArrowToRight(true);
+        onChangeWidth(rollWidth);
+
+        if (newWidth < width) {
+          setAnimate(true);
+          document.removeEventListener('mousemove', handleMouseMove);
+        }
       } else {
         widthRef.current = newWidth;
         setWidth(newWidth);
         setArrowToRight(newWidth < maxWidth * 0.3);
+        onChangeWidth(newWidth);
       }
     },
-    [isRTL, maxWidth, minWidth, width],
+    [isRTL, maxWidth, rollWidth, width],
   );
 
   const handleSelectStart = useCallback((e) => {
@@ -116,11 +133,13 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     if (arrowToRight) {
       setWidth(maxWidth);
       setArrowToRight(false);
+      onChangeWidth(maxWidth);
     } else {
-      setWidth(minWidth);
+      setWidth(rollWidth);
+      onChangeWidth(rollWidth);
       setArrowToRight(true);
     }
-  }, [arrowToRight, maxWidth, minWidth]);
+  }, [arrowToRight, maxWidth, rollWidth]);
 
   const createObserver = (): ResizeObserver | undefined => {
     if (sidebarRef.current === null) {

@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0;
   }
-  
+
   html {
     box-sizing: border-box;
   }
@@ -49,7 +49,7 @@ const SidebarNavigate = styled.div`
   padding-bottom: 60px;
   flex-grow: 1;
   flex-shrink: 1;
-  
+
   a {
     position: relative;
     display: block;
@@ -221,6 +221,9 @@ const propsTheme: IThemeNamespace = {
 const props = {
   navComponent: <NavPanel />,
   withArrow: true,
+  minWidth: 200,
+  defaultWidth: 300,
+  maxWidth: 500,
 };
 
 storiesOf('Sidebar', module)
@@ -287,4 +290,27 @@ storiesOf('Sidebar', module)
         </Switch>
       </BrowserRouter>
     </ThemeProvider>
-  ));
+  ))
+  .add('With callback(save to sessionStorage)', () => {
+    const onChangeWidth = (width) => {
+      sessionStorage.setItem('sidebar-width', width);
+    };
+
+    return (
+      <BrowserRouter>
+        <GlobalStyle />
+        <Sidebar
+          { ...props }
+          defaultWidth={ (Number(sessionStorage.getItem('sidebar-width')) || 200) }
+          onChangeWidth={ onChangeWidth }
+          theme={ propsTheme }
+        >
+          { list(100) }
+        </Sidebar>
+        <Switch>
+          { routerConfig.map(({ path, component, exact }: any) => (
+            <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+        </Switch>
+      </BrowserRouter>
+    );
+  });
