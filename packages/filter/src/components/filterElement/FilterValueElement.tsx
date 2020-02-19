@@ -12,7 +12,7 @@ export const FilterValueElement: React.FC<ISelectedFilterComponent> = React.memo
   onChange,
 }) => (
   currentFilter?.Element
-    ? currentFilter.Element(value, onChange)
+    ? currentFilter.Element(value, onChange, condition)
     : (
       <Input
         disabled={ !condition }
