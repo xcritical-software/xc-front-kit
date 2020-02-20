@@ -483,7 +483,7 @@ export const columnsFixed = (fixeds) => items
 export const totalsFixed = items
   .reduce((acc, el) => ({ ...acc, [el]: Math.floor(Math.random() * 100 + 50) }), {});
 
-export const rowsFixed = new Array(100).fill(true)
+export const rowsFixed = new Array(1000).fill(true)
   .map((_el, i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {
     children: i === 3 || i === 10 || i === 40
       ? new Array(5).fill(true)

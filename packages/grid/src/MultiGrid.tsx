@@ -68,7 +68,8 @@ export const MultiGrid = ({
           gridHOCMappedColumns={ centerMappedColumns }
           setGridHOCMappedColumns={ setCenterMappedColumns }
           gridPosition="center"
-
+          overscanColumnCount={4}
+          isScrollingOptOut={true}
           { ...allGridsProps }
         />
       ) : null

@@ -58,6 +58,8 @@ const Grid = ({
   setGridHOCMappedColumns,
   resizeGridAfterResizeLastColumn,
   gridPosition,
+  overscanColumnCount,
+  isScrollingOptOut
 }: IGrid) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(
@@ -99,8 +101,10 @@ const Grid = ({
     }
   }, [setScrollLeft, onScrollsyncScroll]);
 
+
+
   const cellRenderer = ({
-    columnIndex, key, parent, rowIndex, style,
+    columnIndex, key, parent, rowIndex, style
   }: GridCellProps) => {
     const isFirstColumn = columnIndex === 0;
 
@@ -130,7 +134,9 @@ const Grid = ({
         rowIndex={ rowIndex }
       >
         <BodyCell
-          onClick={ (e: MouseEvent) => handleSelect(e, mappedItems[rowIndex].key) }
+          onClick={ (e: MouseEvent) => {
+            handleSelect(e, mappedItems[rowIndex].key)
+          } }
           key={ key }
           selected={ isSelected }
           style={ {
@@ -214,6 +220,10 @@ const Grid = ({
   );
 
   useEffect(() => {
+    if (isScrollingOptOut) gridRef.current?.recomputeGridSize()
+  }, [selectedRows])
+
+  useEffect(() => {
     if (gridRef.current) gridRef.current.recomputeGridSize();
     if (cacheRef.current && !rowHeight) cacheRef.current.clearAll();
   }, [mappedColumns, mappedItems]);
@@ -263,6 +273,8 @@ const Grid = ({
           width={ width }
           onScroll={ handleScroll }
           scrollTop={ scrollTop }
+          overscanColumnCount={overscanColumnCount}
+          isScrollingOptOut={isScrollingOptOut}
         />
       </Body>
       {

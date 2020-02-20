@@ -98,6 +98,9 @@ export interface IGrid {
   gridHOCMappedColumns: any;
   resizeGridAfterResizeLastColumn?: boolean;
   gridPosition: 'left' | 'center' | 'right';
+  overscanColumnCount?: any;
+  isScrollingOptOut?: any;
+
 }
 
 export interface IMappedItem extends IItem {
