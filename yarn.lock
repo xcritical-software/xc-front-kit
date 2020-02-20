@@ -2117,18 +2117,6 @@
   dependencies:
     lodash "^4.17.15"
 
-"@storybook/node-logger@5.3.12":
-  version "5.3.12"
-  resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-5.3.12.tgz#df25b725583cb5aa799b6c5b8103a8ea0921d3ba"
-  integrity sha512-ytIqS1Lx+gWFBNxwWOK7F63702YYsoU90UFQNUMC44lC1L7tOI9BQXtGIWTvmXJYns+O5pHHOVKkHLT9EGX2OA==
-  dependencies:
-    "@types/npmlog" "^4.1.2"
-    chalk "^3.0.0"
-    core-js "^3.0.1"
-    npmlog "^4.1.2"
-    pretty-hrtime "^1.0.3"
-    regenerator-runtime "^0.13.3"
-
 "@storybook/node-logger@5.3.13":
   version "5.3.13"
   resolved "https://registry.yarnpkg.com/@storybook/node-logger/-/node-logger-5.3.13.tgz#f41c611c3b200add8d85777f19970bdabaa94634"
@@ -2538,9 +2526,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dates@^17.1.5":
-  version "17.1.5"
-  resolved "https://registry.yarnpkg.com/@types/react-dates/-/react-dates-17.1.5.tgz#3b293c7334372f15f04beaac02df0041316be2fc"
+"@types/react-dates@^17.1.9":
+  version "17.1.9"
+  resolved "https://registry.yarnpkg.com/@types/react-dates/-/react-dates-17.1.9.tgz#6f7b7090ffbd078acef76ffb3e2f3866cd5d4fd3"
+  integrity sha512-bUUZnuhu3UVgIeU5WdT8dX93L5EhNqdokHsSwcFklfsfOGPUz9mbLPc0KWs2NfNEhVXuyuSK2S4rTMtlDDik9A==
   dependencies:
     "@types/react" "*"
     moment ">=2.17.1"
