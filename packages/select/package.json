@@ -30,7 +30,7 @@
 		"@xcritical/theme": "^1.0.0",
 		"lodash.isempty": "4.x",
 		"micro-memoize": "^4.0.8",
-		"polished": "^3.0.0",
+		"polished": "^3.4.4",
 		"react-select": "3.0.8",
 		"utilitify": "^1.0.2"
 	},
