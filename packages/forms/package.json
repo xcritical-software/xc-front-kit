@@ -29,13 +29,13 @@
 		"@xcritical/button": "*",
 		"@xcritical/input": "*",
 		"@xcritical/select": "*",
-		"react-redux": "^7.0.2",
+		"react-redux": "^7.2.0",
 		"redux": "^4.0.5"
 	},
 	"peerDependencies": {
 		"react": "^16.8.3",
 		"redux": "^4.0.5",
-		"react-redux": "^7.0.2"
+		"react-redux": "^7.2.0"
 	},
 	"dependencies": {
 		"utilitify": "^1.0.2",
