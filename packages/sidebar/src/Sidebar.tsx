@@ -84,16 +84,6 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
         setWidth(rollWidth);
         setArrowToRight(true);
         onChangeWidth(rollWidth);
-      } else if (newWidth <= minWidth) {
-        widthRef.current = rollWidth;
-        setWidth(rollWidth);
-        setArrowToRight(true);
-        onChangeWidth(rollWidth);
-
-        if (newWidth < width) {
-          setAnimate(true);
-          document.removeEventListener('mousemove', handleMouseMove);
-        }
       } else {
         widthRef.current = newWidth;
         setWidth(newWidth);
@@ -109,6 +99,13 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   }, []);
 
   const handleMouseUp = useCallback(() => {
+    if (widthRef.current <= minWidth) {
+      widthRef.current = rollWidth;
+      setWidth(rollWidth);
+      setArrowToRight(true);
+      onChangeWidth(rollWidth);
+      setAnimate(true);
+    }
     document.removeEventListener('selectstart', handleSelectStart);
     document.removeEventListener('mouseup', handleMouseUp);
     document.removeEventListener('mousemove', handleMouseMove);
