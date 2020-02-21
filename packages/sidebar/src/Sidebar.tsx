@@ -60,8 +60,9 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
 
   useEffect(() => {
     setWidth( collapsed ? rollWidth : propsWidth);
+    setArrowToRight(collapsed)
     // widthRef.current = collapsed ? rollWidth : propsWidth;
-  }, [propsWidth]);
+  }, [collapsed, propsWidth]);
 
   const handleMouseMove = useCallback(
     (e) => {
@@ -83,6 +84,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
         // widthRef.current = rollWidth;
         setWidth(rollWidth);
       } else {
+        // console.log('!!!!!!!', newWidth)
         // widthRef.current = newWidth;
         setWidth(newWidth);
       }
@@ -93,10 +95,12 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   const handleSelectStart = useCallback((e) => {
     e.preventDefault();
   }, []);
-
+  /* вернуть реф ширины потому что в любом случае даже с зависимостями новый width не попадает в mouseUp */
+  console.log('!!!!!!!!!!!!!!!!!', width)
   const handleMouseUp = useCallback(() => {
     if (width <= minWidth) {
       setWidth(rollWidth);
+      console.log('!!!!!!!!!!!!!!!!!', width)
       onChangeWidth({
         collapsed: true,
         width: minWidth + 1
@@ -110,7 +114,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     document.removeEventListener('mouseup', handleMouseUp);
     document.removeEventListener('mousemove', handleMouseMove);
     setAntiSelectLayer(false);
-  }, [handleSelectStart, handleMouseMove, minWidth,/* widthRef.current,*/ rollWidth]);
+  }, [handleSelectStart, handleMouseMove, minWidth,/* widthRef.current,*/ rollWidth, width]);
   // const handleMouseUp = useCallback(() => {
   //   if (widthRef.current <= minWidth) {
   //     widthRef.current = rollWidth;
@@ -181,6 +185,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
       propsWidth,
       width,
       arrowToRight,
+      collapsed
       // widthRef: widthRef.current
     })
   })
