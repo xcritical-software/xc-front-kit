@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useState } from 'react';
 import { MdiReactIconComponentType } from 'mdi-react';
 import { storiesOf } from '@storybook/react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
@@ -292,8 +292,14 @@ storiesOf('Sidebar', module)
     </ThemeProvider>
   ))
   .add('With callback(save to sessionStorage)', () => {
-    const onChangeWidth = (width) => {
-      sessionStorage.setItem('sidebar-width', width);
+    const [params, setParams] = useState({
+      collapsed: true,
+      width: 300
+    })
+
+
+    const onChangeWidth = (newParams) => {
+      setParams(newParams)
     };
 
     return (
@@ -301,7 +307,7 @@ storiesOf('Sidebar', module)
         <GlobalStyle />
         <Sidebar
           { ...props }
-          defaultWidth={ (Number(sessionStorage.getItem('sidebar-width')) || 200) }
+          params={params}
           onChangeWidth={ onChangeWidth }
           theme={ propsTheme }
         >
