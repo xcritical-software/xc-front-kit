@@ -56,12 +56,12 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   const sidebarRef = useRef<HTMLDivElement>(null);
   const observerRef: React.MutableRefObject<ResizeObserver | undefined> = useRef();
   const clickXRef = useRef(0);
-  // const widthRef = useRef(propsWidth);
+  const widthRef = useRef(propsWidth);
 
   useEffect(() => {
     setWidth( collapsed ? rollWidth : propsWidth);
     setArrowToRight(collapsed)
-    // widthRef.current = collapsed ? rollWidth : propsWidth;
+    widthRef.current = collapsed ? rollWidth : propsWidth;
   }, [collapsed, propsWidth]);
 
   const handleMouseMove = useCallback(
@@ -73,21 +73,28 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
         : width + (currentX - clickXRef.current);
 
       if (newWidth > maxWidth) {
-        // if (widthRef.current < maxWidth) {
-          // widthRef.current = maxWidth;
+        if (widthRef.current < maxWidth) {
+          widthRef.current = maxWidth;
           setWidth(maxWidth);
-        // }
+        }
+        onChangeWidth({
+          collapsed: false,
+          width: widthRef.current
+        })
         return;
       }
 
       if (newWidth <= rollWidth) {
-        // widthRef.current = rollWidth;
+        widthRef.current = rollWidth;
         setWidth(rollWidth);
       } else {
-        // console.log('!!!!!!!', newWidth)
-        // widthRef.current = newWidth;
+        widthRef.current = newWidth;
         setWidth(newWidth);
       }
+      onChangeWidth({
+        collapsed: false,
+        width: widthRef.current
+      })
     },
     [isRTL, maxWidth, rollWidth, width],
   );
@@ -95,40 +102,25 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   const handleSelectStart = useCallback((e) => {
     e.preventDefault();
   }, []);
-  /* вернуть реф ширины потому что в любом случае даже с зависимостями новый width не попадает в mouseUp */
-  console.log('!!!!!!!!!!!!!!!!!', width)
-  const handleMouseUp = useCallback(() => {
-    if (width <= minWidth) {
+
+  const handleMouseUp = useCallback((e) => {
+    if (widthRef.current <= minWidth) {
       setWidth(rollWidth);
-      console.log('!!!!!!!!!!!!!!!!!', width)
-      onChangeWidth({
-        collapsed: true,
-        width: minWidth + 1
-      }
-        );
       setAnimate(true);
-    } else {
-      onChangeWidth({width, collapsed: false});
+      const {tagName} = e.target
+      if (tagName !== 'BUTTON' && tagName !== 'svg') {
+        onChangeWidth({
+          collapsed: true,
+          width: minWidth + 1
+        })
+      }
     }
     document.removeEventListener('selectstart', handleSelectStart);
     document.removeEventListener('mouseup', handleMouseUp);
     document.removeEventListener('mousemove', handleMouseMove);
     setAntiSelectLayer(false);
-  }, [handleSelectStart, handleMouseMove, minWidth,/* widthRef.current,*/ rollWidth, width]);
-  // const handleMouseUp = useCallback(() => {
-  //   if (widthRef.current <= minWidth) {
-  //     widthRef.current = rollWidth;
-  //     setWidth(rollWidth);
-  //     onChangeWidth(minWidth + 1);
-  //     setAnimate(true);
-  //   } else {
-  //     onChangeWidth(widthRef.current);
-  //   }
-  //   document.removeEventListener('selectstart', handleSelectStart);
-  //   document.removeEventListener('mouseup', handleMouseUp);
-  //   document.removeEventListener('mousemove', handleMouseMove);
-  //   setAntiSelectLayer(false);
-  // }, [handleSelectStart, handleMouseMove, minWidth, widthRef.current, rollWidth]);
+  }, [handleSelectStart, handleMouseMove, minWidth, widthRef.current, rollWidth, width]);
+
 
 
 
@@ -150,14 +142,14 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
       setWidth(propsWidth);
       onChangeWidth({
         collapsed: false,
-        width
+        width: propsWidth
       })
       // widthRef.current = propsWidth;
     } else {
       setWidth(rollWidth);
       onChangeWidth({
         collapsed: true,
-        width
+        width: propsWidth
       })
       // widthRef.current = rollWidth;
     }
@@ -180,15 +172,15 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     return observer;
   };
 
-  useEffect(() => {
-    console.log({
-      propsWidth,
-      width,
-      arrowToRight,
-      collapsed
-      // widthRef: widthRef.current
-    })
-  })
+  // useEffect(() => {
+  //   console.log({
+  //     propsWidth,
+  //     width,
+  //     arrowToRight,
+  //     collapsed
+  //     // widthRef: widthRef.current
+  //   })
+  // })
 
 
   useEffect(() => {
