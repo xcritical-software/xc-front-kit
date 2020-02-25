@@ -61,7 +61,7 @@
     "@types/react-dates": "^17.1.9",
     "@types/react-router": "^5.1.4",
     "@types/react-router-dom": "^5.1.2",
-    "@types/styled-components": "^4.4.3",
+    "@types/styled-components": "^5.0.1",
     "@xcritical/eslint-plugin-xcritical": "^2.1.0",
     "@xcritical/gulpify": "^2.0.0",
     "babel-loader": "^8.0.6",
