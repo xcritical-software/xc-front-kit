@@ -59,9 +59,12 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   const widthRef = useRef(propsWidth);
 
   useEffect(() => {
+    setArrowToRight(width < minWidth);
+  }, [minWidth, propsWidth, width]);
+
+  useEffect(() => {
     setWidth(collapsed ? rollWidth : propsWidth);
     setArrowToRight(collapsed);
-    widthRef.current = collapsed ? rollWidth : propsWidth;
   }, [collapsed, propsWidth]);
 
   const handleMouseMove = useCallback(
@@ -95,15 +98,17 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     e.preventDefault();
   }, []);
 
-  const handleMouseUp = useCallback(() => {
+  const handleMouseUp = useCallback((e) => {
     if (widthRef.current <= minWidth) {
       setWidth(rollWidth);
       setAnimate(true);
     }
-    onChangeWidth({
-      collapsed: widthRef.current < minWidth,
-      width: widthRef.current < minWidth ? minWidth + 1 : widthRef.current,
-    });
+    if (!e.target.closest('button')) {
+      onChangeWidth({
+        collapsed: widthRef.current < minWidth,
+        width: widthRef.current < minWidth ? minWidth + 1 : widthRef.current,
+      });
+    }
     document.removeEventListener('selectstart', handleSelectStart);
     document.removeEventListener('mouseup', handleMouseUp);
     document.removeEventListener('mousemove', handleMouseMove);
@@ -130,6 +135,10 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     } else {
       setWidth(rollWidth);
     }
+    onChangeWidth({
+      collapsed: !arrowToRight,
+      width: widthRef.current < minWidth ? minWidth + 1 : widthRef.current,
+    });
   }, [arrowToRight, maxWidth, rollWidth, propsWidth]);
 
   const createObserver = (): ResizeObserver | undefined => {
@@ -147,9 +156,6 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     return observer;
   };
 
-  useEffect(() => {
-    setArrowToRight(width < minWidth);
-  }, [minWidth, propsWidth, width]);
 
   useEffect(() => {
     observerRef.current = createObserver();
