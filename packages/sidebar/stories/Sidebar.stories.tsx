@@ -292,20 +292,21 @@ storiesOf('Sidebar', module)
     </ThemeProvider>
   ))
   .add('With callback(save to sessionStorage)', () => {
+    const sSParams = sessionStorage.getItem('sidebar-params');
     const [params, setParams] = useState(
-      sessionStorage.getItem('sidebar-params') ? 
-      JSON.parse(sessionStorage.getItem('sidebar-params')!) :
-        {
+      sSParams
+        ? JSON.parse(sSParams)
+        : {
           collapsed: false,
-          width: 300
-        }
-      )
+          width: 300,
+        },
+    );
 
 
     const onChangeWidth = (newParams) => {
-      console.log(newParams)
-      sessionStorage.setItem('sidebar-params', JSON.stringify(newParams))
-      setParams(newParams)
+      console.log(newParams);
+      sessionStorage.setItem('sidebar-params', JSON.stringify(newParams));
+      setParams(newParams);
     };
 
     return (
@@ -313,7 +314,7 @@ storiesOf('Sidebar', module)
         <GlobalStyle />
         <Sidebar
           { ...props }
-          params={params}
+          params={ params }
           onChangeWidth={ onChangeWidth }
           theme={ propsTheme }
         >
