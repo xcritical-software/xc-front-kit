@@ -45,6 +45,6 @@
 		"lodash.get": "4.x",
 		"lodash.isempty": "4.x",
 		"utilitify": "^1.0.2",
-		"uuid": "3.4.0"
+		"uuid": "7.0.1"
 	}
 }
