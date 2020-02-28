@@ -31,6 +31,7 @@
 	},
 	"dependencies": {
 		"@xcritical/popper": "^1.0.0",
-		"@xcritical/theme": "^1.0.0"
+		"@xcritical/theme": "^1.0.0",
+		"resize-observer-polyfill": "^1.5.1"
 	}
 }

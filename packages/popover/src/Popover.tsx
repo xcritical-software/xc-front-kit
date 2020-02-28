@@ -5,6 +5,7 @@ import React, {
   useRef,
 } from 'react';
 
+import ResizeObserver from 'resize-observer-polyfill';
 import Popper, { IRenderPopperProps } from '@xcritical/popper';
 
 import { IPopover, IPopoverEvents } from './interfaces';
@@ -21,6 +22,8 @@ export const Popover: React.FC<IPopover> = ({
   onVisibleChange,
   withArrow = true,
   shouldFitContainer = false,
+  observeContentSize = false,
+  hoverOutTimeout = 150,
   trigger = 'hover',
   theme,
   appearance = 'default',
@@ -28,6 +31,8 @@ export const Popover: React.FC<IPopover> = ({
 }) => {
   const popoverTargetRef = useRef<any>();
   const popoverContentRef = useRef<any>();
+  const popperScheduleUpdateRef = useRef<any>();
+  const popoverContentObserverRef: React.MutableRefObject<ResizeObserver | undefined> = useRef();
 
   const [_visible, _setVisible] = useState(false);
   const [hideTimeoutId, setHideTimeoutId] = useState<null | number>(null);
@@ -59,18 +64,6 @@ export const Popover: React.FC<IPopover> = ({
     changeVisible(false);
   }, [_visible, changeVisible]);
 
-  useEffect(() => {
-    if (trigger === 'click') {
-      document.addEventListener('click', handleClick);
-
-      return () => {
-        document.removeEventListener('click', handleClick);
-      };
-    }
-
-    return () => {};
-  }, [trigger, handleClick]);
-
   const handleMouseOver = useCallback((e: React.MouseEvent): void => {
     if (e.target === popoverTargetRef.current) {
       return;
@@ -88,11 +81,32 @@ export const Popover: React.FC<IPopover> = ({
     const timeoutId = setTimeout(() => {
       _setVisible(false);
       changeVisible(false);
-    }, 150);
+    }, hoverOutTimeout);
 
     setHideTimeoutId(timeoutId);
-  }, [changeVisible]);
+  }, [changeVisible, hoverOutTimeout]);
 
+  const createContentObserver = useCallback(() => {
+    if (popoverContentRef.current) {
+      const observer = new ResizeObserver(() => {
+        if (popperScheduleUpdateRef.current) {
+          popperScheduleUpdateRef.current();
+        }
+      });
+
+      popoverContentObserverRef.current = observer;
+
+      observer.observe(popoverContentRef.current);
+    }
+  }, []);
+
+  const destroyContentObserver = useCallback(() => {
+    if (popoverContentObserverRef.current) {
+      popoverContentObserverRef.current.disconnect();
+    }
+  }, []);
+
+  const isVisible = visible === undefined ? _visible : visible;
   const events: IPopoverEvents = {};
 
   if (trigger === 'hover') {
@@ -100,54 +114,86 @@ export const Popover: React.FC<IPopover> = ({
     events.onMouseOut = handleMouseOut;
   }
 
+  useEffect(() => {
+    if (observeContentSize) {
+      if (isVisible) {
+        createContentObserver();
+      } else {
+        destroyContentObserver();
+      }
+    }
+  }, [observeContentSize, isVisible, createContentObserver, destroyContentObserver]);
+
+  useEffect(() => () => {
+    if (observeContentSize) {
+      destroyContentObserver();
+    }
+  }, [observeContentSize, destroyContentObserver]);
+
+  useEffect(() => {
+    if (trigger === 'click') {
+      document.addEventListener('click', handleClick);
+
+      return () => {
+        document.removeEventListener('click', handleClick);
+      };
+    }
+
+    return () => {};
+  }, [trigger, handleClick]);
+
   return (
     <Popper
       position={ position }
       autoFlip={ autoFlip }
       positionFixed={ positionFixed }
-      visible={ visible === undefined ? _visible : visible }
+      visible={ isVisible }
     >
-      { (popperProps: IRenderPopperProps) => (
-        <PopoverWrapper
-          ref={ (node) => {
-            const { targetRef } = popperProps;
+      { (popperProps: IRenderPopperProps) => {
+        popperScheduleUpdateRef.current = popperProps.scheduleUpdate;
 
-            targetRef.current = node && node.firstChild;
-            popoverTargetRef.current = node;
-          } }
-          { ...events }
-        >
-          { children }
-          { popperProps.visible && (
-            <Content
-              ref={ (node) => {
-                const { contentRef } = popperProps;
+        return (
+          <PopoverWrapper
+            ref={ (node) => {
+              const { targetRef } = popperProps;
 
-                contentRef.current = node;
-                popoverContentRef.current = node;
-              } }
-              data-content-position={ position }
-              shouldFitContainer={ shouldFitContainer }
-              theme={ theme }
-              appearance={ appearance }
-              baseAppearance={ baseAppearance }
-              style={ popperProps.popperStyles }
-            >
-              { content }
-              { withArrow && (
-                <Arrow
-                  x-arrow=""
-                  style={ popperProps.arrowStyles }
-                  data-arrow-position={ popperProps.position }
-                  theme={ theme }
-                  appearance={ appearance }
-                  baseAppearance={ baseAppearance }
-                />
-              ) }
-            </Content>
-          ) }
-        </PopoverWrapper>
-      ) }
+              targetRef.current = node && node.firstChild;
+              popoverTargetRef.current = node;
+            } }
+            { ...events }
+          >
+            { children }
+            { popperProps.visible && (
+              <Content
+                ref={ (node) => {
+                  const { contentRef } = popperProps;
+
+                  contentRef.current = node;
+                  popoverContentRef.current = node;
+                } }
+                data-content-position={ popperProps.position }
+                shouldFitContainer={ shouldFitContainer }
+                theme={ theme }
+                appearance={ appearance }
+                baseAppearance={ baseAppearance }
+                style={ popperProps.popperStyles }
+              >
+                { content }
+                { withArrow && (
+                  <Arrow
+                    x-arrow=""
+                    style={ popperProps.arrowStyles }
+                    data-arrow-position={ popperProps.position }
+                    theme={ theme }
+                    appearance={ appearance }
+                    baseAppearance={ baseAppearance }
+                  />
+                ) }
+              </Content>
+            ) }
+          </PopoverWrapper>
+        );
+      } }
     </Popper>
   );
 };

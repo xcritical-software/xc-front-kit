@@ -38,6 +38,12 @@ export const Popper: React.FC<IPopperProps> = ({
     position,
   });
 
+  const scheduleUpdate = useCallback(() => {
+    if (popperInstance.current) {
+      popperInstance.current.scheduleUpdate();
+    }
+  }, []);
+
   const scheduleSetState = useRef(rafSchedule((data: Data) => {
     setState({
       popperStyles: data.styles,
@@ -92,5 +98,6 @@ export const Popper: React.FC<IPopperProps> = ({
     position: state.position,
     arrowStyles: state.arrowStyles,
     popperStyles: state.popperStyles,
+    scheduleUpdate,
   });
 };
