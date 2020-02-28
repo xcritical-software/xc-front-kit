@@ -23,3 +23,7 @@ export const SomeBlock = styled.div<{ height: number }>`
   height: ${({ height }) => `${height}px`};
   border: 1px solid green;
 `;
+
+export const SelectorColumnsWrapper = styled.div`
+  display: flex;
+`;

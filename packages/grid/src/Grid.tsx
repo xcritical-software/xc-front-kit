@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, {
   useState,
   useRef,
@@ -59,7 +60,7 @@ const Grid = ({
   resizeGridAfterResizeLastColumn,
   gridPosition,
   overscanColumnCount,
-  isScrollingOptOut
+  isScrollingOptOut,
 }: IGrid) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(
@@ -102,9 +103,8 @@ const Grid = ({
   }, [setScrollLeft, onScrollsyncScroll]);
 
 
-
   const cellRenderer = ({
-    columnIndex, key, parent, rowIndex, style
+    columnIndex, key, parent, rowIndex, style,
   }: GridCellProps) => {
     const isFirstColumn = columnIndex === 0;
 
@@ -127,7 +127,7 @@ const Grid = ({
 
     return (
       <CellMeasurer
-        cache={ cacheRef.current }
+        cache={ cacheRef.current! }
         columnIndex={ columnIndex }
         key={ key }
         parent={ parent }
@@ -135,7 +135,7 @@ const Grid = ({
       >
         <BodyCell
           onClick={ (e: MouseEvent) => {
-            handleSelect(e, mappedItems[rowIndex].key)
+            handleSelect(e, mappedItems[rowIndex].key);
           } }
           key={ key }
           selected={ isSelected }
@@ -220,8 +220,8 @@ const Grid = ({
   );
 
   useEffect(() => {
-    if (isScrollingOptOut) gridRef.current?.recomputeGridSize()
-  }, [selectedRows])
+    if (isScrollingOptOut) gridRef.current?.recomputeGridSize();
+  }, [selectedRows]);
 
   useEffect(() => {
     if (gridRef.current) gridRef.current.recomputeGridSize();
@@ -231,7 +231,7 @@ const Grid = ({
   const {
     header: { height: headerHeight = 0 } = {},
     totals: { height: totalsHeight = 0 } = {},
-  } = themeRef.current;
+  } = themeRef.current!;
 
   const gridHeight = useMemo(() => Number(
     height
@@ -253,7 +253,7 @@ const Grid = ({
         onChangeWidth={ handleChangeWidth }
         onChangeMoving={ handleChangeMoving }
         setChangingColumns={ setChangingColumns }
-        theme={ themeRef.current }
+        theme={ themeRef.current! }
         shouldMovingColumns={ shouldMovingColumns }
         shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
       />
@@ -265,16 +265,16 @@ const Grid = ({
           ref={ gridRef as MutableRefObject<VirtualisedGrid> }
           columnCount={ filteredColums.length }
           columnWidth={ ({ index }: any) => filteredColums[index].width }
-          deferredMeasurementCache={ cacheRef.current }
+          deferredMeasurementCache={ cacheRef.current! }
           height={ gridHeight }
           cellRenderer={ cellRenderer }
           rowCount={ mappedItems.length }
-          rowHeight={ cacheRef.current.rowHeight }
+          rowHeight={ cacheRef.current!.rowHeight }
           width={ width }
           onScroll={ handleScroll }
           scrollTop={ scrollTop }
-          overscanColumnCount={overscanColumnCount}
-          isScrollingOptOut={isScrollingOptOut}
+          overscanColumnCount={ overscanColumnCount }
+          isScrollingOptOut={ isScrollingOptOut }
         />
       </Body>
       {

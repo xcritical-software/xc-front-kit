@@ -64,7 +64,7 @@ export interface IMultiGrid {
 }
 
 interface IAllGridsProps {
-  totals?: any;
+  totals?: IItem;
   onChangeExpand: Function;
   handleSelect: Function;
   selectedRows: string[];
@@ -91,15 +91,15 @@ export interface IGrid {
   onChangeExpand: Function;
   handleSelect: Function;
   selectedRows: string[];
-  cacheRef: any;
-  themeRef: any;
+  cacheRef: RefObject<CellMeasurerCache>;
+  themeRef: RefObject<IGridTheme>;
   rowHeight?: number;
-  setGridHOCMappedColumns: any;
-  gridHOCMappedColumns: any;
+  setGridHOCMappedColumns: Function;
+  gridHOCMappedColumns: IColumn[];
   resizeGridAfterResizeLastColumn?: boolean;
   gridPosition: 'left' | 'center' | 'right';
-  overscanColumnCount?: any;
-  isScrollingOptOut?: any;
+  overscanColumnCount?: number;
+  isScrollingOptOut?: boolean;
 
 }
 

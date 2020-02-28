@@ -30,6 +30,7 @@ import {
   Content,
   GridWrapper,
   SomeBlock,
+  SelectorColumnsWrapper,
 } from './styled';
 import './reset.css';
 
@@ -357,7 +358,7 @@ storiesOf('New Grid', module)
 
     return (
       <>
-        <div>
+        <SelectorColumnsWrapper>
           {
             mappedColumns.map((col, i) => (
               <div>
@@ -370,7 +371,7 @@ storiesOf('New Grid', module)
               </div>
             ))
           }
-        </div>
+        </SelectorColumnsWrapper>
         <Grid
           columns={ mappedColumns }
           items={ rowsFixed }
