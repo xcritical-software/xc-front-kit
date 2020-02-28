@@ -30,7 +30,10 @@ export interface ISidebarProps {
   separatorWidth?: number;
   rollWidth?: number;
   onChangeWidth?: Function;
-  params?: any;
+  params?: {
+    collapsed: boolean;
+    width: number;
+  };
 }
 
 export interface ISidebarStates {
