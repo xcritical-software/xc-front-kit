@@ -60,7 +60,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   useEffect(() => {
     setWidth(collapsed ? minimizedWidth : propsWidth);
     setArrowToRight(collapsed);
-  }, [collapsed, propsWidth]);
+  }, [collapsed, propsWidth, minimizedWidth]);
 
   useEffect(() => {
     setArrowToRight(width < minWidth);
