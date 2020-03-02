@@ -303,8 +303,7 @@ storiesOf('Sidebar', module)
     );
 
 
-    const onChangeWidth = (newParams) => {
-      // console.log(newParams);
+    const onChangeState = (newParams) => {
       sessionStorage.setItem('sidebar-params', JSON.stringify(newParams));
       setParams(newParams);
     };
@@ -315,7 +314,7 @@ storiesOf('Sidebar', module)
         <Sidebar
           { ...props }
           params={ params }
-          onChangeWidth={ onChangeWidth }
+          onChangeState={ onChangeState }
           theme={ propsTheme }
         >
           { list(100) }

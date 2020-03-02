@@ -29,7 +29,7 @@ export interface ISidebarProps {
   navWidth?: number;
   separatorWidth?: number;
   minimizedWidth?: number;
-  onChangeWidth?: Function;
+  onChangeState?: Function;
   params?: {
     collapsed: boolean;
     width: number;

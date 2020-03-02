@@ -43,7 +43,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   } = {},
   navWidth = 90,
   separatorWidth = 10,
-  onChangeWidth = () => {},
+  onChangeState = () => {},
 }) => {
   const themeContext = useContext(ThemeContext);
 
@@ -106,7 +106,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
       setAnimate(true);
     }
     if (!e.target.closest('button')) {
-      onChangeWidth({
+      onChangeState({
         collapsed: widthRef.current < minWidth,
         width: widthRef.current < minWidth ? minWidth + 1 : widthRef.current,
       });
@@ -137,9 +137,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     } else {
       setWidth(minimizedWidth);
     }
-    console.log(widthRef.current);
-    console.log(arrowToRight, propsWidth, minimizedWidth);
-    onChangeWidth({
+    onChangeState({
       collapsed: !arrowToRight,
       width: propsWidth,
     });
