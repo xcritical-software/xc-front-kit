@@ -313,7 +313,8 @@ storiesOf('Sidebar', module)
         <GlobalStyle />
         <Sidebar
           { ...props }
-          params={ params }
+          collapsed={ params.collapsed }
+          width={ params.width }
           onChangeState={ onChangeState }
           theme={ propsTheme }
         >

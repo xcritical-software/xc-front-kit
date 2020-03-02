@@ -30,10 +30,8 @@ export interface ISidebarProps {
   separatorWidth?: number;
   minimizedWidth?: number;
   onChangeState?: Function;
-  params?: {
-    collapsed: boolean;
-    width: number;
-  };
+  collapsed?: boolean;
+  width?: number;
 }
 
 export interface ISidebarStates {

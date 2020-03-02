@@ -37,10 +37,8 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   minWidth = 30,
   maxWidth = 400,
   minimizedWidth = 10,
-  params: {
-    collapsed = false,
-    width: propsWidth = maxWidth,
-  } = {},
+  collapsed = false,
+  width: propsWidth = maxWidth,
   navWidth = 90,
   separatorWidth = 10,
   onChangeState = () => {},
