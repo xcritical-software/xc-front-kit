@@ -304,7 +304,7 @@ storiesOf('Sidebar', module)
 
 
     const onChangeWidth = (newParams) => {
-      console.log(newParams);
+      // console.log(newParams);
       sessionStorage.setItem('sidebar-params', JSON.stringify(newParams));
       setParams(newParams);
     };

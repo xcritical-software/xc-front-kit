@@ -36,7 +36,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   isRTL = false,
   minWidth = 30,
   maxWidth = 400,
-  rollWidth = 10,
+  minimizedWidth = 10,
   params: {
     collapsed = false,
     width: propsWidth = maxWidth,
@@ -47,7 +47,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
 }) => {
   const themeContext = useContext(ThemeContext);
 
-  const [width, setWidth] = useState(collapsed ? rollWidth : propsWidth);
+  const [width, setWidth] = useState(collapsed ? minimizedWidth : propsWidth);
   const [animate, setAnimate] = useState(false);
   const [arrowToRight, setArrowToRight] = useState(collapsed);
   const [antiSelectLayer, setAntiSelectLayer] = useState(false);
@@ -58,22 +58,24 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   const clickXRef = useRef(0);
   const widthRef = useRef(propsWidth);
 
-  useEffect(() => {
-    setArrowToRight(width < minWidth);
-  }, [minWidth, propsWidth, width]);
 
   useEffect(() => {
-    setWidth(collapsed ? rollWidth : propsWidth);
+    setWidth(collapsed ? minimizedWidth : propsWidth);
     setArrowToRight(collapsed);
   }, [collapsed, propsWidth]);
 
+  useEffect(() => {
+    setArrowToRight(width < minWidth);
+  }, [minWidth, width]);
+
+
   const handleMouseMove = useCallback(
-    (e) => {
+    (e: MouseEvent) => {
       const { clientX: currentX } = e;
 
       const newWidth = isRTL
-        ? Number(width) - Number(currentX - clickXRef.current)
-        : Number(width) + Number(currentX - clickXRef.current);
+        ? (width) - (currentX - clickXRef.current)
+        : (width) + (currentX - clickXRef.current);
 
       if (newWidth > maxWidth) {
         if (widthRef.current < maxWidth) {
@@ -83,15 +85,15 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
         return;
       }
 
-      if (newWidth <= rollWidth) {
-        widthRef.current = rollWidth;
-        setWidth(rollWidth);
+      if (newWidth <= minimizedWidth) {
+        widthRef.current = minimizedWidth;
+        setWidth(minimizedWidth);
       } else {
         widthRef.current = newWidth;
         setWidth(newWidth);
       }
     },
-    [isRTL, maxWidth, rollWidth, width],
+    [isRTL, maxWidth, minimizedWidth, width],
   );
 
   const handleSelectStart = useCallback((e) => {
@@ -100,7 +102,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
 
   const handleMouseUp = useCallback((e) => {
     if (widthRef.current <= minWidth) {
-      setWidth(rollWidth);
+      setWidth(minimizedWidth);
       setAnimate(true);
     }
     if (!e.target.closest('button')) {
@@ -113,7 +115,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     document.removeEventListener('mouseup', handleMouseUp);
     document.removeEventListener('mousemove', handleMouseMove);
     setAntiSelectLayer(false);
-  }, [handleSelectStart, handleMouseMove, minWidth, widthRef.current, rollWidth, width]);
+  }, [handleSelectStart, handleMouseMove, minWidth, minimizedWidth, width]);
 
 
   const handleMouseDown = useCallback(
@@ -133,13 +135,15 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     if (arrowToRight) {
       setWidth(propsWidth);
     } else {
-      setWidth(rollWidth);
+      setWidth(minimizedWidth);
     }
+    console.log(widthRef.current);
+    console.log(arrowToRight, propsWidth, minimizedWidth);
     onChangeWidth({
       collapsed: !arrowToRight,
-      width: widthRef.current < minWidth ? minWidth + 1 : widthRef.current,
+      width: propsWidth,
     });
-  }, [arrowToRight, maxWidth, rollWidth, propsWidth]);
+  }, [arrowToRight, maxWidth, minimizedWidth, propsWidth]);
 
   const createObserver = (): ResizeObserver | undefined => {
     if (sidebarRef.current === null) {
