@@ -36,67 +36,86 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   isRTL = false,
   minWidth = 30,
   maxWidth = 400,
+  minimizedWidth = 10,
+  collapsed = false,
+  width: propsWidth = maxWidth,
   navWidth = 90,
   separatorWidth = 10,
+  onChangeState = () => {},
 }) => {
   const themeContext = useContext(ThemeContext);
 
-  const [width, setWidth] = useState(maxWidth);
+  const [width, setWidth] = useState(collapsed ? minimizedWidth : propsWidth);
   const [animate, setAnimate] = useState(false);
-  const [arrowToRight, setArrowToRight] = useState(false);
+  const [arrowToRight, setArrowToRight] = useState(collapsed);
   const [antiSelectLayer, setAntiSelectLayer] = useState(false);
   const [offsetLeft, changeOffsetLeft] = useState(0);
 
   const sidebarRef = useRef<HTMLDivElement>(null);
   const observerRef: React.MutableRefObject<ResizeObserver | undefined> = useRef();
   const clickXRef = useRef(0);
-  const widthRef = useRef(maxWidth);
+  const widthRef = useRef(propsWidth);
+
+
+  useEffect(() => {
+    setWidth(collapsed ? minimizedWidth : propsWidth);
+    setArrowToRight(collapsed);
+  }, [collapsed, propsWidth, minimizedWidth]);
+
+  useEffect(() => {
+    setArrowToRight(width < minWidth);
+  }, [minWidth, width]);
+
 
   const handleMouseMove = useCallback(
-    (e) => {
+    (e: MouseEvent) => {
       const { clientX: currentX } = e;
 
       const newWidth = isRTL
-        ? width - (currentX - clickXRef.current)
-        : width + (currentX - clickXRef.current);
+        ? (width) - (currentX - clickXRef.current)
+        : (width) + (currentX - clickXRef.current);
 
       if (newWidth > maxWidth) {
         if (widthRef.current < maxWidth) {
           widthRef.current = maxWidth;
           setWidth(maxWidth);
-          setArrowToRight(false);
         }
-
         return;
       }
 
-      if (newWidth <= 0) {
-        widthRef.current = minWidth;
-        setWidth(minWidth);
-        setArrowToRight(true);
-      } else if (newWidth <= minWidth) {
-        widthRef.current = minWidth;
-        setWidth(minWidth);
-        setArrowToRight(true);
+      if (newWidth <= minimizedWidth) {
+        widthRef.current = minimizedWidth;
+        setWidth(minimizedWidth);
       } else {
         widthRef.current = newWidth;
         setWidth(newWidth);
-        setArrowToRight(newWidth < maxWidth * 0.3);
       }
     },
-    [isRTL, maxWidth, minWidth, width],
+    [isRTL, maxWidth, minimizedWidth, width],
   );
 
   const handleSelectStart = useCallback((e) => {
     e.preventDefault();
   }, []);
 
-  const handleMouseUp = useCallback(() => {
+  const handleMouseUp = useCallback((e) => {
+    if (!e.target.closest('button')) {
+      if (widthRef.current <= minWidth) {
+        setWidth(minimizedWidth);
+        setAnimate(true);
+      }
+
+      onChangeState({
+        collapsed: widthRef.current < minWidth,
+        width: widthRef.current < minWidth ? minWidth + 1 : widthRef.current,
+      });
+    }
     document.removeEventListener('selectstart', handleSelectStart);
     document.removeEventListener('mouseup', handleMouseUp);
     document.removeEventListener('mousemove', handleMouseMove);
     setAntiSelectLayer(false);
-  }, [handleSelectStart, handleMouseMove]);
+  }, [minWidth, handleSelectStart, handleMouseMove, minimizedWidth, onChangeState]);
+
 
   const handleMouseDown = useCallback(
     (e) => {
@@ -114,13 +133,16 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     setAnimate(true);
 
     if (arrowToRight) {
-      setWidth(maxWidth);
-      setArrowToRight(false);
+      setWidth(propsWidth);
     } else {
-      setWidth(minWidth);
-      setArrowToRight(true);
+      setWidth(minimizedWidth);
     }
-  }, [arrowToRight, maxWidth, minWidth]);
+
+    onChangeState({
+      collapsed: !arrowToRight,
+      width: propsWidth,
+    });
+  }, [arrowToRight, minimizedWidth, onChangeState, propsWidth]);
 
   const createObserver = (): ResizeObserver | undefined => {
     if (sidebarRef.current === null) {
@@ -137,6 +159,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     return observer;
   };
 
+
   useEffect(() => {
     observerRef.current = createObserver();
   }, []);
@@ -150,7 +173,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
         }
       }
     },
-    [observerRef],
+    [],
   );
 
   return (
