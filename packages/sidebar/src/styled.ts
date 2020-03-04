@@ -59,6 +59,10 @@ export const CloseOpenButton = styled.button<ISidebarProps & ICloseOpenButton>`
     return toRight ? 'rotateZ(-360deg)' : 'rotateZ(180deg)';
   }};
 
+  & > * {
+    display: block;
+  }
+
   &:focus {
     outline: none;
   }

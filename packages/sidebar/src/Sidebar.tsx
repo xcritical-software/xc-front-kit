@@ -99,11 +99,12 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   }, []);
 
   const handleMouseUp = useCallback((e) => {
-    if (widthRef.current <= minWidth) {
-      setWidth(minimizedWidth);
-      setAnimate(true);
-    }
     if (!e.target.closest('button')) {
+      if (widthRef.current <= minWidth) {
+        setWidth(minimizedWidth);
+        setAnimate(true);
+      }
+
       onChangeState({
         collapsed: widthRef.current < minWidth,
         width: widthRef.current < minWidth ? minWidth + 1 : widthRef.current,
@@ -113,7 +114,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     document.removeEventListener('mouseup', handleMouseUp);
     document.removeEventListener('mousemove', handleMouseMove);
     setAntiSelectLayer(false);
-  }, [handleSelectStart, handleMouseMove, minWidth, minimizedWidth, width]);
+  }, [minWidth, handleSelectStart, handleMouseMove, minimizedWidth, onChangeState]);
 
 
   const handleMouseDown = useCallback(
@@ -130,16 +131,18 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
 
   const handleClose = useCallback(() => {
     setAnimate(true);
+
     if (arrowToRight) {
       setWidth(propsWidth);
     } else {
       setWidth(minimizedWidth);
     }
+
     onChangeState({
       collapsed: !arrowToRight,
       width: propsWidth,
     });
-  }, [arrowToRight, maxWidth, minimizedWidth, propsWidth]);
+  }, [arrowToRight, minimizedWidth, onChangeState, propsWidth]);
 
   const createObserver = (): ResizeObserver | undefined => {
     if (sidebarRef.current === null) {
@@ -170,7 +173,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
         }
       }
     },
-    [observerRef],
+    [],
   );
 
   return (
