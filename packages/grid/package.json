@@ -35,7 +35,7 @@
 		"utilitify": "^1.0.2"
 	},
 	"devDependencies": {
-		"@types/react-virtualized": "^9.21.5",
+		"@types/react-virtualized": "^9.21.8",
 		"@xcritical/sidebar": "^1.0.2"
 	}
 }
