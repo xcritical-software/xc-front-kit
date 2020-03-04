@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useState } from 'react';
 import { MdiReactIconComponentType } from 'mdi-react';
 import { storiesOf } from '@storybook/react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0;
   }
-  
+
   html {
     box-sizing: border-box;
   }
@@ -49,7 +49,7 @@ const SidebarNavigate = styled.div`
   padding-bottom: 60px;
   flex-grow: 1;
   flex-shrink: 1;
-  
+
   a {
     position: relative;
     display: block;
@@ -221,6 +221,9 @@ const propsTheme: IThemeNamespace = {
 const props = {
   navComponent: <NavPanel />,
   withArrow: true,
+  minWidth: 200,
+  defaultWidth: 300,
+  maxWidth: 500,
 };
 
 storiesOf('Sidebar', module)
@@ -287,4 +290,40 @@ storiesOf('Sidebar', module)
         </Switch>
       </BrowserRouter>
     </ThemeProvider>
-  ));
+  ))
+  .add('With callback(save to sessionStorage)', () => {
+    const sSParams = sessionStorage.getItem('sidebar-params');
+    const [params, setParams] = useState(
+      sSParams
+        ? JSON.parse(sSParams)
+        : {
+          collapsed: false,
+          width: 300,
+        },
+    );
+
+
+    const onChangeState = (newParams) => {
+      sessionStorage.setItem('sidebar-params', JSON.stringify(newParams));
+      setParams(newParams);
+    };
+
+    return (
+      <BrowserRouter>
+        <GlobalStyle />
+        <Sidebar
+          { ...props }
+          collapsed={ params.collapsed }
+          width={ params.width }
+          onChangeState={ onChangeState }
+          theme={ propsTheme }
+        >
+          { list(100) }
+        </Sidebar>
+        <Switch>
+          { routerConfig.map(({ path, component, exact }: any) => (
+            <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+        </Switch>
+      </BrowserRouter>
+    );
+  });
