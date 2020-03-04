@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
@@ -67,7 +68,7 @@ const BasicInput = () => {
 
 const ValidationInput = () => {
   const [value, setValue] = React.useState('');
-  const [isValid, setIsValid] = React.useState();
+  const [isValid, setIsValid] = React.useState<null | boolean>(null);
 
   const handleChange = (v: string): void => {
     setValue(v);
