@@ -29,7 +29,7 @@
 		"react": "^16.9.0"
 	},
 	"dependencies": {
-		"kind-of": "^6.0.2",
+		"kind-of": "^6.0.3",
 		"lodash.get": "4.x",
 		"lodash.isempty": "4.x",
 		"micro-memoize": "^4.0.8",
