@@ -22,7 +22,7 @@ export const Popover: React.FC<IPopover> = ({
   onVisibleChange,
   withArrow = true,
   shouldFitContainer = false,
-  observeContentSize = false,
+  autoContentSize = false,
   hoverOutTimeout = 150,
   trigger = 'hover',
   theme,
@@ -115,20 +115,20 @@ export const Popover: React.FC<IPopover> = ({
   }
 
   useEffect(() => {
-    if (observeContentSize) {
+    if (autoContentSize) {
       if (isVisible) {
         createContentObserver();
       } else {
         destroyContentObserver();
       }
     }
-  }, [observeContentSize, isVisible, createContentObserver, destroyContentObserver]);
+  }, [autoContentSize, isVisible, createContentObserver, destroyContentObserver]);
 
   useEffect(() => () => {
-    if (observeContentSize) {
+    if (autoContentSize) {
       destroyContentObserver();
     }
-  }, [observeContentSize, destroyContentObserver]);
+  }, [autoContentSize, destroyContentObserver]);
 
   useEffect(() => {
     if (trigger === 'click') {

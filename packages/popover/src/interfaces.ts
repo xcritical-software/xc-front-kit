@@ -13,7 +13,7 @@ export interface IPopover {
   shouldFitContainer?: boolean;
   withArrow?: boolean;
   visible?: boolean;
-  observeContentSize?: boolean;
+  autoContentSize?: boolean;
   hoverOutTimeout?: number;
   trigger?: 'hover' | 'click';
   onVisibleChange?: (visible: boolean) => void;

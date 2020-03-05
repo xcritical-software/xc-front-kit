@@ -274,7 +274,7 @@ storiesOf('Popover', module)
     );
 
     return (
-      <Popover position="bottom center" visible observeContentSize content={ Content }>
+      <Popover position="bottom center" visible autoContentSize content={ Content }>
         <ComponentWithPopover>Bottom Center</ComponentWithPopover>
       </Popover>
     );
