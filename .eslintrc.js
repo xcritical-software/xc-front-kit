@@ -31,6 +31,7 @@ module.exports = {
     "@typescript-eslint/no-inferrable-types": 0, // this is a temporary solution due to problems in TS (see: https://github.com/microsoft/TypeScript/pull/30593)
     "@typescript-eslint/restrict-template-expressions": 0,
     "@typescript-eslint/space-before-function-paren": 0,
+    "import/extensions": 0,
     "@typescript-eslint/explicit-function-return-type": [1, {
       allowExpressions: true,
       allowTypedFunctionExpressions: true,

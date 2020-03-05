@@ -67,7 +67,7 @@ const BasicInput = () => {
 
 const ValidationInput = () => {
   const [value, setValue] = React.useState('');
-  const [isValid, setIsValid] = React.useState();
+  const [isValid, setIsValid] = React.useState<null | boolean>(null);
 
   const handleChange = (v: string): void => {
     setValue(v);
