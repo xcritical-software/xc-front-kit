@@ -39,4 +39,5 @@ export interface IRenderPopperProps {
   position: Position;
   arrowStyles: object;
   popperStyles: object;
+  scheduleUpdate: Function;
 }
