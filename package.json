@@ -72,7 +72,7 @@
     "jest": "^25.1.0",
     "lint-staged": "^10.0.8",
     "prop-types": "^15.7.2",
-    "react-docgen-typescript-loader": "^3.4.0",
+    "react-docgen-typescript-loader": "^3.7.0",
     "redux-devtools-extension": "^2.13.8",
     "rimraf": "^3.0.2",
     "storybook": "^5.3.14",
