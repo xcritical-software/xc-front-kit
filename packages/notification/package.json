@@ -32,6 +32,6 @@
 	"dependencies": {
 		"lodash.get": "4.x",
 		"react-toastify": "5.5.0",
-		"utilitify": "^1.0.2"
+		"utilitify": "^1.0.3"
 	}
 }
