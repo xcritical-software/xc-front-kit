@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/popper",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "",
 	"main": "src/index.ts",
 	"scripts": {
@@ -46,7 +46,7 @@
 		"styled-components": "^5.0.0"
 	},
 	"dependencies": {
-		"popper.js": "^1.15.0",
+		"popper.js": "^1.16.1",
 		"raf-schd": "^4.0.0",
 		"utilitify": "^1.0.2"
 	}

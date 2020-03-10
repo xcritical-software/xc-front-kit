@@ -260,4 +260,22 @@ storiesOf('Popover', module)
     <Popover position="bottom center" visible shouldFitContainer content={ popoverContent }>
       <ComponentWithPopover>Bottom Center</ComponentWithPopover>
     </Popover>
-  ));
+  ))
+  .add('Reposition when content size change', () => {
+    const [contentWidth, setContentWidth] = useState(150);
+    const [contentHeight, setContentHeight] = useState(150);
+
+    const Content = (
+      <div style={ { width: `${contentWidth}px`, height: `${contentHeight}px` } }>
+        <h3>Dynamic Content</h3>
+        <button onClick={ () => setContentWidth(contentWidth + 50) }>Increase width</button>
+        <button onClick={ () => setContentHeight(contentHeight + 50) }>Increase height</button>
+      </div>
+    );
+
+    return (
+      <Popover position="bottom center" visible autoContentSize content={ Content }>
+        <ComponentWithPopover>Bottom Center</ComponentWithPopover>
+      </Popover>
+    );
+  });
