@@ -15,6 +15,7 @@ import { ButtonTheme } from '@xcritical/button/src/interfaces';
 import { darken } from 'polished';
 import {
   CompactFilterContainer,
+  ExternalFilterContainer,
 } from './pages';
 import { filterReducer } from '../src';
 
@@ -93,4 +94,7 @@ storiesOf('Filter', module)
     <ThemeProvider theme={ themeTwo }>
       <CompactFilterContainer />
     </ThemeProvider>
+  ))
+  .add('External Filter', () => (
+    <ExternalFilterContainer />
   ));

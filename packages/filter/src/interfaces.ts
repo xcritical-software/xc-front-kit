@@ -66,6 +66,7 @@ export interface IFilter {
   field: string;
   displayName: string;
   conditions: IConditions;
+  notShow?: boolean;
   Element?: (
     value: any,
     onChange: (value: any) => void,
@@ -93,7 +94,8 @@ export interface ISelectedFilterComponent {
 export interface IStateRecivedFilter {
   column: string;
   condition: string;
-  value: string;
+  value: any;
+  key?: string;
 }
 
 export interface IStateFilter extends IStateRecivedFilter {

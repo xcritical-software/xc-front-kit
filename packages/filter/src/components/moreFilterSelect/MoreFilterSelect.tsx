@@ -16,6 +16,7 @@ import {
 import {
   IMoreButtonWithFilterSelectorProps,
   IStateRecivedFilter,
+  IFilter,
 } from '../../interfaces';
 import {
   convertFiltersToOptions,
@@ -34,11 +35,27 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
   onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { showedFilters, notShowedFilters } = useMemo(() => {
+    const $showedFilters: IFilter[] = [];
+    const $notShowedFilters: IFilter[] = [];
 
+    filters.forEach((filter) => {
+      if (filter.notShow) {
+        $notShowedFilters.push(filter);
+      } else {
+        $showedFilters.push(filter);
+      }
+    });
+
+    return {
+      showedFilters: $showedFilters,
+      notShowedFilters: $notShowedFilters,
+    };
+  }, [filters]);
 
   const filterItems = useMemo(
-    () => convertFiltersToOptions(filters),
-    [filters],
+    () => convertFiltersToOptions(showedFilters),
+    [showedFilters],
   );
 
   const selectedValueItems = useMemo(
@@ -57,7 +74,14 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
       condition: '',
       value: '',
     }));
-    onChange(selected);
+
+    const mappedNowShowedFilters = notShowedFilters.map(({ field: column }) => ({
+      column,
+      condition: '',
+      value: '',
+    }));
+
+    onChange([...selected, ...mappedNowShowedFilters]);
   }, [onChange]);
 
   return (

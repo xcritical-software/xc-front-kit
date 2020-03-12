@@ -74,7 +74,7 @@ export const TagCondition: React.FC<ITagConditionProps> = (
         />
       </DropdownItem>
       {
-        (!selectedCondition || selectedCondition?.hasValue)
+        (selectedCondition && selectedCondition?.hasValue)
           ? (
             <DropdownItem>
               <TagLabel>Value</TagLabel>
