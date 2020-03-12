@@ -3,6 +3,10 @@ export interface IPage {
   onInit: Function;
   isSearchable?: boolean;
 }
+export interface IPageExternal extends IPage {
+  onChangeExternal: Function;
+  userName: string;
+}
 
 export interface IDictionary {
   label: string;

@@ -1,4 +1,4 @@
-import uuid from 'uuid/v1';
+import { v1 as uuid } from 'uuid';
 
 import { setIn } from 'utilitify';
 import {
@@ -20,14 +20,17 @@ export const defaultFilter = {
 export const addFilters = (
   state: any,
   { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
-): IFilterStore => setIn(state, [
-  ...state.drafts,
-  ...filters.map((filter) => ({
+): IFilterStore => {
+  const mappedFilters = filters.map((filter) => ({
     ...filter,
-    key: uuid(),
-  })),
-], 'drafts');
+    key: filter.key || uuid(),
+  }));
 
+  return setIn(state, [
+    ...state.drafts,
+    ...mappedFilters,
+  ], 'drafts');
+};
 
 export const removeFilter = (
   state: IFilterStore,
@@ -60,6 +63,9 @@ export const changeFilter = (
       condition: '',
       value: '',
     }, ['drafts', `${index}`]);
+  } if (field === 'condition') {
+    const $state = setIn(state, value, ['drafts', `${index}`, 'condition']);
+    return setIn($state, null, ['drafts', `${index}`, 'value']);
   }
 
   return setIn(state, value, ['drafts', `${index}`, field]);
@@ -68,21 +74,30 @@ export const changeFilter = (
 export const initFilters = (
   state: IFilterStore,
   { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
-): IFilterStore => setIn(
-  state,
-  filters.map((filter: IStateRecivedFilter) => ({
+): IFilterStore => {
+  const mappedFilters = filters.map((filter: IStateRecivedFilter) => ({
     ...filter,
-    key: uuid(),
-  })),
-  'drafts',
-);
+    key: filter.key || uuid(),
+  }));
+
+  const $state = setIn(
+    state,
+    mappedFilters,
+    'drafts',
+  );
+
+  return setIn(
+    $state,
+    mappedFilters,
+    'applied',
+  );
+};
 
 export const updateSelectedFilters = (
   state: IFilterStore,
   { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
 ): IFilterStore => {
   const { drafts } = state;
-
   const newFilters = filters.map((filter) => {
     const draft = drafts.find((draftItem) => draftItem.column === filter.column);
 
