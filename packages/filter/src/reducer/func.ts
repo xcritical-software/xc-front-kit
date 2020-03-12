@@ -1,4 +1,4 @@
-import uuid from 'uuid/v1';
+import { v1 as uuid } from 'uuid';
 
 import { setIn } from 'utilitify';
 import {
@@ -26,15 +26,10 @@ export const addFilters = (
     key: filter.key || uuid(),
   }));
 
-  const $state = setIn(state, [
+  return setIn(state, [
     ...state.drafts,
     ...mappedFilters,
   ], 'drafts');
-
-  return setIn($state, [
-    ...state.applied,
-    ...mappedFilters,
-  ], 'applied');
 };
 
 export const removeFilter = (

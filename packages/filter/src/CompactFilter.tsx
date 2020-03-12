@@ -44,7 +44,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
   const mergedFilters = useMemo(
     () => groupBy(
       activeFilters.filter((filter) => filter.column)
-        .filter(({ column }) => !filters.find(({ field }) => field === column)?.notShow),
+        .filter(({ column }) => !filters.find(({ field }) => field === column)?.isHidden),
       'column',
     ),
     [activeFilters],

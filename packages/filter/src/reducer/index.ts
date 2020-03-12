@@ -1,7 +1,7 @@
 import get from 'lodash.get';
 import { Reducer } from 'redux';
 
-import uuid from 'uuid/v1';
+import { v1 as uuid } from 'uuid';
 import * as actions from '../actions/const';
 
 import { reducerDictionary } from '../utils';

@@ -84,7 +84,7 @@ export const salesStatus: IDictionary[] = [
 
 export const simpleData: IFilter[] = [{
   field: 'userName',
-  notShow: true,
+  isHidden: true,
   displayName: 'User Name',
   conditions: {
     equalsTo: {

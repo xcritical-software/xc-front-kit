@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import uuid from 'uuid/v1';
+import { v1 as uuid } from 'uuid';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import Input from '@xcritical/input';

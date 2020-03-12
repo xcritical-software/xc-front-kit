@@ -66,7 +66,7 @@ export interface IFilter {
   field: string;
   displayName: string;
   conditions: IConditions;
-  notShow?: boolean;
+  isHidden?: boolean;
   Element?: (
     value: any,
     onChange: (value: any) => void,
