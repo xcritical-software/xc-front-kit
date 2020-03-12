@@ -75,13 +75,13 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
       value: '',
     }));
 
-    const mappedNowShowedFilters = hiddenedFilters.map(({ field: column }) => ({
+    const mappedHiddenedFilters = hiddenedFilters.map(({ field: column }) => ({
       column,
       condition: '',
       value: '',
     }));
 
-    onChange([...selected, ...mappedNowShowedFilters]);
+    onChange([...selected, ...mappedHiddenedFilters]);
   }, [onChange]);
 
   return (
