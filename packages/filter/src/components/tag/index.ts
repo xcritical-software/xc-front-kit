@@ -40,6 +40,7 @@ const mapDispatchToProps = () => {
   };
 };
 
+
 export default connect<null, IMapDispatchFilterTag, ITagContainerProps>(
   null,
   mapDispatchToProps,

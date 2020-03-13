@@ -34,7 +34,7 @@
 		"lodash.isempty": "4.x",
 		"micro-memoize": "^4.0.8",
 		"polished": "3.x",
-		"utilitify": "^1.0.2",
+		"utilitify": "^1.0.3",
 		"csstype": "^2.6.9",
 		"fast-equals": "2.0.0"
 	}

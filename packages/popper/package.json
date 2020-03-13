@@ -48,6 +48,6 @@
 	"dependencies": {
 		"popper.js": "^1.16.1",
 		"raf-schd": "^4.0.0",
-		"utilitify": "^1.0.2"
+		"utilitify": "^1.0.3"
 	}
 }
