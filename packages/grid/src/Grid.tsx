@@ -52,6 +52,9 @@ const Grid = ({
   onSelect = () => {},
   shouldMovingColumns = true,
   shouldChangeColumnsWidth = true,
+  isScrollingOptOut = true,
+  overscanColumnCount = 8,
+  overscanRowCount = 8,
 }: IGrid) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme || contextTheme));
@@ -327,6 +330,9 @@ const Grid = ({
           rowHeight={ cacheRef.current.rowHeight }
           width={ width }
           onScroll={ handleScroll }
+          isScrollingOptOut={ isScrollingOptOut }
+          overscanColumnCount={ overscanColumnCount }
+          overscanRowCount={ overscanRowCount }
         />
       </Body>
       { totals && (
