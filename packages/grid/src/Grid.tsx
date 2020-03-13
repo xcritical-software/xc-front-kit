@@ -299,6 +299,10 @@ const Grid = ({
     if (cacheRef.current) cacheRef.current.clearAll();
   }, [mappedColumns, mappedItems]);
 
+  useEffect(() => {
+    if (gridRef.current) gridRef.current.recomputeGridSize();
+  }, [selectedRows]);
+
   const {
     header: { height: headerHeight = 0 } = {},
     totals: { height: totalsHeight = 0 } = {},
