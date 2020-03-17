@@ -28,6 +28,12 @@ export const MultiGrid = ({
 
   scrollTop,
   onScroll,
+
+  isScrollingOptOut,
+  overscanColumnCount,
+  overscanRowCount,
+
+
   allGridsProps,
 }: IMultiGrid) => (
   <>
@@ -68,8 +74,9 @@ export const MultiGrid = ({
           gridHOCMappedColumns={ centerMappedColumns }
           setGridHOCMappedColumns={ setCenterMappedColumns }
           gridPosition="center"
-          overscanColumnCount={ 4 }
-          isScrollingOptOut
+          isScrollingOptOut={ isScrollingOptOut }
+          overscanColumnCount={ overscanColumnCount }
+          overscanRowCount={ overscanRowCount }
           { ...allGridsProps }
         />
       ) : null

@@ -37,30 +37,30 @@ import {
 
 
 const Grid = ({
-  mappedItems = [],
-  width = 0,
-  height = 0,
-  onChangeColumns = () => {},
-  totals,
-  theme,
-  shouldMovingColumns = true,
-  shouldChangeColumnsWidth = true,
   rightScroll = true,
   bottomScroll = true,
+  width = 0,
+  height = 0,
+  shouldMovingColumns = true,
+  shouldChangeColumnsWidth = true,
   scrollTop,
   onScrollsyncScroll,
-  onChangeExpand,
-  handleSelect,
-  selectedRows,
-  cacheRef,
-  themeRef,
-  rowHeight,
   gridHOCMappedColumns,
   setGridHOCMappedColumns,
   resizeGridAfterResizeLastColumn,
   gridPosition,
-  overscanColumnCount,
+  onChangeColumns = () => {},
+  totals,
+  handleSelect,
+  onChangeExpand,
+  mappedItems = [],
+  selectedRows,
+  cacheRef,
+  themeRef,
+  rowHeight,
   isScrollingOptOut,
+  overscanColumnCount,
+  overscanRowCount,
 }: IGrid) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(
@@ -93,7 +93,7 @@ const Grid = ({
 
     fullWidthRef.current = newFullWidth;
     setMappedColumns(gridHOCMappedColumns);
-  }, [gridHOCMappedColumns, theme, width]);
+  }, [gridHOCMappedColumns, width]);
 
   const handleScroll = useCallback((e: ScrollPosition) => {
     setScrollLeft(-e.scrollLeft);
@@ -228,6 +228,10 @@ const Grid = ({
     if (cacheRef.current && !rowHeight) cacheRef.current.clearAll();
   }, [mappedColumns, mappedItems]);
 
+  useEffect(() => {
+    if (gridRef.current) gridRef.current.recomputeGridSize();
+  }, [selectedRows]);
+
   const {
     header: { height: headerHeight = 0 } = {},
     totals: { height: totalsHeight = 0 } = {},
@@ -273,8 +277,9 @@ const Grid = ({
           width={ width }
           onScroll={ handleScroll }
           scrollTop={ scrollTop }
-          overscanColumnCount={ overscanColumnCount }
           isScrollingOptOut={ isScrollingOptOut }
+          overscanColumnCount={ overscanColumnCount }
+          overscanRowCount={ overscanRowCount }
         />
       </Body>
       {

@@ -39,6 +39,9 @@ export interface IGridHOC {
   shouldChangeRightColumnsWidth?: boolean;
   shouldFitContainer?: boolean;
   rowHeight?: number;
+  isScrollingOptOut?: boolean;
+  overscanColumnCount?: number;
+  overscanRowCount?: number;
 }
 
 
@@ -61,6 +64,9 @@ export interface IMultiGrid {
   scrollTop: number;
   onScroll: Function;
   allGridsProps: IAllGridsProps;
+  isScrollingOptOut?: boolean;
+  overscanColumnCount?: number;
+  overscanRowCount?: number;
 }
 
 interface IAllGridsProps {
@@ -76,31 +82,30 @@ interface IAllGridsProps {
 
 
 export interface IGrid {
-  mappedItems: IMappedItem[];
-  width: number;
-  height: number;
-  onChangeColumns?: Function;
-  totals?: ITotals;
-  theme?: ITheme;
-  shouldMovingColumns?: boolean;
-  shouldChangeColumnsWidth?: boolean;
-  onScrollsyncScroll?: Function;
-  scrollTop?: number;
   rightScroll?: boolean;
   bottomScroll?: boolean;
-  onChangeExpand: Function;
-  handleSelect: Function;
-  selectedRows: string[];
-  cacheRef: RefObject<CellMeasurerCache>;
-  themeRef: RefObject<IGridTheme>;
-  rowHeight?: number;
+  width: number;
+  height: number;
+  shouldMovingColumns?: boolean;
+  shouldChangeColumnsWidth?: boolean;
+  scrollTop?: number;
+  onScrollsyncScroll?: Function;
   setGridHOCMappedColumns: Function;
   gridHOCMappedColumns: IColumn[];
   resizeGridAfterResizeLastColumn?: boolean;
   gridPosition: 'left' | 'center' | 'right';
+  onChangeColumns?: Function;
+  totals?: ITotals;
+  handleSelect: Function;
+  onChangeExpand: Function;
+  mappedItems: IMappedItem[];
+  selectedRows: string[];
+  cacheRef: RefObject<CellMeasurerCache>;
+  themeRef: RefObject<IGridTheme>;
+  rowHeight?: number;
   overscanColumnCount?: number;
   isScrollingOptOut?: boolean;
-
+  overscanRowCount?: number;
 }
 
 export interface IMappedItem extends IItem {

@@ -18,6 +18,6 @@ export const FilterValueElement: React.FC<ISelectedFilterComponent> = React.memo
         disabled={ !condition }
         shouldFitContainer
         onChange={ onChange }
-        value={ value }
+        value={ value || '' }
       />
     )));

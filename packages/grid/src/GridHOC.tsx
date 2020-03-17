@@ -36,6 +36,9 @@ const GridHOC = ({
   shouldMovingColumns,
   width,
   height,
+  isScrollingOptOut = true,
+  overscanColumnCount = 8,
+  overscanRowCount = 8,
 }: IGridHOC) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
@@ -280,7 +283,12 @@ const GridHOC = ({
       setCenterMappedColumns,
       setRightMappedColumns,
 
+      isScrollingOptOut,
+      overscanColumnCount,
+      overscanRowCount,
       allGridsProps: {
+        onChangeColumns,
+        totals,
         handleSelect,
         onChangeExpand,
         mappedItems,
@@ -288,8 +296,6 @@ const GridHOC = ({
         cacheRef,
         themeRef: themeRef || {},
         rowHeight,
-        totals,
-        onChangeColumns,
       },
     };
 
@@ -356,6 +362,9 @@ const GridHOC = ({
           totals={ totals }
           onChangeColumns={ onChangeColumns }
           gridPosition="center"
+          isScrollingOptOut={ isScrollingOptOut }
+          overscanColumnCount={ overscanColumnCount }
+          overscanRowCount={ overscanRowCount }
         />
       </div>
     );
@@ -381,6 +390,9 @@ const GridHOC = ({
       totals={ totals }
       onChangeColumns={ onChangeColumns }
       gridPosition="center"
+      isScrollingOptOut={ isScrollingOptOut }
+      overscanColumnCount={ overscanColumnCount }
+      overscanRowCount={ overscanRowCount }
     />
   );
 };
