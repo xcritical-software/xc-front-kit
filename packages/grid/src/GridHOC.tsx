@@ -365,6 +365,7 @@ const GridHOC = ({
           isScrollingOptOut={ isScrollingOptOut }
           overscanColumnCount={ overscanColumnCount }
           overscanRowCount={ overscanRowCount }
+          shouldMovingColumns={ shouldMovingColumns }
         />
       </div>
     );
@@ -393,6 +394,7 @@ const GridHOC = ({
       isScrollingOptOut={ isScrollingOptOut }
       overscanColumnCount={ overscanColumnCount }
       overscanRowCount={ overscanRowCount }
+      shouldMovingColumns={ shouldMovingColumns }
     />
   );
 };
