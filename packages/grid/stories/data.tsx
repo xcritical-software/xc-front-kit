@@ -137,12 +137,10 @@ const popoverTheme = {
 
 const convertPopperStyles = (styles) => {
   const newStyles = { ...styles };
-  console.log(newStyles);
   delete newStyles.top;
   delete newStyles.left;
   delete newStyles.transform;
   delete newStyles.willChange;
-  console.log(newStyles);
   return newStyles;
 };
 
