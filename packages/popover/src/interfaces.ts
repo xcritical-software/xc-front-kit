@@ -20,6 +20,7 @@ export interface IPopover {
   theme?: IThemeNamespace<IPopoverTheme>;
   appearance?: string;
   baseAppearance?: string;
+  insideGrid?: boolean;
 }
 
 export interface IPopoverTheme {

@@ -3,6 +3,8 @@ import EqualIcon from 'mdi-react/EqualIcon';
 import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon';
 import KeyboardArrowUpIcon from 'mdi-react/KeyboardArrowUpIcon';
 
+import { Popover, popoverThemeNamespace } from '../../popover';
+
 
 const renderFunc = (field) => (
   <>
@@ -110,6 +112,51 @@ export const generateLorem = (n: any) => {
   return res.join(' ');
 };
 
+const popoverTheme = {
+  [popoverThemeNamespace]: {
+    content: {
+      offset: '5px',
+      background: 'red',
+      padding: '5px',
+      border: '1px solid #ddd',
+      borderRadius: '2px',
+      zIndex: 100,
+    },
+    arrow: {
+      offset: '10px',
+      size: '5px',
+      background: '#fff',
+      border: {
+        width: '1px',
+        color: '#ddd',
+      },
+    },
+  },
+};
+
+const PopoverCell = ({ content }) => (
+  <Popover
+    position="bottom center"
+    trigger="click"
+    theme={ popoverTheme }
+    positionFixed
+    insideGrid
+    content={ (
+      <div style={ {
+        width: '200px', height: '200px', border: '1px solid black', color: 'black', overflow: 'auto', wordBreak: 'break-word',
+      } }
+      >
+        { content }
+      </div>
+    ) }
+  >
+    <div style={ { cursor: 'pointer' } }>
+        col 2 popover
+    </div>
+  </Popover>
+);
+
+
 const createDublicateRows = (n: any) => {
   const res: any[] = [];
   for (let i = 0; i < n; i++) {
@@ -117,7 +164,7 @@ const createDublicateRows = (n: any) => {
       price: Math.floor(Math.random() * 100000 + 10000),
       make: generateLorem(Math.floor(Math.random() * 10 + 1)),
       model: generateLorem(Math.floor(Math.random() * 10 + 1)),
-      col1: generateLorem(Math.floor(Math.random() * 6 + 1)),
+      col1: <PopoverCell content={ generateLorem(Math.floor(Math.random() * 60 + 1)) } />,
       col2: generateLorem(Math.floor(Math.random() * 3 + 1)),
       col3: generateLorem(Math.floor(Math.random() * 5 + 1)),
       col4: generateLorem(Math.floor(Math.random() * 10 + 1)),

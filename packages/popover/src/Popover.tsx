@@ -10,6 +10,7 @@ import Popper, { IRenderPopperProps } from '@xcritical/popper';
 
 import { IPopover, IPopoverEvents } from './interfaces';
 import { Content, Arrow, PopoverWrapper } from './styles';
+import { changeProps } from './styles/utils';
 
 
 export const Popover: React.FC<IPopover> = ({
@@ -21,6 +22,7 @@ export const Popover: React.FC<IPopover> = ({
   visible,
   onVisibleChange,
   withArrow = true,
+  insideGrid = false,
   shouldFitContainer = false,
   autoContentSize = false,
   hoverOutTimeout = 150,
@@ -176,7 +178,7 @@ export const Popover: React.FC<IPopover> = ({
                 theme={ theme }
                 appearance={ appearance }
                 baseAppearance={ baseAppearance }
-                style={ popperProps.popperStyles }
+                style={ changeProps(insideGrid, popperProps.popperStyles) }
               >
                 { content }
                 { withArrow && (
