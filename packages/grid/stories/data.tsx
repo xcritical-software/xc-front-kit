@@ -135,7 +135,7 @@ const popoverTheme = {
   },
 };
 
-const convertPopperStyles = (styles) => {
+const convertStyles = (styles) => {
   const newStyles = { ...styles };
   delete newStyles.top;
   delete newStyles.left;
@@ -157,7 +157,7 @@ const PopoverCell = ({ content }) => (
     trigger="click"
     theme={ popoverTheme }
     positionFixed
-    convertPopperStyles={ convertPopperStyles }
+    convertStyles={ convertStyles }
     content={ (
       <PopoverContent>
         { content }
