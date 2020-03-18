@@ -21,6 +21,7 @@ export const Popover: React.FC<IPopover> = ({
   visible,
   onVisibleChange,
   withArrow = true,
+  convertStyles,
   shouldFitContainer = false,
   autoContentSize = false,
   hoverOutTimeout = 150,
@@ -176,7 +177,9 @@ export const Popover: React.FC<IPopover> = ({
                 theme={ theme }
                 appearance={ appearance }
                 baseAppearance={ baseAppearance }
-                style={ popperProps.popperStyles }
+                style={ convertStyles
+                  ? convertStyles(popperProps.popperStyles)
+                  : popperProps.popperStyles }
               >
                 { content }
                 { withArrow && (
