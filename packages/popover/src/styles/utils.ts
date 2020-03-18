@@ -64,3 +64,12 @@ export const getArrowBorderWidth = (props: IThemed, arrowDirection: ArrowDirecti
     default: return '';
   }
 };
+export const changeProps = (insideGrid, styles) => {
+  if (!insideGrid) return styles;
+  const newStyles = { ...styles };
+  delete newStyles.top;
+  delete newStyles.left;
+  delete newStyles.transform;
+  delete newStyles.willChange;
+  return newStyles;
+};
