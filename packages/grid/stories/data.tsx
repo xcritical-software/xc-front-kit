@@ -3,6 +3,7 @@ import EqualIcon from 'mdi-react/EqualIcon';
 import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon';
 import KeyboardArrowUpIcon from 'mdi-react/KeyboardArrowUpIcon';
 
+import styled from 'styled-components';
 import { Popover, popoverThemeNamespace } from '../../popover';
 
 
@@ -134,20 +135,35 @@ const popoverTheme = {
   },
 };
 
+const convertPopperStyles = (styles) => {
+  const newStyles = { ...styles };
+  console.log(newStyles);
+  delete newStyles.top;
+  delete newStyles.left;
+  delete newStyles.transform;
+  delete newStyles.willChange;
+  console.log(newStyles);
+  return newStyles;
+};
+
+const PopoverContent = styled.div`
+  width: 200px;
+  color: black;
+  overflow: auto;
+  white-space: normal;
+`;
+
 const PopoverCell = ({ content }) => (
   <Popover
     position="bottom center"
     trigger="click"
     theme={ popoverTheme }
     positionFixed
-    insideGrid
+    convertPopperStyles={ convertPopperStyles }
     content={ (
-      <div style={ {
-        width: '200px',
-      } }
-      >
+      <PopoverContent>
         { content }
-      </div>
+      </PopoverContent>
     ) }
   >
     <div style={ { cursor: 'pointer' } }>
