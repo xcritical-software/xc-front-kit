@@ -70,7 +70,6 @@ export const changeProps = (insideGrid, styles) => {
   delete newStyles.top;
   delete newStyles.left;
   delete newStyles.transform;
-  delete newStyles.transform;
   delete newStyles.willChange;
   return newStyles;
 };

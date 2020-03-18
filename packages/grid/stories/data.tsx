@@ -143,7 +143,7 @@ const PopoverCell = ({ content }) => (
     insideGrid
     content={ (
       <div style={ {
-        width: '200px', height: '200px', border: '1px solid black', color: 'black', overflow: 'auto', wordBreak: 'break-word',
+        width: '200px',
       } }
       >
         { content }
