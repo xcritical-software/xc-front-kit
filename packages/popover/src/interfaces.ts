@@ -1,5 +1,5 @@
 import { MouseEvent } from 'react';
-import { CSSObject } from 'styled-components';
+import { CSSObject, CSSProperties } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
 import { Position } from '@xcritical/popper';
 
@@ -20,6 +20,7 @@ export interface IPopover {
   theme?: IThemeNamespace<IPopoverTheme>;
   appearance?: string;
   baseAppearance?: string;
+  convertStyles?: (styles: CSSProperties) => CSSProperties;
 }
 
 export interface IPopoverTheme {
