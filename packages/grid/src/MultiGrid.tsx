@@ -1,5 +1,5 @@
 import React from 'react';
-import Grid from './Grid';
+import InternalGrid from './InternalGrid';
 import { IMultiGrid } from './interfaces';
 
 
@@ -38,7 +38,7 @@ export const MultiGrid = ({
 }: IMultiGrid) => (
   <>
     { leftMappedColumns.length ? (
-      <Grid
+      <InternalGrid
         rightScroll={ false }
         bottomScroll={ false }
         height={ height }
@@ -61,7 +61,7 @@ export const MultiGrid = ({
     ) : null }
     {
       centerMappedColumns.length ? (
-        <Grid
+        <InternalGrid
           rightScroll={ !rightMappedColumns.length }
           width={ (width || wrapperSize.width) - leftFixedWidth - rightFixedWidth }
           height={ height }
@@ -82,7 +82,7 @@ export const MultiGrid = ({
       ) : null
     }
     { rightMappedColumns.length ? (
-      <Grid
+      <InternalGrid
         width={ rightFixedWidth }
         height={ height }
         bottomScroll={ false }

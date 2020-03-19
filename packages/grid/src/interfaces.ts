@@ -22,7 +22,7 @@ export interface ITotals {
   [key: string]: string | number;
 }
 
-export interface IGridHOC {
+export interface IGridProps {
   items: IItem[];
   columns: IColumn[];
   width?: number;
@@ -81,7 +81,7 @@ interface IAllGridsProps {
 }
 
 
-export interface IGrid {
+export interface IInternalGrid {
   rightScroll?: boolean;
   bottomScroll?: boolean;
   width: number;
