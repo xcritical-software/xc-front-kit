@@ -1,10 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 import EqualIcon from 'mdi-react/EqualIcon';
 import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon';
 import KeyboardArrowUpIcon from 'mdi-react/KeyboardArrowUpIcon';
-import { IColumn } from '../src/interfaces';
 
-import styled from 'styled-components';
+import { IColumn } from '../src/interfaces';
 import { Popover, popoverThemeNamespace } from '../../popover';
 
 
