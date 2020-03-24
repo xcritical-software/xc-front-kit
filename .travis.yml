@@ -16,7 +16,7 @@ install: yarn install --no-progress --frozen-lockfile
 stages:
   - lint
   - name: check-version
-    if: branch != master AND type = pull_request 
+    if: NOT (branch = master) AND type = pull_request 
   - name: next-version
     if: branch = master AND type = push AND commit_message !~ /(release)/
   - name: gen-docs
@@ -26,7 +26,7 @@ jobs:
     - stage: lint
       script: yarn commitlint-travis && yarn lint && yarn test && yarn build
     - stage: check-version
-      if: branch != master AND type = pull_request 
+      if: NOT (branch = master) AND type = pull_request 
       script: 
         - git config --local user.name "TravisCI"
         - git config --local user.email "frontend@xcritical.software"        
