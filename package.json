@@ -26,7 +26,8 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "yarn build && yarn lint && yarn test"
+      "pre-push": "yarn build && yarn lint && yarn test",
+      "commit-msg": "yarn commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
@@ -79,7 +80,10 @@
     "ts-jest": "^25.2.1",
     "ts-loader": "^6.2.0",
     "typescript": "^3.7.5",
-    "typescript-plugin-styled-components": "1.4.4"
+    "typescript-plugin-styled-components": "1.4.4",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/travis-cli": "8.3.5"
   },
   "dependencies": {
     "@types/react-redux": "^7.1.7",
