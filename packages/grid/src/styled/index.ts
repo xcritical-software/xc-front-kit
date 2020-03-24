@@ -34,3 +34,9 @@ export const Wrapper = styled.div.attrs(({ width }: IWrapper) => ({
   }}
   ${getWrapperStyles}
 `;
+
+
+export const MultiGridWrapper = styled.div<{ height?: string }>`
+  display: flex;
+  ${({ height }) => height && `height: ${height}`}
+`;

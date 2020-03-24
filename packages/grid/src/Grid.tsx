@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 
-import { ThemeContext, CSSProperties } from 'styled-components';
+import { ThemeContext } from 'styled-components';
 import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
 
@@ -17,9 +17,11 @@ import {
   guid, addOrDeleteItemFromArray, deletePropsFromObjects, gridTheme,
 } from './utils';
 import { MultiGrid } from './MultiGrid';
+import { gridPositions } from './consts';
+import { MultiGridWrapper } from './styled';
 
 
-const Grid = ({
+const Grid: React.FC<IGridProps> = ({
   shouldFitContainer,
   items,
   isDisableSelect = false,
@@ -34,12 +36,12 @@ const Grid = ({
   totals,
   onChangeColumns: onChangeColumnsFromProps = () => {},
   shouldMovingColumns,
-  width,
-  height,
+  width = 0,
+  height = 0,
   isScrollingOptOut = true,
   overscanColumnCount = 8,
   overscanRowCount = 8,
-}: IGridProps) => {
+}) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
@@ -188,7 +190,7 @@ const Grid = ({
   const mappedColumns = useMemo(() => [...columns], [columns]);
 
   const [leftMappedColumns, setLeftMappedColumns] = useState<IColumn[]>(
-    mappedColumns.filter(({ fixedPosition }) => fixedPosition === 'left'),
+    mappedColumns.filter(({ fixedPosition }) => fixedPosition === gridPositions.LEFT),
   );
 
   const [centerMappedColumns, setCenterMappedColumns] = useState<IColumn[]>(
@@ -196,7 +198,7 @@ const Grid = ({
   );
 
   const [rightMappedColumns, setRightMappedColumns] = useState<IColumn[]>(
-    mappedColumns.filter(({ fixedPosition }) => fixedPosition === 'right'),
+    mappedColumns.filter(({ fixedPosition }) => fixedPosition === gridPositions.RIGHT),
   );
 
   const [leftFixedWidth, setLeftFixedWidth] = useState(0);
@@ -204,34 +206,37 @@ const Grid = ({
 
 
   useEffect(() => {
-    setLeftMappedColumns(mappedColumns.filter(({ fixedPosition }: IColumn) => fixedPosition === 'left'));
+    setLeftMappedColumns(mappedColumns
+      .filter(({ fixedPosition }: IColumn) => fixedPosition === gridPositions.LEFT));
 
-    setCenterMappedColumns(mappedColumns.filter(({ fixedPosition }: IColumn) => !fixedPosition));
+    setCenterMappedColumns(mappedColumns
+      .filter(({ fixedPosition }: IColumn) => !fixedPosition));
 
-    setRightMappedColumns(mappedColumns.filter(({ fixedPosition }: IColumn) => fixedPosition === 'right'));
+    setRightMappedColumns(mappedColumns
+      .filter(({ fixedPosition }: IColumn) => fixedPosition === gridPositions.RIGHT));
   }, [mappedColumns]);
 
   useEffect(() => {
     setLeftFixedWidth(
       leftMappedColumns
         .filter(({ visible }: IColumn) => visible)
-        .reduce((acc, { width: $width }) => Number(acc) + Number($width), 0),
+        .reduce((acc, { width: $width }) => acc + $width, 0),
     );
     setRightFixedWidth(
       rightMappedColumns
         .filter(({ visible }: IColumn) => visible)
-        .reduce((acc, { width: $width }) => Number(acc) + Number($width), 0),
+        .reduce((acc, { width: $width }) => acc + $width, 0),
     );
   }, [leftMappedColumns, rightMappedColumns]);
 
   const onChangeColumns = useCallback((cols, gridPosition) => {
-    if (gridPosition === 'left') {
+    if (gridPosition === gridPositions.LEFT) {
       onChangeColumnsFromProps([
         ...cols,
         ...centerMappedColumns,
         ...rightMappedColumns,
       ]);
-    } else if (gridPosition === 'center') {
+    } else if (gridPosition === gridPositions.CENTER) {
       onChangeColumnsFromProps([
         ...leftMappedColumns,
         ...cols,
@@ -252,22 +257,16 @@ const Grid = ({
 
 
   if (isMultiGrid) {
-    const styles: CSSProperties = {
-      display: 'flex',
-    };
-
     const multiGridProps = {
       shouldMovingColumns,
       shouldChangeColumnsWidth,
       shouldChangeLeftColumnsWidth,
       shouldChangeRightColumnsWidth,
-      width: 0,
-      height: 0,
+      width,
+      height,
 
       leftFixedWidth,
       rightFixedWidth,
-
-      wrapperSize,
 
       leftMappedColumns,
       centerMappedColumns,
@@ -295,7 +294,6 @@ const Grid = ({
     };
 
     if (shouldFitContainer) {
-      styles.height = '100%';
       multiGridProps.width = wrapperSize.width;
       multiGridProps.height = wrapperSize.height;
 
@@ -305,34 +303,31 @@ const Grid = ({
             onScroll,
             scrollTop,
           }) => (
-            <div style={ styles } ref={ wrapperRef }>
+            <MultiGridWrapper height="100%" ref={ wrapperRef }>
               <MultiGrid
                 { ...multiGridProps }
                 onScroll={ onScroll }
                 scrollTop={ scrollTop }
               />
-            </div>
+            </MultiGridWrapper>
           ) }
         </ScrollSync>
       );
     }
-    /* eslint-disable @typescript-eslint/no-non-null-assertion  */
-    multiGridProps.width = width!;
-    multiGridProps.height = height!;
-    /* eslint-enable @typescript-eslint/no-non-null-assertion  */
+
     return (
       <ScrollSync>
         { ({
           onScroll,
           scrollTop,
         }) => (
-          <div style={ styles } ref={ wrapperRef }>
+          <MultiGridWrapper ref={ wrapperRef }>
             <MultiGrid
               { ...multiGridProps }
               onScroll={ onScroll }
               scrollTop={ scrollTop }
             />
-          </div>
+          </MultiGridWrapper>
         ) }
       </ScrollSync>
     );
@@ -355,6 +350,7 @@ const Grid = ({
     overscanColumnCount,
     overscanRowCount,
     shouldMovingColumns,
+    shiftFirstColumn: true,
   };
 
   if (shouldFitContainer) {
@@ -363,7 +359,7 @@ const Grid = ({
         <InternalGrid
           width={ wrapperSize.width }
           height={ wrapperSize.height }
-          gridPosition="center"
+          gridPosition={ gridPositions.CENTER }
           { ...singleGridProps }
         />
       </div>
@@ -373,11 +369,9 @@ const Grid = ({
 
   return (
     <InternalGrid
-      /* eslint-disable @typescript-eslint/no-non-null-assertion  */
-      width={ width! }
-      height={ height! }
-      /* eslint-enable @typescript-eslint/no-non-null-assertion  */
-      gridPosition="center"
+      width={ width }
+      height={ height }
+      gridPosition={ gridPositions.CENTER }
       { ...singleGridProps }
     />
   );

@@ -7,7 +7,9 @@ export interface IItem {
   [key: string]: string | number | ReactElement | any;
 }
 
-type fixedPositionType = 'left' | 'right';
+type FixedPositionType = 'LEFT' | 'RIGHT';
+export type GridPositionType = 'LEFT' | 'CENTER' | 'RIGHT';
+
 export interface IColumn {
   headerName: string;
   field: string;
@@ -16,7 +18,7 @@ export interface IColumn {
   center?: boolean;
   isExpandable?: boolean;
   render?: Function;
-  fixedPosition?: fixedPositionType;
+  fixedPosition?: FixedPositionType;
 }
 export interface ITotals {
   [key: string]: string | number;
@@ -60,7 +62,6 @@ export interface IMultiGrid {
   setRightMappedColumns: Function;
   leftFixedWidth: number;
   rightFixedWidth: number;
-  wrapperSize: { width: number; height: number };
   scrollTop: number;
   onScroll: Function;
   allGridsProps: IAllGridsProps;
@@ -93,7 +94,7 @@ export interface IInternalGrid {
   setGridHOCMappedColumns: Function;
   gridHOCMappedColumns: IColumn[];
   resizeGridAfterResizeLastColumn?: boolean;
-  gridPosition: 'left' | 'center' | 'right';
+  gridPosition: GridPositionType;
   onChangeColumns?: Function;
   totals?: ITotals;
   handleSelect: Function;
@@ -106,6 +107,7 @@ export interface IInternalGrid {
   overscanColumnCount?: number;
   isScrollingOptOut?: boolean;
   overscanRowCount?: number;
+  shiftFirstColumn: boolean;
 }
 
 export interface IMappedItem extends IItem {
@@ -223,4 +225,9 @@ export interface IGridTheme {
   selectedRowColor?: string;
   movingHeaderCellColor?: string;
   expandButtonMargin?: string;
+}
+
+
+export interface IGridPositions {
+  [key: string]: GridPositionType;
 }

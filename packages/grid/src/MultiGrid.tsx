@@ -1,9 +1,10 @@
 import React from 'react';
 import InternalGrid from './InternalGrid';
 import { IMultiGrid } from './interfaces';
+import { gridPositions } from './consts';
 
 
-export const MultiGrid = ({
+export const MultiGrid: React.FC<IMultiGrid> = ({
   width,
   height,
 
@@ -24,7 +25,6 @@ export const MultiGrid = ({
 
   leftFixedWidth,
   rightFixedWidth,
-  wrapperSize,
 
   scrollTop,
   onScroll,
@@ -54,8 +54,8 @@ export const MultiGrid = ({
         setGridHOCMappedColumns={ setLeftMappedColumns }
 
         resizeGridAfterResizeLastColumn
-        gridPosition="left"
-
+        gridPosition={ gridPositions.LEFT }
+        shiftFirstColumn
         { ...allGridsProps }
       />
     ) : null }
@@ -63,7 +63,7 @@ export const MultiGrid = ({
       centerMappedColumns.length ? (
         <InternalGrid
           rightScroll={ !rightMappedColumns.length }
-          width={ (width || wrapperSize.width) - leftFixedWidth - rightFixedWidth }
+          width={ width - leftFixedWidth - rightFixedWidth }
           height={ height }
           shouldMovingColumns={ shouldMovingColumns }
           shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
@@ -73,10 +73,11 @@ export const MultiGrid = ({
 
           gridHOCMappedColumns={ centerMappedColumns }
           setGridHOCMappedColumns={ setCenterMappedColumns }
-          gridPosition="center"
+          gridPosition={ gridPositions.CENTER }
           isScrollingOptOut={ isScrollingOptOut }
           overscanColumnCount={ overscanColumnCount }
           overscanRowCount={ overscanRowCount }
+          shiftFirstColumn={ !leftMappedColumns.length }
           { ...allGridsProps }
         />
       ) : null
@@ -94,8 +95,8 @@ export const MultiGrid = ({
         gridHOCMappedColumns={ rightMappedColumns }
         setGridHOCMappedColumns={ setRightMappedColumns }
         resizeGridAfterResizeLastColumn
-        gridPosition="right"
-
+        gridPosition={ gridPositions.RIGHT }
+        shiftFirstColumn={ !leftMappedColumns.length && !centerMappedColumns.length }
         { ...allGridsProps }
       />
     ) : null }

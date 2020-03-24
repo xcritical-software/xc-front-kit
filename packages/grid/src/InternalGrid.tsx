@@ -36,11 +36,11 @@ import {
 } from './interfaces';
 
 
-const InternalGrid = ({
+const InternalGrid: React.FC<IInternalGrid> = ({
   rightScroll = true,
   bottomScroll = true,
-  width = 0,
-  height = 0,
+  width,
+  height,
   shouldMovingColumns = true,
   shouldChangeColumnsWidth = true,
   scrollTop,
@@ -61,7 +61,8 @@ const InternalGrid = ({
   isScrollingOptOut,
   overscanColumnCount,
   overscanRowCount,
-}: IInternalGrid) => {
+  shiftFirstColumn,
+}) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(
     mappedColumns.filter(({ visible }: IColumn) => visible).reduce(
@@ -111,7 +112,7 @@ const InternalGrid = ({
     const row = mappedItems[rowIndex];
     const column = filteredColums[columnIndex];
 
-    const expandLevel = isFirstColumn ? row.expandLevel : 0;
+    const expandLevel = isFirstColumn && shiftFirstColumn ? row.expandLevel : 0;
 
     const renderFunction = column.render;
 
