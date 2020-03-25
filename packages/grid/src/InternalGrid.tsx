@@ -28,7 +28,7 @@ import {
   TotalsShift,
 } from './styled';
 import { AddIcon, RemoveIcon } from './icons';
-import { searchLastVisible } from './utils';
+import { searchLastVisible, getFullWidth } from './utils';
 
 import { HeaderWrapper } from './HeaderWrapper';
 import {
@@ -64,11 +64,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   shiftFirstColumn,
 }) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
-  const fullWidthRef = useRef(
-    mappedColumns.filter(({ visible }: IColumn) => visible).reduce(
-      (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
-    ),
-  );
+  const fullWidthRef = useRef(getFullWidth(mappedColumns));
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [changingColumns, setChangingColumns] = useState<string>('');
   const gridRef = useRef<VirtualisedGrid>();
@@ -78,9 +74,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   ), [mappedColumns]);
 
   useEffect(() => {
-    const newFullWidth = gridHOCMappedColumns.filter(({ visible }: IColumn) => visible).reduce(
-      (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
-    );
+    const newFullWidth = getFullWidth(gridHOCMappedColumns);
 
     fullWidthRef.current = newFullWidth;
     if (newFullWidth < width) {

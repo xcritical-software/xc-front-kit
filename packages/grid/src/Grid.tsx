@@ -14,10 +14,10 @@ import {
   IMappedItem, IItem, IGridProps, IColumn,
 } from './interfaces';
 import {
-  guid, addOrDeleteItemFromArray, deletePropsFromObjects, gridTheme,
+  guid, addOrDeleteItemFromArray, deletePropsFromObjects, gridTheme, getFullWidth,
 } from './utils';
 import { MultiGrid } from './MultiGrid';
-import { gridPositions } from './consts';
+import { GridPositions } from './consts';
 import { MultiGridWrapper } from './styled';
 
 
@@ -190,7 +190,7 @@ const Grid: React.FC<IGridProps> = ({
   const mappedColumns = useMemo(() => [...columns], [columns]);
 
   const [leftMappedColumns, setLeftMappedColumns] = useState<IColumn[]>(
-    mappedColumns.filter(({ fixedPosition }) => fixedPosition === gridPositions.LEFT),
+    mappedColumns.filter(({ fixedPosition }) => fixedPosition === GridPositions.LEFT),
   );
 
   const [centerMappedColumns, setCenterMappedColumns] = useState<IColumn[]>(
@@ -198,7 +198,7 @@ const Grid: React.FC<IGridProps> = ({
   );
 
   const [rightMappedColumns, setRightMappedColumns] = useState<IColumn[]>(
-    mappedColumns.filter(({ fixedPosition }) => fixedPosition === gridPositions.RIGHT),
+    mappedColumns.filter(({ fixedPosition }) => fixedPosition === GridPositions.RIGHT),
   );
 
   const [leftFixedWidth, setLeftFixedWidth] = useState(0);
@@ -207,36 +207,32 @@ const Grid: React.FC<IGridProps> = ({
 
   useEffect(() => {
     setLeftMappedColumns(mappedColumns
-      .filter(({ fixedPosition }: IColumn) => fixedPosition === gridPositions.LEFT));
+      .filter(({ fixedPosition }: IColumn) => fixedPosition === GridPositions.LEFT));
 
     setCenterMappedColumns(mappedColumns
       .filter(({ fixedPosition }: IColumn) => !fixedPosition));
 
     setRightMappedColumns(mappedColumns
-      .filter(({ fixedPosition }: IColumn) => fixedPosition === gridPositions.RIGHT));
+      .filter(({ fixedPosition }: IColumn) => fixedPosition === GridPositions.RIGHT));
   }, [mappedColumns]);
 
   useEffect(() => {
     setLeftFixedWidth(
-      leftMappedColumns
-        .filter(({ visible }: IColumn) => visible)
-        .reduce((acc, { width: $width }) => acc + $width, 0),
+      getFullWidth(leftMappedColumns),
     );
     setRightFixedWidth(
-      rightMappedColumns
-        .filter(({ visible }: IColumn) => visible)
-        .reduce((acc, { width: $width }) => acc + $width, 0),
+      getFullWidth(rightMappedColumns),
     );
   }, [leftMappedColumns, rightMappedColumns]);
 
   const onChangeColumns = useCallback((cols, gridPosition) => {
-    if (gridPosition === gridPositions.LEFT) {
+    if (gridPosition === GridPositions.LEFT) {
       onChangeColumnsFromProps([
         ...cols,
         ...centerMappedColumns,
         ...rightMappedColumns,
       ]);
-    } else if (gridPosition === gridPositions.CENTER) {
+    } else if (gridPosition === GridPositions.CENTER) {
       onChangeColumnsFromProps([
         ...leftMappedColumns,
         ...cols,
@@ -359,7 +355,7 @@ const Grid: React.FC<IGridProps> = ({
         <InternalGrid
           width={ wrapperSize.width }
           height={ wrapperSize.height }
-          gridPosition={ gridPositions.CENTER }
+          gridPosition={ GridPositions.CENTER }
           { ...singleGridProps }
         />
       </div>
@@ -371,7 +367,7 @@ const Grid: React.FC<IGridProps> = ({
     <InternalGrid
       width={ width }
       height={ height }
-      gridPosition={ gridPositions.CENTER }
+      gridPosition={ GridPositions.CENTER }
       { ...singleGridProps }
     />
   );
