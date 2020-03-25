@@ -542,6 +542,7 @@ export const columnsFixed = (fixeds) => items
     return column;
   });
 
+
 export const totalsFixed = items
   .reduce((acc, el) => ({ ...acc, [el]: Math.floor(Math.random() * 100 + 50) }), {});
 
