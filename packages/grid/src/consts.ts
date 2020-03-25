@@ -1,8 +1,5 @@
-import { IGridPositions } from './interfaces';
-
-
-export const gridPositions: IGridPositions = {
-  LEFT: 'LEFT',
-  CENTER: 'CENTER',
-  RIGHT: 'RIGHT',
-};
+export enum GridPositions{
+  LEFT = 'LEFT',
+  CENTER = 'CENTER',
+  RIGHT = 'RIGHT',
+}

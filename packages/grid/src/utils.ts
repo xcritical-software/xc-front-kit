@@ -60,3 +60,9 @@ export const searchNextVisible = (arr: IColumn[], idx: number) => {
   }
   return nextVisible;
 };
+
+
+export const getFullWidth = (columns: IColumn[]) => columns
+  .filter(({ visible }: IColumn) => visible).reduce(
+    (acc: number, { width: colWidth }) => (acc + colWidth), 0,
+  );

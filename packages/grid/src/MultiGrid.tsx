@@ -1,7 +1,7 @@
 import React from 'react';
 import InternalGrid from './InternalGrid';
 import { IMultiGrid } from './interfaces';
-import { gridPositions } from './consts';
+import { GridPositions } from './consts';
 
 
 export const MultiGrid: React.FC<IMultiGrid> = ({
@@ -54,7 +54,7 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
         setGridHOCMappedColumns={ setLeftMappedColumns }
 
         resizeGridAfterResizeLastColumn
-        gridPosition={ gridPositions.LEFT }
+        gridPosition={ GridPositions.LEFT }
         shiftFirstColumn
         { ...allGridsProps }
       />
@@ -73,7 +73,7 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
 
           gridHOCMappedColumns={ centerMappedColumns }
           setGridHOCMappedColumns={ setCenterMappedColumns }
-          gridPosition={ gridPositions.CENTER }
+          gridPosition={ GridPositions.CENTER }
           isScrollingOptOut={ isScrollingOptOut }
           overscanColumnCount={ overscanColumnCount }
           overscanRowCount={ overscanRowCount }
@@ -95,7 +95,7 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
         gridHOCMappedColumns={ rightMappedColumns }
         setGridHOCMappedColumns={ setRightMappedColumns }
         resizeGridAfterResizeLastColumn
-        gridPosition={ gridPositions.RIGHT }
+        gridPosition={ GridPositions.RIGHT }
         shiftFirstColumn={ !leftMappedColumns.length && !centerMappedColumns.length }
         { ...allGridsProps }
       />

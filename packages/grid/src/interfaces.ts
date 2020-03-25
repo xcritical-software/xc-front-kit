@@ -1,14 +1,13 @@
 import { ReactElement, CSSProperties, RefObject } from 'react';
 import { ITheme } from '@xcritical/theme';
 import { CellMeasurerCache } from 'react-virtualized';
+import { GridPositions } from './consts';
 
 
 export interface IItem {
   [key: string]: string | number | ReactElement | any;
 }
 
-type FixedPositionType = 'LEFT' | 'RIGHT';
-export type GridPositionType = 'LEFT' | 'CENTER' | 'RIGHT';
 
 export interface IColumn {
   headerName: string;
@@ -18,7 +17,7 @@ export interface IColumn {
   center?: boolean;
   isExpandable?: boolean;
   render?: Function;
-  fixedPosition?: FixedPositionType;
+  fixedPosition?: GridPositions.LEFT | GridPositions.RIGHT;
 }
 export interface ITotals {
   [key: string]: string | number;
@@ -94,7 +93,7 @@ export interface IInternalGrid {
   setGridHOCMappedColumns: Function;
   gridHOCMappedColumns: IColumn[];
   resizeGridAfterResizeLastColumn?: boolean;
-  gridPosition: GridPositionType;
+  gridPosition: GridPositions;
   onChangeColumns?: Function;
   totals?: ITotals;
   handleSelect: Function;
@@ -225,9 +224,4 @@ export interface IGridTheme {
   selectedRowColor?: string;
   movingHeaderCellColor?: string;
   expandButtonMargin?: string;
-}
-
-
-export interface IGridPositions {
-  [key: string]: GridPositionType;
 }
