@@ -11,7 +11,7 @@ import { IHeaderWrapper, IColumn } from './interfaces';
 import { searchLastVisible, searchNextVisible } from './utils';
 
 
-export const HeaderWrapper = ({
+export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
   fullWidth,
   translateX,
   columns,
@@ -21,7 +21,7 @@ export const HeaderWrapper = ({
   theme,
   shouldMovingColumns,
   shouldChangeColumnsWidth,
-}: IHeaderWrapper) => {
+}) => {
   const mappedColumnsRef = useRef(columns);
   const [isMoving, setIsMoving] = useState(false);
   const clickXRef = useRef(0);
@@ -115,10 +115,6 @@ export const HeaderWrapper = ({
     setChangingColumns('move');
   };
 
-  const getColumnWidth = useCallback((column: IColumn, index: number): number => {
-    if (mappedColumnsRef.current.length === index + 1) return column.width + 9;
-    return column.width;
-  }, []);
 
   return (
     <Header ref={ headerRef } width={ fullWidth } translateX={ translateX } theme={ theme }>
@@ -129,7 +125,7 @@ export const HeaderWrapper = ({
             key={ el.field }
             isEmpty={ index === emptyColumnIndexRef.current }
             onMouseDown={ handleMouseDown }
-            width={ getColumnWidth(el, index) }
+            width={ el.width }
             text={ el.headerName }
             onChangeWidth={ onChangeWidth }
             index={ index }

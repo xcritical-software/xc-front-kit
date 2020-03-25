@@ -5,7 +5,7 @@ import { RightBorder, HeaderCell, HeaderCellContent } from './styled';
 import { IHeaderCellWrapper } from './interfaces';
 
 
-export const HeaderCellWrapper = ({
+export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   text,
   width,
   onChangeWidth,
@@ -17,7 +17,7 @@ export const HeaderCellWrapper = ({
   theme,
   shouldMovingColumns,
   shouldChangeColumnsWidth,
-}: IHeaderCellWrapper) => {
+}) => {
   const [newWidth, setNewWidth] = useState(width);
   const clickXRef = useRef(0);
   const widthRef = useRef(width);

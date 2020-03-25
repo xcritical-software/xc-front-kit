@@ -1,10 +1,13 @@
-import { ReactElement, CSSProperties } from 'react';
+import { ReactElement, CSSProperties, RefObject } from 'react';
 import { ITheme } from '@xcritical/theme';
+import { CellMeasurerCache } from 'react-virtualized';
+import { GridPositions } from './consts';
 
 
 export interface IItem {
   [key: string]: string | number | ReactElement | any;
 }
+
 
 export interface IColumn {
   headerName: string;
@@ -14,11 +17,13 @@ export interface IColumn {
   center?: boolean;
   isExpandable?: boolean;
   render?: Function;
+  fixedPosition?: GridPositions.LEFT | GridPositions.RIGHT;
 }
 export interface ITotals {
   [key: string]: string | number;
 }
-export interface IGrid {
+
+export interface IGridProps {
   items: IItem[];
   columns: IColumn[];
   width?: number;
@@ -31,12 +36,78 @@ export interface IGrid {
   onSelect?: Function;
   shouldMovingColumns?: boolean;
   shouldChangeColumnsWidth?: boolean;
+  shouldChangeLeftColumnsWidth?: boolean;
+  shouldChangeRightColumnsWidth?: boolean;
   shouldFitContainer?: boolean;
+  rowHeight?: number;
   isScrollingOptOut?: boolean;
   overscanColumnCount?: number;
   overscanRowCount?: number;
 }
 
+
+export interface IMultiGrid {
+  width: number;
+  height: number;
+  shouldMovingColumns?: boolean;
+  shouldChangeColumnsWidth?: boolean;
+  shouldChangeLeftColumnsWidth?: boolean;
+  shouldChangeRightColumnsWidth?: boolean;
+  leftMappedColumns: IColumn[];
+  centerMappedColumns: IColumn[];
+  rightMappedColumns: IColumn[];
+  setLeftMappedColumns: Function;
+  setCenterMappedColumns: Function;
+  setRightMappedColumns: Function;
+  leftFixedWidth: number;
+  rightFixedWidth: number;
+  scrollTop: number;
+  onScroll: Function;
+  allGridsProps: IAllGridsProps;
+  isScrollingOptOut?: boolean;
+  overscanColumnCount?: number;
+  overscanRowCount?: number;
+}
+
+interface IAllGridsProps {
+  totals?: IItem;
+  onChangeExpand: Function;
+  handleSelect: Function;
+  selectedRows: string[];
+  mappedItems: IMappedItem[];
+  cacheRef: RefObject<CellMeasurerCache>;
+  themeRef: RefObject<IGridTheme>;
+  rowHeight?: number;
+}
+
+
+export interface IInternalGrid {
+  rightScroll?: boolean;
+  bottomScroll?: boolean;
+  width: number;
+  height: number;
+  shouldMovingColumns?: boolean;
+  shouldChangeColumnsWidth?: boolean;
+  scrollTop?: number;
+  onScrollsyncScroll?: Function;
+  setGridHOCMappedColumns: Function;
+  gridHOCMappedColumns: IColumn[];
+  resizeGridAfterResizeLastColumn?: boolean;
+  gridPosition: GridPositions;
+  onChangeColumns?: Function;
+  totals?: ITotals;
+  handleSelect: Function;
+  onChangeExpand: Function;
+  mappedItems: IMappedItem[];
+  selectedRows: string[];
+  cacheRef: RefObject<CellMeasurerCache>;
+  themeRef: RefObject<IGridTheme>;
+  rowHeight?: number;
+  overscanColumnCount?: number;
+  isScrollingOptOut?: boolean;
+  overscanRowCount?: number;
+  shiftFirstColumn: boolean;
+}
 
 export interface IMappedItem extends IItem {
   key: string;
@@ -111,6 +182,7 @@ export interface IBodyCellContent {
   theme: IGridTheme;
   center: boolean;
   selected: boolean;
+  rowHeight?: number;
 }
 export interface IBodyCellOffset {
   theme: IGridTheme;

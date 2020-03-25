@@ -17,7 +17,6 @@ export const Wrapper = styled.div.attrs(({ width }: IWrapper) => ({
     box-sizing: border-box;
   }
   overflow: hidden;
-  border-radius: 10px;
   ${({ changingColumns }) => {
     if (changingColumns === 'move') {
       return `
@@ -34,4 +33,10 @@ export const Wrapper = styled.div.attrs(({ width }: IWrapper) => ({
     return '';
   }}
   ${getWrapperStyles}
+`;
+
+
+export const MultiGridWrapper = styled.div<{ height?: string }>`
+  display: flex;
+  ${({ height }) => height && `height: ${height}`}
 `;

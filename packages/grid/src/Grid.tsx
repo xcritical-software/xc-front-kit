@@ -1,114 +1,103 @@
 import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  MutableRefObject,
-  useContext,
-  useMemo,
+  useState, useEffect, useRef, useCallback, useMemo, useContext,
 } from 'react';
+
+
 import { ThemeContext } from 'styled-components';
-import {
-  Grid as VirtualisedGrid,
-  CellMeasurer,
-  CellMeasurerCache,
-  ScrollPosition,
-  GridCellProps,
-} from 'react-virtualized';
+import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
-import {
-  Body,
-  BodyCell,
-  BodyCellOffset,
-  BodyCellContent,
-  ExpandButtonWrapper,
-  Wrapper,
-  TotalBlock,
-  TotalCellContent,
-  TotalCell,
-  ShiftInsteadButton,
-} from './styled';
-import { AddIcon, RemoveIcon } from './icons';
-import {
-  guid, addOrDeleteItemFromArray, gridTheme, deletePropsFromObjects, searchLastVisible,
-} from './utils';
 
-import { HeaderWrapper } from './HeaderWrapper';
+import { ScrollSync, CellMeasurerCache } from 'react-virtualized';
+
+import InternalGrid from './InternalGrid';
 import {
-  IItem, IColumn, IGrid, IMappedItem,
+  IMappedItem, IItem, IGridProps, IColumn,
 } from './interfaces';
+import {
+  guid, addOrDeleteItemFromArray, deletePropsFromObjects, gridTheme, getFullWidth,
+} from './utils';
+import { MultiGrid } from './MultiGrid';
+import { GridPositions } from './consts';
+import { MultiGridWrapper } from './styled';
 
 
-const Grid = ({
-  items = [],
-  columns = [],
-  width = 0,
-  height = 0,
+const Grid: React.FC<IGridProps> = ({
+  shouldFitContainer,
+  items,
   isDisableSelect = false,
   isMultiSelect = false,
-  onChangeColumns = () => {},
-  totals,
+  onSelect,
   theme,
-  onSelect = () => {},
-  shouldMovingColumns = true,
+  rowHeight,
   shouldChangeColumnsWidth = true,
+  shouldChangeLeftColumnsWidth = true,
+  shouldChangeRightColumnsWidth = true,
+  columns,
+  totals,
+  onChangeColumns: onChangeColumnsFromProps = () => {},
+  shouldMovingColumns,
+  width = 0,
+  height = 0,
   isScrollingOptOut = true,
   overscanColumnCount = 8,
   overscanRowCount = 8,
-}: IGrid) => {
-  const contextTheme = useContext(ThemeContext);
-  const themeRef = useRef(gridTheme(theme || contextTheme));
-
-  const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
+}) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
     items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
   );
-  const [selectedRows, setSelectedRows] = useState<string[]>([]);
-  const fullWidthRef = useRef(
-    mappedColumns.filter(({ visible }: IColumn) => visible).reduce(
-      (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
-    ),
-  );
-  const [scrollLeft, setScrollLeft] = useState<number>(0);
-  const [changingColumns, setChangingColumns] = useState<string>('');
-  const gridRef = useRef<VirtualisedGrid>();
+
+  const contextTheme = useContext(ThemeContext);
+  const themeRef = useRef(gridTheme(theme || contextTheme));
+
+  useEffect(() => {
+    themeRef.current = gridTheme(theme || contextTheme);
+  }, [theme, contextTheme]);
+
   const cacheRef = useRef(
     new CellMeasurerCache({
       fixedWidth: true,
-      defaultHeight: 100,
+      fixedHeight: Boolean(rowHeight),
+      defaultHeight: rowHeight || 100,
     }),
   );
 
-  const filteredColums = useMemo(() => (
-    mappedColumns.filter(({ visible }) => visible)
-  ), [mappedColumns]);
+  const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
-  useEffect(() => {
-    const newFullWidth = columns.filter(({ visible }: IColumn) => visible).reduce(
-      (acc: number, { width: colWidth }: IColumn): number => (acc + colWidth), 0,
-    );
-    themeRef.current = gridTheme(theme || contextTheme);
-    fullWidthRef.current = newFullWidth;
-    if (newFullWidth < width) {
-      const lastElemIdx = searchLastVisible(columns, columns.length);
-      const widthLast = columns[lastElemIdx].width;
-      const newColumns = setIn(columns, widthLast + (width - newFullWidth), [String(lastElemIdx), 'width']);
-      setMappedColumns(newColumns);
-      fullWidthRef.current = newFullWidth;
-      return;
+  const createObserver = (): ResizeObserver | undefined => {
+    if (wrapperRef.current === null) {
+      return undefined;
     }
+    const observer = new ResizeObserver((): undefined => {
+      if (wrapperRef.current === null) {
+        return undefined;
+      }
+      setWrapperSize({
+        width: wrapperRef.current.clientWidth,
+        height: wrapperRef.current.clientHeight,
+      });
+      return undefined;
+    });
+    observer.observe(wrapperRef.current);
+    return observer;
+  };
 
-    fullWidthRef.current = newFullWidth;
-    setMappedColumns(columns);
-  }, [columns, contextTheme, theme, width]);
+  const observerRef: React.MutableRefObject<ResizeObserver | undefined> = useRef();
 
   useEffect(() => {
-    setMappedItems(items.map((el: IItem) => ({ ...el, key: guid(), expandLevel: 0 })));
-  }, [items]);
+    if (shouldFitContainer) observerRef.current = createObserver();
+  }, [shouldFitContainer]);
 
-  const handleScroll = (e: ScrollPosition) => {
-    setScrollLeft(-e.scrollLeft);
-  };
+  useEffect(
+    () => () => {
+      if (shouldFitContainer && observerRef.current && wrapperRef.current) {
+        observerRef.current.unobserve(wrapperRef.current);
+        observerRef.current.disconnect();
+      }
+    },
+    [observerRef, shouldFitContainer],
+  );
 
   const onChangeExpand = useCallback(
     (index: number, childrens: IItem[]) => {
@@ -151,22 +140,27 @@ const Grid = ({
   const handleSelect = useCallback(
     (e, key) => {
       if (isDisableSelect
-           || e.target.tagName === 'svg'
-           || e.target.tagName === 'path'
-           || e.target.tagName === 'BUTTON'
+             || e.target.tagName === 'svg'
+             || e.target.tagName === 'path'
+             || e.target.tagName === 'BUTTON'
       ) return;
       if (isMultiSelect) {
         const newSelectedRows = addOrDeleteItemFromArray(selectedRows, key);
-        onSelect(
-          deletePropsFromObjects(
-            mappedItems.filter((el: IMappedItem) => newSelectedRows.some((id) => id === el.key)), 'key', 'expandLevel',
-          ),
-        );
+        if (onSelect) {
+          onSelect(
+            deletePropsFromObjects(
+              mappedItems.filter((el: IMappedItem) => newSelectedRows.some((id) => id === el.key)), 'key', 'expandLevel',
+            ),
+          );
+        }
         setSelectedRows(newSelectedRows);
         return;
       }
       if (selectedRows[0] === key) {
-        onSelect({});
+        if (onSelect) {
+          onSelect({});
+        }
+
         setSelectedRows([]);
       } else {
         const selectedRow = {
@@ -175,190 +169,209 @@ const Grid = ({
         } as IMappedItem;
         delete selectedRow.key;
         delete selectedRow.expandLevel;
-        onSelect(selectedRow);
+        if (onSelect) {
+          onSelect(selectedRow);
+        }
         setSelectedRows([key]);
       }
     },
     [isDisableSelect, isMultiSelect, selectedRows, onSelect, mappedItems],
   );
 
-  const cellRenderer = ({
-    columnIndex, key, parent, rowIndex, style,
-  }: GridCellProps) => {
-    const isFirstColumn = columnIndex === 0;
 
-    const row = mappedItems[rowIndex];
-    const column = filteredColums[columnIndex];
+  useEffect(() => {
+    setMappedItems(items.map((el: IItem) => ({ ...el, key: guid(), expandLevel: 0 })));
+  }, [items]);
 
-    const expandLevel = isFirstColumn ? row.expandLevel : 0;
+  const isMultiGrid = useMemo(() => columns
+    .some(({ fixedPosition }: IColumn) => Boolean(fixedPosition)), [columns]);
 
-    const renderFunction = column.render;
 
-    const content = row[column.field];
+  const mappedColumns = useMemo(() => [...columns], [columns]);
 
-    const cellContent = renderFunction ? renderFunction(content, column.field, row) : content;
+  const [leftMappedColumns, setLeftMappedColumns] = useState<IColumn[]>(
+    mappedColumns.filter(({ fixedPosition }) => fixedPosition === GridPositions.LEFT),
+  );
 
-    const handleExpand = () => {
-      onChangeExpand(rowIndex, mappedItems[rowIndex].children);
+  const [centerMappedColumns, setCenterMappedColumns] = useState<IColumn[]>(
+    mappedColumns.filter(({ fixedPosition }) => !fixedPosition),
+  );
+
+  const [rightMappedColumns, setRightMappedColumns] = useState<IColumn[]>(
+    mappedColumns.filter(({ fixedPosition }) => fixedPosition === GridPositions.RIGHT),
+  );
+
+  const [leftFixedWidth, setLeftFixedWidth] = useState(0);
+  const [rightFixedWidth, setRightFixedWidth] = useState(0);
+
+
+  useEffect(() => {
+    setLeftMappedColumns(mappedColumns
+      .filter(({ fixedPosition }: IColumn) => fixedPosition === GridPositions.LEFT));
+
+    setCenterMappedColumns(mappedColumns
+      .filter(({ fixedPosition }: IColumn) => !fixedPosition));
+
+    setRightMappedColumns(mappedColumns
+      .filter(({ fixedPosition }: IColumn) => fixedPosition === GridPositions.RIGHT));
+  }, [mappedColumns]);
+
+  useEffect(() => {
+    setLeftFixedWidth(
+      getFullWidth(leftMappedColumns),
+    );
+    setRightFixedWidth(
+      getFullWidth(rightMappedColumns),
+    );
+  }, [leftMappedColumns, rightMappedColumns]);
+
+  const onChangeColumns = useCallback((cols, gridPosition) => {
+    if (gridPosition === GridPositions.LEFT) {
+      onChangeColumnsFromProps([
+        ...cols,
+        ...centerMappedColumns,
+        ...rightMappedColumns,
+      ]);
+    } else if (gridPosition === GridPositions.CENTER) {
+      onChangeColumnsFromProps([
+        ...leftMappedColumns,
+        ...cols,
+        ...rightMappedColumns,
+      ]);
+    } else {
+      onChangeColumnsFromProps([
+        ...leftMappedColumns,
+        ...centerMappedColumns,
+        ...cols,
+      ]);
+    }
+  }, [
+    leftMappedColumns,
+    centerMappedColumns,
+    rightMappedColumns,
+  ]);
+
+
+  if (isMultiGrid) {
+    const multiGridProps = {
+      shouldMovingColumns,
+      shouldChangeColumnsWidth,
+      shouldChangeLeftColumnsWidth,
+      shouldChangeRightColumnsWidth,
+      width,
+      height,
+
+      leftFixedWidth,
+      rightFixedWidth,
+
+      leftMappedColumns,
+      centerMappedColumns,
+      rightMappedColumns,
+
+
+      setLeftMappedColumns,
+      setCenterMappedColumns,
+      setRightMappedColumns,
+
+      isScrollingOptOut,
+      overscanColumnCount,
+      overscanRowCount,
+      allGridsProps: {
+        onChangeColumns,
+        totals,
+        handleSelect,
+        onChangeExpand,
+        mappedItems,
+        selectedRows,
+        cacheRef,
+        themeRef: themeRef || {},
+        rowHeight,
+      },
     };
 
-    const isSelected = selectedRows
-      .some((k: string) => k === mappedItems[rowIndex].key);
+    if (shouldFitContainer) {
+      multiGridProps.width = wrapperSize.width;
+      multiGridProps.height = wrapperSize.height;
+
+      return (
+        <ScrollSync>
+          { ({
+            onScroll,
+            scrollTop,
+          }) => (
+            <MultiGridWrapper height="100%" ref={ wrapperRef }>
+              <MultiGrid
+                { ...multiGridProps }
+                onScroll={ onScroll }
+                scrollTop={ scrollTop }
+              />
+            </MultiGridWrapper>
+          ) }
+        </ScrollSync>
+      );
+    }
 
     return (
-      <CellMeasurer
-        cache={ cacheRef.current }
-        columnIndex={ columnIndex }
-        key={ key }
-        parent={ parent }
-        rowIndex={ rowIndex }
-      >
-        <BodyCell
-          onClick={ (e: MouseEvent) => handleSelect(e, mappedItems[rowIndex].key) }
-          key={ key }
-          selected={ isSelected }
-          style={ {
-            ...style,
-            width: column.width,
-          } }
-          firstRow={ rowIndex === 0 }
-          even={ !!(rowIndex % 2) }
-          theme={ themeRef.current }
-        >
-          <BodyCellOffset
-            center={ !!column.center }
-            expandLevel={ expandLevel }
-            theme={ themeRef.current }
-          />
-
-
-          <BodyCellContent
-            theme={ themeRef.current }
-            center={ !!column.center }
-            selected={ isSelected }
-          >
-
-            { column.isExpandable && mappedItems[rowIndex].children && (
-              <ExpandButtonWrapper onClick={ handleExpand } theme={ themeRef.current }>
-                { mappedItems[rowIndex].isExpand
-                  ? <RemoveIcon />
-                  : <AddIcon /> }
-              </ExpandButtonWrapper>
-            ) }
-
-            { column.isExpandable && !mappedItems[rowIndex].children && (
-              <ShiftInsteadButton theme={ themeRef.current } />
-            ) }
-
-            <span>{ cellContent }</span>
-          </BodyCellContent>
-        </BodyCell>
-      </CellMeasurer>
+      <ScrollSync>
+        { ({
+          onScroll,
+          scrollTop,
+        }) => (
+          <MultiGridWrapper ref={ wrapperRef }>
+            <MultiGrid
+              { ...multiGridProps }
+              onScroll={ onScroll }
+              scrollTop={ scrollTop }
+            />
+          </MultiGridWrapper>
+        ) }
+      </ScrollSync>
     );
+  }
+
+  const singleGridProps = {
+    handleSelect,
+    onChangeExpand,
+    mappedItems,
+    selectedRows,
+    cacheRef,
+    themeRef,
+    rowHeight,
+    shouldChangeColumnsWidth,
+    gridHOCMappedColumns: centerMappedColumns,
+    setGridHOCMappedColumns: setCenterMappedColumns,
+    totals,
+    onChangeColumns,
+    isScrollingOptOut,
+    overscanColumnCount,
+    overscanRowCount,
+    shouldMovingColumns,
+    shiftFirstColumn: true,
   };
 
-  const handleChangeWidth = useCallback(
-    (index, newWidth) => {
-      let newColumns: IColumn[] = setIn(mappedColumns, newWidth, [index, 'width']);
-      let newFullWidth: number = newColumns.reduce(
-        (acc, { width: colWidth }) => (acc + colWidth),
-        0,
-      );
-
-      if (newFullWidth < width) {
-        const lastColIdx = searchLastVisible(newColumns, newColumns.length);
-        newColumns = setIn(
-          newColumns,
-          newColumns[lastColIdx].width + (width - newFullWidth),
-          [String(lastColIdx), 'width'],
-        );
-
-        newFullWidth = newColumns.reduce(
-          (acc, { width: colWidth }) => (acc + colWidth),
-          0,
-        );
-      }
-      fullWidthRef.current = newFullWidth;
-      setMappedColumns(newColumns);
-      onChangeColumns(newColumns);
-    },
-    [mappedColumns, onChangeColumns, width],
-  );
-
-
-  const handleChangeMoving = useCallback(
-    (newColumns) => {
-      setMappedColumns(newColumns);
-      onChangeColumns(newColumns);
-    },
-    [onChangeColumns],
-  );
-
-  useEffect(() => {
-    if (gridRef.current) gridRef.current.recomputeGridSize();
-    if (cacheRef.current) cacheRef.current.clearAll();
-  }, [mappedColumns, mappedItems]);
-
-  useEffect(() => {
-    if (gridRef.current) gridRef.current.recomputeGridSize();
-  }, [selectedRows]);
-
-  const {
-    header: { height: headerHeight = 0 } = {},
-    totals: { height: totalsHeight = 0 } = {},
-  } = themeRef.current;
+  if (shouldFitContainer) {
+    return (
+      <div ref={ wrapperRef } style={ { height: '100%' } }>
+        <InternalGrid
+          width={ wrapperSize.width }
+          height={ wrapperSize.height }
+          gridPosition={ GridPositions.CENTER }
+          { ...singleGridProps }
+        />
+      </div>
+    );
+  }
 
 
   return (
-    <Wrapper theme={ themeRef.current } width={ width } changingColumns={ changingColumns }>
-      <HeaderWrapper
-        fullWidth={ fullWidthRef.current }
-        columns={ mappedColumns }
-        translateX={ scrollLeft }
-        onChangeWidth={ handleChangeWidth }
-        onChangeMoving={ handleChangeMoving }
-        setChangingColumns={ setChangingColumns }
-        theme={ themeRef.current }
-        shouldMovingColumns={ shouldMovingColumns }
-        shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-      />
-      <Body>
-        <VirtualisedGrid
-          ref={ gridRef as MutableRefObject<VirtualisedGrid> }
-          columnCount={ filteredColums.length }
-          columnWidth={ ({ index }: any) => filteredColums[index].width }
-          deferredMeasurementCache={ cacheRef.current }
-          height={ height - Number(headerHeight) - Number(totals ? totalsHeight : 0) }
-          cellRenderer={ cellRenderer }
-          rowCount={ mappedItems.length }
-          rowHeight={ cacheRef.current.rowHeight }
-          width={ width }
-          onScroll={ handleScroll }
-          isScrollingOptOut={ isScrollingOptOut }
-          overscanColumnCount={ overscanColumnCount }
-          overscanRowCount={ overscanRowCount }
-        />
-      </Body>
-      { totals && (
-        <TotalBlock
-          width={ fullWidthRef.current }
-          translateX={ scrollLeft }
-          theme={ themeRef.current }
-        >
-          { filteredColums.map((el: IColumn, index: number) => (
-            <TotalCell
-              theme={ themeRef.current }
-              width={ filteredColums.length === index + 1 ? el.width + 9 : el.width }
-            >
-              <TotalCellContent center={ !!el.center } theme={ themeRef.current }>
-                <span>{ totals[el.field] }</span>
-              </TotalCellContent>
-            </TotalCell>
-          )) }
-        </TotalBlock>
-      ) }
-    </Wrapper>
+    <InternalGrid
+      width={ width }
+      height={ height }
+      gridPosition={ GridPositions.CENTER }
+      { ...singleGridProps }
+    />
   );
 };
+
 
 export default Grid;

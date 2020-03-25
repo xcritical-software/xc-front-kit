@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { css } from 'styled-components';
+
 import {
   IHeader,
   IHeaderCell,
@@ -16,24 +18,24 @@ import {
 
 export const getHeaderStyles = ({ theme }: IHeader) => {
   if (theme.border !== 'none') {
-    return `
-      background-color: ${theme.header?.backgroundColor}
+    return css`
+      background-color: ${theme.header?.backgroundColor};
       border-bottom: ${theme.header?.border};
     `;
   }
-  return `
-      background-color: ${theme.header?.backgroundColor}
+  return css`
+      background-color: ${theme.header?.backgroundColor};
       border: ${theme.header?.border};
     `;
 };
 
 export const getTotalStyles = ({ theme }: ITotal) => {
   if (theme.border !== 'none') {
-    return `
+    return css`
       border-top: ${theme.totals?.border};
     `;
   }
-  return `
+  return css`
       border: ${theme.totals?.border};
     `;
 };
@@ -59,9 +61,10 @@ export const getBodyCellStyles = ({
     : `border-top: ${rowCellBorder};
        border-right: ${rowCellBorder};
        border-left: ${rowCellBorder};
-       border-bottom: ${rowCellBorder}  `;
+       border-bottom: ${rowCellBorder};
+      `;
 
-  return `
+  return css`
       background: ${background};
       border-top: ${borderTop};
       ${rowCellBorder !== 'none' ? cellBorder : ''};
@@ -113,18 +116,21 @@ export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
 export const getBodyCellContentStyles = ({
   theme: { row, selectedRowColor },
   selected,
-}: IBodyCellContent) => `
+  rowHeight,
+}: IBodyCellContent) => css`
     padding: ${row?.padding};
-    ${row?.height ? `height: ${row?.height}` : null};
+    ${rowHeight ? `height: ${rowHeight}px` : null};
 
     span {
       font-size: ${row?.fontSize};
       color: ${selected ? selectedRowColor : row?.color};
-      ${row?.height ? `
+      display: flex;
+      ${rowHeight ? css`
           white-space: nowrap;
           overflow: hidden;
           display: block;
-          text-overflow: ellipsis;` : null
+          text-overflow: ellipsis;
+          ` : null
 }
     }
     `;
