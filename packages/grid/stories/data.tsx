@@ -6,6 +6,7 @@ import KeyboardArrowUpIcon from 'mdi-react/KeyboardArrowUpIcon';
 
 import { IColumn } from '../src/interfaces';
 import { Popover, popoverThemeNamespace } from '../../popover';
+import { GridPositions } from '../src/consts';
 
 
 const renderFunc = (field) => (
@@ -534,8 +535,8 @@ export const columnsFixed = (fixeds) => items
       isExpandable: i === 2,
     };
     /* eslint-disable no-mixed-operators */
-    if ((fixeds === 'both' || fixeds === 'left') && i === 2) column.fixedPosition = 'LEFT';
-    if ((fixeds === 'both' || fixeds === 'right') && i === 5) column.fixedPosition = 'RIGHT';
+    if ((fixeds === 'both' || fixeds === 'left') && i === 2) column.fixedPosition = GridPositions.LEFT;
+    if ((fixeds === 'both' || fixeds === 'right') && i === 5) column.fixedPosition = GridPositions.RIGHT;
     /* eslint-enable no-mixed-operators */
 
     return column;
