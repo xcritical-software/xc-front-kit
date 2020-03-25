@@ -1,10 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 import EqualIcon from 'mdi-react/EqualIcon';
 import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon';
 import KeyboardArrowUpIcon from 'mdi-react/KeyboardArrowUpIcon';
 
-import styled from 'styled-components';
+import { IColumn } from '../src/interfaces';
 import { Popover, popoverThemeNamespace } from '../../popover';
+import { GridPositions } from '../src/consts';
 
 
 const renderFunc = (field) => (
@@ -497,3 +499,57 @@ export function createRowsWithRender (x = 3) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return new Array(Math.floor(Math.random() * 5 + 5)).fill(true).map((_el) => createItem(x));
 }
+
+
+const items = [
+  'one',
+  'two',
+  'three',
+  'four',
+  'five',
+  'siz',
+  'saven',
+  'eight',
+  'nine',
+  'ten',
+  'eleven',
+  'twelve',
+  'thirteen',
+  'fourteen',
+  'fiveteen',
+];
+
+const getWidth = (i) => {
+  if (i >= 2 && i <= 5) return 100;
+  return 200;
+};
+
+export const columnsFixed = (fixeds) => items
+  .map((el, i) => {
+    const column: IColumn = {
+      headerName: el,
+      field: el,
+      width: getWidth(i),
+      visible: true,
+      center: i !== 2,
+      isExpandable: i === 2,
+    };
+    /* eslint-disable no-mixed-operators */
+    if ((fixeds === 'both' || fixeds === 'left') && i === 2) column.fixedPosition = GridPositions.LEFT;
+    if ((fixeds === 'both' || fixeds === 'right') && i === 5) column.fixedPosition = GridPositions.RIGHT;
+    /* eslint-enable no-mixed-operators */
+
+    return column;
+  });
+
+
+export const totalsFixed = items
+  .reduce((acc, el) => ({ ...acc, [el]: Math.floor(Math.random() * 100 + 50) }), {});
+
+export const rowsFixed = new Array(1000).fill(true)
+  .map((_el, i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {
+    children: i === 3 || i === 10 || i === 40
+      ? new Array(5).fill(true)
+        .map((_$el, $i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${$i}` }), {}))
+      : null,
+  }));

@@ -10,7 +10,15 @@ import { setIn } from 'utilitify';
 import Grid from '../src';
 import { IColumn } from '../src/interfaces';
 import {
-  columns, totals, rowsWithChildren, rows, columnsWithRender, createRowsWithRender,
+  columns,
+  totals,
+  rowsWithChildren,
+  rows,
+  columnsWithRender,
+  createRowsWithRender,
+  columnsFixed,
+  rowsFixed,
+  totalsFixed,
 } from './data';
 import * as countries from './countries';
 import { gridThemeNamespace } from '../src/theme';
@@ -22,6 +30,7 @@ import {
   Content,
   GridWrapper,
   SomeBlock,
+  SelectorColumnsWrapper,
 } from './styled';
 import './reset.css';
 
@@ -90,7 +99,6 @@ const AMStheme = {
       border: `1px solid ${colors.GRAY}`,
       padding: '5px 10px',
       fontSize: '13px',
-      height: '28px',
     },
   },
 };
@@ -196,6 +204,7 @@ storiesOf('New Grid', module)
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
       theme={ AMStheme }
+      rowHeight={ 40 }
     />
   ))
   .add('Dinamic size', () => {
@@ -277,5 +286,101 @@ storiesOf('New Grid', module)
       items={ createRowsWithRender() }
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
+      rowHeight={ 30 }
     />
-  ));
+  ))
+  .add('fixed columns (left+right)', () => (
+    <Grid
+      columns={ columnsFixed('both') }
+      items={ rowsFixed }
+      width={ document.documentElement.clientWidth - 100 }
+      height={ document.documentElement.clientHeight - 100 }
+      rowHeight={ 30 }
+      theme={ AMStheme }
+    />
+  ))
+  .add('fixed columns (left)', () => (
+    <Grid
+      columns={ columnsFixed('left') }
+      items={ rowsFixed }
+      width={ document.documentElement.clientWidth - 100 }
+      height={ document.documentElement.clientHeight - 100 }
+      rowHeight={ 30 }
+      theme={ AMStheme }
+    />
+  ))
+  .add('Fixed columns + Dinamic size', () => {
+    const [someBlockHeight, setSomeBlockHeight] = useState(100);
+
+    const handleChangeHeight = ({ target: { value } }) => {
+      if (value < 300) setSomeBlockHeight(value);
+      else setSomeBlockHeight(300);
+    };
+
+    return (
+      <Provider store={ store }>
+        <Page>
+          <Sidebar maxWidth={ 300 }>{ list(100) }</Sidebar>
+          <Content>
+            <div>
+              <CompactFilterContainer />
+            </div>
+            <GridWrapper>
+              <Grid
+                columns={ columnsFixed('both') }
+                items={ rowsFixed }
+                totals={ totalsFixed }
+                theme={ AMStheme }
+                rowHeight={ 30 }
+                shouldFitContainer
+              />
+            </GridWrapper>
+            <input placeholder="some block height (max 300)" value={ someBlockHeight } onChange={ handleChangeHeight } />
+            <SomeBlock height={ someBlockHeight }> max height =  300px  </SomeBlock>
+          </Content>
+        </Page>
+      </Provider>
+    );
+  })
+  .add('Selector columns + fixeds', () => {
+    const [mappedColumns, setMappedColumns] = useState(columnsFixed('both'));
+
+    const handleChangeVisibleColumns = useCallback((i) => {
+      const newColumns = setIn(mappedColumns, !mappedColumns[i].visible, [String(i), 'visible']);
+      console.log(newColumns);
+      setMappedColumns(newColumns);
+    }, [mappedColumns]);
+
+    const handleChangeColumns = (newColumns) => {
+      setMappedColumns(newColumns);
+      console.log(newColumns);
+    };
+
+    return (
+      <>
+        <SelectorColumnsWrapper>
+          {
+            mappedColumns.map((col, i) => (
+              <div>
+                <label htmlFor={ col.field }>
+
+                  { col.headerName }
+
+                </label>
+                <input type="checkbox" checked={ col.visible } onChange={ () => handleChangeVisibleColumns(i) } />
+              </div>
+            ))
+          }
+        </SelectorColumnsWrapper>
+        <Grid
+          columns={ mappedColumns }
+          items={ rowsFixed }
+          width={ document.documentElement.clientWidth - 100 }
+          height={ document.documentElement.clientHeight - 100 }
+          rowHeight={ 30 }
+          theme={ AMStheme }
+          onChangeColumns={ handleChangeColumns }
+        />
+      </>
+    );
+  });
