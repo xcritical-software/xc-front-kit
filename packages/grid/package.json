@@ -13,7 +13,16 @@
 		"type": "git",
 		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
 	},
-	"keywords": [],
+	"keywords": [
+    "react",
+    "reactjs",
+    "react-component",
+    "virtual",
+    "virtualized",
+    "table",
+    "grid",
+    "spreadsheet"
+  ],
 	"author": "XCritical Software",
 	"license": "MIT",
 	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/grid#readme",
