@@ -79,7 +79,7 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
         <span>{ isEmpty ? null : text }</span>
         {
           sortOrder === 'ask'
-          && <SortAscendingIcon size={ theme.sortIconSize } />
+            && <SortAscendingIcon size={ theme.sortIconSize } />
         }
         {
           sortOrder === 'desk'
