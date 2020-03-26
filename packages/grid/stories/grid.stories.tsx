@@ -291,7 +291,7 @@ storiesOf('New Grid', module)
   ))
   .add('fixed columns (left+right)', () => (
     <Grid
-      columns={ columnsFixed('both') }
+      columns={ columnsFixed('both').map((el) => ({ ...el, sortable: true })) }
       items={ rowsFixed }
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
@@ -383,17 +383,17 @@ storiesOf('New Grid', module)
         />
       </>
     );
-  }).add("Sortable", () => {
-    return (
-      <Grid
-        columns={ columns.map((el, i) => ({
-          ...el,
-          sortable: i > 2,
-          sortOrder: i === 3 ? 'ask' : null
-         })) }
-        items={ rows }
-        totals={ totals }
-        width={ document.documentElement.clientWidth - 100 }
-        height={ document.documentElement.clientHeight - 100 }
-      />)
   })
+  .add('Sortable', () => (
+    <Grid
+      columns={ columns.map((el) => ({
+        ...el,
+        sortable: true,
+      })) }
+      items={ rows }
+      totals={ totals }
+      width={ document.documentElement.clientWidth - 100 }
+      height={ document.documentElement.clientHeight - 100 }
+      onChangeColumns={ (cols) => console.table(cols) }
+    />
+  ));

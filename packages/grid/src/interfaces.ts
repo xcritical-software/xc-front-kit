@@ -8,10 +8,6 @@ export interface IItem {
   [key: string]: string | number | ReactElement | any;
 }
 
-export enum SortOrder {
-  ask = 'ask',
-  desk = 'desk',
-}
 
 export interface IColumn {
   headerName: string;
@@ -23,7 +19,7 @@ export interface IColumn {
   render?: Function;
   fixedPosition?: GridPositions.LEFT | GridPositions.RIGHT;
   sortable?: boolean;
-  sortOrder?: SortOrder.ask | SortOrder.desk | null
+  sortOrder?: 'ask' | 'desk' | null;
 }
 export interface ITotals {
   [key: string]: string | number;
@@ -84,6 +80,7 @@ interface IAllGridsProps {
   cacheRef: RefObject<CellMeasurerCache>;
   themeRef: RefObject<IGridTheme>;
   rowHeight?: number;
+  onChangeSort: Function;
 }
 
 
@@ -113,6 +110,7 @@ export interface IInternalGrid {
   isScrollingOptOut?: boolean;
   overscanRowCount?: number;
   shiftFirstColumn: boolean;
+  onChangeSort: Function;
 }
 
 export interface IMappedItem extends IItem {
@@ -133,8 +131,9 @@ export interface IHeaderCellWrapper {
   shouldChangeColumnsWidth: boolean;
   shouldMovingColumns: boolean;
   sortable?: boolean;
-  sortOrder?: SortOrder.ask | SortOrder.desk;
-  onClick: Function;
+  sortOrder?: 'ask' | 'desk' | null;
+  gridPosition: GridPositions;
+  onChangeSort: Function;
 }
 
 export interface IHeaderWrapper {
@@ -142,12 +141,13 @@ export interface IHeaderWrapper {
   translateX: number;
   columns: IColumn[];
   onChangeWidth: Function;
-  onChangeMoving: Function;
+  onChangeColumns: Function;
   setChangingColumns: Function;
   theme: IGridTheme;
   shouldMovingColumns: boolean;
   shouldChangeColumnsWidth: boolean;
-  onChangeSorting: Function
+  gridPosition: GridPositions;
+  onChangeSort: Function;
 }
 
 
@@ -234,4 +234,5 @@ export interface IGridTheme {
   selectedRowColor?: string;
   movingHeaderCellColor?: string;
   expandButtonMargin?: string;
+  sortIconSize?: number | string;
 }

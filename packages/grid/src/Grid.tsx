@@ -14,7 +14,13 @@ import {
   IMappedItem, IItem, IGridProps, IColumn,
 } from './interfaces';
 import {
-  guid, addOrDeleteItemFromArray, deletePropsFromObjects, gridTheme, getFullWidth,
+  guid,
+  addOrDeleteItemFromArray,
+  deletePropsFromObjects,
+  gridTheme,
+  getFullWidth,
+  removeSorting,
+  changeGridSort,
 } from './utils';
 import { MultiGrid } from './MultiGrid';
 import { GridPositions } from './consts';
@@ -227,24 +233,58 @@ const Grid: React.FC<IGridProps> = ({
 
   const onChangeColumns = useCallback((cols, gridPosition) => {
     if (gridPosition === GridPositions.LEFT) {
+      setLeftMappedColumns(cols);
       onChangeColumnsFromProps([
         ...cols,
         ...centerMappedColumns,
         ...rightMappedColumns,
       ]);
     } else if (gridPosition === GridPositions.CENTER) {
+      setCenterMappedColumns(cols);
       onChangeColumnsFromProps([
         ...leftMappedColumns,
         ...cols,
         ...rightMappedColumns,
       ]);
     } else {
+      setRightMappedColumns(cols);
       onChangeColumnsFromProps([
         ...leftMappedColumns,
         ...centerMappedColumns,
         ...cols,
       ]);
     }
+  }, [
+    leftMappedColumns,
+    centerMappedColumns,
+    rightMappedColumns,
+  ]);
+
+
+  const onChangeSort = useCallback((sortable, sortOrder, index, gridPosition) => {
+    if (!sortable) return;
+    // ask => desk => null => ask
+    let newSortOrder: 'ask' | 'desk' | null = null;
+    if (!sortOrder) newSortOrder = 'ask';
+    if (sortOrder === 'ask') newSortOrder = 'desk';
+    if (sortOrder === 'desk') newSortOrder = null;
+
+    const newLeftColumns = removeSorting(leftMappedColumns);
+    const newCenterColumns = removeSorting(centerMappedColumns);
+    const newRightColumns = removeSorting(rightMappedColumns);
+
+    const newAllColumns = changeGridSort({
+      sortOrder: newSortOrder,
+      index,
+      gridPosition,
+      leftColumns: newLeftColumns,
+      centerColumns: newCenterColumns,
+      rightColumns: newRightColumns,
+      setLeftMappedColumns,
+      setCenterMappedColumns,
+      setRightMappedColumns,
+    });
+    onChangeColumnsFromProps(newAllColumns);
   }, [
     leftMappedColumns,
     centerMappedColumns,
@@ -286,6 +326,7 @@ const Grid: React.FC<IGridProps> = ({
         cacheRef,
         themeRef: themeRef || {},
         rowHeight,
+        onChangeSort,
       },
     };
 
@@ -347,6 +388,7 @@ const Grid: React.FC<IGridProps> = ({
     overscanRowCount,
     shouldMovingColumns,
     shiftFirstColumn: true,
+    onChangeSort,
   };
 
   if (shouldFitContainer) {

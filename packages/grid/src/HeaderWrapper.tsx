@@ -5,11 +5,13 @@ import React, {
   useCallback,
   MouseEvent,
 } from 'react';
+import SortAscendingIcon from 'mdi-react/SortAscendingIcon';
+import SortDescendingIcon from 'mdi-react/SortDescendingIcon';
+
 import { HeaderCellWrapper } from './HeaderCell';
 import { Header, MovingElem } from './styled';
-import { IHeaderWrapper, IColumn, SortOrder } from './interfaces';
+import { IHeaderWrapper, IColumn } from './interfaces';
 import { searchLastVisible, searchNextVisible } from './utils';
-import { setIn } from 'utilitify';
 
 
 export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
@@ -17,12 +19,13 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
   translateX,
   columns,
   onChangeWidth,
-  onChangeMoving,
-  onChangeSorting,
+  onChangeColumns,
   setChangingColumns,
   theme,
   shouldMovingColumns,
   shouldChangeColumnsWidth,
+  gridPosition,
+  onChangeSort,
 }) => {
   const mappedColumnsRef = useRef(columns);
   const [isMoving, setIsMoving] = useState(false);
@@ -91,7 +94,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
     emptyColumnIndexRef.current = undefined;
     setIsMoving(false);
     setMouseMove(0);
-    onChangeMoving(mappedColumnsRef.current);
+    onChangeColumns(mappedColumnsRef.current);
     movingColumnIndexRef.current = 0;
     movingColumnDataRef.current = undefined;
     document.removeEventListener('mouseup', handleMouseUp);
@@ -117,36 +120,16 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
     setChangingColumns('move');
   };
 
-  const onClick = useCallback((sortable, sortOrder, index) => {
-    if (!sortable) return;
-    // ask => desk => null => ask
-    let newSortOrder: null | SortOrder.ask | SortOrder.desk = null;
-    if (!sortOrder) newSortOrder = SortOrder.ask;
-    if (sortOrder === 'ask') newSortOrder = SortOrder.desk;
-    if (sortOrder === 'desk') newSortOrder = null;
-
-    const removedSorting = mappedColumnsRef.current.map(el => {
-      if (el.sortOrder) return {
-        ...el,
-        sortOrder: null,
-      }
-      return el
-    })
-    const newColumns = setIn(removedSorting, newSortOrder, [index, 'sortOrder']);
-    onChangeMoving(newColumns);
-  }, [])
-
-
   return (
     <Header ref={ headerRef } width={ fullWidth } translateX={ translateX } theme={ theme }>
       { mappedColumnsRef.current.map((el: IColumn, index: number) => (
         el.visible
         && (
           <HeaderCellWrapper
-            sortable={el.sortable}
-            sortOrder={el.sortOrder}
+            sortable={ el.sortable }
+            sortOrder={ el.sortOrder }
             key={ el.field }
-            isEmpty={ index === emptyColumnIndexRef.current }
+            isEmpty={ isMoving && index === emptyColumnIndexRef.current }
             onMouseDown={ handleMouseDown }
             width={ el.width }
             text={ el.headerName }
@@ -157,7 +140,8 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
             theme={ theme }
             shouldMovingColumns={ shouldMovingColumns }
             shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-            onClick={ onClick }
+            gridPosition={ gridPosition }
+            onChangeSort={ onChangeSort }
           />
         )
       )) }
@@ -170,6 +154,14 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
           theme={ theme }
         >
           <span>{ movingColumnDataRef.current?.headerName }</span>
+          {
+            movingColumnDataRef.current?.sortOrder === 'ask'
+            && <SortAscendingIcon size={ theme.sortIconSize } />
+          }
+          {
+            movingColumnDataRef.current?.sortOrder === 'desk'
+            && <SortDescendingIcon size={ theme.sortIconSize } />
+          }
         </MovingElem>
       ) }
     </Header>

@@ -74,7 +74,7 @@ export const SortIconWrapper = styled.div`
   overflow: hidden;
   display: flex;
   align-items: center;
-`
+`;
 
 
 export const RightBorder = styled.div<IRightBorder>`

@@ -1,12 +1,12 @@
 import React, {
-  useRef, useCallback, useState, useEffect, RefObject,
+  useRef, useCallback, useState, useEffect,
 } from 'react';
+import SortAscendingIcon from 'mdi-react/SortAscendingIcon';
+import SortDescendingIcon from 'mdi-react/SortDescendingIcon';
+
 import { RightBorder, HeaderCell, HeaderCellContent } from './styled';
 import { IHeaderCellWrapper } from './interfaces';
 
-
-import SortAscendingIcon from 'mdi-react/SortAscendingIcon';
-import SortDescendingIcon from 'mdi-react/SortDescendingIcon';
 
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   text,
@@ -14,7 +14,6 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   onChangeWidth,
   index,
   onMouseDown,
-  onClick,
   isEmpty,
   setChangingColumns,
   center,
@@ -23,6 +22,8 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   shouldChangeColumnsWidth,
   sortable,
   sortOrder,
+  gridPosition,
+  onChangeSort,
 }) => {
   const [newWidth, setNewWidth] = useState(width);
   const clickXRef = useRef(0);
@@ -72,17 +73,17 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
         theme={ theme }
         center={ center }
         onMouseDown={ (e) => onMouseDown(e, index) }
-        onClick={ () => onClick(sortable, sortOrder, index)}
+        onClick={ () => onChangeSort(sortable, sortOrder, index, gridPosition) }
         shouldMovingColumns={ shouldMovingColumns }
       >
         <span>{ isEmpty ? null : text }</span>
         {
-          sortOrder === 'ask' &&
-          <SortAscendingIcon />
+          sortOrder === 'ask'
+          && <SortAscendingIcon size={ theme.sortIconSize } />
         }
         {
-          sortOrder === 'desk' &&
-            <SortDescendingIcon />
+          sortOrder === 'desk'
+            && <SortDescendingIcon size={ theme.sortIconSize } />
         }
       </HeaderCellContent>
       <RightBorder
