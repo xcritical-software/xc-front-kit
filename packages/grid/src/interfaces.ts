@@ -8,6 +8,10 @@ export interface IItem {
   [key: string]: string | number | ReactElement | any;
 }
 
+export enum SortOrder {
+  ask = 'ask',
+  desk = 'desk',
+}
 
 export interface IColumn {
   headerName: string;
@@ -18,6 +22,8 @@ export interface IColumn {
   isExpandable?: boolean;
   render?: Function;
   fixedPosition?: GridPositions.LEFT | GridPositions.RIGHT;
+  sortable?: boolean;
+  sortOrder?: SortOrder.ask | SortOrder.desk | null
 }
 export interface ITotals {
   [key: string]: string | number;
@@ -126,6 +132,9 @@ export interface IHeaderCellWrapper {
   theme: IGridTheme;
   shouldChangeColumnsWidth: boolean;
   shouldMovingColumns: boolean;
+  sortable?: boolean;
+  sortOrder?: SortOrder.ask | SortOrder.desk;
+  onClick: Function;
 }
 
 export interface IHeaderWrapper {
@@ -138,6 +147,7 @@ export interface IHeaderWrapper {
   theme: IGridTheme;
   shouldMovingColumns: boolean;
   shouldChangeColumnsWidth: boolean;
+  onChangeSorting: Function
 }
 
 

@@ -214,6 +214,14 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     [onChangeColumns, gridPosition],
   );
 
+  const handleChangeSorting = useCallback(
+    (newColumns) => {
+      setMappedColumns(newColumns);
+      onChangeColumns(newColumns, gridPosition);
+    },
+    [onChangeColumns, gridPosition],
+  );
+
   useEffect(() => {
     if (isScrollingOptOut) gridRef.current?.recomputeGridSize();
   }, [selectedRows]);
@@ -251,6 +259,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
         translateX={ scrollLeft }
         onChangeWidth={ handleChangeWidth }
         onChangeMoving={ handleChangeMoving }
+        onChangeSorting={ handleChangeSorting }
         setChangingColumns={ setChangingColumns }
         theme={ themeRef.current! }
         shouldMovingColumns={ shouldMovingColumns }

@@ -1,9 +1,12 @@
 import React, {
-  useRef, useCallback, useState, useEffect,
+  useRef, useCallback, useState, useEffect, RefObject,
 } from 'react';
 import { RightBorder, HeaderCell, HeaderCellContent } from './styled';
 import { IHeaderCellWrapper } from './interfaces';
 
+
+import SortAscendingIcon from 'mdi-react/SortAscendingIcon';
+import SortDescendingIcon from 'mdi-react/SortDescendingIcon';
 
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   text,
@@ -11,12 +14,15 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   onChangeWidth,
   index,
   onMouseDown,
+  onClick,
   isEmpty,
   setChangingColumns,
   center,
   theme,
   shouldMovingColumns,
   shouldChangeColumnsWidth,
+  sortable,
+  sortOrder,
 }) => {
   const [newWidth, setNewWidth] = useState(width);
   const clickXRef = useRef(0);
@@ -59,15 +65,25 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
     },
     [setChangingColumns, handleMouseMove, handleMouseUp, shouldChangeColumnsWidth],
   );
+
   return (
     <HeaderCell theme={ theme } width={ newWidth } isEmpty={ isEmpty }>
       <HeaderCellContent
         theme={ theme }
-        onMouseDown={ (e) => onMouseDown(e, index) }
         center={ center }
+        onMouseDown={ (e) => onMouseDown(e, index) }
+        onClick={ () => onClick(sortable, sortOrder, index)}
         shouldMovingColumns={ shouldMovingColumns }
       >
         <span>{ isEmpty ? null : text }</span>
+        {
+          sortOrder === 'ask' &&
+          <SortAscendingIcon />
+        }
+        {
+          sortOrder === 'desk' &&
+            <SortDescendingIcon />
+        }
       </HeaderCellContent>
       <RightBorder
         theme={ theme }

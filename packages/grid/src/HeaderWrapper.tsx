@@ -7,8 +7,9 @@ import React, {
 } from 'react';
 import { HeaderCellWrapper } from './HeaderCell';
 import { Header, MovingElem } from './styled';
-import { IHeaderWrapper, IColumn } from './interfaces';
+import { IHeaderWrapper, IColumn, SortOrder } from './interfaces';
 import { searchLastVisible, searchNextVisible } from './utils';
+import { setIn } from 'utilitify';
 
 
 export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
@@ -17,6 +18,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
   columns,
   onChangeWidth,
   onChangeMoving,
+  onChangeSorting,
   setChangingColumns,
   theme,
   shouldMovingColumns,
@@ -40,6 +42,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
 
   const handleMouseMove = useCallback(
     (e) => {
+      setIsMoving(true);
       const { clientX } = e;
       const moveMouse = clientX - clickXRef.current;
 
@@ -106,7 +109,6 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
       y: coords.y,
       height: coords.height,
     });
-    setIsMoving(true);
     movingColumnIndexRef.current = i;
     emptyColumnIndexRef.current = i;
     movingColumnDataRef.current = mappedColumnsRef.current[i];
@@ -115,6 +117,25 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
     setChangingColumns('move');
   };
 
+  const onClick = useCallback((sortable, sortOrder, index) => {
+    if (!sortable) return;
+    // ask => desk => null => ask
+    let newSortOrder: null | SortOrder.ask | SortOrder.desk = null;
+    if (!sortOrder) newSortOrder = SortOrder.ask;
+    if (sortOrder === 'ask') newSortOrder = SortOrder.desk;
+    if (sortOrder === 'desk') newSortOrder = null;
+
+    const removedSorting = mappedColumnsRef.current.map(el => {
+      if (el.sortOrder) return {
+        ...el,
+        sortOrder: null,
+      }
+      return el
+    })
+    const newColumns = setIn(removedSorting, newSortOrder, [index, 'sortOrder']);
+    onChangeMoving(newColumns);
+  }, [])
+
 
   return (
     <Header ref={ headerRef } width={ fullWidth } translateX={ translateX } theme={ theme }>
@@ -122,6 +143,8 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
         el.visible
         && (
           <HeaderCellWrapper
+            sortable={el.sortable}
+            sortOrder={el.sortOrder}
             key={ el.field }
             isEmpty={ index === emptyColumnIndexRef.current }
             onMouseDown={ handleMouseDown }
@@ -134,6 +157,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
             theme={ theme }
             shouldMovingColumns={ shouldMovingColumns }
             shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+            onClick={ onClick }
           />
         )
       )) }
