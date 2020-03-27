@@ -1,11 +1,12 @@
 import React, {
   useRef, useCallback, useState, useEffect,
 } from 'react';
-import SortAscendingIcon from 'mdi-react/SortAscendingIcon';
-import SortDescendingIcon from 'mdi-react/SortDescendingIcon';
 
-import { RightBorder, HeaderCell, HeaderCellContent } from './styled';
+import {
+  RightBorder, HeaderCell, HeaderCellContent,
+} from './styled';
 import { IHeaderCellWrapper } from './interfaces';
+import { HeaderCellContentWrapper } from './HeaderCellContentWrapper';
 
 
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
@@ -76,15 +77,11 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
         onClick={ () => onChangeSort(sortable, sortOrder, index, gridPosition) }
         shouldMovingColumns={ shouldMovingColumns }
       >
-        <span>{ isEmpty ? null : text }</span>
-        {
-          sortOrder === 'ask'
-            && <SortAscendingIcon size={ theme.sortIconSize } />
-        }
-        {
-          sortOrder === 'desk'
-            && <SortDescendingIcon size={ theme.sortIconSize } />
-        }
+        <HeaderCellContentWrapper
+          theme={ theme }
+          content={ isEmpty ? null : text }
+          sortOrder={ sortOrder }
+        />
       </HeaderCellContent>
       <RightBorder
         theme={ theme }

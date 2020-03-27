@@ -91,34 +91,34 @@ export const changeGridSort = ({
   setRightMappedColumns,
 }) => {
   if (gridPosition === GridPositions.LEFT) {
-    const newColumns = setIn(leftColumns, sortOrder, [index, 'sortOrder']);
-    setLeftMappedColumns(newColumns);
+    const newLeftColumns = setIn(leftColumns, sortOrder, [index, 'sortOrder']);
+    setLeftMappedColumns(newLeftColumns);
     setCenterMappedColumns(centerColumns);
     setRightMappedColumns(rightColumns);
     return [
-      ...newColumns,
+      ...newLeftColumns,
       ...centerColumns,
       ...rightColumns,
     ];
   } if (gridPosition === GridPositions.CENTER) {
-    const newColumns = setIn(centerColumns, sortOrder, [index, 'sortOrder']);
+    const newCenterColumns = setIn(centerColumns, sortOrder, [index, 'sortOrder']);
     setLeftMappedColumns(leftColumns);
-    setCenterMappedColumns(newColumns);
+    setCenterMappedColumns(newCenterColumns);
     setRightMappedColumns(rightColumns);
     return [
       ...leftColumns,
-      ...newColumns,
+      ...newCenterColumns,
       ...rightColumns,
     ];
   } if (gridPosition === GridPositions.RIGHT) {
-    const newColumns = setIn(rightColumns, sortOrder, [index, 'sortOrder']);
+    const newRightColumns = setIn(rightColumns, sortOrder, [index, 'sortOrder']);
     setLeftMappedColumns(leftColumns);
     setCenterMappedColumns(centerColumns);
-    setRightMappedColumns(newColumns);
+    setRightMappedColumns(newRightColumns);
     return [
       ...leftColumns,
       ...centerColumns,
-      ...newColumns,
+      ...newRightColumns,
     ];
   }
   return [];

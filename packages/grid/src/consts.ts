@@ -3,3 +3,9 @@ export enum GridPositions{
   CENTER = 'CENTER',
   RIGHT = 'RIGHT',
 }
+
+
+export enum GridSort{
+  ASC = 'ASC',
+  DESC = 'DESC'
+}

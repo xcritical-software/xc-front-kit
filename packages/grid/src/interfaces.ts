@@ -1,7 +1,7 @@
 import { ReactElement, CSSProperties, RefObject } from 'react';
 import { ITheme } from '@xcritical/theme';
 import { CellMeasurerCache } from 'react-virtualized';
-import { GridPositions } from './consts';
+import { GridPositions, GridSort } from './consts';
 
 
 export interface IItem {
@@ -19,7 +19,7 @@ export interface IColumn {
   render?: Function;
   fixedPosition?: GridPositions.LEFT | GridPositions.RIGHT;
   sortable?: boolean;
-  sortOrder?: 'ask' | 'desk' | null;
+  sortOrder?: GridSort.ASC | GridSort.DESC | null;
 }
 export interface ITotals {
   [key: string]: string | number;
@@ -131,7 +131,7 @@ export interface IHeaderCellWrapper {
   shouldChangeColumnsWidth: boolean;
   shouldMovingColumns: boolean;
   sortable?: boolean;
-  sortOrder?: 'ask' | 'desk' | null;
+  sortOrder?: GridSort.ASC | GridSort.DESC | null;
   gridPosition: GridPositions;
   onChangeSort: Function;
 }

@@ -70,10 +70,10 @@ export const HeaderCellContent = styled.div<IHeaderCellContent>`
 `;
 
 export const SortIconWrapper = styled.div`
-  width: 10px;
   overflow: hidden;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
 `;
 
 

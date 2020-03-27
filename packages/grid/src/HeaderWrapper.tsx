@@ -5,13 +5,12 @@ import React, {
   useCallback,
   MouseEvent,
 } from 'react';
-import SortAscendingIcon from 'mdi-react/SortAscendingIcon';
-import SortDescendingIcon from 'mdi-react/SortDescendingIcon';
 
 import { HeaderCellWrapper } from './HeaderCell';
 import { Header, MovingElem } from './styled';
 import { IHeaderWrapper, IColumn } from './interfaces';
 import { searchLastVisible, searchNextVisible } from './utils';
+import { HeaderCellContentWrapper } from './HeaderCellContentWrapper';
 
 
 export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
@@ -153,15 +152,23 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
           center={ !!movingColumnDataRef.current?.center }
           theme={ theme }
         >
-          <span>{ movingColumnDataRef.current?.headerName }</span>
+          { /* <span>{ movingColumnDataRef.current?.headerName }</span>
+          <SortIconWrapper >
+
           {
-            movingColumnDataRef.current?.sortOrder === 'ask'
+            movingColumnDataRef.current?.sortOrder === GridSort.ASC
             && <SortAscendingIcon size={ theme.sortIconSize } />
           }
           {
-            movingColumnDataRef.current?.sortOrder === 'desk'
+            movingColumnDataRef.current?.sortOrder === GridSort.DESC
             && <SortDescendingIcon size={ theme.sortIconSize } />
           }
+          </SortIconWrapper> */ }
+          <HeaderCellContentWrapper
+            theme={ theme }
+            content={ movingColumnDataRef.current?.headerName }
+            sortOrder={ movingColumnDataRef.current?.sortOrder }
+          />
         </MovingElem>
       ) }
     </Header>

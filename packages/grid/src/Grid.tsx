@@ -23,7 +23,7 @@ import {
   changeGridSort,
 } from './utils';
 import { MultiGrid } from './MultiGrid';
-import { GridPositions } from './consts';
+import { GridPositions, GridSort } from './consts';
 import { MultiGridWrapper } from './styled';
 
 
@@ -264,10 +264,10 @@ const Grid: React.FC<IGridProps> = ({
   const onChangeSort = useCallback((sortable, sortOrder, index, gridPosition) => {
     if (!sortable) return;
     // ask => desk => null => ask
-    let newSortOrder: 'ask' | 'desk' | null = null;
-    if (!sortOrder) newSortOrder = 'ask';
-    if (sortOrder === 'ask') newSortOrder = 'desk';
-    if (sortOrder === 'desk') newSortOrder = null;
+    let newSortOrder: GridSort.ASC | GridSort.DESC | null = null;
+    if (!sortOrder) newSortOrder = GridSort.ASC;
+    if (sortOrder === GridSort.ASC) newSortOrder = GridSort.DESC;
+    if (sortOrder === GridSort.DESC) newSortOrder = null;
 
     const newLeftColumns = removeSorting(leftMappedColumns);
     const newCenterColumns = removeSorting(centerMappedColumns);
