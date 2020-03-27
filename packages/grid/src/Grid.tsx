@@ -41,6 +41,7 @@ const Grid: React.FC<IGridProps> = ({
   columns,
   totals,
   onChangeColumns: onChangeColumnsFromProps = () => {},
+  onSortChanged = () => {},
   shouldMovingColumns,
   width = 0,
   height = 0,
@@ -284,7 +285,7 @@ const Grid: React.FC<IGridProps> = ({
       setCenterMappedColumns,
       setRightMappedColumns,
     });
-    onChangeColumnsFromProps(newAllColumns);
+    onSortChanged(newAllColumns);
   }, [
     leftMappedColumns,
     centerMappedColumns,

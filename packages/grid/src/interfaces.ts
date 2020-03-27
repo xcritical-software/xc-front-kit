@@ -33,6 +33,7 @@ export interface IGridProps {
   isDisableSelect?: boolean;
   isMultiSelect?: boolean;
   onChangeColumns?: Function;
+  onSortChanged?: Function;
   totals?: ITotals;
   theme?: ITheme;
   onSelect?: Function;

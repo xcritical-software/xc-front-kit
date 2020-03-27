@@ -297,6 +297,7 @@ storiesOf('New Grid', module)
       height={ document.documentElement.clientHeight - 100 }
       rowHeight={ 30 }
       theme={ AMStheme }
+      onSortChanged={ (cols) => console.table(cols) }
     />
   ))
   .add('fixed columns (left)', () => (
@@ -394,6 +395,6 @@ storiesOf('New Grid', module)
       totals={ totals }
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
-      onChangeColumns={ (cols) => console.table(cols) }
+      onSortChanged={ (cols) => console.table(cols) }
     />
   ));

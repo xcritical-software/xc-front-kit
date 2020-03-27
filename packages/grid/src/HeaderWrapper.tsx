@@ -152,18 +152,6 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
           center={ !!movingColumnDataRef.current?.center }
           theme={ theme }
         >
-          { /* <span>{ movingColumnDataRef.current?.headerName }</span>
-          <SortIconWrapper >
-
-          {
-            movingColumnDataRef.current?.sortOrder === GridSort.ASC
-            && <SortAscendingIcon size={ theme.sortIconSize } />
-          }
-          {
-            movingColumnDataRef.current?.sortOrder === GridSort.DESC
-            && <SortDescendingIcon size={ theme.sortIconSize } />
-          }
-          </SortIconWrapper> */ }
           <HeaderCellContentWrapper
             theme={ theme }
             content={ movingColumnDataRef.current?.headerName }
