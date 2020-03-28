@@ -28,12 +28,7 @@ jobs:
     - stage: check-version
       if: NOT (branch = master) AND type = pull_request 
       script: 
-        - git config --local user.name "TravisCI"
-        - git config --local user.email "frontend@xcritical.software"        
-        - git remote set-url origin https://github.com/xcritical-software/xc-front-kit.git > /dev/null 2>&1
         - git fetch --tags --force
-        - git checkout ${TRAVIS_BRANCH}
-        - git pull
         - yarn boltify version --loglevel silly --no-commit-hooks --no-push --no-git-tag-version
     - stage: next-version
       script: skip

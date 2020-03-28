@@ -1,6 +1,6 @@
 import React from 'react';
-import SortAscendingIcon from 'mdi-react/SortAscendingIcon';
-import SortDescendingIcon from 'mdi-react/SortDescendingIcon';
+
+import { SortAscendingIcon, SortDescendingIcon } from './icons';
 import { SortIconWrapper } from './styled';
 import { GridSort } from './consts';
 
