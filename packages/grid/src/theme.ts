@@ -9,6 +9,7 @@ export const defaultTheme: IGridTheme = {
   selectedRowBackgroundColor: colors.SECONDARY,
   selectedRowColor: colors.GRAY_LIGHT,
   offsetExpand: 20,
+  sortIconSize: 16,
   border: `1px solid ${colors.GRAY}`,
   borderRadius: 5,
   headerCellBorder: `1px solid ${colors.BLACK_RAISIN}`,

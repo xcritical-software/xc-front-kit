@@ -5,10 +5,12 @@ import React, {
   useCallback,
   MouseEvent,
 } from 'react';
+
 import { HeaderCellWrapper } from './HeaderCell';
 import { Header, MovingElem } from './styled';
 import { IHeaderWrapper, IColumn } from './interfaces';
 import { searchLastVisible, searchNextVisible } from './utils';
+import { HeaderCellContentWrapper } from './HeaderCellContentWrapper';
 
 
 export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
@@ -16,11 +18,13 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
   translateX,
   columns,
   onChangeWidth,
-  onChangeMoving,
+  onChangeColumns,
   setChangingColumns,
   theme,
   shouldMovingColumns,
   shouldChangeColumnsWidth,
+  gridPosition,
+  onChangeSort,
 }) => {
   const mappedColumnsRef = useRef(columns);
   const [isMoving, setIsMoving] = useState(false);
@@ -40,6 +44,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
 
   const handleMouseMove = useCallback(
     (e) => {
+      setIsMoving(true);
       const { clientX } = e;
       const moveMouse = clientX - clickXRef.current;
 
@@ -88,7 +93,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
     emptyColumnIndexRef.current = undefined;
     setIsMoving(false);
     setMouseMove(0);
-    onChangeMoving(mappedColumnsRef.current);
+    onChangeColumns(mappedColumnsRef.current);
     movingColumnIndexRef.current = 0;
     movingColumnDataRef.current = undefined;
     document.removeEventListener('mouseup', handleMouseUp);
@@ -106,7 +111,6 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
       y: coords.y,
       height: coords.height,
     });
-    setIsMoving(true);
     movingColumnIndexRef.current = i;
     emptyColumnIndexRef.current = i;
     movingColumnDataRef.current = mappedColumnsRef.current[i];
@@ -115,15 +119,16 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
     setChangingColumns('move');
   };
 
-
   return (
     <Header ref={ headerRef } width={ fullWidth } translateX={ translateX } theme={ theme }>
       { mappedColumnsRef.current.map((el: IColumn, index: number) => (
         el.visible
         && (
           <HeaderCellWrapper
+            sortable={ el.sortable }
+            sortOrder={ el.sortOrder }
             key={ el.field }
-            isEmpty={ index === emptyColumnIndexRef.current }
+            isEmpty={ isMoving && index === emptyColumnIndexRef.current }
             onMouseDown={ handleMouseDown }
             width={ el.width }
             text={ el.headerName }
@@ -134,6 +139,8 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
             theme={ theme }
             shouldMovingColumns={ shouldMovingColumns }
             shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+            gridPosition={ gridPosition }
+            onChangeSort={ onChangeSort }
           />
         )
       )) }
@@ -145,7 +152,11 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
           center={ !!movingColumnDataRef.current?.center }
           theme={ theme }
         >
-          <span>{ movingColumnDataRef.current?.headerName }</span>
+          <HeaderCellContentWrapper
+            theme={ theme }
+            content={ movingColumnDataRef.current?.headerName }
+            sortOrder={ movingColumnDataRef.current?.sortOrder }
+          />
         </MovingElem>
       ) }
     </Header>

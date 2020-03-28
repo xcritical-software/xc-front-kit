@@ -1,7 +1,9 @@
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
+import { setIn } from 'utilitify';
 
 import { gridThemeNamespace, defaultTheme } from './theme';
 import { IGridTheme, IMappedItem, IColumn } from './interfaces';
+import { GridPositions } from './consts';
 
 
 export const guid = () => {
@@ -66,3 +68,58 @@ export const getFullWidth = (columns: IColumn[]) => columns
   .filter(({ visible }: IColumn) => visible).reduce(
     (acc: number, { width: colWidth }) => (acc + colWidth), 0,
   );
+
+export const removeSorting = (columns) => columns
+  .map((el) => {
+    if (el.sortable && el.sortOrder) {
+      return {
+        ...el, sortOrder: null,
+      };
+    }
+    return el;
+  });
+
+export const changeGridSort = ({
+  sortOrder,
+  index,
+  gridPosition,
+  leftColumns,
+  centerColumns,
+  rightColumns,
+  setLeftMappedColumns,
+  setCenterMappedColumns,
+  setRightMappedColumns,
+}) => {
+  if (gridPosition === GridPositions.LEFT) {
+    const newLeftColumns = setIn(leftColumns, sortOrder, [index, 'sortOrder']);
+    setLeftMappedColumns(newLeftColumns);
+    setCenterMappedColumns(centerColumns);
+    setRightMappedColumns(rightColumns);
+    return [
+      ...newLeftColumns,
+      ...centerColumns,
+      ...rightColumns,
+    ];
+  } if (gridPosition === GridPositions.CENTER) {
+    const newCenterColumns = setIn(centerColumns, sortOrder, [index, 'sortOrder']);
+    setLeftMappedColumns(leftColumns);
+    setCenterMappedColumns(newCenterColumns);
+    setRightMappedColumns(rightColumns);
+    return [
+      ...leftColumns,
+      ...newCenterColumns,
+      ...rightColumns,
+    ];
+  } if (gridPosition === GridPositions.RIGHT) {
+    const newRightColumns = setIn(rightColumns, sortOrder, [index, 'sortOrder']);
+    setLeftMappedColumns(leftColumns);
+    setCenterMappedColumns(centerColumns);
+    setRightMappedColumns(newRightColumns);
+    return [
+      ...leftColumns,
+      ...centerColumns,
+      ...newRightColumns,
+    ];
+  }
+  return [];
+};

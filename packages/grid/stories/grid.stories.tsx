@@ -291,12 +291,13 @@ storiesOf('New Grid', module)
   ))
   .add('fixed columns (left+right)', () => (
     <Grid
-      columns={ columnsFixed('both') }
+      columns={ columnsFixed('both').map((el) => ({ ...el, sortable: true })) }
       items={ rowsFixed }
       width={ document.documentElement.clientWidth - 100 }
       height={ document.documentElement.clientHeight - 100 }
       rowHeight={ 30 }
       theme={ AMStheme }
+      onSortChanged={ (cols) => console.table(cols) }
     />
   ))
   .add('fixed columns (left)', () => (
@@ -383,4 +384,17 @@ storiesOf('New Grid', module)
         />
       </>
     );
-  });
+  })
+  .add('Sortable', () => (
+    <Grid
+      columns={ columns.map((el) => ({
+        ...el,
+        sortable: true,
+      })) }
+      items={ rows }
+      totals={ totals }
+      width={ document.documentElement.clientWidth - 100 }
+      height={ document.documentElement.clientHeight - 100 }
+      onSortChanged={ (cols) => console.table(cols) }
+    />
+  ));

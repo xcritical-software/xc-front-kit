@@ -69,6 +69,14 @@ export const HeaderCellContent = styled.div<IHeaderCellContent>`
   ${getHeaderCellContentStyles}
 `;
 
+export const SortIconWrapper = styled.div`
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+`;
+
+
 export const RightBorder = styled.div<IRightBorder>`
   width: 8px;
   position: relative;

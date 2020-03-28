@@ -1,8 +1,12 @@
 import React, {
   useRef, useCallback, useState, useEffect,
 } from 'react';
-import { RightBorder, HeaderCell, HeaderCellContent } from './styled';
+
+import {
+  RightBorder, HeaderCell, HeaderCellContent,
+} from './styled';
 import { IHeaderCellWrapper } from './interfaces';
+import { HeaderCellContentWrapper } from './HeaderCellContentWrapper';
 
 
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
@@ -17,6 +21,10 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   theme,
   shouldMovingColumns,
   shouldChangeColumnsWidth,
+  sortable,
+  sortOrder,
+  gridPosition,
+  onChangeSort,
 }) => {
   const [newWidth, setNewWidth] = useState(width);
   const clickXRef = useRef(0);
@@ -59,15 +67,21 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
     },
     [setChangingColumns, handleMouseMove, handleMouseUp, shouldChangeColumnsWidth],
   );
+
   return (
     <HeaderCell theme={ theme } width={ newWidth } isEmpty={ isEmpty }>
       <HeaderCellContent
         theme={ theme }
-        onMouseDown={ (e) => onMouseDown(e, index) }
         center={ center }
+        onMouseDown={ (e) => onMouseDown(e, index) }
+        onClick={ () => onChangeSort(sortable, sortOrder, index, gridPosition) }
         shouldMovingColumns={ shouldMovingColumns }
       >
-        <span>{ isEmpty ? null : text }</span>
+        <HeaderCellContentWrapper
+          theme={ theme }
+          content={ isEmpty ? null : text }
+          sortOrder={ sortOrder }
+        />
       </HeaderCellContent>
       <RightBorder
         theme={ theme }

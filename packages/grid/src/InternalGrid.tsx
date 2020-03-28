@@ -62,6 +62,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   overscanColumnCount,
   overscanRowCount,
   shiftFirstColumn,
+  onChangeSort,
 }) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(getFullWidth(mappedColumns));
@@ -206,7 +207,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   );
 
 
-  const handleChangeMoving = useCallback(
+  const handleChangeColumns = useCallback(
     (newColumns) => {
       setMappedColumns(newColumns);
       onChangeColumns(newColumns, gridPosition);
@@ -250,11 +251,13 @@ const InternalGrid: React.FC<IInternalGrid> = ({
         columns={ mappedColumns }
         translateX={ scrollLeft }
         onChangeWidth={ handleChangeWidth }
-        onChangeMoving={ handleChangeMoving }
+        onChangeColumns={ handleChangeColumns }
         setChangingColumns={ setChangingColumns }
         theme={ themeRef.current! }
         shouldMovingColumns={ shouldMovingColumns }
         shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+        gridPosition={ gridPosition }
+        onChangeSort={ onChangeSort }
       />
       <Body
         rightScroll={ rightScroll }

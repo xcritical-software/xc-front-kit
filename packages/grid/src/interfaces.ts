@@ -1,7 +1,7 @@
 import { ReactElement, CSSProperties, RefObject } from 'react';
 import { ITheme } from '@xcritical/theme';
 import { CellMeasurerCache } from 'react-virtualized';
-import { GridPositions } from './consts';
+import { GridPositions, GridSort } from './consts';
 
 
 export interface IItem {
@@ -18,6 +18,8 @@ export interface IColumn {
   isExpandable?: boolean;
   render?: Function;
   fixedPosition?: GridPositions.LEFT | GridPositions.RIGHT;
+  sortable?: boolean;
+  sortOrder?: GridSort.ASC | GridSort.DESC | null;
 }
 export interface ITotals {
   [key: string]: string | number;
@@ -31,6 +33,7 @@ export interface IGridProps {
   isDisableSelect?: boolean;
   isMultiSelect?: boolean;
   onChangeColumns?: Function;
+  onSortChanged?: Function;
   totals?: ITotals;
   theme?: ITheme;
   onSelect?: Function;
@@ -78,6 +81,7 @@ interface IAllGridsProps {
   cacheRef: RefObject<CellMeasurerCache>;
   themeRef: RefObject<IGridTheme>;
   rowHeight?: number;
+  onChangeSort: Function;
 }
 
 
@@ -107,6 +111,7 @@ export interface IInternalGrid {
   isScrollingOptOut?: boolean;
   overscanRowCount?: number;
   shiftFirstColumn: boolean;
+  onChangeSort: Function;
 }
 
 export interface IMappedItem extends IItem {
@@ -126,6 +131,10 @@ export interface IHeaderCellWrapper {
   theme: IGridTheme;
   shouldChangeColumnsWidth: boolean;
   shouldMovingColumns: boolean;
+  sortable?: boolean;
+  sortOrder?: GridSort.ASC | GridSort.DESC | null;
+  gridPosition: GridPositions;
+  onChangeSort: Function;
 }
 
 export interface IHeaderWrapper {
@@ -133,11 +142,13 @@ export interface IHeaderWrapper {
   translateX: number;
   columns: IColumn[];
   onChangeWidth: Function;
-  onChangeMoving: Function;
+  onChangeColumns: Function;
   setChangingColumns: Function;
   theme: IGridTheme;
   shouldMovingColumns: boolean;
   shouldChangeColumnsWidth: boolean;
+  gridPosition: GridPositions;
+  onChangeSort: Function;
 }
 
 
@@ -224,4 +235,5 @@ export interface IGridTheme {
   selectedRowColor?: string;
   movingHeaderCellColor?: string;
   expandButtonMargin?: string;
+  sortIconSize?: number | string;
 }
