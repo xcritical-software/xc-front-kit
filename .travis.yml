@@ -28,7 +28,6 @@ jobs:
     - stage: check-version
       if: NOT (branch = master) AND type = pull_request 
       script: 
-        - git fetch --tags --force
         - yarn boltify version --loglevel silly --no-commit-hooks --no-push --no-git-tag-version
     - stage: next-version
       script: skip
