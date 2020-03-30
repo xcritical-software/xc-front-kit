@@ -398,4 +398,3 @@ storiesOf('New Grid', module)
       onSortChanged={ (cols) => console.table(cols) }
     />
   ));
-  

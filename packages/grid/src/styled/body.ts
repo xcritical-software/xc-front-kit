@@ -131,10 +131,6 @@ export const BodyCellContent = styled.div<IBodyCellContent>`
   width: 100%;
   display: flex;
   align-items: center;
-  ${({ center }) => center
-    && `
-    text-align: center;
-    `}
   ${getBodyCellContentStyles}
 `;
 
