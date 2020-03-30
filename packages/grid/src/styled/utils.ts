@@ -117,10 +117,11 @@ export const getBodyCellContentStyles = ({
   theme: { row, selectedRowColor },
   selected,
   rowHeight,
+  center,
 }: IBodyCellContent) => css`
     padding: ${row?.padding};
     ${rowHeight ? `height: ${rowHeight}px` : null};
-
+    ${center ? css`justify-content: center` : null};
     span {
       font-size: ${row?.fontSize};
       color: ${selected ? selectedRowColor : row?.color};
