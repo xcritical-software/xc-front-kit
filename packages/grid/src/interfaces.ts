@@ -1,6 +1,5 @@
 import { ReactElement, CSSProperties, RefObject } from 'react';
 import { ITheme } from '@xcritical/theme';
-import { CellMeasurerCache } from 'react-virtualized';
 import { GridPositions, GridSort } from './consts';
 
 
@@ -78,7 +77,6 @@ interface IAllGridsProps {
   handleSelect: Function;
   selectedRows: string[];
   mappedItems: IMappedItem[];
-  cacheRef: RefObject<CellMeasurerCache>;
   themeRef: RefObject<IGridTheme>;
   rowHeight?: number;
   onChangeSort: Function;
@@ -104,7 +102,6 @@ export interface IInternalGrid {
   onChangeExpand: Function;
   mappedItems: IMappedItem[];
   selectedRows: string[];
-  cacheRef: RefObject<CellMeasurerCache>;
   themeRef: RefObject<IGridTheme>;
   rowHeight?: number;
   overscanColumnCount?: number;

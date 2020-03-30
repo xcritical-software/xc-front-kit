@@ -7,7 +7,7 @@ import { ThemeContext } from 'styled-components';
 import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
 
-import { ScrollSync, CellMeasurerCache } from 'react-virtualized';
+import { ScrollSync } from 'react-virtualized';
 
 import InternalGrid from './InternalGrid';
 import {
@@ -62,13 +62,6 @@ const Grid: React.FC<IGridProps> = ({
     themeRef.current = gridTheme(theme || contextTheme);
   }, [theme, contextTheme]);
 
-  const cacheRef = useRef(
-    new CellMeasurerCache({
-      fixedWidth: true,
-      fixedHeight: Boolean(rowHeight),
-      defaultHeight: rowHeight || 100,
-    }),
-  );
 
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
@@ -324,7 +317,6 @@ const Grid: React.FC<IGridProps> = ({
         onChangeExpand,
         mappedItems,
         selectedRows,
-        cacheRef,
         themeRef: themeRef || {},
         rowHeight,
         onChangeSort,
@@ -376,7 +368,6 @@ const Grid: React.FC<IGridProps> = ({
     onChangeExpand,
     mappedItems,
     selectedRows,
-    cacheRef,
     themeRef,
     rowHeight,
     shouldChangeColumnsWidth,
