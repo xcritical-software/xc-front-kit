@@ -19,6 +19,7 @@ import {
   columnsFixed,
   rowsFixed,
   totalsFixed,
+  CustomReactHeaderName,
 } from './data';
 import * as countries from './countries';
 import { gridThemeNamespace } from '../src/theme';
@@ -390,6 +391,19 @@ storiesOf('New Grid', module)
       columns={ columns.map((el) => ({
         ...el,
         sortable: true,
+      })) }
+      items={ rows }
+      totals={ totals }
+      width={ document.documentElement.clientWidth - 100 }
+      height={ document.documentElement.clientHeight - 100 }
+      onSortChanged={ (cols) => console.table(cols) }
+    />
+  ))
+  .add('Header cell - ReactElement', () => (
+    <Grid
+      columns={ columns.map((el) => ({
+        ...el,
+        headerName: <CustomReactHeaderName text={ el.headerName } />,
       })) }
       items={ rows }
       totals={ totals }

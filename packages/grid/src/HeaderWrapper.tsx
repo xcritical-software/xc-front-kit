@@ -131,7 +131,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
             isEmpty={ isMoving && index === emptyColumnIndexRef.current }
             onMouseDown={ handleMouseDown }
             width={ el.width }
-            text={ el.headerName }
+            content={ el.headerName }
             onChangeWidth={ onChangeWidth }
             index={ index }
             setChangingColumns={ setChangingColumns }

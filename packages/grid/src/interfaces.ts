@@ -3,13 +3,15 @@ import { ITheme } from '@xcritical/theme';
 import { GridPositions, GridSort } from './consts';
 
 
+type CellContent = string | number | ReactElement | any;
+
 export interface IItem {
-  [key: string]: string | number | ReactElement | any;
+  [key: string]: CellContent;
 }
 
 
 export interface IColumn {
-  headerName: string;
+  headerName: CellContent;
   field: string;
   width: number;
   visible: boolean;
@@ -117,7 +119,7 @@ export interface IMappedItem extends IItem {
 }
 
 export interface IHeaderCellWrapper {
-  text: string;
+  content: CellContent;
   width: number;
   onChangeWidth: Function;
   index: number;
