@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/grid",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"description": "XCritical Grid Component",
 	"main": "src/index.ts",
 	"scripts": {
@@ -13,7 +13,16 @@
 		"type": "git",
 		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
 	},
-	"keywords": [],
+	"keywords": [
+		"react",
+		"reactjs",
+		"react-component",
+		"virtual",
+		"virtualized",
+		"table",
+		"grid",
+		"spreadsheet"
+	],
 	"author": "XCritical Software",
 	"license": "MIT",
 	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/grid#readme",
