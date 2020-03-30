@@ -38,12 +38,12 @@
 	},
 	"dependencies": {
 		"@xcritical/theme": "^1.0.0",
-		"mdi-react": "^6.7.0",
 		"react-virtualized": "^9.21.2",
 		"resize-observer-polyfill": "latest",
 		"utilitify": "^1.0.3"
 	},
 	"devDependencies": {
+		"mdi-react": "^6.7.0",
 		"@types/react-virtualized": "^9.21.8",
 		"@xcritical/sidebar": "^1.0.2"
 	}

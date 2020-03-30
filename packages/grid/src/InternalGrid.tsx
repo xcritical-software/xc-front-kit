@@ -12,8 +12,10 @@ import {
   CellMeasurer,
   ScrollPosition,
   GridCellProps,
+  CellMeasurerCache,
 } from 'react-virtualized';
 import { setIn } from 'utilitify';
+
 import {
   Body,
   BodyCell,
@@ -55,19 +57,26 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   onChangeExpand,
   mappedItems = [],
   selectedRows,
-  cacheRef,
   themeRef,
   rowHeight,
   isScrollingOptOut,
   overscanColumnCount,
   overscanRowCount,
   shiftFirstColumn,
+  onChangeSort,
 }) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(getFullWidth(mappedColumns));
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [changingColumns, setChangingColumns] = useState<string>('');
   const gridRef = useRef<VirtualisedGrid>();
+  const cacheRef = useRef(
+    new CellMeasurerCache({
+      fixedWidth: true,
+      fixedHeight: Boolean(rowHeight),
+      defaultHeight: rowHeight || 100,
+    }),
+  );
 
   const filteredColums = useMemo(() => (
     mappedColumns.filter(({ visible }) => visible)
@@ -122,7 +131,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
 
     return (
       <CellMeasurer
-        cache={ cacheRef.current! }
+        cache={ cacheRef.current }
         columnIndex={ columnIndex }
         key={ key }
         parent={ parent }
@@ -206,7 +215,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   );
 
 
-  const handleChangeMoving = useCallback(
+  const handleChangeColumns = useCallback(
     (newColumns) => {
       setMappedColumns(newColumns);
       onChangeColumns(newColumns, gridPosition);
@@ -250,11 +259,13 @@ const InternalGrid: React.FC<IInternalGrid> = ({
         columns={ mappedColumns }
         translateX={ scrollLeft }
         onChangeWidth={ handleChangeWidth }
-        onChangeMoving={ handleChangeMoving }
+        onChangeColumns={ handleChangeColumns }
         setChangingColumns={ setChangingColumns }
         theme={ themeRef.current! }
         shouldMovingColumns={ shouldMovingColumns }
         shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+        gridPosition={ gridPosition }
+        onChangeSort={ onChangeSort }
       />
       <Body
         rightScroll={ rightScroll }
@@ -264,11 +275,11 @@ const InternalGrid: React.FC<IInternalGrid> = ({
           ref={ gridRef as MutableRefObject<VirtualisedGrid> }
           columnCount={ filteredColums.length }
           columnWidth={ ({ index }: any) => filteredColums[index].width }
-          deferredMeasurementCache={ cacheRef.current! }
+          deferredMeasurementCache={ cacheRef.current }
           height={ gridHeight }
           cellRenderer={ cellRenderer }
           rowCount={ mappedItems.length }
-          rowHeight={ cacheRef.current!.rowHeight }
+          rowHeight={ cacheRef.current.rowHeight }
           width={ width }
           onScroll={ handleScroll }
           scrollTop={ scrollTop }
