@@ -10,7 +10,7 @@ import { HeaderCellContentWrapper } from './HeaderCellContentWrapper';
 
 
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
-  text,
+  content,
   width,
   onChangeWidth,
   index,
@@ -79,7 +79,7 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
       >
         <HeaderCellContentWrapper
           theme={ theme }
-          content={ isEmpty ? null : text }
+          content={ isEmpty ? null : content }
           sortOrder={ sortOrder }
         />
       </HeaderCellContent>

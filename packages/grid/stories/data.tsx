@@ -553,3 +553,24 @@ export const rowsFixed = new Array(1000).fill(true)
         .map((_$el, $i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${$i}` }), {}))
       : null,
   }));
+
+const getRand = () => Math.floor(Math.random() * 255);
+
+const getRandColor = () => `
+  rgba(
+    ${getRand()},
+    ${getRand()},
+    ${getRand()},
+    0.5
+  )
+`;
+
+const CustomReactHeaderNameStyled = styled.div`
+  background-color: ${({ color }) => color};
+`;
+
+export const CustomReactHeaderName = ({ text }) => (
+  <CustomReactHeaderNameStyled color={ getRandColor() }>
+    { text }
+  </CustomReactHeaderNameStyled>
+);

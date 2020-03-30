@@ -145,7 +145,7 @@ export const getBodyCellOffsetStyles = ({
     `;
 
 export const getWrapperStyles = ({ theme: { border, borderRadius } }: IWrapper) => `
-    border: ${border}
+    border: ${border};
     border-radius: ${borderRadius}px;
   `;
 
