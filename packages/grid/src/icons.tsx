@@ -27,7 +27,7 @@ export const RemoveIcon = () => (
 );
 
 
-export const SortDescendingIcon = React.memo<IIconProps>(({
+export const SortAscendingIcon = React.memo<IIconProps>(({
   color = 'currentColor', size = 24, children: _, ...props
 }) => (
   <svg { ...props } width={ size } height={ size } fill={ color } viewBox="0 0 24 24">
@@ -35,7 +35,7 @@ export const SortDescendingIcon = React.memo<IIconProps>(({
   </svg>
 ));
 
-export const SortAscendingIcon = React.memo<IIconProps>(({
+export const SortDescendingIcon = React.memo<IIconProps>(({
   color = 'currentColor', size = 24, children, ...props
 }) => (
   <svg { ...props } width={ size } height={ size } fill={ color } viewBox="0 0 24 24">
