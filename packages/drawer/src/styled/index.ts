@@ -1,15 +1,13 @@
 import styled from 'styled-components';
 
 import {
-  getElementStyles,
-  getDrawerIconInteractiveStyles,
-} from '../utils';
-import {
   IDrawerProps,
   IDrawerStates,
   IDrawerWrapperProps,
   IIconWrapperProps,
 } from '../interfaces';
+
+import { getElementStyles, getDrawerIconInteractiveStyles } from '../utils';
 import { transitionDurationMs, transitionTimingFunction } from '../consts';
 
 
