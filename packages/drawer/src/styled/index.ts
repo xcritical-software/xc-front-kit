@@ -30,18 +30,18 @@ export const Content = styled.div.attrs(({ width }: IDrawerStates) => ({
     width,
   },
 }))<IDrawerProps & IDrawerStates>`
-  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'drawerContent', appearance, baseAppearance)};
+  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'drawerContent', appearance, baseAppearance)}
   display: ${({ isOpen }): string => (isOpen ? 'block' : 'none')};
   transition: transform ${transitionDurationMs}ms ${transitionTimingFunction}, width ${transitionDurationMs}ms ${transitionTimingFunction};
 `;
 
 export const SeparatorWrapper = styled.div<IDrawerProps & IDrawerStates>`
-  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'separatorWrapper', appearance, baseAppearance)};
+  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'separatorWrapper', appearance, baseAppearance)}
   cursor: ${({ isMovable }) => (isMovable ? 'w-resize' : 'default')};
 `;
 
 export const Separator = styled.div<IDrawerProps>`
-  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'separator', appearance, baseAppearance)};
+  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'separator', appearance, baseAppearance)}
   right: ${({ isRTL }): string => (isRTL ? '-10px' : '0')};
 `;
 
