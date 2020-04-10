@@ -12,7 +12,7 @@ interface IBasicDrawerProps {
   isRTL?: boolean;
   isMovable?: boolean;
   withCloseButton?: boolean;
-  closeIcon?: ReactNode;
+  closeIconComponent?: ReactNode;
 }
 
 const generateTheme = (
@@ -96,7 +96,7 @@ const BasicDrawer = ({
   isRTL = false,
   isMovable = false,
   withCloseButton = false,
-  closeIcon,
+  closeIconComponent,
 }: IBasicDrawerProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -113,7 +113,7 @@ const BasicDrawer = ({
         isRTL={ isRTL }
         isMovable={ isMovable }
         withCloseButton={ withCloseButton }
-        closeIcon={ closeIcon }
+        closeIconComponent={ closeIconComponent }
       >
         <div>Content</div>
       </Drawer>
@@ -168,6 +168,6 @@ storiesOf('Drawer', module)
   .add('With custom close icon', () => (
     <div>
       <GlobalStyle />
-      <BasicDrawer withCloseButton closeIcon={ <div>X</div> } />
+      <BasicDrawer withCloseButton closeIconComponent={ <div>X</div> } />
     </div>
   ));
