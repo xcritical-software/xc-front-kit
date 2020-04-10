@@ -9,7 +9,7 @@ export const defaultPaginationTheme: IPaginationTheme = {
   wrapper: {
     display: 'inline-flex',
   },
-  totalInfo: {
+  totals: {
     display: 'flex',
     alignItems: 'center',
     marginRight: '15px',

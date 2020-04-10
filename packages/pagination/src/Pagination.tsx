@@ -20,12 +20,12 @@ const PurePagination: React.FC<IPagination> = ({
   currentPage = 1,
   visibleRange = 5,
   showSizeChanger = true,
-  isDisabled = false,
-  showTotalInfo = false,
+  showTotals = false,
+  disabled = false,
   pageSize = 25,
   pageSizeOptions = [25, 50, 100],
+  pageSizeProps,
   total,
-  selectProps,
   onChangePage,
   onChangePageSize,
   theme,
@@ -100,7 +100,7 @@ const PurePagination: React.FC<IPagination> = ({
 
   return (
     <PaginationWrapper>
-      { showTotalInfo && (
+      { showTotals && (
         <TotalInfo>
           { `${currentPage} - ${pageSize > total ? total : pageSize} of ${total}` }
         </TotalInfo>
@@ -112,7 +112,7 @@ const PurePagination: React.FC<IPagination> = ({
             theme={ paginationButtonTheme }
             appearance="paginationButton"
             selected={ currentPage === 1 }
-            disabled={ isDisabled }
+            disabled={ disabled }
             onClick={ () => onChangePage(1) }
           >
             1
@@ -123,7 +123,7 @@ const PurePagination: React.FC<IPagination> = ({
           <Button
             theme={ paginationButtonTheme }
             appearance="paginationButton"
-            disabled={ isDisabled }
+            disabled={ disabled }
             onClick={ () => toPrevious(availableVisibleRangeCenter) }
           >
             <span>&lsaquo;</span>
@@ -136,7 +136,7 @@ const PurePagination: React.FC<IPagination> = ({
             theme={ paginationButtonTheme }
             appearance="paginationButton"
             selected={ currentPage === visiblePage }
-            disabled={ isDisabled }
+            disabled={ disabled }
             onClick={ () => onChangePage(visiblePage) }
           >
             { visiblePage }
@@ -147,7 +147,7 @@ const PurePagination: React.FC<IPagination> = ({
           <Button
             theme={ paginationButtonTheme }
             appearance="paginationButton"
-            disabled={ isDisabled }
+            disabled={ disabled }
             onClick={ () => toNext(availableVisibleRangeCenter, visibleCenterPage, totalPages) }
           >
             <span>&rsaquo;</span>
@@ -159,7 +159,7 @@ const PurePagination: React.FC<IPagination> = ({
             theme={ paginationButtonTheme }
             appearance="paginationButton"
             selected={ currentPage === totalPages }
-            disabled={ isDisabled }
+            disabled={ disabled }
             onClick={ () => onChangePage(totalPages) }
           >
             { totalPages }
@@ -173,9 +173,9 @@ const PurePagination: React.FC<IPagination> = ({
           appearance="paginationSelect"
           options={ mappedPageSizeOptions }
           value={ mappedPageSizeOption }
-          isDisabled={ isDisabled }
+          isDisabled={ disabled }
           onChange={ changePageSize }
-          { ...selectProps }
+          { ...pageSizeProps }
         />
       ) }
     </PaginationWrapper>

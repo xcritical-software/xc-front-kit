@@ -9,13 +9,13 @@ import { ButtonGroupTheme, ButtonTheme } from '@xcritical/button';
 export interface IPagination {
   currentPage?: number;
   showSizeChanger?: boolean;
-  isDisabled?: boolean;
-  showTotalInfo?: boolean;
+  showTotals?: boolean;
+  disabled?: boolean;
   pageSize?: number;
   pageSizeOptions?: number[];
+  pageSizeProps?: SelectProps;
   visibleRange?: 3 | 5 | 7;
   total: number;
-  selectProps?: SelectProps;
   onChangePage: (page: number) => void;
   onChangePageSize?: (page: number, pageSize: number) => void;
   theme?: IThemeNamespace<IPaginationTheme>;
@@ -23,7 +23,7 @@ export interface IPagination {
 
 export interface IPaginationTheme {
   wrapper?: CSSObject;
-  totalInfo?: CSSObject;
+  totals?: CSSObject;
   buttonGroup?: ButtonGroupTheme;
   button?: ButtonTheme;
   select?: ISelectBaseTheme;

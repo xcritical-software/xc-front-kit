@@ -151,7 +151,7 @@ storiesOf('Pagination', module)
       </ThemeProvider>
     );
   })
-  .add('With custom select props', () => {
+  .add('With pageSizeProps', () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(25);
 
@@ -159,32 +159,32 @@ storiesOf('Pagination', module)
       <ThemeProvider theme={ emptyTheme }>
         <Pagination
           total={ 200 }
-          pageSize={ pageSize }
           currentPage={ currentPage }
-          onChangePage={ (newCurrentPage) => {
-            setCurrentPage(newCurrentPage);
-          } }
-          onChangePageSize={ (newPage, newPageSize) => {
-            setCurrentPage(newPage);
-            setPageSize(newPageSize);
-          } }
-          selectProps={ {
+          pageSize={ pageSize }
+          pageSizeProps={ {
             components: {
               IndicatorSeparator: null,
             },
           } }
+          onChangePage={ (newCurrentPage) => {
+            setCurrentPage(newCurrentPage);
+          } }
+          onChangePageSize={ (newPage, newPageSize) => {
+            setCurrentPage(newPage);
+            setPageSize(newPageSize);
+          } }
         />
       </ThemeProvider>
     );
   })
-  .add('With isDisabled', () => {
+  .add('With disabled', () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(25);
 
     return (
       <ThemeProvider theme={ emptyTheme }>
         <Pagination
-          isDisabled
+          disabled
           total={ 200 }
           pageSize={ pageSize }
           currentPage={ currentPage }
@@ -199,14 +199,14 @@ storiesOf('Pagination', module)
       </ThemeProvider>
     );
   })
-  .add('With showTotalInfo', () => {
+  .add('With showTotals', () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(25);
 
     return (
       <ThemeProvider theme={ emptyTheme }>
         <Pagination
-          showTotalInfo
+          showTotals
           total={ 200 }
           pageSize={ pageSize }
           currentPage={ currentPage }
