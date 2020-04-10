@@ -22,7 +22,7 @@ import {
 import { ArrowLeft, ArrowRight } from './Icons';
 
 
-export const PureDrawer: React.FC<IDrawerProps> = React.memo<IDrawerProps>(({
+export const PureDrawer = React.memo<IDrawerProps>(({
   children,
   // TODO Maybe 'appearance' and 'baseAppearance' doesn't need in future
   appearance = 'default',
@@ -35,6 +35,7 @@ export const PureDrawer: React.FC<IDrawerProps> = React.memo<IDrawerProps>(({
   isRTL = false,
   isMovable = false,
   withCloseButton = false,
+  closeIconComponent,
 }: IDrawerProps) => {
   const themeContext = useContext<IThemeNamespace<DrawerTheme>>(ThemeContext);
 
@@ -112,7 +113,7 @@ export const PureDrawer: React.FC<IDrawerProps> = React.memo<IDrawerProps>(({
             {
               withCloseButton && (
                 <IconWrapper onClick={ onOutsideClick }>
-                  { isRTL ? <ArrowRight /> : <ArrowLeft /> }
+                  { closeIconComponent || (isRTL ? <ArrowRight /> : <ArrowLeft />) }
                 </IconWrapper>
               )
             }
