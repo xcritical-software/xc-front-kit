@@ -1,3 +1,5 @@
+import { CSSObject } from 'styled-components';
+
 import {
   ITheme,
   IThemeNamespace,
@@ -16,4 +18,5 @@ export interface IThemeBadgeProps {
   appearance?: string;
   baseAppearance?: string;
   ghost?: boolean;
+  styles?: CSSObject;
 }

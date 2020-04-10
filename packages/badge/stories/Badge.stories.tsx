@@ -197,4 +197,15 @@ Example heading
         )) }
       </Table>
     </ThemeProvider>
-  ));
+  ))
+  .add('Custom styles', () => {
+    const customStyles = {
+      border: `2px solid ${colors.BLUE}`,
+    };
+
+    return (
+      <ThemeProvider theme={ theme }>
+        <Badge styles={ customStyles }>Badge with custom styles</Badge>
+      </ThemeProvider>
+    );
+  });

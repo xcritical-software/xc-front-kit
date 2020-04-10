@@ -18,8 +18,10 @@ export const Badge = styled.span<IThemeBadgeProps>`
     appearance = 'default',
     baseAppearance = 'default',
     ghost,
+    styles,
   }) => ({
     ...getRootBadgeStyles(theme, appearance, baseAppearance),
     ...getRootBadgeInteractiveStyles(theme, appearance, baseAppearance, ghost),
+    ...styles,
   })}
 `;
