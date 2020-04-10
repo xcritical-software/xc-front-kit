@@ -1,13 +1,10 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
-import * as React from 'react';
+import React, { ReactNode } from 'react';
 import { storiesOf } from '@storybook/react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { darken, mix, lighten } from 'polished';
 
-import Drawer, { drawerThemeNamespace } from '../src';
-import { DrawerTheme } from '../src/interfaces';
+import Drawer, { drawerThemeNamespace, DrawerTheme } from '../src';
 
 
 interface IBasicDrawerProps {
@@ -15,6 +12,7 @@ interface IBasicDrawerProps {
   isRTL?: boolean;
   isMovable?: boolean;
   withCloseButton?: boolean;
+  closeIcon?: ReactNode;
 }
 
 const generateTheme = (
@@ -98,6 +96,7 @@ const BasicDrawer = ({
   isRTL = false,
   isMovable = false,
   withCloseButton = false,
+  closeIcon,
 }: IBasicDrawerProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -114,6 +113,7 @@ const BasicDrawer = ({
         isRTL={ isRTL }
         isMovable={ isMovable }
         withCloseButton={ withCloseButton }
+        closeIcon={ closeIcon }
       >
         <div>Content</div>
       </Drawer>
@@ -163,5 +163,11 @@ storiesOf('Drawer', module)
     <div>
       <GlobalStyle />
       <BasicDrawer withCloseButton isRTL />
+    </div>
+  ))
+  .add('With custom close icon', () => (
+    <div>
+      <GlobalStyle />
+      <BasicDrawer withCloseButton closeIcon={ <div>X</div> } />
     </div>
   ));
