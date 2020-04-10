@@ -150,4 +150,74 @@ storiesOf('Pagination', module)
         />
       </ThemeProvider>
     );
+  })
+  .add('With custom select props', () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(25);
+
+    return (
+      <ThemeProvider theme={ emptyTheme }>
+        <Pagination
+          total={ 200 }
+          pageSize={ pageSize }
+          currentPage={ currentPage }
+          onChangePage={ (newCurrentPage) => {
+            setCurrentPage(newCurrentPage);
+          } }
+          onChangePageSize={ (newPage, newPageSize) => {
+            setCurrentPage(newPage);
+            setPageSize(newPageSize);
+          } }
+          selectProps={ {
+            components: {
+              IndicatorSeparator: null,
+            },
+          } }
+        />
+      </ThemeProvider>
+    );
+  })
+  .add('With isDisabled', () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(25);
+
+    return (
+      <ThemeProvider theme={ emptyTheme }>
+        <Pagination
+          isDisabled
+          total={ 200 }
+          pageSize={ pageSize }
+          currentPage={ currentPage }
+          onChangePage={ (newCurrentPage) => {
+            setCurrentPage(newCurrentPage);
+          } }
+          onChangePageSize={ (newPage, newPageSize) => {
+            setCurrentPage(newPage);
+            setPageSize(newPageSize);
+          } }
+        />
+      </ThemeProvider>
+    );
+  })
+  .add('With showTotalInfo', () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(25);
+
+    return (
+      <ThemeProvider theme={ emptyTheme }>
+        <Pagination
+          showTotalInfo
+          total={ 200 }
+          pageSize={ pageSize }
+          currentPage={ currentPage }
+          onChangePage={ (newCurrentPage) => {
+            setCurrentPage(newCurrentPage);
+          } }
+          onChangePageSize={ (newPage, newPageSize) => {
+            setCurrentPage(newPage);
+            setPageSize(newPageSize);
+          } }
+        />
+      </ThemeProvider>
+    );
   });
