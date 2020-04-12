@@ -1,4 +1,9 @@
-import { ReactChildren, ComponentType, RefObject } from 'react';
+import {
+  ReactChildren,
+  ComponentType,
+  RefObject,
+  ReactNode,
+} from 'react';
 
 import { ITheme, ICSSProperties, AllType } from '@xcritical/theme';
 
@@ -21,6 +26,7 @@ export interface IDrawerProps {
   isRTL?: boolean;
   isMovable?: boolean;
   withCloseButton?: boolean;
+  closeIconComponent?: ReactNode;
   minWidth?: number;
   maxWidth?: number;
   onOutsideClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void | undefined;
@@ -31,8 +37,6 @@ export interface IDrawerStates {
   ref?: RefObject<HTMLElement>;
 }
 
-export type DrawerWidth = 'extended' | 'full' | 'medium' | 'narrow' | 'wide';
-
 export interface IReturnFunction<TValue> {
   (
     theme: DrawerTheme,
@@ -41,13 +45,6 @@ export interface IReturnFunction<TValue> {
     baseAppearance?: string,
   ): TValue;
 }
-
-export interface IReturnWithArgsFunction<TProp, TValue> {
-  (elementName: string, ...props: TProp[]): TValue;
-}
-
-export type GetPropStyles<TResult> =
-  IReturnFunction<IReturnWithArgsFunction<any, TResult>>;
 
 export interface IDrawerWrapperProps {
   children?: ReactChildren;

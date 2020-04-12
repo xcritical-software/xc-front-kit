@@ -9,6 +9,11 @@ export const defaultPaginationTheme: IPaginationTheme = {
   wrapper: {
     display: 'inline-flex',
   },
+  totals: {
+    display: 'flex',
+    alignItems: 'center',
+    marginRight: '15px',
+  },
   buttonGroup: {
     borderRadius: '5px',
   },

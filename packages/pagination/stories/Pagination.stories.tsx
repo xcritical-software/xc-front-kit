@@ -150,4 +150,74 @@ storiesOf('Pagination', module)
         />
       </ThemeProvider>
     );
+  })
+  .add('With pageSizeProps', () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(25);
+
+    return (
+      <ThemeProvider theme={ emptyTheme }>
+        <Pagination
+          total={ 200 }
+          currentPage={ currentPage }
+          pageSize={ pageSize }
+          pageSizeProps={ {
+            components: {
+              IndicatorSeparator: null,
+            },
+          } }
+          onChangePage={ (newCurrentPage) => {
+            setCurrentPage(newCurrentPage);
+          } }
+          onChangePageSize={ (newPage, newPageSize) => {
+            setCurrentPage(newPage);
+            setPageSize(newPageSize);
+          } }
+        />
+      </ThemeProvider>
+    );
+  })
+  .add('With disabled', () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(25);
+
+    return (
+      <ThemeProvider theme={ emptyTheme }>
+        <Pagination
+          disabled
+          total={ 200 }
+          pageSize={ pageSize }
+          currentPage={ currentPage }
+          onChangePage={ (newCurrentPage) => {
+            setCurrentPage(newCurrentPage);
+          } }
+          onChangePageSize={ (newPage, newPageSize) => {
+            setCurrentPage(newPage);
+            setPageSize(newPageSize);
+          } }
+        />
+      </ThemeProvider>
+    );
+  })
+  .add('With showTotals', () => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(25);
+
+    return (
+      <ThemeProvider theme={ emptyTheme }>
+        <Pagination
+          showTotals
+          total={ 200 }
+          pageSize={ pageSize }
+          currentPage={ currentPage }
+          onChangePage={ (newCurrentPage) => {
+            setCurrentPage(newCurrentPage);
+          } }
+          onChangePageSize={ (newPage, newPageSize) => {
+            setCurrentPage(newPage);
+            setPageSize(newPageSize);
+          } }
+        />
+      </ThemeProvider>
+    );
   });
