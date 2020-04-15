@@ -65,11 +65,15 @@ export function xcriticalFiltersReset(name: string): IFilterAction {
 export function xcriticalFiltersInit(
   name: string,
   filters: IStateRecivedFilter[],
+  search?: string,
 ): IFilterAction<IPayloadInitFilters> {
   return actionCreator(
     actions.FILTERS_INIT,
     name,
-    { filters },
+    {
+      filters,
+      search,
+    },
   );
 }
 export function xcriticalFiltersAdd(
