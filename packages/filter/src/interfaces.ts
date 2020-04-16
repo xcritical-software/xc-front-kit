@@ -53,6 +53,7 @@ export interface IPayloadChangeFilter {
 
 export interface IPayloadInitFilters {
   filters: IStateRecivedFilter[];
+  search: string;
 }
 
 export interface IPayloadApplyFilters {
