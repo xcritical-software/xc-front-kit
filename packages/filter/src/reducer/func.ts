@@ -87,7 +87,7 @@ export const initFilters = (
   );
 
   $state = setIn(
-    state,
+    $state,
     search,
     'search',
   );
