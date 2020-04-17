@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "jest --config=jest.config.js",
-    "lint": "eslint packages/**/{src,stories,test}/**/*.{js,jsx,ts,tsx}",
+    "lint": "eslint 'packages/**/{src,stories,test}/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "yarn lint --fix --quiet",
     "compile": "yarn boltify run build",
     "build": "yarn clean && yarn compile",

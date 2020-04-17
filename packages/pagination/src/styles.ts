@@ -7,6 +7,6 @@ export const PaginationWrapper = styled.div`
   ${({ theme }) => getPaginationStyles(theme, ['wrapper'])};
 `;
 
-export const TotalInfo = styled.div`
+export const StyledTotals = styled.div`
   ${({ theme }) => getPaginationStyles(theme, ['totals'])};
 `;
