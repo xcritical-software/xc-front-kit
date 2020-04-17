@@ -57,7 +57,7 @@ const CompactFilterPage: React.FC<IPage> = ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onInit: () => {
-    dispatch(xcriticalFiltersInit(pageName, threeFilters));
+    dispatch(xcriticalFiltersInit(pageName, threeFilters, 'test string'));
     dispatch(xcriticalFiltersAdd(pageName, threeFiltersAdd));
   },
 });

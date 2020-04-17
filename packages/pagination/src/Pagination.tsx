@@ -5,7 +5,8 @@ import Select from '@xcritical/select';
 import Button, { ButtonGroup } from '@xcritical/button';
 
 import { IPagination, IPageSizeOption } from './interfaces';
-import { PaginationWrapper, TotalInfo } from './styles';
+import { PaginationWrapper } from './styles';
+import { Totals } from './Totals';
 
 import {
   getVisiblePagesArray,
@@ -100,11 +101,7 @@ const PurePagination: React.FC<IPagination> = ({
 
   return (
     <PaginationWrapper>
-      { showTotals && (
-        <TotalInfo>
-          { `${currentPage} - ${pageSize > total ? total : pageSize} of ${total}` }
-        </TotalInfo>
-      ) }
+      { showTotals && <Totals currentPage={ currentPage } pageSize={ pageSize } total={ total } /> }
 
       <ButtonGroup theme={ paginationButtonGroupTheme }>
         { needFirstPage && (

@@ -73,17 +73,23 @@ export const changeFilter = (
 
 export const initFilters = (
   state: IFilterStore,
-  { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
+  { payload: { filters, search = '' } }: IFilterAction<IPayloadInitFilters>,
 ): IFilterStore => {
   const mappedFilters = filters.map((filter: IStateRecivedFilter) => ({
     ...filter,
     key: filter.key || uuid(),
   }));
 
-  const $state = setIn(
+  let $state = setIn(
     state,
     mappedFilters,
     'drafts',
+  );
+
+  $state = setIn(
+    $state,
+    search,
+    'search',
   );
 
   return setIn(

@@ -207,7 +207,7 @@ storiesOf('Pagination', module)
       <ThemeProvider theme={ emptyTheme }>
         <Pagination
           showTotals
-          total={ 200 }
+          total={ 270 }
           pageSize={ pageSize }
           currentPage={ currentPage }
           onChangePage={ (newCurrentPage) => {
