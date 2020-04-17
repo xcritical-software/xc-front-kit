@@ -33,3 +33,9 @@ export interface IPageSizeOption {
   value: number;
   label: number;
 }
+
+export interface ITotalsProps {
+  currentPage: number;
+  pageSize: number;
+  total: number;
+}
