@@ -23,16 +23,38 @@ const options2 = [
   { value: 'fourthCard', label: '444444444444444444', prefix: <MasterCardIcon /> },
 ];
 
+const groupOptions = [
+  {
+    label: 'first',
+    options,
+  },
+  {
+    label: 'second',
+    options: options2,
+  },
+];
+
 const ChangeOptions = () => {
   const [isFirstOptions, changeIsFirstOptions] = useState(true);
   return (
     <>
-      <button style={ { width: '60px', height: '38px', margin: '10px' } } onClick={ () => changeIsFirstOptions(true) }>One</button>
-      <button style={ { width: '60px', height: '38px', margin: '20px ' } } onClick={ () => changeIsFirstOptions(false) }>Two</button>
+      <button
+        style={ { width: '60px', height: '38px', margin: '10px' } }
+        onClick={ () => changeIsFirstOptions(true) }
+      >
+One
+      </button>
+      <button
+        style={ { width: '60px', height: '38px', margin: '20px ' } }
+        onClick={ () => changeIsFirstOptions(false) }
+      >
+Two
+      </button>
       <Select options={ isFirstOptions ? options : options2 } />
     </>
   );
 };
+
 
 storiesOf('Select', module)
   .add('Basic', () => (
@@ -67,4 +89,7 @@ storiesOf('Select', module)
   ))
   .add('Only default option', () => (
     <Select isSearchable isClearable defaultValue={ options[3] } />
+  ))
+  .add('With groups', () => (
+    <Select options={ groupOptions } />
   ));

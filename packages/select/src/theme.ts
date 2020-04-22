@@ -211,7 +211,6 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
 
       option: {
         color: 'inherit',
-
         fontSize: 'inherit',
         fontWeight: 'normal',
         hover: {
@@ -306,6 +305,11 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         color: 'inherit',
         fontSize: '13px',
         fontWeight: 'normal',
+      },
+      group: {
+        fontWeight: 600,
+        fontSize: '100%',
+        paddingLeft: '5px',
       },
     },
   },

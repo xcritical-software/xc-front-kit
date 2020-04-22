@@ -59,12 +59,13 @@ export const themeConverter = (
       ...getElementStyles('placeholder'),
       ...getInteractiveStyles('placeholder', isDisabled, isFocused, isSelected),
     }),
-
     group: (css) => ({
       ...css,
+      ...getElementStyles('group'),
     }),
     groupHeading: (css) => ({
       ...css,
+      ...getElementStyles('group'),
     }),
     indicatorsContainer: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
