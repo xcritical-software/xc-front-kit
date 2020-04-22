@@ -13,47 +13,49 @@ import {
   TopPanelButtons,
   RootPanel,
   TopPanelTags,
-  MoreFilterSelect,
   SearchInputWrapper,
-  Tag,
+  Prefix,
+  Postfix,
+  MoreFilterSelect,
   Search,
+  Tag,
 } from './components';
 
-import {
-  IFilterComponentProps,
-  IFilterTheme,
-} from './interfaces';
+import { IFilterComponentProps, IFilterTheme } from './interfaces';
 import { filterTheme, groupBy } from './utils';
 
 
 const PureCompactFilter: React.FC<IFilterComponentProps> = ({
   filters,
   activeFilters = [],
-  onApply,
   searchInput,
   isSearchable = true,
+  disabled = false,
   name,
+  theme,
+  prefix,
+  postfix,
+  onApply,
   onResetFilters,
   onChangeFilters,
   onSearchInputChange,
-  theme,
 }): ReactElement => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(filterTheme<IFilterTheme>(theme || contextTheme));
 
-  const mergedFilters = useMemo(
-    () => groupBy(
-      activeFilters.filter((filter) => filter.column)
-        .filter(({ column }) => !filters.find(({ field }) => field === column)?.isHidden),
-      'column',
-    ),
-    [activeFilters],
-  );
+  const mergedFilters = useMemo(() => groupBy(
+    activeFilters
+      .filter((filter) => filter.column)
+      .filter(({ column }) => !filters.find(({ field }) => field === column)?.isHidden),
+    'column',
+  ), [activeFilters, filters]);
 
 
   return (
     <RootPanel>
       <TopPanel theme={ themeRef.current }>
+        { prefix && <Prefix theme={ themeRef.current }>{ prefix }</Prefix> }
+
         {
           isSearchable
             ? (
@@ -61,6 +63,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
                 <Input
                   prefix={ <Search /> }
                   value={ searchInput }
+                  disabled={ disabled }
                   onChange={ onSearchInputChange }
                   appearance="filters-search"
                 />
@@ -78,6 +81,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
                 filterId={ filterId }
                 conditions={ mergedFilters[filterId] }
                 theme={ themeRef.current }
+                disabled={ disabled }
                 onApply={ onApply }
               />
             )) }
@@ -85,9 +89,10 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
 
         <TopPanelButtons>
           <MoreFilterSelect
-            onChange={ onChangeFilters }
             filters={ filters }
             selectedFilters={ activeFilters }
+            disabled={ disabled }
+            onChange={ onChangeFilters }
           >
             More
           </MoreFilterSelect>
@@ -95,6 +100,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
           <Button
             appearance="filters-reset"
             baseAppearance="link"
+            disabled={ disabled }
             onClick={ onResetFilters }
           >
             Reset
@@ -103,11 +109,14 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
           <Button
             appearance="filters-apply"
             baseAppearance="primary"
+            disabled={ disabled }
             onClick={ onApply }
           >
             Search
           </Button>
         </TopPanelButtons>
+
+        { postfix && <Postfix theme={ themeRef.current }>{ postfix }</Postfix> }
       </TopPanel>
     </RootPanel>
   );

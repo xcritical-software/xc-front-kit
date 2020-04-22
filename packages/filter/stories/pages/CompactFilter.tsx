@@ -43,14 +43,17 @@ const threeFiltersAdd = [
 
 
 const pageName = 'compactFilter';
-const CompactFilterPage: React.FC<IPage> = ({
-  onInit, isSearchable,
-}) => {
+const CompactFilterPage: React.FC<IPage> = ({ isSearchable, disabled, onInit }) => {
   useEffect(() => {
     onInit();
   });
   return (
-    <CompactFilter filters={ simpleData } name={ pageName } isSearchable={ isSearchable } />
+    <CompactFilter
+      name={ pageName }
+      filters={ simpleData }
+      isSearchable={ isSearchable }
+      disabled={ disabled }
+    />
   );
 };
 
