@@ -1,22 +1,16 @@
 import React, {
-  useState, useCallback, useMemo, MouseEvent,
+  useState,
+  useCallback,
+  useMemo,
+  MouseEvent,
 } from 'react';
+
 import Button from '@xcritical/button';
 
-import {
-  Dropdown,
-} from '../Dropdown';
-import {
-  DropdownFooter,
-  ButtonBlock,
-  RemoveButton,
-} from './styled';
-import {
-  ChevronDown,
-  ChevronUp,
-  Remove,
-} from '../icons';
 import { ITagProps, IFilter } from '../../interfaces';
+import { Dropdown } from '../Dropdown';
+import { ChevronDown, ChevronUp, Remove } from '../icons';
+import { DropdownFooter, ButtonBlock, RemoveButton } from './styled';
 import { TagCondition } from './TagConditions';
 
 
@@ -24,6 +18,7 @@ export const Tag: React.FC<ITagProps> = ({
   filterId,
   conditions,
   filters,
+  disabled,
   onChangeFilter,
   onRemoveFilter,
   onAddCondition,
@@ -40,25 +35,22 @@ export const Tag: React.FC<ITagProps> = ({
     setIsOpen(!isOpen);
   }, [isOpen]);
 
-  const onTagApply = useCallback(
-    () => {
-      setIsOpen(!isOpen);
-      onApply();
-    }, [isOpen, onApply],
-  );
+  const onTagApply = useCallback(() => {
+    setIsOpen(!isOpen);
+    onApply();
+  }, [isOpen, onApply]);
 
-  const onTagRemove = useCallback(
-    (e: MouseEvent<any>) => {
-      e.stopPropagation();
+  const onTagRemove = useCallback((e: MouseEvent<any>) => {
+    e.stopPropagation();
+
+    if (!disabled) {
       onRemoveFilter({ name: filterId });
-    }, [filterId, onRemoveFilter],
-  );
+    }
+  }, [disabled, filterId, onRemoveFilter]);
 
-  const onTagAddCondition = useCallback(
-    () => {
-      onAddCondition(filterId);
-    }, [filterId, onAddCondition],
-  );
+  const onTagAddCondition = useCallback(() => {
+    onAddCondition(filterId);
+  }, [filterId, onAddCondition]);
 
 
   return (
@@ -76,8 +68,9 @@ export const Tag: React.FC<ITagProps> = ({
             </>
           ) }
           appearance="filter-tag"
-          onClick={ toggleOpen }
           selected={ isOpen }
+          disabled={ disabled }
+          onClick={ toggleOpen }
         >
           { `${filterSetting.displayName}` }
         </Button>
@@ -87,6 +80,7 @@ export const Tag: React.FC<ITagProps> = ({
       {
         conditions.map((condition) => (
           <TagCondition
+            key={ condition.key }
             conditions={ filterSetting.conditions }
             onRemoveFilter={ onRemoveFilter }
             currentFilterState={ condition }

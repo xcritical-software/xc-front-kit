@@ -27,4 +27,10 @@ export const defaultTheme: IFilterTheme = {
   filterPanelButtons: {
     margin: '30px auto',
   },
+  prefix: {
+    marginRight: '15px',
+  },
+  postfix: {
+    marginLeft: '15px',
+  },
 };
