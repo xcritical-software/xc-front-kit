@@ -106,7 +106,6 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     }
   }, [setScrollLeft, onScrollsyncScroll]);
 
-
   const cellRenderer = ({
     columnIndex, key, parent, rowIndex, style,
   }: GridCellProps) => {
