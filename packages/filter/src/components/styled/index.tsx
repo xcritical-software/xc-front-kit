@@ -62,3 +62,11 @@ export const SearchInputWrapper = styled.div`
   margin: 4px 0;
   padding-right: 10px;  
 `;
+
+export const Prefix = styled.div`
+  ${({ theme }) => theme.prefix}
+`;
+
+export const Postfix = styled.div`
+  ${({ theme }) => theme.postfix}
+`;

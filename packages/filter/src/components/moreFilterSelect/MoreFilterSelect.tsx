@@ -32,6 +32,7 @@ const selectStyles = {
 export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
   filters,
   selectedFilters,
+  disabled,
   onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -82,7 +83,7 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
     }));
 
     onChange([...selected, ...mappedHiddenedFilters]);
-  }, [onChange]);
+  }, [hiddenedFilters, onChange]);
 
   return (
     <Dropdown
@@ -92,10 +93,11 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
         <Button
           appearance="filters-more"
           baseAppearance="link"
+          selected={ isOpen }
+          disabled={ disabled }
           postfix={ isOpen ? <ChevronUp /> : <ChevronDown /> }
           prefix={ <Plus /> }
           onClick={ toggleOpen }
-          selected={ isOpen }
         >
           More
         </Button>

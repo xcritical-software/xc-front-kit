@@ -35,14 +35,12 @@ export const ButtonBlock = styled.div<any>`
   }
 `;
 
-export const RemoveButton = styled.button<any>`
-  outline: 0;
-  background: transparent;
-  cursor: pointer;
-  border: 0;
+export const RemoveButton = styled.div`
+  display: flex;
+  align-items: center;
   margin: 0 5px;
-  padding: 3px;
-  height: 21px;
+  padding: 0 3px;
+  height: 20px;
 `;
 
 export const RemoveConditionButton = styled(RemoveButton)`

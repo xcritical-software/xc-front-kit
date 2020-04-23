@@ -49,25 +49,27 @@ export interface ISelectOnlyProps {
 export type SelectProps = Omit<Props<IOptionProps>, 'theme' | 'value'> & ISelectOnlyProps;
 
 export interface ISubComponents {
+  button?: IThemeBase<ISelectCssTheme>;
+  clearIndicator?: IThemeBase<ISelectCssTheme>;
   dropdown?: IThemeBase<ISelectCssTheme>;
   dropdownList?: IThemeBase<ISelectCssTheme>;
-  button?: IThemeBase<ISelectCssTheme>;
+  dropdownIndicator?: IThemeBase<ISelectCssTheme>;
+  group?: IThemeBase<ISelectCssTheme>;
+  groupHeading?: IThemeBase<ISelectCssTheme>;
   indicatorsContainer?: IThemeBase<ISelectCssTheme>;
   indicatorSeparator?: IThemeBase<ISelectCssTheme>;
-  dropdownIndicator?: IThemeBase<ISelectCssTheme>;
-  clearIndicator?: IThemeBase<ISelectCssTheme>;
+  input?: IThemeBase<ISelectCssTheme>;
+  labelText?: IThemeBase<ISelectCssTheme>;
   loadingIndicator?: IThemeBase<ISelectCssTheme>;
   loadingMessage?: IThemeBase<ISelectCssTheme>;
-  input?: IThemeBase<ISelectCssTheme>;
-  placeholder?: IThemeBase<ISelectCssTheme>;
-  labelText?: IThemeBase<ISelectCssTheme>;
-  option?: IThemeBase<ISelectCssTheme>;
-  valueContainer?: IThemeBase<ISelectCssTheme>;
-  singleValue?: IThemeBase<ISelectCssTheme>;
   multiValue?: IThemeBase<ISelectCssTheme>;
   multiValueLabel?: IThemeBase<ISelectCssTheme>;
   multiValueRemove?: IThemeBase<ISelectCssTheme>;
   noOptionsMessage?: IThemeBase<ISelectCssTheme>;
+  option?: IThemeBase<ISelectCssTheme>;
+  placeholder?: IThemeBase<ISelectCssTheme>;
+  singleValue?: IThemeBase<ISelectCssTheme>;
+  valueContainer?: IThemeBase<ISelectCssTheme>;
 }
 
 export interface ISelectCssTheme extends ICSSProperties {
@@ -85,7 +87,7 @@ export interface ILabelTextCssTheme extends ISelectCssTheme {
 export interface ISelectBaseTheme extends ISelectCssTheme, ISubComponents {
 }
 
-export interface IReturnFunction< TValue> {
+export interface IReturnFunction<TValue> {
   (
     theme: IThemeNamespace<ISelectBaseTheme>,
     appearance: string,

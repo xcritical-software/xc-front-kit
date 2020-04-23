@@ -1,3 +1,4 @@
+import React from 'react';
 import { IThemeNamespace, ITheme } from '@xcritical/theme';
 import { CSSProperties } from 'styled-components';
 
@@ -123,6 +124,7 @@ export interface IMapDispatchFilterTag {
 
 
 export interface ITagProps extends ITagContainerProps, IMapDispatchFilterTag {
+  disabled: boolean;
 }
 
 export interface ITagConditionProps {
@@ -143,6 +145,9 @@ export interface IFilterProps {
   name: string;
   theme?: IThemeNamespace;
   isSearchable?: boolean;
+  disabled?: boolean;
+  prefix?: React.ReactNode;
+  postfix?: React.ReactNode;
 }
 
 export interface IApplyAction {
@@ -166,6 +171,7 @@ export interface IFilterComponentProps extends IMapDispatchFilter,
 export interface IMoreButtonWithFilterSelectorProps {
   selectedFilters: IStateFilter[];
   filters: IFilter[];
+  disabled: boolean;
   onChange: (value: IStateRecivedFilter[]) => void;
 }
 
@@ -176,6 +182,8 @@ export interface IFilterTheme extends ITheme {
   topPanel: CSSProperties;
   filtersPanel: CSSProperties;
   filterPanelButtons: CSSProperties;
+  prefix?: CSSProperties;
+  postfix?: CSSProperties;
 }
 
 export type IThemeProp<T> = T;

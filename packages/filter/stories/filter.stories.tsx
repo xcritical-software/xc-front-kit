@@ -13,11 +13,9 @@ import { IThemeNamespace, colors } from '@xcritical/theme';
 import { buttonThemeNamespace } from '@xcritical/button';
 import { ButtonTheme } from '@xcritical/button/src/interfaces';
 import { darken } from 'polished';
-import {
-  CompactFilterContainer,
-  ExternalFilterContainer,
-} from './pages';
-import { filterReducer } from '../src';
+
+import { filterReducer, CompactFilter } from '../src';
+import { CompactFilterContainer, ExternalFilterContainer } from './pages';
 
 
 export const store = createStore(
@@ -85,7 +83,6 @@ const withProvider = (story) => (
 );
 
 storiesOf('Filter', module)
-
   .addDecorator(withProvider)
   .add('Simple Filter', () => (
     <CompactFilterContainer />
@@ -94,6 +91,15 @@ storiesOf('Filter', module)
     <ThemeProvider theme={ themeTwo }>
       <CompactFilterContainer />
     </ThemeProvider>
+  ))
+  .add('With Disabled', () => (
+    <CompactFilterContainer disabled />
+  ))
+  .add('With Prefix', () => (
+    <CompactFilter name="withPrefix" filters={ [] } prefix={ <div>Prefix</div> } />
+  ))
+  .add('With Postfix', () => (
+    <CompactFilter name="withPostfix" filters={ [] } postfix={ <div>Postfix</div> } />
   ))
   .add('External Filter', () => (
     <ExternalFilterContainer />

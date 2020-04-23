@@ -23,16 +23,63 @@ const options2 = [
   { value: 'fourthCard', label: '444444444444444444', prefix: <MasterCardIcon /> },
 ];
 
+const options3 = [
+  { value: 'firstCard', label: '1234 1234 1234 1234' },
+  { value: 'secondCard', label: '4321 4321 4321 4321' },
+  { value: 'thirdCard', label: '4567 4567 4567 4567', isDisabled: true },
+  { value: 'fourthCard', label: '0123 0123 0123 0123' },
+];
+
+const options4 = [
+  { value: 'firstCard', label: '111111111111111111', isDisabled: true },
+  { value: 'secondCard', label: '222222222222222222' },
+  { value: 'thirdCard', label: '333333333333333333' },
+  { value: 'fourthCard', label: '444444444444444444' },
+];
+
+const groupOptions = [
+  {
+    label: 'first',
+    options: options3,
+  },
+  {
+    label: 'second',
+    options: options4,
+  },
+];
+
+const groupOptionsPrefix = [
+  {
+    label: 'third',
+    options,
+  },
+  {
+    label: 'forth',
+    options: options2,
+  },
+];
+
 const ChangeOptions = () => {
   const [isFirstOptions, changeIsFirstOptions] = useState(true);
   return (
     <>
-      <button style={ { width: '60px', height: '38px', margin: '10px' } } onClick={ () => changeIsFirstOptions(true) }>One</button>
-      <button style={ { width: '60px', height: '38px', margin: '20px ' } } onClick={ () => changeIsFirstOptions(false) }>Two</button>
+      <button
+        style={ { width: '60px', height: '38px', margin: '10px' } }
+        onClick={ () => changeIsFirstOptions(true) }
+      >
+        One
+      </button>
+      <button
+        style={ { width: '60px', height: '38px', margin: '20px ' } }
+        onClick={ () => changeIsFirstOptions(false) }
+      >
+        Two
+      </button>
       <Select options={ isFirstOptions ? options : options2 } />
     </>
   );
 };
+
 
 storiesOf('Select', module)
   .add('Basic', () => (
@@ -67,4 +114,12 @@ storiesOf('Select', module)
   ))
   .add('Only default option', () => (
     <Select isSearchable isClearable defaultValue={ options[3] } />
+  ))
+  .add('With groups', () => (
+    <>
+      <span style={ { margin: '10px' } }>Default with disabled options:</span>
+      <Select options={ groupOptions } placeholder="Search.." />
+      <span style={ { margin: '10px' } }>With prefix:</span>
+      <Select options={ groupOptionsPrefix } placeholder="Search.." />
+    </>
   ));
