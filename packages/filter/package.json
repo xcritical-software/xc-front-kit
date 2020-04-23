@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/filter",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "XCritical Filter Component",
 	"main": "src/index.ts",
 	"scripts": {
@@ -40,7 +40,7 @@
 	"dependencies": {
 		"@xcritical/button": "^2.0.0",
 		"@xcritical/input": "^1.0.0",
-		"@xcritical/select": "^1.0.0",
+		"@xcritical/select": "^1.0.2",
 		"@xcritical/theme": "^1.0.0",
 		"lodash.get": "4.x",
 		"lodash.isempty": "4.x",
