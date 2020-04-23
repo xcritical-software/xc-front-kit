@@ -307,6 +307,8 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         fontWeight: 'normal',
       },
       group: {
+      },
+      groupHeading: {
         fontWeight: 600,
         fontSize: '100%',
         paddingLeft: '5px',

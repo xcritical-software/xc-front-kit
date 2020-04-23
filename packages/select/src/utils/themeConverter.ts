@@ -65,7 +65,7 @@ export const themeConverter = (
     }),
     groupHeading: (css) => ({
       ...css,
-      ...getElementStyles('group'),
+      ...getElementStyles('groupHeading'),
     }),
     indicatorsContainer: (css, { isDisabled, isFocused, isSelected }) => ({
       ...css,
