@@ -33,6 +33,7 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
   overscanColumnCount,
   overscanRowCount,
 
+  shouldFitLastColumn,
 
   allGridsProps,
 }: IMultiGrid) => (
@@ -52,7 +53,7 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
 
         gridHOCMappedColumns={ leftMappedColumns }
         setGridHOCMappedColumns={ setLeftMappedColumns }
-
+        shouldFitLastColumn={ false }
         resizeGridAfterResizeLastColumn
         gridPosition={ GridPositions.LEFT }
         shiftFirstColumn
@@ -70,7 +71,7 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
 
           onScrollsyncScroll={ onScroll }
           scrollTop={ scrollTop }
-
+          shouldFitLastColumn={ shouldFitLastColumn }
           gridHOCMappedColumns={ centerMappedColumns }
           setGridHOCMappedColumns={ setCenterMappedColumns }
           gridPosition={ GridPositions.CENTER }
@@ -89,7 +90,7 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
         bottomScroll={ false }
         shouldMovingColumns={ false }
         shouldChangeColumnsWidth={ shouldChangeRightColumnsWidth }
-
+        shouldFitLastColumn={ false }
         onScrollsyncScroll={ onScroll }
         scrollTop={ scrollTop }
         gridHOCMappedColumns={ rightMappedColumns }

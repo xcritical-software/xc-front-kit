@@ -108,6 +108,8 @@ storiesOf('New Grid', module)
   .add('Basic', () => {
     const [shouldMovingColumns, changeShouldMovingColumns] = useState(true);
     const [shouldChangeColumnsWidth, changeShouldChangeColumnsWidth] = useState(true);
+    const [shouldFitLastColumn, changeShouldFitLastColumn] = useState(true);
+
     return (
       <>
         <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
@@ -128,6 +130,15 @@ storiesOf('New Grid', module)
             onChange={ (e) => changeShouldChangeColumnsWidth(e.target.checked) }
           />
         </label>
+        <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
+          Should fit last column
+          <input
+            style={ { marginLeft: '30px' } }
+            type="checkbox"
+            checked={ shouldFitLastColumn }
+            onChange={ (e) => changeShouldFitLastColumn(e.target.checked) }
+          />
+        </label>
         <Grid
           columns={ columns }
           items={ rows }
@@ -136,6 +147,7 @@ storiesOf('New Grid', module)
           height={ document.documentElement.clientHeight - 100 }
           shouldMovingColumns={ shouldMovingColumns }
           shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+          shouldFitLastColumn={ shouldFitLastColumn }
         />
       </>
     );
@@ -411,4 +423,47 @@ storiesOf('New Grid', module)
       height={ document.documentElement.clientHeight - 100 }
       onSortChanged={ (cols) => console.table(cols) }
     />
-  ));
+  ))
+  .add('Dinamic size + toggler should fit last column', () => {
+    const [shouldFitLastColumn, changeShouldFitLastColumn] = useState(true);
+    const [columnsCount, setColumnsCount] = useState(3);
+
+    return (
+      <Provider store={ store }>
+        <Page>
+          <Sidebar>
+            <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
+              Should fit last column
+              <input
+                style={ { marginLeft: '30px' } }
+                type="checkbox"
+                checked={ shouldFitLastColumn }
+                onChange={ (e) => changeShouldFitLastColumn(e.target.checked) }
+              />
+            </label>
+            <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
+              Columns count
+              <input
+                style={ { marginLeft: '30px' } }
+                value={ columnsCount }
+                onChange={ (e) => setColumnsCount(Number(e.target.value)) }
+              />
+            </label>
+            { list(100) }
+          </Sidebar>
+          <Content>
+            <GridWrapper>
+              <Grid
+                columns={ columnsFixed('both').slice(0, columnsCount) }
+                items={ rowsFixed }
+                rowHeight={ 40 }
+                theme={ AMStheme }
+                shouldFitContainer
+                shouldFitLastColumn={ shouldFitLastColumn }
+              />
+            </GridWrapper>
+          </Content>
+        </Page>
+      </Provider>
+    );
+  });
