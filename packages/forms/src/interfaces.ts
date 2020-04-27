@@ -11,9 +11,9 @@ export interface IFormContext {
   fields: string[];
 }
 
-export interface IFormState {
-  source?: { [fieldName: string]: any };
-  model?: { [fieldName: string]: any };
+export interface IFormState<TModel = { [fieldName: string]: any }> {
+  source?: TModel;
+  model?: TModel;
   isNew: boolean;
   isChanged: boolean;
   errors: { [fieldName: string]: string };
