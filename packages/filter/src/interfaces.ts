@@ -106,7 +106,6 @@ export interface IStateFilter extends IStateRecivedFilter {
 
 
 export interface ITagContainerProps {
-  theme: IFilterTheme;
   filters: IFilter[];
   name: string;
   key: string;
