@@ -14,8 +14,14 @@ import { buttonThemeNamespace } from '@xcritical/button';
 import { ButtonTheme } from '@xcritical/button/src/interfaces';
 import { darken } from 'polished';
 
-import { filterReducer, CompactFilter } from '../src';
 import { CompactFilterContainer, ExternalFilterContainer } from './pages';
+
+import {
+  filterReducer,
+  filterThemeNamespace,
+  CompactFilter,
+  IFilterTheme,
+} from '../src';
 
 
 export const store = createStore(
@@ -74,6 +80,25 @@ const themeTwo: IThemeNamespace = {
       'filter-tag-delete-button-appearance': {},
     },
   } as ButtonTheme,
+  [filterThemeNamespace]: {
+    topPanel: {
+      flexWrap: 'wrap',
+    },
+    searchInputWrapper: {
+      order: 1,
+      margin: 0,
+      height: '36px',
+    },
+    topPanelTags: {
+      width: '100%',
+      order: 3,
+      paddingTop: '10px',
+    },
+    topPanelButtons: {
+      order: 2,
+      margin: 0,
+    },
+  } as IFilterTheme,
 };
 
 const withProvider = (story) => (

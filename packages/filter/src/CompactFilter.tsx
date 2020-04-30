@@ -52,14 +52,14 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
 
 
   return (
-    <RootPanel>
+    <RootPanel theme={ themeRef.current }>
       <TopPanel theme={ themeRef.current }>
         { prefix && <Prefix theme={ themeRef.current }>{ prefix }</Prefix> }
 
         {
           isSearchable
             ? (
-              <SearchInputWrapper>
+              <SearchInputWrapper theme={ themeRef.current }>
                 <Input
                   prefix={ <Search /> }
                   value={ searchInput }
@@ -71,7 +71,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
             )
             : null
         }
-        <TopPanelTags>
+        <TopPanelTags theme={ themeRef.current }>
           { Object.keys(mergedFilters)
             .map((filterId) => (
               <Tag
@@ -87,7 +87,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
             )) }
         </TopPanelTags>
 
-        <TopPanelButtons>
+        <TopPanelButtons theme={ themeRef.current }>
           <MoreFilterSelect
             filters={ filters }
             selectedFilters={ activeFilters }

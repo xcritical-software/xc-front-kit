@@ -178,11 +178,12 @@ export interface IMoreButtonWithFilterSelectorProps {
 // Theme interfaces
 
 export interface IFilterTheme extends ITheme {
-  tag: CSSProperties;
-  topPanel: CSSProperties;
-  filtersPanel: CSSProperties;
-  filterPanelButtons: CSSProperties;
+  rootPanel?: CSSProperties;
+  topPanel?: CSSProperties;
   prefix?: CSSProperties;
+  searchInputWrapper?: CSSProperties;
+  topPanelTags?: CSSProperties;
+  topPanelButtons?: CSSProperties;
   postfix?: CSSProperties;
 }
 
