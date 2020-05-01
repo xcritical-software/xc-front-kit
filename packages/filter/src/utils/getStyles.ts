@@ -10,7 +10,7 @@ import {
 import { IFilterTheme, IThemeProp } from '../interfaces';
 
 
-export function filterTheme<T>(
+export function getFilterTheme<T>(
   theme: IThemeNamespace,
   propertyPath?: string | undefined,
 ): IFilterTheme | IThemeProp<T> {

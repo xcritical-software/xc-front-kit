@@ -3,7 +3,6 @@ import filterReducer from './reducer';
 
 
 export * from './actions';
-export {
-  filterReducer,
-  CompactFilter,
-};
+export { filterThemeNamespace } from './theme';
+export { IFilterTheme } from './interfaces';
+export { filterReducer, CompactFilter };
