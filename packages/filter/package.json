@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/filter",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "XCritical Filter Component",
 	"main": "src/index.ts",
 	"scripts": {
