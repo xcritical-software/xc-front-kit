@@ -1,27 +1,43 @@
 import styled from 'styled-components';
 
 
-export const TopPanel = styled.div`
-  ${({ theme }) => theme.topPanel}
-  display: flex;
-  flex-wrap: nowrap;
-  width: 100%;
-  justify-content: flex-start;
-`;
-
 export const RootPanel = styled.div`
-  ${({ theme }) => theme.topPanel}
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   position: relative;
   justify-content: flex-end;
+
+  ${({ theme }) => theme.rootPanel}
+`;
+
+export const TopPanel = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: flex-start;
+
+  ${({ theme }) => theme.topPanel}
+`;
+
+export const Prefix = styled.div`
+  ${({ theme }) => theme.prefix}
+`;
+
+export const SearchInputWrapper = styled.div`
+  height: 37px;
+  margin: 4px 0;
+  padding-right: 10px;
+
+  ${({ theme }) => theme.searchInputWrapper}
 `;
 
 export const TopPanelTags = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding-top: 4px;
+
+  ${({ theme }) => theme.topPanelTags}
 `;
 
 export const TopPanelButtons = styled.div`
@@ -35,6 +51,12 @@ export const TopPanelButtons = styled.div`
   & > * {
     margin-right: 10px;
   }
+
+  ${({ theme }) => theme.topPanelButtons}
+`;
+
+export const Postfix = styled.div`
+  ${({ theme }) => theme.postfix}
 `;
 
 export const Blanket = styled.div`
@@ -46,7 +68,6 @@ export const Blanket = styled.div`
   z-index: 1;
 `;
 
-
 export const DropdownContent = styled.div`
   background-color: white;
   border-radius: 4px;
@@ -54,19 +75,4 @@ export const DropdownContent = styled.div`
   margin-top: 8px;
   position: absolute;
   z-index: 2;
-`;
-
-
-export const SearchInputWrapper = styled.div`
-  height: 37px;
-  margin: 4px 0;
-  padding-right: 10px;  
-`;
-
-export const Prefix = styled.div`
-  ${({ theme }) => theme.prefix}
-`;
-
-export const Postfix = styled.div`
-  ${({ theme }) => theme.postfix}
 `;
