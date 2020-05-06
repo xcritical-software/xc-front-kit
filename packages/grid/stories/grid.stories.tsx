@@ -454,7 +454,7 @@ storiesOf('New Grid', module)
           <Content>
             <GridWrapper>
               <Grid
-                columns={ columnsFixed('both').slice(0, columnsCount) }
+                columns={ columnsFixed('both').slice(0, columnsCount || 1) }
                 items={ rowsFixed }
                 rowHeight={ 40 }
                 theme={ AMStheme }

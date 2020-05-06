@@ -92,10 +92,8 @@ const InternalGrid: React.FC<IInternalGrid> = ({
       const widthLast = gridHOCMappedColumns[lastElemIdx].width;
       const newColumns = setIn(gridHOCMappedColumns, Number(widthLast) + (width - newFullWidth), [String(lastElemIdx), 'width']);
       setMappedColumns(newColumns);
-      fullWidthRef.current = newFullWidth;
       return;
     }
-    fullWidthRef.current = newFullWidth;
     setMappedColumns(gridHOCMappedColumns);
   }, [gridHOCMappedColumns, width, shouldFitLastColumn]);
 
