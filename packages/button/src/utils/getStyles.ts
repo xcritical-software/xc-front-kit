@@ -120,15 +120,7 @@ const getButtonStatesStyle = (stateName: string) => ({
 export const getItemInteractiveStyles = memoize((
   disabled: boolean = false,
   selected: boolean = false,
-  theme?: IThemeNamespace<ButtonTheme>,
-  appearance: string = 'default',
-  baseAppearance: string = 'default',
 ): FlattenInterpolation<any> => {
-  const standardFocus = css`
-    &:focus {
-      box-shadow: 0 0 0 2px ${buttonAppearanceTheme(theme, appearance, baseAppearance, 'boxShadowColor')};
-    }
-  `;
   if (disabled) {
     return css`
       cursor: not-allowed;
@@ -159,7 +151,6 @@ export const getItemInteractiveStyles = memoize((
     &:active {
       ${getButtonStatesStyle('active')};
     }
-    ${standardFocus}
   `;
 }, {
   isEqual: shallowEqual,

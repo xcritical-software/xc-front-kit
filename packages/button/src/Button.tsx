@@ -84,8 +84,16 @@ export const PureButton: React.FC<IButtonProps> = ({
           </Prefix>
         ) }
 
-        <ContentWrapper>
-          <Content textPosition={ textPosition } isRTL={ isRTL }>
+        <ContentWrapper
+          appearance={ appearance }
+          baseAppearance={ baseAppearance }
+        >
+          <Content
+            textPosition={ textPosition }
+            isRTL={ isRTL }
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
+          >
             { children }
           </Content>
         </ContentWrapper>
