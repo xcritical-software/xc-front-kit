@@ -1,15 +1,22 @@
 import React from 'react';
-import { ITheme, IThemeNamespace, ICSSProperties } from '@xcritical/theme';
+import {
+  ITheme,
+  IThemeNamespace,
+  ICSSProperties,
+  IThemeBase,
+} from '@xcritical/theme';
 import { CSSObject } from 'styled-components';
 
 /* BUTTON */
-export type ButtonTags= 'button' | 'span' | 'a';
+export type ButtonTags = 'button' | 'span' | 'a';
 export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
 
 export interface IBaseButtonTheme extends ICSSProperties {
   prefixSpacing?: number;
   postfixSpacing?: number;
   boxShadowColor?: string;
+  buttonContentWrapper?: IThemeBase<ICSSProperties>;
+  buttonContent?: IThemeBase<ICSSProperties>;
   _outline?: ICSSProperties;
 }
 
@@ -21,13 +28,19 @@ export interface IButtonAppearanceProps {
   baseAppearance?: string;
 }
 
+export interface IInnerComponentAppearanceProps {
+  theme: IThemeNamespace<ButtonTheme>;
+  appearance: string;
+  baseAppearance: string;
+}
+
 export interface IIsRTL {
   isRTL?: boolean;
 }
 
-export interface IPrefixProps extends IButtonAppearanceProps, IIsRTL {}
+export interface IPrefixProps extends IInnerComponentAppearanceProps, IIsRTL { }
 
-export interface IContentProps extends IIsRTL {
+export interface IContentProps extends IIsRTL, IInnerComponentAppearanceProps {
   textPosition?: string;
 }
 

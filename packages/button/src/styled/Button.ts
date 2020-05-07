@@ -6,23 +6,24 @@ import {
   getButtonStyles,
   getItemInteractiveStyles,
 } from '../utils';
-import { IPrefixProps, IStyledButtonProps, IContentProps } from '../interfaces';
+import {
+  IPrefixProps,
+  IStyledButtonProps,
+  IContentProps,
+} from '../interfaces';
 
 
 const style = css<IStyledButtonProps>`
-${({
+  ${({
     theme, baseAppearance, appearance, spacing, ghost, shouldFitContent,
   }) => getButtonStyles(theme, baseAppearance, appearance, spacing, ghost, shouldFitContent)};
-${({
+  ${({
     disabled,
     selected,
-    theme,
-    appearance,
-    baseAppearance,
-  }) => getItemInteractiveStyles(disabled, selected, theme, appearance, baseAppearance)};
-${({ height }) => (height ? `height: ${height}` : null)}
-${({ css: cssInner }) => (cssInner || null)}
-direction: ${({ isRTL }) => (isRTL ? 'rtl' : 'ltr')};
+  }) => getItemInteractiveStyles(disabled, selected)};
+  ${({ height }) => (height ? `height: ${height}` : null)}
+  ${({ css: cssInner }) => (cssInner || null)}
+  direction: ${({ isRTL }) => (isRTL ? 'rtl' : 'ltr')};
 `;
 
 export const StyledButton = styled.div`
@@ -51,18 +52,18 @@ const PrefixPostfixBase = styled.span<IPrefixProps>`
 export const Prefix = styled(PrefixPostfixBase)`
   margin-${({ isRTL }) => (isRTL ? 'left' : 'right')}: ${({
   theme,
-  appearance = 'default',
-  baseAppearance = 'default',
+  appearance,
+  baseAppearance,
 }) => buttonAppearanceTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
 `;
 
 export const Postfix = styled(PrefixPostfixBase)`
   margin-${({ isRTL }) => (isRTL ? 'right' : 'left')}: ${(
-  { theme, appearance = 'default', baseAppearance = 'default' },
+  { theme, appearance, baseAppearance },
 ) => buttonAppearanceTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
 `;
 
-export const ContentWrapper = styled.span`
+export const ContentWrapper = styled.span<IContentProps>`
   direction: inherit;
   display: flex;
   flex-direction: column;
@@ -73,6 +74,10 @@ export const ContentWrapper = styled.span`
   &:first-child {
     margin: 0;
   }
+
+  ${(
+    { theme, appearance, baseAppearance },
+  ) => buttonAppearanceTheme(theme, appearance, baseAppearance, 'buttonContentWrapper')}
 `;
 
 export const Content = styled.span<IContentProps>`
@@ -83,4 +88,7 @@ export const Content = styled.span<IContentProps>`
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: ${({ isRTL, textPosition = 'center' }) => rtlSide(isRTL || false, textPosition)};
+  ${(
+    { theme, appearance, baseAppearance },
+  ) => buttonAppearanceTheme(theme, appearance, baseAppearance, 'buttonContent')}
 `;
