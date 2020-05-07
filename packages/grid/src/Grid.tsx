@@ -48,6 +48,7 @@ const Grid: React.FC<IGridProps> = ({
   isScrollingOptOut = true,
   overscanColumnCount = 8,
   overscanRowCount = 8,
+  shouldFitLastColumn = true,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
@@ -310,6 +311,7 @@ const Grid: React.FC<IGridProps> = ({
       isScrollingOptOut,
       overscanColumnCount,
       overscanRowCount,
+      shouldFitLastColumn,
       allGridsProps: {
         onChangeColumns,
         totals,
@@ -381,6 +383,7 @@ const Grid: React.FC<IGridProps> = ({
     shouldMovingColumns,
     shiftFirstColumn: true,
     onChangeSort,
+    shouldFitLastColumn,
   };
 
   if (shouldFitContainer) {

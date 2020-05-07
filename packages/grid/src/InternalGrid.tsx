@@ -64,6 +64,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   overscanRowCount,
   shiftFirstColumn,
   onChangeSort,
+  shouldFitLastColumn,
 }) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(getFullWidth(mappedColumns));
@@ -86,18 +87,15 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     const newFullWidth = getFullWidth(gridHOCMappedColumns);
 
     fullWidthRef.current = newFullWidth;
-    if (newFullWidth < width) {
+    if (newFullWidth < width && shouldFitLastColumn) {
       const lastElemIdx = searchLastVisible(gridHOCMappedColumns, gridHOCMappedColumns.length);
       const widthLast = gridHOCMappedColumns[lastElemIdx].width;
       const newColumns = setIn(gridHOCMappedColumns, Number(widthLast) + (width - newFullWidth), [String(lastElemIdx), 'width']);
       setMappedColumns(newColumns);
-      fullWidthRef.current = newFullWidth;
       return;
     }
-
-    fullWidthRef.current = newFullWidth;
     setMappedColumns(gridHOCMappedColumns);
-  }, [gridHOCMappedColumns, width]);
+  }, [gridHOCMappedColumns, width, shouldFitLastColumn]);
 
   const handleScroll = useCallback((e: ScrollPosition) => {
     setScrollLeft(-e.scrollLeft);
@@ -105,7 +103,6 @@ const InternalGrid: React.FC<IInternalGrid> = ({
       onScrollsyncScroll(e);
     }
   }, [setScrollLeft, onScrollsyncScroll]);
-
 
   const cellRenderer = ({
     columnIndex, key, parent, rowIndex, style,
@@ -192,7 +189,11 @@ const InternalGrid: React.FC<IInternalGrid> = ({
         0,
       );
 
-      if (newFullWidth < width && !resizeGridAfterResizeLastColumn) {
+      if (
+        newFullWidth < width
+        && !resizeGridAfterResizeLastColumn
+        && shouldFitLastColumn
+      ) {
         const lastColIdx = searchLastVisible(newColumns, newColumns.length);
         newColumns = setIn(
           newColumns,
@@ -211,7 +212,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
       setMappedColumns(newColumns);
       onChangeColumns(newColumns, gridPosition);
     },
-    [mappedColumns, onChangeColumns, width, gridPosition],
+    [mappedColumns, onChangeColumns, width, gridPosition, shouldFitLastColumn],
   );
 
 

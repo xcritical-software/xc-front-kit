@@ -47,6 +47,7 @@ export interface IGridProps {
   isScrollingOptOut?: boolean;
   overscanColumnCount?: number;
   overscanRowCount?: number;
+  shouldFitLastColumn?: boolean;
 }
 
 
@@ -71,6 +72,7 @@ export interface IMultiGrid {
   isScrollingOptOut?: boolean;
   overscanColumnCount?: number;
   overscanRowCount?: number;
+  shouldFitLastColumn: boolean;
 }
 
 interface IAllGridsProps {
@@ -111,6 +113,7 @@ export interface IInternalGrid {
   overscanRowCount?: number;
   shiftFirstColumn: boolean;
   onChangeSort: Function;
+  shouldFitLastColumn: boolean;
 }
 
 export interface IMappedItem extends IItem {
