@@ -92,7 +92,6 @@ const getButtonStatesStyle = (stateName: string) => ({
   ghost,
 }: IStyledButtonProps): FlattenInterpolation<any> => {
   const {
-    boxShadowColor,
     _outline,
     ...styles
   } = getAppearanceStyleProperty(
@@ -109,11 +108,6 @@ const getButtonStatesStyle = (stateName: string) => ({
     
     cursor: ${getCursor(stateName)};
     transition: ${getTransition(stateName)};
-
-    &:focus {
-      box-shadow: 0 0 0 2px ${boxShadowColor};
-      text-decoration: none;
-    }
   `;
 };
 
