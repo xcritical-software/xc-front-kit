@@ -1,6 +1,8 @@
 import React from 'react';
 import Input from '@xcritical/input';
+
 import { ISelectedFilterComponent } from '../../interfaces';
+import { ValidationError } from '../styled';
 
 
 export const FilterValueElement: React.FC<ISelectedFilterComponent> = React.memo(({
@@ -9,15 +11,20 @@ export const FilterValueElement: React.FC<ISelectedFilterComponent> = React.memo
     condition = '',
     value = '',
   } = {},
+  validationError,
   onChange,
 }) => (
   currentFilter?.Element
-    ? currentFilter.Element(value, onChange, condition)
+    ? currentFilter.Element(value, onChange, condition, validationError)
     : (
-      <Input
-        disabled={ !condition }
-        shouldFitContainer
-        onChange={ onChange }
-        value={ value || '' }
-      />
+      <>
+        <Input
+          shouldFitContainer
+          value={ value || '' }
+          disabled={ !condition }
+          invalid={ !!validationError }
+          onChange={ onChange }
+        />
+        { validationError && <ValidationError>{ validationError }</ValidationError> }
+      </>
     )));

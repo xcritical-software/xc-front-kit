@@ -11,10 +11,12 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
 import { ThemeProvider } from 'styled-components';
 import { IThemeNamespace, colors } from '@xcritical/theme';
 import { buttonThemeNamespace } from '@xcritical/button';
+import Select from '@xcritical/select/src';
 import { ButtonTheme } from '@xcritical/button/src/interfaces';
 import { darken } from 'polished';
 
 import { CompactFilterContainer, ExternalFilterContainer } from './pages';
+import { salesStatus, simpleData } from './data/simpleData';
 
 import {
   filterReducer,
@@ -126,6 +128,66 @@ storiesOf('Filter', module)
   .add('With Postfix', () => (
     <CompactFilter name="withPostfix" filters={ [] } postfix={ <div>Postfix</div> } />
   ))
+  .add('With Auto Select First Condition', () => (
+    <CompactFilter name="withAutoSelectFirstCondition" isAutoSelectFirstCondition filters={ simpleData } />
+  ))
+  .add('With Auto Open Added Tag', () => (
+    <CompactFilter name="withAutoOpenAddedTag" isAutoOpenAddedTag filters={ simpleData } />
+  ))
+  .add('With Custom Names', () => (
+    <CompactFilter
+      name="withCustomNames"
+      moreName="Add Field Name"
+      resetName="Reset Filters"
+      searchName="Start Search"
+      filters={ simpleData }
+    />
+  ))
+  .add('With Validation', () => {
+    const SelectWithValidation = (
+      value: any,
+      onChange: (value: any) => void,
+      condition?: string,
+      validationError?: string,
+    ) => (
+      <>
+        <Select
+          options={ salesStatus }
+          shouldFitContainer
+          onChange={ onChange }
+          value={ value }
+        />
+        { validationError && <div style={ { color: colors.DANGER } }>{ validationError }</div> }
+      </>
+    );
+
+    const filtersWithValidation = simpleData.map((filter) => {
+      const generalMap = {
+        ...filter,
+        validate: (conditions) => {
+          const validationErrors = {};
+
+          conditions.forEach((condition) => {
+            if (!condition.value) {
+              validationErrors[condition.key] = 'Filed is required';
+            }
+          });
+
+          return validationErrors;
+        },
+      };
+
+      if (filter.field === 'status') {
+        generalMap.Element = SelectWithValidation;
+      }
+
+      return generalMap;
+    });
+
+    return (
+      <CompactFilter name="withValidation" filters={ filtersWithValidation } />
+    );
+  })
   .add('External Filter', () => (
     <ExternalFilterContainer />
   ));

@@ -6,6 +6,10 @@ export const TagLabel = styled.label`
   display: inline-block;
 `;
 
+export const TagConditions = styled.div`
+  ${({ theme }) => theme.tagConditions}
+`;
+
 export const TagConditionsWrapper = styled.div`
   padding: 20px;
   position: relative;

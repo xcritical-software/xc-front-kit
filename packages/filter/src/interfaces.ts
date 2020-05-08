@@ -69,10 +69,12 @@ export interface IFilter {
   displayName: string;
   conditions: IConditions;
   isHidden?: boolean;
+  validate?: (conditions: IStateFilter[]) => Record<string, string>;
   Element?: (
     value: any,
     onChange: (value: any) => void,
-    condition?: string
+    condition?: string,
+    validationError?: string,
   ) => React.ReactElement;
 }
 
@@ -90,6 +92,7 @@ export interface ISelectedFilterComponent {
   filters?: IFilter[];
   currentFilter?: IFilter;
   filterData?: IStateFilter;
+  validationError?: string;
   onChange: (value: any) => void;
 }
 
@@ -124,12 +127,14 @@ export interface IMapDispatchFilterTag {
 
 export interface ITagProps extends ITagContainerProps, IMapDispatchFilterTag {
   disabled: boolean;
+  isAutoSelectFirstCondition: boolean;
+  isAutoOpenAddedTag: boolean;
 }
 
 export interface ITagConditionProps {
   currentFilterState: IStateFilter;
-  conditions: IConditions;
   filterSetting?: IFilter;
+  validationError?: string;
   onChangeFilter: (changes: IPayloadChangeFilter) => void;
   onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
 }
@@ -145,6 +150,11 @@ export interface IFilterProps {
   theme?: IThemeNamespace;
   isSearchable?: boolean;
   disabled?: boolean;
+  isAutoSelectFirstCondition?: boolean;
+  isAutoOpenAddedTag?: boolean;
+  moreName?: string;
+  resetName?: string;
+  searchName?: string;
   prefix?: React.ReactNode;
   postfix?: React.ReactNode;
 }
@@ -171,6 +181,7 @@ export interface IMoreButtonWithFilterSelectorProps {
   selectedFilters: IStateFilter[];
   filters: IFilter[];
   disabled: boolean;
+  isAutoOpenAddedTag: boolean;
   onChange: (value: IStateRecivedFilter[]) => void;
 }
 
@@ -184,6 +195,8 @@ export interface IFilterTheme extends ITheme {
   topPanelTags?: CSSProperties;
   topPanelButtons?: CSSProperties;
   postfix?: CSSProperties;
+  validationError?: CSSProperties;
+  tagConditions?: CSSProperties;
 }
 
 export type IThemeProp<T> = T;
