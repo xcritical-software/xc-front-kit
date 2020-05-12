@@ -76,3 +76,7 @@ export const DropdownContent = styled.div`
   position: absolute;
   z-index: 2;
 `;
+
+export const ValidationError = styled.div`
+  ${({ theme }) => theme.validationError}
+`;

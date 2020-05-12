@@ -97,18 +97,18 @@ const theme: IThemeNamespace<ButtonTheme> = {
         color: '#a7a7a7',
         background: '#575857',
         borderColor: 'transparent',
-        boxShadowColor: '#62AAFF',
+        boxShadow: '0 0 0 2px #62AAFF',
         hover: {
           color: '#a7a7a7',
           background: '#575857',
           borderColor: 'transparent',
-          boxShadowColor: '#62AAFF',
+          boxShadow: '0 0 0 2px #62AAFF',
         },
         active: {
           color: '#a7a7a7',
           background: '#575857',
           borderColor: 'transparent',
-          boxShadowColor: '#62AAFF',
+          boxShadow: '0 0 0 2px #62AAFF',
         },
         disabled: {
           color: '#a7a7a7',
@@ -125,24 +125,27 @@ const theme: IThemeNamespace<ButtonTheme> = {
         color: '#fff',
         background: 'linear-gradient(to top, #337e29, #66a436)',
         borderColor: 'transparent',
-        boxShadowColor: '#62AAFF',
+        boxShadow: '0 0 0 2px #62AAFF',
         // default: {
         //   color: '#fff',
         //   background: 'linear-gradient(to top, #337e29, #66a436)',
         //   borderColor: 'transparent',
-        //   boxShadowColor: '#62AAFF',
+        //   boxShadow: '0 0 0 2px #62AAFF',
         // },
         hover: {
           color: '#fff',
           background: 'linear-gradient(to top, #337e29, #66a436)',
           borderColor: 'transparent',
-          boxShadowColor: '#62AAFF',
+          boxShadow: '0 0 0 2px #62AAFF',
+        },
+        focus: {
+          boxShadow: '0 0 0 2px #62AAFF',
         },
         active: {
           color: '#fff',
           background: 'linear-gradient(to top, #337e29, #66a436)',
           borderColor: 'transparent',
-          boxShadowColor: '#62AAFF',
+          boxShadow: '0 0 0 2px #62AAFF',
         },
         disabled: {
           color: '#fff',

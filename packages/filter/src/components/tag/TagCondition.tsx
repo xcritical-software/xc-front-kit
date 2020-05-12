@@ -15,14 +15,13 @@ import { ITagConditionProps } from '../../interfaces';
 import { Remove } from '../icons';
 
 
-export const TagCondition: React.FC<ITagConditionProps> = (
-  {
-    currentFilterState,
-    filterSetting,
-    onChangeFilter,
-    onRemoveFilter,
-  },
-) => {
+export const TagCondition: React.FC<ITagConditionProps> = ({
+  currentFilterState,
+  filterSetting,
+  validationError,
+  onChangeFilter,
+  onRemoveFilter,
+}) => {
   const { key: guid, condition, column } = currentFilterState;
 
   const conditions = useMemo(() => (filterSetting
@@ -83,6 +82,7 @@ export const TagCondition: React.FC<ITagConditionProps> = (
                   onChange={ onChangeValue }
                   currentFilter={ filterSetting }
                   filterData={ currentFilterState }
+                  validationError={ validationError }
                 />
               </div>
             </DropdownItem>

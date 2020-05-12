@@ -26,6 +26,11 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
   searchInput,
   isSearchable = true,
   disabled = false,
+  isAutoSelectFirstCondition = false,
+  isAutoOpenAddedTag = false,
+  moreName = 'More',
+  resetName = 'Reset',
+  searchName = 'Search',
   name,
   theme,
   prefix,
@@ -80,6 +85,8 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
                   filterId={ filterId }
                   conditions={ mergedFilters[filterId] }
                   disabled={ disabled }
+                  isAutoSelectFirstCondition={ isAutoSelectFirstCondition }
+                  isAutoOpenAddedTag={ isAutoOpenAddedTag }
                   onApply={ onApply }
                 />
               )) }
@@ -90,9 +97,10 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
               filters={ filters }
               selectedFilters={ activeFilters }
               disabled={ disabled }
+              isAutoOpenAddedTag={ isAutoOpenAddedTag }
               onChange={ onChangeFilters }
             >
-            More
+              { moreName }
             </MoreFilterSelect>
 
             <Button
@@ -101,7 +109,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
               disabled={ disabled }
               onClick={ onResetFilters }
             >
-            Reset
+              { resetName }
             </Button>
 
             <Button
@@ -110,7 +118,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
               disabled={ disabled }
               onClick={ onApply }
             >
-            Search
+              { searchName }
             </Button>
           </TopPanelButtons>
 
