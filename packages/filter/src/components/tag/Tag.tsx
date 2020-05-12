@@ -2,6 +2,7 @@ import React, {
   useState,
   useCallback,
   useMemo,
+  useEffect,
   MouseEvent,
 } from 'react';
 
@@ -51,6 +52,16 @@ export const Tag: React.FC<ITagProps> = ({
   );
 
 
+  const selectFirstCondition = useCallback(() => {
+    if (conditions.length === 1 && !conditions[0].condition) {
+      onChangeFilter({
+        field: 'condition',
+        value: Object.keys(filterSetting.conditions)[0],
+        guid: conditions[0].key,
+      });
+    }
+  }, [conditions, filterSetting.conditions, onChangeFilter]);
+
   const validateConditions = useCallback((filterConditions: IStateFilter[]): boolean => {
     if (filterSetting.validate) {
       const conditionsForValidation = filterConditions.filter(({ condition }) => (
@@ -70,17 +81,11 @@ export const Tag: React.FC<ITagProps> = ({
 
   const onOpenDropdown = useCallback(() => {
     if (isAutoSelectFirstCondition) {
-      if (conditions.length === 1 && !conditions[0].condition) {
-        onChangeFilter({
-          field: 'condition',
-          value: Object.keys(filterSetting.conditions)[0],
-          guid: conditions[0].key,
-        });
-      }
+      selectFirstCondition();
     }
 
     setIsOpen(true);
-  }, [isAutoSelectFirstCondition, conditions, filterSetting.conditions, onChangeFilter]);
+  }, [isAutoSelectFirstCondition, selectFirstCondition]);
 
   const onCloseDropdown = useCallback(() => {
     const isValidConditions = validateConditions(conditions);
@@ -121,6 +126,14 @@ export const Tag: React.FC<ITagProps> = ({
   const onTagAddCondition = useCallback(() => {
     onAddCondition(filterId);
   }, [filterId, onAddCondition]);
+
+
+  useEffect(() => {
+    if (isAutoOpenAddedTag && isAutoSelectFirstCondition) {
+      selectFirstCondition();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
   return (
