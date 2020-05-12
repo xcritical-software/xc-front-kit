@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/filter",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "XCritical Filter Component",
 	"main": "src/index.ts",
 	"scripts": {
@@ -38,7 +38,7 @@
 		"redux": "^4.0.5"
 	},
 	"dependencies": {
-		"@xcritical/button": "^2.0.0",
+		"@xcritical/button": "^2.0.2",
 		"@xcritical/input": "^1.0.0",
 		"@xcritical/select": "^1.0.2",
 		"@xcritical/theme": "^1.0.0",
