@@ -30,9 +30,11 @@ const selectStyles = {
 };
 
 export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
+  children,
   filters,
   selectedFilters,
   disabled,
+  isAutoOpenAddedTag,
   onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,8 +71,8 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
     setIsOpen(!isOpen);
   }, [isOpen]);
 
-  const onSelectChange = useCallback((value: OptionTypeBase[]) => {
-    const selected = value.map<IStateRecivedFilter>((item) => ({
+  const onSelectChange = useCallback((values: OptionTypeBase[]) => {
+    const selected = values.map<IStateRecivedFilter>((item) => ({
       column: item.value as string,
       condition: '',
       value: '',
@@ -83,7 +85,11 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
     }));
 
     onChange([...selected, ...mappedHiddenedFilters]);
-  }, [hiddenedFilters, onChange]);
+
+    if (isAutoOpenAddedTag && values.length > selectedValueItems.length) {
+      setIsOpen(false);
+    }
+  }, [hiddenedFilters, onChange, isAutoOpenAddedTag, selectedValueItems]);
 
   return (
     <Dropdown
@@ -99,7 +105,7 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
           prefix={ <Plus /> }
           onClick={ toggleOpen }
         >
-          More
+          { children }
         </Button>
       ) }
     >

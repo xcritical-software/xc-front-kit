@@ -5,13 +5,26 @@ import React, {
   MouseEvent,
 } from 'react';
 
+import isEmpty from 'lodash.isempty';
 import Button from '@xcritical/button';
 
-import { ITagProps, IFilter } from '../../interfaces';
+import {
+  ITagProps,
+  IFilter,
+  IStateFilter,
+  IPayloadChangeFilter,
+} from '../../interfaces';
+
 import { Dropdown } from '../Dropdown';
 import { ChevronDown, ChevronUp, Remove } from '../icons';
-import { DropdownFooter, ButtonBlock, RemoveButton } from './styled';
-import { TagCondition } from './TagConditions';
+import { TagCondition } from './TagCondition';
+
+import {
+  TagConditions,
+  DropdownFooter,
+  ButtonBlock,
+  RemoveButton,
+} from './styled';
 
 
 export const Tag: React.FC<ITagProps> = ({
@@ -19,26 +32,83 @@ export const Tag: React.FC<ITagProps> = ({
   conditions,
   filters,
   disabled,
+  isAutoSelectFirstCondition,
+  isAutoOpenAddedTag,
   onChangeFilter,
   onRemoveFilter,
   onAddCondition,
   onApply,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
+  const [isOpen, setIsOpen] = useState(() => {
+    const isAdded = conditions.length === 1 && !conditions[0].condition;
+    return isAutoOpenAddedTag && isAdded;
+  });
+
   const filterSetting = useMemo(
     () => filters.find((f) => f.field === filterId) as IFilter,
     [filterId, filters],
   );
 
 
-  const toggleOpen = useCallback(() => {
-    setIsOpen(!isOpen);
-  }, [isOpen]);
+  const validateConditions = useCallback((filterConditions: IStateFilter[]): boolean => {
+    if (filterSetting.validate) {
+      const conditionsForValidation = filterConditions.filter(({ condition }) => (
+        condition && filterSetting.conditions[condition]?.hasValue
+      ));
+      const filterValidationErrors = filterSetting.validate(conditionsForValidation);
+
+      setValidationErrors(filterValidationErrors);
+
+      if (!isEmpty(filterValidationErrors)) {
+        return false;
+      }
+    }
+
+    return true;
+  }, [filterSetting]);
+
+  const onOpenDropdown = useCallback(() => {
+    if (isAutoSelectFirstCondition) {
+      if (conditions.length === 1 && !conditions[0].condition) {
+        onChangeFilter({
+          field: 'condition',
+          value: Object.keys(filterSetting.conditions)[0],
+          guid: conditions[0].key,
+        });
+      }
+    }
+
+    setIsOpen(true);
+  }, [isAutoSelectFirstCondition, conditions, filterSetting.conditions, onChangeFilter]);
+
+  const onCloseDropdown = useCallback(() => {
+    const isValidConditions = validateConditions(conditions);
+
+    if (isValidConditions) {
+      setIsOpen(false);
+    }
+  }, [conditions, validateConditions]);
+
+  const onChangeTagCondition = useCallback((changes: IPayloadChangeFilter) => {
+    if (filterSetting.validate) {
+      const newValidationErrors = { ...validationErrors };
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete newValidationErrors[changes.guid];
+      setValidationErrors(newValidationErrors);
+    }
+
+    onChangeFilter(changes);
+  }, [filterSetting.validate, onChangeFilter, validationErrors]);
 
   const onTagApply = useCallback(() => {
-    setIsOpen(!isOpen);
-    onApply();
-  }, [isOpen, onApply]);
+    const isValidConditions = validateConditions(conditions);
+
+    if (isValidConditions) {
+      setIsOpen(!isOpen);
+      onApply();
+    }
+  }, [conditions, validateConditions, isOpen, onApply]);
 
   const onTagRemove = useCallback((e: MouseEvent<any>) => {
     e.stopPropagation();
@@ -56,7 +126,7 @@ export const Tag: React.FC<ITagProps> = ({
   return (
     <Dropdown
       isOpen={ isOpen }
-      onClose={ toggleOpen }
+      onClose={ onCloseDropdown }
       target={ (
         <Button
           postfix={ (
@@ -70,54 +140,54 @@ export const Tag: React.FC<ITagProps> = ({
           appearance="filter-tag"
           selected={ isOpen }
           disabled={ disabled }
-          onClick={ toggleOpen }
+          onClick={ onOpenDropdown }
         >
           { `${filterSetting.displayName}` }
         </Button>
       ) }
     >
+      <TagConditions>
+        {
+          conditions.map((condition) => (
+            <TagCondition
+              key={ condition.key }
+              currentFilterState={ condition }
+              filterSetting={ filterSetting }
+              validationError={ validationErrors[condition.key] }
+              onChangeFilter={ onChangeTagCondition }
+              onRemoveFilter={ onRemoveFilter }
+            />
+          ))
+        }
 
-      {
-        conditions.map((condition) => (
-          <TagCondition
-            key={ condition.key }
-            conditions={ filterSetting.conditions }
-            onRemoveFilter={ onRemoveFilter }
-            currentFilterState={ condition }
-            filterSetting={ filterSetting }
-            onChangeFilter={ onChangeFilter }
-          />
-        ))
-      }
+        <DropdownFooter>
+          <ButtonBlock position="left">
+            <Button
+              appearance="filter-tag-add-condition"
+              onClick={ onTagAddCondition }
+            >
+              Add condition
+            </Button>
+          </ButtonBlock>
+          <ButtonBlock>
+            <Button
+              appearance="filter-tag-remove"
+              baseAppearance="link"
+              onClick={ onTagRemove }
+            >
+              Remove
+            </Button>
 
-      <DropdownFooter>
-        <ButtonBlock position="left">
-          <Button
-            appearance="filter-tag-add-condition"
-            onClick={ onTagAddCondition }
-          >
-          Add condition
-          </Button>
-        </ButtonBlock>
-        <ButtonBlock>
-          <Button
-            appearance="filter-tag-remove"
-            baseAppearance="link"
-            onClick={ onTagRemove }
-          >
-            Remove
-          </Button>
-
-          <Button
-            appearance="filter-tag-apply"
-            baseAppearance="primary"
-            onClick={ onTagApply }
-          >
-            Apply
-          </Button>
-        </ButtonBlock>
-
-      </DropdownFooter>
+            <Button
+              appearance="filter-tag-apply"
+              baseAppearance="primary"
+              onClick={ onTagApply }
+            >
+              Apply
+            </Button>
+          </ButtonBlock>
+        </DropdownFooter>
+      </TagConditions>
     </Dropdown>
   );
 };
