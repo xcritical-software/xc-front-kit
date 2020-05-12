@@ -134,6 +134,14 @@ storiesOf('Filter', module)
   .add('With Auto Open Added Tag', () => (
     <CompactFilter name="withAutoOpenAddedTag" isAutoOpenAddedTag filters={ simpleData } />
   ))
+  .add('With Auto Open Added Tag And Select First Condition', () => (
+    <CompactFilter
+      isAutoOpenAddedTag
+      isAutoSelectFirstCondition
+      name="withAutoOpenAddedTagAndSelectFirstCondition"
+      filters={ simpleData }
+    />
+  ))
   .add('With Custom Names', () => (
     <CompactFilter
       name="withCustomNames"
