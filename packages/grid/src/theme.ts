@@ -19,6 +19,7 @@ export const defaultTheme: IGridTheme = {
   movingHeaderCellBackgroungColor: colors.SECONDARY,
   movingHeaderCellColor: colors.WHITE,
   expandButtonMargin: '7px',
+  hoveredBackgroundColor: 'rgba(0,0,0,0.1)',
   header: {
     border: `1px solid ${colors.GRAY}`,
     fontSize: '16px',

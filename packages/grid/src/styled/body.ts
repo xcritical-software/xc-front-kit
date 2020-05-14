@@ -119,7 +119,84 @@ export const Body = styled.div<any>`
 export const BodyCell = styled.div<any>`
   display: flex;
   align-items: center;
-  ${getBodyCellStyles}
+  ${getBodyCellStyles};
+
+
+  ${({ hoverable }) => hoverable && css`
+    :hover {
+    ::before {
+      content: '';
+      position: absolute;
+      height: 0px;
+      width: 6000px;
+      left: -3000px;
+      z-index: 1;
+      box-shadow: ${({
+    height,
+    theme: { hoveredBackgroundColor },
+  }: any) => `0px 0px 0px ${height / 2}px ${hoveredBackgroundColor}`}; 
+    }
+    ::after {
+      content: '';
+      position: absolute;
+      width: 0px;
+      transform: ${({ width }: any) => `translateX(${width / 2}px);`};
+      height: 6000px;
+      top: -3000px;
+      z-index: 1;
+      box-shadow: ${({
+    width,
+    theme: { hoveredBackgroundColor },
+  }: any) => `0px 0px 0px ${width / 2}px ${hoveredBackgroundColor}`}; 
+    }
+  }
+    `}
+  
+
+  ${({ hoveredRow }) => hoveredRow && css`
+  ::before {
+      content: '';
+      position: absolute;
+      height: 0px;
+      width: 6000px;
+      left: -3000px;
+      z-index: 1;
+      box-shadow: ${({
+    height,
+    theme: { hoveredBackgroundColor },
+  }: any) => `0px 0px 0px ${height / 2}px ${hoveredBackgroundColor}`}; 
+    }
+  `}
+
+  /* ${({ beforer }) => beforer && css`
+    ::before {
+      content: '';
+      position: absolute;
+      height: 0px;
+      width: 6000px;
+      left: -3000px;
+      z-index: 1;
+      box-shadow: ${({
+    height,
+    theme: { hoveredBackgroundColor },
+  }: any) => `0px 0px 0px ${height / 2}px ${hoveredBackgroundColor}`}; 
+    }
+    ::after {
+      content: '';
+      position: absolute;
+      width: 0px;
+      transform: ${({ width }: any) => `translateX(${width / 2}px);`};
+      height: 6000px;
+      top: -3000px;
+      z-index: 1;
+      box-shadow: ${({
+    width,
+    theme: { hoveredBackgroundColor },
+  }: any) => `0px 0px 0px ${width / 2}px ${hoveredBackgroundColor}`}; 
+    }
+  `} */
+
+
   span {
     display: inline-block;
     font-weight: 400;
