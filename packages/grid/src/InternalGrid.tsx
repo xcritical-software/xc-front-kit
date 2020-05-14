@@ -165,8 +165,6 @@ const InternalGrid: React.FC<IInternalGrid> = ({
           hoverable={ gridPosition === GridPositions.CENTER }
           onMouseOut={ () => {} }
           onBlur={ () => undefined }
-
-          // beforer={rowIndex === 4 && columnIndex === 3}
         >
           <BodyCellOffset
             center={ !!column.center }
