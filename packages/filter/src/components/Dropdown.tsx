@@ -1,30 +1,39 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Popover, popoverThemeNamespace } from '@xcritical/popover';
 
-import { Blanket, DropdownContent } from './styled';
-
-
-export const DropdownRoot = styled.div`
-  position: relative;
-  padding-right: 10px; 
-  padding-bottom: 10px;
-`;
+import { DropdownRoot, Blanket } from './styled';
 
 
 export const Dropdown = ({
+  target,
   children,
   isOpen,
-  target,
+  filterTheme,
   onClose,
-}: any) => (
-  <DropdownRoot>
-    { target }
-    { isOpen
-      ? (
-        <>
-          <DropdownContent>{ children }</DropdownContent>
-          <Blanket onClick={ onClose } />
-        </>
-      ) : null }
-  </DropdownRoot>
-);
+}: any) => {
+  const popoverTheme = {
+    [popoverThemeNamespace]: {
+      appearance: {
+        default: filterTheme.popover,
+      },
+    },
+  };
+
+  const blanketZIndex = filterTheme.dropdownBlanketZIndex;
+
+  return (
+    <DropdownRoot>
+      <Popover
+        preventOverflowViewport
+        visible={ isOpen }
+        content={ children }
+        withArrow={ false }
+        theme={ popoverTheme }
+        position="bottom left"
+      >
+        { target }
+      </Popover>
+      { isOpen && <Blanket zIndex={ blanketZIndex } onClick={ onClose } /> }
+    </DropdownRoot>
+  );
+};

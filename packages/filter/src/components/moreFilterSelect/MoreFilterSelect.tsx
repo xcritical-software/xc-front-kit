@@ -35,6 +35,7 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
   selectedFilters,
   disabled,
   isAutoOpenAddedTag,
+  filterTheme,
   onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -95,6 +96,7 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
     <Dropdown
       isOpen={ isOpen }
       onClose={ toggleOpen }
+      filterTheme={ filterTheme }
       target={ (
         <Button
           appearance="filters-more"
@@ -111,6 +113,7 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
     >
       <Select
         autoFocus
+        appearance="filters-more"
         backspaceRemovesValue={ false }
         components={ { DropdownIndicator, IndicatorSeparator: null } }
         controlShouldRenderValue={ false }
