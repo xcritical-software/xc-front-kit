@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { IBlanketProps } from '../../interfaces';
+
 
 export const RootPanel = styled.div`
   display: flex;
@@ -59,22 +61,19 @@ export const Postfix = styled.div`
   ${({ theme }) => theme.postfix}
 `;
 
-export const Blanket = styled.div`
+export const DropdownRoot = styled.div`
+  position: relative;
+  padding-right: 10px; 
+  padding-bottom: 10px;
+`;
+
+export const Blanket = styled.div<IBlanketProps>`
   bottom: 0;
   left: 0;
   top: 0;
   right: 0;
   position: fixed;
-  z-index: 1;
-`;
-
-export const DropdownContent = styled.div`
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 0 0 1px hsla(218, 50%, 10%, 0.1), 0 4px 11px hsla(218, 50%, 10%, 0.1);
-  margin-top: 8px;
-  position: absolute;
-  z-index: 2;
+  z-index: ${({ zIndex }) => zIndex};
 `;
 
 export const ValidationError = styled.div`

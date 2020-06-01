@@ -98,7 +98,6 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         paddingRight: 0,
         paddingTop: 0,
         lineHeight: 1.69,
-        height: 21,
         hover: {
           background: 'transparent',
         },

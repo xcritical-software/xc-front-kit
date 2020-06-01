@@ -29,6 +29,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   placeholder,
   theme,
   components,
+  styles,
   onChange,
   ...rest
 }) => {
@@ -44,7 +45,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
     isRTL,
   ), [appearance, baseAppearance, innerTheme, isRTL]);
 
-  const styles = useRef(themeConverter(
+  const selectStyles = useRef(themeConverter(
     innerTheme,
     appearance,
     baseAppearance,
@@ -52,7 +53,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   ));
 
   useEffect(() => {
-    styles.current = themeConverter(
+    selectStyles.current = themeConverter(
       innerTheme,
       appearance,
       baseAppearance,
@@ -67,7 +68,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
       className={ className }
       classNamePrefix={ className }
       formatOptionLabel={ formatOptionLabel }
-      styles={ styles.current }
+      styles={ { ...selectStyles.current, ...styles } }
       isDisabled={ disabled }
       isMulti={ isMulti }
       isSearchable={ isSearchable }

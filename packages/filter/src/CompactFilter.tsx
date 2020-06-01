@@ -85,6 +85,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
                   filterId={ filterId }
                   conditions={ mergedFilters[filterId] }
                   disabled={ disabled }
+                  filterTheme={ filterTheme }
                   isAutoSelectFirstCondition={ isAutoSelectFirstCondition }
                   isAutoOpenAddedTag={ isAutoOpenAddedTag }
                   onApply={ onApply }
@@ -98,6 +99,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
               selectedFilters={ activeFilters }
               disabled={ disabled }
               isAutoOpenAddedTag={ isAutoOpenAddedTag }
+              filterTheme={ filterTheme }
               onChange={ onChangeFilters }
             >
               { moreName }
