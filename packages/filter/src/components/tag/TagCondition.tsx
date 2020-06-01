@@ -26,12 +26,9 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
 }) => {
   const { key: guid, condition, column } = currentFilterState;
 
-  const tagConditionSelectStyles = {
-    menuPortal: (css) => ({
-      ...css,
-      zIndex: filterTheme.tagConditionSelectZIndex,
-    }),
-  };
+  const tagConditionSelectStyles = useMemo(() => ({
+    menuPortal: (css) => ({ ...css, zIndex: filterTheme.tagConditionSelectZIndex }),
+  }), [filterTheme.tagConditionSelectZIndex]);
 
   const conditions = useMemo(() => (filterSetting
     ? Object.keys(filterSetting.conditions).map((key) => ({

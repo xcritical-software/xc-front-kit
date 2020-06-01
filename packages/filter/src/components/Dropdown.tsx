@@ -1,23 +1,25 @@
-import React from 'react';
-import { Popover, popoverThemeNamespace } from '@xcritical/popover';
+import React, { useMemo } from 'react';
+import { IThemeNamespace } from '@xcritical/theme';
+import { Popover, popoverThemeNamespace, IPopoverTheme } from '@xcritical/popover';
 
+import { IDropdownProps } from '../interfaces';
 import { DropdownRoot, Blanket } from './styled';
 
 
-export const Dropdown = ({
+export const Dropdown: React.FC<IDropdownProps> = ({
   target,
   children,
   isOpen,
   filterTheme,
   onClose,
-}: any) => {
-  const popoverTheme = {
+}) => {
+  const popoverTheme: IThemeNamespace<IPopoverTheme> = useMemo(() => ({
     [popoverThemeNamespace]: {
       appearance: {
-        default: filterTheme.popover,
+        default: filterTheme.popover || {},
       },
     },
-  };
+  }), [filterTheme.popover]);
 
   const blanketZIndex = filterTheme.dropdownBlanketZIndex;
 

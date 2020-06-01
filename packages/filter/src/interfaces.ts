@@ -190,8 +190,16 @@ export interface IMoreButtonWithFilterSelectorProps {
   onChange: (value: IStateRecivedFilter[]) => void;
 }
 
+export interface IDropdownProps {
+  target: React.ReactNode;
+  children: React.ReactNode;
+  isOpen: boolean;
+  filterTheme: IFilterTheme;
+  onClose: () => void;
+}
+
 export interface IBlanketProps {
-  zIndex: number;
+  zIndex?: number;
 }
 
 // Theme interfaces
