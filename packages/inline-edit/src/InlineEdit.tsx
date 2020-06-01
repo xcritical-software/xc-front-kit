@@ -12,7 +12,7 @@ interface IInlineEditState {
   isEditing?: boolean;
 }
 
-const getPureInlineEdit: <TFieldValue = string>() => FC<
+const getPureInlineEdit: <TFieldValue>() => FC<
 IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
   return ({
     startWithEditViewOpen = false,
