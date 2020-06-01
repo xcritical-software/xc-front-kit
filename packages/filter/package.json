@@ -40,6 +40,7 @@
 	"dependencies": {
 		"@xcritical/button": "^2.0.2",
 		"@xcritical/input": "^1.0.0",
+		"@xcritical/popover": "^2.0.1",
 		"@xcritical/select": "^1.0.2",
 		"@xcritical/theme": "^1.0.0",
 		"lodash.get": "4.x",

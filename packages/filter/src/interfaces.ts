@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { MutableRefObject } from 'react';
 import { IThemeNamespace, ITheme } from '@xcritical/theme';
+import { IPopoverTheme } from '@xcritical/popover';
 import { CSSProperties } from 'styled-components';
 
 import {
@@ -126,15 +127,18 @@ export interface IMapDispatchFilterTag {
 
 
 export interface ITagProps extends ITagContainerProps, IMapDispatchFilterTag {
+  filterTheme: IFilterTheme;
   disabled: boolean;
   isAutoSelectFirstCondition: boolean;
   isAutoOpenAddedTag: boolean;
 }
 
 export interface ITagConditionProps {
+  tagConditionsRef: MutableRefObject<null>;
   currentFilterState: IStateFilter;
   filterSetting?: IFilter;
   validationError?: string;
+  filterTheme: IFilterTheme;
   onChangeFilter: (changes: IPayloadChangeFilter) => void;
   onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
 }
@@ -182,7 +186,20 @@ export interface IMoreButtonWithFilterSelectorProps {
   filters: IFilter[];
   disabled: boolean;
   isAutoOpenAddedTag: boolean;
+  filterTheme: IFilterTheme;
   onChange: (value: IStateRecivedFilter[]) => void;
+}
+
+export interface IDropdownProps {
+  target: React.ReactNode;
+  children: React.ReactNode;
+  isOpen: boolean;
+  filterTheme: IFilterTheme;
+  onClose: () => void;
+}
+
+export interface IBlanketProps {
+  zIndex?: number;
 }
 
 // Theme interfaces
@@ -197,6 +214,9 @@ export interface IFilterTheme extends ITheme {
   postfix?: CSSProperties;
   validationError?: CSSProperties;
   tagConditions?: CSSProperties;
+  tagConditionSelectZIndex?: number;
+  dropdownBlanketZIndex?: number;
+  popover?: IPopoverTheme;
 }
 
 export type IThemeProp<T> = T;

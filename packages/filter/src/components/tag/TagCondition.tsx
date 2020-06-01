@@ -16,13 +16,19 @@ import { Remove } from '../icons';
 
 
 export const TagCondition: React.FC<ITagConditionProps> = ({
+  tagConditionsRef,
   currentFilterState,
   filterSetting,
   validationError,
+  filterTheme,
   onChangeFilter,
   onRemoveFilter,
 }) => {
   const { key: guid, condition, column } = currentFilterState;
+
+  const tagConditionSelectStyles = useMemo(() => ({
+    menuPortal: (css) => ({ ...css, zIndex: filterTheme.tagConditionSelectZIndex }),
+  }), [filterTheme.tagConditionSelectZIndex]);
 
   const conditions = useMemo(() => (filterSetting
     ? Object.keys(filterSetting.conditions).map((key) => ({
@@ -66,6 +72,10 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
         <TagLabel>Conditions</TagLabel>
         <Select
           shouldFitContainer
+          appearance="filters-tag-condition"
+          menuPortalTarget={ document.body }
+          styles={ tagConditionSelectStyles }
+          closeMenuOnScroll={ (event: Event) => event.target === tagConditionsRef.current }
           onChange={ onChangeCondition }
           options={ conditions }
           disabled={ !column }
