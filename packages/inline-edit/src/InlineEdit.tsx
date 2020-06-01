@@ -40,7 +40,7 @@ IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
       }
     }, [isEditing, editViewRef]);
 
-    const handleConfirm = useCallback((value: string): void => {
+    const handleConfirm = useCallback((value: TFieldValue): void => {
       setIsEditing(false);
       onConfirm(value);
       defaultValueRef.current = value;

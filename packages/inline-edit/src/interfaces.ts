@@ -39,14 +39,14 @@ export interface IInlineEditUncontrolledProps<TFieldValue> extends ICommonProps 
   /** Whether the component shows the readView or the editView. */
   isEditing: boolean;
   /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
-  defaultValue: AllType;
+  defaultValue: TFieldValue;
   /** Handler called when readView is clicked. */
   onEditRequested: () => void;
   /**
    * Handler called editView is closed and changes are confirmed.
    * Field value is passed as an argument to this function.
    */
-  onConfirm: (value: AllType) => void;
+  onConfirm: (value: TFieldValue) => void;
   /** Handler called when checkmark is. */
   onCancel?: () => void;
 }
@@ -60,10 +60,10 @@ export interface IInlineEditProps<TFieldValue> extends ICommonProps {
    * Handler called editView is closed and changes are confirmed.
    * Field value is passed as an argument to this function.
    */
-  onConfirm: (value: AllType) => void;
-  onCancel?: (defaultValue?: AllType) => void;
+  onConfirm: (value: TFieldValue) => void;
+  onCancel?: (defaultValue?: TFieldValue) => void;
   /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
-  defaultValue: AllType;
+  defaultValue: TFieldValue;
   /** Determines whether isEditing begins as true. */
   startWithEditViewOpen?: boolean;
 }
