@@ -2,13 +2,19 @@
 	"name": "@xcritical/popper",
 	"version": "1.0.2",
 	"description": "",
-	"main": "src/index.ts",
+	"main": "dist/index.js",
+	"module": "dist/popper.esm.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"test": "exit 0",
 		"lint": "eslint --ext .js --ext .jsx src",
 		"lint:teamcity": "npm run lint -- --format ./node_modules/eslint-teamcity/index.js",
 		"lint:fix": "eslint --ext .js --ext .jsx src stories --fix",
-		"compile": "gulp --cwd . compile",
+		"compile": "tsdx build --format cjs,esm --verbose",
+		"compile:storybook": "tsdx build --format esm --verbose",
 		"build": "npm run clean && npm run compile",
 		"deploy": "cd .publish && npm publish",
 		"check": "npm run lint && npm run test",

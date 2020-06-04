@@ -9,5 +9,5 @@ export const Root = styled.div<IBlanketProps>`
 
   opacity: ${({ theme, isTinted }: IBlanketProps) => (isTinted ? getBlanketThemeStylesByProperty({ theme })(['opacity']) : 0)};
   pointer-events: ${({ canClickThrough }: IBlanketProps) => (canClickThrough ? 'none' : 'initial')};
-  z-index: ${({ theme, zIndex }) => (zIndex || blanketTheme(theme, ['zIndex']))};
+  z-index: ${({ theme, zIndex }) => (zIndex ?? blanketTheme(theme, ['zIndex']))};
 `;

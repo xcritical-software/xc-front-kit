@@ -39,7 +39,7 @@ import './reset.css';
 const list: any = (n: number) => (
   <div>
     <ul style={ { listStyleType: 'none' } }>
-      { new Array(n).fill(true).map((el, i) => `This is list item number ${i}`).map((el) => (
+      { new Array(n).fill(true).map((_el, i) => `This is list item number ${i}`).map((el) => (
         <li
           key={ el }
           style={ { padding: '10px 10px 10px 10px' } }

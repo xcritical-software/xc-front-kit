@@ -18,7 +18,7 @@ export const maxZIndexManager = (): IMaxZIndexManager => {
   const Provider: FC = ({
     children,
   }) => {
-    const maxZIndex = useMemo(() => getMaxZIndex() || 1, []);
+    const maxZIndex = useMemo(() => getMaxZIndex() ?? 1, []);
 
     return (
       <MaxZIndexContext.Provider value={ maxZIndex }>

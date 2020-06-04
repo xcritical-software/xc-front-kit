@@ -45,7 +45,7 @@ export const usePortal = (id: string, zIndex: number | string = 0) => {
     // Look for existing target dom element to append to
     const existingParent: Maybe<HTMLElement> = document.querySelector(`#${id}`);
     // Parent is either a new root or the existing dom element
-    const parentElem: HTMLElement = existingParent || createRootElement(id, zIndex);
+    const parentElem: HTMLElement = existingParent ?? createRootElement(id, zIndex);
 
     // If there is no existing DOM element, add a new one.
     if (!existingParent) {

@@ -134,7 +134,7 @@ storiesOf('ConnectedModal', module)
     <Provider store={ store }>
       <ThemeProvider theme={ emptyTheme }>
         <StyledButton onClick={ () => store.dispatch(xcriticalModalOpen('defaultModal')) }>
-            Open Default Modal
+          Open Default Modal
         </StyledButton>
 
         <ConnectedModal title="Default Modal" name="defaultModal">

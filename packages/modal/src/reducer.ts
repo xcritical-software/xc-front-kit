@@ -2,11 +2,13 @@ import { XCRITICAL_MODAL_OPEN, XCRITICAL_MODAL_CLOSE } from './consts';
 import { IModalStore, ModalActions } from './interfaces';
 
 
-export const modalReducer = (state: IModalStore = {}, action: ModalActions): IModalStore => {
+export const modalReducer = (
+  state: IModalStore = {},
+  action: ModalActions,
+): IModalStore => {
   switch (action.type) {
     case XCRITICAL_MODAL_OPEN: {
-      const { name } = action.meta;
-
+      const { meta: { name } } = action;
       return {
         ...state,
         [name]: {
@@ -16,8 +18,7 @@ export const modalReducer = (state: IModalStore = {}, action: ModalActions): IMo
       };
     }
     case XCRITICAL_MODAL_CLOSE: {
-      const { name } = action.meta;
-
+      const { meta: { name } } = action;
       if (state[name]) {
         const newState = { ...state };
         // eslint-disable-next-line @typescript-eslint/no-dynamic-delete

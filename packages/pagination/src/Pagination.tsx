@@ -84,6 +84,7 @@ const PurePagination: React.FC<IPagination> = ({
     availableVisibleRange,
     availableVisibleRangeCenter,
   );
+  // eslint-disable-next-line prefer-destructuring
   const visibleCenterPage = visiblePagesArray[availableVisibleRangeCenter - 1];
 
   const showPrevious = isAvailableVisibleRange

@@ -24,20 +24,20 @@ export const generateApperance = ({
   background,
   color,
   fill: color,
-  boxShadowColor: boxShadowColor || darken(0.1, background),
+  boxShadowColor: boxShadowColor ?? darken(0.1, background),
   ...fontWeight && { fontWeight },
   _outline,
   borderColor: borderColor || background,
   hover: {
     background: darken(0.1, background),
     color,
-    boxShadowColor: boxShadowColor || darken(0.1, background),
+    boxShadowColor: boxShadowColor ?? darken(0.1, background),
     ...fontWeight && { fontWeight },
   },
   selected: {
     background: darken(0.1, background),
     color,
-    boxShadowColor: boxShadowColor || darken(0.1, background),
+    boxShadowColor: boxShadowColor ?? darken(0.1, background),
     ...fontWeight && { fontWeight },
 
     _outline,
@@ -46,7 +46,7 @@ export const generateApperance = ({
   active: {
     background: darken(0.1, background),
     color,
-    boxShadowColor: boxShadowColor || darken(0.1, background),
+    boxShadowColor: boxShadowColor ?? darken(0.1, background),
     ...fontWeight && { fontWeight },
 
     _outline,
@@ -55,7 +55,7 @@ export const generateApperance = ({
   disabled: {
     background,
     color,
-    boxShadowColor: boxShadowColor || darken(0.1, background),
+    boxShadowColor: boxShadowColor ?? darken(0.1, background),
     ...fontWeight && { fontWeight },
 
     _outline,

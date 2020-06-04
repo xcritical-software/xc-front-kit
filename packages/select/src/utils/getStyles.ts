@@ -133,17 +133,13 @@ export const getBorderRadiusStyles: GetStyles = memoizee((
       const bottomLeft = isBorderRadiusObject ? borderRadius.bottomLeft : borderRadius;
 
       return {
-        borderTopLeftRadius: (element && element.borderRadius
-          && element.borderRadius.topLeft !== undefined)
+        borderTopLeftRadius: (element?.borderRadius?.topLeft !== undefined)
           ? element.borderRadius.topLeft : topLeft,
-        borderTopRightRadius: (element && element.borderRadius
-          && element.borderRadius.topRight !== undefined)
+        borderTopRightRadius: (element?.borderRadius?.topRight !== undefined)
           ? element.borderRadius.topRight : topRight,
-        borderBottomRightRadius: (element && element.borderRadius
-          && element.borderRadius.bottomRight !== undefined)
+        borderBottomRightRadius: (element?.borderRadius?.bottomRight !== undefined)
           ? element.borderRadius.bottomRight : bottomRight,
-        borderBottomLeftRadius: (element && element.borderRadius
-          && element.borderRadius.bottomLeft !== undefined)
+        borderBottomLeftRadius: (element?.borderRadius?.bottomLeft !== undefined)
           ? element.borderRadius.bottomLeft : bottomLeft,
       };
     }
@@ -171,7 +167,7 @@ export const getBackgroundStyles: GetStyles = memoizee((
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
 
     return {
-      background: (element && element.background) || background,
+      background: (element?.background) || background,
     };
   });
 });
@@ -232,10 +228,10 @@ export const getStatesStyles: GetStyles = memoizee((
     let elementStyles = {
       ...(isSearchable && element.searchable),
       ':hover': {
-        ...((element && element.hover) || hoverStyles),
+        ...((element?.hover) || hoverStyles),
       },
       ':active': {
-        ...((element && element.active) || activeStyles),
+        ...((element?.active) || activeStyles),
       },
 
     };
@@ -243,21 +239,21 @@ export const getStatesStyles: GetStyles = memoizee((
     if (isDisabled) {
       elementStyles = {
         ...elementStyles,
-        ...((element && element.disabled) || disabledStyles),
+        ...((element?.disabled) || disabledStyles),
       };
     }
 
     if (isFocused) {
       elementStyles = {
         ...elementStyles,
-        ...((element && element.focus) || focusStyles),
+        ...((element?.focus) || focusStyles),
       };
     }
 
     if (isSelected) {
       elementStyles = {
         ...elementStyles,
-        ...((element && element.selected) || selectedStyles),
+        ...((element?.selected) || selectedStyles),
       };
     }
 

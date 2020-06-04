@@ -4,11 +4,11 @@ os:
   - linux
 language: node_js
 node_js:
-  - '10'
-cache: 
+  - "10"
+cache:
   yarn: true
   directories:
-  - node_modules
+    - node_modules
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.17.3
   - export PATH="$HOME/.yarn/bin:$PATH"
@@ -16,7 +16,7 @@ install: yarn install --no-progress --frozen-lockfile
 stages:
   - lint
   - name: check-version
-    if: NOT (branch = master) AND type = pull_request 
+    if: NOT (branch = master) AND type = pull_request
   - name: next-version
     if: branch = master AND type = push AND commit_message !~ /(release)/
   - name: gen-docs
@@ -24,12 +24,12 @@ stages:
 jobs:
   include:
     - stage: lint
-      script: yarn commitlint-travis && yarn lint && yarn test && yarn build
+      script: yarn commitlint-travis && yarn build && yarn lint && yarn test
     - stage: check-version
-      if: branch = develop AND type = push 
-      script: 
+      if: branch = develop AND type = push
+      script:
         - git config --local user.name "TravisCI"
-        - git config --local user.email "frontend@xcritical.software"        
+        - git config --local user.email "frontend@xcritical.software"
         - git remote set-url origin https://${GH_TOKEN}@github.com/xcritical-software/xc-front-kit.git > /dev/null 2>&1
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
         - git fetch --tags --force
@@ -41,14 +41,14 @@ jobs:
       if: branch = master AND type = push AND commit_message !~ /(release)/
       before_deploy:
         - git config --local user.name "TravisCI"
-        - git config --local user.email "frontend@xcritical.software"        
+        - git config --local user.email "frontend@xcritical.software"
         - git remote set-url origin https://${GH_TOKEN}@github.com/xcritical-software/xc-front-kit.git > /dev/null 2>&1
         - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
         - git fetch --tags --force
         - git checkout master
         - git pull
         - yarn boltify version --loglevel silly --message "chore(release):" --no-push
-      after_deploy: 
+      after_deploy:
         - git push --follow-tags --no-verify
       deploy:
         provider: script

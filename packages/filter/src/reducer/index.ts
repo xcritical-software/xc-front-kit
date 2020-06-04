@@ -37,7 +37,7 @@ const defaultFilterState = {
 };
 
 const reducer: Reducer<IFilterStore, IFilterAction> = (state = defaultFilterState, action) => {
-  const behavior = behaviors[action.type];
+  const { [action.type]: behavior } = behaviors;
   return behavior ? behavior(state, action) : state;
 };
 

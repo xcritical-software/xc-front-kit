@@ -23,7 +23,7 @@ export const addFilters = (
 ): IFilterStore => {
   const mappedFilters = filters.map((filter) => ({
     ...filter,
-    key: filter.key || uuid(),
+    key: filter.key ?? uuid(),
   }));
 
   return setIn(state, [
@@ -77,7 +77,7 @@ export const initFilters = (
 ): IFilterStore => {
   const mappedFilters = filters.map((filter: IStateRecivedFilter) => ({
     ...filter,
-    key: filter.key || uuid(),
+    key: filter.key ?? uuid(),
   }));
 
   let $state = setIn(

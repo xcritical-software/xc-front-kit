@@ -48,7 +48,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
       const { clientX } = e;
       const moveMouse = clientX - clickXRef.current;
 
-      const emptyIdx = emptyColumnIndexRef.current || 0;
+      const emptyIdx = emptyColumnIndexRef.current ?? 0;
       const leftColumnIndex = searchLastVisible(mappedColumnsRef.current, emptyIdx);
       const rightColumnIndex = searchNextVisible(mappedColumnsRef.current, emptyIdx);
 
@@ -148,7 +148,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
         <MovingElem
           startCoord={ startCoord }
           mouseMove={ mouseMove }
-          width={ movingColumnDataRef.current?.width || 0 }
+          width={ movingColumnDataRef.current?.width ?? 0 }
           center={ !!movingColumnDataRef.current?.center }
           theme={ theme }
         >

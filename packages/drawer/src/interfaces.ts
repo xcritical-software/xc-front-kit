@@ -29,7 +29,7 @@ export interface IDrawerProps {
   closeIconComponent?: ReactNode;
   minWidth?: number;
   maxWidth?: number;
-  onOutsideClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void | undefined;
+  onOutsideClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 export interface IDrawerStates {

@@ -65,19 +65,19 @@ export const getPaddingStyle: IReturnThemeFunction<IBaseInputTheme, any> = memoi
   } = inputApperanceTheme(theme, appearance, baseAppearance, 'padding');
 
   const element = inputApperanceTheme(theme, appearance, baseAppearance, elementName);
-  const commonBottom = (element && element.padding && element.padding.bottom !== undefined)
+  const commonBottom = (element?.padding?.bottom !== undefined)
     ? element.padding.bottom
     : bottom;
 
-  const commonLeft = (element && element.padding && element.padding.left !== undefined)
+  const commonLeft = (element?.padding?.left !== undefined)
     ? element.padding.left
     : left;
 
-  const commonRight = (element && element.padding && element.padding.right !== undefined)
+  const commonRight = (element?.padding?.right !== undefined)
     ? element.padding.right
     : right;
 
-  const commonTop = (element && element.padding && element.padding.top !== undefined)
+  const commonTop = (element?.padding?.top !== undefined)
     ? element.padding.top
     : top;
 
@@ -186,7 +186,7 @@ export const getInputStatesStyle = (stateName: string) => memoize(({
   theme,
   baseAppearance,
   appearance,
-}: IInputProps): any => inputApperanceTheme(theme, appearance || '', baseAppearance || '', ['input', stateName]));
+}: IInputProps): any => inputApperanceTheme(theme, appearance ?? '', baseAppearance ?? '', ['input', stateName]));
 
 export const getInputInteractiveStyles = memoize(({
   disabled,

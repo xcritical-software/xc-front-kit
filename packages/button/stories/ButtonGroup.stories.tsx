@@ -80,7 +80,7 @@ storiesOf('ButtonGroup', module)
               ))
             }
           >
-          3
+            3
           </Button>
         </ButtonGroup>
       </ThemeProvider>

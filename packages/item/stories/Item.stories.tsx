@@ -86,7 +86,7 @@ storiesOf('Item', module)
           prefix={ <MasterCardIcon /> }
           postfix={ <MasterCardIcon /> }
         >
-         This is just a standard item
+          This is just a standard item
         </Item>
         <Item>This is just a standard item</Item>
       </ItemGroup>
@@ -106,7 +106,7 @@ storiesOf('Item', module)
             prefix={ <MasterCardIcon /> }
             postfix={ <MasterCardIcon /> }
           >
-         This is just a standard item
+            This is just a standard item
           </Item>
           <Item>This is just a standard item</Item>
         </ItemGroup>
@@ -119,7 +119,7 @@ storiesOf('Item', module)
             postfix={ <MasterCardIcon /> }
             isRTL
           >
-This is just a standard item with RTL
+            This is just a standard item with RTL
 
           </Item>
         </ItemGroup>

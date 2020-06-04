@@ -42,7 +42,7 @@ export const PureButton: React.FC<IButtonProps> = ({
   ...rest
 }) => {
   const themeContext = useContext<IThemeNamespace<ButtonTheme>>(ThemeContext);
-  const innerTheme = theme || themeContext || {};
+  const innerTheme = (theme ?? themeContext) || {};
   const buttonRef = useRef();
 
   const onClick = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
@@ -52,7 +52,7 @@ export const PureButton: React.FC<IButtonProps> = ({
   }, [disabled, onClickProps]);
 
   const element = useMemo(
-    () => CustomComponent || getElement(disabled, href),
+    () => CustomComponent ?? getElement(disabled, href),
     [CustomComponent, disabled, href],
   );
 

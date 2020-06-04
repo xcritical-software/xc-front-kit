@@ -43,7 +43,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
   const contextTheme = useContext(ThemeContext);
 
   const filterTheme = useMemo(() => (
-    getFilterTheme<IFilterTheme>(theme || contextTheme)
+    getFilterTheme<IFilterTheme>(theme ?? contextTheme)
   ), [theme, contextTheme]);
 
   const mergedFilters = useMemo(() => groupBy(

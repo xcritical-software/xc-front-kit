@@ -39,7 +39,7 @@ export interface IFormConnectedFieldProps extends React.ComponentProps<any> {
 }
 
 export interface IFormConnectedFieldDispatch {
-  onChange(value: any, action: Function): void;
+  onChange: (value: any, action: Function) => void;
 }
 
 export interface IForm {

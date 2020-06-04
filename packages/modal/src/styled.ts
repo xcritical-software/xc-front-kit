@@ -6,7 +6,7 @@ import { IModalTheme } from './interfaces';
 
 export const ModalContent = styled.div<{ theme: IModalTheme; zIndex?: number | undefined }>`
   ${({ theme }) => getModalStyles(theme, ['content'])};
-  z-index: ${({ theme, zIndex }) => (zIndex || getModalStyles(theme, ['zIndex']))};
+  z-index: ${({ theme, zIndex }) => (zIndex ?? getModalStyles(theme, ['zIndex']))};
 `;
 
 export const ModalHeaderWrapper = styled.div`
