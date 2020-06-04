@@ -8,6 +8,7 @@
 	"scripts": {
 		"test": "exit 0",
 		"compile": "tsdx build --format cjs,esm --verbose",
+		"compile:storybook": "tsdx build --format cjs --verbose",
 		"publish-files": "gulp --cwd . publish-files",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
