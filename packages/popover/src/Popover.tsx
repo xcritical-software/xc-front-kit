@@ -3,10 +3,11 @@ import React, {
   useCallback,
   useEffect,
   useRef,
+  useMemo,
 } from 'react';
 
 import ResizeObserver from 'resize-observer-polyfill';
-import Popper, { IRenderPopperProps } from '@xcritical/popper';
+import Popper, { IRenderPopperProps, Modifiers } from '@xcritical/popper';
 
 import { IPopover, IPopoverEvents } from './interfaces';
 import { Content, Arrow, PopoverWrapper } from './styles';
@@ -24,6 +25,7 @@ export const Popover: React.FC<IPopover> = ({
   convertStyles,
   shouldFitContainer = false,
   autoContentSize = false,
+  preventOverflowViewport = false,
   hoverOutTimeout = 150,
   trigger = 'hover',
   theme,
@@ -37,6 +39,18 @@ export const Popover: React.FC<IPopover> = ({
 
   const [_visible, _setVisible] = useState(false);
   const [hideTimeoutId, setHideTimeoutId] = useState<null | number>(null);
+
+  const popperModifiers: Modifiers = useMemo(() => {
+    if (preventOverflowViewport) {
+      return {
+        preventOverflow: {
+          boundariesElement: 'viewport',
+        },
+      };
+    }
+
+    return {};
+  }, [preventOverflowViewport]);
 
   const changeVisible = useCallback((newVisible: boolean) => {
     if (onVisibleChange) {
@@ -149,6 +163,7 @@ export const Popover: React.FC<IPopover> = ({
       autoFlip={ autoFlip }
       positionFixed={ positionFixed }
       visible={ isVisible }
+      modifiers={ popperModifiers }
     >
       { (popperProps: IRenderPopperProps) => {
         popperScheduleUpdateRef.current = popperProps.scheduleUpdate;

@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/select",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "XCritical Select Component",
 	"main": "dist/package.cjs.js",
 	"module": "dist/esm",

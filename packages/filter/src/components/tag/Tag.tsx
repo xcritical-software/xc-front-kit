@@ -3,6 +3,7 @@ import React, {
   useCallback,
   useMemo,
   useEffect,
+  useRef,
   MouseEvent,
 } from 'react';
 
@@ -33,6 +34,7 @@ export const Tag: React.FC<ITagProps> = ({
   conditions,
   filters,
   disabled,
+  filterTheme,
   isAutoSelectFirstCondition,
   isAutoOpenAddedTag,
   onChangeFilter,
@@ -50,6 +52,8 @@ export const Tag: React.FC<ITagProps> = ({
     () => filters.find((f) => f.field === filterId) as IFilter,
     [filterId, filters],
   );
+
+  const tagConditionsRef = useRef(null);
 
 
   const selectFirstCondition = useCallback(() => {
@@ -140,6 +144,7 @@ export const Tag: React.FC<ITagProps> = ({
     <Dropdown
       isOpen={ isOpen }
       onClose={ onCloseDropdown }
+      filterTheme={ filterTheme }
       target={ (
         <Button
           postfix={ (
@@ -159,14 +164,16 @@ export const Tag: React.FC<ITagProps> = ({
         </Button>
       ) }
     >
-      <TagConditions>
+      <TagConditions ref={ tagConditionsRef }>
         {
           conditions.map((condition) => (
             <TagCondition
               key={ condition.key }
+              tagConditionsRef={ tagConditionsRef }
               currentFilterState={ condition }
               filterSetting={ filterSetting }
               validationError={ validationErrors[condition.key] }
+              filterTheme={ filterTheme }
               onChangeFilter={ onChangeTagCondition }
               onRemoveFilter={ onRemoveFilter }
             />

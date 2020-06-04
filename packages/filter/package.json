@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/filter",
-	"version": "1.0.6",
+	"version": "1.0.8",
 	"description": "XCritical Filter Component",
 	"main": "dist/package.cjs.js",
 	"module": "dist/esm",
@@ -46,7 +46,8 @@
 	"dependencies": {
 		"@xcritical/button": "^2.0.2",
 		"@xcritical/input": "^1.0.0",
-		"@xcritical/select": "^1.0.2",
+		"@xcritical/popover": "^2.0.2",
+		"@xcritical/select": "^1.0.3",
 		"@xcritical/theme": "^1.0.0",
 		"lodash.get": "4.x",
 		"lodash.isempty": "4.x",

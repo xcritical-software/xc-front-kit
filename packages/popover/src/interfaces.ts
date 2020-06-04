@@ -14,6 +14,7 @@ export interface IPopover {
   withArrow?: boolean;
   visible?: boolean;
   autoContentSize?: boolean;
+  preventOverflowViewport?: boolean;
   hoverOutTimeout?: number;
   trigger?: 'hover' | 'click';
   onVisibleChange?: (visible: boolean) => void;
