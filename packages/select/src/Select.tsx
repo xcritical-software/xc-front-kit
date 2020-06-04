@@ -34,7 +34,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   ...rest
 }) => {
   const themeContext = useContext<IThemeNamespace<ISelectBaseTheme>>(ThemeContext);
-  const innerTheme = theme || themeContext || {};
+  const innerTheme = (theme ?? themeContext) || {};
 
   const selectRef = useRef<any>();
 

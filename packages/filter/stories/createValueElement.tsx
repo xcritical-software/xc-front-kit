@@ -30,10 +30,10 @@ export const BooleanSelector = (
   <select defaultValue="yes" onChange={ (e) => onChange(e.target.value) }>
     { !value && <option selected>Please select...</option> }
     <option key="yes" value="yes">
-        Yes
+      Yes
     </option>
     <option key="no" value="no">
-        No
+      No
     </option>
   </select>
 );

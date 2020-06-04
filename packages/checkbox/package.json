@@ -2,17 +2,15 @@
 	"name": "@xcritical/checkbox",
 	"version": "1.0.1",
 	"description": "XCritical Checkbox Component",
-	"module": "esm/index.js",
-	"main": "dist/package.cjs.js",
-	"module": "dist/esm",
-	"browser": "dist/package.umd.js",
-	"types": "dist/types",
+	"main": "dist/index.js",
+	"module": "dist/checkbox.esm.js",
+	"types": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
 	"scripts": {
 		"test": "exit 0",
-		"compile": "rollup -c",
+		"compile": "tsdx build --format cjs,esm",
 		"publish-files": "gulp --cwd . publish-files",
 		"build:cjs": "tsc --project ./tsconfig.json --outDir ./.publish/ --module commonjs -d",
 		"build:esm": "tsc --project ./tsconfig.json --outDir ./.publish/esm --module esnext",

@@ -173,13 +173,13 @@ storiesOf('Button', module)
       <Row>
         <Cell>
           <span>
-          You need to click
+            You need to click
             <Button
               onClick={ () => console.log('clicking the Component') }
             >
-            Pay
+              Pay
             </Button>
-          button
+            button
           </span>
 
         </Cell>
@@ -211,7 +211,7 @@ storiesOf('Button', module)
                   ))
                 }
               >
-              Go to
+                Go to
               </Button>
             </Cell>
           </Row>
@@ -236,7 +236,7 @@ storiesOf('Button', module)
                 theme
               }
             >
-            Pay
+              Pay
             </Button>
           </Cell>
         </Row>
@@ -252,7 +252,7 @@ storiesOf('Button', module)
                 theme
               }
             >
-            Pay
+              Pay
             </Button>
           </Cell>
         </Row>
@@ -268,7 +268,7 @@ storiesOf('Button', module)
                 theme
               }
             >
-            Pay
+              Pay
             </Button>
           </Cell>
         </Row>
@@ -284,7 +284,7 @@ storiesOf('Button', module)
                 theme
               }
             >
-            Pay
+              Pay
             </Button>
           </Cell>
         </Row>
@@ -308,7 +308,7 @@ storiesOf('Button', module)
                 appearance={ a }
                 disabled
               >
-                  Disabled
+                Disabled
               </Button>
             </Cell>
             <Cell>
@@ -317,7 +317,7 @@ storiesOf('Button', module)
                 appearance={ a }
                 selected
               >
-                  Selected
+                Selected
               </Button>
             </Cell>
             <Cell>
@@ -333,7 +333,7 @@ storiesOf('Button', module)
                 key={ `${a}_ghost_disabled` }
                 disabled
               >
-                  Disabled
+                Disabled
               </Button>
             </Cell>
             <Cell>
@@ -343,7 +343,7 @@ storiesOf('Button', module)
                 selected
                 key={ `${a}_ghost_selected` }
               >
-                  Selected
+                Selected
               </Button>
             </Cell>
           </Row>
@@ -363,7 +363,7 @@ storiesOf('Button', module)
                 <ChevronDown />
               }
             >
-            5536 91** **** 8402
+              5536 91** **** 8402
             </Button>
           </Cell>
         </Row>
@@ -377,7 +377,7 @@ storiesOf('Button', module)
                 <ChevronUp />
               }
             >
-            5536 91** **** 8402
+              5536 91** **** 8402
             </Button>
           </Cell>
         </Row>
@@ -392,7 +392,7 @@ storiesOf('Button', module)
                 <ChevronDown />
               }
             >
-            5536 91** **** 8402
+              5536 91** **** 8402
             </Button>
           </Cell>
         </Row>
@@ -408,7 +408,7 @@ storiesOf('Button', module)
                 <ChevronUp />
               }
             >
-            5536 91** **** 8402
+              5536 91** **** 8402
             </Button>
           </Cell>
         </Row>
@@ -424,7 +424,7 @@ storiesOf('Button', module)
             height="45px"
             shouldFitContent
           >
-Pay
+            Pay
           </Button>
         </Cell>
       </Row>
@@ -436,7 +436,7 @@ Pay
             shouldFitContent
             selected
           >
-Pay
+            Pay
           </Button>
         </Cell>
       </Row>
@@ -448,7 +448,7 @@ Pay
             shouldFitContent
             disabled
           >
-Pay
+            Pay
           </Button>
         </Cell>
       </Row>

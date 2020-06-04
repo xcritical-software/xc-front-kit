@@ -55,12 +55,12 @@ const simpleForm = () => (
         <label>
           <Form.Field name="sex" component={ Input } type="radio" value="male" />
 
-    Male
+          Male
         </label>
         <label>
           <Form.Field name="sex" component={ Input } type="radio" value="female" />
 
-    Female
+          Female
         </label>
       </div>
     </div>
@@ -90,7 +90,7 @@ const simpleForm = () => (
     <div>
       <Button type="submit">Submit</Button>
       <Button type="button">
-  Clear Values
+        Clear Values
       </Button>
     </div>
     <Form.Field

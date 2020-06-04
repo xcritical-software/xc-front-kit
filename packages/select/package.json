@@ -2,16 +2,15 @@
 	"name": "@xcritical/select",
 	"version": "1.0.3",
 	"description": "XCritical Select Component",
-	"main": "dist/package.cjs.js",
-	"module": "dist/esm",
-	"browser": "dist/package.umd.js",
-	"types": "dist/types",
+	"main": "dist/index.js",
+	"module": "dist/select.esm.js",
+	"types": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
 	"scripts": {
 		"test": "exit 0",
-		"compile": "rollup -c",
+		"compile": "tsdx build --format cjs,esm",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},

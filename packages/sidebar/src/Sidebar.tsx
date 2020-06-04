@@ -177,7 +177,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   );
 
   return (
-    <ThemeProvider theme={ theme || themeContext || {} }>
+    <ThemeProvider theme={ (theme ?? themeContext) || {} }>
       <Root offsetLeft={ offsetLeft } isRTL={ isRTL }>
         <SidebarWrapper ref={ sidebarRef } isRTL={ isRTL }>
           { navComponent && (

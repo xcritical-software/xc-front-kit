@@ -44,7 +44,7 @@ const mapDispatchToProps = () => {
   ) => {
     if (!dispatchProps) {
       dispatchProps = {
-        onApply: (filters, search) => dispatch(xcriticalFiltersApply(name, filters || [], search || '')),
+        onApply: (filters, search) => dispatch(xcriticalFiltersApply(name, filters ?? [], search ?? '')),
         onResetFilters: () => dispatch(xcriticalFiltersReset(name)),
         onChangeFilters: (
           values: IStateRecivedFilter[],

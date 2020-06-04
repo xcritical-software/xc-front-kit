@@ -2,16 +2,15 @@
 	"name": "@xcritical/filter",
 	"version": "1.0.8",
 	"description": "XCritical Filter Component",
-	"main": "dist/package.cjs.js",
-	"module": "dist/esm",
-	"browser": "dist/package.umd.js",
-	"types": "dist/types",
+	"main": "dist/index.js",
+	"module": "dist/filter.esm.js",
+	"types": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
 	"scripts": {
 		"test": "exit 0",
-		"compile": "rollup -c",
+		"compile": "tsdx build --format cjs,esm",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},

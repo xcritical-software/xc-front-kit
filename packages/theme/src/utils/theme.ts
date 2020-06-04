@@ -109,7 +109,7 @@ export function getAppearanceTheme<T>(
       defaultTheme,
       theme,
       appearanceName,
-      baseAppearanceName || 'default',
+      baseAppearanceName ?? 'default',
     );
 
     if (propertyPath) {
@@ -130,7 +130,7 @@ export const getFontStyle = ({
   lineHeightRatio = 1.69,
 }: IFont): FlattenSimpleInterpolation => css`
         ${weight ? `font-weight: ${weight}` : null};
-        ${size ? `font-size: ${size}px; line-height: ${lineHeight || lineHeightRatio};` : null};
+        ${size ? `font-size: ${size}px; line-height: ${lineHeight ?? lineHeightRatio};` : null};
       `;
 
 export const getFontObj = ({
@@ -140,5 +140,5 @@ export const getFontObj = ({
   lineHeightRatio = 1.69,
 }: IFont = {}): React.CSSProperties => ({
   ...weight && ({ fontWeight: weight }),
-  ...size && ({ fontSize: `${size}px`, lineHeight: lineHeight || lineHeightRatio }),
+  ...size && ({ fontSize: `${size}px`, lineHeight: lineHeight ?? lineHeightRatio }),
 });

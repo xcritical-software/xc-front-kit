@@ -2,16 +2,15 @@
 	"name": "@xcritical/blanket",
 	"version": "1.0.1",
 	"description": "XCritical Blanket Component",
-	"main": "dist/package.cjs.js",
-	"module": "dist/esm",
-	"browser": "dist/package.umd.js",
-	"types": "dist/types",
+	"main": "dist/index.js",
+	"module": "dist/blanket.esm.js",
+	"types": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
 	"scripts": {
 		"test": "exit 0",
-		"compile": "rollup -c",
+		"compile": "tsdx build --format cjs,esm",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},

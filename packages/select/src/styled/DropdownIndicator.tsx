@@ -6,16 +6,16 @@ import { DropdownIndicatorProps } from '../interfaces';
 
 
 const DropdownIndicator = (props: DropdownIndicatorProps) => {
-  const { getStyles } = props;
+  const { getStyles, selectProps } = props;
   const dropdownIndicatorStyles = getStyles('dropdownIndicator', props);
 
   return (
     components.DropdownIndicator && (
       <components.DropdownIndicator { ...props }>
         {
-          props.selectProps.menuIsOpen
-            ? <ChevronUp fill={ dropdownIndicatorStyles && dropdownIndicatorStyles.color } />
-            : <ChevronDown fill={ dropdownIndicatorStyles && dropdownIndicatorStyles.color } />
+          selectProps.menuIsOpen
+            ? <ChevronUp fill={ dropdownIndicatorStyles?.color } />
+            : <ChevronDown fill={ dropdownIndicatorStyles?.color } />
         }
       </components.DropdownIndicator>
     )

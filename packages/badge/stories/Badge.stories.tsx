@@ -132,31 +132,31 @@ storiesOf('Badge', module)
   .addDecorator(withKnobs)
   .add('Basic', () => (
     <>
-     A simple text with
+      A simple text with
 
       <Badge>badge</Badge>
       <Head size={ 13 }>
-Example heading
+        Example heading
         <Badge>New</Badge>
       </Head>
       <Head size={ 15 }>
-Example heading
+        Example heading
         <Badge>New</Badge>
       </Head>
       <Head size={ 16 }>
-Example heading
+        Example heading
         <Badge>New</Badge>
       </Head>
       <Head size={ 17 }>
-Example heading
+        Example heading
         <Badge>New</Badge>
       </Head>
       <Head size={ 18 }>
-Example heading
+        Example heading
         <Badge>New</Badge>
       </Head>
       <Head size={ 19 }>
-Example heading
+        Example heading
         <Badge>New</Badge>
       </Head>
     </>

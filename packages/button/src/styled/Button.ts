@@ -87,7 +87,7 @@ export const Content = styled.span<IContentProps>`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  text-align: ${({ isRTL, textPosition = 'center' }) => rtlSide(isRTL || false, textPosition)};
+  text-align: ${({ isRTL, textPosition = 'center' }) => rtlSide(isRTL ?? false, textPosition)};
   ${(
     { theme, appearance, baseAppearance },
   ) => buttonAppearanceTheme(theme, appearance, baseAppearance, 'buttonContent')}

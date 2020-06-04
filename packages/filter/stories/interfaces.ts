@@ -10,9 +10,9 @@ export interface IPageExternal extends IPage {
 }
 
 export interface IDictionary {
+  [key: string]: any;
   label: string;
   value: any;
-  [key: string]: any;
 }
 
 export interface IDictionaries {

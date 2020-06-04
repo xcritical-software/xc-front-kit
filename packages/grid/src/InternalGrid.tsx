@@ -75,11 +75,11 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     new CellMeasurerCache({
       fixedWidth: true,
       fixedHeight: Boolean(rowHeight),
-      defaultHeight: rowHeight || 100,
+      defaultHeight: rowHeight ?? 100,
     }),
   );
 
-  const filteredColums = useMemo(() => (
+  const filteredColums = useMemo<IColumn[]>(() => (
     mappedColumns.filter(({ visible }) => visible)
   ), [mappedColumns]);
 
@@ -104,9 +104,13 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     }
   }, [setScrollLeft, onScrollsyncScroll]);
 
-  const cellRenderer = ({
-    columnIndex, key, parent, rowIndex, style,
-  }: GridCellProps) => {
+  const cellRenderer: React.FC<GridCellProps> = ({
+    columnIndex,
+    key,
+    parent,
+    rowIndex,
+    style,
+  }) => {
     const isFirstColumn = columnIndex === 0;
 
     const row = mappedItems[rowIndex];
@@ -114,11 +118,12 @@ const InternalGrid: React.FC<IInternalGrid> = ({
 
     const expandLevel = isFirstColumn && shiftFirstColumn ? row.expandLevel : 0;
 
-    const renderFunction = column.render;
+    const { field, render: renderFunction } = column;
+    const {
+      [field]: content,
+    } = row;
 
-    const content = row[column.field];
-
-    const cellContent = renderFunction ? renderFunction(content, column.field, row) : content;
+    const cellContent = renderFunction ? renderFunction(content, field, row) : content;
 
     const handleExpand = () => {
       onChangeExpand(rowIndex, mappedItems[rowIndex].children);

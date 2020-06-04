@@ -69,7 +69,7 @@ export const Tag: React.FC<ITagProps> = ({
   const validateConditions = useCallback((filterConditions: IStateFilter[]): boolean => {
     if (filterSetting.validate) {
       const conditionsForValidation = filterConditions.filter(({ condition }) => (
-        condition && filterSetting.conditions[condition]?.hasValue
+        condition && filterSetting.conditions[condition].hasValue
       ));
       const filterValidationErrors = filterSetting.validate(conditionsForValidation);
 
