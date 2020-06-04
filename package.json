@@ -20,7 +20,7 @@
     "deploy": "bash ./copy-to-publish.sh && bash ./publish.sh",
     "check": "npm run lint && npm run test",
     "clean": "yarn boltify run clean",
-    "storybook": "start-storybook -p 9009 -s public",
+    "storybook": "yarn boltify run compile:storybook && start-storybook -p 9009 -s public",
     "build:lastcommit": "yarn clean && yarn compile --since HEAD~1"
   },
   "husky": {

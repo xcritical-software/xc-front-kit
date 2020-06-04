@@ -11,7 +11,7 @@
   "scripts": {
     "test": "exit 0",
     "compile": "tsdx build --format cjs,esm --verbose",
-    "compile:storybook": "tsdx build --format cjs --verbose",
+    "compile:storybook": "tsdx build --format esm --verbose",
     "build": "yarn clean && yarn compile",
     "clean": "rimraf dist lib .publish"
   },

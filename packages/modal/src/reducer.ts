@@ -6,9 +6,9 @@ export const modalReducer = (
   state: IModalStore = {},
   action: ModalActions,
 ): IModalStore => {
-  const { meta: { name } } = action;
   switch (action.type) {
     case XCRITICAL_MODAL_OPEN: {
+      const { meta: { name } } = action;
       return {
         ...state,
         [name]: {
@@ -18,6 +18,7 @@ export const modalReducer = (
       };
     }
     case XCRITICAL_MODAL_CLOSE: {
+      const { meta: { name } } = action;
       if (state[name]) {
         const newState = { ...state };
         // eslint-disable-next-line @typescript-eslint/no-dynamic-delete

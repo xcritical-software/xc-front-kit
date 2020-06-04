@@ -11,7 +11,7 @@
 	"scripts": {
 		"test": "exit 0",
 		"compile": "tsdx build --format cjs,esm --verbose",
-		"compile:storybook": "tsdx build --format cjs --verbose",
+		"compile:storybook": "tsdx build --format esm --verbose",
 		"publish-files": "gulp --cwd . publish-files",
 		"build:cjs": "tsc --project ./tsconfig.json --outDir ./.publish/ --module commonjs -d",
 		"build:esm": "tsc --project ./tsconfig.json --outDir ./.publish/esm --module esnext",
