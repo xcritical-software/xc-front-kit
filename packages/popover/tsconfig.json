@@ -1,4 +1,9 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src/**/*", "stories/**/*"]
+  "compilerOptions": {
+    "declarationDir": "dist/types"
+  },
+  "include": [
+    "src/**/*",
+  ]
 }

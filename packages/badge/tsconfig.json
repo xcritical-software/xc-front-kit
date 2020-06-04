@@ -1,4 +1,9 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src/**/*", "stories/**/*"]                        /* Avoid stories dir of being compiled */
+  "compilerOptions": {
+    "declarationDir": "dist/types"
+  },
+  "include": [
+    "src/**/*"
+  ] /* Avoid stories dir of being compiled */
 }

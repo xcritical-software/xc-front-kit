@@ -1,9 +1,14 @@
 {
   "compilerOptions": {
-    "outDir": "build/lib",
-    "module": "commonjs",
-    "target": "es2018",
-    "lib": ["es5", "es6", "es7", "es2017", "dom"],
+    "module": "es2015",
+    "target": "es2015",
+    "lib": [
+      "es5",
+      "es6",
+      "es7",
+      "es2017",
+      "dom"
+    ],
     "sourceMap": true,
     "allowJs": false,
     "jsx": "react",
@@ -22,6 +27,14 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
   },
-  "include": ["packages/**/src/**/*", "packages/**/stories/**/*", "packages/**/test/**/*"],
-  "exclude": ["node_modules", "build", "scripts", ]
+  "include": [
+    "packages/**/src/**/*",
+    "packages/**/stories/**/*",
+    "packages/**/test/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+  ]
 }
