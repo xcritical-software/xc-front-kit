@@ -155,7 +155,7 @@ storiesOf('Filter', module)
     const SelectWithValidation = (
       value: any,
       onChange: (value: any) => void,
-      condition?: string,
+      _condition?: string,
       validationError?: string,
     ) => (
       <>

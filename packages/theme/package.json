@@ -2,10 +2,13 @@
 	"name": "@xcritical/theme",
 	"version": "1.0.0",
 	"description": "",
-	"main": "src/index.ts",
+	"main": "dist/index.js",
+	"module": "dist/theme.esm.js",
+	"types": "dist/index.d.ts",
 	"scripts": {
 		"test": "jest --config=jest.config.js",
-		"compile": "gulp --cwd . compile",
+		"compile": "tsdx build --format cjs,esm --verbose",
+		"compile:storybook": "tsdx build --format esm --verbose",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},
@@ -13,6 +16,9 @@
 		"type": "git",
 		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
 	},
+	"files": [
+		"dist"
+	],
 	"keywords": [
 		"theme",
 		"style-components"

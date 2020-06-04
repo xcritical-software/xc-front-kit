@@ -12,7 +12,7 @@ const ClearIndicator = (props: ClearIndicatorProps) => {
   return (
     components.ClearIndicator && (
       <components.ClearIndicator { ...props }>
-        <Close fill={ clearIndicatorStyles && clearIndicatorStyles.color } />
+        <Close fill={ clearIndicatorStyles?.color } />
       </components.ClearIndicator>
     )
   );

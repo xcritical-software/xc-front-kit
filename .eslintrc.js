@@ -22,20 +22,13 @@ module.exports = {
       allow: ["error"]
     }],
     "react/prop-types": 0,
-    "@typescript-eslint/no-unnecessary-condition": 0,
-    '@typescript-eslint/quotes': ["error", "single"],
-    "react/jsx-props-no-spreading": 0,
-    "import/no-extraneous-dependencies": ["error", {
-      "devDependencies": ["**/stories/**/*.tsx", "**/stories/**/*.ts"]
-    }],
-    "@typescript-eslint/no-inferrable-types": 0, // this is a temporary solution due to problems in TS (see: https://github.com/microsoft/TypeScript/pull/30593)
-    "@typescript-eslint/restrict-template-expressions": 0,
-    "@typescript-eslint/space-before-function-paren": 0,
-    "import/extensions": 0,
-    "@typescript-eslint/explicit-function-return-type": [1, {
-      allowExpressions: true,
-      allowTypedFunctionExpressions: true,
-      allowHigherOrderFunctions: true
-    }]
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-unnecessary-condition": "warn",
+    "prefer-destructuring": ["error", {
+      "array": false,
+      "object": true
+    }, {
+        "enforceForRenamedProperties": false
+      }]
   },
 };

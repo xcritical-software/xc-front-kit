@@ -19,8 +19,9 @@ export const reducerDictionary = (
 };
 
 
-export const isEvent = (candidate: any): boolean => !!(candidate
-  && candidate.stopPropagation && candidate.preventDefault);
+export const isEvent = ({
+  stopPropagation, preventDefault,
+}: Event): boolean => !!(stopPropagation && preventDefault);
 
 export const getValueFromNativeComponent = (event: Event): any => {
   if (isEvent(event)) {
@@ -35,7 +36,7 @@ export const getValueFromNativeComponent = (event: Event): any => {
       return !!checked;
     }
     if (type === 'file') {
-      return files || (dataTransfer && dataTransfer.files);
+      return files || (dataTransfer?.files);
     }
     if (type === 'select-multiple') {
       return options;

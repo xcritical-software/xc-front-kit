@@ -33,8 +33,8 @@ export interface IModalStore {
 }
 
 export interface IModal {
-  isOpen: boolean;
   [key: string]: any;
+  isOpen: boolean;
 }
 
 /* COMPONENT */

@@ -48,9 +48,9 @@ const textCSS = (
   const padding = getPaddingStyles(theme, appearance, baseAppearance)('labelText');
 
   if (isRTL) {
-    paddingRight = (padding && padding.paddingRight) || 0;
+    paddingRight = (padding?.paddingRight) || 0;
   } else {
-    paddingLeft = (padding && padding.paddingLeft) || 0;
+    paddingLeft = (padding?.paddingLeft) || 0;
   }
 
   return {

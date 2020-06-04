@@ -7,6 +7,7 @@ const reducer = combineReducers({
 });
 
 
+// eslint-disable-next-line prefer-destructuring
 const devtoolsCompose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 const composeEnhancers = devtoolsCompose || compose;
 const composedMiddleware = composeEnhancers();

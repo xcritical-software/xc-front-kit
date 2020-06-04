@@ -1,4 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src/**/*"]                        /* Avoid stories dir of being compiled */
+  "include": [
+    "src/**/*"
+  ] /* Avoid stories dir of being compiled */
 }

@@ -18,7 +18,7 @@ import { IFormState } from './interfaces';
 
 
 const behaviors: Record<FormActionType, Function> = {
-  [XCRITICAL_FORM_INIT]: (state: IFormState, {
+  [XCRITICAL_FORM_INIT]: (_state: IFormState, {
     payload,
     meta: { isNew = !payload },
   }: IFormAction) => ({

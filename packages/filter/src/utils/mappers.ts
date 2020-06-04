@@ -10,7 +10,7 @@ export const convertFiltersToOptions = (
       ...acc,
       { label: displayName, value: field },
     ]), [],
-  ) || [];
+  ) ?? [];
 
 
 export const convertSelectedFiltersToOptions = (
@@ -18,7 +18,7 @@ export const convertSelectedFiltersToOptions = (
   filters: OptionTypeBase[],
 ): OptionTypeBase[] => filters
   .filter(
-    (filter) => selectedFilters?.some((selectedFilter) => selectedFilter.column === filter.value),
+    (filter) => selectedFilters.some((selectedFilter) => selectedFilter.column === filter.value),
   );
 
 // TODO: move to utilitify

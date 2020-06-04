@@ -2,10 +2,16 @@
 	"name": "@xcritical/pagination",
 	"version": "1.0.2",
 	"description": "Pagination component",
-	"main": "src/index.ts",
+	"main": "dist/index.js",
+	"module": "dist/pagination.esm.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"test": "exit 0",
-		"compile": "gulp --cwd . compile",
+		"compile": "tsdx build --format cjs,esm --verbose",
+		"compile:storybook": "tsdx build --format esm --verbose",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},

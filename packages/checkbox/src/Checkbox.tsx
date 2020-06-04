@@ -9,7 +9,7 @@ import {
   DefaultCheckbox,
   Checkbox as StyledCheckbox,
   HiddenCheckbox,
-} from './styled';
+} from './styled/index';
 
 
 export const PureCheckbox: React.FC<ICheckboxProps> = ({

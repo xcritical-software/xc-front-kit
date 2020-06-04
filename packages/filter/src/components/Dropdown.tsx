@@ -16,12 +16,12 @@ export const Dropdown: React.FC<IDropdownProps> = ({
   const popoverTheme: IThemeNamespace<IPopoverTheme> = useMemo(() => ({
     [popoverThemeNamespace]: {
       appearance: {
-        default: filterTheme.popover || {},
+        default: filterTheme.popover ?? {},
       },
     },
   }), [filterTheme.popover]);
 
-  const blanketZIndex = filterTheme.dropdownBlanketZIndex;
+  const { dropdownBlanketZIndex } = filterTheme;
 
   return (
     <DropdownRoot>
@@ -35,7 +35,7 @@ export const Dropdown: React.FC<IDropdownProps> = ({
       >
         { target }
       </Popover>
-      { isOpen && <Blanket zIndex={ blanketZIndex } onClick={ onClose } /> }
+      { isOpen && <Blanket zIndex={ dropdownBlanketZIndex } onClick={ onClose } /> }
     </DropdownRoot>
   );
 };

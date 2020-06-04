@@ -167,7 +167,7 @@ const PopoverCell = ({ content }) => (
     ) }
   >
     <div style={ { cursor: 'pointer' } }>
-        col 2 popover
+      col 2 popover
     </div>
   </Popover>
 );

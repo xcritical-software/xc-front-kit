@@ -8,7 +8,7 @@ do
 
 PROJECT_NAME=`basename $CURRENT_DIR/$workspaces`
 PUBLISH_PROJECT_DIR="$CURRENT_DIR/.publish/$PROJECT_NAME"
-SOURCE_PROJECT_DIR="$CURRENT_DIR/$workspaces/.publish"
+SOURCE_PROJECT_DIR="$CURRENT_DIR/$workspaces"
 
 if [[ -e $SOURCE_PROJECT_DIR ]]; then
 
@@ -17,8 +17,7 @@ if [[ -e $SOURCE_PROJECT_DIR ]]; then
   fi
 
   rm -rf $PUBLISH_PROJECT_DIR/*
-  cp -rT $SOURCE_PROJECT_DIR/ $PUBLISH_PROJECT_DIR/
-  rm -rf $SOURCE_PROJECT_DIR
+  cp -r $SOURCE_PROJECT_DIR/ $PUBLISH_PROJECT_DIR/
 
 fi
 

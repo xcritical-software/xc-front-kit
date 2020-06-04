@@ -5,15 +5,16 @@ import { sidebarThemeNamespace, defaultSidebarTheme } from './theme';
 import { SidebarTheme } from './interfaces';
 
 
-export function sidebarTheme(
+export function sidebarTheme (
   theme: SidebarTheme,
   propertyPath?: string | string[],
 ): CSSObject {
   const func = getThemedState(sidebarThemeNamespace, defaultSidebarTheme);
-  return func(theme, propertyPath);
+  // TODO: Need investigate this problem
+  return func(theme, propertyPath) as CSSObject;
 }
 
-export function getStylesWithoutTransition(
+export function getStylesWithoutTransition (
   theme: SidebarTheme,
   propertyPath?: string | string[],
 ): CSSObject {
@@ -23,10 +24,11 @@ export function getStylesWithoutTransition(
   return styles;
 }
 
-export function getTransition(
+export function getTransition (
   theme: SidebarTheme,
   animate: boolean,
   propertyPath?: string | string[],
 ): string | null {
+  // eslint-disable-next-line @typescript-eslint/no-base-to-string
   return animate ? `transition: ${sidebarTheme(theme, propertyPath)}` : null;
 }

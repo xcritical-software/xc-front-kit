@@ -57,10 +57,10 @@ const Grid: React.FC<IGridProps> = ({
   );
 
   const contextTheme = useContext(ThemeContext);
-  const themeRef = useRef(gridTheme(theme || contextTheme));
+  const themeRef = useRef(gridTheme(theme ?? contextTheme));
 
   useEffect(() => {
-    themeRef.current = gridTheme(theme || contextTheme);
+    themeRef.current = gridTheme(theme ?? contextTheme);
   }, [theme, contextTheme]);
 
 

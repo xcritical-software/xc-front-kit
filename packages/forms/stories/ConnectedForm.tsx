@@ -101,7 +101,7 @@ const SimpleForm = ({
             else setErrors(errors);
           } }
         >
-            Submit
+          Submit
         </Button>
         <Button type="button" disabled={ !formData.isChanged } onClick={ reset }>Reset</Button>
       </div>

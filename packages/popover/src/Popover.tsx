@@ -173,7 +173,7 @@ export const Popover: React.FC<IPopover> = ({
             ref={ (node) => {
               const { targetRef } = popperProps;
 
-              targetRef.current = node && node.firstChild;
+              targetRef.current = node?.firstChild;
               popoverTargetRef.current = node;
             } }
             { ...events }

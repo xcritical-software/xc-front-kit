@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import { colors } from '@xcritical/theme';
 
 import { InputTheme } from './interfaces';

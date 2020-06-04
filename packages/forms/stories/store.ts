@@ -8,6 +8,7 @@ const reducer = combineReducers({
 
 
 const devtoolsCompose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 const composeEnhancers = devtoolsCompose || compose;
 const composedMiddleware = composeEnhancers();
 
