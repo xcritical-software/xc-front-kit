@@ -7,7 +7,7 @@
 	"types": "dist/index.d.ts",
 	"scripts": {
 		"test": "jest --config=jest.config.js",
-		"compile": "tsdx build --format cjs,esm",
+		"compile": "tsdx build --format cjs,esm --verbose",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},

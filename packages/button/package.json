@@ -7,7 +7,7 @@
 	"types": "dist/index.d.ts",
 	"scripts": {
 		"test": "exit 0",
-		"compile": "tsdx build --format cjs,esm",
+		"compile": "tsdx build --format cjs,esm --verbose",
 		"publish-files": "gulp --cwd . publish-files",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"

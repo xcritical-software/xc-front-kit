@@ -10,7 +10,7 @@
 	],
 	"scripts": {
 		"test": "exit 0",
-		"compile": "tsdx build --format cjs,esm",
+		"compile": "tsdx build --format cjs,esm --verbose",
 		"publish-files": "gulp --cwd . publish-files",
 		"build:cjs": "tsc --project ./tsconfig.json --outDir ./.publish/ --module commonjs -d",
 		"build:esm": "tsc --project ./tsconfig.json --outDir ./.publish/esm --module esnext",
