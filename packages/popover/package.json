@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/popover",
-	"version": "2.0.2",
+	"version": "2.1.0",
 	"description": "",
 	"main": "dist/index.js",
 	"module": "dist/popover.esm.js",
@@ -36,8 +36,8 @@
 		"styled-components": "^5.0.0"
 	},
 	"dependencies": {
-		"@xcritical/popper": "^1.0.2",
-		"@xcritical/theme": "^1.0.0",
+		"@xcritical/popper": "^1.1.0",
+		"@xcritical/theme": "^1.1.0",
 		"resize-observer-polyfill": "^1.5.1"
 	}
 }

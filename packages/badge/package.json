@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/badge",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "Small count and labeling component",
 	"main": "dist/index.js",
 	"module": "dist/badge.esm.js",
@@ -35,7 +35,7 @@
 		"polished": "^3.4.4"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^1.0.0",
+		"@xcritical/theme": "^1.1.0",
 		"lodash.get": "^4.x",
 		"micro-memoize": "4.0.8"
 	}

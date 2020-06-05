@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/checkbox",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "XCritical Checkbox Component",
 	"main": "dist/index.js",
 	"module": "dist/checkbox.esm.js",
@@ -40,7 +40,7 @@
 		"styled-components": "^5.0.0"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^1.0.0",
+		"@xcritical/theme": "^1.1.0",
 		"lodash.get": "^4.x",
 		"micro-memoize": "^4.0.9",
 		"polished": "^3.4.4"

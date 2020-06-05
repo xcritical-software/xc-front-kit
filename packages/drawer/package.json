@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/drawer",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"description": "XCritical Drawer Component",
 	"main": "dist/index.js",
 	"module": "dist/drawer.esm.js",
@@ -37,9 +37,9 @@
 		"styled-components": "^5.0.0"
 	},
 	"dependencies": {
-		"@xcritical/blanket": "^1.0.0",
-		"@xcritical/portal": "^0.0.1",
-		"@xcritical/theme": "^1.0.0",
+		"@xcritical/blanket": "^1.1.0",
+		"@xcritical/portal": "^0.1.0",
+		"@xcritical/theme": "^1.1.0",
 		"lodash.get": "4.x",
 		"micro-memoize": "^4.0.8",
 		"polished": "^3.4.4",

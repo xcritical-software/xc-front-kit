@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/button",
-	"version": "2.0.2",
+	"version": "2.1.0",
 	"description": "<>",
 	"main": "dist/index.js",
 	"module": "dist/button.esm.js",
@@ -38,7 +38,7 @@
 		"fast-equals": "2.0.0"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^1.0.0",
+		"@xcritical/theme": "^1.1.0",
 		"lodash.get": "^4.x",
 		"micro-memoize": "^4.0.8",
 		"polished": "^3.4.4"

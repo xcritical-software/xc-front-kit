@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/select",
-	"version": "1.0.3",
+	"version": "1.1.0",
 	"description": "XCritical Select Component",
 	"main": "dist/index.js",
 	"module": "dist/select.esm.js",
@@ -33,7 +33,7 @@
 		"lodash.get": "^4.x"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^1.0.0",
+		"@xcritical/theme": "^1.1.0",
 		"lodash.isempty": "4.x",
 		"micro-memoize": "^4.0.8",
 		"polished": "^3.4.4",

@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/input",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "",
 	"main": "dist/index.js",
 	"module": "dist/input.esm.js",
@@ -33,7 +33,7 @@
 		"polished": "^3.0.0"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^1.0.0",
+		"@xcritical/theme": "^1.1.0",
 		"micro-memoize": "^4.0.8"
 	}
 }

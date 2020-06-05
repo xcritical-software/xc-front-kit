@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/popper",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"description": "",
 	"main": "dist/index.js",
 	"module": "dist/popper.esm.js",

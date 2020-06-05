@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/modal",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Modal component",
 	"main": "dist/index.js",
 	"module": "dist/modal.esm.js",
@@ -41,10 +41,10 @@
 		"mdi-react": "^6.7.0"
 	},
 	"dependencies": {
-		"@xcritical/blanket": "1.0.1",
-		"@xcritical/portal": "^0.0.1",
-		"@xcritical/theme": "^1.0.0",
-		"@xcritical/utils": "^0.1.1",
+		"@xcritical/blanket": "1.1.0",
+		"@xcritical/portal": "^0.1.0",
+		"@xcritical/theme": "^1.1.0",
+		"@xcritical/utils": "^0.2.0",
 		"micro-memoize": "^4.0.8"
 	}
 }
