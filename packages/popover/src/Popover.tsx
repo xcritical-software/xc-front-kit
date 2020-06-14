@@ -170,6 +170,9 @@ export const Popover: React.FC<IPopover> = ({
 
         return (
           <PopoverWrapper
+            theme={ theme }
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
             ref={ (node) => {
               const { targetRef } = popperProps;
 
