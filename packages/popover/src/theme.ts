@@ -20,4 +20,7 @@ export const defaultPopoverTheme: IPopoverTheme = {
       color: '#ddd',
     },
   },
+  wrapper: {
+    cursor: 'pointer',
+  },
 };
