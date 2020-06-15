@@ -37,6 +37,7 @@ export interface IPopoverTheme {
       color?: string;
     };
   };
+  wrapper?: CSSObject;
 }
 
 export interface IPopoverEvents {
@@ -47,6 +48,8 @@ export interface IPopoverEvents {
 export interface IContent extends IThemed {
   shouldFitContainer?: boolean;
 }
+
+export type IWrapperProps = IThemed;
 
 export interface IThemed {
   theme: IThemeNamespace<IPopoverTheme>;
