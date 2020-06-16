@@ -6,9 +6,9 @@ rm -rf $PUBLISH_DIR/*
 for workspaces in $(yarn boltify ws --json --since HEAD~1 | grep location  | awk -F: '{ print $2 }' | sed 's/[",]//g')
 do
 
-PROJECT_NAME=`basename $CURRENT_DIR/$workspaces`
+PROJECT_NAME=`basename $workspaces`
 PUBLISH_PROJECT_DIR="$CURRENT_DIR/.publish/$PROJECT_NAME"
-SOURCE_PROJECT_DIR="$CURRENT_DIR/$workspaces"
+SOURCE_PROJECT_DIR="$workspaces"
 echo $PROJECT_NAME;
 if [[ -e "$SOURCE_PROJECT_DIR/dist" ]]; then
 
