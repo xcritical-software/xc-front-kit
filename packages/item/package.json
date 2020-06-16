@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/item",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "XCritical Item Component",
 	"main": "dist/index.js",
 	"module": "dist/item.esm.js",
