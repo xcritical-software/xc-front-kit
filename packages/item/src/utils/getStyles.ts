@@ -4,7 +4,9 @@ import {
   ITheme,
   AllType,
 } from '@xcritical/theme';
-import { css, FlattenSimpleInterpolation, FlattenInterpolation } from 'styled-components';
+import {
+  css, FlattenSimpleInterpolation, FlattenInterpolation, ThemeProps,
+} from 'styled-components';
 
 import { itemThemeNamespace, itemThemeStyle } from '../theme';
 import { IItemTheme, IItemProps } from '../interfaces';
@@ -87,45 +89,38 @@ export const getItemInteractiveStyles = ({
   baseAppearance = 'default',
   disabled,
   selected,
-}: IItemProps): FlattenInterpolation<any> => {
+}: IItemProps): FlattenInterpolation<ThemeProps<IItemProps>> => {
   const standardFocus = css`
     &:focus {
       box-shadow: 0 0 0 2px ${itemAppearanceTheme(theme, appearance, baseAppearance, ['focus', 'outline'])} inset;
     }
   `;
 
-  if (disabled) {
-    return css`
-      cursor: not-allowed;
-      ${getItemStatesStyle('disabled')}
-      ${standardFocus};
-    `;
-  }
-
-  if (selected) {
-    return css`
-      ${getItemStatesStyle('selected')}
-      &:hover {
-        ${getItemStatesStyle('hover')};
-      }
-
-      &:active {
-        ${getItemStatesStyle('active')};
-      }
-
-      ${standardFocus};
-    `;
-  }
-
-  return css`
+  const standardHover = !disabled ? css`
     &:hover {
       ${getItemStatesStyle('hover')};
     }
+  ` : null;
 
+  const standardActive = !disabled ? css`
     &:active {
       ${getItemStatesStyle('active')};
     }
+  ` : null;
 
-    ${standardFocus};
+  const standardDisable = disabled ? css`
+    cursor: not-allowed;
+    ${getItemStatesStyle('disabled')}
+  ` : null;
+
+  const standardSelected = selected ? getItemStatesStyle('selected') : null;
+
+  return css`
+    ${standardSelected}
+    ${standardDisable}
+
+    ${standardHover}
+    ${standardActive}
+    ${standardFocus}
   `;
 };
