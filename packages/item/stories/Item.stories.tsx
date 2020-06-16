@@ -93,6 +93,7 @@ storiesOf('Item', module)
       <ItemGroup>
         <Item disabled>This is just a standard item</Item>
         <Item selected>This is just a standard item</Item>
+        <Item selected disabled>This is just a standard item</Item>
         <Item>This is just a standard item</Item>
       </ItemGroup>
     </div>
