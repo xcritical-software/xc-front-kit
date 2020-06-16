@@ -3,7 +3,7 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 PUBLISH_DIR="$CURRENT_DIR/.publish"
 rm -rf $PUBLISH_DIR/*
 
-for workspaces in $(yarn workspaces info  | grep location  | awk -F: '{ print $2 }' | sed 's/[",]//g')
+for workspaces in $(yarn boltify ws --json  --since HEAD~1 | grep location  | awk -F: '{ print $2 }' | sed 's/[",]//g')
 do
 
 PROJECT_NAME=`basename $CURRENT_DIR/$workspaces`

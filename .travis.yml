@@ -53,7 +53,7 @@ jobs:
         - git push --follow-tags --no-verify
       deploy:
         provider: script
-        script: yarn build:lastcommit && npm run deploy
+        script: yarn build && npm run deploy
         skip_cleanup: true
         on:
           branch: master
