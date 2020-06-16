@@ -84,6 +84,8 @@ interface IAllGridsProps {
   themeRef: RefObject<IGridTheme>;
   rowHeight?: number;
   onChangeSort: Function;
+  hoveredRow: any;
+  setHoveredRow: any;
 }
 
 
@@ -114,6 +116,8 @@ export interface IInternalGrid {
   shiftFirstColumn: boolean;
   onChangeSort: Function;
   shouldFitLastColumn: boolean;
+  hoveredRow: any;
+  setHoveredRow: any;
 }
 
 export interface IMappedItem extends IItem {
@@ -238,4 +242,5 @@ export interface IGridTheme {
   movingHeaderCellColor?: string;
   expandButtonMargin?: string;
   sortIconSize?: number | string;
+  hoveredBackgroundColor: string;
 }

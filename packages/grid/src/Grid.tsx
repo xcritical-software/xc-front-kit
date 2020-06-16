@@ -56,6 +56,9 @@ const Grid: React.FC<IGridProps> = ({
     items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
   );
 
+  const [hoveredRow, setHoveredRow] = useState(null);
+
+
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme ?? contextTheme));
 
@@ -322,6 +325,8 @@ const Grid: React.FC<IGridProps> = ({
         themeRef: themeRef || {},
         rowHeight,
         onChangeSort,
+        hoveredRow,
+        setHoveredRow,
       },
     };
 
@@ -384,6 +389,8 @@ const Grid: React.FC<IGridProps> = ({
     shiftFirstColumn: true,
     onChangeSort,
     shouldFitLastColumn,
+    hoveredRow,
+    setHoveredRow,
   };
 
   if (shouldFitContainer) {

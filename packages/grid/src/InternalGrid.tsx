@@ -36,6 +36,7 @@ import { HeaderWrapper } from './HeaderWrapper';
 import {
   IColumn, IInternalGrid,
 } from './interfaces';
+import { GridPositions } from './consts';
 
 
 const InternalGrid: React.FC<IInternalGrid> = ({
@@ -65,6 +66,8 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   shiftFirstColumn,
   onChangeSort,
   shouldFitLastColumn,
+  hoveredRow,
+  setHoveredRow,
 }) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(getFullWidth(mappedColumns));
@@ -149,9 +152,24 @@ const InternalGrid: React.FC<IInternalGrid> = ({
             ...style,
             width: column.width,
           } }
+          width={ column.width }
+          height={ style.height }
           firstRow={ rowIndex === 0 }
           even={ !!(rowIndex % 2) }
           theme={ themeRef.current }
+          onMouseOver={ () => {
+            if (gridPosition === GridPositions.CENTER) {
+              setHoveredRow(rowIndex);
+            }
+          } }
+          onFocus={ () => undefined }
+          hoveredRow={
+            gridPosition !== GridPositions.CENTER
+            && hoveredRow === rowIndex
+          }
+          hoverable={ gridPosition === GridPositions.CENTER }
+          onMouseOut={ () => {} }
+          onBlur={ () => undefined }
         >
           <BodyCellOffset
             center={ !!column.center }
@@ -276,6 +294,10 @@ const InternalGrid: React.FC<IInternalGrid> = ({
       <Body
         rightScroll={ rightScroll }
         bottomScroll={ bottomScroll }
+        onMouseOut={ () => {
+          setHoveredRow(null);
+        } }
+        onBlur={ () => undefined }
       >
         <VirtualisedGrid
           ref={ gridRef as MutableRefObject<VirtualisedGrid> }
