@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "<>",
   "main": "dist/index.js",
+  "source": "src/index.ts",
   "module": "dist/package.esm.js",
   "types": "dist/index.d.ts",
   "files": [

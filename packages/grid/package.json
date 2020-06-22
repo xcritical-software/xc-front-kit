@@ -3,6 +3,7 @@
 	"version": "1.2.0",
 	"description": "XCritical Grid Component",
 	"main": "dist/index.js",
+	"source": "src/index.ts",
 	"module": "dist/grid.esm.js",
 	"types": "dist/index.d.ts",
 	"files": [
