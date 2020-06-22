@@ -16,7 +16,7 @@ module.exports = {
                 },
             ],
         });
-
+        config.resolve.mainFields = ['source', 'browser', 'module', 'main']
         config.resolve.extensions.push('.ts', '.tsx');
 
         return config;

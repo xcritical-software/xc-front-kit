@@ -3,6 +3,7 @@
 	"version": "2.1.0",
 	"description": "",
 	"main": "dist/index.js",
+	"source": "src/index.ts",
 	"module": "dist/popover.esm.js",
 	"types": "dist/index.d.ts",
 	"files": [

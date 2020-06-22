@@ -3,6 +3,7 @@
 	"version": "1.1.0",
 	"description": "XCritical Blanket Component",
 	"main": "dist/index.js",
+	"source": "src/index.ts",
 	"module": "dist/blanket.esm.js",
 	"types": "dist/index.d.ts",
 	"files": [
