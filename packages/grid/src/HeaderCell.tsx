@@ -12,6 +12,7 @@ import { HeaderCellContentWrapper } from './HeaderCellContentWrapper';
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   content,
   width,
+  minColumnWidth,
   onChangeWidth,
   index,
   onMouseDown,
@@ -39,9 +40,9 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
       const { clientX: currentX } = e;
       const calcNewWidth = width + (currentX - clickXRef.current);
       if (calcNewWidth >= 1200) return;
-      if (calcNewWidth <= 30) {
-        setNewWidth(30);
-        widthRef.current = 30;
+      if (calcNewWidth <= minColumnWidth) {
+        setNewWidth(minColumnWidth);
+        widthRef.current = minColumnWidth;
       } else {
         setNewWidth(calcNewWidth);
         widthRef.current = calcNewWidth;

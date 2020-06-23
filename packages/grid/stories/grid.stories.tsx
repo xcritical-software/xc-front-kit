@@ -466,4 +466,14 @@ storiesOf('New Grid', module)
         </Page>
       </Provider>
     );
-  });
+  })
+  .add('Min Column Width', () => (
+    <Grid
+      columns={ columns }
+      items={ rows }
+      totals={ totals }
+      width={ document.documentElement.clientWidth - 100 }
+      height={ document.documentElement.clientHeight - 100 }
+      minColumnWidth={ 60 }
+    />
+  ));

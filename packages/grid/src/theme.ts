@@ -26,6 +26,7 @@ export const defaultTheme: IGridTheme = {
     backgroundColor: colors.GRAY,
     height: 30,
     padding: '12px',
+    overflow: 'initial',
   },
   row: {
     border: `1px solid ${colors.GRAY}`,
