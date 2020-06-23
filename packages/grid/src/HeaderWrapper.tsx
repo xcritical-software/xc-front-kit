@@ -24,6 +24,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
   shouldMovingColumns,
   shouldChangeColumnsWidth,
   gridPosition,
+  minColumnWidth,
   onChangeSort,
 }) => {
   const mappedColumnsRef = useRef(columns);
@@ -131,6 +132,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
             isEmpty={ isMoving && index === emptyColumnIndexRef.current }
             onMouseDown={ handleMouseDown }
             width={ el.width }
+            minColumnWidth={ minColumnWidth }
             content={ el.headerName }
             onChangeWidth={ onChangeWidth }
             index={ index }

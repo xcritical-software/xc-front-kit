@@ -48,6 +48,7 @@ export interface IGridProps {
   overscanColumnCount?: number;
   overscanRowCount?: number;
   shouldFitLastColumn?: boolean;
+  minColumnWidth?: number;
 }
 
 
@@ -83,6 +84,7 @@ interface IAllGridsProps {
   mappedItems: IMappedItem[];
   themeRef: RefObject<IGridTheme>;
   rowHeight?: number;
+  minColumnWidth: number;
   onChangeSort: Function;
 }
 
@@ -114,6 +116,7 @@ export interface IInternalGrid {
   shiftFirstColumn: boolean;
   onChangeSort: Function;
   shouldFitLastColumn: boolean;
+  minColumnWidth: number;
 }
 
 export interface IMappedItem extends IItem {
@@ -124,6 +127,7 @@ export interface IMappedItem extends IItem {
 export interface IHeaderCellWrapper {
   content: CellContent;
   width: number;
+  minColumnWidth: number;
   onChangeWidth: Function;
   index: number;
   onMouseDown: Function;
@@ -150,6 +154,7 @@ export interface IHeaderWrapper {
   shouldMovingColumns: boolean;
   shouldChangeColumnsWidth: boolean;
   gridPosition: GridPositions;
+  minColumnWidth: number;
   onChangeSort: Function;
 }
 
