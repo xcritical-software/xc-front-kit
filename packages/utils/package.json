@@ -5,14 +5,14 @@
 	"main": "dist/index.js",
 	"source": "src/index.ts",
 	"module": "dist/utils.esm.js",
-	"types": "dist/index.d.ts",
+	"types": "dist/typings.d.ts",
 	"files": [
 		"dist"
 	],
 	"scripts": {
 		"test": "exit 0",
-		"compile": "tsdx build --format cjs,esm --verbose",
-		"compile:storybook": "tsdx build --format esm --verbose",
+		"compile": "tsdx build --format cjs,esm --verbose && api-extractor run",
+		"compile:local": "tsdx build --format cjs,esm --verbose && api-extractor run --local",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},
