@@ -1,5 +1,5 @@
 import React, {
-  FC, useState, useCallback, useEffect,
+  useState, useCallback, useEffect,
 } from 'react';
 import { withTheme } from 'styled-components';
 
@@ -8,7 +8,7 @@ import { ISwitchGroupProps } from './interfaces';
 import { SwitchGroupWrapper } from './styled';
 
 
-export const PureSwitchGroup: FC<ISwitchGroupProps> = ({
+export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
   type = 'checkbox',
   appearance = 'default',
   baseAppearance = 'default',
