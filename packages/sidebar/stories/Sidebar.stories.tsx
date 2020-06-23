@@ -7,8 +7,11 @@ import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import {
   NavLink, BrowserRouter, Switch, Route,
 } from 'react-router-dom';
+
 import { IThemeNamespace } from '@xcritical/theme';
+
 import Sidebar, { sidebarThemeNamespace } from '../src';
+
 import { routerConfig } from './routerConfig';
 
 

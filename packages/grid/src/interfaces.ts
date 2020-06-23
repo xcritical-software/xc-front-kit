@@ -1,5 +1,7 @@
 import { ReactElement, CSSProperties, RefObject } from 'react';
+
 import { ITheme } from '@xcritical/theme';
+
 import { GridPositions, GridSort } from './consts';
 
 

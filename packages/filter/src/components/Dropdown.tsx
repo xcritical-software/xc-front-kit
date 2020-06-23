@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
+
 import { IThemeNamespace } from '@xcritical/theme';
 import { Popover, popoverThemeNamespace, IPopoverTheme } from '@xcritical/popover';
 
 import { IDropdownProps } from '../interfaces';
+
 import { DropdownRoot, Blanket } from './styled';
 
 

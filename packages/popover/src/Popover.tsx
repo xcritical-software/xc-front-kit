@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 
 import ResizeObserver from 'resize-observer-polyfill';
+
 import Popper, { IRenderPopperProps, Modifiers } from '@xcritical/popper';
 
 import { IPopover, IPopoverEvents } from './interfaces';
@@ -66,12 +67,14 @@ export const Popover: React.FC<IPopover> = ({
     if (e.target === popoverTargetRef.current) {
       _setVisible(false);
       changeVisible(false);
+
       return;
     }
 
     if (popoverTargetRef.current && popoverTargetRef.current.contains(e.target)) {
       _setVisible(!_visible);
       changeVisible(!_visible);
+
       return;
     }
 

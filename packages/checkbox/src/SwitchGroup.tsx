@@ -21,6 +21,7 @@ export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
 
   const handleChange = useCallback((value: string | number) => {
     let newValues;
+
     if (type === 'radio') {
       newValues = [value];
     } else if (values.includes(value)) {

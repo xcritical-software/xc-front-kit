@@ -5,10 +5,19 @@ import { storiesOf } from '@storybook/react';
 import { darken, lighten } from 'polished';
 import { Provider } from 'react-redux';
 
-import { colors } from '@xcritical/theme';
 import { setIn } from 'utilitify';
+
+import { colors } from '@xcritical/theme';
+
 import Grid from '../src';
 import { IColumn } from '../src/interfaces';
+
+import { gridThemeNamespace } from '../src/theme';
+import Sidebar from '../../sidebar/src';
+import { CompactFilterContainer } from '../../filter/stories/pages';
+import { store } from '../../filter/stories/filter.stories';
+
+import * as countries from './countries';
 import {
   columns,
   totals,
@@ -21,11 +30,6 @@ import {
   totalsFixed,
   CustomReactHeaderName,
 } from './data';
-import * as countries from './countries';
-import { gridThemeNamespace } from '../src/theme';
-import Sidebar from '../../sidebar/src';
-import { CompactFilterContainer } from '../../filter/stories/pages';
-import { store } from '../../filter/stories/filter.stories';
 import {
   Page,
   Content,
@@ -75,6 +79,7 @@ const generateTheme = (color: string) => {
       },
     },
   };
+
   return theme;
 };
 
@@ -163,6 +168,7 @@ storiesOf('New Grid', module)
   ))
   .add('Handler change and select columns (see consol)', () => {
     const [isMultiSelect, changeIsMultySelect] = useState(false);
+
     return (
       <>
         <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
@@ -196,6 +202,7 @@ storiesOf('New Grid', module)
   ))
   .add('Themed and multi select', () => {
     const [color, changeColor] = useState('#023fa1');
+
     return (
       <>
         <input type="color" value={ color } onChange={ (e) => changeColor(e.target.value) } />

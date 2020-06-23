@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import Select from '@xcritical/select';
+
 import { ISelectedFilterComponent } from '../../interfaces';
 
 

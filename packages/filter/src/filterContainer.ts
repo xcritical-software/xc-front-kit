@@ -30,6 +30,7 @@ const mapStateToProps = (
     drafts = [],
     search,
   } = filterSelector(state, ownProps.name);
+
   return {
     activeFilters: drafts,
     searchInput: search,
@@ -38,6 +39,7 @@ const mapStateToProps = (
 
 const mapDispatchToProps = () => {
   let dispatchProps: IMapDispatchFilter;
+
   return (
     dispatch: Dispatch,
     { name }: IFilterProps,
@@ -52,6 +54,7 @@ const mapDispatchToProps = () => {
         onSearchInputChange: (value) => dispatch(xcriticalFiltersSearchUpdate(name, value)),
       };
     }
+
     return dispatchProps;
   };
 };
@@ -62,12 +65,15 @@ const filterToApply = (
 ): IStateRecivedFilter[] => activeFilters
   .filter(({ column, condition, value }) => {
     if (value) return true;
+
     if (!condition) return false;
 
     const filter = filters.find((f) => f.field === column);
+
     if (filter?.conditions[condition].hasValue) {
       return !!value;
     }
+
     return false;
   });
 

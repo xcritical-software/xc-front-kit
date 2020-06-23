@@ -8,10 +8,12 @@ import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 
 // eslint-disable-next-line import/no-unresolved
 import { IThemeNamespace } from '@xcritical/theme';
+
 import Button, { buttonThemeNamespace } from '../src';
 
-import { MasterCardIcon, ChevronDown, ChevronUp } from './Icons';
 import { ButtonTheme } from '../src/interfaces';
+
+import { MasterCardIcon, ChevronDown, ChevronUp } from './Icons';
 
 
 const appearances = [

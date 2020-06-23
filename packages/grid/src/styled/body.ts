@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components';
+
+import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
+
 import {
   getBodyCellStyles, getBodyCellContentStyles, getBodyCellOffsetStyles, getExpandButtonStyles,
 } from './utils';
-import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
 
 
 const scrollbarSize = 8;
@@ -107,8 +109,11 @@ const getScrollbar = ({
   bottomScroll,
 }) => {
   if (rightScroll && bottomScroll) return fullScrollbar;
+
   if (rightScroll) return rightScrollbar;
+
   if (bottomScroll) return bottomScrollbar;
+
   return hiddenScrollbar;
 };
 

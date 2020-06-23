@@ -1,4 +1,5 @@
 import range from 'lodash.range';
+
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 import { selectThemeNamespace, ISelectBaseTheme } from '@xcritical/select';
 
@@ -18,6 +19,7 @@ export const getPaginationStyles = (
   propertyPath?: string[],
 ): any => {
   const func = getThemedState(paginationThemeNamespace, defaultPaginationTheme);
+
   return func(theme, propertyPath);
 };
 
@@ -61,9 +63,11 @@ export const getVisiblePagesArray = (
 ): number[] => {
   if (isAvailableVisibleRange) {
     const isStartRange = currentPage <= availableVisibleRangeCenter;
+
     if (isStartRange) return range(2, 2 + availableVisibleRange);
 
     const isEndRange = currentPage + availableVisibleRangeCenter >= totalPages;
+
     if (isEndRange) return range(totalPages - availableVisibleRange, totalPages);
 
     const visiblePagesStart = currentPage - availableVisibleRangeCenter + 1;

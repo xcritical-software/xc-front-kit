@@ -56,6 +56,7 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
       event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>,
     ): void => {
       event.preventDefault();
+
       if (!disabled) {
         onEditRequested();
       }

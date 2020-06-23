@@ -1,5 +1,6 @@
 import memoizee from 'micro-memoize';
 import { css, FlattenInterpolation } from 'styled-components';
+
 import { getAppearanceTheme, AllType } from '@xcritical/theme';
 
 import { drawerThemeNamespace, defaultDrawerTheme } from '../theme';
@@ -18,6 +19,7 @@ export const drawerAppearanceTheme = (
   propertyPath?: string | string[],
 ): AllType => {
   const func = getAppearanceTheme(drawerThemeNamespace, defaultDrawerTheme);
+
   return func(theme, appearanceName, propertyPath, baseAppearance);
 };
 

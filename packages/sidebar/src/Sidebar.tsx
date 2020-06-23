@@ -80,6 +80,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
           widthRef.current = maxWidth;
           setWidth(maxWidth);
         }
+
         return;
       }
 
@@ -110,6 +111,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
         width: widthRef.current < minWidth ? minWidth + 1 : widthRef.current,
       });
     }
+
     document.removeEventListener('selectstart', handleSelectStart);
     document.removeEventListener('mouseup', handleMouseUp);
     document.removeEventListener('mousemove', handleMouseMove);
@@ -148,14 +150,18 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     if (sidebarRef.current === null) {
       return undefined;
     }
+
     const observer = new ResizeObserver((): undefined => {
       if (sidebarRef.current === null) {
         return undefined;
       }
+
       changeOffsetLeft(sidebarRef.current.offsetWidth);
+
       return undefined;
     });
     observer.observe(sidebarRef.current);
+
     return observer;
   };
 
@@ -168,6 +174,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
     () => () => {
       if (observerRef.current && sidebarRef.current) {
         observerRef.current.unobserve(sidebarRef.current);
+
         if (observerRef.current.disconnect) {
           observerRef.current.disconnect();
         }
