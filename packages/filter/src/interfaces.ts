@@ -156,6 +156,7 @@ export interface IFilterProps {
   disabled?: boolean;
   isAutoSelectFirstCondition?: boolean;
   isAutoOpenAddedTag?: boolean;
+  isTagsVisible?: boolean;
   moreName?: string;
   resetName?: string;
   searchName?: string;

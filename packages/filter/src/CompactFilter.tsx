@@ -28,6 +28,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
   disabled = false,
   isAutoSelectFirstCondition = false,
   isAutoOpenAddedTag = false,
+  isTagsVisible = true,
   moreName = 'More',
   resetName = 'Reset',
   searchName = 'Search',
@@ -75,9 +76,10 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
               )
               : null
           }
-          <TopPanelTags>
-            { Object.keys(mergedFilters)
-              .map((filterId) => (
+
+          { isTagsVisible && (
+            <TopPanelTags>
+              { Object.keys(mergedFilters).map((filterId) => (
                 <Tag
                   name={ name }
                   key={ filterId }
@@ -91,7 +93,8 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
                   onApply={ onApply }
                 />
               )) }
-          </TopPanelTags>
+            </TopPanelTags>
+          ) }
 
           <TopPanelButtons>
             <MoreFilterSelect
