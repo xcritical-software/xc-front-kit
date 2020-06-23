@@ -2,6 +2,7 @@
 export interface IPage {
   onInit: Function;
   isSearchable?: boolean;
+  isTagsVisible?: boolean;
   disabled?: boolean;
 }
 export interface IPageExternal extends IPage {

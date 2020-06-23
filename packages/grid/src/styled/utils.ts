@@ -96,6 +96,7 @@ export const getHeaderCellContentStyles = ({ theme }: IHeaderCellContent) => `
         font-size: ${theme.header?.fontSize};
         color: ${theme.header?.color};
         padding: ${theme.header?.padding};
+        overflow: ${theme.header?.overflow};
       }
     `;
 

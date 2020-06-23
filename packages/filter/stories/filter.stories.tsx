@@ -196,6 +196,9 @@ storiesOf('Filter', module)
       <CompactFilter name="withValidation" filters={ filtersWithValidation } />
     );
   })
+  .add('With Hidden Tags', () => (
+    <CompactFilterContainer isTagsVisible={ false } />
+  ))
   .add('External Filter', () => (
     <ExternalFilterContainer />
   ));

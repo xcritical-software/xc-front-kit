@@ -65,6 +65,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   shiftFirstColumn,
   onChangeSort,
   shouldFitLastColumn,
+  minColumnWidth,
 }) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(getFullWidth(mappedColumns));
@@ -271,6 +272,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
         shouldMovingColumns={ shouldMovingColumns }
         shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
         gridPosition={ gridPosition }
+        minColumnWidth={ minColumnWidth }
         onChangeSort={ onChangeSort }
       />
       <Body
