@@ -25,7 +25,7 @@ stages:
 jobs:
   include:
     - stage: lint
-      script: yarn commitlint-travis && yarn build && yarn lint && yarn test
+      script: yarn commitlint-travis && yarn build:prod && yarn lint && yarn test
     - stage: check-version
       if: branch = develop AND type = push
       script:
@@ -48,7 +48,7 @@ jobs:
         - git fetch --tags --force
         - git checkout master
         - git pull
-        - yarn boltify version --loglevel silly --message "chore(release):" --no-push
+        - yarn boltify version --loglevel silly --message "chore(release): release of" --no-push
       after_deploy:
         - git push --follow-tags --no-verify
       deploy:
