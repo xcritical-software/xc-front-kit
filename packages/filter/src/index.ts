@@ -1,8 +1,8 @@
 import { CompactFilter } from './filterContainer';
-import filterReducer from './reducer';
+import filterReducer, { filterSelector } from './reducer';
 
 
 export * from './actions';
 export { filterThemeNamespace } from './theme';
-export { IFilterTheme } from './interfaces';
-export { filterReducer, CompactFilter };
+export * from './interfaces';
+export { filterReducer, CompactFilter, filterSelector };

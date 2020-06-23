@@ -1,7 +1,7 @@
 import { PureForm } from './components';
-import reducer from './reducer';
+import reducer, { formSelector } from './reducer';
 
 
-export { reducer };
+export { reducer, formSelector };
 
 export default PureForm;
