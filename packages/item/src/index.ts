@@ -3,3 +3,4 @@ export * from './ItemGroup';
 export {
   itemThemeNamespace,
 } from './theme';
+export * from './interfaces';

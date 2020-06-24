@@ -24,6 +24,9 @@ module.exports = {
     "react/prop-types": 0,
     "@typescript-eslint/no-empty-function": 0,
     "@typescript-eslint/no-unnecessary-condition": "warn",
+    "@typescript-eslint/ban-tslint-comment": 0,
+    "@typescript-eslint/no-confusing-non-null-assertion": 0,
+    "@typescript-eslint/no-loss-of-precision": 0,
     "prefer-destructuring": ["error", {
       "array": false,
       "object": true
