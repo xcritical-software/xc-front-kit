@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/grid",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"description": "XCritical Grid Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -51,7 +51,7 @@
 	},
 	"devDependencies": {
 		"@types/react-virtualized": "^9.21.8",
-		"@xcritical/sidebar": "^1.1.1",
+		"@xcritical/sidebar": "^1.1.2",
 		"mdi-react": "^6.7.0"
 	}
 }
