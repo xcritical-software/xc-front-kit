@@ -1,7 +1,9 @@
 import React, { MutableRefObject } from 'react';
+
+import { CSSProperties } from 'styled-components';
+
 import { IThemeNamespace, ITheme } from '@xcritical/theme';
 import { IPopoverTheme } from '@xcritical/popover';
-import { CSSProperties } from 'styled-components';
 
 import {
   FILTERS_ADD,

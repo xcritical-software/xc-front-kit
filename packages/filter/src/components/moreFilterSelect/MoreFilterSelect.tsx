@@ -1,7 +1,9 @@
 import React, { useState, useMemo, useCallback } from 'react';
+
+import { OptionTypeBase } from 'react-select';
+
 import Button from '@xcritical/button';
 import Select from '@xcritical/select';
-import { OptionTypeBase } from 'react-select';
 
 import {
   Dropdown,

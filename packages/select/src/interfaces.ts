@@ -1,9 +1,11 @@
 import { OptionTypeBase } from 'react-select/src/types';
 import { FormatOptionLabelContext, Props } from 'react-select/src/Select';
+
+import { IndicatorProps } from 'react-select/src/components/indicators';
+
 import {
   IThemeNamespace, ICSSProperties, IThemeBase,
 } from '@xcritical/theme';
-import { IndicatorProps } from 'react-select/src/components/indicators';
 
 
 export type DropdownIndicatorProps = IndicatorProps<IOptionItem> & {

@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
+
+import { connect } from 'react-redux';
+
 import Input from '@xcritical/input';
 import Button from '@xcritical/button';
 
-import { connect } from 'react-redux';
 import Select from '@xcritical/select';
+
 import Form from '../src';
 import { xcriticalFormError, xcriticalFormInit, xcriticalFormReset } from '../src/actions';
 import { formSelector } from '../src/reducer';
@@ -22,6 +25,7 @@ const validate = (values) => {
   let errors = {};
 
   if (values.firstName === null) errors = { firstName: 'First name is required.' };
+
   if (values.lastName === null) errors = { ...errors, lastName: 'Last name is required.' };
 
   return errors;

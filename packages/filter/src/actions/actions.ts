@@ -1,4 +1,3 @@
-import * as actions from './const';
 import {
   IStateRecivedFilter,
   IPayloadChangeFilter,
@@ -8,6 +7,8 @@ import {
   IPayloadInitFilters,
   IPayloadApplyFilters,
 } from '../interfaces';
+
+import * as actions from './const';
 
 
 function actionCreator(type: FilterActionType, name: string, payload?: any): IFilterAction {

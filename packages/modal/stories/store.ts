@@ -1,4 +1,5 @@
 import { createStore, combineReducers, compose } from 'redux';
+
 import { modalReducer } from '../src';
 
 

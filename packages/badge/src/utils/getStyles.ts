@@ -21,6 +21,7 @@ const badgeTheme = memoize((
   propertyPath?: string | string[],
 ): BadgeTheme | any => {
   const func = getThemedState(badgeThemeNamespace, defaultBadgeTheme);
+
   return func(theme, propertyPath);
 });
 
@@ -32,6 +33,7 @@ const badgeApperanceTheme = memoize((
   propertyPath?: string | string[],
 ): BadgeTheme | any => {
   const func = getAppearanceTheme(badgeThemeNamespace, defaultBadgeTheme);
+
   return func(theme, appearanceName, propertyPath, baseAppearance);
 });
 

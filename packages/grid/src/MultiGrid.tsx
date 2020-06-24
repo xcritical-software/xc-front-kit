@@ -1,4 +1,5 @@
 import React from 'react';
+
 import InternalGrid from './InternalGrid';
 import { IMultiGrid } from './interfaces';
 import { GridPositions } from './consts';

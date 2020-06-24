@@ -24,5 +24,6 @@ export const getPopperPlacementByPosition = (position: Position): Placement => (
 
 export const getPositionByPopperPlacement = (placement: Placement): Position => {
   const position = Object.keys(positionMap).find((key) => positionMap[key] === placement);
+
   return position as Position;
 };

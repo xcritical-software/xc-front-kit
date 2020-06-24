@@ -22,6 +22,7 @@ export const inlineEditTheme = memoize((
   propertyPath?: string | string[],
 ): AllType => {
   const func = getThemedState(inlineEditThemeNamespace, defaultInlineEditTheme);
+
   return func(theme, propertyPath);
 });
 
@@ -32,6 +33,7 @@ const inlineEditAppearanceTheme = memoize((
   propertyPath?: string | string[],
 ): ITheme<IInlineEditTheme> | AllType => {
   const func = getAppearanceTheme(inlineEditThemeNamespace, defaultInlineEditTheme);
+
   return func(theme, appearanceName, propertyPath, baseAppearance);
 });
 
@@ -41,6 +43,7 @@ export const getInlineEditStatesStyle = (stateName: string): AllType => memoize(
   baseAppearance: string,
 ): AllType => {
   const styles = inlineEditAppearanceTheme(theme, appearance || '', baseAppearance || '', [stateName]);
+
   return styles;
 });
 
@@ -53,6 +56,7 @@ export const getElementStyles: IReturnFunction<AllType> = memoize((
   const styles = inlineEditAppearanceTheme(
     theme, appearance as string, baseAppearance as string, elementName,
   );
+
   return styles;
 });
 

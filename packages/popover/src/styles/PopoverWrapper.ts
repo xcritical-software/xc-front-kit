@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import { IWrapperProps } from '../interfaces';
+
 import { getPopperProperty } from './utils';
 
 

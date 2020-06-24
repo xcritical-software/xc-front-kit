@@ -71,17 +71,21 @@ const Grid: React.FC<IGridProps> = ({
     if (wrapperRef.current === null) {
       return undefined;
     }
+
     const observer = new ResizeObserver((): undefined => {
       if (wrapperRef.current === null) {
         return undefined;
       }
+
       setWrapperSize({
         width: wrapperRef.current.clientWidth,
         height: wrapperRef.current.clientHeight,
       });
+
       return undefined;
     });
     observer.observe(wrapperRef.current);
+
     return observer;
   };
 
@@ -146,8 +150,10 @@ const Grid: React.FC<IGridProps> = ({
              || e.target.tagName === 'path'
              || e.target.tagName === 'BUTTON'
       ) return;
+
       if (isMultiSelect) {
         const newSelectedRows = addOrDeleteItemFromArray(selectedRows, key);
+
         if (onSelect) {
           onSelect(
             deletePropsFromObjects(
@@ -155,9 +161,12 @@ const Grid: React.FC<IGridProps> = ({
             ),
           );
         }
+
         setSelectedRows(newSelectedRows);
+
         return;
       }
+
       if (selectedRows[0] === key) {
         if (onSelect) {
           onSelect({});
@@ -171,9 +180,11 @@ const Grid: React.FC<IGridProps> = ({
         } as IMappedItem;
         delete selectedRow.key;
         delete selectedRow.expandLevel;
+
         if (onSelect) {
           onSelect(selectedRow);
         }
+
         setSelectedRows([key]);
       }
     },
@@ -259,10 +270,14 @@ const Grid: React.FC<IGridProps> = ({
 
   const onChangeSort = useCallback((sortable, sortOrder, index, gridPosition) => {
     if (!sortable) return;
+
     // ask => desk => null => ask
     let newSortOrder: GridSort.ASC | GridSort.DESC | null = null;
+
     if (!sortOrder) newSortOrder = GridSort.ASC;
+
     if (sortOrder === GridSort.ASC) newSortOrder = GridSort.DESC;
+
     if (sortOrder === GridSort.DESC) newSortOrder = null;
 
     const newLeftColumns = removeSorting(leftMappedColumns);

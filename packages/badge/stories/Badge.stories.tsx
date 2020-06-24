@@ -6,9 +6,10 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { darken } from 'polished';
 
-import Badge, { badgeThemeNamespace } from '@xcritical/badge';
 import { withKnobs } from '@storybook/addon-knobs';
 import styled, { ThemeProvider } from 'styled-components';
+
+import Badge, { badgeThemeNamespace } from '@xcritical/badge';
 import { colors } from '@xcritical/theme';
 
 

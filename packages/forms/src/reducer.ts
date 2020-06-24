@@ -77,6 +77,7 @@ const reducer: Reducer<IFormState> = (state = {
   isChanged: false,
 }, action) => {
   const behavior = behaviors[action.type];
+
   return behavior ? behavior(state, action) : state;
 };
 

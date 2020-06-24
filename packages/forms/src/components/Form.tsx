@@ -1,8 +1,10 @@
 import React from 'react';
 import { isNil, isObject } from 'utilitify';
+
+import { IFormProps, IForm } from '../interfaces';
+
 import { withForm, FormProvider } from './FormContext';
 import СreateConnectedFormField from './ConnectedFormField';
-import { IFormProps, IForm } from '../interfaces';
 
 
 export const PureForm: React.FC<IFormProps> & IForm = ({
@@ -16,6 +18,7 @@ export const PureForm: React.FC<IFormProps> & IForm = ({
     if (!isNil(child) && child.props) {
       Object.keys(child.props).forEach((key) => {
         const currentChildValue = child.props[key];
+
         if (key === 'children') {
           if (Array.isArray(currentChildValue)) {
             React.Children.forEach(currentChildValue, findChildPropName);

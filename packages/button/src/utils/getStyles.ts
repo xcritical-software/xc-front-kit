@@ -20,6 +20,7 @@ export const buttonTheme = memoize((
   propertyPath?: string | string[],
 ): ButtonTheme | any => {
   const func = getThemedState(buttonThemeNamespace, buttonThemeStyle);
+
   return func(theme, propertyPath);
 }, {
   isEqual: shallowEqual,
@@ -33,6 +34,7 @@ export const buttonAppearanceTheme = memoize((
   propertyPath?: string | string[],
 ): ButtonTheme | any => {
   const func = getAppearanceTheme(buttonThemeNamespace, buttonThemeStyle);
+
   return func(theme, appearanceName, propertyPath, baseAppearance);
 }, {
   isEqual: shallowEqual,

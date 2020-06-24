@@ -5,6 +5,7 @@ import { shallowEqual } from 'fast-equals';
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
 import { mergeDeep } from 'utilitify';
+
 import {
   IFont,
   ITheme,
@@ -48,6 +49,7 @@ export const getThemedState = (namespace: string, defaultTheme: ITheme) => memoi
   theme: IThemeNamespace = {}, propertyPath: OneOrManyString | undefined,
 ): ITheme => {
   const componentTheme = mergeBaseTheme(namespace, defaultTheme, theme);
+
   return propertyPath ? get(componentTheme, propertyPath) : componentTheme;
 },
 {
@@ -61,6 +63,7 @@ export const compileAppearanceTheme = memoize(
     appearanceName: string,
     baseAppearanceName: string): ITheme => {
     const themeExtractor = getThemedState(namespace, defaultTheme);
+
     if (appearanceName !== baseAppearanceName) {
       return mergeDeep(
         themeExtractor(theme, getAppearancePath(baseAppearanceName)) || {},
