@@ -12,21 +12,23 @@ interface IInlineEditState {
   isEditing?: boolean;
 }
 
-const getPureInlineEdit: <TFieldValue>() => FC<
-IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
+const getPureInlineEdit: <TFieldValue>() => FC<IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
   return ({
-    startWithEditViewOpen = false,
-    onConfirm,
-    onCancel,
-    defaultValue,
-    readView,
-    editView,
-    disabled = false,
-    ...rest
-  }: IInlineEditProps<TFieldValue>) => {
+            startWithEditViewOpen = false,
+            onConfirm,
+            onCancel,
+            defaultValue,
+            readView,
+            editView,
+            disabled = false,
+            invalid = false,
+            appearance = 'default',
+            ...rest
+          }: IInlineEditProps<TFieldValue>) => {
     const editViewRef = createRef<HTMLElement>();
-    const [isEditing, setIsEditing] = useState(startWithEditViewOpen);
+    const [isEditing, setIsEditing] = useState(startWithEditViewOpen || invalid);
     const defaultValueRef = useRef(defaultValue);
+    console.log(invalid, isEditing)
 
     useEffect(() => {
       if (startWithEditViewOpen && editViewRef.current) {
@@ -40,15 +42,21 @@ IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
       }
     }, [isEditing, editViewRef]);
 
+    useEffect(() => {
+      if (invalid) {
+        setIsEditing(true)
+      }
+    });
+
     const handleConfirm = useCallback((value: TFieldValue): void => {
       setIsEditing(false);
-      onConfirm(value);
       defaultValueRef.current = value;
-    }, [onConfirm]);
+      onConfirm(value);
+    }, [onConfirm, invalid]);
 
     const handleCancel = useCallback((): void => {
-      setIsEditing(false);
       onCancel?.(defaultValueRef.current);
+      setIsEditing(false);
     }, [onCancel]);
 
     const handleEditRequested = useCallback((): void => {
@@ -68,6 +76,7 @@ IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
         isEditing={ isEditing }
         disabled={ disabled }
         onEditRequested={ handleEditRequested }
+        appearance={ invalid ? 'error' : appearance }
       />
     );
   };

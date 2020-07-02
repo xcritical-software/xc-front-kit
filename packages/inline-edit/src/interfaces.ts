@@ -66,6 +66,7 @@ export interface IInlineEditProps<TFieldValue> extends ICommonProps {
   defaultValue: TFieldValue;
   /** Determines whether isEditing begins as true. */
   startWithEditViewOpen?: boolean;
+  invalid?: boolean
 }
 
 export interface IReturnFunction<TValue> {
