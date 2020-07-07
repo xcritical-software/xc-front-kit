@@ -1,5 +1,5 @@
 import React, {
-  FC, createRef, useState, useEffect, useCallback, memo, useRef,
+  FC, createRef, useState, useEffect, useCallback, memo,
 } from 'react';
 import { withTheme } from 'styled-components';
 
@@ -12,23 +12,25 @@ interface IInlineEditState {
   isEditing?: boolean;
 }
 
-const getPureInlineEdit: <TFieldValue>() => FC<IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
+const getPureInlineEdit: <TFieldValue>() => FC<
+IInlineEditProps<TFieldValue> & IInlineEditState
+> = function f<TFieldValue>() {
   return ({
-            startWithEditViewOpen = false,
-            onConfirm,
-            onCancel,
-            defaultValue,
-            readView,
-            editView,
-            disabled = false,
-            invalid = false,
-            appearance = 'default',
-            ...rest
-          }: IInlineEditProps<TFieldValue>) => {
+    startWithEditViewOpen = false,
+    onConfirm,
+    onCancel,
+    defaultValue,
+    readView,
+    editView,
+    disabled = false,
+    invalid = false,
+    appearance = 'default',
+    error,
+    ...rest
+  }: IInlineEditProps<TFieldValue>) => {
     const editViewRef = createRef<HTMLElement>();
-    const [isEditing, setIsEditing] = useState(startWithEditViewOpen || invalid);
-    const defaultValueRef = useRef(defaultValue);
-    console.log(invalid, isEditing)
+    const [isEditing, setIsEditing] = useState(startWithEditViewOpen);
+    const [value, setValue] = useState(defaultValue);
 
     useEffect(() => {
       if (startWithEditViewOpen && editViewRef.current) {
@@ -44,20 +46,21 @@ const getPureInlineEdit: <TFieldValue>() => FC<IInlineEditProps<TFieldValue> & I
 
     useEffect(() => {
       if (invalid) {
-        setIsEditing(true)
+        setIsEditing(true);
       }
     });
 
-    const handleConfirm = useCallback((value: TFieldValue): void => {
+    const handleConfirm = useCallback((newValue: TFieldValue): void => {
+      onConfirm(newValue);
+      setValue(newValue);
       setIsEditing(false);
-      defaultValueRef.current = value;
-      onConfirm(value);
-    }, [onConfirm, invalid]);
+    }, [onConfirm]);
 
     const handleCancel = useCallback((): void => {
-      onCancel?.(defaultValueRef.current);
-      setIsEditing(false);
-    }, [onCancel]);
+      onCancel?.(defaultValue);
+      setValue(defaultValue);
+      handleConfirm(defaultValue);
+    }, [onCancel, defaultValue]);
 
     const handleEditRequested = useCallback((): void => {
       setIsEditing(true);
@@ -68,7 +71,9 @@ const getPureInlineEdit: <TFieldValue>() => FC<IInlineEditProps<TFieldValue> & I
     return (
       <InlineEditUncontrolled
         { ...rest }
-        defaultValue={ defaultValue }
+        invalid={ invalid }
+        error={ error }
+        defaultValue={ value }
         editView={ editView }
         readView={ readView }
         onConfirm={ handleConfirm }
@@ -76,7 +81,7 @@ const getPureInlineEdit: <TFieldValue>() => FC<IInlineEditProps<TFieldValue> & I
         isEditing={ isEditing }
         disabled={ disabled }
         onEditRequested={ handleEditRequested }
-        appearance={ invalid ? 'error' : appearance }
+        appearance={ appearance }
       />
     );
   };

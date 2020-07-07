@@ -26,7 +26,7 @@ const generateTheme = (
     crm: {
       editButton: {
         focus: {
-          border: `2px solid ${ lighten(0.6, '#003e6c') }`,
+          border: `2px solid ${lighten(0.6, '#003e6c')}`,
           backgroundColor: '#003e6c',
         },
       },
@@ -41,16 +41,6 @@ const generateTheme = (
         backgroundColor: lighten(0.6, '#003e6c'),
       },
     },
-    error: {
-      editButton: {
-        focus: {
-          border: `2px solid red`
-        },
-        hover: {
-          border: `2px solid red`
-        }
-      },
-    }
   },
 });
 
@@ -64,11 +54,12 @@ const options = [
 ];
 
 const BasicInlineEditInput: React.FC<AllType> = ({
-                                                   appearance = 'default',
-                                                   ...rest
-                                                 }) => {
+  appearance = 'default',
+  ...rest
+}) => {
   const [value, setValue] = React.useState('');
   const [invalid, setInvalid] = React.useState(false);
+  const [error, setError] = React.useState('');
 
   const getReadView = React.useCallback(() => (
     <div>
@@ -86,16 +77,13 @@ const BasicInlineEditInput: React.FC<AllType> = ({
   ), [rest]);
 
   const handleConfirm = React.useCallback((v: AllType) => {
-    setValue(v);
     if (v === '000') {
       setInvalid(true);
+      setError('You can\'t use \'000\' as value.');
     } else {
       setInvalid(false);
+      setValue(v);
     }
-  }, []);
-
-  const handleCancel = React.useCallback((defaultValue: AllType) => {
-    setValue(defaultValue || '');
   }, []);
 
   return (
@@ -106,17 +94,17 @@ const BasicInlineEditInput: React.FC<AllType> = ({
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
-        onCancel={ handleCancel }
         invalid={ invalid }
+        error={ error }
       />
     </ThemeProvider>
   );
 };
 
 const BasicInlineEditSelect: React.FC<AllType> = ({
-                                                    appearance = 'default',
-                                                    ...rest
-                                                  }) => {
+  appearance = 'default',
+  ...rest
+}) => {
   const [selectValue, setSelectValue] = React.useState({ value: 0, label: 'Select value' });
 
   const getReadView = React.useCallback(() => (
@@ -181,6 +169,6 @@ storiesOf('InlineEdit', module)
   ))
   .add('With error', () => (
     <div style={ { width: '200px' } }>
-      <BasicInlineEditInput editView={ Input } invalid={ true } />
+      <BasicInlineEditInput editView={ Input } />
     </div>
   ));

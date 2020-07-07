@@ -18,6 +18,7 @@ export type InlineEditTheme = ITheme<IInlineEditTheme>;
 export interface IFieldProps<T> {
   value: T;
   onChange: (e: T) => void;
+  invalid?: boolean;
 }
 
 export interface ICommonProps {
@@ -49,6 +50,8 @@ export interface IInlineEditUncontrolledProps<TFieldValue> extends ICommonProps 
   onConfirm: (value: TFieldValue) => void;
   /** Handler called when checkmark is. */
   onCancel?: () => void;
+  invalid?: boolean;
+  error?: string;
 }
 
 export interface IInlineEditProps<TFieldValue> extends ICommonProps {
@@ -66,7 +69,8 @@ export interface IInlineEditProps<TFieldValue> extends ICommonProps {
   defaultValue: TFieldValue;
   /** Determines whether isEditing begins as true. */
   startWithEditViewOpen?: boolean;
-  invalid?: boolean
+  invalid?: boolean;
+  error?: string;
 }
 
 export interface IReturnFunction<TValue> {

@@ -65,6 +65,13 @@ export const defaultInlineEditTheme: InlineEditTheme = {
       hover: {
         backgroundColor: lighten(0.15, '#ccc'),
       },
+      error: {
+        color: 'red',
+        padding: '2px 10px 0',
+        fontSize: '0.9em',
+        wordBreak: 'break-word',
+        textAlign: 'justify',
+      },
     },
   },
 };

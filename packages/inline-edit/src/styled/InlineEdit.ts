@@ -42,3 +42,7 @@ export const ButtonWrapper = styled.div<ICommonProps>`
 export const Button = styled.button<ICommonProps>`
   ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'button', appearance, baseAppearance)}
 `;
+
+export const ErrorText = styled.div<ICommonProps>`
+  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'error', appearance, baseAppearance)}
+`;

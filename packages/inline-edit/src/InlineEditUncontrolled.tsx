@@ -11,6 +11,7 @@ import {
   ButtonWrapper,
   Button,
   ContentWrapper,
+  ErrorText,
 } from './styled/InlineEdit';
 import {
   ConfirmIcon,
@@ -20,7 +21,8 @@ import { IInlineEditUncontrolledProps } from './interfaces';
 
 
 export const getInlineEditUncontrolled: <TFieldValue = string>() => FC<
-IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
+IInlineEditUncontrolledProps<TFieldValue>
+> = function f<TFieldValue>() {
   return ({
     appearance = 'default',
     baseAppearance = 'default',
@@ -33,6 +35,8 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
     onEditRequested,
     onCancel,
     onConfirm,
+    invalid,
+    error,
   }: IInlineEditUncontrolledProps<TFieldValue>) => {
     const editButtonRef = createRef<HTMLButtonElement>();
     const confirmButtonRef = createRef<HTMLButtonElement>();
@@ -144,12 +148,15 @@ IInlineEditUncontrolledProps<TFieldValue>> = function f<TFieldValue>() {
         baseAppearance={ baseAppearance }
       >
         {
-          isEditing ? (
-            <>
-              <EditView value={ value } onChange={ handleEditValueChange } />
-              { renderActionButtons() }
-            </>
-          ) : renderReadView()
+          isEditing
+            ? (
+              <>
+                <EditView value={ value } onChange={ handleEditValueChange } invalid={ invalid } />
+                { invalid && <ErrorText>{ error ?? 'Wrong value.' }</ErrorText> }
+                { renderActionButtons() }
+              </>
+            )
+            : renderReadView()
         }
       </ContentWrapper>
     );
