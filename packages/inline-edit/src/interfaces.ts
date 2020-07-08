@@ -60,16 +60,21 @@ export interface IInlineEditProps<TFieldValue> extends ICommonProps {
   /** Component to be shown when editing. */
   editView: React.FC<IFieldProps<TFieldValue>>;
   /**
-   * Handler called editView is closed and changes are confirmed.
+   * Handler is called, editView is closed and changes are confirmed.
    * Field value is passed as an argument to this function.
    */
   onConfirm: (value: TFieldValue) => void;
   onCancel?: (defaultValue?: TFieldValue) => void;
-  /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
+  /** If this prop is truthy, the editView component is active. */
+  isEditing?: boolean;
+  /** The value is shown in the editView when it is entered. Should be updated by onConfirm. */
   defaultValue: TFieldValue;
   /** Determines whether isEditing begins as true. */
   startWithEditViewOpen?: boolean;
+  /** If this prop is truthy, the editView doesn't close and an error message is displayed below it.
+    */
   invalid?: boolean;
+  /** Custom text for error message. */
   error?: string;
 }
 

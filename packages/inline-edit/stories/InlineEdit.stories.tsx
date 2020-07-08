@@ -96,6 +96,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
         onConfirm={ handleConfirm }
         invalid={ invalid }
         error={ error }
+        isEditing
       />
     </ThemeProvider>
   );

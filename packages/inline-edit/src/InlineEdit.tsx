@@ -8,14 +8,11 @@ import { getInlineEditUncontrolled } from './InlineEditUncontrolled';
 import { IInlineEditProps } from './interfaces';
 
 
-interface IInlineEditState {
-  isEditing?: boolean;
-}
-
 const getPureInlineEdit: <TFieldValue>() => FC<
-IInlineEditProps<TFieldValue> & IInlineEditState
+IInlineEditProps<TFieldValue>
 > = function f<TFieldValue>() {
   return ({
+    appearance = 'default',
     startWithEditViewOpen = false,
     onConfirm,
     onCancel,
@@ -24,12 +21,12 @@ IInlineEditProps<TFieldValue> & IInlineEditState
     editView,
     disabled = false,
     invalid = false,
-    appearance = 'default',
     error,
+    isEditing,
     ...rest
   }: IInlineEditProps<TFieldValue>) => {
     const editViewRef = createRef<HTMLElement>();
-    const [isEditing, setIsEditing] = useState(startWithEditViewOpen);
+    const [isEditingAuto, setIsEditingAuto] = useState(startWithEditViewOpen);
     const [value, setValue] = useState(defaultValue);
 
     useEffect(() => {
@@ -39,21 +36,21 @@ IInlineEditProps<TFieldValue> & IInlineEditState
     }, [startWithEditViewOpen, editViewRef]);
 
     useEffect(() => {
-      if (isEditing && editViewRef.current) {
+      if (isEditingAuto && editViewRef.current) {
         editViewRef.current.focus();
       }
-    }, [isEditing, editViewRef]);
+    }, [isEditingAuto, editViewRef]);
 
     useEffect(() => {
       if (invalid) {
-        setIsEditing(true);
+        setIsEditingAuto(true);
       }
     });
 
     const handleConfirm = useCallback((newValue: TFieldValue): void => {
-      onConfirm(newValue);
       setValue(newValue);
-      setIsEditing(false);
+      onConfirm(newValue);
+      setIsEditingAuto(false);
     }, [onConfirm]);
 
     const handleCancel = useCallback((): void => {
@@ -63,10 +60,11 @@ IInlineEditProps<TFieldValue> & IInlineEditState
     }, [onCancel, defaultValue]);
 
     const handleEditRequested = useCallback((): void => {
-      setIsEditing(true);
+      setIsEditingAuto(true);
     }, []);
 
     const InlineEditUncontrolled = getInlineEditUncontrolled<TFieldValue>();
+
 
     return (
       <InlineEditUncontrolled
@@ -78,7 +76,7 @@ IInlineEditProps<TFieldValue> & IInlineEditState
         readView={ readView }
         onConfirm={ handleConfirm }
         onCancel={ handleCancel }
-        isEditing={ isEditing }
+        isEditing={ isEditing !== undefined ? isEditing : isEditingAuto }
         disabled={ disabled }
         onEditRequested={ handleEditRequested }
         appearance={ appearance }
