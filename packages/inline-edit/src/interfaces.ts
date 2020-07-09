@@ -67,6 +67,9 @@ export interface IInlineEditProps<TFieldValue> extends ICommonProps {
   onCancel?: (defaultValue?: TFieldValue) => void;
   /** If this prop is truthy, the editView component is active. */
   isEditing?: boolean;
+  /** Callback for changing prop "isEditing" outside the InlineEdit component.
+   * Required, if you use "isEditing". */
+  setIsEditing?: (value: boolean) => void;
   /** The value is shown in the editView when it is entered. Should be updated by onConfirm. */
   defaultValue: TFieldValue;
   /** Determines whether isEditing begins as true. */

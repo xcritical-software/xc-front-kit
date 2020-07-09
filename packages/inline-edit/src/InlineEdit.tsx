@@ -23,10 +23,11 @@ IInlineEditProps<TFieldValue>
     invalid = false,
     error,
     isEditing,
+    setIsEditing,
     ...rest
   }: IInlineEditProps<TFieldValue>) => {
     const editViewRef = createRef<HTMLElement>();
-    const [isEditingAuto, setIsEditingAuto] = useState(startWithEditViewOpen);
+    const [isEditingAuto, setIsEditingAutoMode] = useState(startWithEditViewOpen);
     const [value, setValue] = useState(defaultValue);
 
     useEffect(() => {
@@ -42,25 +43,29 @@ IInlineEditProps<TFieldValue>
     }, [isEditingAuto, editViewRef]);
 
     useEffect(() => {
-      if (invalid) {
-        setIsEditingAuto(true);
+      if (invalid && isEditing === undefined) {
+        setIsEditingAutoMode(true);
       }
     });
 
     const handleConfirm = useCallback((newValue: TFieldValue): void => {
       setValue(newValue);
       onConfirm(newValue);
-      setIsEditingAuto(false);
-    }, [onConfirm]);
+      if (isEditing) return;
+      setIsEditingAutoMode(false);
+    }, [onConfirm, setIsEditing]);
 
     const handleCancel = useCallback((): void => {
       onCancel?.(defaultValue);
-      setValue(defaultValue);
       handleConfirm(defaultValue);
     }, [onCancel, defaultValue]);
 
     const handleEditRequested = useCallback((): void => {
-      setIsEditingAuto(true);
+      if (setIsEditing) {
+        setIsEditing(true);
+        return;
+      }
+      setIsEditingAutoMode(true);
     }, []);
 
     const InlineEditUncontrolled = getInlineEditUncontrolled<TFieldValue>();

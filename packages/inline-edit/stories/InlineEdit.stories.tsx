@@ -58,8 +58,6 @@ const BasicInlineEditInput: React.FC<AllType> = ({
   ...rest
 }) => {
   const [value, setValue] = React.useState('');
-  const [invalid, setInvalid] = React.useState(false);
-  const [error, setError] = React.useState('');
 
   const getReadView = React.useCallback(() => (
     <div>
@@ -77,13 +75,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
   ), [rest]);
 
   const handleConfirm = React.useCallback((v: AllType) => {
-    if (v === '000') {
-      setInvalid(true);
-      setError('You can\'t use \'000\' as value.');
-    } else {
-      setInvalid(false);
-      setValue(v);
-    }
+    setValue(v);
   }, []);
 
   return (
@@ -94,9 +86,6 @@ const BasicInlineEditInput: React.FC<AllType> = ({
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
-        invalid={ invalid }
-        error={ error }
-        isEditing
       />
     </ThemeProvider>
   );
@@ -145,6 +134,64 @@ const BasicInlineEditSelect: React.FC<AllType> = ({
   );
 };
 
+const InlineEditInputWithValidation: React.FC<AllType> = ({
+  appearance = 'default',
+  ...rest
+}) => {
+  const [value, setValue] = React.useState('');
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [error, setError] = React.useState('');
+  const [invalid, setInvalid] = React.useState(false);
+
+  const getReadView = React.useCallback(() => (
+    <div>
+      { value || 'Click and try to enter \'123\'' }
+    </div>
+  ), [value]);
+
+  const getEditView = React.useCallback((fieldProps) => (
+    <Input
+      { ...fieldProps }
+      { ...rest }
+      autoFocus
+      shouldFitContainer
+    />
+  ), [rest]);
+
+  const handleConfirm = React.useCallback((v: AllType) => {
+    if (v === '123') {
+      setInvalid(true);
+      setError('You can\'t use \'123\' as value.');
+    } else {
+      setInvalid(false);
+      setValue(v);
+      setIsEditing(false);
+    }
+  }, []);
+
+  const handleSetIsEditing = React.useCallback((isEditingState: boolean) => {
+    if (isEditingState) {
+      setIsEditing(true);
+    }
+  }, []);
+
+  return (
+    <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
+      <InlineEdit
+        appearance={ appearance }
+        defaultValue={ value }
+        readView={ getReadView }
+        editView={ getEditView }
+        onConfirm={ handleConfirm }
+        invalid={ invalid }
+        error={ error }
+        isEditing={ isEditing }
+        setIsEditing={ handleSetIsEditing }
+      />
+    </ThemeProvider>
+  );
+};
+
 
 storiesOf('InlineEdit', module)
   .add('Basic', () => (
@@ -168,8 +215,8 @@ storiesOf('InlineEdit', module)
       />
     </div>
   ))
-  .add('With error', () => (
-    <div style={ { width: '200px' } }>
-      <BasicInlineEditInput editView={ Input } />
+  .add('With custom validation', () => (
+    <div style={ { width: '210px' } }>
+      <InlineEditInputWithValidation editView={ Input } />
     </div>
   ));
