@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import { ITheme, ICSSProperties } from '@xcritical/theme';
 
 
@@ -24,6 +25,7 @@ export interface ICheckboxProps extends IStyledProps {
   disabled?: boolean;
   checkIcon?: React.ReactElement;
   onChange?: (checked: boolean) => void;
+  onClick?: (event: MouseEvent<HTMLLabelElement>) => void;
 }
 
 export interface IStyledCheckboxProps {

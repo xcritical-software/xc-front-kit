@@ -21,6 +21,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
   label,
   checkIcon,
   onChange,
+  onClick,
 }) => {
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>): void => {
     onChange?.(e.target.checked);
@@ -31,6 +32,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
       appearance={ appearance }
       baseAppearance={ baseAppearance }
       disabled={ disabled }
+      onClick={ onClick }
     >
       <HiddenCheckbox
         type={ type }
