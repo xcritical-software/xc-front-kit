@@ -192,6 +192,64 @@ const InlineEditInputWithValidation: React.FC<AllType> = ({
   );
 };
 
+const InlineEditSelectWithValidation: React.FC<AllType> = ({
+  appearance = 'default',
+  ...rest
+}) => {
+  const [value, setValue] = React.useState({ value: '', label: '' });
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [error, setError] = React.useState('');
+  const [invalid, setInvalid] = React.useState(false);
+
+  const getReadView = React.useCallback(() => (
+    <div>
+      { value.label || 'Click and try to save it without value' }
+    </div>
+  ), [value]);
+
+  const getEditView = React.useCallback((fieldProps) => (
+    <Select
+      { ...fieldProps }
+      { ...rest }
+      autoFocus
+      shouldFitContainer
+    />
+  ), [rest]);
+
+  const handleConfirm = React.useCallback((v: { value: string; label: string }) => {
+    if (v.value === '') {
+      setInvalid(true);
+      setError('You should select something.');
+    } else {
+      setInvalid(false);
+      setValue(v);
+      setIsEditing(false);
+    }
+  }, []);
+
+  const handleSetIsEditing = React.useCallback((isEditingState: boolean) => {
+    if (isEditingState) {
+      setIsEditing(true);
+    }
+  }, []);
+
+  return (
+    <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
+      <InlineEdit
+        appearance={ appearance }
+        defaultValue={ value }
+        readView={ getReadView }
+        editView={ getEditView }
+        onConfirm={ handleConfirm }
+        invalid={ invalid }
+        error={ error }
+        isEditing={ isEditing }
+        setIsEditing={ handleSetIsEditing }
+      />
+    </ThemeProvider>
+  );
+};
+
 
 storiesOf('InlineEdit', module)
   .add('Basic', () => (
@@ -215,8 +273,15 @@ storiesOf('InlineEdit', module)
       />
     </div>
   ))
-  .add('With custom validation', () => (
+  .add('Input with custom validation', () => (
     <div style={ { width: '210px' } }>
       <InlineEditInputWithValidation editView={ Input } />
+    </div>
+  ))
+  .add('Select with custom validation', () => (
+    <div style={ { width: '210px' } }>
+      <InlineEditSelectWithValidation
+        options={ options }
+      />
     </div>
   ));
