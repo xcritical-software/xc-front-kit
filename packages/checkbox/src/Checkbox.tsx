@@ -21,18 +21,24 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
   label,
   checkIcon,
   onChange,
-  onClick,
 }) => {
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>): void => {
-    onChange?.(e.target.checked);
-  }, [onChange]);
+  const handleInputChange = useCallback(() => {}, []);
+
+  const handleClick = useCallback((e: React.MouseEvent<HTMLLabelElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!disabled && onChange) {
+      onChange(!checked, e);
+    }
+  }, [disabled, checked, onChange]);
 
   return (
     <CheckboxLabel
       appearance={ appearance }
       baseAppearance={ baseAppearance }
       disabled={ disabled }
-      onClick={ onClick }
+      onClick={ handleClick }
     >
       <HiddenCheckbox
         type={ type }

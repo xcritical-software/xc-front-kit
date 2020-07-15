@@ -24,8 +24,7 @@ export interface ICheckboxProps extends IStyledProps {
   checked?: boolean;
   disabled?: boolean;
   checkIcon?: React.ReactElement;
-  onChange?: (checked: boolean) => void;
-  onClick?: (event: MouseEvent<HTMLLabelElement>) => void;
+  onChange?: (checked: boolean, event: MouseEvent<HTMLLabelElement>) => void;
 }
 
 export interface IStyledCheckboxProps {
