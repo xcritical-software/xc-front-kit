@@ -19,6 +19,7 @@ export interface IFieldProps<T> {
   value: T;
   onChange: (e: T) => void;
   invalid?: boolean;
+  errorMessage?: string;
 }
 
 export interface ICommonProps {
@@ -51,7 +52,7 @@ export interface IInlineEditUncontrolledProps<TFieldValue> extends ICommonProps 
   /** Handler called when checkmark is. */
   onCancel?: () => void;
   invalid?: boolean;
-  error?: string;
+  errorMessage?: string;
 }
 
 export interface IInlineEditProps<TFieldValue> extends ICommonProps {
@@ -78,7 +79,7 @@ export interface IInlineEditProps<TFieldValue> extends ICommonProps {
     */
   invalid?: boolean;
   /** Custom text for error message. */
-  error?: string;
+  errorMessage?: string;
 }
 
 export interface IReturnFunction<TValue> {

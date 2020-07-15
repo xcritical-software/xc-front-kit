@@ -4,7 +4,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { lighten } from 'polished';
 
 import Input from '@xcritical/input';
@@ -52,6 +52,15 @@ const options = [
   { value: 'thirdCard', label: '4567 4567 4567 4567' },
   { value: 'fourthCard', label: '0123 0123 0123 0123' },
 ];
+
+const ErrorMessage = styled.p`
+  color: red;
+  padding: 2px 5px 2px;
+  margin: 0;
+  font-size: 0.9em;
+  word-break: break-word;
+  text-align: justify;
+`;
 
 const BasicInlineEditInput: React.FC<AllType> = ({
   appearance = 'default',
@@ -141,7 +150,7 @@ const InlineEditInputWithValidation: React.FC<AllType> = ({
   const [value, setValue] = React.useState('');
   const [isEditing, setIsEditing] = React.useState(false);
   const [error, setError] = React.useState('');
-  const [invalid, setInvalid] = React.useState(false);
+  const [withError, setWithError] = React.useState(false);
 
   const getReadView = React.useCallback(() => (
     <div>
@@ -149,21 +158,25 @@ const InlineEditInputWithValidation: React.FC<AllType> = ({
     </div>
   ), [value]);
 
-  const getEditView = React.useCallback((fieldProps) => (
-    <Input
-      { ...fieldProps }
-      { ...rest }
-      autoFocus
-      shouldFitContainer
-    />
+  const getEditView = React.useCallback(({ invalid, errorMessage, ...fieldProps }) => (
+    <>
+      { invalid && <ErrorMessage>{ errorMessage }</ErrorMessage> }
+      <Input
+        { ...fieldProps }
+        { ...rest }
+        invalid={ invalid }
+        autoFocus
+        shouldFitContainer
+      />
+    </>
   ), [rest]);
 
   const handleConfirm = React.useCallback((v: AllType) => {
     if (v === '123') {
-      setInvalid(true);
+      setWithError(true);
       setError('You can\'t use \'123\' as value.');
     } else {
-      setInvalid(false);
+      setWithError(false);
       setValue(v);
       setIsEditing(false);
     }
@@ -183,8 +196,8 @@ const InlineEditInputWithValidation: React.FC<AllType> = ({
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
-        invalid={ invalid }
-        error={ error }
+        invalid={ withError }
+        errorMessage={ error }
         isEditing={ isEditing }
         setIsEditing={ handleSetIsEditing }
       />
@@ -199,7 +212,7 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
   const [value, setValue] = React.useState({ value: '', label: '' });
   const [isEditing, setIsEditing] = React.useState(false);
   const [error, setError] = React.useState('');
-  const [invalid, setInvalid] = React.useState(false);
+  const [withError, setWithError] = React.useState(false);
 
   const getReadView = React.useCallback(() => (
     <div>
@@ -207,21 +220,24 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
     </div>
   ), [value]);
 
-  const getEditView = React.useCallback((fieldProps) => (
-    <Select
-      { ...fieldProps }
-      { ...rest }
-      autoFocus
-      shouldFitContainer
-    />
+  const getEditView = React.useCallback(({ invalid, errorMessage, ...fieldProps }) => (
+    <>
+      { invalid && <ErrorMessage>{ errorMessage }</ErrorMessage> }
+      <Select
+        { ...fieldProps }
+        { ...rest }
+        autoFocus
+        shouldFitContainer
+      />
+    </>
   ), [rest]);
 
   const handleConfirm = React.useCallback((v: { value: string; label: string }) => {
     if (v.value === '') {
-      setInvalid(true);
+      setWithError(true);
       setError('You should select something.');
     } else {
-      setInvalid(false);
+      setWithError(false);
       setValue(v);
       setIsEditing(false);
     }
@@ -233,6 +249,10 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
     }
   }, []);
 
+  const onCancel = React.useCallback(() => {
+    setIsEditing(false);
+  }, []);
+
   return (
     <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
       <InlineEdit
@@ -241,8 +261,9 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
-        invalid={ invalid }
-        error={ error }
+        onCancel={ onCancel }
+        invalid={ withError }
+        errorMessage={ error }
         isEditing={ isEditing }
         setIsEditing={ handleSetIsEditing }
       />
@@ -273,15 +294,17 @@ storiesOf('InlineEdit', module)
       />
     </div>
   ))
-  .add('Input with custom validation', () => (
-    <div style={ { width: '210px' } }>
-      <InlineEditInputWithValidation editView={ Input } />
-    </div>
-  ))
-  .add('Select with custom validation', () => (
-    <div style={ { width: '210px' } }>
-      <InlineEditSelectWithValidation
-        options={ options }
-      />
+  .add('InlineEdit with custom validation', () => (
+    <div style={ { display: 'flex' } }>
+      <div style={ { width: '300px', marginLeft: '10px' } }>
+        <p>Input InlineEdit</p>
+        <InlineEditInputWithValidation editView={ Input } />
+      </div>
+      <div style={ { width: '300px', marginLeft: '50px' } }>
+        <p>Select InlineEdit</p>
+        <InlineEditSelectWithValidation
+          options={ options }
+        />
+      </div>
     </div>
   ));

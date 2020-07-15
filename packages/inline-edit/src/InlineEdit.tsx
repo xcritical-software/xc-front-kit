@@ -21,7 +21,7 @@ IInlineEditProps<TFieldValue>
     editView,
     disabled = false,
     invalid = false,
-    error,
+    errorMessage,
     isEditing,
     setIsEditing,
     ...rest
@@ -75,7 +75,7 @@ IInlineEditProps<TFieldValue>
       <InlineEditUncontrolled
         { ...rest }
         invalid={ invalid }
-        error={ error }
+        errorMessage={ errorMessage }
         defaultValue={ value }
         editView={ editView }
         readView={ readView }

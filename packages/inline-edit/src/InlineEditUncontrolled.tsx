@@ -11,7 +11,6 @@ import {
   ButtonWrapper,
   Button,
   ContentWrapper,
-  ErrorText,
 } from './styled/InlineEdit';
 import {
   ConfirmIcon,
@@ -36,7 +35,7 @@ IInlineEditUncontrolledProps<TFieldValue>
     onCancel,
     onConfirm,
     invalid,
-    error,
+    errorMessage,
   }: IInlineEditUncontrolledProps<TFieldValue>) => {
     const editButtonRef = createRef<HTMLButtonElement>();
     const confirmButtonRef = createRef<HTMLButtonElement>();
@@ -151,8 +150,12 @@ IInlineEditUncontrolledProps<TFieldValue>
           isEditing
             ? (
               <>
-                <EditView value={ value } onChange={ handleEditValueChange } invalid={ invalid } />
-                { invalid && <ErrorText>{ error ?? 'Wrong value.' }</ErrorText> }
+                <EditView
+                  value={ value }
+                  onChange={ handleEditValueChange }
+                  invalid={ invalid }
+                  errorMessage={ errorMessage }
+                />
                 { renderActionButtons() }
               </>
             )
