@@ -1,4 +1,5 @@
 import { createStore, combineReducers, compose } from 'redux';
+
 import { reducer as reduxFormReducer } from '../src';
 
 

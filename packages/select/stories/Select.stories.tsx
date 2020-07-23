@@ -2,6 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
+
 // eslint-disable-next-line import/no-unresolved
 import Select from '../src';
 
@@ -61,6 +62,7 @@ const groupOptionsPrefix = [
 
 const ChangeOptions = () => {
   const [isFirstOptions, changeIsFirstOptions] = useState(true);
+
   return (
     <>
       <button

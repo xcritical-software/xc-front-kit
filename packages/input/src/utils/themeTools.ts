@@ -1,5 +1,7 @@
 import { darken } from 'polished';
+
 import { colors } from '@xcritical/theme';
+
 import { IBaseInputTheme } from '../interfaces';
 
 

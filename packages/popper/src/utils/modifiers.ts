@@ -23,5 +23,6 @@ const getAutoFlipModifiers = (autoFlip: boolean): Modifiers => ({
 export const getModifiers = (autoFlip: boolean, modifiers?: Modifiers): Modifiers => {
   const defaultModifiers = getDefaultModifiers();
   const autoFlipModifiers = getAutoFlipModifiers(autoFlip);
+
   return mergeDeep(defaultModifiers, autoFlipModifiers, modifiers);
 };

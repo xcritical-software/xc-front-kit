@@ -1,12 +1,13 @@
 import {
+  css, FlattenSimpleInterpolation, FlattenInterpolation, ThemeProps,
+} from 'styled-components';
+
+import {
   getAppearanceTheme,
   getThemedState,
   ITheme,
   AllType,
 } from '@xcritical/theme';
-import {
-  css, FlattenSimpleInterpolation, FlattenInterpolation, ThemeProps,
-} from 'styled-components';
 
 import { itemThemeNamespace, itemThemeStyle } from '../theme';
 import { IItemTheme, IItemProps } from '../interfaces';
@@ -17,6 +18,7 @@ export const itemTheme = (
   propertyPath?: string | string[],
 ): AllType => {
   const func = getThemedState(itemThemeNamespace, itemThemeStyle);
+
   return func(theme, propertyPath);
 };
 
@@ -27,6 +29,7 @@ export const itemAppearanceTheme = (
   propertyPath?: string | string[],
 ): AllType => {
   const func = getAppearanceTheme(itemThemeNamespace, itemThemeStyle);
+
   return func(theme, appearanceName, propertyPath, baseAppearance);
 };
 
@@ -60,6 +63,7 @@ export const getHeightStyle = ({
   baseAppearance = 'default',
 }: IItemProps): FlattenSimpleInterpolation | string => {
   const height = itemAppearanceTheme(theme, appearance, baseAppearance, 'height');
+
   return height
     ? css`
         height: ${height}px;

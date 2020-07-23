@@ -1,5 +1,6 @@
-import { getThemedState } from '@xcritical/theme';
 import { CSSObject } from 'styled-components';
+
+import { getThemedState } from '@xcritical/theme';
 
 import { sidebarThemeNamespace, defaultSidebarTheme } from './theme';
 import { SidebarTheme } from './interfaces';
@@ -10,6 +11,7 @@ export function sidebarTheme (
   propertyPath?: string | string[],
 ): CSSObject {
   const func = getThemedState(sidebarThemeNamespace, defaultSidebarTheme);
+
   // TODO: Need investigate this problem
   return func(theme, propertyPath) as CSSObject;
 }

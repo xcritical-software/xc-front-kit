@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { storiesOf } from '@storybook/react';
+
 import { colors } from '@xcritical/theme';
 
 import { Pagination, paginationThemeNamespace } from '../src';

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+
 import { IWrapper } from '../interfaces';
+
 import { getWrapperStyles } from './utils';
 
 
@@ -24,12 +26,14 @@ export const Wrapper = styled.div.attrs(({ width }: IWrapper) => ({
         cursor: grabbing;
         `;
     }
+
     if (changingColumns === 'resize') {
       return `
         user-select: none;
         cursor: w-resize;
         `;
     }
+
     return '';
   }}
   ${getWrapperStyles}

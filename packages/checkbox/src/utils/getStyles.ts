@@ -14,6 +14,7 @@ export const checkboxAppearanceTheme = (
   propertyPath?: string | string[],
 ): AllType => {
   const func = getAppearanceTheme(checkboxThemeNamespace, defaultCheckboxTheme);
+
   return func(theme, appearanceName, propertyPath, baseAppearance);
 };
 

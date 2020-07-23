@@ -12,11 +12,13 @@ import {
   xcriticalFiltersRemoveFilter,
   xcriticalFiltersAdd,
 } from '../../actions';
+
 import { Tag } from './Tag';
 
 
 const mapDispatchToProps = () => {
   let dispatchProps: IMapDispatchFilterTag;
+
   return (
     dispatch: Dispatch,
     { name }: ITagContainerProps,
@@ -36,6 +38,7 @@ const mapDispatchToProps = () => {
         })),
       };
     }
+
     return dispatchProps;
   };
 };

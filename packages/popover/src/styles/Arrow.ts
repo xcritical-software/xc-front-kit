@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { IThemed } from '../interfaces';
+
 import { getPopperProperty, getArrowSizes, getArrowBorderWidth } from './utils';
 
 

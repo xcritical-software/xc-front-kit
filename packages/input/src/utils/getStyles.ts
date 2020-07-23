@@ -22,6 +22,7 @@ export const inputTheme = memoize((
   propertyPath?: string | string[],
 ): InputTheme | any => {
   const func = getThemedState(inputThemeNamespace, inputThemeStyle);
+
   return func(theme, propertyPath);
 });
 
@@ -33,6 +34,7 @@ export const inputApperanceTheme = memoize((
   propertyPath?: string | string[],
 ): InputTheme | any => {
   const func = getAppearanceTheme(inputThemeNamespace, inputThemeStyle);
+
   return func(theme, appearanceName, propertyPath, baseAppearance);
 });
 

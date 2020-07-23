@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { IThemeBadgeProps } from './interfaces';
 import { getRootBadgeStyles, getRootBadgeInteractiveStyles } from './utils';
 
