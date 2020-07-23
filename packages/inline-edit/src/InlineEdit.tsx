@@ -8,9 +8,8 @@ import { getInlineEditUncontrolled } from './InlineEditUncontrolled';
 import { IInlineEditProps } from './interfaces';
 
 
-const getPureInlineEdit: <TFieldValue>() => FC<
-IInlineEditProps<TFieldValue>
-> = function f<TFieldValue>() {
+const getPureInlineEdit: <TFieldValue>
+() => FC<IInlineEditProps<TFieldValue>> = function f<TFieldValue>() {
   return ({
     appearance = 'default',
     startWithEditViewOpen = false,
@@ -51,24 +50,31 @@ IInlineEditProps<TFieldValue>
     const handleConfirm = useCallback((newValue: TFieldValue): void => {
       setValue(newValue);
       onConfirm(newValue);
+
       if (isEditing) return;
+
       setIsEditingAutoMode(false);
     }, [onConfirm, onIsEditingChange]);
 
     const handleCancel = useCallback((): void => {
       setValue(defaultValue);
+
       if (onCancel) {
         onCancel();
+
         return;
       }
+
       setIsEditingAutoMode(false);
     }, [onCancel, defaultValue]);
 
     const handleEditRequested = useCallback((): void => {
       if (onIsEditingChange) {
         onIsEditingChange(true);
+
         return;
       }
+
       setIsEditingAutoMode(true);
     }, []);
 
