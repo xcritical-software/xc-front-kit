@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import React, {
-  FC, ReactNode, useCallback, createRef, useState, useEffect,
+  ReactNode, useCallback, createRef, useState, useEffect,
 } from 'react';
 
 import {
@@ -16,18 +16,21 @@ import {
   ConfirmIcon,
   CancelIcon,
 } from './Icons';
-import { IInlineEditUncontrolledProps } from './interfaces';
+import { IInlineEditUncontrolledProps, IEditViewProps, IReadViewProps } from './interfaces';
 
 
-export const getInlineEditUncontrolled: <TFieldValue = string>() => FC<
-IInlineEditUncontrolledProps<TFieldValue>
-> = function f<TFieldValue>() {
-  return ({
+export const InlineEditUncontrolled = function <
+  TEditViewProps extends IEditViewProps<TFieldValue>,
+  TViewProps extends IReadViewProps<TFieldValue>,
+  TFieldValue>(
+  {
     appearance = 'default',
     baseAppearance = 'default',
     defaultValue,
     readView: ReadView,
+    readViewProps,
     editView: EditView,
+    editViewProps,
     readViewFitContainerWidth,
     isEditing,
     disabled,
@@ -36,132 +39,137 @@ IInlineEditUncontrolledProps<TFieldValue>
     onConfirm,
     invalid,
     errorMessage,
-  }: IInlineEditUncontrolledProps<TFieldValue>) => {
-    const editButtonRef = createRef<HTMLButtonElement>();
-    const confirmButtonRef = createRef<HTMLButtonElement>();
-    const cancelButtonRef = createRef<HTMLButtonElement>();
+  }: IInlineEditUncontrolledProps<TEditViewProps, TViewProps, TFieldValue>,
+): React.ReactElement<IInlineEditUncontrolledProps<TEditViewProps, TViewProps, TFieldValue>> {
+  const editButtonRef = createRef<HTMLButtonElement>();
+  const confirmButtonRef = createRef<HTMLButtonElement>();
+  const cancelButtonRef = createRef<HTMLButtonElement>();
 
-    const [value, setValue] = useState(defaultValue);
+  const [value, setValue] = useState(defaultValue);
 
-    useEffect(() => {
-      setValue(defaultValue);
-    }, [defaultValue]);
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
 
-    const handleEditValueChange = useCallback((e) => {
-      if (e.target && e.target.value) {
-        setValue(e.target.value);
-      } else {
-        setValue(e);
-      }
-    }, []);
+  const handleEditValueChange = useCallback((e: any) => {
+    if (e.target && e.target.value) {
+      setValue(e.target.value);
+    } else {
+      setValue(e);
+    }
+  }, []);
 
-    const handleReadViewClick = useCallback((
-      event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>,
-    ): void => {
-      event.preventDefault();
-      if (!disabled) {
-        onEditRequested();
-      }
-    }, [disabled, onEditRequested]);
+  const handleReadViewClick = useCallback((
+    event: React.MouseEvent<HTMLButtonElement | HTMLDivElement>,
+  ): void => {
+    event.preventDefault();
 
-    const handleConfirmClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
-      e.preventDefault();
-      onConfirm(value);
-    }, [onConfirm, value]);
+    if (!disabled) {
+      onEditRequested();
+    }
+  }, [disabled, onEditRequested]);
 
-    const handleCancelClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
-      e.preventDefault();
+  const handleConfirmClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    onConfirm(value);
+  }, [onConfirm, value]);
+
+  const handleCancelClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
       onCancel?.();
-    }, [onCancel]);
+  }, [onCancel]);
 
-    const renderReadView = useCallback((): ReactNode => (
-      <ReadViewWrapper>
-        <EditButton
-          appearance={ appearance }
-          baseAppearance={ baseAppearance }
-          onClick={ onEditRequested }
-          ref={ editButtonRef }
+  const renderReadView = useCallback((): ReactNode => (
+    <ReadViewWrapper>
+      <EditButton
+        appearance={ appearance }
+        baseAppearance={ baseAppearance }
+        onClick={ onEditRequested }
+        ref={ editButtonRef }
+      />
+      <ReadViewContentWrapper
+        appearance={ appearance }
+        baseAppearance={ baseAppearance }
+        onClick={ handleReadViewClick }
+        readViewFitContainerWidth={ readViewFitContainerWidth }
+        disabled={ disabled }
+      >
+        <ReadView
+          { ...readViewProps }
+          value={ value }
         />
-        <ReadViewContentWrapper
-          appearance={ appearance }
-          baseAppearance={ baseAppearance }
-          onClick={ handleReadViewClick }
-          readViewFitContainerWidth={ readViewFitContainerWidth }
-          disabled={ disabled }
-        >
-          <ReadView value={ value } />
-        </ReadViewContentWrapper>
-      </ReadViewWrapper>
-    ), [
-      appearance,
-      baseAppearance,
-      editButtonRef,
-      handleReadViewClick,
-      onEditRequested,
-      readViewFitContainerWidth,
-      value,
-      disabled,
-    ]);
+      </ReadViewContentWrapper>
+    </ReadViewWrapper>
+  ), [
+    appearance,
+    baseAppearance,
+    editButtonRef,
+    handleReadViewClick,
+    onEditRequested,
+    readViewFitContainerWidth,
+    value,
+    disabled,
+  ]);
 
-    const renderActionButtons = useCallback((): ReactNode => (
-      <ButtonsWrapper
+  const renderActionButtons = useCallback((): ReactNode => (
+    <ButtonsWrapper
+      appearance={ appearance }
+      baseAppearance={ baseAppearance }
+    >
+      <ButtonWrapper
         appearance={ appearance }
         baseAppearance={ baseAppearance }
       >
-        <ButtonWrapper
+        <Button
           appearance={ appearance }
           baseAppearance={ baseAppearance }
+          ref={ confirmButtonRef }
+          onClick={ handleConfirmClick }
         >
-          <Button
-            appearance={ appearance }
-            baseAppearance={ baseAppearance }
-            ref={ confirmButtonRef }
-            onClick={ handleConfirmClick }
-          >
-            <ConfirmIcon />
-          </Button>
-        </ButtonWrapper>
-        <ButtonWrapper>
-          <Button
-            appearance={ appearance }
-            baseAppearance={ baseAppearance }
-            ref={ cancelButtonRef }
-            onClick={ handleCancelClick }
-          >
-            <CancelIcon />
-          </Button>
-        </ButtonWrapper>
-      </ButtonsWrapper>
-    ), [
-      appearance,
-      baseAppearance,
-      cancelButtonRef,
-      confirmButtonRef,
-      handleCancelClick,
-      handleConfirmClick,
-    ]);
+          <ConfirmIcon />
+        </Button>
+      </ButtonWrapper>
+      <ButtonWrapper>
+        <Button
+          appearance={ appearance }
+          baseAppearance={ baseAppearance }
+          ref={ cancelButtonRef }
+          onClick={ handleCancelClick }
+        >
+          <CancelIcon />
+        </Button>
+      </ButtonWrapper>
+    </ButtonsWrapper>
+  ), [
+    appearance,
+    baseAppearance,
+    cancelButtonRef,
+    confirmButtonRef,
+    handleCancelClick,
+    handleConfirmClick,
+  ]);
 
-    return (
-      <ContentWrapper
-        appearance={ appearance }
-        baseAppearance={ baseAppearance }
-      >
-        {
-          isEditing
-            ? (
-              <>
-                <EditView
-                  value={ value }
-                  onChange={ handleEditValueChange }
-                  invalid={ invalid }
-                  errorMessage={ errorMessage }
-                />
-                { renderActionButtons() }
-              </>
-            )
-            : renderReadView()
-        }
-      </ContentWrapper>
-    );
-  };
+  return (
+    <ContentWrapper
+      appearance={ appearance }
+      baseAppearance={ baseAppearance }
+    >
+      {
+        isEditing
+          ? (
+            <>
+              <EditView
+                { ...editViewProps }
+                value={ value }
+                onChange={ handleEditValueChange }
+                invalid={ invalid }
+                errorMessage={ errorMessage }
+              />
+              { renderActionButtons() }
+            </>
+          )
+          : renderReadView()
+      }
+    </ContentWrapper>
+  );
 };
