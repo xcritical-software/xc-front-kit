@@ -2,7 +2,12 @@ import React, { useCallback, useMemo } from 'react';
 import { OptionTypeBase } from 'react-select';
 
 import Select from '@xcritical/select';
+
 import { FilterValueElement } from '../filterElement';
+
+
+import { ITagConditionProps } from '../../interfaces';
+import { Remove } from '../icons';
 
 import {
   TagLabel,
@@ -10,9 +15,6 @@ import {
   DropdownItem,
   RemoveConditionButton,
 } from './styled';
-
-import { ITagConditionProps } from '../../interfaces';
-import { Remove } from '../icons';
 
 
 export const TagCondition: React.FC<ITagConditionProps> = ({

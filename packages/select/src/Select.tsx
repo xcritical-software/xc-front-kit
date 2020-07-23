@@ -3,7 +3,9 @@ import React, {
 } from 'react';
 import Select from 'react-select';
 import { ThemeContext } from 'styled-components';
+
 import { IThemeNamespace } from '@xcritical/theme';
+
 import {
   getFormatOptionLabel,
   ClearIndicator,

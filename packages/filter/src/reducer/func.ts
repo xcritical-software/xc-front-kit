@@ -1,6 +1,7 @@
 import { v1 as uuid } from 'uuid';
 
 import { setIn } from 'utilitify';
+
 import {
   IFilterAction,
   IFilterStore,
@@ -63,8 +64,11 @@ export const changeFilter = (
       condition: '',
       value: '',
     }, ['drafts', `${index}`]);
-  } if (field === 'condition') {
+  }
+
+  if (field === 'condition') {
     const $state = setIn(state, value, ['drafts', `${index}`, 'condition']);
+
     return setIn($state, null, ['drafts', `${index}`, 'value']);
   }
 

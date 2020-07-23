@@ -1,11 +1,13 @@
 import React from 'react';
+
+import { CSSObject } from 'styled-components';
+
 import {
   ITheme,
   IThemeNamespace,
   ICSSProperties,
   IThemeBase,
 } from '@xcritical/theme';
-import { CSSObject } from 'styled-components';
 
 /* BUTTON */
 export type ButtonTags = 'button' | 'span' | 'a';

@@ -85,6 +85,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
           }
         }
       }
+
       setMouseMove(clientX - startClickXRef.current);
     },
     [emptyColumnIndexRef],
@@ -104,6 +105,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
 
   const handleMouseDown = (e: MouseEvent, i: number) => {
     if (!shouldMovingColumns) return;
+
     clickXRef.current = e.clientX;
     startClickXRef.current = e.clientX;
     const coords = e.currentTarget.getBoundingClientRect();

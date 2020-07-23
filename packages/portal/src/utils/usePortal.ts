@@ -11,6 +11,7 @@ export const createRootElement = (id: string, zIndex: number | string): HTMLElem
   const rootContainer = document.createElement('div');
   rootContainer.setAttribute('id', id);
   rootContainer.setAttribute('style', `z-index: ${zIndex};`);
+
   return rootContainer;
 };
 

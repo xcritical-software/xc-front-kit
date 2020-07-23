@@ -88,18 +88,22 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     const newFullWidth = getFullWidth(gridHOCMappedColumns);
 
     fullWidthRef.current = newFullWidth;
+
     if (newFullWidth < width && shouldFitLastColumn) {
       const lastElemIdx = searchLastVisible(gridHOCMappedColumns, gridHOCMappedColumns.length);
       const widthLast = gridHOCMappedColumns[lastElemIdx].width;
       const newColumns = setIn(gridHOCMappedColumns, Number(widthLast) + (width - newFullWidth), [String(lastElemIdx), 'width']);
       setMappedColumns(newColumns);
+
       return;
     }
+
     setMappedColumns(gridHOCMappedColumns);
   }, [gridHOCMappedColumns, width, shouldFitLastColumn]);
 
   const handleScroll = useCallback((e: ScrollPosition) => {
     setScrollLeft(-e.scrollLeft);
+
     if (onScrollsyncScroll) {
       onScrollsyncScroll(e);
     }
@@ -236,6 +240,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
 
   useEffect(() => {
     if (gridRef.current) gridRef.current.recomputeGridSize();
+
     if (cacheRef.current && !rowHeight) cacheRef.current.clearAll();
   }, [mappedColumns, mappedItems]);
 

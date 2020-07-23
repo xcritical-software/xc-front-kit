@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { Provider, connect } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import CloseCircleOutlineIcon from 'mdi-react/CloseCircleOutlineIcon';
+
 import { colors } from '@xcritical/theme';
 
 import ModalPortal, {
@@ -79,6 +80,7 @@ const ModalWithPayload: React.FC<{id?: number}> = ({ id }) => (
 
 const mapStateToProps = (state) => {
   const modal = getModalByName(state, 'modalWithPayload');
+
   return {
     id: modal.id,
   };

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+
 import {
   IHeader, IHeaderCell, IHeaderCellContent, IRightBorder, IMovingElem,
 } from '../interfaces';
+
 import {
   getHeaderStyles,
   getHeaderCellStyles,

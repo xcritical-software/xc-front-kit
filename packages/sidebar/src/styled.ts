@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { Scrollbars } from 'react-custom-scrollbars';
+
 import { sidebarTheme, getStylesWithoutTransition, getTransition } from './utils';
 
 import {

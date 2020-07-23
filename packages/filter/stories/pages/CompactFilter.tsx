@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+
 import { CompactFilter, xcriticalFiltersInit, xcriticalFiltersAdd } from '../../src';
 import { simpleData } from '../data/simpleData';
 import { IPage } from '../interfaces';
@@ -52,6 +53,7 @@ const CompactFilterPage: React.FC<IPage> = ({
   useEffect(() => {
     onInit();
   });
+
   return (
     <CompactFilter
       name={ pageName }

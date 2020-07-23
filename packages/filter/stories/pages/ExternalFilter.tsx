@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { v1 as uuid } from 'uuid';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import Input from '@xcritical/input';
+
 import get from 'lodash.get';
+
+import Input from '@xcritical/input';
+
 import { CompactFilter, xcriticalFiltersInit, xcriticalFiltersChangeFilter } from '../../src';
 import { simpleData } from '../data/externalData';
 import { IPageExternal } from '../interfaces';
@@ -28,6 +31,7 @@ const CompactFilterPage: React.FC<IPageExternal> = ({
   useEffect(() => {
     onInit();
   }, []);
+
   return (
     <>
       <Input placeholder="User Name" value={ userName } onChange={ (value) => onChangeExternal(value) } />

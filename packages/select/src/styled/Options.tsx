@@ -1,7 +1,10 @@
 import React, { CSSProperties } from 'react';
-import { IThemeNamespace } from '@xcritical/theme';
+
 import styled from 'styled-components';
 import { FormatOptionLabelContext, FormatOptionLabelMeta } from 'react-select/src/Select';
+
+import { IThemeNamespace } from '@xcritical/theme';
+
 import { getPaddingStyles, getCustomStyles } from '../utils';
 import {
   IOptionProps, IPrefixProps, IOptionItem, ISelectBaseTheme,

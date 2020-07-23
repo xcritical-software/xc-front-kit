@@ -1,6 +1,7 @@
 import { lighten, darken } from 'polished';
 
 import { colors, ITheme } from '@xcritical/theme';
+
 import { ISelectBaseTheme } from './interfaces';
 
 

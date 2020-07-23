@@ -1,9 +1,11 @@
 import memoizee from 'micro-memoize';
 import get from 'lodash.get';
+
+import { isObject } from 'utilitify';
+
 import {
   getAppearanceTheme, getStatesTheme, IThemeNamespace,
 } from '@xcritical/theme';
-import { isObject } from 'utilitify';
 
 import { selectThemeNamespace, selectThemeStyle } from '../theme';
 import { GetStyles, ISelectBaseTheme } from '../interfaces';
@@ -16,6 +18,7 @@ export const selectTheme = (
   propertyPath?: string | string[],
 ): ISelectBaseTheme | any => {
   const func = getAppearanceTheme(selectThemeNamespace, selectThemeStyle);
+
   return func(theme, appearanceName, propertyPath, baseAppearance);
 };
 
@@ -27,6 +30,7 @@ const getAppearanceStyleProperty = (
 ): any => {
   const appearanceTheme = selectTheme(theme, appearance, baseAppearance);
   const statesTheme = getStatesTheme(appearanceTheme, stateName);
+
   return statesTheme();
 };
 

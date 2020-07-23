@@ -5,10 +5,12 @@ export const rtlSide = (isRTL: boolean, property: string): string => {
     if (property === 'left') {
       return 'right';
     }
+
     if (property === 'right') {
       return 'left';
     }
   }
+
   return property;
 };
 
@@ -22,5 +24,6 @@ export const rtlSwapper = (
   if (isRTL) {
     return [right, left];
   }
+
   return [left, right];
 };

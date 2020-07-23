@@ -23,6 +23,7 @@ export const getHeaderStyles = ({ theme }: IHeader) => {
       border-bottom: ${theme.header?.border};
     `;
   }
+
   return css`
       background-color: ${theme.header?.backgroundColor};
       border: ${theme.header?.border};
@@ -35,6 +36,7 @@ export const getTotalStyles = ({ theme }: ITotal) => {
       border-top: ${theme.totals?.border};
     `;
   }
+
   return css`
       border: ${theme.totals?.border};
     `;
@@ -49,9 +51,11 @@ export const getBodyCellStyles = ({
   firstRow,
 }: any) => {
   let background = '';
+
   if (selected) background = selectedRowBackgroundColor;
   else if (even) background = evenRowBackground;
   else background = row.backgroundColor;
+
   const headerBorder = header.border !== 'none';
   const borderTop = !firstRow || !headerBorder ? row.border : 'none';
   const cellBorder = firstRow
