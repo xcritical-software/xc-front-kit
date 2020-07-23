@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+
 import {
   IHeader, ITotalCellContent, ITotal, ITotalCell,
 } from '../interfaces';
+
 import { getTotalStyles, getTotalCellStyles, getTotalCellContentStyles } from './utils';
 
 

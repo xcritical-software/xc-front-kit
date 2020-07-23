@@ -1,5 +1,6 @@
-import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 import { setIn } from 'utilitify';
+
+import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
 import { gridThemeNamespace, defaultTheme } from './theme';
 import { IGridTheme, IMappedItem, IColumn } from './interfaces';
@@ -19,6 +20,7 @@ export const guid = () => {
 
 export const addOrDeleteItemFromArray = (array: string[], item: string) => {
   if (array.some((el: string) => el === item)) return array.filter((el: string) => el !== item);
+
   return [...array, item];
 };
 
@@ -27,6 +29,7 @@ export function gridTheme(
   propertyPath?: string | undefined,
 ): IGridTheme {
   const func = getThemedState(gridThemeNamespace, defaultTheme);
+
   return func(theme, propertyPath) as IGridTheme;
 }
 
@@ -38,6 +41,7 @@ export const deletePropsFromObjects = (arr: IMappedItem[], ...rest: any) => arr
       // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete newElem[prop];
     });
+
     return newElem;
   });
 
@@ -50,6 +54,7 @@ export const searchLastVisible = (arr: IColumn[], idx: number) => {
       break;
     }
   }
+
   return lastVisible;
 };
 export const searchNextVisible = (arr: IColumn[], idx: number) => {
@@ -60,6 +65,7 @@ export const searchNextVisible = (arr: IColumn[], idx: number) => {
       break;
     }
   }
+
   return nextVisible;
 };
 
@@ -76,6 +82,7 @@ export const removeSorting = (columns) => columns
         ...el, sortOrder: null,
       };
     }
+
     return el;
   });
 
@@ -95,31 +102,39 @@ export const changeGridSort = ({
     setLeftMappedColumns(newLeftColumns);
     setCenterMappedColumns(centerColumns);
     setRightMappedColumns(rightColumns);
+
     return [
       ...newLeftColumns,
       ...centerColumns,
       ...rightColumns,
     ];
-  } if (gridPosition === GridPositions.CENTER) {
+  }
+
+  if (gridPosition === GridPositions.CENTER) {
     const newCenterColumns = setIn(centerColumns, sortOrder, [index, 'sortOrder']);
     setLeftMappedColumns(leftColumns);
     setCenterMappedColumns(newCenterColumns);
     setRightMappedColumns(rightColumns);
+
     return [
       ...leftColumns,
       ...newCenterColumns,
       ...rightColumns,
     ];
-  } if (gridPosition === GridPositions.RIGHT) {
+  }
+
+  if (gridPosition === GridPositions.RIGHT) {
     const newRightColumns = setIn(rightColumns, sortOrder, [index, 'sortOrder']);
     setLeftMappedColumns(leftColumns);
     setCenterMappedColumns(centerColumns);
     setRightMappedColumns(newRightColumns);
+
     return [
       ...leftColumns,
       ...centerColumns,
       ...newRightColumns,
     ];
   }
+
   return [];
 };

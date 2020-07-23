@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { IContent } from '../interfaces';
+
 import { getPopperProperty, getContentStyles } from './utils';
 
 

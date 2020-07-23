@@ -22,7 +22,7 @@ export type IEditViewProps<TValue> = {} & {
   value?: TValue;
   onChange: (e: TValue | SyntheticEvent<any>) => void;
   invalid?: boolean;
-  errorMessage?: string;
+  error?: string;
 };
 
 export interface IReadViewProps<TValue> {
@@ -68,8 +68,6 @@ export type IInlineEditUncontrolledProps<
 export type InlineEditCommonProps<
   TFieldValue
 > = ICommonProps & {
-
-
   /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
   defaultValue?: TFieldValue;
   /**
@@ -78,7 +76,7 @@ export type InlineEditCommonProps<
    */
   onConfirm: (value?: TFieldValue) => void;
   /** Custom text for error message. */
-  errorMessage?: string;
+  error?: string | string[];
 };
 
 export type IInlineEditProps<
@@ -96,14 +94,12 @@ export type IInlineEditProps<
   isEditing?: boolean;
   /** Callback for changing prop "isEditing" outside the InlineEdit component.
    * Required, if you use "isEditing". */
-  setIsEditing?: (value: boolean) => void;
+  onIsEditingChange?: (value: boolean) => void;
   /** Determines whether isEditing begins as true. */
   startWithEditViewOpen?: boolean;
   /** If this prop is truthy, the editView doesn't close and an error message is displayed below it.
-    */
+   */
   invalid?: boolean;
-
-
   onCancel?: (value?: TFieldValue) => void;
 };
 

@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 
 import { ThemeContext, ThemeProvider } from 'styled-components';
+
 import { IThemeNamespace } from '@xcritical/theme';
 
 import {

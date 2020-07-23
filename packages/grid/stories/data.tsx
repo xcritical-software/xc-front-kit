@@ -104,7 +104,9 @@ export const generateLorem = (n: any) => {
      Donec rhoncus elit sit amet sodales efficitur. Nam iaculis, est et gravida congue, mauris nulla
       pulvinar sem, ac congue dui nisl vitae orci. Aliquam venenatis nunc sit amet dignissim viverra.`;
   const words = text.split(' ').slice(0, 100);
+
   if (n < 100) return words.slice(0, n).join(' ');
+
   const mult = +String(n / 100).split('.')[0];
   const remains = n % 100;
   const res: any[] = [];
@@ -112,6 +114,7 @@ export const generateLorem = (n: any) => {
     res.push(text);
   }
   res.push(words.slice(0, remains).join(' '));
+
   return res.join(' ');
 };
 
@@ -143,6 +146,7 @@ const convertStyles = (styles) => {
   delete newStyles.left;
   delete newStyles.transform;
   delete newStyles.willChange;
+
   return newStyles;
 };
 
@@ -192,6 +196,7 @@ const createDublicateRows = (n: any) => {
       row: i,
     });
   }
+
   return res;
 };
 
@@ -496,6 +501,7 @@ const createItem = (x) => ({
 
 export function createRowsWithRender (x = 3) {
   x -= 1;
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return new Array(Math.floor(Math.random() * 5 + 5)).fill(true).map((_el) => createItem(x));
 }
@@ -521,6 +527,7 @@ const items = [
 
 const getWidth = (i) => {
   if (i >= 2 && i <= 5) return 100;
+
   return 200;
 };
 
@@ -534,8 +541,10 @@ export const columnsFixed = (fixeds) => items
       center: i !== 2,
       isExpandable: i === 2,
     };
+
     /* eslint-disable no-mixed-operators */
     if ((fixeds === 'both' || fixeds === 'left') && i === 2) column.fixedPosition = GridPositions.LEFT;
+
     if ((fixeds === 'both' || fixeds === 'right') && i === 5) column.fixedPosition = GridPositions.RIGHT;
     /* eslint-enable no-mixed-operators */
 

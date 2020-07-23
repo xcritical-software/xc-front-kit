@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 
 import isEmpty from 'lodash.isempty';
+
 import Button from '@xcritical/button';
 
 import {
@@ -19,6 +20,7 @@ import {
 
 import { Dropdown } from '../Dropdown';
 import { ChevronDown, ChevronUp, Remove } from '../icons';
+
 import { TagCondition } from './TagCondition';
 
 import {
@@ -45,6 +47,7 @@ export const Tag: React.FC<ITagProps> = ({
   const [validationErrors, setValidationErrors] = useState({});
   const [isOpen, setIsOpen] = useState(() => {
     const isAdded = conditions.length === 1 && !conditions[0].condition;
+
     return isAutoOpenAddedTag && isAdded;
   });
 

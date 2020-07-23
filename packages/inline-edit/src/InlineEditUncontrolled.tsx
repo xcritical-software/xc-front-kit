@@ -16,12 +16,10 @@ import {
   ConfirmIcon,
   CancelIcon,
 } from './Icons';
-import { IInlineEditUncontrolledProps, IEditViewProps, IReadViewProps } from './interfaces';
+import { IInlineEditUncontrolledProps } from './interfaces';
 
 
 export const InlineEditUncontrolled = function <
-  TEditViewProps extends IEditViewProps<TFieldValue>,
-  TViewProps extends IReadViewProps<TFieldValue>,
   TFieldValue>(
   {
     appearance = 'default',
@@ -38,9 +36,9 @@ export const InlineEditUncontrolled = function <
     onCancel,
     onConfirm,
     invalid,
-    errorMessage,
-  }: IInlineEditUncontrolledProps<TEditViewProps, TViewProps, TFieldValue>,
-): React.ReactElement<IInlineEditUncontrolledProps<TEditViewProps, TViewProps, TFieldValue>> {
+    error,
+  }: IInlineEditUncontrolledProps<TFieldValue>,
+): React.ReactElement<IInlineEditUncontrolledProps<TFieldValue>> {
   const editButtonRef = createRef<HTMLButtonElement>();
   const confirmButtonRef = createRef<HTMLButtonElement>();
   const cancelButtonRef = createRef<HTMLButtonElement>();
@@ -163,7 +161,7 @@ export const InlineEditUncontrolled = function <
                 value={ value }
                 onChange={ handleEditValueChange }
                 invalid={ invalid }
-                errorMessage={ errorMessage }
+                error={ error }
               />
               { renderActionButtons() }
             </>

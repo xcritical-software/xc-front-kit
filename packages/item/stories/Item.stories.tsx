@@ -9,8 +9,9 @@ import { action } from '@storybook/addon-actions';
 
 import Item, { ItemGroup, itemThemeNamespace } from '../src';
 
-import { MasterCardIcon } from './Icons';
 import { ItemTheme } from '../src/interfaces';
+
+import { MasterCardIcon } from './Icons';
 
 
 const generateTheme = (

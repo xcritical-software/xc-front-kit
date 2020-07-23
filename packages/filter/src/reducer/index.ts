@@ -2,10 +2,12 @@ import get from 'lodash.get';
 import { Reducer } from 'redux';
 
 import { v1 as uuid } from 'uuid';
+
 import * as actions from '../actions/const';
 
 import { reducerDictionary } from '../utils';
 import { IFilterStore, FilterActionType, IFilterAction } from '../interfaces';
+
 import {
   changeFilter,
   addFilters,
@@ -38,6 +40,7 @@ const defaultFilterState = {
 
 const reducer: Reducer<IFilterStore, IFilterAction> = (state = defaultFilterState, action) => {
   const { [action.type]: behavior } = behaviors;
+
   return behavior ? behavior(state, action) : state;
 };
 

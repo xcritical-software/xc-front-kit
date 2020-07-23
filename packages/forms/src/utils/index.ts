@@ -10,11 +10,14 @@ export const reducerDictionary = (
   propName: string,
 ) => (state: Store, action: Action<IFormAction>) => {
   const name = get(action, ['meta', propName]);
+
   if (!name) {
     return state || {};
   }
+
   const reducerState = get(state, name);
   const result = $reducer(reducerState, action);
+
   return result === reducerState ? state : setIn(state, result, name);
 };
 
@@ -32,16 +35,21 @@ export const getValueFromNativeComponent = (event: Event): any => {
       },
       dataTransfer,
     } = detypedEvent;
+
     if (type === 'checkbox') {
       return !!checked;
     }
+
     if (type === 'file') {
       return files || (dataTransfer?.files);
     }
+
     if (type === 'select-multiple') {
       return options;
     }
+
     return value;
   }
+
   return event;
 };

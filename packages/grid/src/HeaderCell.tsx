@@ -39,7 +39,9 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
     (e) => {
       const { clientX: currentX } = e;
       const calcNewWidth = width + (currentX - clickXRef.current);
+
       if (calcNewWidth >= 1200) return;
+
       if (calcNewWidth <= minColumnWidth) {
         setNewWidth(minColumnWidth);
         widthRef.current = minColumnWidth;
@@ -61,6 +63,7 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   const handleMouseDown = useCallback(
     (e) => {
       if (!shouldChangeColumnsWidth) return;
+
       clickXRef.current = e.clientX;
       document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('mousemove', handleMouseMove);

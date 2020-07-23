@@ -1,4 +1,5 @@
 import { CSSObject } from 'styled-components';
+
 import { getAppearanceTheme } from '@xcritical/theme';
 
 import { IThemed, ArrowDirection } from '../interfaces';

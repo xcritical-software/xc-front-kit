@@ -9,14 +9,13 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 import { ThemeProvider } from 'styled-components';
+
+import { darken } from 'polished';
+
 import { IThemeNamespace, colors } from '@xcritical/theme';
 import { buttonThemeNamespace } from '@xcritical/button';
 import Select from '@xcritical/select/src';
 import { ButtonTheme } from '@xcritical/button/src/interfaces';
-import { darken } from 'polished';
-
-import { CompactFilterContainer, ExternalFilterContainer } from './pages';
-import { salesStatus, simpleData } from './data/simpleData';
 
 import {
   filterReducer,
@@ -24,6 +23,9 @@ import {
   CompactFilter,
   IFilterTheme,
 } from '../src';
+
+import { CompactFilterContainer, ExternalFilterContainer } from './pages';
+import { salesStatus, simpleData } from './data/simpleData';
 
 
 export const store = createStore(

@@ -1,5 +1,10 @@
 import { StylesConfig } from 'react-select/src/styles';
+
 import { IThemeNamespace } from '@xcritical/theme';
+
+import {
+  ISelectBaseTheme,
+} from '../interfaces';
 
 import {
   getDisplayStyles,
@@ -11,9 +16,6 @@ import {
   getCommonStyles,
   getStatesStyles,
 } from './getStyles';
-import {
-  ISelectBaseTheme,
-} from '../interfaces';
 
 
 export const themeConverter = (

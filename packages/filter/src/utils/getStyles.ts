@@ -15,5 +15,6 @@ export function getFilterTheme<T>(
   propertyPath?: string | undefined,
 ): IFilterTheme | IThemeProp<T> {
   const func = getThemedState(filterThemeNamespace, defaultTheme);
+
   return func(theme, propertyPath) as IFilterTheme | T;
 }

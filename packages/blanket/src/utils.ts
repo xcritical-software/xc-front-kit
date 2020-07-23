@@ -17,6 +17,7 @@ export const blanketTheme = (
   propertyPath?: string | string[],
 ): AllType => {
   const func = getThemedState(blanketThemeNamespace, defaultBlanketTheme);
+
   return func(theme, propertyPath);
 };
 

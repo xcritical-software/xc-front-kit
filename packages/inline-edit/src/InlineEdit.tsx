@@ -20,7 +20,7 @@ export const PureInlineEdit = function <
     disabled = false,
     invalid = false,
     isEditing,
-    setIsEditing,
+    onIsEditingChange,
     ...rest
   }: IInlineEditProps<TEditViewProps, TViewProps, TFieldValue>,
 ): React.ReactElement<IInlineEditProps<TEditViewProps, TViewProps, TFieldValue>> {
@@ -46,30 +46,36 @@ export const PureInlineEdit = function <
     }
   });
 
-  const handleConfirm = useCallback((newValue?: TFieldValue): void => {
+  const handleConfirm = useCallback((newValue: TFieldValue): void => {
     setValue(newValue);
     onConfirm(newValue);
 
     if (isEditing) return;
 
     setIsEditingAutoMode(false);
-  }, [onConfirm, setIsEditing]);
+  }, [onConfirm, onIsEditingChange]);
 
   const handleCancel = useCallback((): void => {
-      onCancel?.(defaultValue);
-      handleConfirm(defaultValue);
+    setValue(defaultValue);
+
+    if (onCancel) {
+      onCancel();
+
+      return;
+    }
+
+    setIsEditingAutoMode(false);
   }, [onCancel, defaultValue]);
 
   const handleEditRequested = useCallback((): void => {
-    if (setIsEditing) {
-      setIsEditing(true);
+    if (onIsEditingChange) {
+      onIsEditingChange(true);
 
       return;
     }
 
     setIsEditingAutoMode(true);
   }, []);
-
 
   return (
     <InlineEditUncontrolled
