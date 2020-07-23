@@ -149,7 +149,7 @@ const InlineEditInputWithValidation: React.FC<AllType> = ({
 }) => {
   const [value, setValue] = React.useState('');
   const [isEditing, setIsEditing] = React.useState(false);
-  const [error, setError] = React.useState('');
+  const [innerError, setError] = React.useState('');
   const [withError, setWithError] = React.useState(false);
 
   const getReadView = React.useCallback(() => (
@@ -158,9 +158,9 @@ const InlineEditInputWithValidation: React.FC<AllType> = ({
     </div>
   ), [value]);
 
-  const getEditView = React.useCallback(({ invalid, errorMessage, ...fieldProps }) => (
+  const getEditView = React.useCallback(({ invalid, error, ...fieldProps }) => (
     <>
-      { invalid && <ErrorMessage>{ errorMessage }</ErrorMessage> }
+      { invalid && <ErrorMessage>{ error }</ErrorMessage> }
       <Input
         { ...fieldProps }
         { ...rest }
@@ -182,10 +182,9 @@ const InlineEditInputWithValidation: React.FC<AllType> = ({
     }
   }, []);
 
-  const handleSetIsEditing = React.useCallback((isEditingState: boolean) => {
-    if (isEditingState) {
-      setIsEditing(true);
-    }
+  const onCancel = React.useCallback(() => {
+    setWithError(false);
+    setIsEditing(false);
   }, []);
 
   return (
@@ -196,10 +195,11 @@ const InlineEditInputWithValidation: React.FC<AllType> = ({
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
+        onCancel={ onCancel }
         invalid={ withError }
-        errorMessage={ error }
+        error={ innerError }
         isEditing={ isEditing }
-        setIsEditing={ handleSetIsEditing }
+        onIsEditingChange={ setIsEditing }
       />
     </ThemeProvider>
   );
@@ -211,7 +211,7 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
 }) => {
   const [value, setValue] = React.useState({ value: '', label: '' });
   const [isEditing, setIsEditing] = React.useState(false);
-  const [error, setError] = React.useState('');
+  const [innerError, setError] = React.useState('');
   const [withError, setWithError] = React.useState(false);
 
   const getReadView = React.useCallback(() => (
@@ -220,9 +220,9 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
     </div>
   ), [value]);
 
-  const getEditView = React.useCallback(({ invalid, errorMessage, ...fieldProps }) => (
+  const getEditView = React.useCallback(({ invalid, error, ...fieldProps }) => (
     <>
-      { invalid && <ErrorMessage>{ errorMessage }</ErrorMessage> }
+      { invalid && <ErrorMessage>{ error }</ErrorMessage> }
       <Select
         { ...fieldProps }
         { ...rest }
@@ -243,13 +243,14 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
     }
   }, []);
 
-  const handleSetIsEditing = React.useCallback((isEditingState: boolean) => {
+  const handleOnIsEditingChange = React.useCallback((isEditingState: boolean) => {
     if (isEditingState) {
       setIsEditing(true);
     }
   }, []);
 
   const onCancel = React.useCallback(() => {
+    setWithError(false);
     setIsEditing(false);
   }, []);
 
@@ -263,9 +264,9 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
         onConfirm={ handleConfirm }
         onCancel={ onCancel }
         invalid={ withError }
-        errorMessage={ error }
+        error={ innerError }
         isEditing={ isEditing }
-        setIsEditing={ handleSetIsEditing }
+        onIsEditingChange={ handleOnIsEditingChange }
       />
     </ThemeProvider>
   );
@@ -298,7 +299,9 @@ storiesOf('InlineEdit', module)
     <div style={ { display: 'flex' } }>
       <div style={ { width: '300px', marginLeft: '10px' } }>
         <p>Input InlineEdit</p>
-        <InlineEditInputWithValidation editView={ Input } />
+        <InlineEditInputWithValidation
+          editView={ Input }
+        />
       </div>
       <div style={ { width: '300px', marginLeft: '50px' } }>
         <p>Select InlineEdit</p>

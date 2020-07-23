@@ -35,7 +35,7 @@ IInlineEditUncontrolledProps<TFieldValue>
     onCancel,
     onConfirm,
     invalid,
-    errorMessage,
+    error,
   }: IInlineEditUncontrolledProps<TFieldValue>) => {
     const editButtonRef = createRef<HTMLButtonElement>();
     const confirmButtonRef = createRef<HTMLButtonElement>();
@@ -154,7 +154,7 @@ IInlineEditUncontrolledProps<TFieldValue>
                   value={ value }
                   onChange={ handleEditValueChange }
                   invalid={ invalid }
-                  errorMessage={ errorMessage }
+                  error={ error }
                 />
                 { renderActionButtons() }
               </>

@@ -19,7 +19,7 @@ export interface IFieldProps<T> {
   value: T;
   onChange: (e: T) => void;
   invalid?: boolean;
-  errorMessage?: string;
+  error?: string | string[];
 }
 
 export interface ICommonProps {
@@ -52,7 +52,7 @@ export interface IInlineEditUncontrolledProps<TFieldValue> extends ICommonProps 
   /** Handler called when checkmark is. */
   onCancel?: () => void;
   invalid?: boolean;
-  errorMessage?: string;
+  error?: string | string[];
 }
 
 export interface IInlineEditProps<TFieldValue> extends ICommonProps {
@@ -70,16 +70,16 @@ export interface IInlineEditProps<TFieldValue> extends ICommonProps {
   isEditing?: boolean;
   /** Callback for changing prop "isEditing" outside the InlineEdit component.
    * Required, if you use "isEditing". */
-  setIsEditing?: (value: boolean) => void;
+  onIsEditingChange?: (value: boolean) => void;
   /** The value is shown in the editView when it is entered. Should be updated by onConfirm. */
   defaultValue: TFieldValue;
   /** Determines whether isEditing begins as true. */
   startWithEditViewOpen?: boolean;
   /** If this prop is truthy, the editView doesn't close and an error message is displayed below it.
-    */
+   */
   invalid?: boolean;
   /** Custom text for error message. */
-  errorMessage?: string;
+  error?: string | string[];
 }
 
 export interface IReturnFunction<TValue> {

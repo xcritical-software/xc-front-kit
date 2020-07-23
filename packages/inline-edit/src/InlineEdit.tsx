@@ -21,9 +21,9 @@ IInlineEditProps<TFieldValue>
     editView,
     disabled = false,
     invalid = false,
-    errorMessage,
+    error,
     isEditing,
-    setIsEditing,
+    onIsEditingChange,
     ...rest
   }: IInlineEditProps<TFieldValue>) => {
     const editViewRef = createRef<HTMLElement>();
@@ -53,16 +53,20 @@ IInlineEditProps<TFieldValue>
       onConfirm(newValue);
       if (isEditing) return;
       setIsEditingAutoMode(false);
-    }, [onConfirm, setIsEditing]);
+    }, [onConfirm, onIsEditingChange]);
 
     const handleCancel = useCallback((): void => {
-      onCancel?.(defaultValue);
-      handleConfirm(defaultValue);
+      setValue(defaultValue);
+      if (onCancel) {
+        onCancel();
+        return;
+      }
+      setIsEditingAutoMode(false);
     }, [onCancel, defaultValue]);
 
     const handleEditRequested = useCallback((): void => {
-      if (setIsEditing) {
-        setIsEditing(true);
+      if (onIsEditingChange) {
+        onIsEditingChange(true);
         return;
       }
       setIsEditingAutoMode(true);
@@ -70,12 +74,11 @@ IInlineEditProps<TFieldValue>
 
     const InlineEditUncontrolled = getInlineEditUncontrolled<TFieldValue>();
 
-
     return (
       <InlineEditUncontrolled
         { ...rest }
         invalid={ invalid }
-        errorMessage={ errorMessage }
+        error={ error }
         defaultValue={ value }
         editView={ editView }
         readView={ readView }
