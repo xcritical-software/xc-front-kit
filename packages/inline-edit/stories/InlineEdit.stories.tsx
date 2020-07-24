@@ -125,10 +125,6 @@ const BasicInlineEditSelect: React.FC<AllType> = ({
     setSelectValue(v);
   }, []);
 
-  const handleCancel = React.useCallback((defaultValue: AllType) => {
-    setSelectValue(defaultValue);
-  }, []);
-
   return (
     <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
       <InlineEdit
@@ -137,7 +133,6 @@ const BasicInlineEditSelect: React.FC<AllType> = ({
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
-        onCancel={ handleCancel }
       />
     </ThemeProvider>
   );

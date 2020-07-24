@@ -1,5 +1,5 @@
 import React, {
-  createRef, useState, useEffect, useCallback,
+  useState, useEffect, useCallback,
 } from 'react';
 
 
@@ -24,21 +24,8 @@ export const PureInlineEdit = function <
     ...rest
   }: IInlineEditProps<TEditViewProps, TViewProps, TFieldValue>,
 ): React.ReactElement<IInlineEditProps<TEditViewProps, TViewProps, TFieldValue>> {
-  const editViewRef = createRef<HTMLElement>();
   const [isEditingAuto, setIsEditingAutoMode] = useState(startWithEditViewOpen);
   const [value, setValue] = useState(defaultValue);
-
-  useEffect(() => {
-    if (startWithEditViewOpen && editViewRef.current) {
-      editViewRef.current.focus();
-    }
-  }, [startWithEditViewOpen, editViewRef]);
-
-  useEffect(() => {
-    if (isEditingAuto && editViewRef.current) {
-      editViewRef.current.focus();
-    }
-  }, [isEditingAuto, editViewRef]);
 
   useEffect(() => {
     if (invalid && isEditing === undefined) {
@@ -53,7 +40,7 @@ export const PureInlineEdit = function <
     if (isEditing) return;
 
     setIsEditingAutoMode(false);
-  }, [onConfirm, onIsEditingChange]);
+  }, [onConfirm, isEditing]);
 
   const handleCancel = useCallback((): void => {
     setValue(defaultValue);
@@ -91,8 +78,5 @@ export const PureInlineEdit = function <
     />
   );
 };
-
-
-// export const PureInlineEdit = getPureInlineEdit();
 
 export const InlineEdit = PureInlineEdit;

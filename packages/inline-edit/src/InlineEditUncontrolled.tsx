@@ -19,8 +19,7 @@ import {
 import { IInlineEditUncontrolledProps } from './interfaces';
 
 
-export const InlineEditUncontrolled = function <
-  TFieldValue>(
+export const InlineEditUncontrolled = function <TFieldValue>(
   {
     appearance = 'default',
     baseAppearance = 'default',
@@ -74,7 +73,8 @@ export const InlineEditUncontrolled = function <
 
   const handleCancelClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
-      onCancel?.();
+    setValue(defaultValue);
+    onCancel?.();
   }, [onCancel]);
 
   const renderReadView = useCallback((): ReactNode => (
