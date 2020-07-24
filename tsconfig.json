@@ -22,6 +22,7 @@
     "noUnusedLocals": false,
     "declaration": false,
     "allowSyntheticDefaultImports": true,
+    "noErrorTruncation": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,

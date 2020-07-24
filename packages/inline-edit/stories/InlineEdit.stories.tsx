@@ -104,7 +104,7 @@ const BasicInlineEditSelect: React.FC<AllType> = ({
   appearance = 'default',
   ...rest
 }) => {
-  const [selectValue, setSelectValue] = React.useState({ value: 0, label: 'Select value' });
+  const [selectValue, setSelectValue] = React.useState<{value: number; label: string}>({ value: 0, label: 'Select value' });
 
   const getReadView = React.useCallback(() => (
     <div>
