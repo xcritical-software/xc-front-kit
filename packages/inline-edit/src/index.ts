@@ -4,3 +4,5 @@ export {
   inlineEditThemeNamespace,
   defaultInlineEditTheme,
 } from './theme';
+
+export * from './interfaces';

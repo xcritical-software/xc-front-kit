@@ -84,9 +84,9 @@
        *
        * DEFAULT VALUE: no overrideTsconfig section
        */
-        // "overrideTsconfig": {
-        //   . . .
-        // }
+        //"overrideTsconfig": {
+        //    "esModuleInterop": false
+        //},
         /**
        * This option causes the compiler to be invoked with the --skipLibCheck option. This option is not recommended
        * and may cause API Extractor to produce incomplete or incorrect declarations, but it may be required when
@@ -95,7 +95,7 @@
        *
        * DEFAULT VALUE: false
        */
-        "skipLibCheck": true,
+        "skipLibCheck": false,
     },
     /**
      * Configures how the API report file (*.api.md) will be generated.
