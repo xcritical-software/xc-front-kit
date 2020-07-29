@@ -22,16 +22,14 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
   checkIcon,
   onChange,
 }) => {
-  const handleInputChange = useCallback(() => {}, []);
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e.target.checked, e);
+  }, []);
 
-  const handleClick = useCallback((e: React.MouseEvent<HTMLLabelElement>): void => {
-    e.preventDefault();
+  const handleClick = useCallback((e: React.MouseEvent): void => {
     e.stopPropagation();
+  }, []);
 
-    if (!disabled && onChange) {
-      onChange(!checked, e);
-    }
-  }, [disabled, checked, onChange]);
 
   return (
     <CheckboxLabel
@@ -44,6 +42,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
         type={ type }
         checked={ checked }
         disabled={ disabled }
+        onClick={ handleClick }
         onChange={ handleInputChange }
       />
       <CheckboxWrapper
