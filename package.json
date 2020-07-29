@@ -66,7 +66,7 @@
     "@types/react-router": "^5.1.4",
     "@types/react-router-dom": "^5.1.2",
     "@types/styled-components": "^5.0.1",
-    "@xcritical/eslint-plugin-xcritical": "3.0.0",
+    "@xcritical/eslint-plugin-xcritical": "3.1.0",
     "@xcritical/gulpify": "^2.0.0",
     "babel-loader": "^8.0.6",
     "boltify": "^1.1.3",
