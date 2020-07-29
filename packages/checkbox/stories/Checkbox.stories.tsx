@@ -1,9 +1,12 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { action } from '@storybook/addon-actions';
 
 import Checkbox, { SwitchGroup, checkboxThemeNamespace } from '../src';
 import { CheckboxTheme, ICheckboxProps, IOption } from '../src/interfaces';
@@ -183,8 +186,9 @@ const BasicCheckbox = ({
 }: ICheckboxProps): React.ReactElement => {
   const [isChecked, setIsChecked] = React.useState(false);
 
-  const handleChange = (): void => {
-    setIsChecked(!isChecked);
+  const handleChange = (checked: boolean): void => {
+    setIsChecked(checked);
+    action('handleChange')(isChecked, checked);
   };
 
   return (
@@ -324,6 +328,15 @@ storiesOf('Checkbox', module)
         theme={ { [checkboxThemeNamespace]: theme } }
         label="Disabled Checkbox"
         disabled
+      />
+    </div>
+  ))
+  .add('Prevent bubbling', () => (
+    <div onClick={ action('bubbling') }>
+      <GlobalStyle />
+      <BasicCheckbox
+        theme={ { [checkboxThemeNamespace]: theme } }
+        label="Checkbox"
       />
     </div>
   ))
