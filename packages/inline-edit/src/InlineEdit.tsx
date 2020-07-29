@@ -1,78 +1,82 @@
 import React, {
-  FC, createRef, useState, useEffect, useCallback, memo, useRef,
+  useState, useEffect, useCallback,
 } from 'react';
-import { withTheme } from 'styled-components';
 
 
-import { getInlineEditUncontrolled } from './InlineEditUncontrolled';
-import { IInlineEditProps } from './interfaces';
+import { InlineEditUncontrolled } from './InlineEditUncontrolled';
+import { IInlineEditProps, IEditViewProps, IReadViewProps } from './interfaces';
 
 
-interface IInlineEditState {
-  isEditing?: boolean;
-}
-
-const getPureInlineEdit: <TFieldValue>() => FC<
-IInlineEditProps<TFieldValue> & IInlineEditState> = function f<TFieldValue>() {
-  return ({
+export const PureInlineEdit = function <
+  TEditViewProps extends IEditViewProps<TFieldValue>,
+  TViewProps extends IReadViewProps<TFieldValue>,
+  TFieldValue>(
+  {
+    appearance = 'default',
     startWithEditViewOpen = false,
     onConfirm,
     onCancel,
     defaultValue,
-    readView,
-    editView,
     disabled = false,
+    invalid = false,
+    isEditing,
+    onIsEditingChange,
     ...rest
-  }: IInlineEditProps<TFieldValue>) => {
-    const editViewRef = createRef<HTMLElement>();
-    const [isEditing, setIsEditing] = useState(startWithEditViewOpen);
-    const defaultValueRef = useRef(defaultValue);
+  }: IInlineEditProps<TEditViewProps, TViewProps, TFieldValue>,
+): React.ReactElement<IInlineEditProps<TEditViewProps, TViewProps, TFieldValue>> {
+  const [isEditingAuto, setIsEditingAutoMode] = useState(startWithEditViewOpen);
+  const [value, setValue] = useState(defaultValue);
 
-    useEffect(() => {
-      if (startWithEditViewOpen && editViewRef.current) {
-        editViewRef.current.focus();
-      }
-    }, [startWithEditViewOpen, editViewRef]);
+  useEffect(() => {
+    if (invalid && isEditing === undefined) {
+      setIsEditingAutoMode(true);
+    }
+  });
 
-    useEffect(() => {
-      if (isEditing && editViewRef.current) {
-        editViewRef.current.focus();
-      }
-    }, [isEditing, editViewRef]);
+  const handleConfirm = useCallback((newValue: TFieldValue): void => {
+    setValue(newValue);
+    onConfirm(newValue);
 
-    const handleConfirm = useCallback((value: TFieldValue): void => {
-      setIsEditing(false);
-      onConfirm(value);
-      defaultValueRef.current = value;
-    }, [onConfirm]);
+    if (isEditing) return;
 
-    const handleCancel = useCallback((): void => {
-      setIsEditing(false);
-      onCancel?.(defaultValueRef.current);
-    }, [onCancel]);
+    setIsEditingAutoMode(false);
+  }, [onConfirm, isEditing]);
 
-    const handleEditRequested = useCallback((): void => {
-      setIsEditing(true);
-    }, []);
+  const handleCancel = useCallback((): void => {
+    setValue(defaultValue);
 
-    const InlineEditUncontrolled = getInlineEditUncontrolled<TFieldValue>();
+    if (onCancel) {
+      onCancel();
 
-    return (
-      <InlineEditUncontrolled
-        { ...rest }
-        defaultValue={ defaultValue }
-        editView={ editView }
-        readView={ readView }
-        onConfirm={ handleConfirm }
-        onCancel={ handleCancel }
-        isEditing={ isEditing }
-        disabled={ disabled }
-        onEditRequested={ handleEditRequested }
-      />
-    );
-  };
+      return;
+    }
+
+    setIsEditingAutoMode(false);
+  }, [onCancel, defaultValue]);
+
+  const handleEditRequested = useCallback((): void => {
+    if (onIsEditingChange) {
+      onIsEditingChange(true);
+
+      return;
+    }
+
+    setIsEditingAutoMode(true);
+  }, []);
+
+  return (
+    <InlineEditUncontrolled
+      { ...rest }
+      invalid={ invalid }
+      defaultValue={ value }
+      onConfirm={ handleConfirm }
+      onCancel={ handleCancel }
+      isEditing={ isEditing !== undefined ? isEditing : isEditingAuto }
+      disabled={ disabled }
+      onEditRequested={ handleEditRequested }
+      appearance={ appearance }
+    />
+  );
 };
 
-export const PureInlineEdit = getPureInlineEdit();
-
-export const InlineEdit = memo(withTheme(PureInlineEdit));
+export const InlineEdit = PureInlineEdit;
