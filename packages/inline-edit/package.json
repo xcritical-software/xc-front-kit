@@ -12,7 +12,7 @@
 	"scripts": {
 		"test": "exit 0",
 		"compile": "tsdx build --format cjs,esm --verbose && api-extractor run",
-		"compile:local": "tsdx build --format cjs,esm --verbose && api-extractor run --local",
+		"compile:local": "tsdx build --format esm --verbose",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},

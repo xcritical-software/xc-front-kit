@@ -1,6 +1,8 @@
 import { CSSObject } from 'styled-components';
 
 
+import { SyntheticEvent } from 'react';
+
 import { ITheme, ICSSProperties, AllType } from '@xcritical/theme';
 
 
@@ -15,13 +17,19 @@ export interface IInlineEditTheme extends ICSSProperties {
 
 export type InlineEditTheme = ITheme<IInlineEditTheme>;
 
-export interface IFieldProps<T> {
-  value: T;
-  onChange: (e: T) => void;
+
+export type IEditViewProps<TValue> = {} & {
+  value?: TValue;
+  onChange: (e: TValue | SyntheticEvent<any>) => void;
+  invalid?: boolean;
+  error?: string;
+};
+
+export interface IReadViewProps<TValue> {
+  value?: TValue;
 }
 
 export interface ICommonProps {
-  theme: InlineEditTheme;
   appearance?: string;
   baseAppearance?: string;
   label?: string;
@@ -31,42 +39,70 @@ export interface ICommonProps {
   disabled?: boolean;
 }
 
-export interface IInlineEditUncontrolledProps<TFieldValue> extends ICommonProps {
+
+export type IInlineEditUncontrolledProps<
+  TFieldValue
+> = InlineEditCommonProps<TFieldValue> & {
   /** Component to be shown when not in edit view. */
-  readView: React.FC<{ value?: TFieldValue }>;
+  readView: React.FC<any>;
+  readViewProps?: any;
   /** Component to be shown when editing. */
-  editView: React.FC<IFieldProps<TFieldValue>>;
+  editView: React.FC<any>;
+  editViewProps?: any;
   /** Whether the component shows the readView or the editView. */
   isEditing: boolean;
-  /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
-  defaultValue: TFieldValue;
+
   /** Handler called when readView is clicked. */
   onEditRequested: () => void;
   /**
    * Handler called editView is closed and changes are confirmed.
    * Field value is passed as an argument to this function.
    */
-  onConfirm: (value: TFieldValue) => void;
+  onConfirm: (value?: TFieldValue) => void;
   /** Handler called when checkmark is. */
   onCancel?: () => void;
-}
+  invalid?: boolean;
+  error?: string | string[];
+};
 
-export interface IInlineEditProps<TFieldValue> extends ICommonProps {
-  /** Component to be shown when not in edit view. */
-  readView: React.FC<{ value?: TFieldValue }>;
-  /** Component to be shown when editing. */
-  editView: React.FC<IFieldProps<TFieldValue>>;
+export type InlineEditCommonProps<
+  TFieldValue
+> = ICommonProps & {
+  /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
+  defaultValue?: TFieldValue;
   /**
-   * Handler called editView is closed and changes are confirmed.
+   * Handler is called, editView is closed and changes are confirmed.
    * Field value is passed as an argument to this function.
    */
-  onConfirm: (value: TFieldValue) => void;
-  onCancel?: (defaultValue?: TFieldValue) => void;
-  /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
-  defaultValue: TFieldValue;
+  onConfirm: (value?: TFieldValue) => void;
+  /** Custom text for error message. */
+  error?: string | string[];
+};
+
+export type IInlineEditProps<
+  TEditViewProps extends IEditViewProps<TFieldValue>,
+  TViewProps extends IReadViewProps<TFieldValue>,
+  TFieldValue
+> = InlineEditCommonProps< TFieldValue> & {
+  /** Component to be shown when not in edit view. */
+  readView: React.FC<TViewProps>;
+  readViewProps?: TViewProps;
+  /** Component to be shown when editing. */
+  editView: React.FC<TEditViewProps>;
+  editViewProps?: TEditViewProps;
+  /** If this prop is truthy, the editView component is active. */
+  isEditing?: boolean;
+  /** Callback for changing prop "isEditing" outside the InlineEdit component.
+   * Required, if you use "isEditing". */
+  onIsEditingChange?: (value: boolean) => void;
   /** Determines whether isEditing begins as true. */
   startWithEditViewOpen?: boolean;
-}
+  /** If this prop is truthy, the editView doesn't close and an error message is displayed below it.
+   */
+  invalid?: boolean;
+  onCancel?: (value?: TFieldValue) => void;
+};
+
 
 export interface IReturnFunction<TValue> {
   (
