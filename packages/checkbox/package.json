@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/checkbox",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "XCritical Checkbox Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",

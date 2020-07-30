@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/grid",
-	"version": "1.2.4",
+	"version": "1.2.5",
 	"description": "XCritical Grid Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
