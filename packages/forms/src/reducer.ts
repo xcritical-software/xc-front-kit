@@ -81,12 +81,14 @@ const reducer: Reducer<IFormState> = (state = {
   return behavior ? behavior(state, action) : state;
 };
 
-export const formSelector = (state: any, formName: string): any => {
+export const formSelector = (state: any, formName: string, namespace?: string): any => {
   if (!formName) {
     return state;
   }
 
-  return get(state.form, formName, state);
+  return namespace
+    ? get(state, `${namespace}.${formName}`, state)
+    : get(state.form, formName, state);
 };
 
 export default reducerDictionary(reducer, 'formName');
