@@ -24,7 +24,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
 }) => {
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.checked, e);
-  }, []);
+  }, [onChange]);
 
   const handleClick = useCallback((e: React.MouseEvent): void => {
     e.stopPropagation();
