@@ -300,7 +300,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
           isScrollingOptOut={ isScrollingOptOut }
           overscanColumnCount={ overscanColumnCount }
           overscanRowCount={ overscanRowCount }
-          {...internalGridProps}
+          { ...internalGridProps }
         />
       </Body>
       {

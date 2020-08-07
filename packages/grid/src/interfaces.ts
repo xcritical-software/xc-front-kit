@@ -1,30 +1,31 @@
 import { ReactElement, CSSProperties, RefObject } from 'react';
 
+import { Alignment } from 'react-virtualized';
+
 import { ITheme } from '@xcritical/theme';
 
 import { GridPositions, GridSort } from './consts';
-import { Alignment } from 'react-virtualized';
 
 
 type CellContent = string | number | ReactElement | any;
 
-export type InternalGridProps = {
-  'aria-label'?: string,
-  'aria-readonly'?: boolean,
-  className?: string,
-  containerProps?: object,
-  containerRole?: string,
-  containerStyle?: React.CSSProperties,
-  id?: string,
-  isScrolling?: boolean,
-  scrollingResetTimeInterval?: number,
-  scrollLeft?: number,
-  scrollToAlignment?: Alignment,
-  scrollToColumn?: number,
-  scrollTop?: number,
-  scrollToRow?: number,
-  style?: React.CSSProperties,
-  tabIndex?: number | null,
+export interface IInternalGridProps {
+  'aria-label'?: string;
+  'aria-readonly'?: boolean;
+  className?: string;
+  containerProps?: object;
+  containerRole?: string;
+  containerStyle?: CSSProperties;
+  id?: string;
+  isScrolling?: boolean;
+  scrollingResetTimeInterval?: number;
+  scrollLeft?: number;
+  scrollToAlignment?: Alignment;
+  scrollToColumn?: number;
+  scrollTop?: number;
+  scrollToRow?: number;
+  style?: CSSProperties;
+  tabIndex?: number | null;
 }
 
 export interface IItem {
@@ -71,7 +72,7 @@ export interface IGridProps {
   overscanRowCount?: number;
   shouldFitLastColumn?: boolean;
   minColumnWidth?: number;
-  internalGridProps?: InternalGridProps 
+  internalGridProps?: IInternalGridProps;
 }
 
 
@@ -109,7 +110,7 @@ interface IAllGridsProps {
   rowHeight?: number;
   minColumnWidth: number;
   onChangeSort: Function;
-  internalGridProps: InternalGridProps;
+  internalGridProps: IInternalGridProps;
 }
 
 
@@ -141,7 +142,7 @@ export interface IInternalGrid {
   onChangeSort: Function;
   shouldFitLastColumn: boolean;
   minColumnWidth: number;
-  internalGridProps: InternalGridProps;
+  internalGridProps: IInternalGridProps;
 }
 
 export interface IMappedItem extends IItem {
