@@ -43,8 +43,11 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@microsoft/api-extractor": "7.7.0",
     "@babel/cli": "^7.8.4",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/travis-cli": "8.3.5",
+    "@microsoft/api-extractor": "7.7.0",
     "@storybook/addon-a11y": "^5.3.19",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-backgrounds": "^5.3.19",
@@ -79,25 +82,22 @@
     "react-docgen-typescript-loader": "^3.4.0",
     "redux-devtools-extension": "^2.13.8",
     "rimraf": "^3.0.2",
+    "rollup-plugin-strip-code": "^0.2.7",
     "storybook": "^5.3.14",
     "ts-jest": "^25.2.1",
     "ts-loader": "^6.2.0",
-    "typescript": "^3.9.2",
-    "typescript-plugin-styled-components": "1.4.4",
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "@commitlint/travis-cli": "8.3.5",
     "tsdx": "^0.13.2",
-    "rollup-plugin-strip-code": "^0.2.7"
+    "typescript": "^3.9.2",
+    "typescript-plugin-styled-components": "1.4.4"
   },
   "dependencies": {
     "@types/react-redux": "^7.1.7",
     "csstype": "^2.6.9",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-router-dom": "^5.0.1",
     "styled-components": "^5.0.1",
-    "styled-css-grid": "^1.2.1",
-    "react-router-dom": "^5.0.1"
+    "styled-css-grid": "^1.2.1"
   },
   "resolutions": {
     "typescript": "^3.7.2",
