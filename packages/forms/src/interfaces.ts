@@ -4,11 +4,13 @@ import { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 export interface IFormProps
   extends DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> {
   name: string;
+  namespace?: string;
 }
 
 export interface IFormContext {
   formName: string;
   fields: string[];
+  namespace?: string;
 }
 
 export interface IFormState<TModel = { [fieldName: string]: any }> {
@@ -30,6 +32,7 @@ export interface IFormFieldPropsWithoutContext extends React.ComponentProps<any>
 
 export interface IFormFieldProps extends IFormFieldPropsWithoutContext {
   formName: string;
+  namespace?: string;
 }
 
 export interface IFormConnectedFieldProps extends React.ComponentProps<any> {

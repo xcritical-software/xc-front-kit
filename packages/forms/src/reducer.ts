@@ -17,6 +17,14 @@ import { reducerDictionary } from './utils';
 import { IFormState } from './interfaces';
 
 
+const initialState: IFormState = {
+  isNew: true,
+  source: {},
+  model: {},
+  errors: {},
+  isChanged: false,
+};
+
 const behaviors: Record<FormActionType, Function> = {
   [XCRITICAL_FORM_INIT]: (_state: IFormState, {
     payload,
@@ -69,24 +77,20 @@ const behaviors: Record<FormActionType, Function> = {
   }),
 };
 
-const reducer: Reducer<IFormState> = (state = {
-  isNew: true,
-  source: {},
-  model: {},
-  errors: {},
-  isChanged: false,
-}, action) => {
+const reducer: Reducer<IFormState> = (state = initialState, action) => {
   const behavior = behaviors[action.type];
 
   return behavior ? behavior(state, action) : state;
 };
 
-export const formSelector = (state: any, formName: string): any => {
+export const formSelector = (state: any, formName: string, namespace?: string): any => {
   if (!formName) {
-    return state;
+    return initialState;
   }
 
-  return get(state.form, formName, state);
+  return namespace
+    ? get(state, `${namespace}.${formName}`, initialState)
+    : get(state.form, formName, initialState);
 };
 
 export default reducerDictionary(reducer, 'formName');
