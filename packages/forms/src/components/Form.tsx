@@ -10,6 +10,7 @@ import СreateConnectedFormField from './ConnectedFormField';
 export const PureForm: React.FC<IFormProps> & IForm = ({
   name,
   children,
+  namespace,
   ...otherProps
 }) => {
   const fieldNames: string[] = [];
@@ -36,7 +37,7 @@ export const PureForm: React.FC<IFormProps> & IForm = ({
 
   return (
     <form name={ name } { ...otherProps }>
-      <FormProvider value={ { formName: name, fields: fieldNames } }>
+      <FormProvider value={ { formName: name, fields: fieldNames, namespace } }>
         { children }
       </FormProvider>
     </form>
