@@ -20,9 +20,11 @@ const ConnectedFormField: React.FC<IFormFieldProps> = ({
 
 const mapStateToProps = (
   state: any,
-  { formName, name, ...rest }: IFormFieldProps,
+  {
+    formName, name, namespace, ...rest
+  }: IFormFieldProps,
 ): IFormConnectedFieldProps => {
-  const $state = formSelector(state, formName);
+  const $state = formSelector(state, formName, namespace);
   const value = get($state, `model.${name}`);
 
   return {

@@ -7,6 +7,11 @@ const reducer = combineReducers({
   form: reduxFormReducer, // mounted under "form"
 });
 
+const reducerWithNamespace = combineReducers({
+  questionnaires: combineReducers({
+    form: reduxFormReducer,
+  }),
+});
 
 const devtoolsCompose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -19,5 +24,10 @@ const store = createStore(
   composedMiddleware,
 );
 
+export const storeWithNamespace = createStore(
+  reducerWithNamespace,
+  {},
+  composedMiddleware,
+);
 
 export default store;

@@ -3,11 +3,12 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Provider } from 'react-redux';
 
-import store from './store';
+import store, { storeWithNamespace } from './store';
 import SimpleForm from './SimpleForm';
 import MultipleForm from './MultipleForm';
 import MirroringForm from './MirroringForm';
 import ConnectedForm from './ConnectedForm';
+import NamespaceForm from './NamespaceForm';
 
 
 storiesOf('Form', module)
@@ -29,5 +30,10 @@ storiesOf('Form', module)
   .add('Connected Form', () => (
     <Provider store={ store }>
       <ConnectedForm />
+    </Provider>
+  ))
+  .add('Namespace Form', () => (
+    <Provider store={ storeWithNamespace }>
+      <NamespaceForm />
     </Provider>
   ));
