@@ -72,7 +72,7 @@ export interface IGridProps {
   overscanRowCount?: number;
   shouldFitLastColumn?: boolean;
   minColumnWidth?: number;
-  internalGridProps?: IInternalGridProps;
+  gridProps?: IInternalGridProps;
 }
 
 
@@ -110,7 +110,7 @@ interface IAllGridsProps {
   rowHeight?: number;
   minColumnWidth: number;
   onChangeSort: Function;
-  internalGridProps: IInternalGridProps;
+  gridProps: IInternalGridProps;
 }
 
 
@@ -142,7 +142,7 @@ export interface IInternalGrid {
   onChangeSort: Function;
   shouldFitLastColumn: boolean;
   minColumnWidth: number;
-  internalGridProps: IInternalGridProps;
+  gridProps: IInternalGridProps;
 }
 
 export interface IMappedItem extends IItem {

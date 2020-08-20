@@ -66,7 +66,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   onChangeSort,
   shouldFitLastColumn,
   minColumnWidth,
-  internalGridProps,
+  gridProps,
 }) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(getFullWidth(mappedColumns));
@@ -300,7 +300,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
           isScrollingOptOut={ isScrollingOptOut }
           overscanColumnCount={ overscanColumnCount }
           overscanRowCount={ overscanRowCount }
-          { ...internalGridProps }
+          { ...gridProps }
         />
       </Body>
       {
