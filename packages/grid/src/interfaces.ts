@@ -1,11 +1,32 @@
 import { ReactElement, CSSProperties, RefObject } from 'react';
 
+import { Alignment } from 'react-virtualized';
+
 import { ITheme } from '@xcritical/theme';
 
 import { GridPositions, GridSort } from './consts';
 
 
 type CellContent = string | number | ReactElement | any;
+
+export interface IInternalGridProps {
+  'aria-label'?: string;
+  'aria-readonly'?: boolean;
+  className?: string;
+  containerProps?: object;
+  containerRole?: string;
+  containerStyle?: CSSProperties;
+  id?: string;
+  isScrolling?: boolean;
+  scrollingResetTimeInterval?: number;
+  scrollLeft?: number;
+  scrollToAlignment?: Alignment;
+  scrollToColumn?: number;
+  scrollTop?: number;
+  scrollToRow?: number;
+  style?: CSSProperties;
+  tabIndex?: number | null;
+}
 
 export interface IItem {
   [key: string]: CellContent;
@@ -51,6 +72,7 @@ export interface IGridProps {
   overscanRowCount?: number;
   shouldFitLastColumn?: boolean;
   minColumnWidth?: number;
+  gridProps?: IInternalGridProps;
 }
 
 
@@ -88,6 +110,7 @@ interface IAllGridsProps {
   rowHeight?: number;
   minColumnWidth: number;
   onChangeSort: Function;
+  gridProps: IInternalGridProps;
 }
 
 
@@ -119,6 +142,7 @@ export interface IInternalGrid {
   onChangeSort: Function;
   shouldFitLastColumn: boolean;
   minColumnWidth: number;
+  gridProps: IInternalGridProps;
 }
 
 export interface IMappedItem extends IItem {
