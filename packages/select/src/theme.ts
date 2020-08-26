@@ -38,18 +38,15 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
       hover: {
         background: '#efefef',
         color: colors.CHAROCOAL,
-
       },
 
       selected: {
         background: '#efefef',
         color: colors.CHAROCOAL,
-
       },
       active: {
         background: '#efefef',
         color: colors.CHAROCOAL,
-
       },
       disabled: {
         background: '#F0F0F0',
@@ -59,7 +56,6 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
       },
 
       dropdown: {
-        background: colors.GRAY_LIGHT,
         selected: {
           background: colors.GRAY_LIGHT,
         },
@@ -74,6 +70,16 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         paddingRight: 0,
         paddingTop: 0,
       },
+
+      scrollbarVertical: {
+        background: colors.CHAROCOAL,
+        borderRadius: 3,
+      },
+      scrollbarHorizontal: {
+        background: colors.CHAROCOAL,
+        borderRadius: 3,
+      },
+
       button: {
         background: colors.WHITE,
         borderColor: colors.GRAY,

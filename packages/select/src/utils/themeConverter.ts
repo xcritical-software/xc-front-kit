@@ -119,6 +119,8 @@ export const themeConverter = (
       ...getBorderRadius('dropdownList'),
       ...getElementStyles('dropdownList'),
       ...getInteractiveStyles('dropdownList', isDisabled, isFocused, isSelected),
+      scrollbarVertical: { ...getElementStyles('scrollbarVertical') },
+      scrollbarHorizontal: { ...getElementStyles('scrollbarHorizontal') },
     }),
     menuPortal: (css) => ({
       ...css,
