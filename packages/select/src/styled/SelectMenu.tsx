@@ -5,16 +5,15 @@ import { MenuListComponentProps, OptionTypeBase } from 'react-select';
 import { CSSObject } from 'styled-components';
 
 
-interface IStyledConfigWithScrollBar {
-  scrollbarVertical?: CSSObject;
-  scrollbarHorizontal?: CSSObject;
+interface IMenuListComponentProps extends MenuListComponentProps<OptionTypeBase> {
+  selectProps: {
+    styles: {
+      menuScrollbar: CSSObject;
+    };
+  };
 }
 
-const renderThumbVertical = (themeStyles): React.FC<{ style }> => ({ style, ...props }) => (
-  <div { ...props } style={ { ...themeStyles, ...style } } />
-);
-
-const renderThumbHorizontal = (themeStyles): React.FC<{ style }> => ({ style, ...props }) => (
+const renderThumb = (themeStyles): React.FC<{ style }> => ({ style, ...props }) => (
   <div { ...props } style={ { ...themeStyles, ...style } } />
 );
 
@@ -22,23 +21,19 @@ const renderThumbHorizontal = (themeStyles): React.FC<{ style }> => ({ style, ..
 //  which leads to a conflict with react-custom-scrollbars
 const FixScrollbarLogic = () => <div />;
 
-export const MenuList: React.FC<MenuListComponentProps<OptionTypeBase>> = memo(
+export const MenuList: React.FC<IMenuListComponentProps> = memo(
   (props) => {
-    const { getStyles } = props;
-    const {
-      scrollbarVertical,
-      scrollbarHorizontal,
-      ...restStyles
-    }: IStyledConfigWithScrollBar = getStyles('menuList', props);
+    const { getStyles, selectProps: { styles } } = props;
+    const menuListStyles = getStyles('menuList', props);
 
     return (
       <>
         <FixScrollbarLogic />
-        <div style={ restStyles }>
+        <div style={ menuListStyles }>
           <Scrollbars
             autoHeight
-            renderThumbVertical={ renderThumbVertical(scrollbarVertical) }
-            renderThumbHorizontal={ renderThumbHorizontal(scrollbarHorizontal) }
+            renderThumbVertical={ renderThumb(styles.menuScrollbar) }
+            renderThumbHorizontal={ renderThumb(styles.menuScrollbar) }
           >
             { props.children }
           </Scrollbars>

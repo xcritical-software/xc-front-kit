@@ -71,11 +71,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         paddingTop: 0,
       },
 
-      scrollbarVertical: {
-        background: colors.CHAROCOAL,
-        borderRadius: 3,
-      },
-      scrollbarHorizontal: {
+      menuScrollbar: {
         background: colors.CHAROCOAL,
         borderRadius: 3,
       },

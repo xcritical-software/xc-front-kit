@@ -1,5 +1,7 @@
 import { StylesConfig } from 'react-select/src/styles';
 
+import { CSSObject } from 'styled-components';
+
 import { IThemeNamespace } from '@xcritical/theme';
 
 import {
@@ -18,12 +20,16 @@ import {
 } from './getStyles';
 
 
+interface IStylesConfigCustom extends StylesConfig {
+  menuScrollbar: CSSObject;
+}
+
 export const themeConverter = (
   theme: IThemeNamespace<ISelectBaseTheme>,
   appearance: string,
   baseAppearance: string,
   shouldFitContainer: boolean,
-): StylesConfig => {
+): IStylesConfigCustom => {
   const getElementStyles = getCommonStyles(theme, appearance, baseAppearance);
   const getInteractiveStyles = getStatesStyles(theme, appearance, baseAppearance);
   const getDisplay = getDisplayStyles(theme, appearance, baseAppearance);
@@ -33,7 +39,7 @@ export const themeConverter = (
   const getWidth = getWidthStyles(theme, appearance, baseAppearance);
   const getHeight = getHeightStyles(theme, appearance, baseAppearance);
 
-  const styles: StylesConfig = {
+  const styles: IStylesConfigCustom = {
     container: (css) => ({
       ...css,
       ...getElementStyles('container'),
@@ -119,9 +125,10 @@ export const themeConverter = (
       ...getBorderRadius('dropdownList'),
       ...getElementStyles('dropdownList'),
       ...getInteractiveStyles('dropdownList', isDisabled, isFocused, isSelected),
-      scrollbarVertical: { ...getElementStyles('scrollbarVertical') },
-      scrollbarHorizontal: { ...getElementStyles('scrollbarHorizontal') },
     }),
+    menuScrollbar: {
+      ...getElementStyles('menuScrollbar'),
+    },
     menuPortal: (css) => ({
       ...css,
     }),
