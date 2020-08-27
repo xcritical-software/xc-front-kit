@@ -128,6 +128,7 @@ export const themeConverter = (
     }),
     menuScrollbar: {
       ...getElementStyles('menuScrollbar'),
+      ...getInteractiveStyles('menuScrollbar'),
     },
     menuPortal: (css) => ({
       ...css,

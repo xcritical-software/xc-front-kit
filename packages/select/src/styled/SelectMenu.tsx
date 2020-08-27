@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 import { MenuListComponentProps, OptionTypeBase } from 'react-select';
-import { CSSObject } from 'styled-components';
+import styled, { CSSObject } from 'styled-components';
 
 
 interface IMenuListComponentProps extends MenuListComponentProps<OptionTypeBase> {
@@ -13,8 +13,16 @@ interface IMenuListComponentProps extends MenuListComponentProps<OptionTypeBase>
   };
 }
 
+interface IThumbProps {
+  themeStyles: CSSObject;
+}
+
+const Thumb = styled.div<IThumbProps>`
+  ${({ themeStyles }) => themeStyles}
+`;
+
 const renderThumb = (themeStyles): React.FC<{ style }> => ({ style, ...props }) => (
-  <div { ...props } style={ { ...themeStyles, ...style } } />
+  <Thumb { ...props } themeStyles={ { ...style, ...themeStyles } } />
 );
 
 // TODO react-select append wheel, touchdown listeners to first child

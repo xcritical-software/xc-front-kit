@@ -72,8 +72,17 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
       },
 
       menuScrollbar: {
-        background: colors.CHAROCOAL,
+        background: '#c1c1c1',
         borderRadius: 3,
+        hover: {
+          background: '#a8a8a8',
+        },
+        focus: {
+          background: '#a8a8a8',
+        },
+        active: {
+          background: '#a8a8a8',
+        },
       },
 
       button: {
