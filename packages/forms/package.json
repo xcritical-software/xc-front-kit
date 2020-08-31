@@ -33,9 +33,9 @@
 	},
 	"private": false,
 	"devDependencies": {
-		"@xcritical/button": "2.1.1",
-		"@xcritical/input": "1.1.1",
-		"@xcritical/select": "1.1.1",
+		"@xcritical/button": "^2.1.1",
+		"@xcritical/input": "^1.1.1",
+		"@xcritical/select": "^1.1.1",
 		"react-redux": "^7.2.0",
 		"redux": "^4.0.5"
 	},
