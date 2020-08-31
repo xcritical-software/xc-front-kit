@@ -14,7 +14,7 @@ import {
 } from './styled';
 import { themeConverter } from './utils';
 import { SelectProps, ISelectBaseTheme } from './interfaces';
-import { MenuList } from './styled/SelectMenu';
+import { MenuList } from './styled/MenuList';
 
 
 export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({

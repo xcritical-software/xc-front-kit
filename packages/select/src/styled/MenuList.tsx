@@ -17,8 +17,16 @@ interface IThumbProps {
   themeStyles: CSSObject;
 }
 
+interface IMenuListWrapperProps {
+  themeStyles: CSSObject;
+}
+
 const Thumb = styled.div<IThumbProps>`
   ${({ themeStyles }) => themeStyles}
+`;
+
+const MenuListWrapper = styled.div<IMenuListWrapperProps>`
+ ${({ themeStyles }) => themeStyles} 
 `;
 
 const renderThumb = (themeStyles): React.FC<{ style }> => ({ style, ...props }) => (
@@ -37,7 +45,7 @@ export const MenuList: React.FC<IMenuListComponentProps> = memo(
     return (
       <>
         <FixScrollbarLogic />
-        <div style={ menuListStyles }>
+        <MenuListWrapper themeStyles={ menuListStyles }>
           <Scrollbars
             autoHeight
             renderThumbVertical={ renderThumb(styles.menuScrollbar) }
@@ -45,7 +53,7 @@ export const MenuList: React.FC<IMenuListComponentProps> = memo(
           >
             { props.children }
           </Scrollbars>
-        </div>
+        </MenuListWrapper>
       </>
     );
   },

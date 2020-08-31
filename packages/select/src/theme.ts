@@ -56,6 +56,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
       },
 
       dropdown: {
+        background: colors.GRAY_LIGHT,
         selected: {
           background: colors.GRAY_LIGHT,
         },
