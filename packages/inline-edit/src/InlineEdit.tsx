@@ -4,11 +4,11 @@ import React, {
 
 
 import { InlineEditUncontrolled } from './InlineEditUncontrolled';
-import { IInlineEditProps, IEditViewProps, IReadViewProps } from './interfaces';
+import { IInlineEditProps, IReadViewProps } from './interfaces';
 
 
 export const PureInlineEdit = function <
-  TEditViewProps extends IEditViewProps<TFieldValue>,
+  TEditViewProps,
   TViewProps extends IReadViewProps<TFieldValue>,
   TFieldValue>(
   {
@@ -35,7 +35,7 @@ export const PureInlineEdit = function <
 
   const handleConfirm = useCallback((newValue: TFieldValue): void => {
     setValue(newValue);
-    onConfirm(newValue);
+    onConfirm?.(newValue);
 
     if (isEditing) return;
 

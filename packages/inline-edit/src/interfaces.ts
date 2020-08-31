@@ -1,7 +1,5 @@
 import { CSSObject } from 'styled-components';
-
-
-import { SyntheticEvent } from 'react';
+import { SyntheticEvent, FC } from 'react';
 
 import { ITheme, ICSSProperties, AllType } from '@xcritical/theme';
 
@@ -44,10 +42,10 @@ export type IInlineEditUncontrolledProps<
   TFieldValue
 > = InlineEditCommonProps<TFieldValue> & {
   /** Component to be shown when not in edit view. */
-  readView: React.FC<any>;
+  readView: FC<any>;
   readViewProps?: any;
   /** Component to be shown when editing. */
-  editView: React.FC<any>;
+  editView: FC<any>;
   editViewProps?: any;
   /** Whether the component shows the readView or the editView. */
   isEditing: boolean;
@@ -74,22 +72,22 @@ export type InlineEditCommonProps<
    * Handler is called, editView is closed and changes are confirmed.
    * Field value is passed as an argument to this function.
    */
-  onConfirm: (value?: TFieldValue) => void;
+  onConfirm?: (value?: TFieldValue) => void;
   /** Custom text for error message. */
   error?: string | string[];
 };
 
 export type IInlineEditProps<
-  TEditViewProps extends IEditViewProps<TFieldValue>,
-  TViewProps extends IReadViewProps<TFieldValue>,
+  TEditViewProps,
+  TViewProps,
   TFieldValue
 > = InlineEditCommonProps< TFieldValue> & {
   /** Component to be shown when not in edit view. */
-  readView: React.FC<TViewProps>;
-  readViewProps?: TViewProps;
+  readView: FC<TViewProps & IReadViewProps<TFieldValue>>;
+  readViewProps?: Omit<TViewProps, keyof IReadViewProps<TFieldValue>>;
   /** Component to be shown when editing. */
-  editView: React.FC<TEditViewProps>;
-  editViewProps?: TEditViewProps;
+  editView: FC<TEditViewProps & IEditViewProps<TFieldValue>>;
+  editViewProps?: Omit<TEditViewProps, 'value' | 'onChange' | 'invalid' | 'error'>;
   /** If this prop is truthy, the editView component is active. */
   isEditing?: boolean;
   /** Callback for changing prop "isEditing" outside the InlineEdit component.
