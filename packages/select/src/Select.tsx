@@ -14,6 +14,7 @@ import {
 } from './styled';
 import { themeConverter } from './utils';
 import { SelectProps, ISelectBaseTheme } from './interfaces';
+import { MenuList } from './styled/MenuList';
 
 
 export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
@@ -63,7 +64,6 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
     );
   }, [innerTheme, appearance, baseAppearance, shouldFitContainer]);
 
-
   return (
     <Select
       ref={ selectRef }
@@ -83,6 +83,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
         DropdownIndicator,
         ClearIndicator,
         MultiValueRemove,
+        MenuList,
         ...components,
       } }
       onChange={ (value, action) => {
