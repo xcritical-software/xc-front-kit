@@ -28,6 +28,7 @@ export const PureButton: React.FC<IButtonProps> = ({
   children,
   href,
   theme,
+  type = 'button',
   role = 'button',
   textPosition = 'center',
   appearance = 'default',
@@ -72,6 +73,7 @@ export const PureButton: React.FC<IButtonProps> = ({
         baseAppearance={ baseAppearance }
         appearance={ appearance }
         onClick={ onClick }
+        type={ type }
         { ...(href ? { href } : null) }
         { ...rest }
       >
