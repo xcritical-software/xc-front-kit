@@ -48,7 +48,7 @@ jobs:
         - git fetch --tags --force
         - git checkout master
         - git pull
-        - yarn boltify version --loglevel silly --message "chore(release):" --no-push
+        - 'yarn boltify version --loglevel silly --message "chore(release): Release of components:" --no-push'
       after_deploy:
         - git push --follow-tags --no-verify
       deploy:
