@@ -9,6 +9,7 @@ import MultipleForm from './MultipleForm';
 import MirroringForm from './MirroringForm';
 import ConnectedForm from './ConnectedForm';
 import NamespaceForm from './NamespaceForm';
+import ErrorsForm from './ErrorsForm';
 
 
 storiesOf('Form', module)
@@ -35,5 +36,10 @@ storiesOf('Form', module)
   .add('Namespace Form', () => (
     <Provider store={ storeWithNamespace }>
       <NamespaceForm />
+    </Provider>
+  ))
+  .add('Errors Form', () => (
+    <Provider store={ store }>
+      <ErrorsForm />
     </Provider>
   ));

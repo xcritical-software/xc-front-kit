@@ -8,3 +8,10 @@ export const Textarea = styled.textarea`
 `;
 export const Select = styled.select`
 `;
+
+export const InputWithErrorWrapper = styled.div`
+  margin-bottom: 15px;
+  span {
+    color: red;
+  }
+`;
