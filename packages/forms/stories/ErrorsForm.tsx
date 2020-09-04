@@ -10,8 +10,8 @@ import Form, {
   formSelector,
   xcriticalFormError,
   xcriticalFormInit,
-  xcriticalFormToggleShowErrors,
-  xcriticalFormChangeFieldsMeta,
+  xcriticalFormShowErrors,
+  xcriticalFormSetFieldsMeta,
 } from '../src';
 
 import { InputWithErrorWrapper } from './SampleComponents';
@@ -76,11 +76,11 @@ const ErrorsForm = () => {
   }, [dispatch]);
 
   const handleToggleShowErrors = () => {
-    dispatch(xcriticalFormToggleShowErrors(FORM_NAME, !form.showAllErrors));
+    dispatch(xcriticalFormShowErrors(FORM_NAME, !form.showAllErrors));
   };
 
   const handleChangeMeta = () => {
-    dispatch(xcriticalFormChangeFieldsMeta(FORM_NAME, changedMeta));
+    dispatch(xcriticalFormSetFieldsMeta(FORM_NAME, changedMeta));
   };
 
   return (

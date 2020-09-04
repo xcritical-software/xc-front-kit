@@ -9,8 +9,9 @@ import {
   XCRITICAL_FORM_ERROR,
   XCRITICAL_FORM_RESET,
   XCRITICAL_FORM_SAVED,
-  XCRITICAL_FORM_TOGGLE_SHOW_ERRORS,
-  XCRITICAL_FORM_CHANGE_FIELDS_META,
+  XCRITICAL_FORM_SHOW_ERRORS,
+  XCRITICAL_FORM_SET_FIELDS_META,
+  XCRITICAL_FORM_SET_FIELD_META,
   FormActionType,
   IFormAction,
 } from './actions';
@@ -53,7 +54,12 @@ const behaviors: Record<FormActionType, Function> = {
     const model = setIn(state.model, $value, field);
     const isChanged = isDifference(model, state.source);
     const errors = setIn(state.errors, false, field);
-    const fields = setIn(state.fields, { touch: true, changed: true }, field);
+    const fieldsMeta = {
+      touch: true,
+      changed: isDifference($value, get(state, ['source', ...field.split('.')])),
+    };
+
+    const fields = setIn(state.fields, fieldsMeta, field);
 
     return {
       ...state,
@@ -82,17 +88,33 @@ const behaviors: Record<FormActionType, Function> = {
     ...state,
     isChanged: false,
     source: state.model,
+    showAllErrors: true,
   }),
-  [XCRITICAL_FORM_TOGGLE_SHOW_ERRORS]: (state: IFormState, { payload }) => ({
+  [XCRITICAL_FORM_SHOW_ERRORS]: (state: IFormState, { payload }) => ({
     ...state,
     showAllErrors: payload,
   }),
-  [XCRITICAL_FORM_CHANGE_FIELDS_META]: (state: IFormState, { payload }: IFormAction) => ({
+  [XCRITICAL_FORM_SET_FIELDS_META]: (state: IFormState, { payload }: IFormAction) => ({
     ...state,
     fields: {
       ...payload,
     },
   }),
+  [XCRITICAL_FORM_SET_FIELD_META]: (
+    state: IFormState, {
+      payload: {
+        field,
+        value,
+      },
+    }: IFormAction,
+  ) => {
+    const fields = setIn(state.fields, value, field);
+
+    return {
+      ...state,
+      fields,
+    };
+  },
 };
 
 const reducer: Reducer<IFormState> = (state = initialState, action) => {
