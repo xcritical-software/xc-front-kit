@@ -4,6 +4,9 @@ export const XCRITICAL_FORM_SAVED = 'XCRITICAL_FORM_SAVED';
 export const XCRITICAL_FORM_DELETE = 'XCRITICAL_FORM_DELETE';
 export const XCRITICAL_FORM_ERROR = 'XCRITICAL_FORM_ERROR';
 export const XCRITICAL_FORM_RESET = 'XCRITICAL_FORM_RESET';
+export const XCRITICAL_FORM_SHOW_ERRORS = 'XCRITICAL_FORM_SHOW_ERRORS';
+export const XCRITICAL_FORM_SET_FIELDS_META = 'XCRITICAL_FORM_SET_FIELDS_META';
+export const XCRITICAL_FORM_SET_FIELD_META = 'XCRITICAL_FORM_SET_FIELD_META';
 
 export type FormActionType =
   typeof XCRITICAL_FORM_INIT |
@@ -11,7 +14,10 @@ export type FormActionType =
   typeof XCRITICAL_FORM_SAVED |
   typeof XCRITICAL_FORM_DELETE |
   typeof XCRITICAL_FORM_ERROR |
-  typeof XCRITICAL_FORM_RESET;
+  typeof XCRITICAL_FORM_RESET |
+  typeof XCRITICAL_FORM_SET_FIELDS_META |
+  typeof XCRITICAL_FORM_SET_FIELD_META |
+  typeof XCRITICAL_FORM_SHOW_ERRORS;
 
 export interface IFormAction {
   type: FormActionType;
@@ -95,5 +101,42 @@ export function xcriticalFormReset(name: string): IFormAction {
     meta: {
       formName: name,
     },
+  };
+}
+
+export function xcriticalFormShowErrors(name: string, value: boolean): IFormAction {
+  return {
+    type: XCRITICAL_FORM_SHOW_ERRORS,
+    meta: {
+      formName: name,
+    },
+    payload: value,
+  };
+}
+
+
+export function xcriticalFormSetFieldsMeta(name: string, model: any): IFormAction {
+  return {
+    type: XCRITICAL_FORM_SET_FIELDS_META,
+    meta: {
+      formName: name,
+    },
+    payload: model,
+  };
+}
+
+export function xcriticalFormSetFieldMeta(name: string,
+  property: string,
+  value: any): IFormAction {
+  return {
+    type: XCRITICAL_FORM_SET_FIELD_META,
+    meta: {
+      formName: name,
+    },
+    payload: {
+      field: property,
+      value,
+    },
+
   };
 }
