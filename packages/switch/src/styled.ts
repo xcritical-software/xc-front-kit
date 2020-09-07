@@ -17,13 +17,6 @@ export const SwitchLabelText = styled.span<StyledSwitchLabelTextProps>`
 `;
 
 export const SwitchHiddenCheckbox = styled.input`
-  width: 0;
-  height: 0;
-  font-size: 0;
-  line-height: 0;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
   appearance: none;
   position: absolute;
         

@@ -11,8 +11,9 @@ import {
   SwitchHiddenCheckbox,
 } from './styled';
 
-import Loader from './icons';
 import { ISwitchProps } from './interfaces';
+
+import DefaultLoader from './icons';
 
 
 const PureSwitch: React.FC<ISwitchProps> = ({
@@ -21,13 +22,14 @@ const PureSwitch: React.FC<ISwitchProps> = ({
   label,
   labelPosition = 'right',
   loading = false,
+  loader: Loader = DefaultLoader,
   checked = false,
   disabled = false,
   appearance = 'default',
   baseAppearance = 'default',
 }) => {
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e);
+    onChange(e.target.checked, e);
   }, [onChange]);
 
   return (
@@ -37,7 +39,7 @@ const PureSwitch: React.FC<ISwitchProps> = ({
     >
       <SwitchHiddenCheckbox
         type="checkbox"
-        name={ name }
+        name={ name ?? label ?? '' }
         checked={ checked }
         disabled={ loading || disabled }
         onChange={ handleInputChange }

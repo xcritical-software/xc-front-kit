@@ -45,7 +45,6 @@ storiesOf('Switch', module)
     <BasicSwitch
       theme={ { [switchThemeNamespace]: theme } }
       disabled={ boolean('Disabled', false) }
-      loading={ boolean('Loading', false) }
       label={ text('Label', '') }
       labelPosition={ select('Label position', ['left', 'right'], 'right') }
     />
@@ -55,7 +54,15 @@ storiesOf('Switch', module)
       theme={ { [switchThemeNamespace]: theme } }
       appearance="customTheme"
       disabled={ boolean('Disabled', false) }
-      loading={ boolean('Loading', false) }
+      label={ text('Label', '') }
+      labelPosition={ select('Label position', ['left', 'right'], 'right') }
+    />
+  ))
+  .add('With Loading State', () => (
+    <BasicSwitch
+      theme={ { [switchThemeNamespace]: theme } }
+      disabled={ boolean('Disabled', false) }
+      loading={ boolean('Loading', true) }
       label={ text('Label', '') }
       labelPosition={ select('Label position', ['left', 'right'], 'right') }
     />
