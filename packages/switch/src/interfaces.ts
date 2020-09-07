@@ -26,11 +26,12 @@ export interface ISwitchStyledProps {
 
 export interface ISwitchProps extends ISwitchStyledProps {
   checked: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (checked: boolean, event: React.ChangeEvent<HTMLInputElement>) => void;
 
   label?: string;
   labelPosition?: 'left' | 'right';
   loading?: boolean;
+  loader?: React.FC;
   disabled?: boolean;
   name?: string;
 }
