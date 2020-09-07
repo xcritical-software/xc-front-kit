@@ -27,11 +27,20 @@ const mapStateToProps = (
   const $state = formSelector(state, formName, namespace);
   const value = get($state, `model.${name}`);
 
+  const $error = get($state, `errors.${name}`);
+  const touch = get($state, `fields.${name}.touch`, false);
+  const { showAllErrors } = $state;
+
+  const showError = showAllErrors || touch;
+  const error = showError ? $error : null;
+  const invalid = showError ? !!error : false;
+
+
   return {
     ...rest,
     value: isNil(value) ? '' : value,
-    error: get($state, `errors.${name}`),
-    invalid: !!get($state, `errors.${name}`, false),
+    error,
+    invalid,
   };
 };
 

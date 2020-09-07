@@ -9,6 +9,9 @@ import {
   XCRITICAL_FORM_ERROR,
   XCRITICAL_FORM_RESET,
   XCRITICAL_FORM_SAVED,
+  XCRITICAL_FORM_SHOW_ERRORS,
+  XCRITICAL_FORM_SET_FIELDS_META,
+  XCRITICAL_FORM_SET_FIELD_META,
   FormActionType,
   IFormAction,
 } from './actions';
@@ -23,6 +26,8 @@ const initialState: IFormState = {
   model: {},
   errors: {},
   isChanged: false,
+  fields: {},
+  showAllErrors: false,
 };
 
 const behaviors: Record<FormActionType, Function> = {
@@ -49,12 +54,19 @@ const behaviors: Record<FormActionType, Function> = {
     const model = setIn(state.model, $value, field);
     const isChanged = isDifference(model, state.source);
     const errors = setIn(state.errors, false, field);
+    const fieldsMeta = {
+      touch: true,
+      changed: isDifference($value, get(state, ['source', ...field.split('.')])),
+    };
+
+    const fields = setIn(state.fields, fieldsMeta, field);
 
     return {
       ...state,
       model,
       errors,
       isChanged,
+      fields,
     };
   },
   [XCRITICAL_FORM_ERROR]: (state: IFormState, { payload }: IFormAction) => ({
@@ -69,12 +81,40 @@ const behaviors: Record<FormActionType, Function> = {
     isChanged: false,
     model: state.source,
     errors: {},
+    fields: {},
+    showAllErrors: false,
   }),
   [XCRITICAL_FORM_SAVED]: (state: IFormState) => ({
     ...state,
     isChanged: false,
     source: state.model,
+    showAllErrors: true,
   }),
+  [XCRITICAL_FORM_SHOW_ERRORS]: (state: IFormState, { payload }) => ({
+    ...state,
+    showAllErrors: payload,
+  }),
+  [XCRITICAL_FORM_SET_FIELDS_META]: (state: IFormState, { payload }: IFormAction) => ({
+    ...state,
+    fields: {
+      ...payload,
+    },
+  }),
+  [XCRITICAL_FORM_SET_FIELD_META]: (
+    state: IFormState, {
+      payload: {
+        field,
+        value,
+      },
+    }: IFormAction,
+  ) => {
+    const fields = setIn(state.fields, value, field);
+
+    return {
+      ...state,
+      fields,
+    };
+  },
 };
 
 const reducer: Reducer<IFormState> = (state = initialState, action) => {

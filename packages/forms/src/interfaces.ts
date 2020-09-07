@@ -19,6 +19,8 @@ export interface IFormState<TModel = { [fieldName: string]: any }> {
   isNew: boolean;
   isChanged: boolean;
   errors: { [fieldName: string]: string };
+  fields?: TModel;
+  showAllErrors: boolean;
 }
 
 export interface IFormStateMap {
