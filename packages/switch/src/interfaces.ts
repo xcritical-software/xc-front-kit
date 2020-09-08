@@ -17,27 +17,28 @@ export interface ISwitchTheme extends ICSSProperties {
 
 export type SwitchTheme = ITheme<ISwitchTheme>;
 
+export interface ISwitchStateProps {
+  checked: boolean;
+  labelPosition: 'left' | 'right';
+  loading?: boolean;
+  loader?: React.FC;
+  disabled?: boolean;
+}
+
 export interface ISwitchStyledProps {
   theme: SwitchTheme;
   appearance?: string;
   baseAppearance?: string;
 }
 
-
-export interface ISwitchProps extends ISwitchStyledProps {
-  checked: boolean;
+export interface ISwitchProps extends ISwitchStyledProps, ISwitchStateProps {
   onChange: (checked: boolean, event: React.ChangeEvent<HTMLInputElement>) => void;
 
   label?: string;
-  labelPosition: 'left' | 'right';
-  loading?: boolean;
-  loader?: React.FC;
-  disabled?: boolean;
   name?: string;
 }
 
 
-export type StyledSwitchProps = Required<ISwitchStyledProps>;
+export type StyledSwitchProps = Required<ISwitchStyledProps> & Partial<ISwitchStateProps>;
 
-export type StyledSwitchStyledWithLabelPosition = Required<ISwitchStyledProps & Pick<ISwitchProps, 'labelPosition'>>;
 export type BaseSwitch = Omit<ISwitchProps, 'checked' | 'onChange'>;

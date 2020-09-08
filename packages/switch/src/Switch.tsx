@@ -47,14 +47,18 @@ const PureSwitch: React.FC<ISwitchProps> = ({
       />
 
       <SwitchContainer
+        disabled={ disabled }
+        checked={ checked }
         appearance={ appearance }
         baseAppearance={ baseAppearance }
       >
         <SwitchHandle
+          checked={ checked }
           appearance={ appearance }
           baseAppearance={ baseAppearance }
         >
           <SwitchHandleItem
+            checked={ checked }
             appearance={ appearance }
             baseAppearance={ baseAppearance }
           >

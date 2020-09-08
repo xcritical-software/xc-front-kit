@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
 import { switchAppearanceTheme } from './utils';
-import { StyledSwitchProps, StyledSwitchStyledWithLabelPosition } from './interfaces';
+import { StyledSwitchProps } from './interfaces';
 
 
-export const SwitchLabel = styled.label<StyledSwitchStyledWithLabelPosition>`
+export const SwitchLabel = styled.label<StyledSwitchProps>`
   ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, 'label')};
   display: inline-flex;
   flex-direction: ${({ labelPosition }) => (labelPosition === 'left' ? 'row-reverse' : 'row')};
 `;
 
-export const SwitchLabelText = styled.span<StyledSwitchStyledWithLabelPosition>`
+export const SwitchLabelText = styled.span<StyledSwitchProps>`
   ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, ['labelText'])};
   ${({
-    theme, appearance, baseAppearance, labelPosition,
+    theme, appearance, baseAppearance, labelPosition = 'right',
   }) => switchAppearanceTheme(theme, appearance, baseAppearance, ['labelText', labelPosition])};
   user-select: none;
 `;
@@ -30,34 +30,24 @@ export const SwitchHiddenCheckbox = styled.input`
 export const SwitchContainer = styled.span<StyledSwitchProps>`
   ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, 'container')};
   
-
-  ${SwitchHiddenCheckbox}:checked + & {
-     ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, ['container', 'checked'])};
-  }
-  
-  ${SwitchHiddenCheckbox}:disabled + & {
-     ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, ['container', 'disabled'])};
-     cursor: not-allowed;
-  }
+  ${({
+    theme, appearance, baseAppearance, checked,
+  }) => checked && switchAppearanceTheme(theme, appearance, baseAppearance, ['container', 'checked'])};
+  ${({
+    theme, appearance, baseAppearance, disabled,
+  }) => disabled && switchAppearanceTheme(theme, appearance, baseAppearance, ['container', 'disabled'])};
 `;
 
 export const SwitchHandle = styled.span<StyledSwitchProps>`
-   ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, 'handle')};
-        
-   ${SwitchHiddenCheckbox}:checked + ${SwitchContainer}  & {
-     ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, ['handle', 'checked'])};
-   }
+   ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, 'handle')}; 
+   ${({
+    theme, appearance, baseAppearance, checked,
+  }) => checked && switchAppearanceTheme(theme, appearance, baseAppearance, ['handle', 'checked'])};
 `;
 
 export const SwitchHandleItem = styled.span<StyledSwitchProps>`
    ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, 'handleItem')};
-
-   ${SwitchHiddenCheckbox}:active:not(:disabled) + ${SwitchContainer} & {
-      right: -30%;
-   }
-    
-   ${SwitchHiddenCheckbox}:checked:active:not(:disabled) + ${SwitchContainer} & {
-     left: -30%;
-     right: 0;
-   }
+   ${({
+    theme, appearance, baseAppearance, checked,
+  }) => checked && switchAppearanceTheme(theme, appearance, baseAppearance, ['handleItem', 'checked'])};
 `;

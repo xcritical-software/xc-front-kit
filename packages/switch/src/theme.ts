@@ -34,12 +34,14 @@ export const defaultSwitchTheme: SwitchTheme = {
     height: '100%',
     transition: 'inherit',
     borderRadius: '1rem',
+    flexShrink: 0,
     checked: {
       backgroundColor: colors.PRIMARY,
       color: colors.PRIMARY,
     },
     disabled: {
       opacity: '0.3',
+      cursor: 'not-allowed',
     },
   },
 
