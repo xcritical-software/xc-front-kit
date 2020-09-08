@@ -1,4 +1,4 @@
-import { colors } from '@xcritical/theme/src';
+import { colors } from '@xcritical/theme';
 
 import { SwitchTheme } from './interfaces';
 
