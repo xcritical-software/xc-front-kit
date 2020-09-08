@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { storiesOf } from '@storybook/react';
 import {
@@ -14,9 +14,9 @@ import { defaultSwitchTheme, switchThemeNamespace } from '../src/theme';
 const BasicSwitch: React.FC<BaseSwitch> = ({ theme: innerTheme, ...props }) => {
   const [isChecked, setIsChecked] = useState(false);
 
-  const handlerChange = () => {
+  const handlerChange = useCallback(() => {
     setIsChecked((prevState) => !prevState);
-  };
+  }, [setIsChecked]);
 
   return (
     <ThemeProvider theme={ innerTheme }>
@@ -24,6 +24,8 @@ const BasicSwitch: React.FC<BaseSwitch> = ({ theme: innerTheme, ...props }) => {
     </ThemeProvider>
   );
 };
+
+const emptyTheme = {};
 
 const theme = {
   appearance: {
@@ -43,7 +45,7 @@ storiesOf('Switch', module)
   .addDecorator(withKnobs)
   .add('Basic', () => (
     <BasicSwitch
-      theme={ { [switchThemeNamespace]: theme } }
+      theme={ emptyTheme }
       disabled={ boolean('Disabled', false) }
       label={ text('Label', '') }
       labelPosition={ select('Label position', ['left', 'right'], 'right') }

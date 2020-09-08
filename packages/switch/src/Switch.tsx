@@ -36,6 +36,7 @@ const PureSwitch: React.FC<ISwitchProps> = ({
     <SwitchLabel
       appearance={ appearance }
       baseAppearance={ baseAppearance }
+      labelPosition={ labelPosition }
     >
       <SwitchHiddenCheckbox
         type="checkbox"
@@ -44,17 +45,6 @@ const PureSwitch: React.FC<ISwitchProps> = ({
         disabled={ loading || disabled }
         onChange={ handleInputChange }
       />
-
-      { label && labelPosition === 'left'
-                && (
-                  <SwitchLabelText
-                    labelPosition={ labelPosition }
-                    appearance={ appearance }
-                    baseAppearance={ baseAppearance }
-                  >
-                    { label }
-                  </SwitchLabelText>
-                ) }
 
       <SwitchContainer
         appearance={ appearance }
@@ -73,16 +63,15 @@ const PureSwitch: React.FC<ISwitchProps> = ({
         </SwitchHandle>
       </SwitchContainer>
 
-      { label && labelPosition === 'right'
-                && (
-                  <SwitchLabelText
-                    labelPosition={ labelPosition }
-                    appearance={ appearance }
-                    baseAppearance={ baseAppearance }
-                  >
-                    { label }
-                  </SwitchLabelText>
-                ) }
+      { label && (
+        <SwitchLabelText
+          labelPosition={ labelPosition }
+          appearance={ appearance }
+          baseAppearance={ baseAppearance }
+        >
+          { label }
+        </SwitchLabelText>
+      ) }
     </SwitchLabel>
   );
 };

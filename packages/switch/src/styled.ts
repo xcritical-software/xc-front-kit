@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 
 import { switchAppearanceTheme } from './utils';
-import { StyledSwitchProps, StyledSwitchLabelTextProps } from './interfaces';
+import { StyledSwitchProps, StyledSwitchStyledWithLabelPosition } from './interfaces';
 
 
-export const SwitchLabel = styled.label<StyledSwitchProps>`
+export const SwitchLabel = styled.label<StyledSwitchStyledWithLabelPosition>`
   ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, 'label')};
+  display: inline-flex;
+  flex-direction: ${({ labelPosition }) => (labelPosition === 'left' ? 'row-reverse' : 'row')};
 `;
 
-export const SwitchLabelText = styled.span<StyledSwitchLabelTextProps>`
+export const SwitchLabelText = styled.span<StyledSwitchStyledWithLabelPosition>`
   ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, ['labelText'])};
   ${({
     theme, appearance, baseAppearance, labelPosition,

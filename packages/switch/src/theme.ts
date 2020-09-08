@@ -9,7 +9,6 @@ const SIZE_IDENT = '2px';
 
 export const defaultSwitchTheme: SwitchTheme = {
   label: {
-    display: 'inline-flex',
     alignItems: 'center',
     height: '22px',
     cursor: 'pointer',
