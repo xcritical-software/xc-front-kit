@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/switch",
-	"version": "2.1.1",
+	"version": "1.0.0",
 	"description": "<>",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
