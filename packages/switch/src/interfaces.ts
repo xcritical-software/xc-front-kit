@@ -20,8 +20,6 @@ export type SwitchTheme = ITheme<ISwitchTheme>;
 export interface ISwitchStateProps {
   checked: boolean;
   labelPosition: 'left' | 'right';
-  loading?: boolean;
-  loader?: React.FC;
   disabled?: boolean;
 }
 
@@ -37,7 +35,6 @@ export interface ISwitchProps extends ISwitchStyledProps, ISwitchStateProps {
   label?: string;
   name?: string;
 }
-
 
 export type StyledSwitchProps = Required<ISwitchStyledProps> & Partial<ISwitchStateProps>;
 

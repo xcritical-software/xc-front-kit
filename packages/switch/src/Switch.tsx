@@ -13,16 +13,12 @@ import {
 
 import { ISwitchProps } from './interfaces';
 
-import DefaultLoader from './icons';
-
 
 const PureSwitch: React.FC<ISwitchProps> = ({
   name,
   onChange,
   label,
   labelPosition = 'right',
-  loading = false,
-  loader: Loader = DefaultLoader,
   checked = false,
   disabled = false,
   appearance = 'default',
@@ -42,7 +38,7 @@ const PureSwitch: React.FC<ISwitchProps> = ({
         type="checkbox"
         name={ name ?? label ?? '' }
         checked={ checked }
-        disabled={ loading || disabled }
+        disabled={ disabled }
         onChange={ handleInputChange }
       />
 
@@ -61,9 +57,7 @@ const PureSwitch: React.FC<ISwitchProps> = ({
             checked={ checked }
             appearance={ appearance }
             baseAppearance={ baseAppearance }
-          >
-            { loading && <Loader /> }
-          </SwitchHandleItem>
+          />
         </SwitchHandle>
       </SwitchContainer>
 
