@@ -1,0 +1,47 @@
+{
+	"name": "@xcritical/switch",
+	"version": "1.0.0",
+	"description": "<>",
+	"main": "dist/index.js",
+	"source": "src/index.ts",
+	"module": "dist/switch.esm.js",
+	"types": "dist/typings.d.ts",
+	"scripts": {
+		"test": "exit 0",
+		"compile": "tsdx build --format cjs,esm --verbose && api-extractor run",
+		"compile:local": "tsdx build --format cjs,esm --verbose && api-extractor run --local",
+		"publish-files": "gulp --cwd . publish-files",
+		"build": "yarn clean && yarn compile",
+		"clean": "rimraf dist lib .publish"
+	},
+	"files": [
+		"dist"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+	},
+	"keywords": [
+		"switch",
+		"style-components",
+		"themed"
+	],
+	"author": "XCritical Software",
+	"license": "MIT",
+	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/switch#readme",
+	"publishConfig": {
+		"access": "public"
+	},
+	"private": false,
+	"peerDependencies": {
+		"react": "^16.9.0",
+		"styled-components": "^5.0.0",
+		"fast-equals": "2.0.0"
+	},
+	"dependencies": {
+		"@xcritical/theme": "^1.1.1",
+		"lodash.get": "^4.x",
+		"micro-memoize": "^4.0.8",
+		"polished": "^3.4.4"
+	}
+}
