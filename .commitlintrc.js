@@ -5,6 +5,5 @@ module.exports = {
     'subject-case': [0],
     'header-max-length': [0],
     'subject-full-stop': [0],
-    'subject-empty': [0]
   },
 };
