@@ -8,7 +8,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { Switch } from '../src/Switch';
 import { BaseSwitch } from '../src/interfaces';
-import { defaultSwitchTheme, switchThemeNamespace } from '../src/theme';
+import { switchThemeNamespace } from '../src/theme';
 
 
 const BasicSwitch: React.FC<BaseSwitch> = ({ theme: innerTheme, ...props }) => {
@@ -29,7 +29,6 @@ const emptyTheme = {};
 
 const theme = {
   appearance: {
-    default: defaultSwitchTheme,
     customTheme: {
       container: {
         backgroundColor: 'red',
@@ -54,13 +53,9 @@ const theme = {
         top: 0,
         bottom: 0,
         left: 0,
-        checked: {
-          left: '100%',
-        },
-      },
-      handleItem: {
         backgroundColor: 'rgb(121 131 138)',
         checked: {
+          left: '100%',
           backgroundColor: 'rgb(64, 172, 173)',
         },
       },
@@ -76,7 +71,6 @@ const theme = {
           opacity: 0.4,
         },
         checked: {
-
           backgroundColor: 'rgb(45 148 243 / 25%)',
         },
       },
@@ -87,14 +81,10 @@ const theme = {
         bottom: 0,
         left: 0,
         transform: 'translateX(-50%)',
+        backgroundColor: 'rgb(161 161 161)',
         checked: {
           left: '100%',
           transform: 'translateX(-50%)',
-        },
-      },
-      handleItem: {
-        backgroundColor: 'rgb(161 161 161)',
-        checked: {
           backgroundColor: 'rgb(44 143 238)',
         },
       },

@@ -6,13 +6,9 @@ import { ICSSProperties, ITheme } from '@xcritical/theme';
 
 export interface ISwitchTheme extends ICSSProperties {
   label?: CSSObject;
-  hiddenCheckbox?: CSSObject;
+  labelText?: CSSObject & {rightPosition: CSSObject; leftPosition: CSSObject};
   container?: CSSObject;
-  containerCheckboxChecked?: CSSObject;
-  containerCheckboxDisabled?: CSSObject;
   handle?: CSSObject;
-  handleCheckboxChecked?: CSSObject;
-  handleItem?: CSSObject;
 }
 
 export type SwitchTheme = ITheme<ISwitchTheme>;

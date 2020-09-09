@@ -7,7 +7,6 @@ import {
   SwitchLabel,
   SwitchLabelText,
   SwitchHandle,
-  SwitchHandleItem,
   SwitchHiddenCheckbox,
 } from './styled';
 
@@ -30,6 +29,7 @@ const PureSwitch: React.FC<ISwitchProps> = ({
 
   return (
     <SwitchLabel
+      disabled={ disabled }
       appearance={ appearance }
       baseAppearance={ baseAppearance }
       labelPosition={ labelPosition }
@@ -52,13 +52,7 @@ const PureSwitch: React.FC<ISwitchProps> = ({
           checked={ checked }
           appearance={ appearance }
           baseAppearance={ baseAppearance }
-        >
-          <SwitchHandleItem
-            checked={ checked }
-            appearance={ appearance }
-            baseAppearance={ baseAppearance }
-          />
-        </SwitchHandle>
+        />
       </SwitchContainer>
 
       { label && (

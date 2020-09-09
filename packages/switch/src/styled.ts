@@ -6,6 +6,15 @@ import { StyledSwitchProps } from './interfaces';
 
 export const SwitchLabel = styled.label<StyledSwitchProps>`
   ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, 'label')};
+  ${({
+    theme, appearance, baseAppearance, disabled,
+  }) => disabled && switchAppearanceTheme(
+    theme,
+    appearance,
+    baseAppearance,
+    ['label', 'disabled'],
+  )
+};
   display: inline-flex;
   flex-direction: ${({ labelPosition }) => (labelPosition === 'left' ? 'row-reverse' : 'row')};
 `;
@@ -14,7 +23,7 @@ export const SwitchLabelText = styled.span<StyledSwitchProps>`
   ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, ['labelText'])};
   ${({
     theme, appearance, baseAppearance, labelPosition = 'right',
-  }) => switchAppearanceTheme(theme, appearance, baseAppearance, ['labelText', labelPosition])};
+  }) => switchAppearanceTheme(theme, appearance, baseAppearance, ['labelText', `${labelPosition}Position`])};
   user-select: none;
 `;
 
@@ -43,11 +52,4 @@ export const SwitchHandle = styled.span<StyledSwitchProps>`
    ${({
     theme, appearance, baseAppearance, checked,
   }) => checked && switchAppearanceTheme(theme, appearance, baseAppearance, ['handle', 'checked'])};
-`;
-
-export const SwitchHandleItem = styled.span<StyledSwitchProps>`
-   ${({ theme, appearance, baseAppearance }) => switchAppearanceTheme(theme, appearance, baseAppearance, 'handleItem')};
-   ${({
-    theme, appearance, baseAppearance, checked,
-  }) => checked && switchAppearanceTheme(theme, appearance, baseAppearance, ['handleItem', 'checked'])};
 `;
