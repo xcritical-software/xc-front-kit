@@ -13,16 +13,16 @@ export interface ISwitchTheme extends ICSSProperties {
 
 export type SwitchTheme = ITheme<ISwitchTheme>;
 
-export interface ISwitchStateProps {
-  checked: boolean;
-  labelPosition: 'left' | 'right';
-  disabled?: boolean;
-}
-
 export interface ISwitchStyledProps {
   theme: SwitchTheme;
   appearance?: string;
   baseAppearance?: string;
+}
+
+export interface ISwitchStateProps {
+  checked: boolean;
+  labelPosition?: 'left' | 'right';
+  disabled?: boolean;
 }
 
 export interface ISwitchProps extends ISwitchStyledProps, ISwitchStateProps {
