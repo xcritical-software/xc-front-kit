@@ -1,8 +1,6 @@
 import memoize from 'micro-memoize';
 
-import { IThemeNamespace, getThemedState, ITheme } from '@xcritical/theme';
-
-import { getAppearanceTheme } from '@xcritical/theme/src';
+import { IThemeNamespace, getThemedState, getAppearanceTheme } from '@xcritical/theme';
 
 import { ISwitchTheme } from './interfaces';
 import { switchThemeNamespace, defaultSwitchTheme } from './theme';
@@ -11,7 +9,7 @@ import { switchThemeNamespace, defaultSwitchTheme } from './theme';
 export const getSwitchStyles = memoize((
   theme?: IThemeNamespace<ISwitchTheme>,
   propertyPath?: string[],
-): ITheme<ISwitchTheme> => {
+): any => {
   const func = getThemedState(switchThemeNamespace, defaultSwitchTheme);
 
   return func(theme, propertyPath);
@@ -22,7 +20,7 @@ export const switchAppearanceTheme = (
   appearanceName: string,
   baseAppearance: string,
   propertyPath?: string | string[],
-): ITheme<ISwitchTheme> => {
+): any => {
   const func = getAppearanceTheme(switchThemeNamespace, defaultSwitchTheme);
 
   return func(theme, appearanceName, propertyPath, baseAppearance);
