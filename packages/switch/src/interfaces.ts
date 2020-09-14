@@ -15,7 +15,7 @@ export type SwitchTheme = ITheme<ISwitchTheme>;
 
 export interface ISwitchStateProps {
   checked: boolean;
-  labelPosition: 'left' | 'right';
+  labelPosition?: 'left' | 'right';
   disabled?: boolean;
 }
 
