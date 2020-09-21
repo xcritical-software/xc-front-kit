@@ -8,7 +8,7 @@ import Button from '@xcritical/button';
 
 import Select from '@xcritical/select';
 
-import Form from '../src';
+import Form, { FormField } from '../src';
 import { xcriticalFormError, xcriticalFormInit, xcriticalFormReset } from '../src/actions';
 import { formSelector } from '../src/reducer';
 
@@ -51,7 +51,7 @@ const SimpleForm = ({
       <div>
         <label>First Name</label>
         <div>
-          <Form.Field
+          <FormField
             name="firstName"
             component={ Input }
             type="text"
@@ -62,7 +62,7 @@ const SimpleForm = ({
       <div>
         <label>Last Name</label>
         <div>
-          <Form.Field
+          <FormField
             name="lastName"
             component={ Input }
             type="text"
@@ -73,7 +73,7 @@ const SimpleForm = ({
       <div>
         <label>Favorite Colors</label>
         <div>
-          <Form.Field
+          <FormField
             isMulti
             name="favoriteColors"
             component={ Select }
@@ -84,11 +84,12 @@ const SimpleForm = ({
       <div>
         <label>Least Favorite Color</label>
         <div>
-          <Form.Field
+          <FormField
             name="leastFavoriteColor"
             isClearable
             component={ Select }
             options={ selectItems }
+            appearance
           />
         </div>
       </div>

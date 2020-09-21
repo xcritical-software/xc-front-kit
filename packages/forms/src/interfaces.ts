@@ -27,26 +27,18 @@ export interface IFormStateMap {
   [formName: string]: IFormState;
 }
 
-export interface IFormFieldPropsWithoutContext extends React.ComponentProps<any> {
-  component: React.ComponentType<any>;
+export type IFormFieldProps<TComponentProps> = TComponentProps & {
+  component: React.ComponentType<TComponentProps & IFormFieldComponentProps>;
   name: string;
-}
+};
 
-export interface IFormFieldProps extends IFormFieldPropsWithoutContext {
-  formName: string;
-  namespace?: string;
-}
-
-export interface IFormConnectedFieldProps extends React.ComponentProps<any> {
+export interface IFormFieldComponentProps {
+  onChange: (value: any) => void;
   invalid: boolean;
-  error?: string;
+  error?: string | string[];
   value: any;
 }
 
-export interface IFormConnectedFieldDispatch {
-  onChange: (value: any, action: Function) => void;
-}
-
 export interface IForm {
-  Field: React.ComponentType<IFormFieldPropsWithoutContext>;
+  Field: React.ComponentType<IFormFieldProps<any>>;
 }

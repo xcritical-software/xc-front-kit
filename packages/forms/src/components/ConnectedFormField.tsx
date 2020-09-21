@@ -1,30 +1,28 @@
-import React, { Dispatch } from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import get from 'lodash.get';
-import { isNil } from 'utilitify';
 
-import { xcriticalFormPropertyChange, IFormAction } from '../actions';
+import { xcriticalFormPropertyChange } from '../actions';
 import { formSelector } from '../reducer';
 import {
-  IFormFieldProps,
-  IFormConnectedFieldProps,
-  IFormConnectedFieldDispatch,
+  IFormFieldProps, IFormStateMap,
 } from '../interfaces';
-import { isEvent, getValueFromNativeComponent } from '../utils';
+import { getValueFromNativeComponent } from '../utils';
+
+import { FormContext } from './FormContext';
 
 
-const ConnectedFormField: React.FC<IFormFieldProps> = ({
-  component: Component,
-  ...props
-}) => <Component { ...props } />;
-
-const mapStateToProps = (
-  state: any,
+export const FormField = function<TProps> (
   {
-    formName, name, namespace, ...rest
-  }: IFormFieldProps,
-): IFormConnectedFieldProps => {
-  const $state = formSelector(state, formName, namespace);
+    component: Component,
+    name,
+    ...props
+  }: IFormFieldProps<TProps>,
+): React.ReactElement<TProps> {
+  const dispatch = useDispatch();
+  const { formName, namespace } = useContext(FormContext);
+  const $state = useSelector((state: IFormStateMap) => formSelector(state, formName, namespace));
+
   const value = get($state, `model.${name}`);
 
   const $error = get($state, `errors.${name}`);
@@ -35,30 +33,17 @@ const mapStateToProps = (
   const error = showError ? $error : null;
   const invalid = showError ? !!error : false;
 
+  const onChange = useCallback(($value: any) => {
+    dispatch(xcriticalFormPropertyChange(formName, name, getValueFromNativeComponent($value)));
+  }, [dispatch, formName, name]);
 
-  return {
-    ...rest,
-    value: isNil(value) ? '' : value,
-    error,
-    invalid,
-  };
+  return (
+    <Component
+      { ...(props as any) }
+      value={ value }
+      error={ error }
+      invalid={ invalid }
+      onChange={ onChange }
+    />
+  );
 };
-
-const mapDispatchToProps = (
-  dispatch: Dispatch<IFormAction>,
-  { formName, name }: IFormFieldProps,
-): IFormConnectedFieldDispatch => ({
-  onChange: (value: any, action: Function) => {
-    let $value = value;
-
-    if (isEvent(value)) {
-      $value = getValueFromNativeComponent(value);
-    } else if (action && typeof action === 'function') {
-      $value = action(value);
-    }
-
-    dispatch(xcriticalFormPropertyChange(formName, name, $value));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConnectedFormField);
