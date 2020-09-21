@@ -75,7 +75,7 @@ const behaviors: Record<FormActionType, Function> = {
       ...payload,
     },
   }),
-  [XCRITICAL_FORM_DELETE]: () => null,
+  [XCRITICAL_FORM_DELETE]: () => undefined,
   [XCRITICAL_FORM_RESET]: (state: IFormState) => ({
     ...state,
     isChanged: false,
