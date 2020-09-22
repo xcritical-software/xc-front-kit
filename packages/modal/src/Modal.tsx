@@ -25,6 +25,7 @@ export const Modal: React.FC<IModalProps> = ({
   theme,
   onModalCancel,
   zIndex: zIndexProp,
+  widths,
 }) => {
   const maxZIndex: number = useContext(MaxZIndexContext);
   const zIndex = useMemo(() => (maxZIndex ? maxZIndex + 1 : zIndexProp), [maxZIndex, zIndexProp]);
@@ -43,7 +44,7 @@ export const Modal: React.FC<IModalProps> = ({
         theme={ modalBlanketTheme }
         onBlanketClicked={ onModalCancel }
       />
-      <ModalContent zIndex={ zIndex }>
+      <ModalContent zIndex={ zIndex } widths={ widths }>
         <ModalHeaderWrapper>
           <ModalHeader>
             { title }

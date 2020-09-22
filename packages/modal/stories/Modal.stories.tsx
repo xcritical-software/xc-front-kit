@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { Provider, connect } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import CloseCircleOutlineIcon from 'mdi-react/CloseCircleOutlineIcon';
+import { withKnobs, text } from '@storybook/addon-knobs';
 
 import { colors } from '@xcritical/theme';
 
@@ -132,6 +133,7 @@ const Modals = ({ component: ModalComponent }): React.ReactElement => {
 };
 
 storiesOf('ConnectedModal', module)
+  .addDecorator(withKnobs)
   .add('Default', () => (
     <Provider store={ store }>
       <ThemeProvider theme={ emptyTheme }>
@@ -139,7 +141,15 @@ storiesOf('ConnectedModal', module)
           Open Default Modal
         </StyledButton>
 
-        <ConnectedModal title="Default Modal" name="defaultModal">
+        <ConnectedModal
+          title="Default Modal"
+          name="defaultModal"
+          widths={ {
+            width: text('Width', '500px'),
+            minWidth: text('Min width', '400px'),
+            maxWidth: text('Max width', '800px'),
+          } }
+        >
           <div>Body example</div>
           <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
         </ConnectedModal>
