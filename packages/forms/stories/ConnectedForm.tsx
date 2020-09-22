@@ -89,7 +89,6 @@ const SimpleForm = ({
             isClearable
             component={ Select }
             options={ selectItems }
-            appearance
           />
         </div>
       </div>

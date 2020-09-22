@@ -27,7 +27,7 @@ export interface IFormStateMap {
   [formName: string]: IFormState;
 }
 
-export type IFormFieldProps<TComponentProps> = TComponentProps & {
+export type FormFieldProps<TComponentProps> = TComponentProps & {
   component: React.ComponentType<TComponentProps & IFormFieldComponentProps>;
   name: string;
 };
@@ -40,5 +40,5 @@ export interface IFormFieldComponentProps {
 }
 
 export interface IForm {
-  Field: React.ComponentType<IFormFieldProps<any>>;
+  Field: React.ComponentType<FormFieldProps<any>>;
 }

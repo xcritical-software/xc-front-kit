@@ -5,7 +5,7 @@ import get from 'lodash.get';
 import { xcriticalFormPropertyChange } from '../actions';
 import { formSelector } from '../reducer';
 import {
-  IFormFieldProps, IFormStateMap,
+  FormFieldProps, IFormStateMap,
 } from '../interfaces';
 import { getValueFromNativeComponent } from '../utils';
 
@@ -17,7 +17,7 @@ export const FormField = function<TProps> (
     component: Component,
     name,
     ...props
-  }: IFormFieldProps<TProps>,
+  }: FormFieldProps<TProps>,
 ): React.ReactElement<TProps> {
   const dispatch = useDispatch();
   const { formName, namespace } = useContext(FormContext);
