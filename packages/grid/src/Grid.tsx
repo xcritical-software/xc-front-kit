@@ -51,6 +51,8 @@ const Grid: React.FC<IGridProps> = ({
   shouldFitLastColumn = true,
   minColumnWidth = 30,
   gridProps = {},
+  sharedScroll,
+  handleSharedScroll = () => {},
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
@@ -218,7 +220,6 @@ const Grid: React.FC<IGridProps> = ({
   const [leftFixedWidth, setLeftFixedWidth] = useState(0);
   const [rightFixedWidth, setRightFixedWidth] = useState(0);
 
-
   useEffect(() => {
     setLeftMappedColumns(mappedColumns
       .filter(({ fixedPosition }: IColumn) => fixedPosition === GridPositions.LEFT));
@@ -344,6 +345,30 @@ const Grid: React.FC<IGridProps> = ({
       },
     };
 
+    if (sharedScroll !== undefined && shouldFitContainer) {
+      multiGridProps.width = wrapperSize.width;
+      multiGridProps.height = wrapperSize.height;
+
+      return (
+        <ScrollSync>
+          { ({
+            onScroll,
+            scrollTop,
+          }) => (
+            <MultiGridWrapper ref={ wrapperRef } style={ { height: '100%' } }>
+              <MultiGrid
+                { ...multiGridProps }
+                onScroll={ onScroll }
+                scrollTop={ scrollTop }
+                sharedScroll={ sharedScroll }
+                handleSharedScroll={ handleSharedScroll }
+              />
+            </MultiGridWrapper>
+          ) }
+        </ScrollSync>
+      );
+    }
+
     if (shouldFitContainer) {
       multiGridProps.width = wrapperSize.width;
       multiGridProps.height = wrapperSize.height;
@@ -419,7 +444,6 @@ const Grid: React.FC<IGridProps> = ({
       </div>
     );
   }
-
 
   return (
     <InternalGrid

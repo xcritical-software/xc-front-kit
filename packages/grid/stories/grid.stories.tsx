@@ -330,6 +330,46 @@ storiesOf('New Grid', module)
       theme={ AMStheme }
     />
   ))
+  .add('fixed columns (left) + shared horizontal scroll', () => {
+    const [sharedScroll, setSharedScroll] = useState<number>(0);
+
+    const handleSharedScroll = useCallback((e: { scrollLeft: number }) => {
+      const { scrollLeft } = e;
+      console.log(e);
+      setSharedScroll(scrollLeft);
+    }, [sharedScroll, setSharedScroll]);
+
+    return (
+      <Content>
+        <GridWrapper>
+          <Grid
+            columns={ columnsFixed('left') }
+            items={ rowsFixed }
+            width={ document.documentElement.clientWidth - 100 }
+            height={ document.documentElement.clientHeight - 100 }
+            rowHeight={ 30 }
+            theme={ AMStheme }
+            shouldFitContainer
+            sharedScroll={ sharedScroll }
+            handleSharedScroll={ handleSharedScroll }
+          />
+        </GridWrapper>
+        <GridWrapper>
+          <Grid
+            columns={ columnsFixed('left') }
+            items={ rowsFixed }
+            width={ document.documentElement.clientWidth - 100 }
+            height={ document.documentElement.clientHeight - 100 }
+            rowHeight={ 30 }
+            theme={ AMStheme }
+            shouldFitContainer
+            sharedScroll={ sharedScroll }
+            handleSharedScroll={ handleSharedScroll }
+          />
+        </GridWrapper>
+      </Content>
+    );
+  })
   .add('Fixed columns + Dinamic size', () => {
     const [someBlockHeight, setSomeBlockHeight] = useState(100);
 
