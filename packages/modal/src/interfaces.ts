@@ -39,7 +39,7 @@ export interface IModal {
 }
 
 /* COMPONENT */
-export interface IWidthsType {
+export interface IWidths {
   minWidth?: string;
   maxWidth?: string;
   width?: string;
@@ -53,7 +53,7 @@ export interface IModalOwnProps {
   onCancel?: () => void;
   theme?: IThemeNamespace<IModalTheme>;
   zIndex?: number;
-  widths?: IWidthsType;
+  widths?: IWidths;
 }
 
 export interface IModalStoreProps {

@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 import { getModalStyles } from './utils';
-import { IModalTheme, IWidthsType } from './interfaces';
+import { IModalTheme, IWidths } from './interfaces';
 
 
 interface IModalContent {
   theme: IModalTheme;
   zIndex?: number | undefined;
-  widths?: IWidthsType;
+  widths?: IWidths;
 }
 
 export const ModalContent = styled.div<IModalContent>`
