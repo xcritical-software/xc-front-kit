@@ -146,6 +146,10 @@ const InternalGrid: React.FC<IInternalGrid> = ({
         rowIndex={ rowIndex }
       >
         <BodyCell
+          aria-rowindex={ rowIndex }
+          aria-colindex={ columnIndex }
+          data-column-name={ field }
+          role="gridcell"
           onClick={ (e: MouseEvent) => {
             handleSelect(e, mappedItems[rowIndex].key);
           } }
@@ -167,9 +171,6 @@ const InternalGrid: React.FC<IInternalGrid> = ({
 
 
           <BodyCellContent
-            data-row-id={ rowIndex }
-            data-column-id={ columnIndex }
-            data-column-name={ field }
             theme={ themeRef.current }
             center={ !!column.center }
             selected={ isSelected }
