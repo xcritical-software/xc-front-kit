@@ -169,7 +169,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
           <BodyCellContent
             data-row-id={ rowIndex }
             data-column-id={ columnIndex }
-            data-column-name={ column.headerName }
+            data-column-name={ field }
             theme={ themeRef.current }
             center={ !!column.center }
             selected={ isSelected }
