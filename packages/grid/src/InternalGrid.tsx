@@ -66,8 +66,8 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   onChangeSort,
   shouldFitLastColumn,
   minColumnWidth,
-  sharedScroll,
-  handleSharedScroll,
+  externalScrollLeft,
+  onChangeScrollLeft,
   gridProps,
 }) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
@@ -111,10 +111,10 @@ const InternalGrid: React.FC<IInternalGrid> = ({
       onScrollsyncScroll(e);
     }
 
-    if (handleSharedScroll && e.scrollLeft !== sharedScroll) {
-      handleSharedScroll(e);
+    if (onChangeScrollLeft && e.scrollLeft !== externalScrollLeft) {
+      onChangeScrollLeft(e.scrollLeft);
     }
-  }, [setScrollLeft, onScrollsyncScroll, handleSharedScroll, sharedScroll]);
+  }, [setScrollLeft, onScrollsyncScroll, onChangeScrollLeft, externalScrollLeft]);
 
   const cellRenderer: React.FC<GridCellProps> = ({
     columnIndex,
@@ -303,7 +303,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
           width={ width }
           onScroll={ handleScroll }
           scrollTop={ scrollTop }
-          scrollLeft={ sharedScroll }
+          scrollLeft={ externalScrollLeft }
           isScrollingOptOut={ isScrollingOptOut }
           overscanColumnCount={ overscanColumnCount }
           overscanRowCount={ overscanRowCount }

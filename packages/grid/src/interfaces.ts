@@ -19,7 +19,7 @@ export interface IInternalGridProps {
   id?: string;
   isScrolling?: boolean;
   scrollingResetTimeInterval?: number;
-  scrollLeft?: number;
+  externalScrollLeft?: number;
   scrollToAlignment?: Alignment;
   scrollToColumn?: number;
   scrollTop?: number;
@@ -73,8 +73,8 @@ export interface IGridProps {
   shouldFitLastColumn?: boolean;
   minColumnWidth?: number;
   isSharedHorizontalScroll?: boolean;
-  sharedScroll?: number;
-  handleSharedScroll?: Function;
+  scrollLeft?: number;
+  onChangeScrollLeft?: Function;
   gridProps?: IInternalGridProps;
 }
 
@@ -102,8 +102,8 @@ export interface IMultiGrid {
   overscanColumnCount?: number;
   overscanRowCount?: number;
   shouldFitLastColumn: boolean;
-  sharedScroll?: number;
-  handleSharedScroll?: Function;
+  externalScrollLeft?: number;
+  onChangeScrollLeft?: Function;
 }
 
 interface IAllGridsProps {
@@ -149,8 +149,8 @@ export interface IInternalGrid {
   shouldFitLastColumn: boolean;
   minColumnWidth: number;
   gridProps: IInternalGridProps;
-  sharedScroll?: number;
-  handleSharedScroll?: Function;
+  externalScrollLeft?: number;
+  onChangeScrollLeft?: Function;
 }
 
 export interface IMappedItem extends IItem {
