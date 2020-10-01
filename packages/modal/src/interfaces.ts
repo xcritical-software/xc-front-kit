@@ -39,12 +39,6 @@ export interface IModal {
 }
 
 /* COMPONENT */
-export interface IWidths {
-  minWidth?: string;
-  maxWidth?: string;
-  width?: string;
-}
-
 export interface IModalOwnProps {
   name: string;
   title: any;
@@ -53,7 +47,9 @@ export interface IModalOwnProps {
   onCancel?: () => void;
   theme?: IThemeNamespace<IModalTheme>;
   zIndex?: number;
-  widths?: IWidths;
+  minWidth?: string;
+  maxWidth?: string;
+  width?: string;
 }
 
 export interface IModalStoreProps {

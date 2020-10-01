@@ -144,11 +144,9 @@ storiesOf('ConnectedModal', module)
         <ConnectedModal
           title="Default Modal"
           name="defaultModal"
-          widths={ {
-            width: text('Width', '500px'),
-            minWidth: text('Min width', '400px'),
-            maxWidth: text('Max width', '800px'),
-          } }
+          width={ text('Width', 'auto') }
+          minWidth={ text('Min width', '100px') }
+          maxWidth={ text('Max width', '300px') }
         >
           <div>Body example</div>
           <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
