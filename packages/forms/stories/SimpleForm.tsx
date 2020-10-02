@@ -7,7 +7,7 @@ import Input from '@xcritical/input';
 import Select from '@xcritical/select';
 import Button from '@xcritical/button';
 
-import Form from '../src';
+import Form, { FormField } from '../src';
 
 import { Textarea } from './SampleComponents';
 
@@ -19,7 +19,7 @@ const simpleForm = () => (
     <div>
       <label>First Name</label>
       <div>
-        <Form.Field
+        <FormField
           name="firstName"
           component={ Input }
           type="text"
@@ -31,7 +31,7 @@ const simpleForm = () => (
     <div>
       <label>Last Name</label>
       <div>
-        <Form.Field
+        <FormField
           name="lastName"
           component={ Input }
           type="text"
@@ -42,25 +42,25 @@ const simpleForm = () => (
     <div>
       <label>Email</label>
       <div>
-        <Form.Field
+        <FormField
           name="email"
           component={ Input }
           type="email"
           placeholder="Email"
         />
-        <Form.Field name="favoriteColor" component={ Select } items={ selectItems } />
+        <FormField name="favoriteColor" component={ Select } items={ selectItems } />
       </div>
     </div>
     <div>
       <label>Sex</label>
       <div>
         <label>
-          <Form.Field name="sex" component={ Input } type="radio" value="male" />
+          <FormField name="sex" component={ Input } type="radio" value="male" />
 
           Male
         </label>
         <label>
-          <Form.Field name="sex" component={ Input } type="radio" value="female" />
+          <FormField name="sex" component={ Input } type="radio" value="female" />
 
           Female
         </label>
@@ -69,13 +69,13 @@ const simpleForm = () => (
     <div>
       <label>Favorite Color</label>
       <div>
-        <Form.Field name="favoriteColor" component={ Select } items={ selectItems } />
+        <FormField name="favoriteColor" component={ Select } items={ selectItems } />
       </div>
     </div>
     <div>
       <label htmlFor="employed">Employed</label>
       <div>
-        <Form.Field
+        <FormField
           name="employed"
           id="employed"
           component={ Input }
@@ -86,7 +86,7 @@ const simpleForm = () => (
     <div>
       <label>Notes</label>
       <div>
-        <Form.Field name="notes" component={ Textarea } />
+        <FormField name="notes" component={ Textarea } />
       </div>
     </div>
     <div>
@@ -95,7 +95,7 @@ const simpleForm = () => (
         Clear Values
       </Button>
     </div>
-    <Form.Field
+    <FormField
       id="text"
       name="text"
       type="text"
