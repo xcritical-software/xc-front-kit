@@ -47,6 +47,9 @@ export interface IModalOwnProps {
   onCancel?: () => void;
   theme?: IThemeNamespace<IModalTheme>;
   zIndex?: number;
+  minWidth?: string;
+  maxWidth?: string;
+  width?: string;
 }
 
 export interface IModalStoreProps {
