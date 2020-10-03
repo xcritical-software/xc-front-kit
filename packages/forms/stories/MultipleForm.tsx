@@ -3,7 +3,7 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 
-import Form from '../src';
+import Form, { FormField } from '../src';
 
 import { Input } from './SampleComponents';
 
@@ -15,7 +15,7 @@ const multipleForm = () => (
       <div>
         <label>First Name</label>
         <div>
-          <Form.Field
+          <FormField
             name="firstName"
             component={ Input }
             type="text"
@@ -26,7 +26,7 @@ const multipleForm = () => (
       <div>
         <label>Last Name</label>
         <div>
-          <Form.Field
+          <FormField
             name="lastName"
             component={ Input }
             type="text"
@@ -40,7 +40,7 @@ const multipleForm = () => (
       <div>
         <label>First Name</label>
         <div>
-          <Form.Field
+          <FormField
             name="firstName"
             component={ Input }
             type="text"
@@ -51,7 +51,7 @@ const multipleForm = () => (
       <div>
         <label>Last Name</label>
         <div>
-          <Form.Field
+          <FormField
             name="lastName"
             component={ Input }
             type="text"
