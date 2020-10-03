@@ -62,43 +62,6 @@ const ErrorMessage = styled.p`
   text-align: justify;
 `;
 
-const BasicInlineEditInput: React.FC<AllType> = ({
-  appearance = 'default',
-  ...rest
-}) => {
-  const [value, setValue] = React.useState('');
-
-  const getReadView = React.useCallback(() => (
-    <div>
-      { value || 'Click to enter value' }
-    </div>
-  ), [value]);
-
-  const getEditView = React.useCallback((fieldProps) => (
-    <Input
-      { ...fieldProps }
-      { ...rest }
-      autoFocus
-      shouldFitContainer
-    />
-  ), [rest]);
-
-  const handleConfirm = React.useCallback((v: AllType) => {
-    setValue(v);
-  }, []);
-
-  return (
-    <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
-      <InlineEdit
-        appearance={ appearance }
-        defaultValue={ value }
-        readView={ getReadView }
-        editView={ getEditView }
-        onConfirm={ handleConfirm }
-      />
-    </ThemeProvider>
-  );
-};
 
 const BasicInlineEditSelect: React.FC<AllType> = ({
   appearance = 'default',
@@ -269,19 +232,6 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
 
 
 storiesOf('InlineEdit', module)
-  .add('Basic', () => (
-    <div style={ { width: '200px' } }>
-      <BasicInlineEditInput editView={ Input } />
-    </div>
-  ))
-  .add('Themed', () => (
-    <div style={ { width: '200px' } }>
-      <BasicInlineEditInput
-        editView={ Input }
-        appearance="crm"
-      />
-    </div>
-  ))
   .add('Select', () => (
     <div style={ { width: '200px' } }>
       <BasicInlineEditSelect

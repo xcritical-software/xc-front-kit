@@ -31,7 +31,7 @@ export const PureInlineEdit = function <
     if (invalid && isEditing === undefined) {
       setIsEditingAutoMode(true);
     }
-  });
+  }, [invalid, isEditing]);
 
   const handleConfirm = useCallback((newValue: TFieldValue): void => {
     setValue(newValue);
@@ -44,25 +44,16 @@ export const PureInlineEdit = function <
 
   const handleCancel = useCallback((): void => {
     setValue(defaultValue);
-
-    if (onCancel) {
-      onCancel();
-
-      return;
-    }
+    onCancel?.(defaultValue);
 
     setIsEditingAutoMode(false);
   }, [onCancel, defaultValue]);
 
   const handleEditRequested = useCallback((): void => {
-    if (onIsEditingChange) {
-      onIsEditingChange(true);
-
-      return;
-    }
+    onIsEditingChange?.(true);
 
     setIsEditingAutoMode(true);
-  }, []);
+  }, [onIsEditingChange]);
 
   return (
     <InlineEditUncontrolled
