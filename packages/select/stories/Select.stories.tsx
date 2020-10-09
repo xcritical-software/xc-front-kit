@@ -127,21 +127,11 @@ storiesOf('Select', module)
   ))
   .add('Save input value and open after select value', () => {
     const [inputValue, setInputValue] = useState('');
-    const [menuIsOpen, setMenuIsOpen] = useState(false);
 
     const onInputChange = useCallback((newInputValue, { action }) => {
       if (action === 'input-change') {
         setInputValue(newInputValue);
       }
-    }, []);
-
-    const onFocus = useCallback(() => {
-      setMenuIsOpen(true);
-    }, []);
-
-    const onBlur = useCallback(() => {
-      setMenuIsOpen(false);
-      setInputValue('');
     }, []);
 
     return (
@@ -151,12 +141,10 @@ storiesOf('Select', module)
           options={ options }
           isMulti
           inputValue={ inputValue }
-          menuIsOpen={ menuIsOpen }
-          onFocus={ onFocus }
-          onBlur={ onBlur }
           onInputChange={ onInputChange }
           isClearable
           isSearchable
+          isCloseMenuOnSelect={false}
         />
       </>
     );
