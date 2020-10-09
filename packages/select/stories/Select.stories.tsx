@@ -134,6 +134,10 @@ storiesOf('Select', module)
       }
     }, []);
 
+    const onMenuClose = useCallback(() => {
+      setInputValue('');
+    }, []);
+
     return (
       <>
         <Select
@@ -144,7 +148,8 @@ storiesOf('Select', module)
           onInputChange={ onInputChange }
           isClearable
           isSearchable
-          isCloseMenuOnSelect={false}
+          isCloseMenuOnSelect={ false }
+          onMenuClose={ onMenuClose }
         />
       </>
     );
