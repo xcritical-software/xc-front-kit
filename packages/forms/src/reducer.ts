@@ -56,7 +56,7 @@ const behaviors: Record<FormActionType, Function> = {
     const errors = setIn(state.errors, false, field);
     const fieldsMeta = {
       touch: true,
-      changed: isDifference($value, get(state, ['source', ...field.split('.')])),
+      changed: value !== get(state, ['source', ...field.split('.')]),
     };
 
     const fields = setIn(state.fields, fieldsMeta, field);
