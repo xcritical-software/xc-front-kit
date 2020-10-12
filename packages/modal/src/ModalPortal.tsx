@@ -24,6 +24,9 @@ export const ModalPortal: React.FC<IModalProps> = ({
   iconClose,
   theme,
   onModalCancel,
+  width,
+  maxWidth,
+  minWidth,
 }) => {
   if (!isOpen) {
     return null;
@@ -38,7 +41,11 @@ export const ModalPortal: React.FC<IModalProps> = ({
         theme={ modalBlanketTheme }
         onBlanketClicked={ onModalCancel }
       />
-      <ModalContent>
+      <ModalContent
+        width={ width }
+        maxWidth={ maxWidth }
+        minWidth={ minWidth }
+      >
         <ModalHeaderWrapper>
           <ModalHeader>
             { title }
