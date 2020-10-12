@@ -11,7 +11,7 @@ import Form, {
   xcriticalFormError,
   xcriticalFormInit,
   xcriticalFormShowErrors,
-  xcriticalFormSetFieldsMeta,
+  xcriticalFormSetFieldsMeta, FormField,
 } from '../src';
 
 import { InputWithErrorWrapper } from './SampleComponents';
@@ -91,7 +91,7 @@ const ErrorsForm = () => {
         <div>
           <label>First Name</label>
           <div>
-            <Form.Field
+            <FormField
               name="firstName"
               component={ InputWithError }
               type="text"
@@ -102,7 +102,7 @@ const ErrorsForm = () => {
         <div>
           <label>Last Name</label>
           <div>
-            <Form.Field
+            <FormField
               name="lastName"
               component={ InputWithError }
               type="text"
@@ -113,7 +113,7 @@ const ErrorsForm = () => {
         <div>
           <label>Age</label>
           <div>
-            <Form.Field
+            <FormField
               name="age"
               component={ InputWithError }
               type="text"
