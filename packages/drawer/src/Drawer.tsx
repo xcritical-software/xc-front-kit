@@ -36,6 +36,7 @@ export const PureDrawer = React.memo<IDrawerProps>(({
   isMovable = false,
   withCloseButton = false,
   closeIconComponent,
+  onClose = () => null,
 }: IDrawerProps) => {
   const themeContext = useContext<IThemeNamespace<DrawerTheme>>(ThemeContext);
 
@@ -94,6 +95,7 @@ export const PureDrawer = React.memo<IDrawerProps>(({
         timeout={ { enter: 0, exit: 220 } }
         mountOnEnter
         unmountOnExit
+        onExited={ onClose }
       >
         <Portal id="drawer" zIndex="unset">
           <Fade in={ isOpen } theme={ theme || themeContext || {} }>
