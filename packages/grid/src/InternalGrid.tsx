@@ -129,7 +129,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
       [field]: content,
     } = row;
 
-    const cellContent = renderFunction ? renderFunction(content, field, row) : content;
+    const cellContent = renderFunction ? renderFunction(content, field, row, rowIndex) : content;
 
     const handleExpand = () => {
       onChangeExpand(rowIndex, mappedItems[rowIndex].children);
