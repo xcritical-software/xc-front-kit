@@ -100,7 +100,7 @@ const BasicDrawer = ({
   isMovable = false,
   withCloseButton = false,
   closeIconComponent,
-  onClose = () => null,
+  onClose,
 }: IBasicDrawerProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 

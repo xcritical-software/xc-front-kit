@@ -36,7 +36,7 @@ export const PureDrawer = React.memo<IDrawerProps>(({
   isMovable = false,
   withCloseButton = false,
   closeIconComponent,
-  onClose = () => null,
+  onClose,
 }: IDrawerProps) => {
   const themeContext = useContext<IThemeNamespace<DrawerTheme>>(ThemeContext);
 
