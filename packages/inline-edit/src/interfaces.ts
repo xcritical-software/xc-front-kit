@@ -67,7 +67,7 @@ export type InlineEditCommonProps<
   TFieldValue
 > = ICommonProps & {
   /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
-  defaultValue?: TFieldValue;
+  value?: TFieldValue;
   /**
    * Handler is called, editView is closed and changes are confirmed.
    * Field value is passed as an argument to this function.

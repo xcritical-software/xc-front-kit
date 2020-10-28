@@ -91,7 +91,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
     <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
       <InlineEdit
         appearance={ appearance }
-        defaultValue={ value }
+        value={ value }
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
@@ -129,7 +129,7 @@ const BasicInlineEditSelect: React.FC<AllType> = ({
     <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
       <InlineEdit
         appearance={ appearance }
-        defaultValue={ selectValue }
+        value={ selectValue }
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
@@ -186,7 +186,7 @@ const InlineEditInputWithValidation: React.FC<AllType> = ({
     <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
       <InlineEdit
         appearance={ appearance }
-        defaultValue={ value }
+        value={ value }
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
@@ -253,7 +253,7 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
     <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
       <InlineEdit
         appearance={ appearance }
-        defaultValue={ value }
+        value={ value }
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
