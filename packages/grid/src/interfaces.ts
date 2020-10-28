@@ -9,6 +9,7 @@ import { GridPositions, GridSort } from './consts';
 
 type CellContent = string | number | ReactElement | any;
 
+type getRowHeightFunc = (item: IItem, index: number, allRows: IItem[]) => number;
 export interface IInternalGridProps {
   'aria-label'?: string;
   'aria-readonly'?: boolean;
@@ -72,6 +73,7 @@ export interface IGridProps {
   overscanRowCount?: number;
   shouldFitLastColumn?: boolean;
   minColumnWidth?: number;
+  getRowHeightFunc?: getRowHeightFunc;
   gridProps?: IInternalGridProps;
 }
 
@@ -110,6 +112,7 @@ interface IAllGridsProps {
   rowHeight?: number;
   minColumnWidth: number;
   onChangeSort: Function;
+  getRowHeightFunc?: getRowHeightFunc;
   gridProps: IInternalGridProps;
 }
 
@@ -142,6 +145,7 @@ export interface IInternalGrid {
   onChangeSort: Function;
   shouldFitLastColumn: boolean;
   minColumnWidth: number;
+  getRowHeightFunc?: getRowHeightFunc;
   gridProps: IInternalGridProps;
 }
 

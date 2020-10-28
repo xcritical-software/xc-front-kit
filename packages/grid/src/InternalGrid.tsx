@@ -66,6 +66,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   onChangeSort,
   shouldFitLastColumn,
   minColumnWidth,
+  getRowHeightFunc,
   gridProps,
 }) => {
   const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
@@ -297,7 +298,9 @@ const InternalGrid: React.FC<IInternalGrid> = ({
           height={ gridHeight }
           cellRenderer={ cellRenderer }
           rowCount={ mappedItems.length }
-          rowHeight={ cacheRef.current.rowHeight }
+          rowHeight={ rowHeight
+            ? cacheRef.current.rowHeight
+            : ({ index }) => getRowHeightFunc!(mappedItems[index], index, mappedItems) }
           width={ width }
           onScroll={ handleScroll }
           scrollTop={ scrollTop }
