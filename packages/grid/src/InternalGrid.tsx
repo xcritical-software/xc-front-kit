@@ -270,6 +270,14 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     totalsHeight,
     resizeGridAfterResizeLastColumn]);
 
+  const rowHeightProp = useMemo(() => {
+    if (getRowHeightFunc) {
+      return ({ index }) => getRowHeightFunc(mappedItems[index], index, mappedItems);
+    }
+
+    return cacheRef.current.rowHeight;
+  }, [rowHeight, getRowHeightFunc, mappedItems]);
+
   return (
     <Wrapper theme={ themeRef.current } width={ width } changingColumns={ changingColumns }>
       <HeaderWrapper
@@ -298,9 +306,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
           height={ gridHeight }
           cellRenderer={ cellRenderer }
           rowCount={ mappedItems.length }
-          rowHeight={ rowHeight
-            ? cacheRef.current.rowHeight
-            : ({ index }) => getRowHeightFunc!(mappedItems[index], index, mappedItems) }
+          rowHeight={ rowHeightProp }
           width={ width }
           onScroll={ handleScroll }
           scrollTop={ scrollTop }
