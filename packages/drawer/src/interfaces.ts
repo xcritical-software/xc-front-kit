@@ -30,6 +30,7 @@ export interface IDrawerProps {
   minWidth?: number;
   maxWidth?: number;
   onOutsideClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  withBlanket?: boolean;
 }
 
 export interface IDrawerStates {
