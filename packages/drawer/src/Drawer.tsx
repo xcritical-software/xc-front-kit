@@ -36,6 +36,7 @@ export const PureDrawer = React.memo<IDrawerProps>(({
   isMovable = false,
   withCloseButton = false,
   closeIconComponent,
+  withBlanket = true,
 }: IDrawerProps) => {
   const themeContext = useContext<IThemeNamespace<DrawerTheme>>(ThemeContext);
 
@@ -96,9 +97,11 @@ export const PureDrawer = React.memo<IDrawerProps>(({
         unmountOnExit
       >
         <Portal id="drawer" zIndex="unset">
-          <Fade in={ isOpen } theme={ theme || themeContext || {} }>
-            <Blanket isTinted onBlanketClicked={ onOutsideClick } />
-          </Fade>
+          { withBlanket && (
+            <Fade in={ isOpen } theme={ theme || themeContext || {} }>
+              <Blanket isTinted onBlanketClicked={ onOutsideClick } />
+            </Fade>
+          ) }
           { antiSelectLayer && <AntiSelect /> }
           <Slide
             ref={ drawerRef }

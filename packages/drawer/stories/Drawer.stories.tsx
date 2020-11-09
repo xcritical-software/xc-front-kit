@@ -13,6 +13,7 @@ interface IBasicDrawerProps {
   isMovable?: boolean;
   withCloseButton?: boolean;
   closeIconComponent?: ReactNode;
+  withBlanket?: boolean;
 }
 
 const generateTheme = (
@@ -97,6 +98,7 @@ const BasicDrawer = ({
   isMovable = false,
   withCloseButton = false,
   closeIconComponent,
+  withBlanket,
 }: IBasicDrawerProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -114,6 +116,7 @@ const BasicDrawer = ({
         isMovable={ isMovable }
         withCloseButton={ withCloseButton }
         closeIconComponent={ closeIconComponent }
+        withBlanket={ withBlanket }
       >
         <div>Content</div>
       </Drawer>
@@ -169,5 +172,14 @@ storiesOf('Drawer', module)
     <div>
       <GlobalStyle />
       <BasicDrawer withCloseButton closeIconComponent={ <div>X</div> } />
+    </div>
+  ))
+  .add('Without Blanket', () => (
+    <div>
+      <GlobalStyle />
+      <BasicDrawer withBlanket={ false } withCloseButton closeIconComponent={ <div>X</div> } />
+      <p>
+        { 'lorem impsum long text '.repeat(600) }
+      </p>
     </div>
   ));
