@@ -40,10 +40,11 @@ export const FormField = function<TProps> (
   return (
     <Component
       { ...(props as any) }
-      value={ value }
+      value={ value || '' }
       error={ error }
       invalid={ invalid }
       onChange={ onChange }
+      name={ name }
     />
   );
 };
