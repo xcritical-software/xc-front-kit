@@ -109,7 +109,7 @@ const AMStheme = {
   },
 };
 
-storiesOf('New Grid', module)
+storiesOf('Grid', module)
   .add('Basic', () => {
     const [shouldMovingColumns, changeShouldMovingColumns] = useState(true);
     const [shouldChangeColumnsWidth, changeShouldChangeColumnsWidth] = useState(true);
