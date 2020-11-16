@@ -32,6 +32,12 @@ export interface IItem {
   [key: string]: CellContent;
 }
 
+export interface ICellRenderParams {
+  parentItem?: IItem;
+  key: string;
+  isExpanded?: boolean;
+  expandLevel: number;
+}
 
 export interface IColumn {
   headerName: CellContent;
@@ -40,7 +46,13 @@ export interface IColumn {
   visible: boolean;
   center?: boolean;
   isExpandable?: boolean;
-  render?: Function;
+  render?: (
+    content: any,
+    field: string,
+    row: IMappedItem,
+    rowIndex: number,
+    params: ICellRenderParams
+  ) => CellContent;
   fixedPosition?: GridPositions.LEFT | GridPositions.RIGHT;
   sortable?: boolean;
   sortOrder?: GridSort.ASC | GridSort.DESC | null;
@@ -102,7 +114,7 @@ export interface IMultiGrid {
 
 interface IAllGridsProps {
   totals?: IItem;
-  onChangeExpand: Function;
+  onChangeExpand: (rowIndex: number, chidrens: IItem[], parent: IItem) => void;
   handleSelect: Function;
   selectedRows: string[];
   mappedItems: IMappedItem[];
@@ -130,7 +142,7 @@ export interface IInternalGrid {
   onChangeColumns?: Function;
   totals?: ITotals;
   handleSelect: Function;
-  onChangeExpand: Function;
+  onChangeExpand: (rowIndex: number, chidrens: IMappedItem[], parent: IMappedItem) => void;
   mappedItems: IMappedItem[];
   selectedRows: string[];
   themeRef: RefObject<IGridTheme>;
@@ -146,8 +158,10 @@ export interface IInternalGrid {
 }
 
 export interface IMappedItem extends IItem {
-  key: string;
-  expandLevel: number;
+  __key: string;
+  __expandLevel: number;
+  __parent?: IMappedItem;
+  __isExpand?: boolean;
 }
 
 export interface IHeaderCellWrapper {

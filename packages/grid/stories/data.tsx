@@ -4,19 +4,29 @@ import EqualIcon from 'mdi-react/EqualIcon';
 import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon';
 import KeyboardArrowUpIcon from 'mdi-react/KeyboardArrowUpIcon';
 
-import { IColumn } from '../src/interfaces';
+import { ICellRenderParams, IColumn, IMappedItem } from '../src/interfaces';
 import { Popover, popoverThemeNamespace } from '../../popover';
 import { GridPositions } from '../src/consts';
 
 
-const renderFunc = (field) => (
-  <>
-    { field.current }
-    { field.diff > 0 ? <KeyboardArrowUpIcon color="green" size="16px" className="color-jungle-green" /> : null }
-    { field.diff < 0 ? <KeyboardArrowDownIcon color="red" size="16px" className="color-rose-madder" /> : null }
-    { !(field.diff < 0 || field.diff > 0) ? <EqualIcon size="16px" color="transparent" /> : null }
-  </>
-);
+const renderFunc = (
+  field: any,
+  fieldName: string,
+  _: IMappedItem,
+  rowIndex: number,
+  { parentItem }: ICellRenderParams,
+) => {
+  console.log(fieldName, rowIndex, parentItem);
+
+  return (
+    <>
+      { field.current }
+      { field.diff > 0 ? <KeyboardArrowUpIcon color="green" size="16px" className="color-jungle-green" /> : null }
+      { field.diff < 0 ? <KeyboardArrowDownIcon color="red" size="16px" className="color-rose-madder" /> : null }
+      { !(field.diff < 0 || field.diff > 0) ? <EqualIcon size="16px" color="transparent" /> : null }
+    </>
+  );
+};
 
 const width = 150;
 const center = true;
@@ -441,7 +451,7 @@ export const rowsWithChildren = [
 ];
 
 
-export const columnsWithRender = [
+export const columnsWithRender: IColumn[] = [
   {
     field: 'zero', headerName: 'zero'.toUpperCase(), width: 300, visible: true, isExpandable: true, center: false,
   },
