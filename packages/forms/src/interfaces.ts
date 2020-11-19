@@ -13,13 +13,18 @@ export interface IFormContext {
   namespace?: string;
 }
 
+export interface IFormFieldState {
+  changed: boolean;
+  touch: boolean;
+}
+
 export interface IFormState<TModel = { [fieldName: string]: any }> {
-  source?: TModel;
-  model?: TModel;
+  source: TModel;
+  model: TModel;
   isNew: boolean;
   isChanged: boolean;
-  errors: { [fieldName: string]: string };
-  fields?: TModel;
+  errors: Partial<Record<keyof TModel, any>>;
+  fields: Partial<Record<keyof TModel, IFormFieldState>>;
   showAllErrors: boolean;
 }
 

@@ -123,14 +123,14 @@ const reducer: Reducer<IFormState> = (state = initialState, action) => {
   return behavior ? behavior(state, action) : state;
 };
 
-export const formSelector = (state: any, formName: string, namespace?: string): any => {
-  if (!formName) {
-    return initialState;
-  }
-
-  return namespace
+export const formSelector = <TFormFields extends Record<string | number, any>>(
+  state: any,
+  formName: string,
+  namespace?: string,
+): IFormState<TFormFields> => (
+  namespace
     ? get(state, `${namespace}.${formName}`, initialState)
-    : get(state.form, formName, initialState);
-};
+    : get(state.form, formName, initialState)
+);
 
 export default reducerDictionary(reducer, 'formName');
