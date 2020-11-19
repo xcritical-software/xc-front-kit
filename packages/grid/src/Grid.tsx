@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, {
   useState, useEffect, useRef, useCallback, useMemo, useContext,
 } from 'react';
@@ -16,11 +17,12 @@ import {
 import {
   guid,
   addOrDeleteItemFromArray,
-  deletePropsFromObjects,
   gridTheme,
   getFullWidth,
   removeSorting,
   changeGridSort,
+  deleteSystemPropsFromObjects,
+  deleteSystemPropsFromObject,
 } from './utils';
 import { MultiGrid } from './MultiGrid';
 import { GridPositions, GridSort } from './consts';
@@ -55,7 +57,7 @@ const Grid: React.FC<IGridProps> = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
-    items.map((el: IItem): IMappedItem => ({ ...el, key: guid(), expandLevel: 0 })),
+    items.map((el: IItem): IMappedItem => ({ ...el, __key: guid(), __expandLevel: 0 })),
   );
 
   const contextTheme = useContext(ThemeContext);
@@ -107,11 +109,11 @@ const Grid: React.FC<IGridProps> = ({
   );
 
   const onChangeExpand = useCallback(
-    (index: number, childrens: IItem[]) => {
-      if (mappedItems[index].isExpand) {
+    (index: number, childrens: IItem[], parent: IMappedItem) => {
+      if (mappedItems[index].__isExpand) {
         let childrensLength = 0;
         for (let i = index + 1; i < mappedItems.length; i++) {
-          if (mappedItems[i].expandLevel) childrensLength += 1;
+          if (mappedItems[i].__expandLevel) childrensLength += 1;
           else break;
         }
         const newMappedItems = [
@@ -120,16 +122,17 @@ const Grid: React.FC<IGridProps> = ({
         ];
         const withNewExpand = setIn(newMappedItems, false, [
           String(index),
-          'isExpand',
+          '$isExpand',
         ]);
         setMappedItems(withNewExpand);
       } else {
-        const parentExpandLevel = mappedItems[index].expandLevel || 0;
+        const parentExpandLevel = mappedItems[index].__expandLevel || 0;
         const newChildrens = childrens.map(
           (el: IItem): IMappedItem => ({
             ...el,
-            expandLevel: parentExpandLevel + 1,
-            key: guid(),
+            __expandLevel: parentExpandLevel + 1,
+            __parent: parent,
+            __key: guid(),
           }),
         );
         const newMappedItems = [
@@ -137,7 +140,7 @@ const Grid: React.FC<IGridProps> = ({
           ...newChildrens,
           ...mappedItems.slice(index + 1),
         ];
-        const withNewExpand = setIn(newMappedItems, true, [String(index), 'isExpand']);
+        const withNewExpand = setIn(newMappedItems, true, [String(index), '$isExpand']);
         setMappedItems(withNewExpand);
       }
     },
@@ -157,8 +160,8 @@ const Grid: React.FC<IGridProps> = ({
 
         if (onSelect) {
           onSelect(
-            deletePropsFromObjects(
-              mappedItems.filter((el: IMappedItem) => newSelectedRows.some((id) => id === el.key)), 'key', 'expandLevel',
+            deleteSystemPropsFromObjects(
+              mappedItems.filter((el) => newSelectedRows.some((id) => id === el.__key)),
             ),
           );
         }
@@ -175,15 +178,11 @@ const Grid: React.FC<IGridProps> = ({
 
         setSelectedRows([]);
       } else {
-        const selectedRow = {
-          ...mappedItems
-            .find((el: IMappedItem) => el.key === key),
-        } as IMappedItem;
-        delete selectedRow.key;
-        delete selectedRow.expandLevel;
+        const selectedRow = mappedItems
+          .find((el) => el.__key === key);
 
         if (onSelect) {
-          onSelect(selectedRow);
+          onSelect(deleteSystemPropsFromObject(selectedRow));
         }
 
         setSelectedRows([key]);
@@ -194,7 +193,7 @@ const Grid: React.FC<IGridProps> = ({
 
 
   useEffect(() => {
-    setMappedItems(items.map((el: IItem) => ({ ...el, key: guid(), expandLevel: 0 })));
+    setMappedItems(items.map((el) => ({ ...el, __key: guid(), __expandLevel: 0 })));
   }, [items]);
 
   const isMultiGrid = useMemo(() => columns

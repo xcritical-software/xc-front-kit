@@ -1,8 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { darken, mix, lighten } from 'polished';
+
+import Modal from '@xcritical/modal';
 
 import Drawer, { drawerThemeNamespace, DrawerTheme } from '../src';
 
@@ -13,6 +15,8 @@ interface IBasicDrawerProps {
   isMovable?: boolean;
   withCloseButton?: boolean;
   closeIconComponent?: ReactNode;
+  onClose?: () => void;
+  withBlanket?: boolean;
 }
 
 const generateTheme = (
@@ -97,6 +101,8 @@ const BasicDrawer = ({
   isMovable = false,
   withCloseButton = false,
   closeIconComponent,
+  onClose,
+  withBlanket,
 }: IBasicDrawerProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -114,6 +120,8 @@ const BasicDrawer = ({
         isMovable={ isMovable }
         withCloseButton={ withCloseButton }
         closeIconComponent={ closeIconComponent }
+        onClose={ onClose }
+        withBlanket={ withBlanket }
       >
         <div>Content</div>
       </Drawer>
@@ -169,5 +177,33 @@ storiesOf('Drawer', module)
     <div>
       <GlobalStyle />
       <BasicDrawer withCloseButton closeIconComponent={ <div>X</div> } />
+    </div>
+  ))
+  .add('Do something after closing Drawer', () => {
+    const [isOpen, changeModalState] = useState(false);
+    const onCloseModal = () => changeModalState(false);
+    const onCloseDrawer = () => changeModalState(true);
+
+    return (
+      <div>
+        <BasicDrawer withCloseButton onClose={ onCloseDrawer } />
+        <Modal
+          name="modal"
+          title="☠️"
+          isOpen={ isOpen }
+          onModalCancel={ onCloseModal }
+        >
+          <div>Bye-bye, Drawer!</div>
+        </Modal>
+      </div>
+    );
+  })
+  .add('Without Blanket', () => (
+    <div>
+      <GlobalStyle />
+      <BasicDrawer withBlanket={ false } withCloseButton closeIconComponent={ <div>X</div> } />
+      <p>
+        { 'lorem impsum long text '.repeat(600) }
+      </p>
     </div>
   ));

@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useRef,
   useMemo,
+  memo,
 } from 'react';
 
 import ResizeObserver from 'resize-observer-polyfill';
@@ -14,7 +15,7 @@ import { IPopover, IPopoverEvents } from './interfaces';
 import { Content, Arrow, PopoverWrapper } from './styles';
 
 
-export const Popover: React.FC<IPopover> = ({
+export const Popover: React.FC<IPopover> = memo(({
   position,
   content,
   autoFlip,
@@ -220,4 +221,4 @@ export const Popover: React.FC<IPopover> = ({
       } }
     </Popper>
   );
-};
+});

@@ -23,7 +23,7 @@ export const InlineEditUncontrolled = function <TFieldValue>(
   {
     appearance = 'default',
     baseAppearance = 'default',
-    defaultValue,
+    value: valueProp,
     readView: ReadView,
     readViewProps,
     editView: EditView,
@@ -42,11 +42,11 @@ export const InlineEditUncontrolled = function <TFieldValue>(
   const confirmButtonRef = createRef<HTMLButtonElement>();
   const cancelButtonRef = createRef<HTMLButtonElement>();
 
-  const [value, setValue] = useState(defaultValue);
+  const [value, setValue] = useState(valueProp);
 
   useEffect(() => {
-    setValue(defaultValue);
-  }, [defaultValue]);
+    setValue(valueProp);
+  }, [valueProp]);
 
   const handleEditValueChange = useCallback((e: any) => {
     if (e.target && e.target.value) {
@@ -73,9 +73,9 @@ export const InlineEditUncontrolled = function <TFieldValue>(
 
   const handleCancelClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
-    setValue(defaultValue);
+    setValue(valueProp);
     onCancel?.();
-  }, [onCancel]);
+  }, [onCancel, valueProp]);
 
   const renderReadView = useCallback((): ReactNode => (
     <ReadViewWrapper>

@@ -5,7 +5,7 @@ import React from 'react';
 
 import Input from '@xcritical/input';
 
-import Form from '../src';
+import Form, { FormField } from '../src';
 
 
 const NamespaceForm = () => (
@@ -15,7 +15,7 @@ const NamespaceForm = () => (
       <div>
         <label>First Name</label>
         <div>
-          <Form.Field
+          <FormField
             name="firstName"
             component={ Input }
             type="text"
@@ -26,7 +26,7 @@ const NamespaceForm = () => (
       <div>
         <label>Last Name</label>
         <div>
-          <Form.Field
+          <FormField
             name="lastName"
             component={ Input }
             type="text"

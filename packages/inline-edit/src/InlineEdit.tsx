@@ -16,7 +16,7 @@ export const PureInlineEdit = function <
     startWithEditViewOpen = false,
     onConfirm,
     onCancel,
-    defaultValue,
+    value: valueProp,
     disabled = false,
     invalid = false,
     isEditing,
@@ -25,13 +25,15 @@ export const PureInlineEdit = function <
   }: IInlineEditProps<TEditViewProps, TViewProps, TFieldValue>,
 ): React.ReactElement<IInlineEditProps<TEditViewProps, TViewProps, TFieldValue>> {
   const [isEditingAuto, setIsEditingAutoMode] = useState(startWithEditViewOpen);
-  const [value, setValue] = useState(defaultValue);
+  const [value, setValue] = useState(valueProp);
 
   useEffect(() => {
     if (invalid && isEditing === undefined) {
       setIsEditingAutoMode(true);
     }
   });
+
+  useEffect(() => setValue(valueProp), [valueProp]);
 
   const handleConfirm = useCallback((newValue: TFieldValue): void => {
     setValue(newValue);
@@ -43,7 +45,7 @@ export const PureInlineEdit = function <
   }, [onConfirm, isEditing]);
 
   const handleCancel = useCallback((): void => {
-    setValue(defaultValue);
+    setValue(valueProp);
 
     if (onCancel) {
       onCancel();
@@ -52,7 +54,7 @@ export const PureInlineEdit = function <
     }
 
     setIsEditingAutoMode(false);
-  }, [onCancel, defaultValue]);
+  }, [onCancel, valueProp]);
 
   const handleEditRequested = useCallback((): void => {
     if (onIsEditingChange) {
@@ -68,7 +70,7 @@ export const PureInlineEdit = function <
     <InlineEditUncontrolled
       { ...rest }
       invalid={ invalid }
-      defaultValue={ value }
+      value={ value }
       onConfirm={ handleConfirm }
       onCancel={ handleCancel }
       isEditing={ isEditing !== undefined ? isEditing : isEditingAuto }

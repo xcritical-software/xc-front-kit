@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, {
   useState,
@@ -120,22 +121,42 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     const isFirstColumn = columnIndex === 0;
 
     const row = mappedItems[rowIndex];
+    const {
+      __key,
+      __parent,
+      __isExpand,
+    } = mappedItems[rowIndex];
     const column = filteredColums[columnIndex];
 
-    const expandLevel = isFirstColumn && shiftFirstColumn ? row.expandLevel : 0;
+    const expandLevel = isFirstColumn && shiftFirstColumn ? row.__expandLevel : 0;
 
     const { field, render: renderFunction } = column;
     const {
       [field]: content,
     } = row;
 
-    const cellContent = renderFunction ? renderFunction(content, field, row) : content;
+    const cellContent = renderFunction ? renderFunction(
+      content,
+      field,
+      row,
+      rowIndex,
+      {
+        expandLevel,
+        isExpanded: __isExpand,
+        parentItem: __parent,
+        key: __key,
+      },
+    ) : content;
 
     const handleExpand = () => {
-      onChangeExpand(rowIndex, mappedItems[rowIndex].children);
+      onChangeExpand(
+        rowIndex,
+        mappedItems[rowIndex].children,
+        mappedItems[rowIndex],
+      );
     };
     const isSelected = selectedRows
-      .some((k: string) => k === mappedItems[rowIndex].key);
+      .some((k: string) => k === mappedItems[rowIndex].__key);
 
     return (
       <CellMeasurer
@@ -146,8 +167,12 @@ const InternalGrid: React.FC<IInternalGrid> = ({
         rowIndex={ rowIndex }
       >
         <BodyCell
+          aria-rowindex={ rowIndex }
+          aria-colindex={ columnIndex }
+          data-column-name={ field }
+          role="gridcell"
           onClick={ (e: MouseEvent) => {
-            handleSelect(e, mappedItems[rowIndex].key);
+            handleSelect(e, mappedItems[rowIndex].__key);
           } }
           key={ key }
           selected={ isSelected }
@@ -175,7 +200,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
 
             { column.isExpandable && mappedItems[rowIndex].children && (
               <ExpandButtonWrapper onClick={ handleExpand } theme={ themeRef.current }>
-                { mappedItems[rowIndex].isExpand
+                { mappedItems[rowIndex].__isExpand
                   ? <RemoveIcon />
                   : <AddIcon /> }
               </ExpandButtonWrapper>

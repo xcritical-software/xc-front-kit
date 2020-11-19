@@ -1,9 +1,12 @@
+
 import { setIn } from 'utilitify';
 
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
 import { gridThemeNamespace, defaultTheme } from './theme';
-import { IGridTheme, IMappedItem, IColumn } from './interfaces';
+import {
+  IGridTheme, IMappedItem, IColumn, IItem,
+} from './interfaces';
 import { GridPositions } from './consts';
 
 
@@ -33,17 +36,26 @@ export function gridTheme(
   return func(theme, propertyPath) as IGridTheme;
 }
 
+export const deleteSystemPropsFromObject = (item?: IMappedItem): IItem | undefined => {
+  if (item) {
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    const {
+      __key,
+      __expandLevel,
+      __isExpand,
+      __parent,
+      ...rest
+    } = item;
+    /* eslint-enable @typescript-eslint/no-unused-vars */
 
-export const deletePropsFromObjects = (arr: IMappedItem[], ...rest: any) => arr
-  .map((el: IMappedItem) => {
-    const newElem = { ...el };
-    rest.forEach((prop: string) => {
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-      delete newElem[prop];
-    });
+    return rest;
+  }
 
-    return newElem;
-  });
+  return undefined;
+};
+
+export const deleteSystemPropsFromObjects = (arr: IMappedItem[]): IItem => arr
+  .map((el: IMappedItem) => deleteSystemPropsFromObject(el));
 
 
 export const searchLastVisible = (arr: IColumn[], idx: number) => {

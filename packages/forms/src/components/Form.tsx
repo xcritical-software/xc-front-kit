@@ -4,7 +4,7 @@ import { isNil, isObject } from 'utilitify';
 import { IFormProps, IForm } from '../interfaces';
 
 import { withForm, FormProvider } from './FormContext';
-import СreateConnectedFormField from './ConnectedFormField';
+import { FormField } from './ConnectedFormField';
 
 
 export const PureForm: React.FC<IFormProps> & IForm = ({
@@ -44,6 +44,6 @@ export const PureForm: React.FC<IFormProps> & IForm = ({
   );
 };
 
-PureForm.Field = withForm(СreateConnectedFormField);
+PureForm.Field = withForm(FormField);
 
 export default PureForm;

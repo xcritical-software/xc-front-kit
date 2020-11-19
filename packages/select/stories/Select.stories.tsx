@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 // eslint-disable-next-line import/no-unresolved
@@ -124,4 +124,33 @@ storiesOf('Select', module)
       <span style={ { margin: '10px' } }>With prefix:</span>
       <Select options={ groupOptionsPrefix } placeholder="Search.." />
     </>
-  ));
+  ))
+  .add('Save input value and open after select value', () => {
+    const [inputValue, setInputValue] = useState('');
+
+    const onInputChange = useCallback((newInputValue, { action }) => {
+      if (action === 'input-change') {
+        setInputValue(newInputValue);
+      }
+    }, []);
+
+    const onMenuClose = useCallback(() => {
+      setInputValue('');
+    }, []);
+
+    return (
+      <>
+        <Select
+          textPosition="left"
+          options={ options }
+          isMulti
+          inputValue={ inputValue }
+          onInputChange={ onInputChange }
+          isClearable
+          isSearchable
+          isCloseMenuOnSelect={ false }
+          onMenuClose={ onMenuClose }
+        />
+      </>
+    );
+  });
