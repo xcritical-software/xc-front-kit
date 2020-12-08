@@ -72,6 +72,9 @@ const generateTheme = (
         backgroundColor: darken(0.75, baseBgColor),
         color: lighten(0.75, textColor),
       },
+      iconWrapper: {
+        background: 'red',
+      },
     },
   },
 });
@@ -140,7 +143,7 @@ storiesOf('Drawer', module)
   .add('Dark', () => (
     <div>
       <GlobalStyle />
-      <BasicDrawer appearance="dark" />
+      <BasicDrawer appearance="dark" withCloseButton />
     </div>
   ))
   .add('Right', () => (

@@ -117,7 +117,11 @@ export const PureDrawer = React.memo<IDrawerProps>(({
           >
             {
               withCloseButton && (
-                <IconWrapper onClick={ onOutsideClick }>
+                <IconWrapper
+                  onClick={ onOutsideClick }
+                  appearance={ appearance }
+                  baseAppearance={ baseAppearance }
+                >
                   { closeIconComponent ?? (isRTL ? <ArrowRight /> : <ArrowLeft />) }
                 </IconWrapper>
               )
