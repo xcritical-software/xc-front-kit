@@ -10,7 +10,7 @@ import { setIn } from 'utilitify';
 import { colors } from '@xcritical/theme';
 
 import Grid from '../src';
-import { IColumn } from '../src/interfaces';
+import { IColumn, IItem } from '../src/interfaces';
 
 import { gridThemeNamespace } from '../src/theme';
 import Sidebar from '../../sidebar/src';
@@ -29,6 +29,7 @@ import {
   rowsFixed,
   totalsFixed,
   CustomReactHeaderName,
+  rowsWithExpandedChildren,
 } from './data';
 import {
   Page,
@@ -166,6 +167,52 @@ storiesOf('Grid', module)
       height={ document.documentElement.clientHeight - 100 }
     />
   ))
+  .add('With childrens and pre-expanded', () => {
+    const [expandedRows, setExpandedRows] = useState<{[key: number]: boolean}>({
+      1: true,
+      2: false,
+      3: true,
+    });
+
+    const mappedGridItems: IItem[] = rowsWithExpandedChildren.map((row: IItem) => {
+      if (expandedRows[row.row]) {
+        const mas = row.children.map((child: IItem) => ({
+          ...child,
+          __expandLevel: 1,
+        }));
+
+        mas.unshift({
+          ...row,
+          __expandLevel: 0,
+          __isExpand: true,
+          children: row.children.map((child: IItem) => ({
+            ...child,
+            __expandLevel: 1,
+          })),
+        });
+
+        return mas;
+      }
+
+      return row;
+    }).flat();
+
+    const handleChandgeExpand = (row: IItem, isExpand: boolean): void => {
+      setExpandedRows({ ...expandedRows, [row.row]: isExpand });
+      console.log('Expanded Rows: ', { ...expandedRows, [row.row]: isExpand });
+    };
+
+    return (
+      <Grid
+        columns={ columns }
+        items={ mappedGridItems }
+        totals={ totals }
+        width={ document.documentElement.clientWidth - 100 }
+        height={ document.documentElement.clientHeight - 100 }
+        onChangeExpandFromProps={ handleChandgeExpand }
+      />
+    );
+  })
   .add('Handler change and select columns (see consol)', () => {
     const [isMultiSelect, changeIsMultySelect] = useState(false);
 

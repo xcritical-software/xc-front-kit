@@ -70,6 +70,7 @@ export interface IGridProps {
   isMultiSelect?: boolean;
   onChangeColumns?: Function;
   onSortChanged?: Function;
+  onChangeExpandFromProps?: (row: IItem, isExpand: boolean) => void;
   totals?: ITotals;
   theme?: ITheme;
   onSelect?: Function;
