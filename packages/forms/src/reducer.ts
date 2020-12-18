@@ -2,6 +2,8 @@ import get from 'lodash.get';
 import { Reducer } from 'redux';
 import { setIn, isDifference } from 'utilitify';
 
+import { useSelector } from 'react-redux';
+
 import {
   XCRITICAL_FORM_INIT,
   XCRITICAL_FORM_PROPERTY_CHANGE,
@@ -132,5 +134,9 @@ export const formSelector = (state: any, formName: string, namespace?: string): 
     ? get(state, `${namespace}.${formName}`, initialState)
     : get(state.form, formName, initialState);
 };
+
+export function useFormData(formName: string, namespace?: string) {
+  return useSelector<any, any>((state) => formSelector(state, formName, namespace));
+}
 
 export default reducerDictionary(reducer, 'formName');
