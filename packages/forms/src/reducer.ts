@@ -92,7 +92,7 @@ const behaviors: Record<FormActionType, Function> = {
     source: state.model,
     showAllErrors: true,
   }),
-  [XCRITICAL_FORM_SHOW_ERRORS]: (state: IFormState, { payload }) => ({
+  [XCRITICAL_FORM_SHOW_ERRORS]: (state: IFormState, { payload }: any) => ({
     ...state,
     showAllErrors: payload,
   }),
