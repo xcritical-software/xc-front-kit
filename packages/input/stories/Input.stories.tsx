@@ -473,4 +473,29 @@ storiesOf('Input', module)
         }
       </Table>
     </ThemeProvider>
-  ));
+  ))
+  .add('With Forwarding ref', () => {
+    const inputRef = React.useRef<HTMLInputElement>();
+
+    const handleFocus = () => {
+      inputRef.current.focus();
+    };
+    const handleBlur = () => {
+      inputRef.current.blur();
+    };
+
+    return (
+      <>
+        <button onClick={ handleFocus }>Focus</button>
+        <button onClick={ handleBlur }>Blur</button>
+        <br />
+        <Input
+          id="input-with-value"
+          name="input-with-value"
+          value="Input with value"
+          placeholder="Enter value"
+          ref={ inputRef }
+        />
+      </>
+    );
+  });

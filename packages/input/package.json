@@ -35,6 +35,7 @@
 	},
 	"dependencies": {
 		"@xcritical/theme": "^1.1.1",
-		"micro-memoize": "^4.0.8"
+		"micro-memoize": "^4.0.8",
+		"@xcritical/utils": "^0.2.1"
 	}
 }
