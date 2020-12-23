@@ -12,7 +12,7 @@ import { getValueFromNativeComponent } from '../utils';
 import { FormContext } from './FormContext';
 
 
-export const FormField = React.forwardRef((
+export const FormField = React.forwardRef(<TProps extends object>(
   {
     component: Component,
     name,
@@ -40,7 +40,7 @@ export const FormField = React.forwardRef((
 
   return (
     <Component
-      { ...(props) }
+      { ...(props as any) }
       value={ value || '' }
       error={ error }
       invalid={ invalid }
