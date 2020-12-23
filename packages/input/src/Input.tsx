@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React, { useCallback, useRef } from 'react';
 
+import { useCombinedRefs } from '@xcritical/utils';
+
 import {
   Root,
   Prefix,
@@ -10,7 +12,7 @@ import {
 import { IInputProps } from './interfaces';
 
 
-export const PureInput: React.FC<IInputProps> = ({
+export const PureInput: React.FC<IInputProps> = React.forwardRef(({
   className,
   appearance = 'default',
   baseAppearance = 'default',
@@ -28,8 +30,9 @@ export const PureInput: React.FC<IInputProps> = ({
   shouldFitContainer = false,
   css,
   ...rest
-}) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+}, ref: React.MutableRefObject<HTMLInputElement>) => {
+  const innerRef = useRef<HTMLInputElement>(null);
+  const combinedRef = useCombinedRefs(null, ref, innerRef);
 
   const inputOnChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +47,7 @@ export const PureInput: React.FC<IInputProps> = ({
   );
 
   const handleClick = useCallback(() => {
-    inputRef.current?.focus();
+    combinedRef.current?.focus();
   }, []);
 
   return (
@@ -78,7 +81,7 @@ export const PureInput: React.FC<IInputProps> = ({
         invalid={ invalid }
         onChange={ inputOnChange }
         type={ type }
-        ref={ inputRef }
+        ref={ combinedRef }
         autoComplete={ autoComplete }
         { ...rest }
       />
@@ -94,4 +97,4 @@ export const PureInput: React.FC<IInputProps> = ({
       ) }
     </Root>
   );
-};
+});
