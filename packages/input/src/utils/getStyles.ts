@@ -194,6 +194,11 @@ export const getInputInteractiveStyles = memoize(({
   disabled,
   invalid,
 }: IInputProps): any => {
+  const active = css`
+    &:active {
+      ${getInputStatesStyle('active')}
+    }
+  `
   if (disabled) {
     return css`
       cursor: not-allowed;
@@ -201,9 +206,7 @@ export const getInputInteractiveStyles = memoize(({
       box-shadow: none;
       ${getInputStatesStyle('disabled')}
 
-      &:active {
-        background: inherit;
-      }
+      ${active}
     `;
   }
 
@@ -212,17 +215,13 @@ export const getInputInteractiveStyles = memoize(({
       cursor: text;
       ${getInputStatesStyle('invalid')}
 
-      &:active {
-        background: inherit;
-      }
+      ${active}
     `;
   }
 
   return css`
     cursor: text;
 
-    &:active {
-      background: inherit;
-    }
+    ${active}
   `;
 });
