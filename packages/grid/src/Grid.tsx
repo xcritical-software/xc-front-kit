@@ -53,6 +53,8 @@ const Grid: React.FC<IGridProps> = ({
   shouldFitLastColumn = true,
   minColumnWidth = 30,
   gridProps = {},
+  scrollLeft: externalScrollLeft,
+  onChangeScrollLeft = () => {},
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
@@ -217,7 +219,6 @@ const Grid: React.FC<IGridProps> = ({
   const [leftFixedWidth, setLeftFixedWidth] = useState(0);
   const [rightFixedWidth, setRightFixedWidth] = useState(0);
 
-
   useEffect(() => {
     setLeftMappedColumns(mappedColumns
       .filter(({ fixedPosition }: IColumn) => fixedPosition === GridPositions.LEFT));
@@ -328,6 +329,8 @@ const Grid: React.FC<IGridProps> = ({
       overscanColumnCount,
       overscanRowCount,
       shouldFitLastColumn,
+      externalScrollLeft,
+      onChangeScrollLeft,
       allGridsProps: {
         onChangeColumns,
         totals,
@@ -342,6 +345,7 @@ const Grid: React.FC<IGridProps> = ({
         gridProps,
       },
     };
+
 
     if (shouldFitContainer) {
       multiGridProps.width = wrapperSize.width;
@@ -404,6 +408,8 @@ const Grid: React.FC<IGridProps> = ({
     shouldFitLastColumn,
     minColumnWidth,
     gridProps,
+    externalScrollLeft,
+    onChangeScrollLeft,
   };
 
   if (shouldFitContainer) {
@@ -418,7 +424,6 @@ const Grid: React.FC<IGridProps> = ({
       </div>
     );
   }
-
 
   return (
     <InternalGrid

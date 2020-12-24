@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-shadow */
 import React, { useState, useCallback } from 'react';
 import { storiesOf } from '@storybook/react';
 import { darken, lighten } from 'polished';
@@ -483,4 +484,176 @@ storiesOf('Grid', module)
       height={ document.documentElement.clientHeight - 100 }
       minColumnWidth={ 60 }
     />
-  ));
+  ))
+  .add('Shared horizontal scroll', () => {
+    const [scrollLeft, setScrollLeft] = useState<number>(0);
+    const [gridsColumns, onChangeGridsColumns] = useState(columns);
+
+
+    const onChangeScrollLeft = useCallback((scrollLeft) => {
+      setScrollLeft(scrollLeft);
+    }, [scrollLeft, setScrollLeft]);
+
+    return (
+      <Content>
+        <GridWrapper>
+          <Grid
+            columns={ gridsColumns }
+            items={ rows }
+            width={ document.documentElement.clientWidth - 100 }
+            height={ document.documentElement.clientHeight - 100 }
+            rowHeight={ 30 }
+            theme={ AMStheme }
+            shouldFitContainer
+            scrollLeft={ scrollLeft }
+            onChangeScrollLeft={ onChangeScrollLeft }
+            onChangeColumns={ onChangeGridsColumns }
+          />
+        </GridWrapper>
+        <GridWrapper>
+          <Grid
+            columns={ gridsColumns }
+            items={ rows }
+            width={ document.documentElement.clientWidth - 100 }
+            height={ document.documentElement.clientHeight - 100 }
+            rowHeight={ 30 }
+            theme={ AMStheme }
+            shouldFitContainer
+            scrollLeft={ scrollLeft }
+            onChangeScrollLeft={ onChangeScrollLeft }
+            onChangeColumns={ onChangeGridsColumns }
+          />
+        </GridWrapper>
+      </Content>
+    );
+  })
+  .add('fixed columns (left) + shared horizontal scroll', () => {
+    const [scrollLeft, setScrollLeft] = useState<number>(0);
+
+    const [columns, onChangeColumns] = useState(columnsFixed('left'));
+
+
+    const onChangeScrollLeft = useCallback((scrollLeft) => {
+      setScrollLeft(scrollLeft);
+    }, [scrollLeft, setScrollLeft]);
+
+    return (
+      <Content>
+        <GridWrapper>
+          <Grid
+            columns={ columns }
+            items={ rowsFixed }
+            width={ document.documentElement.clientWidth - 100 }
+            height={ document.documentElement.clientHeight - 100 }
+            rowHeight={ 30 }
+            theme={ AMStheme }
+            shouldFitContainer
+            scrollLeft={ scrollLeft }
+            onChangeScrollLeft={ onChangeScrollLeft }
+            onChangeColumns={ onChangeColumns }
+          />
+        </GridWrapper>
+        <GridWrapper>
+          <Grid
+            columns={ columns }
+            items={ rowsFixed }
+            width={ document.documentElement.clientWidth - 100 }
+            height={ document.documentElement.clientHeight - 100 }
+            rowHeight={ 30 }
+            theme={ AMStheme }
+            shouldFitContainer
+            scrollLeft={ scrollLeft }
+            onChangeScrollLeft={ onChangeScrollLeft }
+            onChangeColumns={ onChangeColumns }
+          />
+        </GridWrapper>
+      </Content>
+    );
+  })
+  .add('fixed columns (both) + shared horizontal scroll', () => {
+    const [scrollLeft, setScrollLeft] = useState<number>(0);
+
+    const [columns, onChangeColumns] = useState(columnsFixed('both'));
+
+
+    const onChangeScrollLeft = useCallback((scrollLeft) => {
+      setScrollLeft(scrollLeft);
+    }, [scrollLeft, setScrollLeft]);
+
+    return (
+      <Content>
+        <GridWrapper>
+          <Grid
+            columns={ columns }
+            items={ rowsFixed }
+            width={ document.documentElement.clientWidth - 100 }
+            height={ document.documentElement.clientHeight - 100 }
+            rowHeight={ 30 }
+            theme={ AMStheme }
+            shouldFitContainer
+            scrollLeft={ scrollLeft }
+            onChangeScrollLeft={ onChangeScrollLeft }
+            onChangeColumns={ onChangeColumns }
+          />
+        </GridWrapper>
+        <GridWrapper>
+          <Grid
+            columns={ columns }
+            items={ rowsFixed }
+            width={ document.documentElement.clientWidth - 100 }
+            height={ document.documentElement.clientHeight - 100 }
+            rowHeight={ 30 }
+            theme={ AMStheme }
+            shouldFitContainer
+            scrollLeft={ scrollLeft }
+            onChangeScrollLeft={ onChangeScrollLeft }
+            onChangeColumns={ onChangeColumns }
+          />
+        </GridWrapper>
+      </Content>
+    );
+  })
+  .add('fixed columns (right) + shared horizontal scroll', () => {
+    const [scrollLeft, setScrollLeft] = useState<number>(0);
+
+    const [columns, onChangeColumns] = useState(columnsFixed('right'));
+
+
+    const onChangeScrollLeft = useCallback((scrollLeft) => {
+      setScrollLeft(scrollLeft);
+      console.log(scrollLeft);
+    }, [scrollLeft, setScrollLeft]);
+
+    return (
+      <Content>
+        <GridWrapper>
+          <Grid
+            columns={ columns }
+            items={ rowsFixed }
+            width={ document.documentElement.clientWidth - 100 }
+            height={ document.documentElement.clientHeight - 100 }
+            rowHeight={ 30 }
+            theme={ AMStheme }
+            shouldFitContainer
+            scrollLeft={ scrollLeft }
+            onChangeScrollLeft={ onChangeScrollLeft }
+            onChangeColumns={ onChangeColumns }
+          />
+        </GridWrapper>
+        <GridWrapper>
+          <Grid
+            columns={ columns }
+            items={ rowsFixed }
+            width={ document.documentElement.clientWidth - 100 }
+            height={ document.documentElement.clientHeight - 100 }
+            rowHeight={ 30 }
+            theme={ AMStheme }
+            shouldFitContainer
+            scrollLeft={ scrollLeft }
+            onChangeScrollLeft={ onChangeScrollLeft }
+            onChangeColumns={ onChangeColumns }
+          />
+        </GridWrapper>
+      </Content>
+    );
+  });

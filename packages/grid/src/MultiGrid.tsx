@@ -29,6 +29,8 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
 
   scrollTop,
   onScroll,
+  externalScrollLeft,
+  onChangeScrollLeft,
 
   isScrollingOptOut,
   overscanColumnCount,
@@ -72,6 +74,8 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
 
           onScrollsyncScroll={ onScroll }
           scrollTop={ scrollTop }
+          externalScrollLeft={ externalScrollLeft }
+          onChangeScrollLeft={ onChangeScrollLeft }
           shouldFitLastColumn={ shouldFitLastColumn }
           gridHOCMappedColumns={ centerMappedColumns }
           setGridHOCMappedColumns={ setCenterMappedColumns }
