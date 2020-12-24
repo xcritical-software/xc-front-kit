@@ -12,7 +12,7 @@ import {
 import { IInputProps } from './interfaces';
 
 
-export const PureInput: React.FC<IInputProps> = React.forwardRef(({
+export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
   className,
   appearance = 'default',
   baseAppearance = 'default',
