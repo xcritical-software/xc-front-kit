@@ -13,7 +13,6 @@ import { IPrefixPostfixProps, IContentProps, IRootProps } from '../interfaces';
 export const Root = styled.div<IRootProps>`
   ${getBaseStyle}
   box-sizing: border-box;
-  cursor: ${({ theme, appearance, baseAppearance }): string => itemAppearanceTheme(theme, appearance, baseAppearance, 'cursor')};
   display: ${({ isHidden }): string => (isHidden ? 'none' : 'flex')};
   border-radius: ${({ theme, appearance, baseAppearance }): string => itemAppearanceTheme(theme, appearance, baseAppearance, 'borderRadius')}px;
   flex: none;
