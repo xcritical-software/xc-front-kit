@@ -151,8 +151,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     const handleExpand = () => {
       onChangeExpand(
         rowIndex,
-        mappedItems[rowIndex].children,
-        mappedItems[rowIndex],
+        __key,
       );
     };
     const isSelected = selectedRows
