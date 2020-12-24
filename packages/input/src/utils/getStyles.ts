@@ -198,7 +198,8 @@ export const getInputInteractiveStyles = memoize(({
     &:active {
       ${getInputStatesStyle('active')}
     }
-  `
+  `;
+
   if (disabled) {
     return css`
       cursor: not-allowed;

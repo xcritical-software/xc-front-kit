@@ -27,7 +27,7 @@ const gradient = `repeating-linear-gradient(
   transparent 1ch 53px)
   bottom/100% 3px content-box no-repeat`;
 
-  const codeTheme = {
+const codeTheme = {
   [inputThemeNamespace]: {
     height: '48px',
     borderRadius: 3,
@@ -55,8 +55,8 @@ const gradient = `repeating-linear-gradient(
         background: 'rgba(0,0,0,0)',
       },
     },
-  }
-}
+  },
+};
 
 const appearances = [
   'default',
@@ -64,19 +64,19 @@ const appearances = [
 ];
 
 const Table = (props: any) => (
-  <div style={{ display: 'table', minWidth: '280px', float: props.isRTL ? 'right' : 'left' }} {...props} />
+  <div style={ { display: 'table', minWidth: '280px', float: props.isRTL ? 'right' : 'left' } } { ...props } />
 );
 
 const Row = (props: any) => (
-  <div style={{ display: 'table-row' }} {...props} />
+  <div style={ { display: 'table-row' } } { ...props } />
 );
 
 const Cell = (props: any) => (
-  <div style={{ display: 'table-cell', padding: 4 }} {...props} />
+  <div style={ { display: 'table-cell', padding: 4 } } { ...props } />
 );
 
 const Flex = (props: any) => (
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} {...props} />
+  <div style={ { display: 'flex', alignItems: 'center', justifyContent: 'center' } } { ...props } />
 );
 
 const BasicInput = () => {
@@ -88,16 +88,16 @@ const BasicInput = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={ theme }>
       <Input
-        disabled={boolean('Disabled', false)}
-        invalid={boolean('Invalid', false)}
+        disabled={ boolean('Disabled', false) }
+        invalid={ boolean('Invalid', false) }
         id="input-basic"
         name="input-basic"
         placeholder="Enter basic value"
-        value={value}
-        onChange={handleChange}
-        onFocus={() => action('onFocused')}
+        value={ value }
+        onChange={ handleChange }
+        onFocus={ () => action('onFocused') }
       />
     </ThemeProvider>
   );
@@ -131,14 +131,14 @@ const ValidationInput = () => {
         id="input-validation"
         name="input-validation"
         placeholder="Enter validation value"
-        value={value}
+        value={ value }
         pattern="^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-        onChange={handleChange}
-        onValidate={handleValidate}
-        invalid={isValid !== null && !isValid}
+        onChange={ handleChange }
+        onValidate={ handleValidate }
+        invalid={ isValid !== null && !isValid }
       />
-      <div style={{ marginLeft: '10px', marginTop: '10px' }}>
-        {getValidationNote()}
+      <div style={ { marginLeft: '10px', marginTop: '10px' } }>
+        { getValidationNote() }
       </div>
     </div>
   );
@@ -168,7 +168,7 @@ storiesOf('Input', module)
             name="input-with-prefix"
             value="Input with prefix"
             placeholder="Enter value with prefix"
-            prefix={<SearchIcon />}
+            prefix={ <SearchIcon /> }
           />
         </Cell>
       </Row>
@@ -181,7 +181,7 @@ storiesOf('Input', module)
             name="input-with-suffix"
             value="Input with suffix"
             placeholder="Enter value with suffix"
-            postfix={<ErrorIcon />}
+            postfix={ <ErrorIcon /> }
           />
         </Cell>
       </Row>
@@ -194,8 +194,8 @@ storiesOf('Input', module)
             name="input-with-prefix-suffix"
             value="Input with prefix/suffix"
             placeholder="Enter value with prefix/suffix"
-            prefix={<SearchIcon />}
-            postfix={<ErrorIcon />}
+            prefix={ <SearchIcon /> }
+            postfix={ <ErrorIcon /> }
           />
         </Cell>
       </Row>
@@ -208,8 +208,8 @@ storiesOf('Input', module)
             name="input-long-text-with-prefix-suffix"
             value="Input long text with prefix/suffix"
             placeholder="Enter long value with prefix/suffix"
-            prefix={<ErrorIcon />}
-            postfix={<ErrorIcon />}
+            prefix={ <ErrorIcon /> }
+            postfix={ <ErrorIcon /> }
           />
         </Cell>
       </Row>
@@ -239,7 +239,7 @@ storiesOf('Input', module)
             name="input-rtl-with-prefix"
             value="Input RTL with prefix"
             placeholder="Enter RTL value with prefix"
-            prefix={<SearchIcon />}
+            prefix={ <SearchIcon /> }
             isRTL
           />
         </Cell>
@@ -253,7 +253,7 @@ storiesOf('Input', module)
             name="input-rtl-with-suffix"
             value="Input RTL with suffix"
             placeholder="Enter RTL value with suffix"
-            postfix={<ErrorIcon />}
+            postfix={ <ErrorIcon /> }
             isRTL
           />
         </Cell>
@@ -267,8 +267,8 @@ storiesOf('Input', module)
             name="input-rtl-with-prefix-suffix"
             value="Input RTL with prefix/suffix"
             placeholder="Enter RTL value with prefix/suffix"
-            prefix={<SearchIcon />}
-            postfix={<ErrorIcon />}
+            prefix={ <SearchIcon /> }
+            postfix={ <ErrorIcon /> }
             isRTL
           />
         </Cell>
@@ -282,8 +282,8 @@ storiesOf('Input', module)
             name="input-rtl-long-text-with-prefix-suffix"
             value="Input RTL long text with prefix/suffix"
             placeholder="Enter RTL long value with prefix/suffix"
-            prefix={<SearchIcon />}
-            postfix={<ErrorIcon />}
+            prefix={ <SearchIcon /> }
+            postfix={ <ErrorIcon /> }
             isRTL
           />
         </Cell>
@@ -408,7 +408,7 @@ storiesOf('Input', module)
             name="input-in-row-with-prefix"
             value="Input in row with prefix"
             placeholder="Enter Input in row value with prefix"
-            prefix={<SearchIcon />}
+            prefix={ <SearchIcon /> }
           />
         </Cell>
         <Cell>
@@ -419,7 +419,7 @@ storiesOf('Input', module)
             name="input-in-row-with-suffix"
             value="Input in row with suffix"
             placeholder="Enter input in row value with suffix"
-            postfix={<ErrorIcon />}
+            postfix={ <ErrorIcon /> }
           />
         </Cell>
         <Cell>
@@ -430,8 +430,8 @@ storiesOf('Input', module)
             name="input-in-row-with-prefix-suffix"
             value="Input in row with prefix/suffix"
             placeholder="Enter Input in row value with prefix/suffix"
-            prefix={<SearchIcon />}
-            postfix={<ErrorIcon />}
+            prefix={ <SearchIcon /> }
+            postfix={ <ErrorIcon /> }
           />
         </Cell>
         <Cell>
@@ -465,17 +465,17 @@ storiesOf('Input', module)
     <ValidationInput />
   ))
   .add('Themed', () => (
-    <ThemeProvider theme={customTheme}>
+    <ThemeProvider theme={ customTheme }>
       <Table>
         {
           appearances.map((appearance) => (
             <Row>
               <Cell>
-                {appearance}
+                { appearance }
               </Cell>
               <Cell>
                 <Input
-                  appearance={appearance}
+                  appearance={ appearance }
                   baseAppearance="default"
                   id="input-default-state"
                   name="input-default state"
@@ -485,7 +485,7 @@ storiesOf('Input', module)
               </Cell>
               <Cell>
                 <Input
-                  appearance={appearance}
+                  appearance={ appearance }
                   baseAppearance="default"
                   id="input-disabled-state"
                   name="input-disabled state"
@@ -496,7 +496,7 @@ storiesOf('Input', module)
               </Cell>
               <Cell>
                 <Input
-                  appearance={appearance}
+                  appearance={ appearance }
                   baseAppearance="default"
                   id="input-invalid-state"
                   name="input-invalid state"
@@ -523,28 +523,24 @@ storiesOf('Input', module)
 
     return (
       <>
-        <button onClick={handleFocus}>Focus</button>
-        <button onClick={handleBlur}>Blur</button>
+        <button onClick={ handleFocus }>Focus</button>
+        <button onClick={ handleBlur }>Blur</button>
         <br />
         <Input
           id="input-with-value"
           name="input-with-value"
           value="Input with value"
           placeholder="Enter value"
-          ref={inputRef}
+          ref={ inputRef }
         />
       </>
     );
   })
-  .add('Code input', () => {
-
-
-    return (
-      <ThemeProvider theme={codeTheme} >
-        <Input
-          value="123456"
-          disabled
-        />
-      </ThemeProvider>
-    );
-  })
+  .add('Code input', () => (
+    <ThemeProvider theme={ codeTheme }>
+      <Input
+        value="123456"
+        disabled
+      />
+    </ThemeProvider>
+  ));
