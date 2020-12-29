@@ -124,31 +124,19 @@ export const getRootInputStyles = memoize(({
   ...inputApperanceTheme(theme, appearance, baseAppearance),
 }));
 
-export const getRootInputStatesStyle = (stateName: string) => memoize(({
+export const getRootInputStatesStyle = (statePath: string[]) => memoize(({
   theme,
   baseAppearance,
   appearance,
-}: ISubComponentProps): any => inputApperanceTheme(theme, appearance, baseAppearance, [stateName]));
+}: ISubComponentProps): any => inputApperanceTheme(theme, appearance, baseAppearance, statePath));
 
 export const getRootInputInteractiveStyles = memoize(({
   disabled,
   invalid,
 }: IInputProps): any => {
-  const standartFocus = css`
-    &:focus {
-      ${getRootInputStatesStyle('focus')}
-    }
-  `;
-
-  const standartActive = css`
-    &:active {
-      ${getRootInputStatesStyle('active')};
-    }
-  `;
-
-  const standartHover = css`
+  const disabledHover = css`
     &:hover {
-      ${getRootInputStatesStyle('hover')}
+      ${getRootInputStatesStyle(['disabled', 'hover'])}
     }
   `;
 
@@ -157,23 +145,55 @@ export const getRootInputInteractiveStyles = memoize(({
       cursor: not-allowed;
       opacity: 0.65;
       box-shadow: none;
-      ${getRootInputStatesStyle('disabled')}
-
-      ${standartHover}
-      ${standartFocus};
+      ${getRootInputStatesStyle(['disabled'])}
+      ${disabledHover}
     `;
   }
+
+  const invalidFocus = css`
+    &:focus {
+      ${getRootInputStatesStyle(['invalid', 'focus'])}
+    }
+  `;
+  const invalidActive = css`
+    &:active {
+      ${getRootInputStatesStyle(['invalid', 'active'])};
+    }
+  `;
+  const invalidtHover = css`
+    &:hover {
+      ${getRootInputStatesStyle(['invalid', 'hover'])}
+    }
+  `;
 
   if (invalid) {
     return css`
       cursor: text;
-      ${getRootInputStatesStyle('invalid')}
+      ${getRootInputStatesStyle(['invalid'])}
 
-      ${standartActive}
-      ${standartHover}
-      ${standartFocus};
+      ${invalidFocus}
+      ${invalidActive}
+      ${invalidtHover};
     `;
   }
+
+  const standartFocus = css`
+    &:focus {
+      ${getRootInputStatesStyle(['focus'])}
+    }
+  `;
+
+  const standartActive = css`
+    &:active {
+      ${getRootInputStatesStyle(['active'])};
+    }
+  `;
+
+  const standartHover = css`
+    &:hover {
+      ${getRootInputStatesStyle(['hover'])}
+    }
+  `;
 
   return css`
     cursor: text;
@@ -184,11 +204,13 @@ export const getRootInputInteractiveStyles = memoize(({
   `;
 });
 
-export const getInputStatesStyle = (stateName: string) => memoize(({
+export const getStatesStyle = (componentName: string, statePath: string[]) => memoize(({
   theme,
   baseAppearance,
   appearance,
-}: IInputProps): any => inputApperanceTheme(theme, appearance ?? '', baseAppearance ?? '', ['input', stateName]));
+}: IInputProps): any => inputApperanceTheme(theme, appearance ?? '', baseAppearance ?? '', [componentName, ...statePath]));
+
+const getInputStateStyles = (statePath: string[]) => getStatesStyle('input', statePath);
 
 export const getInputInteractiveStyles = memoize(({
   disabled,
@@ -199,19 +221,14 @@ export const getInputInteractiveStyles = memoize(({
       cursor: not-allowed;
       opacity: 0.65;
       box-shadow: none;
-      ${getInputStatesStyle('disabled')}
-
-      &:active {
-        background: inherit;
-      }
+      ${getInputStateStyles(['disabled'])}
     `;
   }
 
   if (invalid) {
     return css`
       cursor: text;
-      ${getInputStatesStyle('invalid')}
-
+      ${getInputStateStyles(['invalid'])}
       &:active {
         background: inherit;
       }
@@ -224,5 +241,76 @@ export const getInputInteractiveStyles = memoize(({
     &:active {
       background: inherit;
     }
+  `;
+});
+
+const getCleanWrapperStateStyles = (statePath: string[]) => getStatesStyle('clearWrapper', statePath);
+
+export const getCloseIconInteractiveStyles = memoize(({
+  disabled,
+  invalid,
+}: IInputProps): any => {
+  const disabledHover = css`
+    &:hover {
+      ${getCleanWrapperStateStyles(['disabled', 'hover'])}
+    }
+  `;
+
+  if (disabled) {
+    return css`
+      cursor: not-allowed;
+      opacity: 0.65;
+      box-shadow: none;
+      ${getCleanWrapperStateStyles(['disabled'])}
+
+      ${disabledHover}
+    `;
+  }
+
+  const invalidFocus = css`
+    &:focus {
+      ${getCleanWrapperStateStyles(['invalid', 'focus'])}
+    }
+  `;
+  const invalidActive = css`
+    &:active {
+      ${getCleanWrapperStateStyles(['invalid', 'active'])};
+    }
+  `;
+  const invalidHover = css`
+    &:hover {
+      ${getCleanWrapperStateStyles(['invalid', 'hover'])}
+    }
+  `;
+
+  if (invalid) {
+    return css`
+      ${getCleanWrapperStateStyles(['invalid'])}
+      ${invalidFocus}
+      ${invalidActive}
+      ${invalidHover}
+    `;
+  }
+
+  const standartFocus = css`
+    &:focus {
+      ${getCleanWrapperStateStyles(['focus'])}
+    }
+  `;
+  const standartActive = css`
+    &:active {
+      ${getCleanWrapperStateStyles(['active'])};
+    }
+  `;
+  const standartHover = css`
+    &:hover {
+      ${getCleanWrapperStateStyles(['hover'])}
+    }
+  `;
+
+  return css`
+    ${standartFocus}
+    ${standartActive}
+    ${standartHover}
   `;
 });

@@ -101,6 +101,8 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
             appearance={ appearance }
             baseAppearance={ baseAppearance }
             onClick={ inputOnClear }
+            disabled={ disabled }
+            invalid={ invalid }
           >
             <ClearIcon />
           </ClearIconWrapper>
