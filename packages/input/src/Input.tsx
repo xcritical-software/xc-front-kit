@@ -8,8 +8,10 @@ import {
   Prefix,
   Postfix,
   StyledInput,
+  ClearIconWrapper,
 } from './styled/Input';
 import { IInputProps } from './interfaces';
+import { DefaultClearIcon } from './Icons';
 
 
 export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
@@ -29,6 +31,9 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
   autoComplete = 'on',
   shouldFitContainer = false,
   css,
+  isClearable,
+  clearIcon: ClearIcon = DefaultClearIcon,
+  value,
   ...rest
 }, ref: React.MutableRefObject<HTMLInputElement>) => {
   const innerRef = useRef<HTMLInputElement>(null);
@@ -49,6 +54,10 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
   const handleClick = useCallback(() => {
     combinedRef.current?.focus();
   }, []);
+
+  const inputOnClear = useCallback(() => {
+    if (onChange) onChange('');
+  }, [onChange]);
 
   return (
     <Root
@@ -83,8 +92,20 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
         type={ type }
         ref={ combinedRef }
         autoComplete={ autoComplete }
+        value={ value }
         { ...rest }
       />
+      {
+        isClearable && !!value && (
+          <ClearIconWrapper
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
+            onClick={ inputOnClear }
+          >
+            <ClearIcon />
+          </ClearIconWrapper>
+        )
+      }
       { !!postfix && (
         <Postfix
           appearance={ appearance }

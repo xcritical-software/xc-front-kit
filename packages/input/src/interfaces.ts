@@ -27,6 +27,8 @@ export interface IBaseItemProps {
   isDivided?: boolean;
   onValidate?: (result: boolean) => void;
   onChange?: (value: string, e?: React.ChangeEvent<HTMLInputElement>) => void;
+  isClearable?: boolean;
+  clearIcon?: React.FC;
 }
 
 export interface IInputProps

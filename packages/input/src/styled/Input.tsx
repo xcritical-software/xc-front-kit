@@ -60,3 +60,12 @@ export const StyledInput = styled.input<IStyledInput>`
   ${({ theme, appearance, baseAppearance }) => getComponentStyle(theme, appearance, baseAppearance, 'input')}
   ${getInputInteractiveStyles}
 `;
+
+
+export const ClearIconWrapper = styled.div<ISubComponentProps>`
+  ${({
+    theme,
+    appearance,
+    baseAppearance,
+  }) => getComponentStyle(theme, appearance, baseAppearance, 'clearWrapper')}
+`;
