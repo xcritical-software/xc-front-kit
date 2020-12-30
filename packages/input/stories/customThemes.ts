@@ -52,7 +52,7 @@ export const customTheme1 = {
   },
 };
 
-export const KYCTheme = {
+export const additionalTheme = {
   [inputThemeNamespace]: {
     appearance: {
       default: {

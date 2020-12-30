@@ -11,7 +11,7 @@ import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import Input from '@xcritical/input';
 
-import { customTheme1, KYCTheme } from './customThemes';
+import { customTheme1, additionalTheme } from './customThemes';
 import { SearchIcon, ErrorIcon } from './Icons';
 
 
@@ -583,11 +583,11 @@ storiesOf('Input', module)
       </>
     );
   })
-  .add('KYC Theme', () => {
+  .add('Additional Theme', () => {
     const [value, setValue] = useState('');
 
     return (
-      <ThemeProvider theme={ KYCTheme }>
+      <ThemeProvider theme={ additionalTheme }>
         <Table>
           <Row>
             <Cell>
