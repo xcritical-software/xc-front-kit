@@ -68,6 +68,7 @@ export const inputThemeStyle: InputTheme = {
         borderColor: colors.DANGER,
         color: colors.DANGER,
       },
+      filled: {},
     },
   },
 };

@@ -119,7 +119,7 @@ export const getRootInputStyles = memoize(({
   theme,
   appearance = 'default',
   baseAppearance = 'default',
-}: IInputProps): any => ({
+}: ISubComponentProps): any => ({
   ...inputTheme(theme),
   ...inputApperanceTheme(theme, appearance, baseAppearance),
 }));
@@ -133,7 +133,9 @@ export const getRootInputStatesStyle = (statePath: string[]) => memoize(({
 export const getRootInputInteractiveStyles = memoize(({
   disabled,
   invalid,
-}: IInputProps): any => {
+  hasValue,
+  focusOnInput,
+}: ISubComponentProps): any => {
   const disabledHover = css`
     &:hover {
       ${getRootInputStatesStyle(['disabled', 'hover'])}
@@ -150,10 +152,8 @@ export const getRootInputInteractiveStyles = memoize(({
     `;
   }
 
-  const invalidFocus = css`
-    &:focus {
+  const invalidFocus = focusOnInput && css`
       ${getRootInputStatesStyle(['invalid', 'focus'])}
-    }
   `;
   const invalidActive = css`
     &:active {
@@ -177,10 +177,8 @@ export const getRootInputInteractiveStyles = memoize(({
     `;
   }
 
-  const standartFocus = css`
-    &:focus {
-      ${getRootInputStatesStyle(['focus'])}
-    }
+  const standartFocus = focusOnInput && css`
+    ${getRootInputStatesStyle(['focus'])}
   `;
 
   const standartActive = css`
@@ -189,9 +187,14 @@ export const getRootInputInteractiveStyles = memoize(({
     }
   `;
 
-  const standartHover = css`
+  const standartHover = !focusOnInput && css`
     &:hover {
       ${getRootInputStatesStyle(['hover'])}
+    }
+  `;
+  const standardFilled = hasValue && !focusOnInput && css`
+    &:not(:hover) {
+      ${getRootInputStatesStyle(['filled'])}
     }
   `;
 
@@ -201,6 +204,7 @@ export const getRootInputInteractiveStyles = memoize(({
     ${standartActive}
     ${standartHover}
     ${standartFocus}
+    ${standardFilled}
   `;
 });
 
@@ -215,7 +219,7 @@ const getInputStateStyles = (statePath: string[]) => getStatesStyle('input', sta
 export const getInputInteractiveStyles = memoize(({
   disabled,
   invalid,
-}: IInputProps): any => {
+}: ISubComponentProps): any => {
   if (disabled) {
     return css`
       cursor: not-allowed;
@@ -249,7 +253,9 @@ const getCleanWrapperStateStyles = (statePath: string[]) => getStatesStyle('clea
 export const getCloseIconInteractiveStyles = memoize(({
   disabled,
   invalid,
-}: IInputProps): any => {
+  hasValue,
+  focusOnInput,
+}: ISubComponentProps): any => {
   const disabledHover = css`
     &:hover {
       ${getCleanWrapperStateStyles(['disabled', 'hover'])}
@@ -267,10 +273,8 @@ export const getCloseIconInteractiveStyles = memoize(({
     `;
   }
 
-  const invalidFocus = css`
-    &:focus {
+  const invalidFocus = focusOnInput && css`
       ${getCleanWrapperStateStyles(['invalid', 'focus'])}
-    }
   `;
   const invalidActive = css`
     &:active {
@@ -292,10 +296,8 @@ export const getCloseIconInteractiveStyles = memoize(({
     `;
   }
 
-  const standartFocus = css`
-    &:focus {
-      ${getCleanWrapperStateStyles(['focus'])}
-    }
+  const standartFocus = focusOnInput && css`
+    ${getCleanWrapperStateStyles(['focus'])}
   `;
   const standartActive = css`
     &:active {
@@ -308,9 +310,16 @@ export const getCloseIconInteractiveStyles = memoize(({
     }
   `;
 
+  const standardFilled = hasValue && !focusOnInput && css`
+    &:not(:hover) {
+      ${getCleanWrapperStateStyles(['filled'])}
+    }
+  `;
+
   return css`
     ${standartFocus}
     ${standartActive}
     ${standartHover}
+    ${standardFilled}
   `;
 });

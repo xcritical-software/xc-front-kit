@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-autofocus */
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import { useCombinedRefs } from '@xcritical/utils';
 
@@ -34,8 +34,11 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
   isClearable,
   clearIcon: ClearIcon = DefaultClearIcon,
   value,
+  onFocus,
+  onBlur,
   ...rest
 }, ref: React.MutableRefObject<HTMLInputElement>) => {
+  const [focus, setFocus] = useState(false);
   const innerRef = useRef<HTMLInputElement>(null);
   const combinedRef = useCombinedRefs(null, ref, innerRef);
 
@@ -59,6 +62,17 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
     if (onChange) onChange('');
   }, [onChange]);
 
+  const handleFocus = useCallback((event: React.FocusEvent<HTMLElement>) => {
+    setFocus(true);
+
+    if (onFocus) onFocus(event);
+  }, [onFocus]);
+  const handleBlur = useCallback((event: React.FocusEvent<HTMLElement>) => {
+    setFocus(false);
+
+    if (onBlur) onBlur(event);
+  }, [onBlur]);
+
   return (
     <Root
       className={ className }
@@ -70,6 +84,8 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
       css={ css }
       shouldFitContainer={ shouldFitContainer }
       onClick={ handleClick }
+      hasValue={ !!value }
+      focusOnInput={ focus }
     >
       { !!prefix && (
         <Prefix
@@ -93,6 +109,8 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
         ref={ combinedRef }
         autoComplete={ autoComplete }
         value={ value }
+        onFocus={ handleFocus }
+        onBlur={ handleBlur }
         { ...rest }
       />
       {
@@ -103,6 +121,8 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
             onClick={ inputOnClear }
             disabled={ disabled }
             invalid={ invalid }
+            hasValue={ !!value }
+            focusOnInput={ focus }
           >
             <ClearIcon />
           </ClearIconWrapper>

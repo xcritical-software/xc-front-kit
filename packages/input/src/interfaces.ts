@@ -52,4 +52,6 @@ export interface ISubComponentProps extends IIsRTL {
   invalid?: boolean;
   disabled?: boolean;
   css?: any;
+  hasValue?: boolean;
+  focusOnInput?: boolean;
 }
