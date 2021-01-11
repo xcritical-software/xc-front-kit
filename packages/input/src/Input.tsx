@@ -38,7 +38,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
   onBlur,
   ...rest
 }, ref: React.MutableRefObject<HTMLInputElement>) => {
-  const [focus, setFocus] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const innerRef = useRef<HTMLInputElement>(null);
   const combinedRef = useCombinedRefs(null, ref, innerRef);
 
@@ -63,12 +63,12 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
   }, [onChange]);
 
   const handleFocus = useCallback((event: React.FocusEvent<HTMLElement>) => {
-    setFocus(true);
+    setIsFocused(true);
 
     if (onFocus) onFocus(event);
   }, [onFocus]);
   const handleBlur = useCallback((event: React.FocusEvent<HTMLElement>) => {
-    setFocus(false);
+    setIsFocused(false);
 
     if (onBlur) onBlur(event);
   }, [onBlur]);
@@ -85,7 +85,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
       shouldFitContainer={ shouldFitContainer }
       onClick={ handleClick }
       hasValue={ !!value }
-      focusOnInput={ focus }
+      focusOnInput={ isFocused }
     >
       { !!prefix && (
         <Prefix
@@ -122,7 +122,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
             disabled={ disabled }
             invalid={ invalid }
             hasValue={ !!value }
-            focusOnInput={ focus }
+            focusOnInput={ isFocused }
           >
             <ClearIcon />
           </ClearIconWrapper>
