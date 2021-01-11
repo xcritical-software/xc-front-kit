@@ -160,7 +160,7 @@ export const getRootInputInteractiveStyles = memoize(({
       ${getRootInputStatesStyle(['invalid', 'active'])};
     }
   `;
-  const invalidtHover = css`
+  const invalidHover = css`
     &:hover {
       ${getRootInputStatesStyle(['invalid', 'hover'])}
     }
@@ -173,21 +173,21 @@ export const getRootInputInteractiveStyles = memoize(({
 
       ${invalidFocus}
       ${invalidActive}
-      ${invalidtHover};
+      ${invalidHover};
     `;
   }
 
-  const standartFocus = focusOnInput && css`
+  const standardFocus = focusOnInput && css`
     ${getRootInputStatesStyle(['focus'])}
   `;
 
-  const standartActive = css`
+  const standardActive = css`
     &:active {
       ${getRootInputStatesStyle(['active'])};
     }
   `;
 
-  const standartHover = !focusOnInput && css`
+  const standardHover = !focusOnInput && css`
     &:hover {
       ${getRootInputStatesStyle(['hover'])}
     }
@@ -201,9 +201,9 @@ export const getRootInputInteractiveStyles = memoize(({
   return css`
     cursor: text;
 
-    ${standartActive}
-    ${standartHover}
-    ${standartFocus}
+    ${standardActive}
+    ${standardHover}
+    ${standardFocus}
     ${standardFilled}
   `;
 });
@@ -296,15 +296,15 @@ export const getCloseIconInteractiveStyles = memoize(({
     `;
   }
 
-  const standartFocus = focusOnInput && css`
+  const standardFocus = focusOnInput && css`
     ${getCleanWrapperStateStyles(['focus'])}
   `;
-  const standartActive = css`
+  const standardActive = css`
     &:active {
       ${getCleanWrapperStateStyles(['active'])};
     }
   `;
-  const standartHover = css`
+  const standardHover = css`
     &:hover {
       ${getCleanWrapperStateStyles(['hover'])}
     }
@@ -317,9 +317,9 @@ export const getCloseIconInteractiveStyles = memoize(({
   `;
 
   return css`
-    ${standartFocus}
-    ${standartActive}
-    ${standartHover}
+    ${standardFocus}
+    ${standardActive}
+    ${standardHover}
     ${standardFilled}
   `;
 });
