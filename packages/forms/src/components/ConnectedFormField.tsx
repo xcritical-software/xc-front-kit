@@ -16,6 +16,7 @@ export const FormField = React.forwardRef(<TProps extends object>(
   {
     component: Component,
     name,
+    onChange: onChangeProp,
     ...props
   }: FormFieldProps<TProps>,
   ref,
@@ -34,9 +35,10 @@ export const FormField = React.forwardRef(<TProps extends object>(
   const error = showError ? $error : null;
   const invalid = showError ? !!error : false;
 
-  const onChange = useCallback(($value: any) => {
-    dispatch(xcriticalFormPropertyChange(formName, name, getValueFromNativeComponent($value)));
-  }, [dispatch, formName, name]);
+  const onChange = useCallback((...args: any[]) => {
+    dispatch(xcriticalFormPropertyChange(formName, name, getValueFromNativeComponent(args[0])));
+    onChangeProp?.(...args);
+  }, [dispatch, formName, name, onChangeProp]);
 
   return (
     <Component
