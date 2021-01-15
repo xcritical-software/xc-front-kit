@@ -1,5 +1,5 @@
 import React, {
-  useRef, useEffect, useContext, useMemo,
+  useRef, useContext, useMemo,
 } from 'react';
 import Select from 'react-select';
 import { ThemeContext } from 'styled-components';
@@ -48,21 +48,15 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
     isRTL,
   ), [appearance, baseAppearance, innerTheme, isRTL]);
 
-  const selectStyles = useRef(themeConverter(
-    innerTheme,
-    appearance,
-    baseAppearance,
-    shouldFitContainer,
-  ));
-
-  useEffect(() => {
-    selectStyles.current = themeConverter(
+  const selectStyles = useMemo(
+    () => themeConverter(
       innerTheme,
       appearance,
       baseAppearance,
       shouldFitContainer,
-    );
-  }, [innerTheme, appearance, baseAppearance, shouldFitContainer]);
+    ),
+    [innerTheme, appearance, baseAppearance, shouldFitContainer],
+  );
 
   return (
     <Select
@@ -70,7 +64,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
       className={ className }
       classNamePrefix={ className }
       formatOptionLabel={ formatOptionLabel }
-      styles={ { ...selectStyles.current, ...styles } }
+      styles={ { ...selectStyles, ...styles } }
       isDisabled={ disabled }
       isMulti={ isMulti }
       isSearchable={ isSearchable }
