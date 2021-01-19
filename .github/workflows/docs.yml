@@ -6,7 +6,7 @@ name: PullRequest
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   pull_request:
-    branches: [ master, develop ]
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -17,19 +17,32 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    if: ${{ startsWith(github.event.head_commit.message, 'chore(release)') }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.0.0
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          cmd: install
-      - uses: borales/actions-yarn@v2.0.0
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install node_modules
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Build storybook
+        run: yarn build:storybook
+      - name: Publish docs
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
         with:
-          cmd: build:prod
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: lint
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: test
+          target_branch: gh-pages
+          build_dir: .storybook-static
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
