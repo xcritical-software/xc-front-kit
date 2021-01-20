@@ -1,100 +1,95 @@
-import { darken, lighten, mix } from 'polished';
-
-import { inputThemeNamespace } from '../src';
+import { inputThemeNamespace } from '../src/theme';
 
 
-const padding = 18;
-const baseBgColor = '#fff';
-const textColor = '#000';
-const borderColor = '#555';
-const focusColor = '#999';
-const invalidColor = '#E71D36';
-
-export const customTheme = {
+export const customTheme1 = {
   [inputThemeNamespace]: {
     appearance: {
       default: {
-        prefixSpacing: 5,
-        suffixSpacing: 5,
-        height: 40,
-        paddingBottom: padding,
-        paddingLeft: padding,
-        paddingRight: padding,
-        paddingTop: padding,
-        background: baseBgColor,
-        color: textColor,
-        fontWeight: 600,
-        fontSize: 14,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor,
-        borderRadius: 20,
-        control: {
-          height: 40,
-          width: 'auto',
+        width: '300px',
+      },
+      custom: {
+        border: '1px solid "#17a2b8"',
+        clearWrapper: {
+          fill: '#f1a',
+          hover: {
+            fill: '#fba',
+          },
+          disabled: {
+            fill: 'green',
+            hover: {
+              fill: 'red',
+            },
+          },
+          invalid: {
+            fill: '#f57178',
+            hover: {
+              fill: '#a8050e',
+            },
+          },
+          filled: {
+            fill: 'yellow',
+          },
         },
-        input: {
-          height: 40,
-        },
-        focus: {
-          color: focusColor,
-        },
-        selected: {
-          background: darken(0.05, baseBgColor),
-          color: textColor,
-          height: 40,
-          borderWidth: 1,
-          borderStyle: 'solid',
-          borderColor,
-          borderRadius: 20,
-        },
-        active: {
-          background: darken(0.1, baseBgColor),
-          color: textColor,
-          height: 40,
-          borderWidth: 1,
-          borderStyle: 'solid',
-          borderColor,
+        hover: {
+          border: '1px solid #2DD070',
         },
         disabled: {
-          background: baseBgColor,
-          color: mix(0.5, baseBgColor, textColor),
-          height: 40,
+          border: '1px solid #71f5d4',
+          hover: {
+            border: '1px solid #06bf91',
+          },
         },
         invalid: {
-          background: baseBgColor,
-          color: textColor,
-          height: 40,
-          borderColor: invalidColor,
+          hover: {
+            border: '1px solid #850000',
+          },
+        },
+        filled: {
+          background: '#aff6fa',
         },
       },
-      dark: {
-        background: darken(0.75, baseBgColor),
-        color: lighten(0.95, textColor),
-        borderColor: lighten(0.95, borderColor),
-        focus: {
-          color: lighten(0.95, textColor),
+    },
+  },
+};
+
+export const additionalTheme = {
+  [inputThemeNamespace]: {
+    appearance: {
+      default: {
+        width: '300px',
+        borderRadius: '3px',
+        padding: '12px',
+        fontSize: '14px',
+        border: '1px solid rgba(153, 153, 153, 0.5)',
+        clearWrapper: {
+          disabled: {
+            opacity: 0,
+          },
+          filled: {
+            opacity: 0.5,
+          },
         },
-        selected: {
-          background: darken(0.75, baseBgColor),
-          color: lighten(0.95, textColor),
-          borderColor: lighten(0.95, borderColor),
+        hover: {
+          border: '1px solid #999999',
+        },
+        focus: {
+          border: '1px solid #333333',
         },
         active: {
-          background: darken(0.75, baseBgColor),
-          color: lighten(0.55, textColor),
-          borderColor: lighten(0.95, borderColor),
+          border: '1px solid #333333',
         },
-        disabled: {
-          background: darken(0.95, baseBgColor),
-          color: mix(0.5, baseBgColor, textColor),
-          borderColor: lighten(0.95, borderColor),
+        filled: {
+          border: '1px solid #32D5EB',
         },
         invalid: {
-          background: darken(0.75, baseBgColor),
-          color: lighten(0.95, textColor),
-          borderColor: invalidColor,
+          border: '1px solid #FF443A',
         },
+        disabled: {
+          border: '1px solid #999999',
+          background: '#EEEEEE',
+          opacity: 0.5,
+        },
+
       },
     },
   },

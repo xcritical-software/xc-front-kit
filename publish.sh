@@ -7,7 +7,7 @@ publish()
     for dirname in $(echo ./.publish/*)
     do    
       (cd $dirname; npm version $version)
-      npm publish $dirname
+      npm publish $dirname --access public
     done
   fi
 }

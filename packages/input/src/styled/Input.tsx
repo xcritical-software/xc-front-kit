@@ -4,6 +4,7 @@ import {
   getComponentStyle,
   inputApperanceTheme,
   getInputInteractiveStyles,
+  getCloseIconInteractiveStyles,
   getRootInputStyles,
   getRootInputInteractiveStyles,
 } from '../utils';
@@ -59,4 +60,14 @@ export const StyledInput = styled.input<IStyledInput>`
   margin: 0;
   ${({ theme, appearance, baseAppearance }) => getComponentStyle(theme, appearance, baseAppearance, 'input')}
   ${getInputInteractiveStyles}
+`;
+
+
+export const ClearIconWrapper = styled.div<ISubComponentProps>`
+  ${({
+    theme,
+    appearance,
+    baseAppearance,
+  }) => getComponentStyle(theme, appearance, baseAppearance, 'clearWrapper')}
+  ${getCloseIconInteractiveStyles}
 `;

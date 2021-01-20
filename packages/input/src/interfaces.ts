@@ -27,6 +27,8 @@ export interface IBaseItemProps {
   isDivided?: boolean;
   onValidate?: (result: boolean) => void;
   onChange?: (value: string, e?: React.ChangeEvent<HTMLInputElement>) => void;
+  isClearable?: boolean;
+  clearIcon?: React.FC;
 }
 
 export interface IInputProps
@@ -50,4 +52,6 @@ export interface ISubComponentProps extends IIsRTL {
   invalid?: boolean;
   disabled?: boolean;
   css?: any;
+  hasValue?: boolean;
+  focusOnInput?: boolean;
 }
