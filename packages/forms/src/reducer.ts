@@ -2,6 +2,8 @@ import get from 'lodash.get';
 import { Reducer } from 'redux';
 import { setIn, isDifference } from 'utilitify';
 
+import { useSelector } from 'react-redux';
+
 import {
   XCRITICAL_FORM_INIT,
   XCRITICAL_FORM_PROPERTY_CHANGE,
@@ -90,7 +92,7 @@ const behaviors: Record<FormActionType, Function> = {
     source: state.model,
     showAllErrors: true,
   }),
-  [XCRITICAL_FORM_SHOW_ERRORS]: (state: IFormState, { payload }) => ({
+  [XCRITICAL_FORM_SHOW_ERRORS]: (state: IFormState, { payload }: IFormAction) => ({
     ...state,
     showAllErrors: payload,
   }),
@@ -132,5 +134,9 @@ export const formSelector = <TFormFields extends Record<string | number, any>>(
     ? get(state, `${namespace}.${formName}`, initialState)
     : get(state.form, formName, initialState)
 );
+
+export function useFormData(formName: string, namespace?: string) {
+  return useSelector<any, any>((state) => formSelector(state, formName, namespace));
+}
 
 export default reducerDictionary(reducer, 'formName');

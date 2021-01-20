@@ -122,7 +122,7 @@ const Grid: React.FC<IGridProps> = ({
         ];
         const withNewExpand = setIn(newMappedItems, false, [
           String(index),
-          '$isExpand',
+          '__isExpand',
         ]);
         setMappedItems(withNewExpand);
       } else {
@@ -140,7 +140,7 @@ const Grid: React.FC<IGridProps> = ({
           ...newChildrens,
           ...mappedItems.slice(index + 1),
         ];
-        const withNewExpand = setIn(newMappedItems, true, [String(index), '$isExpand']);
+        const withNewExpand = setIn(newMappedItems, true, [String(index), '__isExpand']);
         setMappedItems(withNewExpand);
       }
     },

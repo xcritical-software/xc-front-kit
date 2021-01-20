@@ -26,6 +26,7 @@ const generateTheme = (
       prefixSpacing: padding,
       postfixSpacing: padding,
       borderRadius: 0,
+      cursor: 'help',
       focus: {
         outline: focusColor || '',
       },
@@ -60,9 +61,10 @@ const generateTheme = (
         fontWeight: 600,
       },
       disabled: {
+        cursor: 'wait',
         background: baseBgColor,
         color: mix(0.5, baseBgColor, textColor),
-        fontWeight: 600,
+        fontWeight: 900,
       },
     },
   },
@@ -114,8 +116,8 @@ storiesOf('Item', module)
         </ItemGroup>
         <ItemGroup appearance="myaccount">
           <Item>This is just a standard item</Item>
-          <Item>This is just a standard item</Item>
-          <Item>This is just a standard item</Item>
+          <Item disabled>This is just a standard item</Item>
+          <Item selected disabled>This is just a standard item</Item>
           <Item
             prefix={ <MasterCardIcon /> }
             postfix={ <MasterCardIcon /> }
@@ -125,6 +127,7 @@ storiesOf('Item', module)
 
           </Item>
         </ItemGroup>
+
       </div>
     </ThemeProvider>
   ));

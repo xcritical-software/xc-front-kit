@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { darken, mix, lighten } from 'polished';
@@ -72,6 +72,9 @@ const generateTheme = (
         backgroundColor: darken(0.75, baseBgColor),
         color: lighten(0.75, textColor),
       },
+      iconWrapper: {
+        background: 'red',
+      },
     },
   },
 });
@@ -130,6 +133,58 @@ const BasicDrawer = ({
   );
 };
 
+const DynamicDrawer = ({
+  appearance = 'myaccount',
+  isRTL = false,
+  isMovable = true,
+  withCloseButton = false,
+  closeIconComponent,
+  onClose,
+  withBlanket,
+}: IBasicDrawerProps) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleClick = (): void => {
+    setIsOpen(!isOpen);
+  };
+
+  const minWidthProp = 340;
+
+  const maxWidthProp = useMemo(() => {
+    const maxWidth = window.innerWidth - 400;
+
+    if (maxWidth < minWidthProp) return minWidthProp;
+
+    return maxWidth;
+  }, [isOpen]);
+
+  return (
+    <ThemeProvider theme={ { [drawerThemeNamespace]: theme } }>
+      <Drawer
+        isOpen={ isOpen }
+        onOutsideClick={ handleClick }
+        appearance={ appearance }
+        isRTL={ isRTL }
+        isMovable={ isMovable }
+        withCloseButton={ withCloseButton }
+        closeIconComponent={ closeIconComponent }
+        onClose={ onClose }
+        withBlanket={ withBlanket }
+        minWidth={ minWidthProp }
+        maxWidth={ maxWidthProp }
+      >
+        { maxWidthProp > 1000
+        && <div style={ { fontSize: '450px' } }>MAX</div> }
+        { maxWidthProp < 1000 && maxWidthProp > 650
+        && <div style={ { fontSize: '170px' } }>MIDDLE</div> }
+        { maxWidthProp < 650
+        && <div style={ { fontSize: '170px' } }>MIN</div> }
+      </Drawer>
+      <button type="button" onClick={ handleClick }>Click for show Drawer</button>
+    </ThemeProvider>
+  );
+};
+
 storiesOf('Drawer', module)
   .add('Basic', () => (
     <div>
@@ -140,7 +195,7 @@ storiesOf('Drawer', module)
   .add('Dark', () => (
     <div>
       <GlobalStyle />
-      <BasicDrawer appearance="dark" />
+      <BasicDrawer appearance="dark" withCloseButton />
     </div>
   ))
   .add('Right', () => (
@@ -204,6 +259,15 @@ storiesOf('Drawer', module)
       <BasicDrawer withBlanket={ false } withCloseButton closeIconComponent={ <div>X</div> } />
       <p>
         { 'lorem impsum long text '.repeat(600) }
+      </p>
+    </div>
+  ))
+  .add('With dynamic maxWidth', () => (
+    <div>
+      <GlobalStyle />
+      <DynamicDrawer withCloseButton closeIconComponent={ <div>X</div> } />
+      <p>
+        Try to change browser width and then to open the Drawer again!
       </p>
     </div>
   ));

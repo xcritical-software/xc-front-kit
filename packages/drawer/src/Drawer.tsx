@@ -1,5 +1,5 @@
 import React, {
-  useRef, useContext, useState, useCallback,
+  useRef, useContext, useState, useCallback, useEffect,
 } from 'react';
 import { withTheme, ThemeContext, ThemeProvider } from 'styled-components';
 import { Transition } from 'react-transition-group';
@@ -47,6 +47,9 @@ export const PureDrawer = React.memo<IDrawerProps>(({
   const [width, setWidth] = useState(maxWidth);
   const [antiSelectLayer, setAntiSelectLayer] = useState(false);
 
+  useEffect(() => {
+    setWidth(maxWidth);
+  }, [maxWidth]);
 
   const handleMouseMove = useCallback(
     (e) => {
@@ -117,7 +120,11 @@ export const PureDrawer = React.memo<IDrawerProps>(({
           >
             {
               withCloseButton && (
-                <IconWrapper onClick={ onOutsideClick }>
+                <IconWrapper
+                  onClick={ onOutsideClick }
+                  appearance={ appearance }
+                  baseAppearance={ baseAppearance }
+                >
                   { closeIconComponent ?? (isRTL ? <ArrowRight /> : <ArrowLeft />) }
                 </IconWrapper>
               )
