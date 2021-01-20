@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/item",
-	"version": "1.1.3",
+	"version": "1.1.4",
 	"description": "XCritical Item Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
