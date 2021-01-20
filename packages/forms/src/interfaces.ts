@@ -30,10 +30,11 @@ export interface IFormStateMap {
 export type FormFieldProps<TComponentProps> = TComponentProps & {
   component: React.ComponentType<TComponentProps & IFormFieldComponentProps>;
   name: string;
+  onChange?: IFormFieldComponentProps['onChange'];
 };
 
 export interface IFormFieldComponentProps {
-  onChange: (value: any) => void;
+  onChange: (...args: any[]) => void;
   invalid: boolean;
   error?: string | string[];
   value: any;

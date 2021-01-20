@@ -1,16 +1,20 @@
 /* eslint-disable jsx-a11y/no-autofocus */
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
+
+import { useCombinedRefs } from '@xcritical/utils';
 
 import {
   Root,
   Prefix,
   Postfix,
   StyledInput,
+  ClearIconWrapper,
 } from './styled/Input';
 import { IInputProps } from './interfaces';
+import { DefaultClearIcon } from './Icons';
 
 
-export const PureInput: React.FC<IInputProps> = ({
+export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
   className,
   appearance = 'default',
   baseAppearance = 'default',
@@ -27,9 +31,16 @@ export const PureInput: React.FC<IInputProps> = ({
   autoComplete = 'on',
   shouldFitContainer = false,
   css,
+  isClearable,
+  clearIcon: ClearIcon = DefaultClearIcon,
+  value,
+  onFocus,
+  onBlur,
   ...rest
-}) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+}, ref: React.MutableRefObject<HTMLInputElement>) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const innerRef = useRef<HTMLInputElement>(null);
+  const combinedRef = useCombinedRefs(null, ref, innerRef);
 
   const inputOnChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,8 +55,23 @@ export const PureInput: React.FC<IInputProps> = ({
   );
 
   const handleClick = useCallback(() => {
-    inputRef.current?.focus();
+    combinedRef.current?.focus();
   }, []);
+
+  const inputOnClear = useCallback(() => {
+    if (onChange) onChange('');
+  }, [onChange]);
+
+  const handleFocus = useCallback((event: React.FocusEvent<HTMLElement>) => {
+    setIsFocused(true);
+
+    if (onFocus) onFocus(event);
+  }, [onFocus]);
+  const handleBlur = useCallback((event: React.FocusEvent<HTMLElement>) => {
+    setIsFocused(false);
+
+    if (onBlur) onBlur(event);
+  }, [onBlur]);
 
   return (
     <Root
@@ -58,6 +84,8 @@ export const PureInput: React.FC<IInputProps> = ({
       css={ css }
       shouldFitContainer={ shouldFitContainer }
       onClick={ handleClick }
+      hasValue={ !!value }
+      focusOnInput={ isFocused }
     >
       { !!prefix && (
         <Prefix
@@ -78,10 +106,28 @@ export const PureInput: React.FC<IInputProps> = ({
         invalid={ invalid }
         onChange={ inputOnChange }
         type={ type }
-        ref={ inputRef }
+        ref={ combinedRef }
         autoComplete={ autoComplete }
+        value={ value }
+        onFocus={ handleFocus }
+        onBlur={ handleBlur }
         { ...rest }
       />
+      {
+        isClearable && !!value && (
+          <ClearIconWrapper
+            appearance={ appearance }
+            baseAppearance={ baseAppearance }
+            onClick={ inputOnClear }
+            disabled={ disabled }
+            invalid={ invalid }
+            hasValue={ !!value }
+            focusOnInput={ isFocused }
+          >
+            <ClearIcon />
+          </ClearIconWrapper>
+        )
+      }
       { !!postfix && (
         <Postfix
           appearance={ appearance }
@@ -94,4 +140,4 @@ export const PureInput: React.FC<IInputProps> = ({
       ) }
     </Root>
   );
-};
+});

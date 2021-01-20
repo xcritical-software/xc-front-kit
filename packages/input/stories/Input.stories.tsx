@@ -2,29 +2,25 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
-import * as React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
-import Input, { inputThemeNamespace, inputThemeStyle } from '@xcritical/input';
+import Input from '@xcritical/input';
 
-import { customTheme } from './customThemes';
+import { customTheme1, additionalTheme } from './customThemes';
 import { SearchIcon, ErrorIcon } from './Icons';
 
 
-const theme = {
-  [inputThemeNamespace]: {
-    ...inputThemeStyle,
-  },
-};
+const CustomIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24">
+    <path d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,10.84 21.79,9.69 21.39,8.61L19.79,10.21C19.93,10.8 20,11.4 20,12C20,16.42 16.42,20 12,20C7.58,20 4,16.42 4,12C4,7.58 7.58,4 12,4C12.6,4 13.2,4.07 13.79,4.21L15.4,2.6C14.31,2.21 13.16,2 12,2M19,2L15,6V7.5L12.45,10.05C12.3,10 12.15,10 12,10C10.9,10 10,10.9 10,12C10,13.1 10.9,14 12,14C13.1,14 14,13.1 14,12C14,11.85 14,11.7 13.95,11.55L16.5,9H18L22,5H19V2M12,6C8.69,6 6,8.69 6,12C6,15.31 8.69,18 12,18C15.31,18 18,15.31 18,12H16C16,14.21 14.21,16 12,16C9.79,16 8,14.21 8,12C8,9.79 9.79,8 12,8V6Z" />
+  </svg>
+);
 
-const appearances = [
-  'default',
-  'dark',
-];
 
 const Table = (props: any) => (
   <div style={ { display: 'table', minWidth: '280px', float: props.isRTL ? 'right' : 'left' } } { ...props } />
@@ -43,7 +39,7 @@ const Flex = (props: any) => (
 );
 
 const BasicInput = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = useState('');
 
   const handleChange = (v: string): void => {
     setValue(v);
@@ -51,24 +47,23 @@ const BasicInput = () => {
   };
 
   return (
-    <ThemeProvider theme={ theme }>
-      <Input
-        disabled={ boolean('Disabled', false) }
-        invalid={ boolean('Invalid', false) }
-        id="input-basic"
-        name="input-basic"
-        placeholder="Enter basic value"
-        value={ value }
-        onChange={ handleChange }
-        onFocus={ () => action('onFocused') }
-      />
-    </ThemeProvider>
+    <Input
+      disabled={ boolean('Disabled', false) }
+      invalid={ boolean('Invalid', false) }
+      isClearable={ boolean('isClearable', false) }
+      id="input-basic"
+      name="input-basic"
+      placeholder="Enter basic value"
+      value={ value }
+      onChange={ handleChange }
+      onFocus={ () => action('onFocused') }
+    />
   );
 };
 
 const ValidationInput = () => {
-  const [value, setValue] = React.useState('');
-  const [isValid, setIsValid] = React.useState<null | boolean>(null);
+  const [value, setValue] = useState('');
+  const [isValid, setIsValid] = useState<null | boolean>(null);
 
   const handleChange = (v: string): void => {
     setValue(v);
@@ -91,6 +86,9 @@ const ValidationInput = () => {
   return (
     <div>
       <Input
+        disabled={ boolean('Disabled', false) }
+        isClearable={ boolean('isClearable', false) }
+        isRTL={ boolean('isRTL', false) }
         id="input-validation"
         name="input-validation"
         placeholder="Enter validation value"
@@ -114,70 +112,103 @@ storiesOf('Input', module)
   ))
   .add('With value', () => (
     <Input
+      disabled={ boolean('Disabled', false) }
+      invalid={ boolean('Invalid', false) }
       id="input-with-value"
       name="input-with-value"
       value="Input with value"
       placeholder="Enter value"
     />
   ))
-  .add('With prefix and suffix', () => (
-    <Table>
-      <Row>
-        <Cell>
-          <Input
-            appearance="default"
-            baseAppearance="default"
-            id="input-with-prefix"
-            name="input-with-prefix"
-            value="Input with prefix"
-            placeholder="Enter value with prefix"
-            prefix={ <SearchIcon /> }
-          />
-        </Cell>
-      </Row>
-      <Row>
-        <Cell>
-          <Input
-            appearance="default"
-            baseAppearance="default"
-            id="input-with-suffix"
-            name="input-with-suffix"
-            value="Input with suffix"
-            placeholder="Enter value with suffix"
-            postfix={ <ErrorIcon /> }
-          />
-        </Cell>
-      </Row>
-      <Row>
-        <Cell>
-          <Input
-            appearance="default"
-            baseAppearance="default"
-            id="input-with-prefix-suffix"
-            name="input-with-prefix-suffix"
-            value="Input with prefix/suffix"
-            placeholder="Enter value with prefix/suffix"
-            prefix={ <SearchIcon /> }
-            postfix={ <ErrorIcon /> }
-          />
-        </Cell>
-      </Row>
-      <Row>
-        <Cell>
-          <Input
-            appearance="default"
-            baseAppearance="default"
-            id="input-long-text-with-prefix-suffix"
-            name="input-long-text-with-prefix-suffix"
-            value="Input long text with prefix/suffix"
-            placeholder="Enter long value with prefix/suffix"
-            prefix={ <ErrorIcon /> }
-            postfix={ <ErrorIcon /> }
-          />
-        </Cell>
-      </Row>
-    </Table>
-  ))
+  .add('With prefix and suffix', () => {
+    const [prefixValue, setPrefixValue] = useState('Input with prefix');
+    const [suffixValue, setSuffixValue] = useState('Input with suffix');
+    const [prefixSuffixValue, setPrefixSuffixValue] = useState('Input with prefix/suffix');
+    const [longValue, setLongValue] = useState('Input long text with prefix/suffix');
+
+    return (
+      <Table>
+        <Row>
+          <Cell>Prefix</Cell>
+          <Cell>
+            <Input
+              disabled={ boolean('Disabled', false) }
+              invalid={ boolean('Invalid', false) }
+              isClearable={ boolean('isClearable', false) }
+              isRTL={ boolean('isRTL', false) }
+              appearance="default"
+              baseAppearance="default"
+              id="input-with-prefix"
+              name="input-with-prefix"
+              value={ prefixValue }
+              onChange={ setPrefixValue }
+              placeholder="Enter value with prefix"
+              prefix={ <SearchIcon /> }
+            />
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>Suffix</Cell>
+          <Cell>
+            <Input
+              disabled={ boolean('Disabled', false) }
+              invalid={ boolean('Invalid', false) }
+              isClearable={ boolean('isClearable', false) }
+              isRTL={ boolean('isRTL', false) }
+              appearance="default"
+              baseAppearance="default"
+              id="input-with-suffix"
+              name="input-with-suffix"
+              value={ suffixValue }
+              onChange={ setSuffixValue }
+              placeholder="Enter value with suffix"
+              postfix={ <ErrorIcon /> }
+            />
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>Prefix + Suffix</Cell>
+          <Cell>
+            <Input
+              disabled={ boolean('Disabled', false) }
+              invalid={ boolean('Invalid', false) }
+              isClearable={ boolean('isClearable', false) }
+              isRTL={ boolean('isRTL', false) }
+              appearance="default"
+              baseAppearance="default"
+              id="input-with-prefix-suffix"
+              name="input-with-prefix-suffix"
+              value={ prefixSuffixValue }
+              onChange={ setPrefixSuffixValue }
+              placeholder="Enter value with prefix/suffix"
+              prefix={ <SearchIcon /> }
+              postfix={ <ErrorIcon /> }
+            />
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>Long Value Prefix + Suffix</Cell>
+          <Cell>
+            <Input
+              disabled={ boolean('Disabled', false) }
+              invalid={ boolean('Invalid', false) }
+              isClearable={ boolean('isClearable', false) }
+              isRTL={ boolean('isRTL', false) }
+              appearance="default"
+              baseAppearance="default"
+              id="input-long-text-with-prefix-suffix"
+              name="input-long-text-with-prefix-suffix"
+              value={ longValue }
+              onChange={ setLongValue }
+              placeholder="Enter long value with prefix/suffix"
+              prefix={ <ErrorIcon /> }
+              postfix={ <ErrorIcon /> }
+            />
+          </Cell>
+        </Row>
+      </Table>
+    );
+  })
   .add('RTL', () => (
     <Table isRTL>
       <Row>
@@ -361,6 +392,10 @@ storiesOf('Input', module)
             name="input-in-row"
             value="RTL Input in row"
             placeholder="Enter Input in row value"
+            disabled={ boolean('Disabled', false) }
+            invalid={ boolean('Invalid', false) }
+            isClearable={ boolean('isClearable', false) }
+            isRTL={ boolean('isRTL', false) }
           />
         </Cell>
         <Cell>
@@ -372,6 +407,10 @@ storiesOf('Input', module)
             value="Input in row with prefix"
             placeholder="Enter Input in row value with prefix"
             prefix={ <SearchIcon /> }
+            disabled={ boolean('Disabled', false) }
+            invalid={ boolean('Invalid', false) }
+            isClearable={ boolean('isClearable', false) }
+            isRTL={ boolean('isRTL', false) }
           />
         </Cell>
         <Cell>
@@ -383,6 +422,10 @@ storiesOf('Input', module)
             value="Input in row with suffix"
             placeholder="Enter input in row value with suffix"
             postfix={ <ErrorIcon /> }
+            disabled={ boolean('Disabled', false) }
+            invalid={ boolean('Invalid', false) }
+            isClearable={ boolean('isClearable', false) }
+            isRTL={ boolean('isRTL', false) }
           />
         </Cell>
         <Cell>
@@ -395,6 +438,10 @@ storiesOf('Input', module)
             placeholder="Enter Input in row value with prefix/suffix"
             prefix={ <SearchIcon /> }
             postfix={ <ErrorIcon /> }
+            disabled={ boolean('Disabled', false) }
+            invalid={ boolean('Invalid', false) }
+            isClearable={ boolean('isClearable', false) }
+            isRTL={ boolean('isRTL', false) }
           />
         </Cell>
         <Cell>
@@ -407,6 +454,10 @@ storiesOf('Input', module)
             placeholder="Enter Input in row with divided text prefix value"
             prefix="Prefix"
             isDivided
+            disabled={ boolean('Disabled', false) }
+            invalid={ boolean('Invalid', false) }
+            isClearable={ boolean('isClearable', false) }
+            isRTL={ boolean('isRTL', false) }
           />
         </Cell>
         <Cell>
@@ -419,6 +470,10 @@ storiesOf('Input', module)
             placeholder="Enter Input in row with divided text suffix value"
             postfix="Suffix"
             isDivided
+            disabled={ boolean('Disabled', false) }
+            invalid={ boolean('Invalid', false) }
+            isClearable={ boolean('isClearable', false) }
+            isRTL={ boolean('isRTL', false) }
           />
         </Cell>
       </Flex>
@@ -427,50 +482,181 @@ storiesOf('Input', module)
   .add('With validation (IP address', () => (
     <ValidationInput />
   ))
-  .add('Themed', () => (
-    <ThemeProvider theme={ customTheme }>
-      <Table>
-        {
-          appearances.map((appearance) => (
-            <Row>
-              <Cell>
-                { appearance }
-              </Cell>
+  .add('Themed', () => {
+    const [value, setValue] = useState('Default State Input');
+
+    return (
+      <ThemeProvider theme={ customTheme1 }>
+        <Table>
+          <Row>
+            <Cell>
+              Default theme
+            </Cell>
+            <Cell>
               <Cell>
                 <Input
-                  appearance={ appearance }
+                  disabled={ boolean('Disabled', false) }
+                  invalid={ boolean('Invalid', false) }
+                  isClearable={ boolean('isClearable', false) }
+                  isRTL={ boolean('isRTL', false) }
                   baseAppearance="default"
                   id="input-default-state"
                   name="input-default state"
-                  value="Default State Input"
+                  value={ value }
+                  onChange={ setValue }
                   placeholder="Enter value"
                 />
               </Cell>
+            </Cell>
+          </Row>
+          <Row>
+            <Cell>
+              Custom theme
+            </Cell>
+            <Cell>
               <Cell>
                 <Input
-                  appearance={ appearance }
+                  disabled={ boolean('Disabled', false) }
+                  invalid={ boolean('Invalid', false) }
+                  isClearable={ boolean('isClearable', false) }
+                  isRTL={ boolean('isRTL', false) }
+                  appearance="custom"
                   baseAppearance="default"
-                  id="input-disabled-state"
-                  name="input-disabled state"
-                  value="Disabled State Input"
+                  id="input-custom-theme"
+                  name="input-default state"
+                  value={ value }
+                  onChange={ setValue }
                   placeholder="Enter value"
-                  disabled
                 />
               </Cell>
+            </Cell>
+          </Row>
+          <Row>
+            <Cell>
+              Custom theme + Icon
+            </Cell>
+            <Cell>
               <Cell>
                 <Input
-                  appearance={ appearance }
+                  disabled={ boolean('Disabled', false) }
+                  invalid={ boolean('Invalid', false) }
+                  isClearable
+                  clearIcon={ CustomIcon }
+                  isRTL={ boolean('isRTL', false) }
+                  appearance="custom"
                   baseAppearance="default"
-                  id="input-invalid-state"
-                  name="input-invalid state"
-                  value="Invalid State Input"
+                  id="input-custom-theme-icon"
+                  name="input-default state"
+                  value={ value }
+                  onChange={ setValue }
                   placeholder="Enter value"
-                  invalid
                 />
               </Cell>
-            </Row>
-          ))
-        }
-      </Table>
-    </ThemeProvider>
-  ));
+            </Cell>
+          </Row>
+        </Table>
+      </ThemeProvider>
+    );
+  })
+  .add('With Forwarding ref', () => {
+    const inputRef = React.useRef<HTMLInputElement>();
+
+    const handleFocus = () => {
+      inputRef.current.focus();
+    };
+    const handleBlur = () => {
+      inputRef.current.blur();
+    };
+
+    return (
+      <>
+        <button onClick={ handleFocus }>Focus</button>
+        <button onClick={ handleBlur }>Blur</button>
+        <br />
+        <Input
+          id="input-with-value"
+          name="input-with-value"
+          value="Input with value"
+          placeholder="Enter value"
+          ref={ inputRef }
+        />
+      </>
+    );
+  })
+  .add('Additional Theme', () => {
+    const [value, setValue] = useState('');
+
+    return (
+      <ThemeProvider theme={ additionalTheme }>
+        <Table>
+          <Row>
+            <Cell>
+              Basic
+            </Cell>
+            <Cell>
+              <Input
+                disabled={ boolean('Disabled', false) }
+                invalid={ boolean('Invalid', false) }
+                isRTL={ boolean('isRTL', false) }
+                placeholder="Enter value"
+                value={ value }
+                onChange={ setValue }
+                isClearable
+                appearance="custom"
+              />
+            </Cell>
+          </Row>
+          <Row>
+            <Cell>
+              Filled
+            </Cell>
+            <Cell>
+              <Input
+                disabled={ boolean('Disabled', false) }
+                invalid={ boolean('Invalid', false) }
+                isRTL={ boolean('isRTL', false) }
+                placeholder="Enter value"
+                value="Lorem impsum"
+                isClearable
+                appearance="custom"
+              />
+            </Cell>
+          </Row>
+          <Row>
+            <Cell>
+              Invalid
+            </Cell>
+            <Cell>
+              <Input
+                disabled={ boolean('Disabled', false) }
+                isRTL={ boolean('isRTL', false) }
+                placeholder="Enter value"
+                value={ value }
+                onChange={ setValue }
+                isClearable
+                appearance="custom"
+                invalid
+              />
+            </Cell>
+          </Row>
+          <Row>
+            <Cell>
+              Disabled
+            </Cell>
+            <Cell>
+              <Input
+                disabled
+                invalid={ boolean('Invalid', false) }
+                isRTL={ boolean('isRTL', false) }
+                placeholder="Enter value"
+                value={ value }
+                onChange={ setValue }
+                isClearable
+                appearance="custom"
+              />
+            </Cell>
+          </Row>
+        </Table>
+      </ThemeProvider>
+    );
+  });
