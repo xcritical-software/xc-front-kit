@@ -12,13 +12,15 @@ import { getValueFromNativeComponent } from '../utils';
 import { FormContext } from './FormContext';
 
 
-export const FormField = function<TProps> (
+export const FormField = React.forwardRef(<TProps extends object>(
   {
     component: Component,
     name,
+    onChange: onChangeProp,
     ...props
   }: FormFieldProps<TProps>,
-): React.ReactElement<TProps> {
+  ref,
+): React.ReactElement<TProps> => {
   const dispatch = useDispatch();
   const { formName, namespace } = useContext(FormContext);
   const $state = useSelector((state: IFormStateMap) => formSelector(state, formName, namespace));
@@ -33,9 +35,10 @@ export const FormField = function<TProps> (
   const error = showError ? $error : null;
   const invalid = showError ? !!error : false;
 
-  const onChange = useCallback(($value: any) => {
-    dispatch(xcriticalFormPropertyChange(formName, name, getValueFromNativeComponent($value)));
-  }, [dispatch, formName, name]);
+  const onChange = useCallback((...args: any[]) => {
+    dispatch(xcriticalFormPropertyChange(formName, name, getValueFromNativeComponent(args[0])));
+    onChangeProp?.(...args);
+  }, [dispatch, formName, name, onChangeProp]);
 
   return (
     <Component
@@ -45,6 +48,7 @@ export const FormField = function<TProps> (
       invalid={ invalid }
       onChange={ onChange }
       name={ name }
+      ref={ ref }
     />
   );
-};
+});

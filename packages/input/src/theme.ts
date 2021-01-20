@@ -44,6 +44,11 @@ export const inputThemeStyle: InputTheme = {
     backgroundColor: 'inherit',
     lineHeight,
   },
+  clearWrapper: {
+    cursor: 'pointer',
+    display: 'flex',
+    fill: colors.BLACK,
+  },
   appearance: {
     default: {
       hover: {
@@ -63,6 +68,7 @@ export const inputThemeStyle: InputTheme = {
         borderColor: colors.DANGER,
         color: colors.DANGER,
       },
+      filled: {},
     },
   },
 };
