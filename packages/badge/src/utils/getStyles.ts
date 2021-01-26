@@ -59,19 +59,19 @@ export const getRootBadgeInteractiveStyles = memoize((
   baseAppearance: string,
   ghost: boolean = false,
 ): any => {
-  const standartFocus = css`
+  const standardFocus = css`
     &:focus {
       ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'focus')}
     }
   `;
 
-  const standartActive = css`
+  const standardActive = css`
     &:active {
       ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'active')};
     }
   `;
 
-  const standartHover = css`
+  const standardHover = css`
     &:hover {
       ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'hover')}
     }
@@ -81,16 +81,16 @@ export const getRootBadgeInteractiveStyles = memoize((
     return css`
       ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'ghost')}
 
-      ${standartHover}
-      ${standartFocus};
+      ${standardHover}
+      ${standardFocus};
     `;
   }
 
 
   return css`
-    ${standartActive}
-    ${standartHover}
-    ${standartFocus}
+    ${standardActive}
+    ${standardHover}
+    ${standardFocus}
   `;
 });
 

@@ -44,6 +44,9 @@ export const PureForm: React.FC<IFormProps> & IForm = ({
   );
 };
 
+/*
+ * @deprecated Use FormField instead
+ */
 PureForm.Field = withForm(FormField);
 
 export default PureForm;

@@ -113,7 +113,6 @@ export const getItemInteractiveStyles = ({
   ` : null;
 
   const standardDisable = disabled ? css`
-    cursor: not-allowed;
     ${getItemStatesStyle('disabled')}
   ` : null;
 

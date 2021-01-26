@@ -16,6 +16,7 @@ export const itemThemeStyle: ItemTheme = {
   postfixSpacing: 15,
   borderRadius: 0,
   font: { weight: 'normal' },
+  cursor: 'pointer',
   divided: {
     color: '#F0F0F0',
   },
@@ -37,6 +38,7 @@ export const itemThemeStyle: ItemTheme = {
     color: colors.CHAROCOAL,
   },
   disabled: {
+    cursor: 'not-allowed',
     background: '#F0F0F0',
     color: lighten(0.6, colors.CHAROCOAL),
   },

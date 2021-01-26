@@ -9,15 +9,18 @@ export const FormContext = React.createContext<IFormContext>({
 });
 export const FormProvider = FormContext.Provider;
 
-export const withForm = (Component: React.ComponentType<any>) => (props: any) => (
-  <FormContext.Consumer>
-    { ({ formName, fields, namespace }) => (
-      <Component
-        formName={ formName }
-        fields={ fields }
-        namespace={ namespace }
-        { ...props }
-      />
-    ) }
-  </FormContext.Consumer>
+export const withForm = (Component: React.ComponentType<any>) => React.forwardRef(
+  (props: any, ref) => (
+    <FormContext.Consumer>
+      { ({ formName, fields, namespace }) => (
+        <Component
+          formName={ formName }
+          fields={ fields }
+          namespace={ namespace }
+          ref={ ref }
+          { ...props }
+        />
+      ) }
+    </FormContext.Consumer>
+  ),
 );
