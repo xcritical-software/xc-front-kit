@@ -176,6 +176,8 @@ export const getMappedChildrenWithGridInfo = (
   parent: IItem, level: number = 1,
 ): IGridInfoItems[] | undefined => {
   if (parent?.children.length > 0) {
+    // add check if children same, if yes, change.
+
     return parent.children.map((child) => ({
       expandLevel: level,
       data: child,

@@ -170,11 +170,15 @@ const Grid: React.FC<IGridProps> = ({
         return gridInfoItems[index];
       }
 
+      console.log('!!GridInfoData[index]: ', gridInfoItems[index]?.data);
+      console.log('!!item: ', item);
+      console.log('Equality: ', (item === gridInfoItems[index]?.data));
+
       return {
         expandLevel: 0,
         data: item,
         key: guid(),
-        children: (item.children !== undefined)
+        children: (item.children !== undefined && gridInfoItems[index]?.children !== item.children)
           ? getMappedChildrenWithGridInfo(item)
           : undefined,
       };
