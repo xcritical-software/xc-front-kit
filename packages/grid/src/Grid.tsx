@@ -53,11 +53,12 @@ const Grid: React.FC<IGridProps> = ({
   shouldFitLastColumn = true,
   minColumnWidth = 30,
   gridProps = {},
+  onChangeExpand: onChangeExpandFromProps,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
-    items.map((el: IItem): IMappedItem => ({ ...el, __key: guid(), __expandLevel: 0 })),
+    items.map((el: IItem): IMappedItem => ({ __expandLevel: 0, ...el, __key: guid() })),
   );
 
   const contextTheme = useContext(ThemeContext);
@@ -124,6 +125,11 @@ const Grid: React.FC<IGridProps> = ({
           String(index),
           '__isExpand',
         ]);
+
+        if (onChangeExpandFromProps) {
+          onChangeExpandFromProps(mappedItems[index], false);
+        }
+
         setMappedItems(withNewExpand);
       } else {
         const parentExpandLevel = mappedItems[index].__expandLevel || 0;
@@ -141,10 +147,15 @@ const Grid: React.FC<IGridProps> = ({
           ...mappedItems.slice(index + 1),
         ];
         const withNewExpand = setIn(newMappedItems, true, [String(index), '__isExpand']);
+
+        if (onChangeExpandFromProps !== undefined) {
+          onChangeExpandFromProps(mappedItems[index], true);
+        }
+
         setMappedItems(withNewExpand);
       }
     },
-    [mappedItems],
+    [mappedItems, onChangeExpandFromProps],
   );
 
   const handleSelect = useCallback(
@@ -193,7 +204,7 @@ const Grid: React.FC<IGridProps> = ({
 
 
   useEffect(() => {
-    setMappedItems(items.map((el) => ({ ...el, __key: guid(), __expandLevel: 0 })));
+    setMappedItems(items.map((el) => ({ __expandLevel: 0, ...el, __key: guid() })));
   }, [items]);
 
   const isMultiGrid = useMemo(() => columns
