@@ -14,7 +14,7 @@ import {
   FILTERS_REMOVE_FILTER,
   FILTERS_RESET,
   FILTERS_SEARCH_UPDATE,
-} from './actions/const';
+} from './actions';
 
 
 // Actions
