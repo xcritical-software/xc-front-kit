@@ -133,7 +133,10 @@ export const InlineEditUncontrolled = function <TFieldValue>(
 
         </Button>
       </ButtonWrapper>
-      <ButtonWrapper>
+      <ButtonWrapper
+        appearance={ appearance }
+        baseAppearance={ baseAppearance }
+      >
         <Button
           appearance={ appearance }
           baseAppearance={ baseAppearance }
