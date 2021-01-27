@@ -121,13 +121,14 @@ const Grid: React.FC<IGridProps> = ({
           ...mappedItems.slice(0, index + 1),
           ...mappedItems.slice(index + 1 + childrensLength),
         ];
-        const withNewExpand = setIn(newMappedItems, false, [
+        const isExpanded = false;
+        const withNewExpand = setIn(newMappedItems, isExpanded, [
           String(index),
           '__isExpand',
         ]);
 
         if (onChangeExpandFromProps) {
-          onChangeExpandFromProps(mappedItems[index], false);
+          onChangeExpandFromProps(mappedItems[index], isExpanded);
         }
 
         setMappedItems(withNewExpand);
@@ -146,10 +147,11 @@ const Grid: React.FC<IGridProps> = ({
           ...newChildrens,
           ...mappedItems.slice(index + 1),
         ];
-        const withNewExpand = setIn(newMappedItems, true, [String(index), '__isExpand']);
+        const isExpanded = true;
+        const withNewExpand = setIn(newMappedItems, isExpanded, [String(index), '__isExpand']);
 
         if (onChangeExpandFromProps !== undefined) {
-          onChangeExpandFromProps(mappedItems[index], true);
+          onChangeExpandFromProps(mappedItems[index], isExpanded);
         }
 
         setMappedItems(withNewExpand);
