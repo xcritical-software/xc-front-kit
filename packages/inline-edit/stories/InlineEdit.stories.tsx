@@ -24,6 +24,9 @@ const generateTheme = (
   color: textColor,
   appearance: {
     crm: {
+      readViewContentWrapper: {
+        padding: 0,
+      },
       editButton: {
         focus: {
           border: `2px solid ${lighten(0.6, '#003e6c')}`,
@@ -39,6 +42,12 @@ const generateTheme = (
       },
       hover: {
         backgroundColor: lighten(0.6, '#003e6c'),
+      },
+      confirmIcon: {
+        fill: 'green',
+      },
+      cancelIcon: {
+        fill: 'red',
       },
     },
   },
