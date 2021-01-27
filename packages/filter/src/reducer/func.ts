@@ -117,6 +117,8 @@ export const updateSelectedFilters = (
 
     if (filterDrafts.length) {
       newFilters = [...newFilters, ...filterDrafts];
+
+      return;
     }
 
     newFilters.push({
