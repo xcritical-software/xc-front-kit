@@ -45,8 +45,6 @@ export const InlineEditUncontrolled = function <TFieldValue>(
 
   const [value, setValue] = useState(valueProp);
 
-  console.log('CustomCancelIcon', CustomCancelIcon);
-
   useEffect(() => {
     setValue(valueProp);
   }, [valueProp]);
