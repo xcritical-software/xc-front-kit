@@ -9,6 +9,7 @@ import {
   IPayloadRemoveFilter,
   IPayloadChangeFilter,
   IPayloadInitFilters,
+  IStateFilter,
 } from '../interfaces';
 
 
@@ -108,17 +109,22 @@ export const updateSelectedFilters = (
   { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
 ): IFilterStore => {
   const { drafts } = state;
-  const newFilters = filters.map((filter) => {
-    const draft = drafts.find((draftItem) => draftItem.column === filter.column);
 
-    if (draft) {
-      return draft;
+  let newFilters: IStateFilter[] = [];
+
+  filters.forEach((filter) => {
+    const filterDrafts = drafts.filter((draftItem) => draftItem.column === filter.column);
+
+    if (filterDrafts.length) {
+      newFilters = [...newFilters, ...filterDrafts];
+
+      return;
     }
 
-    return {
+    newFilters.push({
       ...filter,
       key: uuid(),
-    };
+    });
   });
 
   return setIn(state, newFilters, 'drafts');
