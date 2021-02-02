@@ -78,6 +78,7 @@ export interface IFilter {
     onChange: (value: any) => void,
     condition?: string,
     validationError?: string,
+    tagConditionsRef?: ISelectedFilterComponent['tagConditionsRef']
   ) => React.ReactElement;
 }
 
@@ -97,6 +98,7 @@ export interface ISelectedFilterComponent {
   filterData?: IStateFilter;
   validationError?: string;
   onChange: (value: any) => void;
+  tagConditionsRef: MutableRefObject<null>;
 }
 
 export interface IStateRecivedFilter {
