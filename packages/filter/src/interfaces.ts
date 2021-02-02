@@ -98,7 +98,7 @@ export interface ISelectedFilterComponent {
   filterData?: IStateFilter;
   validationError?: string;
   onChange: (value: any) => void;
-  tagConditionsRef: MutableRefObject<null>;
+  tagConditionsRef: MutableRefObject<null | HTMLDivElement>;
 }
 
 export interface IStateRecivedFilter {
@@ -138,7 +138,7 @@ export interface ITagProps extends ITagContainerProps, IMapDispatchFilterTag {
 }
 
 export interface ITagConditionProps {
-  tagConditionsRef: MutableRefObject<null>;
+  tagConditionsRef: MutableRefObject<null | HTMLDivElement>;
   currentFilterState: IStateFilter;
   filterSetting?: IFilter;
   validationError?: string;
