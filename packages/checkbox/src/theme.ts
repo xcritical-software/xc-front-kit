@@ -27,6 +27,7 @@ export const defaultCheckboxTheme: CheckboxTheme = {
     width: '16px',
     height: '16px',
     transition: 'background-color 0.1s ease-in-out',
+    color: 'red',
   },
   labelWrapper: {
     marginLeft: '4px',
