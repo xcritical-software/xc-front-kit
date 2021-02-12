@@ -52,6 +52,7 @@ const Grid: React.FC<IGridProps> = ({
   overscanRowCount = 8,
   shouldFitLastColumn = true,
   minColumnWidth = 30,
+  getRowHeightFunc,
   gridProps = {},
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -340,6 +341,7 @@ const Grid: React.FC<IGridProps> = ({
         minColumnWidth,
         onChangeSort,
         gridProps,
+        getRowHeightFunc,
       },
     };
 
@@ -404,6 +406,7 @@ const Grid: React.FC<IGridProps> = ({
     shouldFitLastColumn,
     minColumnWidth,
     gridProps,
+    getRowHeightFunc,
   };
 
   if (shouldFitContainer) {

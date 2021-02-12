@@ -10,7 +10,7 @@ import { setIn } from 'utilitify';
 import { colors } from '@xcritical/theme';
 
 import Grid from '../src';
-import { IColumn } from '../src/interfaces';
+import { IColumn, IItem } from '../src/interfaces';
 
 import { gridThemeNamespace } from '../src/theme';
 import Sidebar from '../../sidebar/src';
@@ -29,6 +29,7 @@ import {
   rowsFixed,
   totalsFixed,
   CustomReactHeaderName,
+  fixedHeightRows,
 } from './data';
 import {
   Page,
@@ -483,4 +484,18 @@ storiesOf('Grid', module)
       height={ document.documentElement.clientHeight - 100 }
       minColumnWidth={ 60 }
     />
-  ));
+  ))
+  .add('Custom every row height', () => {
+    const getRowHeightFunc = (item: IItem) => (item.expandLevel ? 120 : 40);
+
+    return (
+      <Grid
+        columns={ columns }
+        items={ fixedHeightRows }
+        totals={ totals }
+        width={ document.documentElement.clientWidth - 100 }
+        height={ document.documentElement.clientHeight - 100 }
+        getRowHeightFunc={ getRowHeightFunc }
+      />
+    );
+  });

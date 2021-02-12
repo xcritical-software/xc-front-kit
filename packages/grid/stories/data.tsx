@@ -593,3 +593,171 @@ export const CustomReactHeaderName = ({ text }) => (
     { text }
   </CustomReactHeaderNameStyled>
 );
+
+const BigCell = ({ children }) => (
+  <div
+    style={ {
+      height: '120px',
+    } }
+  >
+    <p>
+      { ' ' }
+      row 1
+      { children }
+    </p>
+    <p>
+      { ' ' }
+      row 2
+      { children }
+    </p>
+    <p>
+      { ' ' }
+      row 3
+      { children }
+    </p>
+  </div>
+);
+
+export const fixedHeightRows = [
+  {
+    price: 100,
+    make: 'make 1',
+    model: 'model 1',
+    col1: 'col1 1',
+    col2: 'col2 1',
+    col3: 'col3 1',
+    col4: 'col4 1',
+    col5: 'col5 1',
+    col6: 'col6 1',
+    col7: 'col7 1',
+    col8: 'col8 1',
+    col10: 'col10 1',
+    row: 1,
+    children: [
+      {
+        price: 101,
+        make: 'make 1.1',
+        model: <BigCell>model 1.1</BigCell>,
+        col1: 'col1 1.1',
+        col2: 'col2 1.1',
+        col3: 'col3 1.1',
+        col4: 'col4 1.1',
+        col5: 'col5 1.1',
+        col6: 'col6 1.1',
+        col7: 'col7 1.1',
+        col8: 'col8 1.1',
+        col10: 'col10 1.1',
+        row: 1.1,
+      },
+      {
+        price: 102,
+        make: 'make 1.2',
+        model: <BigCell>model 1.2</BigCell>,
+        col1: 'col1 1.2',
+        col2: 'col2 1.2',
+        col3: 'col3 1.2',
+        col4: 'col4 1.2',
+        col5: 'col5 1.2',
+        col6: 'col6 1.2',
+        col7: 'col7 1.2',
+        col8: 'col8 1.2',
+        col10: 'col10 1.2',
+        row: 1.2,
+      },
+    ],
+  },
+  {
+    price: 200,
+    make: 'make 2',
+    model: 'model 2',
+    col1: 'col1 2',
+    col2: 'col2 2',
+    col3: 'col3 2',
+    col4: 'col4 2',
+    col5: 'col5 2',
+    col6: 'col6 2',
+    col7: 'col7 2',
+    col8: 'col8 2',
+    col10: 'col10 2',
+    row: 1,
+    children: [
+      {
+        price: 201,
+        make: 'make 2.1',
+        model: <BigCell>model 2.1</BigCell>,
+        col1: 'col1 2.1',
+        col2: 'col2 2.1',
+        col3: 'col3 2.1',
+        col4: 'col4 2.1',
+        col5: 'col5 2.1',
+        col6: 'col6 2.1',
+        col7: 'col7 2.1',
+        col8: 'col8 2.1',
+        col10: 'col10 2.1',
+        row: 2.1,
+      },
+      {
+        price: 102,
+        make: 'make 2.2',
+        model: <BigCell>model 2.2</BigCell>,
+        col1: 'col1 2.2',
+        col2: 'col2 2.2',
+        col3: 'col3 2.2',
+        col4: 'col4 2.2',
+        col5: 'col5 2.2',
+        col6: 'col6 2.2',
+        col7: 'col7 2.2',
+        col8: 'col8 2.2',
+        col10: 'col10 2.2',
+        row: 2.2,
+      },
+    ],
+  },
+  {
+    price: 300,
+    make: 'make 3',
+    model: 'model 3',
+    col1: 'col1 3',
+    col2: 'col2 3',
+    col3: 'col3 3',
+    col4: 'col4 3',
+    col5: 'col5 3',
+    col6: 'col6 3',
+    col7: 'col7 3',
+    col8: 'col8 3',
+    col10: 'col10 3',
+    row: 1,
+    children: [
+      {
+        price: 301,
+        make: 'make 3.1',
+        model: <BigCell>model 3.1</BigCell>,
+        col1: 'col1 3.1',
+        col2: 'col2 3.1',
+        col3: 'col3 3.1',
+        col4: 'col4 3.1',
+        col5: 'col5 3.1',
+        col6: 'col6 3.1',
+        col7: 'col7 3.1',
+        col8: 'col8 3.1',
+        col10: 'col10 3.1',
+        row: 1.1,
+      },
+      {
+        price: 302,
+        make: 'make 3.2',
+        model: <BigCell>model 3.1</BigCell>,
+        col1: 'col1 3.2',
+        col2: 'col2 3.2',
+        col3: 'col3 3.2',
+        col4: 'col4 3.2',
+        col5: 'col5 3.2',
+        col6: 'col6 3.2',
+        col7: 'col7 3.2',
+        col8: 'col8 3.2',
+        col10: 'col10 3.2',
+        row: 3.2,
+      },
+    ],
+  },
+];
