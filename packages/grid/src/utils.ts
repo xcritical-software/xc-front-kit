@@ -5,7 +5,7 @@ import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
 import { gridThemeNamespace, defaultTheme } from './theme';
 import {
-  IGridTheme, IMappedItem, IColumn, IItem,
+  IGridTheme, IMappedItem, IColumn, IItem, IGridInfoItems,
 } from './interfaces';
 import { GridPositions } from './consts';
 
@@ -146,6 +146,71 @@ export const changeGridSort = ({
       ...centerColumns,
       ...newRightColumns,
     ];
+  }
+
+  return [];
+};
+
+export const mapGridInfoItems = (gridInfoItems: IGridInfoItems[]): IMappedItem[] => {
+  const result: IMappedItem[] = [];
+  gridInfoItems.forEach(({
+    key, data, expandLevel, isExpand, children = undefined, parent = undefined,
+  }) => {
+    result.push({
+      ...data,
+      __expandLevel: expandLevel,
+      __key: key,
+      __isExpand: isExpand,
+      __parent: parent,
+    });
+
+    if (children !== undefined && isExpand === true) {
+      result.push(...mapGridInfoItems(children));
+    }
+  });
+
+  return result;
+};
+
+export const getMappedChildrenWithGridInfo = (
+  parent: IItem, level: number = 1,
+): IGridInfoItems[] | undefined => {
+  if (parent?.children.length > 0) {
+    // add check if children same, if yes, change.
+
+    return parent.children.map((child) => ({
+      expandLevel: level,
+      data: child,
+      key: guid(),
+      parent,
+      children: (child.children !== undefined)
+        ? getMappedChildrenWithGridInfo(child, level + 1)
+        : undefined,
+    }));
+  }
+
+  return undefined;
+};
+
+export const getPathToGridInfoItemByKey = (
+  technicalItems: IGridInfoItems[] | undefined,
+  __key: string,
+): string[] => {
+  if (typeof technicalItems !== 'undefined') {
+    for (let index = 0; index < technicalItems.length; index++) {
+      if (technicalItems[index].key === __key) {
+        return [String(index)];
+      }
+
+      const path = getPathToGridInfoItemByKey(technicalItems[index].children, __key);
+
+      if (path.length > 0) {
+        path.unshift('children');
+        path.unshift(String(index));
+
+        return path;
+      }
+    }
   }
 
   return [];

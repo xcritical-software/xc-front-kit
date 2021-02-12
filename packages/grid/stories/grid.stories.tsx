@@ -10,7 +10,7 @@ import { setIn } from 'utilitify';
 import { colors } from '@xcritical/theme';
 
 import Grid from '../src';
-import { IColumn } from '../src/interfaces';
+import { IColumn, IItem } from '../src/interfaces';
 
 import { gridThemeNamespace } from '../src/theme';
 import Sidebar from '../../sidebar/src';
@@ -29,6 +29,7 @@ import {
   rowsFixed,
   totalsFixed,
   CustomReactHeaderName,
+  addNewRow,
 } from './data';
 import {
   Page,
@@ -166,6 +167,27 @@ storiesOf('Grid', module)
       height={ document.documentElement.clientHeight - 100 }
     />
   ))
+  .add('With childrens and with saved expanded level', () => {
+    const [gridItems, setGridItems] = useState<IItem[]>(rowsWithChildren);
+    const handleAddNewRow = (): void => {
+      setGridItems(addNewRow(gridItems));
+    };
+
+    return (
+      <>
+        <Grid
+          columns={ columns }
+          items={ gridItems }
+          totals={ totals }
+          width={ document.documentElement.clientWidth - 100 }
+          height={ document.documentElement.clientHeight - 100 }
+        />
+        <button type="button" onClick={ handleAddNewRow } style={ { margin: '15px 10px' } }>
+          Add new row
+        </button>
+      </>
+    );
+  })
   .add('Handler change and select columns (see consol)', () => {
     const [isMultiSelect, changeIsMultySelect] = useState(false);
 

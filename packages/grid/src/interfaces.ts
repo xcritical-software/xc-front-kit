@@ -114,7 +114,7 @@ export interface IMultiGrid {
 
 interface IAllGridsProps {
   totals?: IItem;
-  onChangeExpand: (rowIndex: number, chidrens: IItem[], parent: IItem) => void;
+  onChangeExpand: (rowIndex: number, key: string) => void;
   handleSelect: Function;
   selectedRows: string[];
   mappedItems: IMappedItem[];
@@ -142,7 +142,7 @@ export interface IInternalGrid {
   onChangeColumns?: Function;
   totals?: ITotals;
   handleSelect: Function;
-  onChangeExpand: (rowIndex: number, chidrens: IMappedItem[], parent: IMappedItem) => void;
+  onChangeExpand: (rowIndex: number, key: string) => void;
   mappedItems: IMappedItem[];
   selectedRows: string[];
   themeRef: RefObject<IGridTheme>;
@@ -283,4 +283,13 @@ export interface IGridTheme {
   movingHeaderCellColor?: string;
   expandButtonMargin?: string;
   sortIconSize?: number | string;
+}
+
+export interface IGridInfoItems {
+  expandLevel: number;
+  data: IItem;
+  key: string;
+  children?: IGridInfoItems[];
+  isExpand?: boolean;
+  parent?: IMappedItem;
 }

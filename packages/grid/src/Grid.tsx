@@ -12,7 +12,7 @@ import { ScrollSync } from 'react-virtualized';
 
 import InternalGrid from './InternalGrid';
 import {
-  IMappedItem, IItem, IGridProps, IColumn,
+  IMappedItem, IGridProps, IColumn, IGridInfoItems,
 } from './interfaces';
 import {
   guid,
@@ -23,6 +23,9 @@ import {
   changeGridSort,
   deleteSystemPropsFromObjects,
   deleteSystemPropsFromObject,
+  mapGridInfoItems,
+  getMappedChildrenWithGridInfo,
+  getPathToGridInfoItemByKey,
 } from './utils';
 import { MultiGrid } from './MultiGrid';
 import { GridPositions, GridSort } from './consts';
@@ -56,9 +59,8 @@ const Grid: React.FC<IGridProps> = ({
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
-  const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
-    items.map((el: IItem): IMappedItem => ({ ...el, __key: guid(), __expandLevel: 0 })),
-  );
+  const [gridInfoItems, setGridInfoItems] = useState<IGridInfoItems[]>([]);
+  const mappedItems: IMappedItem[] = mapGridInfoItems(gridInfoItems);
 
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme ?? contextTheme));
@@ -109,42 +111,13 @@ const Grid: React.FC<IGridProps> = ({
   );
 
   const onChangeExpand = useCallback(
-    (index: number, childrens: IItem[], parent: IMappedItem) => {
-      if (mappedItems[index].__isExpand) {
-        let childrensLength = 0;
-        for (let i = index + 1; i < mappedItems.length; i++) {
-          if (mappedItems[i].__expandLevel) childrensLength += 1;
-          else break;
-        }
-        const newMappedItems = [
-          ...mappedItems.slice(0, index + 1),
-          ...mappedItems.slice(index + 1 + childrensLength),
-        ];
-        const withNewExpand = setIn(newMappedItems, false, [
-          String(index),
-          '__isExpand',
-        ]);
-        setMappedItems(withNewExpand);
-      } else {
-        const parentExpandLevel = mappedItems[index].__expandLevel || 0;
-        const newChildrens = childrens.map(
-          (el: IItem): IMappedItem => ({
-            ...el,
-            __expandLevel: parentExpandLevel + 1,
-            __parent: parent,
-            __key: guid(),
-          }),
-        );
-        const newMappedItems = [
-          ...mappedItems.slice(0, index + 1),
-          ...newChildrens,
-          ...mappedItems.slice(index + 1),
-        ];
-        const withNewExpand = setIn(newMappedItems, true, [String(index), '__isExpand']);
-        setMappedItems(withNewExpand);
-      }
-    },
-    [mappedItems],
+    (index: number, key: string) => {
+      const isExpanded = Boolean(mappedItems[index].__isExpand);
+      const path: string[] = getPathToGridInfoItemByKey(gridInfoItems, key);
+      const newGridInfoItems = setIn(gridInfoItems, !isExpanded, [...path, 'isExpand']);
+
+      setGridInfoItems(newGridInfoItems);
+    }, [gridInfoItems, mappedItems],
   );
 
   const handleSelect = useCallback(
@@ -191,14 +164,31 @@ const Grid: React.FC<IGridProps> = ({
     [isDisableSelect, isMultiSelect, selectedRows, onSelect, mappedItems],
   );
 
-
   useEffect(() => {
-    setMappedItems(items.map((el) => ({ ...el, __key: guid(), __expandLevel: 0 })));
+    const mappedItemsWithGrifInfoItems: IGridInfoItems[] = items.map((item, index) => {
+      if (gridInfoItems[index]?.data === item) {
+        return gridInfoItems[index];
+      }
+
+      console.log('!!GridInfoData[index]: ', gridInfoItems[index]?.data);
+      console.log('!!item: ', item);
+      console.log('Equality: ', (item === gridInfoItems[index]?.data));
+
+      return {
+        expandLevel: 0,
+        data: item,
+        key: guid(),
+        children: (item.children !== undefined && gridInfoItems[index]?.children !== item.children)
+          ? getMappedChildrenWithGridInfo(item)
+          : undefined,
+      };
+    });
+
+    setGridInfoItems(mappedItemsWithGrifInfoItems);
   }, [items]);
 
   const isMultiGrid = useMemo(() => columns
     .some(({ fixedPosition }: IColumn) => Boolean(fixedPosition)), [columns]);
-
 
   const mappedColumns = useMemo(() => [...columns], [columns]);
 
