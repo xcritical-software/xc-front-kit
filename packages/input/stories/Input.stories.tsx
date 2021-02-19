@@ -120,6 +120,33 @@ storiesOf('Input', module)
       placeholder="Enter value"
     />
   ))
+  .add('Number type', () => (
+    <Table>
+      <Row>
+        <Cell>Standard number type</Cell>
+        <Cell>
+          <Input
+            id="standard-number-type"
+            name="standard-number-type"
+            placeholder="Enter value or use spin"
+            type="number"
+          />
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>Number type without spin</Cell>
+        <Cell>
+          <Input
+            id="number-type"
+            name="number-type"
+            placeholder="Enter value"
+            type="number"
+            isArrowsHidden
+          />
+        </Cell>
+      </Row>
+    </Table>
+  ))
   .add('With prefix and suffix', () => {
     const [prefixValue, setPrefixValue] = useState('Input with prefix');
     const [suffixValue, setSuffixValue] = useState('Input with suffix');
