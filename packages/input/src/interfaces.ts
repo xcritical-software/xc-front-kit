@@ -38,10 +38,10 @@ export interface IInputProps
   IBaseItemProps {
   css?: any;
   shouldFitContainer?: boolean;
-  isArrowsHidden?: boolean;
+  showArrows?: boolean;
 }
 export interface IStyledInput extends HtmlAttributes, ISubComponentProps {
-  isArrowsHidden: boolean;
+  showArrows: boolean;
   type?: string;
 }
 

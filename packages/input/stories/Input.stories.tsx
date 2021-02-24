@@ -130,6 +130,7 @@ storiesOf('Input', module)
             name="standard-number-type"
             placeholder="Enter value or use spin"
             type="number"
+            showArrows
           />
         </Cell>
       </Row>
@@ -141,7 +142,6 @@ storiesOf('Input', module)
             name="number-type"
             placeholder="Enter value"
             type="number"
-            isArrowsHidden
           />
         </Cell>
       </Row>

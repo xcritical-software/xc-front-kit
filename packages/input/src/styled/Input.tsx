@@ -60,7 +60,7 @@ export const StyledInput = styled.input<IStyledInput>`
   margin: 0;
   ${({ theme, appearance, baseAppearance }) => getComponentStyle(theme, appearance, baseAppearance, 'input')}
   ${getInputInteractiveStyles}
-  ${({ type, isArrowsHidden }) => ((type === 'number' && isArrowsHidden)
+  ${({ type, showArrows }) => ((type === 'number' && !showArrows)
     ? css`
               ::-webkit-outer-spin-button,
               ::-webkit-inner-spin-button {
