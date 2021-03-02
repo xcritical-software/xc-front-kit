@@ -6,6 +6,8 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled, { ThemeProvider } from 'styled-components';
 import { lighten } from 'polished';
+import BookIcon from 'mdi-react/BookIcon';
+import CreditCardIcon from 'mdi-react/CreditCardIcon';
 
 import Input from '@xcritical/input';
 import Select from '@xcritical/select';
@@ -24,6 +26,9 @@ const generateTheme = (
   color: textColor,
   appearance: {
     crm: {
+      readViewContentWrapper: {
+        padding: 0,
+      },
       editButton: {
         focus: {
           border: `2px solid ${lighten(0.6, '#003e6c')}`,
@@ -39,6 +44,12 @@ const generateTheme = (
       },
       hover: {
         backgroundColor: lighten(0.6, '#003e6c'),
+      },
+      confirmIcon: {
+        fill: 'green',
+      },
+      cancelIcon: {
+        fill: 'red',
       },
     },
   },
@@ -64,6 +75,8 @@ const ErrorMessage = styled.p`
 
 const BasicInlineEditInput: React.FC<AllType> = ({
   appearance = 'default',
+  cancelIcon,
+  confirmIcon,
   ...rest
 }) => {
   const [value, setValue] = React.useState('');
@@ -95,6 +108,8 @@ const BasicInlineEditInput: React.FC<AllType> = ({
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
+        cancelIcon={ cancelIcon }
+        confirmIcon={ confirmIcon }
       />
     </ThemeProvider>
   );
@@ -286,6 +301,15 @@ storiesOf('InlineEdit', module)
     <div style={ { width: '200px' } }>
       <BasicInlineEditSelect
         options={ options }
+        appearance="crm"
+      />
+    </div>
+  ))
+  .add('CustomButtonIcon', () => (
+    <div style={ { width: '200px' } }>
+      <BasicInlineEditInput
+        cancelIcon={ () => <BookIcon color="red" /> }
+        confirmIcon={ CreditCardIcon }
         appearance="crm"
       />
     </div>

@@ -91,6 +91,7 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
               <TagLabel>Value</TagLabel>
               <div>
                 <FilterValueElement
+                  tagConditionsRef={ tagConditionsRef }
                   onChange={ onChangeValue }
                   currentFilter={ filterSetting }
                   filterData={ currentFilterState }
