@@ -58,6 +58,16 @@ export const defaultInlineEditTheme: InlineEditTheme = {
         display: 'inline-flex',
         borderRadius: '3px',
       },
+      confirmIcon: {
+        fill: 'black',
+        width: '18px',
+        height: '18px',
+      },
+      cancelIcon: {
+        fill: 'black',
+        width: '18px',
+        height: '18px',
+      },
       contentWrapper: {
         maxWidth: '100%',
         position: 'relative',
