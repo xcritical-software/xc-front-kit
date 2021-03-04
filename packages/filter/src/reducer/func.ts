@@ -7,7 +7,7 @@ import {
   IFilterStore,
   IStateRecivedFilter,
   IPayloadRemoveFilter,
-  IPayloadChangeFilter,
+  PayloadChangeFilterType,
   IPayloadInitFilters,
   IStateFilter,
 } from '../interfaces';
@@ -52,7 +52,7 @@ export const removeFilter = (
 
 export const changeFilter = (
   state: IFilterStore,
-  { payload }: IFilterAction<IPayloadChangeFilter>,
+  { payload }: IFilterAction<PayloadChangeFilterType>,
 ): IFilterStore => {
   const { guid: id, field, value } = payload;
 
@@ -67,8 +67,14 @@ export const changeFilter = (
     }, ['drafts', `${index}`]);
   }
 
-  if (field === 'condition') {
-    const $state = setIn(state, value, ['drafts', `${index}`, 'condition']);
+  if (payload.field === 'condition') {
+    const { valueType, hasFieldForValue } = payload;
+
+    let $state = setIn(state, value, ['drafts', `${index}`, 'condition']);
+
+    if (valueType?.toLowerCase() === 'string' && hasFieldForValue) {
+      return $state;
+    }
 
     return setIn($state, null, ['drafts', `${index}`, 'value']);
   }
