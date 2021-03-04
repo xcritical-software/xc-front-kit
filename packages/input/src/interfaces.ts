@@ -38,9 +38,11 @@ export interface IInputProps
   IBaseItemProps {
   css?: any;
   shouldFitContainer?: boolean;
+  showArrows?: boolean;
 }
 export interface IStyledInput extends HtmlAttributes, ISubComponentProps {
-
+  showArrows: boolean;
+  type?: string;
 }
 
 export interface ISubComponentProps extends IIsRTL {

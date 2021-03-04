@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { storiesOf } from '@storybook/react';
 import { darken, lighten } from 'polished';
 import { Provider } from 'react-redux';
@@ -10,7 +10,7 @@ import { setIn } from 'utilitify';
 import { colors } from '@xcritical/theme';
 
 import Grid from '../src';
-import { IColumn } from '../src/interfaces';
+import { IColumn, IItem } from '../src/interfaces';
 
 import { gridThemeNamespace } from '../src/theme';
 import Sidebar from '../../sidebar/src';
@@ -29,6 +29,7 @@ import {
   rowsFixed,
   totalsFixed,
   CustomReactHeaderName,
+  rowsWithChild,
 } from './data';
 import {
   Page,
@@ -483,4 +484,55 @@ storiesOf('Grid', module)
       height={ document.documentElement.clientHeight - 100 }
       minColumnWidth={ 60 }
     />
-  ));
+  ))
+  .add('Control Expanded Items Outside Grid', () => {
+    const [mappedItems, setMappedItems] = useState<IItem[]>([]);
+    const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>({
+      'Vyacheslav Borisovich': false,
+      'Andrey Prokopievich': true,
+    });
+
+    const handleChangeExpand = useCallback((row: IItem, isExpand: boolean) => {
+      setExpandedRows({ ...expandedRows, [row.model]: isExpand });
+    }, [setExpandedRows, expandedRows]);
+
+    useEffect(() => {
+      const mappedGridItems = rowsWithChild.map((row) => {
+        if (expandedRows[row.model]) {
+          const mas: IItem[] = row.children.map((child: IItem) => ({
+            ...child,
+            __expandLevel: 1,
+          }));
+
+          mas.unshift({
+            ...row,
+            __expandLevel: 0,
+            __isExpand: true,
+            children: row.children.map((child: IItem) => ({
+              ...child,
+              __expandLevel: 1,
+            })),
+          });
+
+          return mas;
+        }
+
+        return row;
+      });
+
+      const flatMappedGridItems = [].concat(...mappedGridItems);
+
+      setMappedItems(flatMappedGridItems);
+      console.log(expandedRows);
+    }, [expandedRows]);
+
+    return (
+      <Grid
+        columns={ columns }
+        items={ mappedItems }
+        width={ document.documentElement.clientWidth - 100 }
+        height={ document.documentElement.clientHeight - 100 }
+        onChangeExpand={ handleChangeExpand }
+      />
+    );
+  });
