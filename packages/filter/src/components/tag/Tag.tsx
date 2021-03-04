@@ -15,7 +15,7 @@ import {
   ITagProps,
   IFilter,
   IStateFilter,
-  IPayloadChangeFilter,
+  PayloadChangeFilterType,
 } from '../../interfaces';
 
 import { Dropdown } from '../Dropdown';
@@ -65,6 +65,7 @@ export const Tag: React.FC<ITagProps> = ({
         field: 'condition',
         value: Object.keys(filterSetting.conditions)[0],
         guid: conditions[0].key,
+        valueType: filterSetting.type,
       });
     }
   }, [conditions, filterSetting.conditions, onChangeFilter]);
@@ -102,7 +103,7 @@ export const Tag: React.FC<ITagProps> = ({
     }
   }, [conditions, validateConditions]);
 
-  const onChangeTagCondition = useCallback((changes: IPayloadChangeFilter) => {
+  const onChangeTagCondition = useCallback((changes: PayloadChangeFilterType) => {
     if (filterSetting.validate) {
       const newValidationErrors = { ...validationErrors };
       // eslint-disable-next-line @typescript-eslint/no-dynamic-delete

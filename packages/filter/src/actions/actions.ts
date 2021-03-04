@@ -1,6 +1,6 @@
 import {
   IStateRecivedFilter,
-  IPayloadChangeFilter,
+  PayloadChangeFilterType,
   IFilterAction,
   FilterActionType,
   IPayloadRemoveFilter,
@@ -23,8 +23,8 @@ function actionCreator(type: FilterActionType, name: string, payload?: any): IFi
 
 export function xcriticalFiltersChangeFilter(
   name: string,
-  changes: IPayloadChangeFilter,
-): IFilterAction<IPayloadChangeFilter> {
+  changes: PayloadChangeFilterType,
+): IFilterAction<PayloadChangeFilterType> {
   return actionCreator(
     actions.FILTERS_CHANGE_FILTER,
     name,
