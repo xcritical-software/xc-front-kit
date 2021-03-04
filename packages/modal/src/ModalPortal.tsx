@@ -27,6 +27,9 @@ export const ModalPortal: React.FC<IModalProps> = ({
   width,
   maxWidth,
   minWidth,
+  height,
+  maxHeight,
+  minHeight,
 }) => {
   if (!isOpen) {
     return null;
@@ -45,6 +48,9 @@ export const ModalPortal: React.FC<IModalProps> = ({
         width={ width }
         maxWidth={ maxWidth }
         minWidth={ minWidth }
+        height={ height }
+        maxHeight={ maxHeight }
+        minHeight={ minHeight }
       >
         <ModalHeaderWrapper>
           <ModalHeader>

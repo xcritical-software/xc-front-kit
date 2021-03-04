@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Provider, connect } from 'react-redux';
 import { storiesOf } from '@storybook/react';
@@ -30,6 +30,9 @@ const theme = {
     },
     content: {
       maxWidth: '500px',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
     },
     headerWrapper: {
       padding: '20px',
@@ -202,4 +205,57 @@ storiesOf('ConnectedModal', module)
     <ThemeProvider theme={ emptyTheme }>
       <Modals component={ ModalPortal } />
     </ThemeProvider>
-  ));
+  ))
+  .add('Full Screen', () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [isFullScreen, setIsFullScreen] = useState(true);
+
+    const handleOpen = useCallback(() => {
+      setIsOpen(true);
+    }, []);
+    const handleClose = useCallback(() => {
+      setIsOpen(false);
+    }, []);
+
+    const handleChangeFullScreen = useCallback(() => {
+      setIsFullScreen(!isFullScreen);
+    }, [isFullScreen]);
+
+
+    const modalSizes = useMemo(() => {
+      if (isFullScreen) {
+        return {
+          width: '100%',
+          height: '100%',
+          maxWidth: '100%',
+
+        };
+      }
+
+      return { };
+    }, [isFullScreen]);
+
+    return (
+      <ThemeProvider theme={ theme }>
+        <button type="button" onClick={ handleOpen }>Open modal</button>
+        <br />
+        <label htmlFor="change-fullscreen">
+          <input id="change-fullscreen" type="checkbox" onChange={ handleChangeFullScreen } checked={ isFullScreen } />
+          Is Full Screen
+        </label>
+        <ModalPortal
+          name="full-screen"
+          title="Full Screen"
+          isOpen={ isOpen }
+          onModalCancel={ handleClose }
+          { ...modalSizes }
+        >
+          <div>
+            <h1>
+              This is Full Screen Modal
+            </h1>
+          </div>
+        </ModalPortal>
+      </ThemeProvider>
+    );
+  });
