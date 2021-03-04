@@ -50,6 +50,9 @@ export interface IModalOwnProps {
   minWidth?: string;
   maxWidth?: string;
   width?: string;
+  height?: string;
+  maxHeight?: string;
+  minHeight?: string;
 }
 
 export interface IModalStoreProps {

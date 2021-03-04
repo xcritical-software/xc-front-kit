@@ -10,6 +10,9 @@ interface IModalContent {
   minWidth?: string;
   maxWidth?: string;
   width?: string;
+  height?: string;
+  maxHeight?: string;
+  minHeight?: string;
 }
 
 export const ModalContent = styled.div<IModalContent>`
@@ -18,6 +21,10 @@ export const ModalContent = styled.div<IModalContent>`
   max-width: ${({ theme, maxWidth }) => (maxWidth ?? getModalStyles(theme, ['maxWidth']))};
   min-width: ${({ theme, minWidth }) => (minWidth ?? getModalStyles(theme, ['minWidth']))};
   width: ${({ theme, width }) => (width ?? getModalStyles(theme, ['width']))};
+  
+  max-height: ${({ theme, maxHeight }) => (maxHeight ?? getModalStyles(theme, ['maxHeight']))};
+  min-height: ${({ theme, minHeight }) => (minHeight ?? getModalStyles(theme, ['minHeight']))};
+  height: ${({ theme, height }) => (height ?? getModalStyles(theme, ['height']))};
 `;
 
 export const ModalHeaderWrapper = styled.div`
