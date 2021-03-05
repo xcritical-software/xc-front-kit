@@ -4,7 +4,11 @@ import { getModalStyles } from './utils';
 import { IModalTheme } from './interfaces';
 
 
-interface IModalContent {
+interface IThemeProps {
+  appearance: string;
+}
+
+interface IModalContent extends IThemeProps{
   theme: IModalTheme;
   zIndex?: number | undefined;
   minWidth?: string;
@@ -16,29 +20,29 @@ interface IModalContent {
 }
 
 export const ModalContent = styled.div<IModalContent>`
-  ${({ theme }) => getModalStyles(theme, ['content'])};
-  z-index: ${({ theme, zIndex }) => (zIndex ?? getModalStyles(theme, ['zIndex']))};
-  max-width: ${({ theme, maxWidth }) => (maxWidth ?? getModalStyles(theme, ['maxWidth']))};
-  min-width: ${({ theme, minWidth }) => (minWidth ?? getModalStyles(theme, ['minWidth']))};
-  width: ${({ theme, width }) => (width ?? getModalStyles(theme, ['width']))};
+  ${({ theme, appearance }) => getModalStyles(theme, appearance, ['content'])};
+  z-index: ${({ theme, appearance, zIndex }) => (zIndex ?? getModalStyles(theme, appearance, ['content', 'zIndex']))};
+  max-width: ${({ theme, appearance, maxWidth }) => (maxWidth ?? getModalStyles(theme, appearance, ['content', 'maxWidth']))};
+  min-width: ${({ theme, appearance, minWidth }) => (minWidth ?? getModalStyles(theme, appearance, ['content', 'minWidth']))};
+  width: ${({ theme, appearance, width }) => (width ?? getModalStyles(theme, appearance, ['content', 'width']))};
   
-  max-height: ${({ theme, maxHeight }) => (maxHeight ?? getModalStyles(theme, ['maxHeight']))};
-  min-height: ${({ theme, minHeight }) => (minHeight ?? getModalStyles(theme, ['minHeight']))};
-  height: ${({ theme, height }) => (height ?? getModalStyles(theme, ['height']))};
+  max-height: ${({ theme, appearance, maxHeight }) => (maxHeight ?? getModalStyles(theme, appearance, ['content', 'maxHeight']))};
+  min-height: ${({ theme, appearance, minHeight }) => (minHeight ?? getModalStyles(theme, appearance, ['content', 'minHeight']))};
+  height: ${({ theme, appearance, height }) => (height ?? getModalStyles(theme, appearance, ['content', 'height']))};
 `;
 
-export const ModalHeaderWrapper = styled.div`
-  ${({ theme }) => getModalStyles(theme, ['headerWrapper'])};
+export const ModalHeaderWrapper = styled.div<IThemeProps>`
+  ${({ theme, appearance }) => getModalStyles(theme, appearance, ['headerWrapper'])};
 `;
 
-export const ModalIconClose = styled.div`
-  ${({ theme }) => getModalStyles(theme, ['iconClose'])};
+export const ModalIconClose = styled.div<IThemeProps>`
+  ${({ theme, appearance }) => getModalStyles(theme, appearance, ['iconClose'])};
 `;
 
-export const ModalHeader = styled.div`
-  ${({ theme }) => getModalStyles(theme, ['header'])};
+export const ModalHeader = styled.div<IThemeProps>`
+  ${({ theme, appearance }) => getModalStyles(theme, appearance, ['header'])};
 `;
 
-export const ModalBody = styled.div`
-  ${({ theme }) => getModalStyles(theme, ['body'])};
+export const ModalBody = styled.div<IThemeProps>`
+  ${({ theme, appearance }) => getModalStyles(theme, appearance, ['body'])};
 `;
