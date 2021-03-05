@@ -34,7 +34,7 @@ const theme = {
         content: {
         },
         headerWrapper: {
-          padding: '20px',
+          padding: '24px',
           borderBottom: `1px solid ${colors.GRAY}`,
         },
         iconClose: {
