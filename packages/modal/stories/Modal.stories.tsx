@@ -1,5 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useState, useCallback, useMemo } from 'react';
+import React, {
+  useState, useCallback, useMemo,
+} from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Provider, connect } from 'react-redux';
 import { storiesOf } from '@storybook/react';
@@ -15,7 +17,6 @@ import ModalPortal, {
   modalThemeNamespace,
   xcriticalModalOpen,
   getModalByName,
-  IModalTheme,
 } from '../src';
 
 import { store } from './store';
@@ -26,30 +27,60 @@ const emptyTheme = {};
 const theme = {
   [modalThemeNamespace]: {
     blanket: {
-      opacity: 0.7,
+      opacity: 1,
     },
-    content: {
-      maxWidth: '500px',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
+    appearance: {
+      default: {
+        content: {
+        },
+        headerWrapper: {
+          padding: '20px',
+          borderBottom: `1px solid ${colors.GRAY}`,
+        },
+        iconClose: {
+          width: '50px',
+          height: '50px',
+        },
+        header: {
+          fontSize: '18px',
+          color: colors.GRAY_BLUE,
+        },
+        body: {
+          padding: '20px',
+        },
+      },
+      mobile: {
+        content: {
+          position: 'absolute',
+          minWidth: '100%',
+          minHeight: '100%',
+          height: '100%',
+          width: '100%',
+          color: 'red',
+          top: '0px',
+          left: '0px',
+          transform: 'translate(0%, 0%)',
+          backgroundColor: colors.LIGHT,
+          borderRadius: '0px',
+        },
+        headerWrapper: {
+          padding: '6px',
+          borderBottom: `1px solid ${colors.GOLDENROD}`,
+        },
+        iconClose: {
+          width: '16px',
+          height: '16px',
+        },
+        header: {
+          fontSize: '18px',
+          color: colors.DARK_LIME,
+        },
+        body: {
+          padding: '14px',
+        },
+      },
     },
-    headerWrapper: {
-      padding: '20px',
-      borderBottom: `1px solid ${colors.GRAY}`,
-    },
-    iconClose: {
-      width: '30px',
-      height: '30px',
-    },
-    header: {
-      fontSize: '18px',
-      color: colors.GRAY_BLUE,
-    },
-    body: {
-      padding: '20px',
-    },
-  } as IModalTheme,
+  },
 };
 
 
@@ -81,6 +112,23 @@ const ModalWithPayload: React.FC<{id?: number}> = ({ id }) => (
     </ConnectedModal>
   </>
 );
+
+const ThemedModal = ({ appearance }: { appearance: string }) => (
+  <>
+    <StyledButton onClick={ () => store.dispatch(xcriticalModalOpen(appearance)) }>
+      Open
+      { ' ' }
+      { appearance }
+      { ' ' }
+      Modal
+    </StyledButton>
+    <ConnectedModal title={ `Appearance: ${appearance}` } name={ appearance } appearance={ appearance }>
+      <div>Body example</div>
+      <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
+    </ConnectedModal>
+  </>
+);
+
 
 const mapStateToProps = (state) => {
   const modal = getModalByName(state, 'modalWithPayload');
@@ -185,14 +233,10 @@ storiesOf('ConnectedModal', module)
   .add('With Theme', () => (
     <Provider store={ store }>
       <ThemeProvider theme={ theme }>
-        <StyledButton onClick={ () => store.dispatch(xcriticalModalOpen('themedModal')) }>
-          Open Themed Modal
-        </StyledButton>
+        <ThemedModal appearance="themedModal" />
 
-        <ConnectedModal title="Themed Modal" name="themedModal">
-          <div>Body example</div>
-          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
-        </ConnectedModal>
+        <ThemedModal appearance="mobile" />
+
       </ThemeProvider>
     </Provider>
   ))
