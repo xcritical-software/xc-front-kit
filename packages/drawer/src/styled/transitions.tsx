@@ -60,7 +60,7 @@ HTMLElement, ITransitionProps & RefAttributes<HTMLElement>
       transition: `opacity ${transitionDurationMs}ms ${transitionTimingFunction}`,
       opacity: 0,
       position: 'fixed',
-      zIndex: props.zIndex ?? getElementStyles(props.theme, 'drawerWrapper', props.appearance, props.baseAppearance).zIndex ?? 0,
+      zIndex: props.zIndex ?? getElementStyles(props.theme, 'drawerWrapper', props.appearance, props.baseAppearance).zIndex ?? 'auto',
     } }
     transitionStyles={ {
       entering: { opacity: 0 },
