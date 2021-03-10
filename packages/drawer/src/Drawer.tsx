@@ -38,6 +38,7 @@ export const PureDrawer = React.memo<IDrawerProps>(({
   closeIconComponent,
   onClose,
   withBlanket = true,
+  zIndex,
 }: IDrawerProps) => {
   const themeContext = useContext<IThemeNamespace<DrawerTheme>>(ThemeContext);
 
@@ -108,12 +109,14 @@ export const PureDrawer = React.memo<IDrawerProps>(({
               theme={ theme || themeContext || {} }
               appearance={ appearance }
               baseAppearance={ baseAppearance }
+              zIndex={ zIndex }
             >
               <Blanket isTinted onBlanketClicked={ onOutsideClick } />
             </Fade>
           ) }
           { antiSelectLayer && <AntiSelect /> }
           <Slide
+            zIndex={ zIndex }
             ref={ drawerRef }
             in={ isOpen }
             component={ Wrapper }

@@ -32,6 +32,7 @@ export interface IDrawerProps {
   onOutsideClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onClose?: () => void;
   withBlanket?: boolean;
+  zIndex?: number;
 }
 
 export interface IDrawerStates {
@@ -65,6 +66,7 @@ export interface ITransitionProps extends Pick<IDrawerProps, 'appearance' | 'bas
   shouldUnmountOnExit?: boolean;
   in: boolean;
   theme: DrawerTheme;
+  zIndex?: number;
 }
 
 export interface IHandlerProps {
