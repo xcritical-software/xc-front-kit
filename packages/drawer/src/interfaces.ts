@@ -59,14 +59,16 @@ export interface IStyles {
   [index: string]: string | number | null;
 }
 
-export interface ITransitionProps extends Pick<IDrawerProps, 'appearance' | 'baseAppearance'>{
+export interface ITransitionProps extends Pick<
+IDrawerProps,
+'appearance' | 'baseAppearance' | 'zIndex'
+>{
   component?: ComponentType<any> | string;
   children?: any;
   onExited?: (node: HTMLElement) => void;
   shouldUnmountOnExit?: boolean;
   in: boolean;
   theme: DrawerTheme;
-  zIndex?: number;
 }
 
 export interface IHandlerProps {
