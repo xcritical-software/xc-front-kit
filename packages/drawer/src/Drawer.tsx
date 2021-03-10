@@ -103,7 +103,12 @@ export const PureDrawer = React.memo<IDrawerProps>(({
       >
         <Portal id="drawer" zIndex="unset">
           { withBlanket && (
-            <Fade in={ isOpen } theme={ theme || themeContext || {} }>
+            <Fade
+              in={ isOpen }
+              theme={ theme || themeContext || {} }
+              appearance={ appearance }
+              baseAppearance={ baseAppearance }
+            >
               <Blanket isTinted onBlanketClicked={ onOutsideClick } />
             </Fade>
           ) }

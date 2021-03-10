@@ -58,7 +58,7 @@ export interface IStyles {
   [index: string]: string | number | null;
 }
 
-export interface ITransitionProps {
+export interface ITransitionProps extends Pick<IDrawerProps, 'appearance' | 'baseAppearance'>{
   component?: ComponentType<any> | string;
   children?: any;
   onExited?: (node: HTMLElement) => void;

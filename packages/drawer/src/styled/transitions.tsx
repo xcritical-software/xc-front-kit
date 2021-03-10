@@ -8,6 +8,7 @@ import {
   ITransitionProps,
   IHandlerProps,
 } from '../interfaces';
+import { getElementStyles } from '../utils';
 
 
 const defaultTransitionProps = {
@@ -59,7 +60,7 @@ HTMLElement, ITransitionProps & RefAttributes<HTMLElement>
       transition: `opacity ${transitionDurationMs}ms ${transitionTimingFunction}`,
       opacity: 0,
       position: 'fixed',
-      zIndex: 0,
+      zIndex: getElementStyles(props.theme, 'drawerWrapper', props.appearance, props.baseAppearance).zIndex || 0,
     } }
     transitionStyles={ {
       entering: { opacity: 0 },
