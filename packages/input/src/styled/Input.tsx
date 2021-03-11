@@ -60,6 +60,18 @@ export const StyledInput = styled.input<IStyledInput>`
   margin: 0;
   ${({ theme, appearance, baseAppearance }) => getComponentStyle(theme, appearance, baseAppearance, 'input')}
   ${getInputInteractiveStyles}
+  ${({ type, showArrows }) => ((type === 'number' && !showArrows)
+    ? css`
+              ::-webkit-outer-spin-button,
+              ::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+              }
+
+              -moz-appearance: textfield;
+            `
+    : css``)};
+
 `;
 
 

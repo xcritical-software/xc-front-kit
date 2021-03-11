@@ -36,6 +36,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
   value,
   onFocus,
   onBlur,
+  showArrows = false,
   ...rest
 }, ref: React.MutableRefObject<HTMLInputElement>) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -111,6 +112,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(({
         value={ value }
         onFocus={ handleFocus }
         onBlur={ handleBlur }
+        showArrows={ showArrows }
         { ...rest }
       />
       {
