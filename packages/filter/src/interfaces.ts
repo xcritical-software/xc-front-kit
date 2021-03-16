@@ -49,11 +49,30 @@ export interface IPayloadRemoveFilter {
   guid?: string;
   name?: string;
 }
-export interface IPayloadChangeFilter {
+
+export interface IPayloadBaseChangeFilter {
   guid: string;
-  field: string;
   value: string;
 }
+
+export interface IPayloadChangeFilterColumn extends IPayloadBaseChangeFilter{
+  field: 'column';
+}
+
+export interface IPayloadChangeFilterValue extends IPayloadBaseChangeFilter{
+  field: 'value';
+}
+
+export interface IPayloadChangeFilterCondition extends IPayloadBaseChangeFilter{
+  field: 'condition';
+  hasFieldForValue?: boolean;
+  valueType?: string;
+}
+
+export type PayloadChangeFilterType =
+  IPayloadChangeFilterValue |
+  IPayloadChangeFilterCondition |
+  IPayloadChangeFilterColumn;
 
 export interface IPayloadInitFilters {
   filters: IStateRecivedFilter[];
@@ -73,11 +92,13 @@ export interface IFilter {
   conditions: IConditions;
   isHidden?: boolean;
   validate?: (conditions: IStateFilter[]) => Record<string, string>;
+  type?: string;
   Element?: (
     value: any,
     onChange: (value: any) => void,
     condition?: string,
     validationError?: string,
+    tagConditionsRef?: ISelectedFilterComponent['tagConditionsRef']
   ) => React.ReactElement;
 }
 
@@ -97,6 +118,7 @@ export interface ISelectedFilterComponent {
   filterData?: IStateFilter;
   validationError?: string;
   onChange: (value: any) => void;
+  tagConditionsRef: MutableRefObject<null | HTMLDivElement>;
 }
 
 export interface IStateRecivedFilter {
@@ -122,7 +144,7 @@ export interface ITagContainerProps {
 
 
 export interface IMapDispatchFilterTag {
-  onChangeFilter: (changes: IPayloadChangeFilter) => void;
+  onChangeFilter: (changes: PayloadChangeFilterType) => void;
   onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
   onAddCondition: (filterId: string) => void;
 }
@@ -136,12 +158,12 @@ export interface ITagProps extends ITagContainerProps, IMapDispatchFilterTag {
 }
 
 export interface ITagConditionProps {
-  tagConditionsRef: MutableRefObject<null>;
+  tagConditionsRef: MutableRefObject<null | HTMLDivElement>;
   currentFilterState: IStateFilter;
   filterSetting?: IFilter;
   validationError?: string;
   filterTheme: IFilterTheme;
-  onChangeFilter: (changes: IPayloadChangeFilter) => void;
+  onChangeFilter: (changes: PayloadChangeFilterType) => void;
   onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
 }
 

@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import Select from '@xcritical/select';
 
 import { ISelectedFilterComponent } from '../../interfaces';
-import { convertFiltersToOptions } from '../../utils/mappers';
+import { convertFiltersToOptions } from '../../utils';
 
 
 export const FilterSelect: React.FC<ISelectedFilterComponent> = React.memo(({

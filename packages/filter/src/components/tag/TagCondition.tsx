@@ -53,8 +53,14 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
 
   const onChangeCondition = useCallback(
     ({ value }: OptionTypeBase) => {
-      onChangeFilter({ field: 'condition', value, guid });
-    }, [guid, onChangeFilter],
+      onChangeFilter({
+        field: 'condition',
+        value,
+        guid,
+        valueType: filterSetting?.type,
+        hasFieldForValue: selectedCondition?.hasValue,
+      });
+    }, [guid, onChangeFilter, conditions, filterSetting?.type],
   );
 
   const onRemoveCondition = useCallback(
@@ -91,6 +97,7 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
               <TagLabel>Value</TagLabel>
               <div>
                 <FilterValueElement
+                  tagConditionsRef={ tagConditionsRef }
                   onChange={ onChangeValue }
                   currentFilter={ filterSetting }
                   filterData={ currentFilterState }

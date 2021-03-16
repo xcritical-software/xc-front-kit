@@ -43,6 +43,7 @@ export interface IOption {
 export interface ISwitchGroupProps extends IStyledProps {
   type?: 'checkbox' | 'radio';
   values: (string | number)[];
+  checkIcon?: ICheckboxProps['checkIcon'];
   options: IOption[];
   disabled?: boolean;
   onChange: (values: (string | number)[]) => void;

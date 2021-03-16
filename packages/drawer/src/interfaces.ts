@@ -32,6 +32,7 @@ export interface IDrawerProps {
   onOutsideClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onClose?: () => void;
   withBlanket?: boolean;
+  zIndex?: number;
 }
 
 export interface IDrawerStates {
@@ -58,7 +59,10 @@ export interface IStyles {
   [index: string]: string | number | null;
 }
 
-export interface ITransitionProps {
+export interface ITransitionProps extends Pick<
+IDrawerProps,
+'appearance' | 'baseAppearance' | 'zIndex'
+>{
   component?: ComponentType<any> | string;
   children?: any;
   onExited?: (node: HTMLElement) => void;
