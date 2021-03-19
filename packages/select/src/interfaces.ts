@@ -97,12 +97,12 @@ export interface IReturnFunction<TValue> {
   ): TValue;
 }
 
-export interface IReturnWithArgsFunction<TProp, TValue> {
-  (elementName: string, ...props: TProp[]): TValue;
+export interface IReturnWithArgsFunction<TValue> {
+  (elementName: string, props?: {[key: string]: boolean}): TValue;
 }
 
 export type GetStyles<TResult = { [key: string]: any }> =
-  IReturnFunction<IReturnWithArgsFunction<any, TResult>>;
+  IReturnFunction<IReturnWithArgsFunction<TResult>>;
 
 
 export interface IOptionProps extends IThemeProps, OptionTypeBase {
