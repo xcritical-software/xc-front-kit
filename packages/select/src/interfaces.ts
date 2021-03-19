@@ -98,7 +98,7 @@ export interface IReturnFunction<TValue> {
 }
 
 export interface IReturnWithArgsFunction<TValue> {
-  (elementName: string, props?: {[key: string]: boolean}): TValue;
+  (elementName: string, props?: {[key: string]: boolean | string}): TValue;
 }
 
 export type GetStyles<TResult = { [key: string]: any }> =

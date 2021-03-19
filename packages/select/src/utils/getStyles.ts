@@ -182,9 +182,16 @@ export const getCustomStyles: GetStyles = memoizee((
   baseAppearance = 'default',
 ) => memoizee((
   elementName,
-  propertyPath,
+  { propertyPath } = {
+    propertyPath: '',
+  },
 ) => {
-  const propValue = selectTheme(theme, appearance, baseAppearance, [elementName, propertyPath]);
+  const propValue = selectTheme(
+    theme,
+    appearance,
+    baseAppearance,
+    [elementName, String(propertyPath)],
+  );
 
   return propValue;
 }));
