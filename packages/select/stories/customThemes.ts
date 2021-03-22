@@ -66,6 +66,9 @@ export const customTheme: IThemeNamespace<ISelectBaseTheme> = {
           focus: {
             boxShadow: 'none',
           },
+          filled: {
+            border: '1px solid darkorange',
+          },
         },
         dropdownIndicator: {
           background: 'transparent',

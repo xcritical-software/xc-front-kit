@@ -101,6 +101,8 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         focus: {
           boxShadow: 'none',
         },
+        filled: {
+        },
       },
 
       indicatorsContainer: {

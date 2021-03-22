@@ -220,12 +220,14 @@ export const getStatesStyles: GetStyles = memoizee((
   const focusStyles = getAppearanceStyleProperty(theme, appearance, baseAppearance, 'focus');
   const selectedStyles = getAppearanceStyleProperty(theme, appearance, baseAppearance, 'selected');
   const disabledStyles = getAppearanceStyleProperty(theme, appearance, baseAppearance, 'disabled');
+  const filledStyles = getAppearanceStyleProperty(theme, appearance, baseAppearance, 'filled');
 
   return memoizee((
     elementName,
     isDisabled,
     isFocused,
     isSelected,
+    hasValue,
     isSearchable,
   ) => {
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
@@ -258,6 +260,13 @@ export const getStatesStyles: GetStyles = memoizee((
       elementStyles = {
         ...elementStyles,
         ...((element?.selected) || selectedStyles),
+      };
+    }
+
+    if (hasValue) {
+      elementStyles = {
+        ...elementStyles,
+        ...((element?.filled) || filledStyles),
       };
     }
 
