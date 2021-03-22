@@ -85,7 +85,7 @@ export const getWidthStyles: GetStyles = memoizee((
 
   return memoizee((
     elementName,
-    { shouldFitContainer } = {},
+    shouldFitContainer,
   ) => {
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
 
@@ -182,16 +182,9 @@ export const getCustomStyles: GetStyles = memoizee((
   baseAppearance = 'default',
 ) => memoizee((
   elementName,
-  { propertyPath } = {
-    propertyPath: '',
-  },
+  propertyPath,
 ) => {
-  const propValue = selectTheme(
-    theme,
-    appearance,
-    baseAppearance,
-    [elementName, String(propertyPath)],
-  );
+  const propValue = selectTheme(theme, appearance, baseAppearance, [elementName, propertyPath]);
 
   return propValue;
 }));
@@ -231,13 +224,11 @@ export const getStatesStyles: GetStyles = memoizee((
 
   return memoizee((
     elementName,
-    {
-      isDisabled,
-      isFocused,
-      isSelected,
-      hasValue,
-      isSearchable,
-    } = {},
+    isDisabled,
+    isFocused,
+    isSelected,
+    hasValue,
+    isSearchable,
   ) => {
     const element = selectTheme(theme, appearance, baseAppearance, elementName);
     let elementStyles = {

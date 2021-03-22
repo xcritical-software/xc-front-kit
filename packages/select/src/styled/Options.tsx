@@ -22,13 +22,13 @@ flex-shrink: 0;
 export const LabelPrefix = styled(LabelPrefixPostfixBase)`
 margin-${({ isRTL }) => (isRTL ? 'left' : 'right')}: ${(
   { theme, appearance = 'default', baseAppearance = 'default' },
-) => getCustomStyles(theme, appearance, baseAppearance)('labelText', { propertyPath: 'prefixSpacing' })}px;
+) => getCustomStyles(theme, appearance, baseAppearance)('labelText', 'prefixSpacing')}px;
 `;
 
 export const LabelPostfix = styled(LabelPrefixPostfixBase)`
 margin-${({ isRTL }) => (isRTL ? 'right' : 'left')}: ${(
   { theme, appearance = 'default', baseAppearance = 'default' },
-) => getCustomStyles(theme, appearance, baseAppearance)('labelText', { propertyPath: 'prefixSpacing' })}px;
+) => getCustomStyles(theme, appearance, baseAppearance)('labelText', 'prefixSpacing')}px;
 `;
 
 

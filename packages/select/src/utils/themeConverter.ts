@@ -43,7 +43,7 @@ export const themeConverter = (
     container: (css) => ({
       ...css,
       ...getElementStyles('container'),
-      ...getWidth('container', { shouldFitContainer }),
+      ...getWidth('container', shouldFitContainer),
       ...getMargin('container'),
       ...getBorderRadius('container'),
     }),
@@ -55,9 +55,8 @@ export const themeConverter = (
       ...getHeight('button'),
       ...getPadding('button'),
       ...getBorderRadius('button'),
-      ...getInteractiveStyles('button', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('button',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     input: (css, {
       isDisabled, isFocused, isSelected, hasValue,
@@ -66,18 +65,16 @@ export const themeConverter = (
       ...getElementStyles('input'),
       ...getMargin('input'),
       ...getPadding('input'),
-      ...getInteractiveStyles('input', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('input',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     placeholder: (css, {
       isDisabled, isFocused, isSelected, hasValue,
     }) => ({
       ...css,
       ...getElementStyles('placeholder'),
-      ...getInteractiveStyles('placeholder', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('placeholder',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     group: (css) => ({
       ...css,
@@ -94,9 +91,8 @@ export const themeConverter = (
       ...getElementStyles('indicatorsContainer'),
       ...getPadding('indicatorsContainer'),
       ...getMargin('indicatorsContainer'),
-      ...getInteractiveStyles('indicatorsContainer', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('indicatorsContainer',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     indicatorSeparator: (css) => ({
       ...css,
@@ -112,9 +108,8 @@ export const themeConverter = (
       ...css,
       ...getElementStyles('dropdownIndicator'),
       ...getPadding('dropdownIndicator'),
-      ...getInteractiveStyles('dropdownIndicator', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('dropdownIndicator',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     clearIndicator: (css, {
       isDisabled, isFocused, isSelected, hasValue,
@@ -122,9 +117,8 @@ export const themeConverter = (
       ...css,
       ...getPadding('clearIndicator'),
       ...getElementStyles('clearIndicator'),
-      ...getInteractiveStyles('clearIndicator', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('clearIndicator',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     loadingIndicator: (css, {
       isDisabled, isFocused, isSelected, hasValue,
@@ -132,18 +126,16 @@ export const themeConverter = (
       ...css,
       ...getPadding('loadingIndicator'),
       ...getElementStyles('loadingIndicator'),
-      ...getInteractiveStyles('loadingIndicator', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('loadingIndicator',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     loadingMessage: (css, {
       isDisabled, isFocused, isSelected, hasValue,
     }) => ({
       ...css,
       ...getElementStyles('loadingMessage'),
-      ...getInteractiveStyles('loadingMessage', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('loadingMessage',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
 
     menu: (css, {
@@ -151,9 +143,8 @@ export const themeConverter = (
     }) => ({
       ...css,
       ...getElementStyles('dropdown'),
-      ...getInteractiveStyles('dropdown', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('dropdown',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     menuList: (css, {
       isDisabled, isFocused, isSelected, hasValue,
@@ -162,9 +153,8 @@ export const themeConverter = (
       ...getPadding('dropdownList'),
       ...getBorderRadius('dropdownList'),
       ...getElementStyles('dropdownList'),
-      ...getInteractiveStyles('dropdownList', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('dropdownList',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     menuScrollbar: {
       ...getElementStyles('menuScrollbar'),
@@ -179,9 +169,8 @@ export const themeConverter = (
       ...css,
       ...getPadding('option'),
       ...getElementStyles('option'),
-      ...getInteractiveStyles('option', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('option',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     noOptionsMessage: (css, {
       isDisabled, isFocused, isSelected, hasValue,
@@ -201,9 +190,8 @@ export const themeConverter = (
       ...getPadding('valueContainer'),
       ...getDisplay('valueContainer'),
       ...getWidth('valueContainer'),
-      ...getInteractiveStyles('valueContainer', {
-        isDisabled, isFocused, isSelected, isSearchable, hasValue,
-      }),
+      ...getInteractiveStyles('valueContainer',
+        isDisabled, isFocused, isSelected, hasValue, isSearchable),
     }),
     singleValue: (css, {
       isDisabled, isFocused, isSelected, hasValue,
@@ -211,9 +199,8 @@ export const themeConverter = (
       ...css,
       ...getElementStyles('singleValue'),
       ...getDisplay('singleValue'),
-      ...getInteractiveStyles('singleValue', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('singleValue',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     multiValue: (css, {
       isDisabled, isFocused, isSelected, hasValue,
@@ -223,9 +210,8 @@ export const themeConverter = (
       ...getDisplay('multiValue'),
       ...getPadding('multiValue'),
       ...getMargin('multiValue'),
-      ...getInteractiveStyles('multiValue', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('multiValue',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     multiValueLabel: (css, {
       isDisabled, isFocused, isSelected, hasValue,
@@ -234,9 +220,8 @@ export const themeConverter = (
       ...getElementStyles('multiValueLabel'),
       ...getPadding('multiValueLabel'),
       ...getMargin('multiValueLabel'),
-      ...getInteractiveStyles('multiValueLabel', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('multiValueLabel',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
     multiValueRemove: (css, {
       isDisabled, isFocused, isSelected, hasValue,
@@ -245,9 +230,8 @@ export const themeConverter = (
       ...getElementStyles('multiValueRemove'),
       ...getPadding('multiValueRemove'),
       ...getMargin('multiValueRemove'),
-      ...getInteractiveStyles('multiValueRemove', {
-        isDisabled, isFocused, isSelected, hasValue,
-      }),
+      ...getInteractiveStyles('multiValueRemove',
+        isDisabled, isFocused, isSelected, hasValue),
     }),
   };
 
