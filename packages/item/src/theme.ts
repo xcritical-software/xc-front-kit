@@ -23,9 +23,6 @@ export const itemThemeStyle: ItemTheme = {
     flexGrow: '1',
     margin: '0',
     overflow: 'hidden',
-    '&:first-child': {
-      margin: '0',
-    },
   },
   content: {
     display: 'block',
