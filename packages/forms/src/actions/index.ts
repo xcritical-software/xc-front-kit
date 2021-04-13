@@ -29,9 +29,14 @@ export interface IFormAction {
 }
 
 
-export function xcriticalFormPropertyChange(name: string,
-  property: string,
-  value: any): IFormAction {
+export function xcriticalFormPropertyChange<
+  TFormModel extends {} = {},
+  TPropertyName extends keyof TFormModel = keyof TFormModel
+>(
+  name: string,
+  property: TPropertyName,
+  value: TFormModel[TPropertyName],
+): IFormAction {
   return {
     type: XCRITICAL_FORM_PROPERTY_CHANGE,
     meta: {
@@ -45,7 +50,9 @@ export function xcriticalFormPropertyChange(name: string,
   };
 }
 
-// Deprecated
+/**
+ * @deprecated don't use this action
+ */
 export function xcriticalFormChange(name: string, model: any): IFormAction {
   return {
     type: XCRITICAL_FORM_INIT,
