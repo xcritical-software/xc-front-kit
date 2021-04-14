@@ -77,9 +77,11 @@ const BasicInlineEditInput: React.FC<AllType> = ({
   appearance = 'default',
   cancelIcon,
   confirmIcon,
+  doubleClickForEditView,
+  defaultValue = '',
   ...rest
 }) => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState(defaultValue);
 
   const getReadView = React.useCallback(() => (
     <div>
@@ -110,6 +112,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
         onConfirm={ handleConfirm }
         cancelIcon={ cancelIcon }
         confirmIcon={ confirmIcon }
+        doubleClickForEditView={ doubleClickForEditView }
       />
     </ThemeProvider>
   );
@@ -328,5 +331,14 @@ storiesOf('InlineEdit', module)
           options={ options }
         />
       </div>
+    </div>
+  ))
+  .add('Edit view on double click', () => (
+    <div style={ { width: '200px' } }>
+      <BasicInlineEditInput
+        editView={ Input }
+        doubleClickForEditView
+        defaultValue="Edit view on double click"
+      />
     </div>
   ));
