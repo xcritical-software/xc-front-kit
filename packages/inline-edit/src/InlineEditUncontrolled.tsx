@@ -37,6 +37,7 @@ export const InlineEditUncontrolled = function <TFieldValue>(
     error,
     cancelIcon: CustomCancelIcon,
     confirmIcon: CustomConfirmIcon,
+    isDoubleClickMode = false,
   }: IInlineEditUncontrolledProps<TFieldValue>,
 ): React.ReactElement<IInlineEditUncontrolledProps<TFieldValue>> {
   const editButtonRef = createRef<HTMLButtonElement>();
@@ -89,9 +90,10 @@ export const InlineEditUncontrolled = function <TFieldValue>(
       <ReadViewContentWrapper
         appearance={ appearance }
         baseAppearance={ baseAppearance }
-        onClick={ handleReadViewClick }
         readViewFitContainerWidth={ readViewFitContainerWidth }
         disabled={ disabled }
+        onClick={ isDoubleClickMode ? undefined : handleReadViewClick }
+        onDoubleClick={ isDoubleClickMode ? handleReadViewClick : undefined }
       >
         <ReadView
           { ...readViewProps }
