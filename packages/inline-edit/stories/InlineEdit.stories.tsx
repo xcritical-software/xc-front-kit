@@ -77,7 +77,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
   appearance = 'default',
   cancelIcon,
   confirmIcon,
-  doubleClickForEditView,
+  isDoubleClickMode,
   defaultValue = '',
   ...rest
 }) => {
@@ -112,7 +112,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
         onConfirm={ handleConfirm }
         cancelIcon={ cancelIcon }
         confirmIcon={ confirmIcon }
-        doubleClickForEditView={ doubleClickForEditView }
+        isDoubleClickMode={ isDoubleClickMode }
       />
     </ThemeProvider>
   );
@@ -337,7 +337,7 @@ storiesOf('InlineEdit', module)
     <div style={ { width: '200px' } }>
       <BasicInlineEditInput
         editView={ Input }
-        doubleClickForEditView
+        isDoubleClickMode
         defaultValue="Edit view on double click"
       />
     </div>

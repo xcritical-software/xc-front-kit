@@ -66,7 +66,7 @@ export type IInlineEditUncontrolledProps<
   invalid?: boolean;
   error?: string | string[];
   /** Change 'Read View' to 'Edit View' by double click instead of single click */
-  doubleClickForEditView?: boolean;
+  isDoubleClickMode?: boolean;
 };
 
 export type InlineEditCommonProps<
@@ -110,7 +110,7 @@ export type IInlineEditProps<
   confirmIcon?: FC;
   onCancel?: (value?: TFieldValue) => void;
   /** Change 'Read View' to 'Edit View' by double click instead of single click */
-  doubleClickForEditView?: boolean;
+  isDoubleClickMode?: boolean;
 };
 
 
