@@ -1,6 +1,4 @@
-import {
-  ComponentPropsWithRef, DetailedHTMLProps, FormHTMLAttributes, Ref,
-} from 'react';
+import { DetailedHTMLProps, FormHTMLAttributes, Ref } from 'react';
 
 
 export interface IFormProps
