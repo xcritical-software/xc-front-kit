@@ -1,4 +1,6 @@
-import { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import {
+  ComponentPropsWithRef, DetailedHTMLProps, FormHTMLAttributes, Ref,
+} from 'react';
 
 
 export interface IFormProps
@@ -32,10 +34,19 @@ export interface IFormStateMap {
   [formName: string]: IFormState;
 }
 
+export type ElementRef<C> =
+        'ref' extends keyof C
+          ? NonNullable<C['ref']> extends Ref<
+          infer Instance
+          >
+            ? Instance
+            : never
+          : never;
+
 export type FormFieldProps<TComponentProps> = TComponentProps & {
   component: React.ComponentType<TComponentProps & IFormFieldComponentProps>;
   name: string;
-  innerRef?: any;
+  innerRef?: React.Ref<ElementRef<TComponentProps>>;
   onChange?: IFormFieldComponentProps['onChange'];
 };
 
@@ -44,8 +55,4 @@ export interface IFormFieldComponentProps {
   invalid: boolean;
   error?: string | string[];
   value: any;
-}
-
-export interface IForm {
-  Field: React.ComponentType<FormFieldProps<any>>;
 }
