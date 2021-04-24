@@ -59,8 +59,14 @@ export type IInlineEditUncontrolledProps<
   onConfirm: (value?: TFieldValue) => void;
   /** Handler called when checkmark is. */
   onCancel?: () => void;
+  /** Change default cancel icon */
+  cancelIcon?: FC;
+  /** Change default successIcon */
+  confirmIcon?: FC;
   invalid?: boolean;
   error?: string | string[];
+  /** Change 'Read View' to 'Edit View' by double click instead of single click */
+  isDoubleClickMode?: boolean;
 };
 
 export type InlineEditCommonProps<
@@ -98,7 +104,13 @@ export type IInlineEditProps<
   /** If this prop is truthy, the editView doesn't close and an error message is displayed below it.
    */
   invalid?: boolean;
+  /** Change default cancel icon */
+  cancelIcon?: FC;
+  /** Change default successIcon */
+  confirmIcon?: FC;
   onCancel?: (value?: TFieldValue) => void;
+  /** Change 'Read View' to 'Edit View' by double click instead of single click */
+  isDoubleClickMode?: boolean;
 };
 
 

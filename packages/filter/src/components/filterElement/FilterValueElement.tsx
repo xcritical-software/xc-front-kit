@@ -14,9 +14,10 @@ export const FilterValueElement: React.FC<ISelectedFilterComponent> = React.memo
   } = {},
   validationError,
   onChange,
+  tagConditionsRef,
 }) => (
   currentFilter?.Element
-    ? currentFilter.Element(value, onChange, condition, validationError)
+    ? currentFilter.Element(value, onChange, condition, validationError, tagConditionsRef)
     : (
       <>
         <Input

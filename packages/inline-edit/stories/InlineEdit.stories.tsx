@@ -6,6 +6,8 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled, { ThemeProvider } from 'styled-components';
 import { lighten } from 'polished';
+import BookIcon from 'mdi-react/BookIcon';
+import CreditCardIcon from 'mdi-react/CreditCardIcon';
 
 import Input from '@xcritical/input';
 import Select from '@xcritical/select';
@@ -24,6 +26,9 @@ const generateTheme = (
   color: textColor,
   appearance: {
     crm: {
+      readViewContentWrapper: {
+        padding: 0,
+      },
       editButton: {
         focus: {
           border: `2px solid ${lighten(0.6, '#003e6c')}`,
@@ -39,6 +44,12 @@ const generateTheme = (
       },
       hover: {
         backgroundColor: lighten(0.6, '#003e6c'),
+      },
+      confirmIcon: {
+        fill: 'green',
+      },
+      cancelIcon: {
+        fill: 'red',
       },
     },
   },
@@ -64,9 +75,13 @@ const ErrorMessage = styled.p`
 
 const BasicInlineEditInput: React.FC<AllType> = ({
   appearance = 'default',
+  cancelIcon,
+  confirmIcon,
+  isDoubleClickMode,
+  defaultValue = '',
   ...rest
 }) => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState(defaultValue);
 
   const getReadView = React.useCallback(() => (
     <div>
@@ -95,6 +110,9 @@ const BasicInlineEditInput: React.FC<AllType> = ({
         readView={ getReadView }
         editView={ getEditView }
         onConfirm={ handleConfirm }
+        cancelIcon={ cancelIcon }
+        confirmIcon={ confirmIcon }
+        isDoubleClickMode={ isDoubleClickMode }
       />
     </ThemeProvider>
   );
@@ -290,6 +308,15 @@ storiesOf('InlineEdit', module)
       />
     </div>
   ))
+  .add('CustomButtonIcon', () => (
+    <div style={ { width: '200px' } }>
+      <BasicInlineEditInput
+        cancelIcon={ () => <BookIcon color="red" /> }
+        confirmIcon={ CreditCardIcon }
+        appearance="crm"
+      />
+    </div>
+  ))
   .add('InlineEdit with custom validation', () => (
     <div style={ { display: 'flex' } }>
       <div style={ { width: '300px', marginLeft: '10px' } }>
@@ -304,5 +331,14 @@ storiesOf('InlineEdit', module)
           options={ options }
         />
       </div>
+    </div>
+  ))
+  .add('Edit view on double click', () => (
+    <div style={ { width: '200px' } }>
+      <BasicInlineEditInput
+        editView={ Input }
+        isDoubleClickMode
+        defaultValue="Edit view on double click"
+      />
     </div>
   ));

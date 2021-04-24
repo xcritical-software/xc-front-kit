@@ -23,6 +23,7 @@ export const Wrapper = styled.div.attrs((
   ${({ isRTL }) => (isRTL ? 'right: 0;' : 'left: 0;')}
   display: flex;
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
+  ${({ zIndex }) => `z-index: ${zIndex}`}
 `;
 
 export const Content = styled.div.attrs(({ width }: IDrawerStates) => ({

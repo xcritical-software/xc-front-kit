@@ -79,6 +79,7 @@ export interface ISelectCssTheme extends ICSSProperties {
   boxShadow?: string;
   prefixSpacing?: number;
   postfixSpacing?: number;
+  filled?: ICSSProperties;
 }
 
 export interface ILabelTextCssTheme extends ISelectCssTheme {

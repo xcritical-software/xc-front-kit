@@ -49,6 +49,7 @@ export const DefaultCheckbox = styled.div<IStyledCheckboxProps>`
 export const Checkbox = styled.div<IStyledCheckboxProps>`
   width: ${({ theme, appearance, baseAppearance }) => checkboxAppearanceTheme(theme, appearance, baseAppearance, ['checkbox', 'width'])};
   height: ${({ theme, appearance, baseAppearance }) => checkboxAppearanceTheme(theme, appearance, baseAppearance, ['checkbox', 'height'])};
+  color: ${({ theme, appearance, baseAppearance }) => checkboxAppearanceTheme(theme, appearance, baseAppearance, ['checkbox', 'color'])};
 `;
 
 export const HiddenCheckbox = styled.input`

@@ -1,6 +1,6 @@
 import memoize from 'micro-memoize';
 
-import { getThemedState, IThemeNamespace } from '@xcritical/theme';
+import { getThemedState, getAppearanceTheme, IThemeNamespace } from '@xcritical/theme';
 import { blanketThemeNamespace, IBlanketTheme } from '@xcritical/blanket';
 
 
@@ -9,16 +9,21 @@ import { modalThemeNamespace, defaultModalTheme } from './theme';
 
 
 export const getModalStyles = memoize((
-  theme?: IThemeNamespace<IModalTheme>,
+  theme: IThemeNamespace<IModalTheme>,
+  appearanceName: string,
   propertyPath?: string[],
 ): any => {
-  const func = getThemedState(modalThemeNamespace, defaultModalTheme);
+  const func = getAppearanceTheme(modalThemeNamespace, defaultModalTheme);
 
-  return func(theme, propertyPath);
+  return func(theme, appearanceName, propertyPath);
 });
 
 export const getModalBlanketTheme = memoize((
   theme?: IThemeNamespace<IModalTheme>,
-): IThemeNamespace<IBlanketTheme> => ({
-  [blanketThemeNamespace]: getModalStyles(theme, ['blanket']),
-}));
+): IThemeNamespace<IBlanketTheme> => {
+  const func = getThemedState(modalThemeNamespace, defaultModalTheme);
+
+  return {
+    [blanketThemeNamespace]: func(theme, ['blanket']),
+  };
+});

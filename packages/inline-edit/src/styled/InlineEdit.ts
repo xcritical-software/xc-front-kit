@@ -16,6 +16,8 @@ export const ReadViewWrapper = styled.div`
 export const ReadViewContentWrapper = styled.div<ICommonProps>`
   width: ${({ readViewFitContainerWidth }) => (readViewFitContainerWidth ? '100%' : 'auto')};
   ${({ theme }) => inlineEditTheme(theme)}
+  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'readViewContentWrapper', appearance, baseAppearance)}
+
   :hover {
     ${({ theme, appearance, baseAppearance }) => getInlineEditStatesStyle('hover')(theme, appearance, baseAppearance)}
     cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
@@ -41,4 +43,11 @@ export const ButtonWrapper = styled.div<ICommonProps>`
 
 export const Button = styled.button<ICommonProps>`
   ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'button', appearance, baseAppearance)}
+`;
+
+export const ConfirmIcon = styled.svg<ICommonProps>`
+  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'confirmIcon', appearance, baseAppearance)}
+`;
+export const CancelIcon = styled.svg<ICommonProps>`
+  ${({ theme, appearance, baseAppearance }) => getElementStyles(theme, 'cancelIcon', appearance, baseAppearance)}
 `;

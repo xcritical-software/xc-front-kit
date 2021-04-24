@@ -16,6 +16,7 @@ export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
   options,
   disabled = false,
   onChange,
+  checkIcon,
 }) => {
   const [values, setValues] = useState(propValues);
 
@@ -43,6 +44,7 @@ export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
       {
         options.map(({ value, label }) => (
           <Checkbox
+            checkIcon={ checkIcon }
             appearance={ appearance }
             baseAppearance={ baseAppearance }
             type={ type }

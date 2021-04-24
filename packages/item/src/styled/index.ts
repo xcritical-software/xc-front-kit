@@ -7,7 +7,9 @@ import {
   getBaseStyle,
   getItemInteractiveStyles,
 } from '../utils';
-import { IPrefixPostfixProps, IContentProps, IRootProps } from '../interfaces';
+import {
+  IPrefixPostfixProps, IContentWrapperProps, IRootProps, IWrapperProps,
+} from '../interfaces';
 
 
 export const Root = styled.div<IRootProps>`
@@ -44,24 +46,13 @@ export const Postfix = styled(PrefixPostfixBase)`
 `;
 
 
-export const ContentWrapper = styled.span`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  margin: 0;
-  overflow: hidden;
-
-  &:first-child {
-    margin: 0;
-  }
+export const Wrapper = styled.span<IWrapperProps>`
+  ${({ theme, appearance, baseAppearance }) => itemAppearanceTheme(theme, appearance, baseAppearance, 'wrapper')};
 `;
 
 
-export const Content = styled.span<IContentProps>`
-  display: block;
-  flex: 1 1 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
+export const ContentWrapper = styled.span<IContentWrapperProps>`
   white-space: ${({ allowMultiline }): string => (allowMultiline ? 'normal' : 'nowrap')};
   text-align: ${({ isRTL, textPosition = 'center' }): string => rtlSide(isRTL, textPosition)};
+  ${({ theme, appearance, baseAppearance }) => itemAppearanceTheme(theme, appearance, baseAppearance, 'contentWrapper')};
 `;

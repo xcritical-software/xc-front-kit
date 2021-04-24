@@ -7,8 +7,9 @@ import {
   IFilterStore,
   IStateRecivedFilter,
   IPayloadRemoveFilter,
-  IPayloadChangeFilter,
+  PayloadChangeFilterType,
   IPayloadInitFilters,
+  IStateFilter,
 } from '../interfaces';
 
 
@@ -51,7 +52,7 @@ export const removeFilter = (
 
 export const changeFilter = (
   state: IFilterStore,
-  { payload }: IFilterAction<IPayloadChangeFilter>,
+  { payload }: IFilterAction<PayloadChangeFilterType>,
 ): IFilterStore => {
   const { guid: id, field, value } = payload;
 
@@ -66,8 +67,14 @@ export const changeFilter = (
     }, ['drafts', `${index}`]);
   }
 
-  if (field === 'condition') {
-    const $state = setIn(state, value, ['drafts', `${index}`, 'condition']);
+  if (payload.field === 'condition') {
+    const { valueType, hasFieldForValue } = payload;
+
+    let $state = setIn(state, value, ['drafts', `${index}`, 'condition']);
+
+    if (valueType?.toLowerCase() === 'string' && hasFieldForValue) {
+      return $state;
+    }
 
     return setIn($state, null, ['drafts', `${index}`, 'value']);
   }
@@ -108,17 +115,22 @@ export const updateSelectedFilters = (
   { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
 ): IFilterStore => {
   const { drafts } = state;
-  const newFilters = filters.map((filter) => {
-    const draft = drafts.find((draftItem) => draftItem.column === filter.column);
 
-    if (draft) {
-      return draft;
+  let newFilters: IStateFilter[] = [];
+
+  filters.forEach((filter) => {
+    const filterDrafts = drafts.filter((draftItem) => draftItem.column === filter.column);
+
+    if (filterDrafts.length) {
+      newFilters = [...newFilters, ...filterDrafts];
+
+      return;
     }
 
-    return {
+    newFilters.push({
       ...filter,
       key: uuid(),
-    };
+    });
   });
 
   return setIn(state, newFilters, 'drafts');

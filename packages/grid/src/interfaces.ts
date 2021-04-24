@@ -85,6 +85,7 @@ export interface IGridProps {
   shouldFitLastColumn?: boolean;
   minColumnWidth?: number;
   gridProps?: IInternalGridProps;
+  onChangeExpand?: Function;
 }
 
 
