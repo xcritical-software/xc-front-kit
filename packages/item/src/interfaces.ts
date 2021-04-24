@@ -1,3 +1,5 @@
+import { CSSObject } from 'styled-components';
+
 import { ITheme, ICSSProperties } from '@xcritical/theme';
 
 
@@ -11,6 +13,8 @@ export interface IItemTheme extends ICSSProperties {
   borderRadius?: number;
   outline?: string;
   divided?: IDivided;
+  wrapper?: CSSObject;
+  contentWrapper?: CSSObject;
 }
 
 export type ItemTheme = ITheme<IItemTheme>;
@@ -50,10 +54,17 @@ export interface IPrefixPostfixProps {
   isRTL: boolean;
 }
 
-export interface IContentProps {
+export interface IWrapperProps {
+  appearance: string;
+  baseAppearance: string;
+}
+
+export interface IContentWrapperProps {
   allowMultiline: boolean;
   isRTL: boolean;
   textPosition: string;
+  appearance: string;
+  baseAppearance: string;
 }
 
 export interface IRootProps extends IItemProps {
