@@ -1,7 +1,7 @@
 import { CSSObject } from 'styled-components';
 
 import { IBlanketTheme } from '@xcritical/blanket';
-import { IThemeNamespace } from '@xcritical/theme';
+import { ITheme, IThemeNamespace } from '@xcritical/theme';
 
 import { XCRITICAL_MODAL_OPEN, XCRITICAL_MODAL_CLOSE } from './consts';
 
@@ -50,6 +50,10 @@ export interface IModalOwnProps {
   minWidth?: string;
   maxWidth?: string;
   width?: string;
+  height?: string;
+  maxHeight?: string;
+  minHeight?: string;
+  appearance?: string;
 }
 
 export interface IModalStoreProps {
@@ -62,8 +66,8 @@ export interface IModalDispatchProps {
 
 export interface IModalProps extends IModalOwnProps, IModalStoreProps, IModalDispatchProps {}
 
-/* THEME */
-export interface IModalTheme {
+
+export interface IBaseModalTheme {
   blanket?: IBlanketTheme;
   content?: CSSObject;
   headerWrapper?: CSSObject;
@@ -71,3 +75,5 @@ export interface IModalTheme {
   iconClose?: CSSObject;
   body?: CSSObject;
 }
+/* THEME */
+export type IModalTheme = ITheme<IBaseModalTheme>;

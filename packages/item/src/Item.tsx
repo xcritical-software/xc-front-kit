@@ -3,7 +3,7 @@ import { withTheme } from 'styled-components';
 
 import { IItemProps } from './interfaces';
 import {
-  Root, Prefix, Postfix, ContentWrapper, Content,
+  Root, Prefix, Postfix, Wrapper, ContentWrapper,
 } from './styled';
 
 
@@ -54,15 +54,20 @@ export const PureItem: FunctionComponent<IItemProps> = memo(({
           { prefix }
         </Prefix>
       ) }
-      <ContentWrapper>
-        <Content
+      <Wrapper
+        appearance={ appearance }
+        baseAppearance={ baseAppearance }
+      >
+        <ContentWrapper
+          appearance={ appearance }
+          baseAppearance={ baseAppearance }
           isRTL={ isRTL }
           textPosition={ textPosition }
           allowMultiline={ shouldAllowMultiline }
         >
           { children }
-        </Content>
-      </ContentWrapper>
+        </ContentWrapper>
+      </Wrapper>
       { !!postfix && (
         <Postfix
           isRTL={ isRTL }

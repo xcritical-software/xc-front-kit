@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {
   IMapDispatchFilterTag,
-  IPayloadChangeFilter,
+  PayloadChangeFilterType,
   ITagContainerProps,
 } from '../../interfaces';
 
@@ -26,7 +26,7 @@ const mapDispatchToProps = () => {
     if (!dispatchProps) {
       dispatchProps = {
         onChangeFilter: (
-          changes: IPayloadChangeFilter,
+          changes: PayloadChangeFilterType,
         ) => dispatch(xcriticalFiltersChangeFilter(name, changes)),
         onRemoveFilter: (guid) => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
         onAddCondition: (
