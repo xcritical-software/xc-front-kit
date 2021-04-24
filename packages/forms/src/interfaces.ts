@@ -35,6 +35,7 @@ export interface IFormStateMap {
 export type FormFieldProps<TComponentProps> = TComponentProps & {
   component: React.ComponentType<TComponentProps & IFormFieldComponentProps>;
   name: string;
+  innerRef?: any;
   onChange?: IFormFieldComponentProps['onChange'];
 };
 
