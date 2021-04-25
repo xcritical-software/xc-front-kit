@@ -1,12 +1,12 @@
-export const XCRITICAL_FORM_INIT = 'XCRITICAL_FORM_INIT';
-export const XCRITICAL_FORM_PROPERTY_CHANGE = 'XCRITICAL_FORM_PROPERTY_CHANGE';
-export const XCRITICAL_FORM_SAVED = 'XCRITICAL_FORM_SAVED';
-export const XCRITICAL_FORM_DELETE = 'XCRITICAL_FORM_DELETE';
-export const XCRITICAL_FORM_ERROR = 'XCRITICAL_FORM_ERROR';
-export const XCRITICAL_FORM_RESET = 'XCRITICAL_FORM_RESET';
-export const XCRITICAL_FORM_SHOW_ERRORS = 'XCRITICAL_FORM_SHOW_ERRORS';
-export const XCRITICAL_FORM_SET_FIELDS_META = 'XCRITICAL_FORM_SET_FIELDS_META';
-export const XCRITICAL_FORM_SET_FIELD_META = 'XCRITICAL_FORM_SET_FIELD_META';
+export const XCRITICAL_FORM_INIT = '@xcritical-form/init';
+export const XCRITICAL_FORM_PROPERTY_CHANGE = '@xcritical-form/property-change';
+export const XCRITICAL_FORM_SAVED = '@xcritical-form/saved';
+export const XCRITICAL_FORM_DELETE = '@xcritical-form/delete';
+export const XCRITICAL_FORM_ERROR = '@xcritical-form/error';
+export const XCRITICAL_FORM_RESET = '@xcritical-form/reset';
+export const XCRITICAL_FORM_SHOW_ERRORS = '@xcritical-form/show-errors';
+export const XCRITICAL_FORM_SET_FIELDS_META = '@xcritical-form/set-fields-meta';
+export const XCRITICAL_FORM_SET_FIELD_META = '@xcritical-form/set-field-meta';
 
 export type FormActionType =
   typeof XCRITICAL_FORM_INIT |
