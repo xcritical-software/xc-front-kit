@@ -135,8 +135,10 @@ export const formSelector = <TFormFields extends Record<string | number, any>>(
     : get(state.form, formName, initialState)
 );
 
-export function useFormData(formName: string, namespace?: string) {
-  return useSelector<any, any>((state) => formSelector(state, formName, namespace));
+export function useFormSelector<TFormModel = any>(formName: string, namespace?: string) {
+  return useSelector<any, IFormState<TFormModel>>((
+    state,
+  ) => formSelector(state, formName, namespace));
 }
 
 export default reducerDictionary(reducer, 'formName');
