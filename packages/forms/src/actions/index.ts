@@ -30,7 +30,7 @@ export interface IFormAction {
 
 
 export function xcriticalFormPropertyChange<
-  TFormModel extends {} = {},
+  TFormModel extends {} = any,
   TPropertyName extends keyof TFormModel = keyof TFormModel
 >(
   name: string,
