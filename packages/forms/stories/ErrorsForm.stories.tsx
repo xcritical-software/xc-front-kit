@@ -2,18 +2,17 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable import/no-unresolved */
 import React, { useEffect } from 'react';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 
 import { storiesOf } from '@storybook/react';
 
 import Input, { IInputProps } from '@xcritical/input';
 
 import Form, {
-  formSelector,
   xcriticalFormError,
   xcriticalFormInit,
   xcriticalFormShowErrors,
-  xcriticalFormSetFieldsMeta, FormField,
+  xcriticalFormSetFieldsMeta, FormField, useForm,
 } from '../src';
 
 import { InputWithErrorWrapper } from './SampleComponents';
@@ -72,7 +71,8 @@ storiesOf('Form', module)
   ))
   .add('Error Form', () => {
     const dispatch = useDispatch();
-    const form = useSelector((state) => formSelector(state, FORM_NAME));
+
+    const form = useForm(FORM_NAME);
 
     useEffect(() => {
       const validationErrors = validate(form.model);

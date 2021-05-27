@@ -1,6 +1,7 @@
 export const XCRITICAL_FORM_INIT = '@xcritical-form/init';
 export const XCRITICAL_FORM_PROPERTY_CHANGE = '@xcritical-form/property-change';
 export const XCRITICAL_FORM_SAVED = '@xcritical-form/saved';
+export const XCRITICAL_FORM_CHANGE = '@xcritical-form/change';
 export const XCRITICAL_FORM_DELETE = '@xcritical-form/delete';
 export const XCRITICAL_FORM_ERROR = '@xcritical-form/error';
 export const XCRITICAL_FORM_RESET = '@xcritical-form/reset';
@@ -17,13 +18,15 @@ export type FormActionType =
   typeof XCRITICAL_FORM_RESET |
   typeof XCRITICAL_FORM_SET_FIELDS_META |
   typeof XCRITICAL_FORM_SET_FIELD_META |
-  typeof XCRITICAL_FORM_SHOW_ERRORS;
+  typeof XCRITICAL_FORM_SHOW_ERRORS |
+  typeof XCRITICAL_FORM_CHANGE;
 
 export interface IFormAction {
   type: FormActionType;
   meta: {
     formName: string;
     isNew?: boolean;
+    commit?: boolean;
   };
   payload?: any;
 }
@@ -36,11 +39,13 @@ export function xcriticalFormPropertyChange<
   name: string,
   property: TPropertyName,
   value: TFormModel[TPropertyName],
+  commit: boolean = false,
 ): IFormAction {
   return {
     type: XCRITICAL_FORM_PROPERTY_CHANGE,
     meta: {
       formName: name,
+      commit,
     },
     payload: {
       field: property,
@@ -50,15 +55,18 @@ export function xcriticalFormPropertyChange<
   };
 }
 
-/**
- * @deprecated don't use this action
- */
-export function xcriticalFormChange(name: string, model: any): IFormAction {
+
+export function xcriticalFormChange(
+  name: string,
+  model: any,
+  commit: boolean = false,
+): IFormAction {
   return {
-    type: XCRITICAL_FORM_INIT,
+    type: XCRITICAL_FORM_CHANGE,
     payload: model,
     meta: {
       formName: name,
+      commit,
     },
   };
 }

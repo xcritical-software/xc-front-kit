@@ -53,4 +53,5 @@ export interface IFormFieldComponentProps {
   invalid: boolean;
   error?: string | string[];
   value: any;
+  initialValue?: any;
 }
