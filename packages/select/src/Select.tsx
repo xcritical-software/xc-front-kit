@@ -1,5 +1,5 @@
 import React, {
-  useRef, useContext, useMemo,
+  useContext, useMemo, memo, forwardRef,
 } from 'react';
 import Select from 'react-select';
 import { ThemeContext } from 'styled-components';
@@ -17,7 +17,7 @@ import { SelectProps, ISelectBaseTheme } from './interfaces';
 import { MenuList } from './styled/MenuList';
 
 
-export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
+export const PureSelect: React.FC<SelectProps> = memo(forwardRef<any, SelectProps>(({
   className,
   disabled = false,
   isMulti = false,
@@ -35,11 +35,9 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
   styles,
   onChange,
   ...rest
-}) => {
+}, ref) => {
   const themeContext = useContext<IThemeNamespace<ISelectBaseTheme>>(ThemeContext);
   const innerTheme = (theme ?? themeContext) || {};
-
-  const selectRef = useRef<any>();
 
   const formatOptionLabel = useMemo(() => getFormatOptionLabel(
     innerTheme,
@@ -60,7 +58,7 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
 
   return (
     <Select
-      ref={ selectRef }
+      ref={ ref }
       className={ className }
       classNamePrefix={ className }
       formatOptionLabel={ formatOptionLabel }
@@ -90,6 +88,6 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(({
       { ...rest }
     />
   );
-});
+}));
 
 export default PureSelect;
