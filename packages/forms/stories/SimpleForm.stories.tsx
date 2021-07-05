@@ -112,9 +112,6 @@ storiesOf('Form', module)
         </div>
         <div>
           <Button type="submit">Submit</Button>
-          <Button type="button">
-            Clear Values
-          </Button>
         </div>
         <FormField
           id="text"

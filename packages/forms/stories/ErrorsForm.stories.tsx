@@ -77,7 +77,7 @@ storiesOf('Form', module)
     useEffect(() => {
       const validationErrors = validate(form.model);
       dispatch(xcriticalFormError(FORM_NAME, validationErrors));
-    }, [form.model]);
+    }, [dispatch, form.model]);
 
 
     useEffect(() => {
@@ -144,7 +144,7 @@ storiesOf('Form', module)
           type="button"
           onClick={ handleChangeMeta }
         >
-          Change first and last fields meta to toched, changed
+          Change first and last fields meta to touched, changed
         </button>
       </>
     );
