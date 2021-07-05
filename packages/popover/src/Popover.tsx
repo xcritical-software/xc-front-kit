@@ -97,7 +97,7 @@ export const Popover: React.FC<IPopover> = memo(({
   }, [hideTimeoutId, changeVisible]);
 
   const handleMouseOut = useCallback((): void => {
-    const timeoutId = setTimeout(() => {
+    const timeoutId = window.setTimeout(() => {
       _setVisible(false);
       changeVisible(false);
     }, hoverOutTimeout);

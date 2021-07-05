@@ -23,8 +23,9 @@ export const reducerDictionary = (
 
 
 export const isEvent = ({
-  stopPropagation, preventDefault,
-}: Event): boolean => !!(stopPropagation && preventDefault);
+  stopPropagation, 
+  preventDefault,
+}: Record<string, any>): boolean => !!(stopPropagation && preventDefault);
 
 export const getValueFromNativeComponent = (event: Event): any => {
   if (isEvent(event)) {
