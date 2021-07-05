@@ -29,6 +29,7 @@ export const ModalPortal: React.FC<IModalProps> = ({
   maxHeight,
   minHeight,
   appearance = 'default',
+  zIndex,
 }) => {
   if (!isOpen) {
     return null;
@@ -40,6 +41,7 @@ export const ModalPortal: React.FC<IModalProps> = ({
     <Portal id={name} zIndex="unset">
       <Blanket
         isTinted
+        zIndex={zIndex}
         theme={modalBlanketTheme}
         onBlanketClicked={onModalCancel}
       />
