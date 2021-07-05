@@ -2,7 +2,6 @@ import { colors } from '@xcritical/theme';
 
 import { IModalTheme } from './interfaces';
 
-
 export const modalThemeNamespace = '@xcritical\\modal';
 
 export const defaultModalTheme: IModalTheme = {

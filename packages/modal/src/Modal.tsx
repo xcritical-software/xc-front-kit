@@ -9,13 +9,10 @@ import {
   ModalBody,
   ModalIconClose,
 } from './styled';
-
 import { MaxZIndexContext } from './ModalProvider';
-
 import { IModalProps } from './interfaces';
 import { getModalBlanketTheme } from './utils';
 import { IconClose } from './IconClose';
-
 
 export const Modal: React.FC<IModalProps> = ({
   isOpen,
@@ -34,7 +31,10 @@ export const Modal: React.FC<IModalProps> = ({
   appearance = 'default',
 }) => {
   const maxZIndex: number = useContext(MaxZIndexContext);
-  const zIndex = useMemo(() => (zIndexProp ?? maxZIndex + 1), [maxZIndex, zIndexProp]);
+  const zIndex = useMemo(() => zIndexProp ?? maxZIndex + 1, [
+    maxZIndex,
+    zIndexProp,
+  ]);
 
   if (!isOpen) {
     return null;
@@ -46,40 +46,26 @@ export const Modal: React.FC<IModalProps> = ({
     <>
       <Blanket
         isTinted
-        zIndex={ zIndex }
-        theme={ modalBlanketTheme }
-        onBlanketClicked={ onModalCancel }
+        zIndex={zIndex}
+        theme={modalBlanketTheme}
+        onBlanketClicked={onModalCancel}
       />
       <ModalContent
-        zIndex={ zIndex }
-        width={ width }
-        maxWidth={ maxWidth }
-        minWidth={ minWidth }
-        height={ height }
-        maxHeight={ maxHeight }
-        minHeight={ minHeight }
-        appearance={ appearance }
-      >
-        <ModalHeaderWrapper
-          appearance={ appearance }
-        >
-          <ModalHeader
-            appearance={ appearance }
-          >
-            { title }
-          </ModalHeader>
-          <ModalIconClose
-            onClick={ onModalCancel }
-            appearance={ appearance }
-          >
-            { iconClose || <IconClose /> }
+        zIndex={zIndex}
+        width={width}
+        maxWidth={maxWidth}
+        minWidth={minWidth}
+        height={height}
+        maxHeight={maxHeight}
+        minHeight={minHeight}
+        appearance={appearance}>
+        <ModalHeaderWrapper appearance={appearance}>
+          <ModalHeader appearance={appearance}>{title}</ModalHeader>
+          <ModalIconClose onClick={onModalCancel} appearance={appearance}>
+            {iconClose || <IconClose />}
           </ModalIconClose>
         </ModalHeaderWrapper>
-        <ModalBody
-          appearance={ appearance }
-        >
-          { children }
-        </ModalBody>
+        <ModalBody appearance={appearance}>{children}</ModalBody>
       </ModalContent>
     </>
   );

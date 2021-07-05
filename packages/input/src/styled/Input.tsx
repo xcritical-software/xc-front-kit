@@ -10,9 +10,9 @@ import {
 } from '../utils';
 import { ISubComponentProps, IStyledInput } from '../interfaces';
 
-
 const inputStyles = css<ISubComponentProps>`
-  ${({ theme, appearance, baseAppearance }) => getComponentStyle(theme, appearance, baseAppearance, 'control')}
+  ${({ theme, appearance, baseAppearance }) =>
+    getComponentStyle(theme, appearance, baseAppearance, 'control')}
 `;
 
 export const Root = styled.div<ISubComponentProps>`
@@ -25,7 +25,7 @@ export const Root = styled.div<ISubComponentProps>`
   width: ${({ shouldFitContainer }) => (shouldFitContainer ? '100%' : 'auto')};
   ${getRootInputStyles}
   ${getRootInputInteractiveStyles}
-  ${({ css: cssInner }: any) => (cssInner || null)}
+  ${({ css: cssInner }: any) => cssInner || null}
 `;
 
 const PrefixSuffixBase = styled.span<ISubComponentProps>`
@@ -41,13 +41,17 @@ export const Prefix = styled(PrefixSuffixBase)`
   theme,
   appearance = 'default',
   baseAppearance = 'default',
-}) => inputApperanceTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
+}) =>
+  inputApperanceTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
 `;
 
 export const Postfix = styled(PrefixSuffixBase)`
-  margin-${({ isRTL }) => (isRTL ? 'right' : 'left')}: ${(
-  { theme, appearance = 'default', baseAppearance = 'default' },
-) => inputApperanceTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
+  margin-${({ isRTL }) => (isRTL ? 'right' : 'left')}: ${({
+  theme,
+  appearance = 'default',
+  baseAppearance = 'default',
+}) =>
+  inputApperanceTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
 `;
 
 export const StyledInput = styled.input<IStyledInput>`
@@ -58,28 +62,25 @@ export const StyledInput = styled.input<IStyledInput>`
   outline: 0;
   padding: 0;
   margin: 0;
-  ${({ theme, appearance, baseAppearance }) => getComponentStyle(theme, appearance, baseAppearance, 'input')}
+  ${({ theme, appearance, baseAppearance }) =>
+    getComponentStyle(theme, appearance, baseAppearance, 'input')}
   ${getInputInteractiveStyles}
-  ${({ type, showArrows }) => ((type === 'number' && !showArrows)
-    ? css`
-              ::-webkit-outer-spin-button,
-              ::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-              }
+  ${({ type, showArrows }) =>
+    type === 'number' && !showArrows
+      ? css`
+          ::-webkit-outer-spin-button,
+          ::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
 
-              -moz-appearance: textfield;
-            `
-    : css``)};
-
+          -moz-appearance: textfield;
+        `
+      : css``};
 `;
 
-
 export const ClearIconWrapper = styled.div<ISubComponentProps>`
-  ${({
-    theme,
-    appearance,
-    baseAppearance,
-  }) => getComponentStyle(theme, appearance, baseAppearance, 'clearWrapper')}
+  ${({ theme, appearance, baseAppearance }) =>
+    getComponentStyle(theme, appearance, baseAppearance, 'clearWrapper')}
   ${getCloseIconInteractiveStyles}
 `;

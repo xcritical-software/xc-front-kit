@@ -10,10 +10,9 @@ import Form, { FormField } from '../src';
 import { Input } from './SampleComponents';
 import store from './store';
 
-
 storiesOf('Form', module)
   .addDecorator((Story) => (
-    <Provider store={ store }>
+    <Provider store={store}>
       <Story />
     </Provider>
   ))
@@ -26,7 +25,7 @@ storiesOf('Form', module)
           <div>
             <FormField
               name="firstName"
-              component={ Input }
+              component={Input}
               type="text"
               placeholder="First Name"
             />
@@ -37,7 +36,7 @@ storiesOf('Form', module)
           <div>
             <FormField
               name="lastName"
-              component={ Input }
+              component={Input}
               type="text"
               placeholder="Last Name"
             />
@@ -51,7 +50,7 @@ storiesOf('Form', module)
           <div>
             <FormField
               name="firstName"
-              component={ Input }
+              component={Input}
               type="text"
               placeholder="First Name"
             />
@@ -62,7 +61,7 @@ storiesOf('Form', module)
           <div>
             <FormField
               name="lastName"
-              component={ Input }
+              component={Input}
               type="text"
               placeholder="Last Name"
             />

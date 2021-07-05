@@ -8,7 +8,6 @@ import Modal from '@xcritical/modal';
 
 import Drawer, { drawerThemeNamespace, DrawerTheme } from '../src';
 
-
 interface IBasicDrawerProps {
   appearance?: string;
   isRTL?: boolean;
@@ -22,7 +21,7 @@ interface IBasicDrawerProps {
 const generateTheme = (
   padding: number,
   baseBgColor: string,
-  textColor: string,
+  textColor: string
 ): DrawerTheme => ({
   appearance: {
     default: {
@@ -114,21 +113,22 @@ const BasicDrawer = ({
   };
 
   return (
-    <ThemeProvider theme={ { [drawerThemeNamespace]: theme } }>
+    <ThemeProvider theme={{ [drawerThemeNamespace]: theme }}>
       <Drawer
-        isOpen={ isOpen }
-        onOutsideClick={ handleClick }
-        appearance={ appearance }
-        isRTL={ isRTL }
-        isMovable={ isMovable }
-        withCloseButton={ withCloseButton }
-        closeIconComponent={ closeIconComponent }
-        onClose={ onClose }
-        withBlanket={ withBlanket }
-      >
+        isOpen={isOpen}
+        onOutsideClick={handleClick}
+        appearance={appearance}
+        isRTL={isRTL}
+        isMovable={isMovable}
+        withCloseButton={withCloseButton}
+        closeIconComponent={closeIconComponent}
+        onClose={onClose}
+        withBlanket={withBlanket}>
         <div>Content</div>
       </Drawer>
-      <button type="button" onClick={ handleClick }>Click for show/hide Drawer</button>
+      <button type="button" onClick={handleClick}>
+        Click for show/hide Drawer
+      </button>
     </ThemeProvider>
   );
 };
@@ -159,28 +159,28 @@ const DynamicDrawer = ({
   }, [isOpen]);
 
   return (
-    <ThemeProvider theme={ { [drawerThemeNamespace]: theme } }>
+    <ThemeProvider theme={{ [drawerThemeNamespace]: theme }}>
       <Drawer
-        isOpen={ isOpen }
-        onOutsideClick={ handleClick }
-        appearance={ appearance }
-        isRTL={ isRTL }
-        isMovable={ isMovable }
-        withCloseButton={ withCloseButton }
-        closeIconComponent={ closeIconComponent }
-        onClose={ onClose }
-        withBlanket={ withBlanket }
-        minWidth={ minWidthProp }
-        maxWidth={ maxWidthProp }
-      >
-        { maxWidthProp > 1000
-        && <div style={ { fontSize: '450px' } }>MAX</div> }
-        { maxWidthProp < 1000 && maxWidthProp > 650
-        && <div style={ { fontSize: '170px' } }>MIDDLE</div> }
-        { maxWidthProp < 650
-        && <div style={ { fontSize: '170px' } }>MIN</div> }
+        isOpen={isOpen}
+        onOutsideClick={handleClick}
+        appearance={appearance}
+        isRTL={isRTL}
+        isMovable={isMovable}
+        withCloseButton={withCloseButton}
+        closeIconComponent={closeIconComponent}
+        onClose={onClose}
+        withBlanket={withBlanket}
+        minWidth={minWidthProp}
+        maxWidth={maxWidthProp}>
+        {maxWidthProp > 1000 && <div style={{ fontSize: '450px' }}>MAX</div>}
+        {maxWidthProp < 1000 && maxWidthProp > 650 && (
+          <div style={{ fontSize: '170px' }}>MIDDLE</div>
+        )}
+        {maxWidthProp < 650 && <div style={{ fontSize: '170px' }}>MIN</div>}
       </Drawer>
-      <button type="button" onClick={ handleClick }>Click for show Drawer</button>
+      <button type="button" onClick={handleClick}>
+        Click for show Drawer
+      </button>
     </ThemeProvider>
   );
 };
@@ -231,7 +231,7 @@ storiesOf('Drawer', module)
   .add('With custom close icon', () => (
     <div>
       <GlobalStyle />
-      <BasicDrawer withCloseButton closeIconComponent={ <div>X</div> } />
+      <BasicDrawer withCloseButton closeIconComponent={<div>X</div>} />
     </div>
   ))
   .add('Do something after closing Drawer', () => {
@@ -241,13 +241,12 @@ storiesOf('Drawer', module)
 
     return (
       <div>
-        <BasicDrawer withCloseButton onClose={ onCloseDrawer } />
+        <BasicDrawer withCloseButton onClose={onCloseDrawer} />
         <Modal
           name="modal"
           title="☠️"
-          isOpen={ isOpen }
-          onModalCancel={ onCloseModal }
-        >
+          isOpen={isOpen}
+          onModalCancel={onCloseModal}>
           <div>Bye-bye, Drawer!</div>
         </Modal>
       </div>
@@ -256,18 +255,18 @@ storiesOf('Drawer', module)
   .add('Without Blanket', () => (
     <div>
       <GlobalStyle />
-      <BasicDrawer withBlanket={ false } withCloseButton closeIconComponent={ <div>X</div> } />
-      <p>
-        { 'lorem impsum long text '.repeat(600) }
-      </p>
+      <BasicDrawer
+        withBlanket={false}
+        withCloseButton
+        closeIconComponent={<div>X</div>}
+      />
+      <p>{'lorem impsum long text '.repeat(600)}</p>
     </div>
   ))
   .add('With dynamic maxWidth', () => (
     <div>
       <GlobalStyle />
-      <DynamicDrawer withCloseButton closeIconComponent={ <div>X</div> } />
-      <p>
-        Try to change browser width and then to open the Drawer again!
-      </p>
+      <DynamicDrawer withCloseButton closeIconComponent={<div>X</div>} />
+      <p>Try to change browser width and then to open the Drawer again!</p>
     </div>
   ));

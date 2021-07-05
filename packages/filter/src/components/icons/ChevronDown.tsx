@@ -1,8 +1,11 @@
 import React from 'react';
 
-
 export const ChevronDown = () => (
-  <svg width="12" height="8" viewBox="0 0 12 8" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="12"
+    height="8"
+    viewBox="0 0 12 8"
+    xmlns="http://www.w3.org/2000/svg">
     <path
       fillRule="evenodd"
       clipRule="evenodd"

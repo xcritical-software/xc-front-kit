@@ -6,7 +6,6 @@ import {
   PayloadChangeFilterType,
   ITagContainerProps,
 } from '../../interfaces';
-
 import {
   xcriticalFiltersChangeFilter,
   xcriticalFiltersRemoveFilter,
@@ -15,27 +14,24 @@ import {
 
 import { Tag } from './Tag';
 
-
 const mapDispatchToProps = () => {
   let dispatchProps: IMapDispatchFilterTag;
 
-  return (
-    dispatch: Dispatch,
-    { name }: ITagContainerProps,
-  ) => {
+  return (dispatch: Dispatch, { name }: ITagContainerProps) => {
     if (!dispatchProps) {
       dispatchProps = {
-        onChangeFilter: (
-          changes: PayloadChangeFilterType,
-        ) => dispatch(xcriticalFiltersChangeFilter(name, changes)),
-        onRemoveFilter: (guid) => dispatch(xcriticalFiltersRemoveFilter(name, guid)),
-        onAddCondition: (
-          filterName: string,
-        ) => dispatch(xcriticalFiltersAdd(name, {
-          column: filterName,
-          condition: '',
-          value: '',
-        })),
+        onChangeFilter: (changes: PayloadChangeFilterType) =>
+          dispatch(xcriticalFiltersChangeFilter(name, changes)),
+        onRemoveFilter: (guid) =>
+          dispatch(xcriticalFiltersRemoveFilter(name, guid)),
+        onAddCondition: (filterName: string) =>
+          dispatch(
+            xcriticalFiltersAdd(name, {
+              column: filterName,
+              condition: '',
+              value: '',
+            })
+          ),
       };
     }
 
@@ -43,8 +39,7 @@ const mapDispatchToProps = () => {
   };
 };
 
-
 export default connect<null, IMapDispatchFilterTag, ITagContainerProps>(
   null,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Tag);

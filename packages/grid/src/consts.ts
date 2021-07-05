@@ -1,11 +1,10 @@
-export enum GridPositions{
+export enum GridPositions {
   LEFT = 'LEFT',
   CENTER = 'CENTER',
   RIGHT = 'RIGHT',
 }
 
-
-export enum GridSort{
+export enum GridSort {
   ASC = 'ASC',
-  DESC = 'DESC'
+  DESC = 'DESC',
 }

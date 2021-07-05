@@ -1,8 +1,10 @@
 import { DetailedHTMLProps, FormHTMLAttributes, Ref } from 'react';
 
-
 export interface IFormProps
-  extends DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> {
+  extends DetailedHTMLProps<
+    FormHTMLAttributes<HTMLFormElement>,
+    HTMLFormElement
+  > {
   name: string;
   namespace?: string;
 }
@@ -32,14 +34,11 @@ export interface IFormStateMap {
   [formName: string]: IFormState;
 }
 
-export type ElementRef<C> =
-        'ref' extends keyof C
-          ? NonNullable<C['ref']> extends Ref<
-          infer Instance
-          >
-            ? Instance
-            : never
-          : never;
+export type ElementRef<C> = 'ref' extends keyof C
+  ? NonNullable<C['ref']> extends Ref<infer Instance>
+    ? Instance
+    : never
+  : never;
 
 export type FormFieldProps<TComponentProps> = TComponentProps & {
   component: React.ComponentType<TComponentProps & IFormFieldComponentProps>;

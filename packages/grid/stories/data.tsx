@@ -8,22 +8,36 @@ import { ICellRenderParams, IColumn, IMappedItem } from '../src/interfaces';
 import { Popover, popoverThemeNamespace } from '../../popover';
 import { GridPositions } from '../src/consts';
 
-
 const renderFunc = (
   field: any,
   fieldName: string,
   _: IMappedItem,
   rowIndex: number,
-  { parentItem }: ICellRenderParams,
+  { parentItem }: ICellRenderParams
 ) => {
+  // eslint-disable-next-line no-console
   console.log(fieldName, rowIndex, parentItem);
 
   return (
     <>
-      { field.current }
-      { field.diff > 0 ? <KeyboardArrowUpIcon color="green" size="16px" className="color-jungle-green" /> : null }
-      { field.diff < 0 ? <KeyboardArrowDownIcon color="red" size="16px" className="color-rose-madder" /> : null }
-      { !(field.diff < 0 || field.diff > 0) ? <EqualIcon size="16px" color="transparent" /> : null }
+      {field.current}
+      {field.diff > 0 ? (
+        <KeyboardArrowUpIcon
+          color="green"
+          size="16px"
+          className="color-jungle-green"
+        />
+      ) : null}
+      {field.diff < 0 ? (
+        <KeyboardArrowDownIcon
+          color="red"
+          size="16px"
+          className="color-rose-madder"
+        />
+      ) : null}
+      {!(field.diff < 0 || field.diff > 0) ? (
+        <EqualIcon size="16px" color="transparent" />
+      ) : null}
     </>
   );
 };
@@ -171,21 +185,13 @@ const PopoverCell = ({ content }) => (
   <Popover
     position="bottom center"
     trigger="click"
-    theme={ popoverTheme }
+    theme={popoverTheme}
     positionFixed
-    convertStyles={ convertStyles }
-    content={ (
-      <PopoverContent>
-        { content }
-      </PopoverContent>
-    ) }
-  >
-    <div style={ { cursor: 'pointer' } }>
-      col 2 popover
-    </div>
+    convertStyles={convertStyles}
+    content={<PopoverContent>{content}</PopoverContent>}>
+    <div style={{ cursor: 'pointer' }}>col 2 popover</div>
   </Popover>
 );
-
 
 const createDublicateRows = (n: any) => {
   const res: any[] = [];
@@ -194,7 +200,11 @@ const createDublicateRows = (n: any) => {
       price: Math.floor(Math.random() * 100000 + 10000),
       make: generateLorem(Math.floor(Math.random() * 10 + 1)),
       model: generateLorem(Math.floor(Math.random() * 10 + 1)),
-      col1: <PopoverCell content={ generateLorem(Math.floor(Math.random() * 60 + 1)) } />,
+      col1: (
+        <PopoverCell
+          content={generateLorem(Math.floor(Math.random() * 60 + 1))}
+        />
+      ),
       col2: generateLorem(Math.floor(Math.random() * 3 + 1)),
       col3: generateLorem(Math.floor(Math.random() * 5 + 1)),
       col4: generateLorem(Math.floor(Math.random() * 10 + 1)),
@@ -450,43 +460,96 @@ export const rowsWithChildren = [
   },
 ];
 
-
 export const columnsWithRender: IColumn[] = [
   {
-    field: 'zero', headerName: 'zero'.toUpperCase(), width: 300, visible: true, isExpandable: true, center: false,
+    field: 'zero',
+    headerName: 'zero'.toUpperCase(),
+    width: 300,
+    visible: true,
+    isExpandable: true,
+    center: false,
   },
   {
-    render: renderFunc, field: 'one', headerName: 'one'.toUpperCase(), width: 100, visible: true, center: true,
+    render: renderFunc,
+    field: 'one',
+    headerName: 'one'.toUpperCase(),
+    width: 100,
+    visible: true,
+    center: true,
   },
   {
-    render: renderFunc, field: 'two', headerName: 'two'.toUpperCase(), width: 100, visible: true, center: true,
+    render: renderFunc,
+    field: 'two',
+    headerName: 'two'.toUpperCase(),
+    width: 100,
+    visible: true,
+    center: true,
   },
   {
-    render: renderFunc, field: 'three', headerName: 'three'.toUpperCase(), width: 100, visible: true, center: true,
+    render: renderFunc,
+    field: 'three',
+    headerName: 'three'.toUpperCase(),
+    width: 100,
+    visible: true,
+    center: true,
   },
   {
-    render: renderFunc, field: 'four', headerName: 'four'.toUpperCase(), width: 100, visible: true, center: true,
+    render: renderFunc,
+    field: 'four',
+    headerName: 'four'.toUpperCase(),
+    width: 100,
+    visible: true,
+    center: true,
   },
   {
-    render: renderFunc, field: 'five', headerName: 'five'.toUpperCase(), width: 100, visible: true, center: true,
+    render: renderFunc,
+    field: 'five',
+    headerName: 'five'.toUpperCase(),
+    width: 100,
+    visible: true,
+    center: true,
   },
   {
-    render: renderFunc, field: 'six', headerName: 'six'.toUpperCase(), width: 100, visible: true, center: true,
+    render: renderFunc,
+    field: 'six',
+    headerName: 'six'.toUpperCase(),
+    width: 100,
+    visible: true,
+    center: true,
   },
   {
-    render: renderFunc, field: 'saven', headerName: 'saven'.toUpperCase(), width: 100, visible: true, center: true,
+    render: renderFunc,
+    field: 'saven',
+    headerName: 'saven'.toUpperCase(),
+    width: 100,
+    visible: true,
+    center: true,
   },
   {
-    render: renderFunc, field: 'eight', headerName: 'eight'.toUpperCase(), width: 100, visible: true, center: true,
+    render: renderFunc,
+    field: 'eight',
+    headerName: 'eight'.toUpperCase(),
+    width: 100,
+    visible: true,
+    center: true,
   },
   {
-    render: renderFunc, field: 'nine', headerName: 'nine'.toUpperCase(), width: 100, visible: true, center: true,
+    render: renderFunc,
+    field: 'nine',
+    headerName: 'nine'.toUpperCase(),
+    width: 100,
+    visible: true,
+    center: true,
   },
   {
-    render: renderFunc, field: 'ten', headerName: 'ten'.toUpperCase(), width: 100, visible: true, center: true,
+    render: renderFunc,
+    field: 'ten',
+    headerName: 'ten'.toUpperCase(),
+    width: 100,
+    visible: true,
+    center: true,
   },
 ];
-
 
 const createObject = () => ({
   current: Math.floor(Math.random() * 100),
@@ -508,14 +571,14 @@ const createItem = (x) => ({
   children: Math.random() > 0.8 && !!x ? createRowsWithRender(x) : null,
 });
 
-
-export function createRowsWithRender (x = 3) {
+export function createRowsWithRender(x = 3) {
   x -= 1;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  return new Array(Math.floor(Math.random() * 5 + 5)).fill(true).map((_el) => createItem(x));
+  return new Array(Math.floor(Math.random() * 5 + 5))
+    .fill(true)
+    .map((_el) => createItem(x));
 }
-
 
 const items = [
   'one',
@@ -541,8 +604,8 @@ const getWidth = (i) => {
   return 200;
 };
 
-export const columnsFixed = (fixeds) => items
-  .map((el, i) => {
+export const columnsFixed = (fixeds) =>
+  items.map((el, i) => {
     const column: IColumn = {
       headerName: el,
       field: el,
@@ -553,25 +616,33 @@ export const columnsFixed = (fixeds) => items
     };
 
     /* eslint-disable no-mixed-operators */
-    if ((fixeds === 'both' || fixeds === 'left') && i === 2) column.fixedPosition = GridPositions.LEFT;
+    if ((fixeds === 'both' || fixeds === 'left') && i === 2)
+      column.fixedPosition = GridPositions.LEFT;
 
-    if ((fixeds === 'both' || fixeds === 'right') && i === 5) column.fixedPosition = GridPositions.RIGHT;
+    if ((fixeds === 'both' || fixeds === 'right') && i === 5)
+      column.fixedPosition = GridPositions.RIGHT;
     /* eslint-enable no-mixed-operators */
 
     return column;
   });
 
+export const totalsFixed = items.reduce(
+  (acc, el) => ({ ...acc, [el]: Math.floor(Math.random() * 100 + 50) }),
+  {}
+);
 
-export const totalsFixed = items
-  .reduce((acc, el) => ({ ...acc, [el]: Math.floor(Math.random() * 100 + 50) }), {});
-
-export const rowsFixed = new Array(1000).fill(true)
-  .map((_el, i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {
-    children: i === 3 || i === 10 || i === 40
-      ? new Array(5).fill(true)
-        .map((_$el, $i) => items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${$i}` }), {}))
-      : null,
-  }));
+export const rowsFixed = new Array(1000).fill(true).map((_el, i) =>
+  items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${i}` }), {
+    children:
+      i === 3 || i === 10 || i === 40
+        ? new Array(5)
+            .fill(true)
+            .map((_$el, $i) =>
+              items.reduce((acc, el) => ({ ...acc, [el]: `${el} ${$i}` }), {})
+            )
+        : null,
+  })
+);
 
 const getRand = () => Math.floor(Math.random() * 255);
 
@@ -589,8 +660,8 @@ const CustomReactHeaderNameStyled = styled.div`
 `;
 
 export const CustomReactHeaderName = ({ text }) => (
-  <CustomReactHeaderNameStyled color={ getRandColor() }>
-    { text }
+  <CustomReactHeaderNameStyled color={getRandColor()}>
+    {text}
   </CustomReactHeaderNameStyled>
 );
 

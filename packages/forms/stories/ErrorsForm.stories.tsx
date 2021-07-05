@@ -3,7 +3,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { useEffect } from 'react';
 import { Provider, useDispatch } from 'react-redux';
-
 import { storiesOf } from '@storybook/react';
 
 import Input, { IInputProps } from '@xcritical/input';
@@ -12,12 +11,13 @@ import Form, {
   xcriticalFormError,
   xcriticalFormInit,
   xcriticalFormShowErrors,
-  xcriticalFormSetFieldsMeta, FormField, useForm,
+  xcriticalFormSetFieldsMeta,
+  FormField,
+  useForm,
 } from '../src';
 
 import { InputWithErrorWrapper } from './SampleComponents';
 import store from './store';
-
 
 const errors = {
   firstName: 'error to firstName field',
@@ -39,11 +39,14 @@ const validate = (model) => ({
   age: model.age === '123' ? errors.age : null,
 });
 
-const InputWithError = ({ error, ...props }: IInputProps & { error?: string}) => (
+const InputWithError = ({
+  error,
+  ...props
+}: IInputProps & { error?: string }) => (
   <InputWithErrorWrapper>
-    <Input { ...props } />
+    <Input {...props} />
     <br />
-    { error && <span>{ error }</span> }
+    {error && <span>{error}</span>}
   </InputWithErrorWrapper>
 );
 
@@ -62,10 +65,9 @@ const changedMeta = {
   },
 };
 
-
 storiesOf('Form', module)
   .addDecorator((Story) => (
-    <Provider store={ store }>
+    <Provider store={store}>
       <Story />
     </Provider>
   ))
@@ -78,7 +80,6 @@ storiesOf('Form', module)
       const validationErrors = validate(form.model);
       dispatch(xcriticalFormError(FORM_NAME, validationErrors));
     }, [dispatch, form.model]);
-
 
     useEffect(() => {
       dispatch(xcriticalFormError(FORM_NAME, errors));
@@ -97,13 +98,13 @@ storiesOf('Form', module)
       <>
         <h1>Form with errors</h1>
         <p>Error value = 123</p>
-        <Form name={ FORM_NAME }>
+        <Form name={FORM_NAME}>
           <div>
             <label>First Name</label>
             <div>
               <FormField
                 name="firstName"
-                component={ InputWithError }
+                component={InputWithError}
                 type="text"
                 placeholder="First Name"
               />
@@ -114,7 +115,7 @@ storiesOf('Form', module)
             <div>
               <FormField
                 name="lastName"
-                component={ InputWithError }
+                component={InputWithError}
                 type="text"
                 placeholder="Last Name"
               />
@@ -125,7 +126,7 @@ storiesOf('Form', module)
             <div>
               <FormField
                 name="age"
-                component={ InputWithError }
+                component={InputWithError}
                 type="text"
                 placeholder="Age"
               />
@@ -134,16 +135,12 @@ storiesOf('Form', module)
         </Form>
         <button
           type="button"
-          style={ { marginBottom: '10px' } }
-          onClick={ handleToggleShowErrors }
-        >
+          style={{ marginBottom: '10px' }}
+          onClick={handleToggleShowErrors}>
           Toggle showAllActions
         </button>
         <br />
-        <button
-          type="button"
-          onClick={ handleChangeMeta }
-        >
+        <button type="button" onClick={handleChangeMeta}>
           Change first and last fields meta to touched, changed
         </button>
       </>

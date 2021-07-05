@@ -1,6 +1,5 @@
 import { colors } from '@xcritical/theme';
 
-
 export const blanketThemeNamespace = '@xcritical\\blanket';
 
 export const defaultBlanketTheme = {

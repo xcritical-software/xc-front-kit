@@ -2,9 +2,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable import/no-unresolved */
 import React from 'react';
-
 import { storiesOf } from '@storybook/react';
-
 import { Provider } from 'react-redux';
 
 import Input from '@xcritical/input';
@@ -13,10 +11,9 @@ import Form, { FormField } from '../src';
 
 import { storeWithNamespace } from './store';
 
-
 storiesOf('Form', module)
   .addDecorator((Story) => (
-    <Provider store={ storeWithNamespace }>
+    <Provider store={storeWithNamespace}>
       <Story />
     </Provider>
   ))
@@ -29,7 +26,7 @@ storiesOf('Form', module)
           <div>
             <FormField
               name="firstName"
-              component={ Input }
+              component={Input}
               type="text"
               placeholder="First Name"
             />
@@ -40,7 +37,7 @@ storiesOf('Form', module)
           <div>
             <FormField
               name="lastName"
-              component={ Input }
+              component={Input}
               type="text"
               placeholder="Last Name"
             />

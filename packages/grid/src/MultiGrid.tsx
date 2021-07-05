@@ -4,7 +4,6 @@ import InternalGrid from './InternalGrid';
 import { IMultiGrid } from './interfaces';
 import { GridPositions } from './consts';
 
-
 export const MultiGrid: React.FC<IMultiGrid> = ({
   width,
   height,
@@ -14,7 +13,6 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
   shouldChangeLeftColumnsWidth,
   shouldChangeRightColumnsWidth,
 
-
   leftMappedColumns,
   centerMappedColumns,
   rightMappedColumns,
@@ -22,7 +20,6 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
   setLeftMappedColumns,
   setCenterMappedColumns,
   setRightMappedColumns,
-
 
   leftFixedWidth,
   rightFixedWidth,
@@ -39,68 +36,64 @@ export const MultiGrid: React.FC<IMultiGrid> = ({
   allGridsProps,
 }: IMultiGrid) => (
   <>
-    { leftMappedColumns.length ? (
+    {leftMappedColumns.length ? (
       <InternalGrid
-        rightScroll={ false }
-        bottomScroll={ false }
-        height={ height }
-        width={ leftFixedWidth }
-
-        shouldMovingColumns={ false }
-        shouldChangeColumnsWidth={ shouldChangeLeftColumnsWidth }
-
-        scrollTop={ scrollTop }
-        onScrollsyncScroll={ onScroll }
-
-        gridHOCMappedColumns={ leftMappedColumns }
-        setGridHOCMappedColumns={ setLeftMappedColumns }
-        shouldFitLastColumn={ false }
+        rightScroll={false}
+        bottomScroll={false}
+        height={height}
+        width={leftFixedWidth}
+        shouldMovingColumns={false}
+        shouldChangeColumnsWidth={shouldChangeLeftColumnsWidth}
+        scrollTop={scrollTop}
+        onScrollsyncScroll={onScroll}
+        gridHOCMappedColumns={leftMappedColumns}
+        setGridHOCMappedColumns={setLeftMappedColumns}
+        shouldFitLastColumn={false}
         resizeGridAfterResizeLastColumn
-        gridPosition={ GridPositions.LEFT }
+        gridPosition={GridPositions.LEFT}
         shiftFirstColumn
-        { ...allGridsProps }
+        {...allGridsProps}
       />
-    ) : null }
-    {
-      centerMappedColumns.length ? (
-        <InternalGrid
-          rightScroll={ !rightMappedColumns.length }
-          width={ width - leftFixedWidth - rightFixedWidth }
-          height={ height }
-          shouldMovingColumns={ shouldMovingColumns }
-          shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-
-          onScrollsyncScroll={ onScroll }
-          scrollTop={ scrollTop }
-          shouldFitLastColumn={ shouldFitLastColumn }
-          gridHOCMappedColumns={ centerMappedColumns }
-          setGridHOCMappedColumns={ setCenterMappedColumns }
-          gridPosition={ GridPositions.CENTER }
-          isScrollingOptOut={ isScrollingOptOut }
-          overscanColumnCount={ overscanColumnCount }
-          overscanRowCount={ overscanRowCount }
-          shiftFirstColumn={ !leftMappedColumns.length }
-          { ...allGridsProps }
-        />
-      ) : null
-    }
-    { rightMappedColumns.length ? (
+    ) : null}
+    {centerMappedColumns.length ? (
       <InternalGrid
-        width={ rightFixedWidth }
-        height={ height }
-        bottomScroll={ false }
-        shouldMovingColumns={ false }
-        shouldChangeColumnsWidth={ shouldChangeRightColumnsWidth }
-        shouldFitLastColumn={ false }
-        onScrollsyncScroll={ onScroll }
-        scrollTop={ scrollTop }
-        gridHOCMappedColumns={ rightMappedColumns }
-        setGridHOCMappedColumns={ setRightMappedColumns }
-        resizeGridAfterResizeLastColumn
-        gridPosition={ GridPositions.RIGHT }
-        shiftFirstColumn={ !leftMappedColumns.length && !centerMappedColumns.length }
-        { ...allGridsProps }
+        rightScroll={!rightMappedColumns.length}
+        width={width - leftFixedWidth - rightFixedWidth}
+        height={height}
+        shouldMovingColumns={shouldMovingColumns}
+        shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+        onScrollsyncScroll={onScroll}
+        scrollTop={scrollTop}
+        shouldFitLastColumn={shouldFitLastColumn}
+        gridHOCMappedColumns={centerMappedColumns}
+        setGridHOCMappedColumns={setCenterMappedColumns}
+        gridPosition={GridPositions.CENTER}
+        isScrollingOptOut={isScrollingOptOut}
+        overscanColumnCount={overscanColumnCount}
+        overscanRowCount={overscanRowCount}
+        shiftFirstColumn={!leftMappedColumns.length}
+        {...allGridsProps}
       />
-    ) : null }
+    ) : null}
+    {rightMappedColumns.length ? (
+      <InternalGrid
+        width={rightFixedWidth}
+        height={height}
+        bottomScroll={false}
+        shouldMovingColumns={false}
+        shouldChangeColumnsWidth={shouldChangeRightColumnsWidth}
+        shouldFitLastColumn={false}
+        onScrollsyncScroll={onScroll}
+        scrollTop={scrollTop}
+        gridHOCMappedColumns={rightMappedColumns}
+        setGridHOCMappedColumns={setRightMappedColumns}
+        resizeGridAfterResizeLastColumn
+        gridPosition={GridPositions.RIGHT}
+        shiftFirstColumn={
+          !leftMappedColumns.length && !centerMappedColumns.length
+        }
+        {...allGridsProps}
+      />
+    ) : null}
   </>
 );

@@ -1,6 +1,5 @@
 import { rtlSide, rtlSwapper } from '../src';
 
-
 describe('This is the tests for the rtl utils', () => {
   test('rtlSide checking', () => {
     expect(rtlSide(true, 'left')).toEqual('right');

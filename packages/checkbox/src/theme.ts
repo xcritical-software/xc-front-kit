@@ -2,7 +2,6 @@ import { colors } from '@xcritical/theme';
 
 import { CheckboxTheme } from './interfaces';
 
-
 export const checkboxThemeNamespace = '@xcritical\\checkbox';
 
 export const defaultCheckboxTheme: CheckboxTheme = {

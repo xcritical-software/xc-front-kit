@@ -3,7 +3,6 @@ import { IThemeNamespace } from '@xcritical/theme';
 import { selectThemeNamespace } from '../src';
 import { ISelectBaseTheme } from '../src/interfaces';
 
-
 export const customTheme: IThemeNamespace<ISelectBaseTheme> = {
   [selectThemeNamespace]: {
     appearance: {
@@ -61,7 +60,6 @@ export const customTheme: IThemeNamespace<ISelectBaseTheme> = {
           paddingTop: '11px',
           hover: {
             background: 'linear-gradient(to top, #505050, #424242)',
-
           },
           focus: {
             boxShadow: 'none',

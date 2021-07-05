@@ -1,13 +1,8 @@
-import React, {
-  useRef, useCallback, useState, useEffect,
-} from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 
-import {
-  RightBorder, HeaderCell, HeaderCellContent,
-} from './styled';
+import { RightBorder, HeaderCell, HeaderCellContent } from './styled';
 import { IHeaderCellWrapper } from './interfaces';
 import { HeaderCellContentWrapper } from './HeaderCellContentWrapper';
-
 
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   content,
@@ -50,7 +45,7 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
         widthRef.current = calcNewWidth;
       }
     },
-    [width],
+    [width]
   );
 
   const handleMouseUp = useCallback(() => {
@@ -69,29 +64,33 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
       document.addEventListener('mousemove', handleMouseMove);
       setChangingColumns('resize');
     },
-    [setChangingColumns, handleMouseMove, handleMouseUp, shouldChangeColumnsWidth],
+    [
+      setChangingColumns,
+      handleMouseMove,
+      handleMouseUp,
+      shouldChangeColumnsWidth,
+    ]
   );
 
   return (
-    <HeaderCell theme={ theme } width={ newWidth } isEmpty={ isEmpty }>
+    <HeaderCell theme={theme} width={newWidth} isEmpty={isEmpty}>
       <HeaderCellContent
-        theme={ theme }
-        center={ center }
-        onMouseDown={ (e) => onMouseDown(e, index) }
-        onClick={ () => onChangeSort(sortable, sortOrder, index, gridPosition) }
-        shouldMovingColumns={ shouldMovingColumns }
-      >
+        theme={theme}
+        center={center}
+        onMouseDown={(e) => onMouseDown(e, index)}
+        onClick={() => onChangeSort(sortable, sortOrder, index, gridPosition)}
+        shouldMovingColumns={shouldMovingColumns}>
         <HeaderCellContentWrapper
-          theme={ theme }
-          content={ isEmpty ? null : content }
-          sortOrder={ sortOrder }
+          theme={theme}
+          content={isEmpty ? null : content}
+          sortOrder={sortOrder}
         />
       </HeaderCellContent>
       <RightBorder
-        theme={ theme }
-        onMouseDown={ handleMouseDown }
-        isEmpty={ isEmpty }
-        shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
+        theme={theme}
+        onMouseDown={handleMouseDown}
+        isEmpty={isEmpty}
+        shouldChangeColumnsWidth={shouldChangeColumnsWidth}
       />
     </HeaderCell>
   );

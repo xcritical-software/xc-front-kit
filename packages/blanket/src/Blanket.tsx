@@ -4,7 +4,6 @@ import { withTheme } from 'styled-components';
 import { Root } from './styled';
 import { IBlanketProps } from './interfaces';
 
-
 export const PureBlanket: React.FC<IBlanketProps> = ({
   theme,
   canClickThrough = false,
@@ -16,11 +15,11 @@ export const PureBlanket: React.FC<IBlanketProps> = ({
 
   return (
     <Root
-      theme={ theme }
-      canClickThrough={ canClickThrough }
-      isTinted={ isTinted }
-      zIndex={ zIndex }
-      onClick={ onClick }
+      theme={theme}
+      canClickThrough={canClickThrough}
+      isTinted={isTinted}
+      zIndex={zIndex}
+      onClick={onClick}
     />
   );
 };

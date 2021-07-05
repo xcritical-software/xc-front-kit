@@ -2,7 +2,6 @@ import { lighten } from 'polished';
 
 import { InlineEditTheme } from './interfaces';
 
-
 export const inlineEditThemeNamespace = '@xcritical\\inline-edit';
 
 export const defaultInlineEditTheme: InlineEditTheme = {

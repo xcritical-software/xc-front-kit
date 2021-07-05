@@ -2,7 +2,6 @@ import { colors } from '@xcritical/theme';
 
 import { SwitchTheme } from './interfaces';
 
-
 export const switchThemeNamespace = '@xcritical\\switch';
 
 const SIZE_IDENT = '2px';

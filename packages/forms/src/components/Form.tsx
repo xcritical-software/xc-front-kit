@@ -5,7 +5,6 @@ import { IFormProps } from '../interfaces';
 
 import { FormProvider } from './FormContext';
 
-
 export const PureForm: React.FC<IFormProps> = ({
   name,
   children,
@@ -35,13 +34,12 @@ export const PureForm: React.FC<IFormProps> = ({
   React.Children.forEach(children, findChildPropName);
 
   return (
-    <form name={ name } { ...otherProps }>
-      <FormProvider value={ { formName: name, fields: fieldNames, namespace } }>
-        { children }
+    <form name={name} {...otherProps}>
+      <FormProvider value={{ formName: name, fields: fieldNames, namespace }}>
+        {children}
       </FormProvider>
     </form>
   );
 };
-
 
 export default PureForm;

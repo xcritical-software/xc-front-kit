@@ -1,5 +1,4 @@
 import React, { MutableRefObject } from 'react';
-
 import { CSSProperties } from 'styled-components';
 
 import { IThemeNamespace, ITheme } from '@xcritical/theme';
@@ -16,18 +15,17 @@ import {
   FILTERS_SEARCH_UPDATE,
 } from './actions';
 
-
 // Actions
 
 export type FilterActionType =
- typeof FILTERS_ADD |
- typeof FILTERS_UPDATE_SELECTED_FILTERS |
- typeof FILTERS_CHANGE_FILTER |
- typeof FILTERS_INIT |
- typeof FILTERS_REMOVE_FILTER |
- typeof FILTERS_APPLY |
- typeof FILTERS_SEARCH_UPDATE |
- typeof FILTERS_RESET;
+  | typeof FILTERS_ADD
+  | typeof FILTERS_UPDATE_SELECTED_FILTERS
+  | typeof FILTERS_CHANGE_FILTER
+  | typeof FILTERS_INIT
+  | typeof FILTERS_REMOVE_FILTER
+  | typeof FILTERS_APPLY
+  | typeof FILTERS_SEARCH_UPDATE
+  | typeof FILTERS_RESET;
 
 export interface IFilterAction<TPayload = any, T = FilterActionType> {
   type: T;
@@ -55,24 +53,25 @@ export interface IPayloadBaseChangeFilter {
   value: string;
 }
 
-export interface IPayloadChangeFilterColumn extends IPayloadBaseChangeFilter{
+export interface IPayloadChangeFilterColumn extends IPayloadBaseChangeFilter {
   field: 'column';
 }
 
-export interface IPayloadChangeFilterValue extends IPayloadBaseChangeFilter{
+export interface IPayloadChangeFilterValue extends IPayloadBaseChangeFilter {
   field: 'value';
 }
 
-export interface IPayloadChangeFilterCondition extends IPayloadBaseChangeFilter{
+export interface IPayloadChangeFilterCondition
+  extends IPayloadBaseChangeFilter {
   field: 'condition';
   hasFieldForValue?: boolean;
   valueType?: string;
 }
 
 export type PayloadChangeFilterType =
-  IPayloadChangeFilterValue |
-  IPayloadChangeFilterCondition |
-  IPayloadChangeFilterColumn;
+  | IPayloadChangeFilterValue
+  | IPayloadChangeFilterCondition
+  | IPayloadChangeFilterColumn;
 
 export interface IPayloadInitFilters {
   filters: IStateRecivedFilter[];
@@ -111,7 +110,6 @@ export interface IConditions {
   [key: string]: ICondition;
 }
 
-
 export interface ISelectedFilterComponent {
   filters?: IFilter[];
   currentFilter?: IFilter;
@@ -132,7 +130,6 @@ export interface IStateFilter extends IStateRecivedFilter {
   key: string;
 }
 
-
 export interface ITagContainerProps {
   filters: IFilter[];
   name: string;
@@ -142,13 +139,11 @@ export interface ITagContainerProps {
   onApply: () => void;
 }
 
-
 export interface IMapDispatchFilterTag {
   onChangeFilter: (changes: PayloadChangeFilterType) => void;
   onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
   onAddCondition: (filterId: string) => void;
 }
-
 
 export interface ITagProps extends ITagContainerProps, IMapDispatchFilterTag {
   filterTheme: IFilterTheme;
@@ -199,10 +194,10 @@ export interface IMapDispatchFilter {
   onSearchInputChange: (value: string) => void;
 }
 
-
-export interface IFilterComponentProps extends IMapDispatchFilter,
-  IFilterContainerProps,
-  IFilterProps {
+export interface IFilterComponentProps
+  extends IMapDispatchFilter,
+    IFilterContainerProps,
+    IFilterProps {
   onApply: () => void;
 }
 

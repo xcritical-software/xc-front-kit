@@ -2,7 +2,6 @@ import { colors } from '@xcritical/theme';
 
 import { BadgeTheme } from './interfaces';
 
-
 export const badgeThemeNamespace = '@xcritical\\badge';
 
 export const defaultBadgeTheme: BadgeTheme = {

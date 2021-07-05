@@ -4,12 +4,11 @@ import get from 'lodash.get';
 import { IFormAction } from '../actions';
 import { IFormState } from '../interfaces';
 
-
 export function formInit() {
-  return (_state: IFormState, {
-    payload,
-    meta: { isNew = !payload },
-  }: IFormAction) => ({
+  return (
+    _state: IFormState,
+    { payload, meta: { isNew = !payload } }: IFormAction
+  ) => ({
     source: payload,
     model: payload,
     isNew,
@@ -19,13 +18,8 @@ export function formInit() {
 }
 
 export const formPropertyChange = (
-  state: IFormState, {
-    payload: {
-      field,
-      value,
-    },
-    meta: { commit },
-  }: IFormAction,
+  state: IFormState,
+  { payload: { field, value }, meta: { commit } }: IFormAction
 ) => {
   const $value = value !== '' ? value : null;
 
@@ -50,14 +44,9 @@ export const formPropertyChange = (
   };
 };
 
-
 export const formSetFieldMeta = (
-  state: IFormState, {
-    payload: {
-      field,
-      value,
-    },
-  }: IFormAction,
+  state: IFormState,
+  { payload: { field, value } }: IFormAction
 ) => {
   const fields = setIn(state.fields, value, field);
 
@@ -66,13 +55,19 @@ export const formSetFieldMeta = (
     fields,
   };
 };
-export const formSetFieldsMeta = (state: IFormState, { payload }: IFormAction) => ({
+export const formSetFieldsMeta = (
+  state: IFormState,
+  { payload }: IFormAction
+) => ({
   ...state,
   fields: {
     ...payload,
   },
 });
-export const formShowErrors = (state: IFormState, { payload }: IFormAction) => ({
+export const formShowErrors = (
+  state: IFormState,
+  { payload }: IFormAction
+) => ({
   ...state,
   showAllErrors: payload,
 });
@@ -97,12 +92,16 @@ export const formError = (state: IFormState, { payload }: IFormAction) => ({
   },
 });
 
-export const formChange = (state: IFormState, { payload, meta, type }: IFormAction) => (
-  Object.keys(payload).reduce((acc, el) => (
-    formPropertyChange(acc, {
-      type,
-      payload: { field: el, value: payload[el] },
-      meta,
-    })
-  ), state)
-);
+export const formChange = (
+  state: IFormState,
+  { payload, meta, type }: IFormAction
+) =>
+  Object.keys(payload).reduce(
+    (acc, el) =>
+      formPropertyChange(acc, {
+        type,
+        payload: { field: el, value: payload[el] },
+        meta,
+      }),
+    state
+  );

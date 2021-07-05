@@ -3,10 +3,9 @@ import { CSSObject } from 'styled-components';
 
 import { ICSSProperties, ITheme } from '@xcritical/theme';
 
-
 export interface ISwitchTheme extends ICSSProperties {
   label?: CSSObject;
-  labelText?: CSSObject & {rightPosition: CSSObject; leftPosition: CSSObject};
+  labelText?: CSSObject & { rightPosition: CSSObject; leftPosition: CSSObject };
   container?: CSSObject;
   handle?: CSSObject;
 }
@@ -26,12 +25,16 @@ export interface ISwitchStateProps {
 }
 
 export interface ISwitchProps extends ISwitchStyledProps, ISwitchStateProps {
-  onChange: (checked: boolean, event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (
+    checked: boolean,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
 
   label?: string;
   name?: string;
 }
 
-export type StyledSwitchProps = Required<ISwitchStyledProps> & Partial<ISwitchStateProps>;
+export type StyledSwitchProps = Required<ISwitchStyledProps> &
+  Partial<ISwitchStateProps>;
 
 export type BaseSwitch = Omit<ISwitchProps, 'checked' | 'onChange'>;

@@ -6,7 +6,6 @@ import React, {
   useRef,
   MouseEvent,
 } from 'react';
-
 import isEmpty from 'lodash.isempty';
 
 import Button from '@xcritical/button';
@@ -17,19 +16,16 @@ import {
   IStateFilter,
   PayloadChangeFilterType,
 } from '../../interfaces';
-
 import { Dropdown } from '../Dropdown';
 import { ChevronDown, ChevronUp, Remove } from '../icons';
 
 import { TagCondition } from './TagCondition';
-
 import {
   TagConditions,
   DropdownFooter,
   ButtonBlock,
   RemoveButton,
 } from './styled';
-
 
 export const Tag: React.FC<ITagProps> = ({
   filterId,
@@ -53,11 +49,10 @@ export const Tag: React.FC<ITagProps> = ({
 
   const filterSetting = useMemo(
     () => filters.find((f) => f.field === filterId) as IFilter,
-    [filterId, filters],
+    [filterId, filters]
   );
 
   const tagConditionsRef = useRef(null);
-
 
   const selectFirstCondition = useCallback(() => {
     if (conditions.length === 1 && !conditions[0].condition) {
@@ -70,22 +65,28 @@ export const Tag: React.FC<ITagProps> = ({
     }
   }, [conditions, filterSetting.conditions, onChangeFilter]);
 
-  const validateConditions = useCallback((filterConditions: IStateFilter[]): boolean => {
-    if (filterSetting.validate) {
-      const conditionsForValidation = filterConditions.filter(({ condition }) => (
-        condition && filterSetting.conditions[condition].hasValue
-      ));
-      const filterValidationErrors = filterSetting.validate(conditionsForValidation);
+  const validateConditions = useCallback(
+    (filterConditions: IStateFilter[]): boolean => {
+      if (filterSetting.validate) {
+        const conditionsForValidation = filterConditions.filter(
+          ({ condition }) =>
+            condition && filterSetting.conditions[condition].hasValue
+        );
+        const filterValidationErrors = filterSetting.validate(
+          conditionsForValidation
+        );
 
-      setValidationErrors(filterValidationErrors);
+        setValidationErrors(filterValidationErrors);
 
-      if (!isEmpty(filterValidationErrors)) {
-        return false;
+        if (!isEmpty(filterValidationErrors)) {
+          return false;
+        }
       }
-    }
 
-    return true;
-  }, [filterSetting]);
+      return true;
+    },
+    [filterSetting]
+  );
 
   const onOpenDropdown = useCallback(() => {
     if (isAutoSelectFirstCondition) {
@@ -103,16 +104,19 @@ export const Tag: React.FC<ITagProps> = ({
     }
   }, [conditions, validateConditions]);
 
-  const onChangeTagCondition = useCallback((changes: PayloadChangeFilterType) => {
-    if (filterSetting.validate) {
-      const newValidationErrors = { ...validationErrors };
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-      delete newValidationErrors[changes.guid];
-      setValidationErrors(newValidationErrors);
-    }
+  const onChangeTagCondition = useCallback(
+    (changes: PayloadChangeFilterType) => {
+      if (filterSetting.validate) {
+        const newValidationErrors = { ...validationErrors };
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+        delete newValidationErrors[changes.guid];
+        setValidationErrors(newValidationErrors);
+      }
 
-    onChangeFilter(changes);
-  }, [filterSetting.validate, onChangeFilter, validationErrors]);
+      onChangeFilter(changes);
+    },
+    [filterSetting.validate, onChangeFilter, validationErrors]
+  );
 
   const onTagApply = useCallback(() => {
     const isValidConditions = validateConditions(conditions);
@@ -123,18 +127,20 @@ export const Tag: React.FC<ITagProps> = ({
     }
   }, [conditions, validateConditions, isOpen, onApply]);
 
-  const onTagRemove = useCallback((e: MouseEvent<any>) => {
-    e.stopPropagation();
+  const onTagRemove = useCallback(
+    (e: MouseEvent<any>) => {
+      e.stopPropagation();
 
-    if (!disabled) {
-      onRemoveFilter({ name: filterId });
-    }
-  }, [disabled, filterId, onRemoveFilter]);
+      if (!disabled) {
+        onRemoveFilter({ name: filterId });
+      }
+    },
+    [disabled, filterId, onRemoveFilter]
+  );
 
   const onTagAddCondition = useCallback(() => {
     onAddCondition(filterId);
   }, [filterId, onAddCondition]);
-
 
   useEffect(() => {
     if (isAutoOpenAddedTag && isAutoSelectFirstCondition) {
@@ -143,53 +149,47 @@ export const Tag: React.FC<ITagProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
   return (
     <Dropdown
-      isOpen={ isOpen }
-      onClose={ onCloseDropdown }
-      filterTheme={ filterTheme }
-      target={ (
+      isOpen={isOpen}
+      onClose={onCloseDropdown}
+      filterTheme={filterTheme}
+      target={
         <Button
-          postfix={ (
+          postfix={
             <>
-              { isOpen ? <ChevronUp /> : <ChevronDown /> }
-              <RemoveButton onClick={ onTagRemove }>
+              {isOpen ? <ChevronUp /> : <ChevronDown />}
+              <RemoveButton onClick={onTagRemove}>
                 <Remove />
               </RemoveButton>
             </>
-          ) }
+          }
           appearance="filter-tag"
-          selected={ isOpen }
-          disabled={ disabled }
-          onClick={ onOpenDropdown }
-        >
-          { `${filterSetting.displayName}` }
+          selected={isOpen}
+          disabled={disabled}
+          onClick={onOpenDropdown}>
+          {`${filterSetting.displayName}`}
         </Button>
-      ) }
-    >
-      <TagConditions ref={ tagConditionsRef }>
-        {
-          conditions.map((condition) => (
-            <TagCondition
-              key={ condition.key }
-              tagConditionsRef={ tagConditionsRef }
-              currentFilterState={ condition }
-              filterSetting={ filterSetting }
-              validationError={ validationErrors[condition.key] }
-              filterTheme={ filterTheme }
-              onChangeFilter={ onChangeTagCondition }
-              onRemoveFilter={ onRemoveFilter }
-            />
-          ))
-        }
+      }>
+      <TagConditions ref={tagConditionsRef}>
+        {conditions.map((condition) => (
+          <TagCondition
+            key={condition.key}
+            tagConditionsRef={tagConditionsRef}
+            currentFilterState={condition}
+            filterSetting={filterSetting}
+            validationError={validationErrors[condition.key]}
+            filterTheme={filterTheme}
+            onChangeFilter={onChangeTagCondition}
+            onRemoveFilter={onRemoveFilter}
+          />
+        ))}
 
         <DropdownFooter>
           <ButtonBlock position="left">
             <Button
               appearance="filter-tag-add-condition"
-              onClick={ onTagAddCondition }
-            >
+              onClick={onTagAddCondition}>
               Add condition
             </Button>
           </ButtonBlock>
@@ -197,16 +197,14 @@ export const Tag: React.FC<ITagProps> = ({
             <Button
               appearance="filter-tag-remove"
               baseAppearance="link"
-              onClick={ onTagRemove }
-            >
+              onClick={onTagRemove}>
               Remove
             </Button>
 
             <Button
               appearance="filter-tag-apply"
               baseAppearance="primary"
-              onClick={ onTagApply }
-            >
+              onClick={onTagApply}>
               Apply
             </Button>
           </ButtonBlock>

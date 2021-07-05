@@ -4,15 +4,14 @@ import { components } from 'react-select';
 import { Close } from '../Icons';
 import { ClearIndicatorProps } from '../interfaces';
 
-
 const ClearIndicator = (props: ClearIndicatorProps) => {
   const { getStyles } = props;
   const clearIndicatorStyles = getStyles('clearIndicator', props);
 
   return (
     components.ClearIndicator && (
-      <components.ClearIndicator { ...props }>
-        <Close fill={ clearIndicatorStyles?.color } />
+      <components.ClearIndicator {...props}>
+        <Close fill={clearIndicatorStyles?.color} />
       </components.ClearIndicator>
     )
   );

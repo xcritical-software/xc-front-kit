@@ -5,10 +5,9 @@ import { getThemedState } from '@xcritical/theme';
 import { sidebarThemeNamespace, defaultSidebarTheme } from './theme';
 import { SidebarTheme } from './interfaces';
 
-
-export function sidebarTheme (
+export function sidebarTheme(
   theme: SidebarTheme,
-  propertyPath?: string | string[],
+  propertyPath?: string | string[]
 ): CSSObject {
   const func = getThemedState(sidebarThemeNamespace, defaultSidebarTheme);
 
@@ -16,9 +15,9 @@ export function sidebarTheme (
   return func(theme, propertyPath) as CSSObject;
 }
 
-export function getStylesWithoutTransition (
+export function getStylesWithoutTransition(
   theme: SidebarTheme,
-  propertyPath?: string | string[],
+  propertyPath?: string | string[]
 ): CSSObject {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { transition, ...styles } = sidebarTheme(theme, propertyPath);
@@ -26,10 +25,10 @@ export function getStylesWithoutTransition (
   return styles;
 }
 
-export function getTransition (
+export function getTransition(
   theme: SidebarTheme,
   animate: boolean,
-  propertyPath?: string | string[],
+  propertyPath?: string | string[]
 ): string | null {
   // eslint-disable-next-line @typescript-eslint/no-base-to-string
   return animate ? `transition: ${sidebarTheme(theme, propertyPath)}` : null;

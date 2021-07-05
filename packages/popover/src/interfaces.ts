@@ -4,7 +4,6 @@ import { CSSObject, CSSProperties } from 'styled-components';
 import { IThemeNamespace } from '@xcritical/theme';
 import { Position } from '@xcritical/popper';
 
-
 export interface IPopover {
   children: any;
   content: any;
@@ -58,4 +57,4 @@ export interface IThemed {
   baseAppearance: string;
 }
 
-export type ArrowDirection ='top' | 'right' | 'bottom' | 'left';
+export type ArrowDirection = 'top' | 'right' | 'bottom' | 'left';

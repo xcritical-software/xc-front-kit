@@ -2,9 +2,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable import/no-unresolved */
 import React, { useRef } from 'react';
-
 import { storiesOf } from '@storybook/react';
-
 import { Provider } from 'react-redux';
 
 import Input from '@xcritical/input';
@@ -16,12 +14,15 @@ import Form, { FormField } from '../src';
 import { Textarea } from './SampleComponents';
 import store from './store';
 
-
-const selectItems = { ff0000: { name: 'Red' }, '00ff00': { name: 'Green' }, '0000ff': { name: 'Blue' } };
+const selectItems = {
+  ff0000: { name: 'Red' },
+  '00ff00': { name: 'Green' },
+  '0000ff': { name: 'Blue' },
+};
 
 storiesOf('Form', module)
   .addDecorator((Story) => (
-    <Provider store={ store }>
+    <Provider store={store}>
       <Story />
     </Provider>
   ))
@@ -35,18 +36,17 @@ storiesOf('Form', module)
     return (
       <Form name="default">
         <div>
-          <button onClick={ handleFocus }>Focus to FirstName</button>
+          <button onClick={handleFocus}>Focus to FirstName</button>
           <br />
           <label>First Name</label>
           <div>
             <FormField
               name="firstName"
-              component={ Input }
+              component={Input}
               type="text"
               placeholder="First Name"
-              innerRef={ ref }
+              innerRef={ref}
             />
-
           </div>
         </div>
         <div>
@@ -54,7 +54,7 @@ storiesOf('Form', module)
           <div>
             <FormField
               name="lastName"
-              component={ Input }
+              component={Input}
               type="text"
               placeholder="Last Name"
             />
@@ -65,24 +65,36 @@ storiesOf('Form', module)
           <div>
             <FormField
               name="email"
-              component={ Input }
+              component={Input}
               type="email"
               placeholder="Email"
             />
-            <FormField name="favoriteColor" component={ Select } items={ selectItems } />
+            <FormField
+              name="favoriteColor"
+              component={Select}
+              items={selectItems}
+            />
           </div>
         </div>
         <div>
           <label>Sex</label>
           <div>
             <label>
-              <FormField name="sex" component={ Input } type="radio" value="male" />
-
+              <FormField
+                name="sex"
+                component={Input}
+                type="radio"
+                value="male"
+              />
               Male
             </label>
             <label>
-              <FormField name="sex" component={ Input } type="radio" value="female" />
-
+              <FormField
+                name="sex"
+                component={Input}
+                type="radio"
+                value="female"
+              />
               Female
             </label>
           </div>
@@ -90,7 +102,11 @@ storiesOf('Form', module)
         <div>
           <label>Favorite Color</label>
           <div>
-            <FormField name="favoriteColor" component={ Select } items={ selectItems } />
+            <FormField
+              name="favoriteColor"
+              component={Select}
+              items={selectItems}
+            />
           </div>
         </div>
         <div>
@@ -99,7 +115,7 @@ storiesOf('Form', module)
             <FormField
               name="employed"
               id="employed"
-              component={ Input }
+              component={Input}
               type="checkbox"
             />
           </div>
@@ -107,7 +123,7 @@ storiesOf('Form', module)
         <div>
           <label>Notes</label>
           <div>
-            <FormField name="notes" component={ Textarea } />
+            <FormField name="notes" component={Textarea} />
           </div>
         </div>
         <div>
@@ -119,7 +135,7 @@ storiesOf('Form', module)
           type="text"
           placeholder="text"
           appearance="lg"
-          component={ Input }
+          component={Input}
         />
       </Form>
     );

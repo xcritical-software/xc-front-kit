@@ -67,7 +67,6 @@
     "@types/styled-components": "^5.0.1",
     "@xcritical/eslint-plugin-xcritical": "4.0.1",
     "boltify": "1.1.5",
-    "eslint-import-resolver-alias": "^1.1.2",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.8",
@@ -85,7 +84,6 @@
     "tsdx": "^0.14.1",
     "rollup-plugin-strip-code": "^0.2.7",
     "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-redux-saga": "^1.0.0",
     "prettier": "2.2.1",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-config-prettier": "8.2.0"
@@ -100,7 +98,7 @@
     "react-router-dom": "^5.0.1"
   },
   "resolutions": {
-    "typescript": "^4.2.3",
+    "typescript": "4.2.3",
     "micro-memoize": "4.0.8"
   }
 }

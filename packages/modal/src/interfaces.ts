@@ -5,7 +5,6 @@ import { ITheme, IThemeNamespace } from '@xcritical/theme';
 
 import { XCRITICAL_MODAL_OPEN, XCRITICAL_MODAL_CLOSE } from './consts';
 
-
 /* ACTIONS */
 export interface IModalOpen {
   type: typeof XCRITICAL_MODAL_OPEN;
@@ -64,8 +63,10 @@ export interface IModalDispatchProps {
   onModalCancel: () => void;
 }
 
-export interface IModalProps extends IModalOwnProps, IModalStoreProps, IModalDispatchProps {}
-
+export interface IModalProps
+  extends IModalOwnProps,
+    IModalStoreProps,
+    IModalDispatchProps {}
 
 export interface IBaseModalTheme {
   blanket?: IBlanketTheme;

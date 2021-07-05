@@ -10,16 +10,16 @@ export const XCRITICAL_FORM_SET_FIELDS_META = '@xcritical-form/set-fields-meta';
 export const XCRITICAL_FORM_SET_FIELD_META = '@xcritical-form/set-field-meta';
 
 export type FormActionType =
-  typeof XCRITICAL_FORM_INIT |
-  typeof XCRITICAL_FORM_PROPERTY_CHANGE |
-  typeof XCRITICAL_FORM_SAVED |
-  typeof XCRITICAL_FORM_DELETE |
-  typeof XCRITICAL_FORM_ERROR |
-  typeof XCRITICAL_FORM_RESET |
-  typeof XCRITICAL_FORM_SET_FIELDS_META |
-  typeof XCRITICAL_FORM_SET_FIELD_META |
-  typeof XCRITICAL_FORM_SHOW_ERRORS |
-  typeof XCRITICAL_FORM_CHANGE;
+  | typeof XCRITICAL_FORM_INIT
+  | typeof XCRITICAL_FORM_PROPERTY_CHANGE
+  | typeof XCRITICAL_FORM_SAVED
+  | typeof XCRITICAL_FORM_DELETE
+  | typeof XCRITICAL_FORM_ERROR
+  | typeof XCRITICAL_FORM_RESET
+  | typeof XCRITICAL_FORM_SET_FIELDS_META
+  | typeof XCRITICAL_FORM_SET_FIELD_META
+  | typeof XCRITICAL_FORM_SHOW_ERRORS
+  | typeof XCRITICAL_FORM_CHANGE;
 
 export interface IFormAction {
   type: FormActionType;
@@ -31,7 +31,6 @@ export interface IFormAction {
   payload?: any;
 }
 
-
 export function xcriticalFormPropertyChange<
   TFormModel extends {} = any,
   TPropertyName extends keyof TFormModel = keyof TFormModel
@@ -39,7 +38,7 @@ export function xcriticalFormPropertyChange<
   name: string,
   property: TPropertyName,
   value: TFormModel[TPropertyName],
-  commit: boolean = false,
+  commit: boolean = false
 ): IFormAction {
   return {
     type: XCRITICAL_FORM_PROPERTY_CHANGE,
@@ -51,15 +50,13 @@ export function xcriticalFormPropertyChange<
       field: property,
       value,
     },
-
   };
 }
-
 
 export function xcriticalFormChange(
   name: string,
   model: any,
-  commit: boolean = false,
+  commit: boolean = false
 ): IFormAction {
   return {
     type: XCRITICAL_FORM_CHANGE,
@@ -80,7 +77,6 @@ export function xcriticalFormInit(name: string, model: any): IFormAction {
     },
   };
 }
-
 
 export function xcriticalFormSaved(name: string): IFormAction {
   return {
@@ -119,7 +115,10 @@ export function xcriticalFormReset(name: string): IFormAction {
   };
 }
 
-export function xcriticalFormShowErrors(name: string, value: boolean): IFormAction {
+export function xcriticalFormShowErrors(
+  name: string,
+  value: boolean
+): IFormAction {
   return {
     type: XCRITICAL_FORM_SHOW_ERRORS,
     meta: {
@@ -129,8 +128,10 @@ export function xcriticalFormShowErrors(name: string, value: boolean): IFormActi
   };
 }
 
-
-export function xcriticalFormSetFieldsMeta(name: string, model: any): IFormAction {
+export function xcriticalFormSetFieldsMeta(
+  name: string,
+  model: any
+): IFormAction {
   return {
     type: XCRITICAL_FORM_SET_FIELDS_META,
     meta: {
@@ -140,9 +141,11 @@ export function xcriticalFormSetFieldsMeta(name: string, model: any): IFormActio
   };
 }
 
-export function xcriticalFormSetFieldMeta(name: string,
+export function xcriticalFormSetFieldMeta(
+  name: string,
   property: string,
-  value: any): IFormAction {
+  value: any
+): IFormAction {
   return {
     type: XCRITICAL_FORM_SET_FIELD_META,
     meta: {
@@ -152,6 +155,5 @@ export function xcriticalFormSetFieldMeta(name: string,
       field: property,
       value,
     },
-
   };
 }

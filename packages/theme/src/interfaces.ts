@@ -1,16 +1,12 @@
 // eslint-disable-next-line import/no-unresolved
 import * as CSS from 'csstype';
 
-
 export interface ICSSProperties extends CSS.Properties<string | number | any> {
   [key: string]: string | number | any | undefined;
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export type AllType = undefined | null | boolean | Buffer | number | string | Date | RegExp | Error
-| Iterator<any> | any[] | Function | Promise<any> | Map<any, any> | WeakMap<any, any> | Set<any>
-| WeakSet<any> | Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array
-| Int32Array | Uint32Array | Float32Array | Float64Array | any;
+export type AllType = any;
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 export type IFilteredPath = string[];
@@ -27,7 +23,21 @@ export interface IIndentation {
 export type ICSSWideKeyword = 'initial' | 'inherit' | 'unset';
 export interface IFont {
   size?: number | string;
-  weight?: ICSSWideKeyword | 'normal' | 'bold' | 'bolder' | 'lighter' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+  weight?:
+    | ICSSWideKeyword
+    | 'normal'
+    | 'bold'
+    | 'bolder'
+    | 'lighter'
+    | 100
+    | 200
+    | 300
+    | 400
+    | 500
+    | 600
+    | 700
+    | 800
+    | 900;
   lineHeight?: string;
   lineHeightRatio?: number;
 }
@@ -52,7 +62,6 @@ export interface ITransition {
   delay?: OneOrManyString;
 }
 
-
 export interface IHtmlActionStates<T> {
   hover?: T;
   active?: T;
@@ -66,8 +75,9 @@ export interface IHtmlActionStates<T> {
 export type IThemeBase<T> = T & IHtmlActionStates<T>;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export type ITheme<T = ICSSProperties | any> = Pick<IThemeBase<T>,
-Exclude<keyof IThemeBase<T>, 'appearance'>
+export type ITheme<T = ICSSProperties | any> = Pick<
+  IThemeBase<T>,
+  Exclude<keyof IThemeBase<T>, 'appearance'>
 > & {
   appearance?: IAppearance<T>;
 };
@@ -80,9 +90,9 @@ export interface IThemeNamespace<T = ICSSProperties | any> {
   [namespace: string]: ITheme<T> | IThemeBase<T>;
 }
 
-
 export interface IApperanceStateFunc<T> {
-  (theme: IThemeNamespace,
+  (
+    theme: IThemeNamespace,
     appearanceName: string,
     propertyPath?: string | string[],
     baseAppearanceName?: string

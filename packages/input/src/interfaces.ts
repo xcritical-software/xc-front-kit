@@ -1,7 +1,9 @@
 import {
-  ITheme, IThemeNamespace, ICSSProperties, IIsRTL,
+  ITheme,
+  IThemeNamespace,
+  ICSSProperties,
+  IIsRTL,
 } from '@xcritical/theme';
-
 
 export interface IBaseInputTheme extends ICSSProperties {
   prefixSpacing?: number;
@@ -16,8 +18,12 @@ export interface IInputAppearanceProps {
   baseAppearance?: string;
 }
 
-type HtmlAttributes = Pick<React.InputHTMLAttributes<HTMLElement>,
-Exclude<keyof React.InputHTMLAttributes<HTMLElement>, keyof IBaseItemProps | 'css'>
+type HtmlAttributes = Pick<
+  React.InputHTMLAttributes<HTMLElement>,
+  Exclude<
+    keyof React.InputHTMLAttributes<HTMLElement>,
+    keyof IBaseItemProps | 'css'
+  >
 >;
 
 export interface IBaseItemProps {
@@ -33,9 +39,9 @@ export interface IBaseItemProps {
 
 export interface IInputProps
   extends HtmlAttributes,
-  IInputAppearanceProps,
-  IIsRTL,
-  IBaseItemProps {
+    IInputAppearanceProps,
+    IIsRTL,
+    IBaseItemProps {
   css?: any;
   shouldFitContainer?: boolean;
   showArrows?: boolean;

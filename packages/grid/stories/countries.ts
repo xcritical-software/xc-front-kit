@@ -1,6 +1,9 @@
 export const columns = [
   {
-    field: 'list', isExpandable: true, headerName: 'Список', width: 150,
+    field: 'list',
+    isExpandable: true,
+    headerName: 'Список',
+    width: 150,
   },
   { field: 'number', headerName: '№', width: 150 },
   { field: 'counry', headerName: 'Страна', width: 150 },
@@ -146,12 +149,13 @@ const countries = [
   'Россия',
 ];
 
-const generRandData = () => new Array(Math.floor(Math.random() * 100)).fill(true).map((_el, i) => ({
-  number: i,
-  counry: countries[Math.floor(Math.random() * 10)],
-  billion2017: Math.floor(Math.random() * 50000),
-  billion2018: Math.floor(Math.random() * 50000),
-}));
+const generRandData = () =>
+  new Array(Math.floor(Math.random() * 100)).fill(true).map((_el, i) => ({
+    number: i,
+    counry: countries[Math.floor(Math.random() * 10)],
+    billion2017: Math.floor(Math.random() * 50000),
+    billion2018: Math.floor(Math.random() * 50000),
+  }));
 const randomData = generRandData();
 
 export const items = [

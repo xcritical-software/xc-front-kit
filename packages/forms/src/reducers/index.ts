@@ -1,7 +1,5 @@
 import get from 'lodash.get';
 import { Reducer } from 'redux';
-
-
 import { useSelector } from 'react-redux';
 
 import {
@@ -17,7 +15,6 @@ import {
   FormActionType,
   XCRITICAL_FORM_CHANGE,
 } from '../actions';
-
 import { reducerDictionary } from '../utils';
 import { IFormState } from '../interfaces';
 
@@ -32,7 +29,6 @@ import {
   formShowErrors,
   formChange,
 } from './func';
-
 
 const initialState: IFormState = {
   isNew: true,
@@ -66,18 +62,19 @@ const reducer: Reducer<IFormState> = (state = initialState, action) => {
 export const formSelector = <TFormFields extends Record<string | number, any>>(
   state: any,
   formName: string,
-  namespace?: string,
-): IFormState<TFormFields> => (
+  namespace?: string
+): IFormState<TFormFields> =>
   namespace
     ? get(state, `${namespace}.${formName}`, initialState)
-    : get(state.form, formName, initialState)
-);
+    : get(state.form, formName, initialState);
 
-
-export function useFormSelector<TFormModel = any>(formName: string, namespace?: string) {
-  return useSelector<any, IFormState<TFormModel>>((
-    state,
-  ) => formSelector(state, formName, namespace));
+export function useFormSelector<TFormModel = any>(
+  formName: string,
+  namespace?: string
+) {
+  return useSelector<any, IFormState<TFormModel>>((state) =>
+    formSelector(state, formName, namespace)
+  );
 }
 
 export default reducerDictionary(reducer, 'formName');

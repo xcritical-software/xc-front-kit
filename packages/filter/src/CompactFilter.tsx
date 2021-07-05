@@ -16,10 +16,8 @@ import {
   Search,
   Tag,
 } from './components';
-
 import { IFilterComponentProps, IFilterTheme } from './interfaces';
 import { getFilterTheme, groupBy } from './utils';
-
 
 const PureCompactFilter: React.FC<IFilterComponentProps> = ({
   filters,
@@ -44,91 +42,91 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
 }) => {
   const contextTheme = useContext(ThemeContext);
 
-  const filterTheme = useMemo(() => (
-    getFilterTheme<IFilterTheme>(theme ?? contextTheme)
-  ), [theme, contextTheme]);
+  const filterTheme = useMemo(
+    () => getFilterTheme<IFilterTheme>(theme ?? contextTheme),
+    [theme, contextTheme]
+  );
 
-  const mergedFilters = useMemo(() => groupBy(
-    activeFilters
-      .filter((filter) => filter.column)
-      .filter(({ column }) => !filters.find(({ field }) => field === column)?.isHidden),
-    'column',
-  ), [activeFilters, filters]);
-
+  const mergedFilters = useMemo(
+    () =>
+      groupBy(
+        activeFilters
+          .filter((filter) => filter.column)
+          .filter(
+            ({ column }) =>
+              !filters.find(({ field }) => field === column)?.isHidden
+          ),
+        'column'
+      ),
+    [activeFilters, filters]
+  );
 
   return (
-    <ThemeProvider theme={ filterTheme }>
+    <ThemeProvider theme={filterTheme}>
       <RootPanel>
         <TopPanel>
-          { prefix && <Prefix>{ prefix }</Prefix> }
+          {prefix && <Prefix>{prefix}</Prefix>}
 
-          {
-            isSearchable
-              ? (
-                <SearchInputWrapper>
-                  <Input
-                    prefix={ <Search /> }
-                    value={ searchInput }
-                    disabled={ disabled }
-                    onChange={ onSearchInputChange }
-                    appearance="filters-search"
-                  />
-                </SearchInputWrapper>
-              )
-              : null
-          }
+          {isSearchable ? (
+            <SearchInputWrapper>
+              <Input
+                prefix={<Search />}
+                value={searchInput}
+                disabled={disabled}
+                onChange={onSearchInputChange}
+                appearance="filters-search"
+              />
+            </SearchInputWrapper>
+          ) : null}
 
-          { isTagsVisible && (
+          {isTagsVisible && (
             <TopPanelTags>
-              { Object.keys(mergedFilters).map((filterId) => (
+              {Object.keys(mergedFilters).map((filterId) => (
                 <Tag
-                  name={ name }
-                  key={ filterId }
-                  filters={ filters }
-                  filterId={ filterId }
-                  conditions={ mergedFilters[filterId] }
-                  disabled={ disabled }
-                  filterTheme={ filterTheme }
-                  isAutoSelectFirstCondition={ isAutoSelectFirstCondition }
-                  isAutoOpenAddedTag={ isAutoOpenAddedTag }
-                  onApply={ onApply }
+                  name={name}
+                  key={filterId}
+                  filters={filters}
+                  filterId={filterId}
+                  conditions={mergedFilters[filterId]}
+                  disabled={disabled}
+                  filterTheme={filterTheme}
+                  isAutoSelectFirstCondition={isAutoSelectFirstCondition}
+                  isAutoOpenAddedTag={isAutoOpenAddedTag}
+                  onApply={onApply}
                 />
-              )) }
+              ))}
             </TopPanelTags>
-          ) }
+          )}
 
           <TopPanelButtons>
             <MoreFilterSelect
-              filters={ filters }
-              selectedFilters={ activeFilters }
-              disabled={ disabled }
-              isAutoOpenAddedTag={ isAutoOpenAddedTag }
-              filterTheme={ filterTheme }
-              onChange={ onChangeFilters }
-            >
-              { moreName }
+              filters={filters}
+              selectedFilters={activeFilters}
+              disabled={disabled}
+              isAutoOpenAddedTag={isAutoOpenAddedTag}
+              filterTheme={filterTheme}
+              onChange={onChangeFilters}>
+              {moreName}
             </MoreFilterSelect>
 
             <Button
               appearance="filters-reset"
               baseAppearance="link"
-              disabled={ disabled }
-              onClick={ onResetFilters }
-            >
-              { resetName }
+              disabled={disabled}
+              onClick={onResetFilters}>
+              {resetName}
             </Button>
 
             <Button
               appearance="filters-apply"
               baseAppearance="primary"
-              disabled={ disabled }
-              onClick={ onApply }
-            >
-              { searchName }
+              disabled={disabled}
+              onClick={onApply}>
+              {searchName}
             </Button>
           </TopPanelButtons>
 
-          { postfix && <Postfix>{ postfix }</Postfix> }
+          {postfix && <Postfix>{postfix}</Postfix>}
         </TopPanel>
       </RootPanel>
     </ThemeProvider>

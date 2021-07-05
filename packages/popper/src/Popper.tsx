@@ -1,17 +1,13 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useCallback,
-} from 'react';
-
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import PopperJS, { Data } from 'popper.js';
 import rafSchedule from 'raf-schd';
 
 import { IPopperProps, IPopperState } from './interfaces';
-import { getPopperPlacementByPosition, getPositionByPopperPlacement } from './utils/helpers';
+import {
+  getPopperPlacementByPosition,
+  getPositionByPopperPlacement,
+} from './utils/helpers';
 import { getModifiers } from './utils/modifiers';
-
 
 export const Popper: React.FC<IPopperProps> = ({
   children,
@@ -44,13 +40,15 @@ export const Popper: React.FC<IPopperProps> = ({
     }
   }, []);
 
-  const scheduleSetState = useRef(rafSchedule((data: Data) => {
-    setState({
-      popperStyles: data.styles,
-      arrowStyles: data.arrowStyles,
-      position: getPositionByPopperPlacement(data.placement),
-    });
-  }));
+  const scheduleSetState = useRef(
+    rafSchedule((data: Data) => {
+      setState({
+        popperStyles: data.styles,
+        arrowStyles: data.arrowStyles,
+        position: getPositionByPopperPlacement(data.placement),
+      });
+    })
+  );
 
   const destroyPopperInstance = (): void => {
     if (popperInstance.current) {
@@ -58,14 +56,17 @@ export const Popper: React.FC<IPopperProps> = ({
     }
   };
 
-  const getOptions = useCallback((): PopperJS.PopperOptions => ({
-    placement: getPopperPlacementByPosition(position),
-    eventsEnabled,
-    positionFixed,
-    onCreate: scheduleSetState.current,
-    onUpdate: scheduleSetState.current,
-    modifiers: getModifiers(autoFlip, modifiers),
-  }), ([position, eventsEnabled, positionFixed, autoFlip, modifiers]));
+  const getOptions = useCallback(
+    (): PopperJS.PopperOptions => ({
+      placement: getPopperPlacementByPosition(position),
+      eventsEnabled,
+      positionFixed,
+      onCreate: scheduleSetState.current,
+      onUpdate: scheduleSetState.current,
+      modifiers: getModifiers(autoFlip, modifiers),
+    }),
+    [position, eventsEnabled, positionFixed, autoFlip, modifiers]
+  );
 
   useEffect(() => {
     destroyPopperInstance();
@@ -83,13 +84,16 @@ export const Popper: React.FC<IPopperProps> = ({
     popperInstance.current = new PopperJS(
       targetRef.current,
       contentRef.current,
-      popperOptions,
+      popperOptions
     );
   }, [getOptions, visible]);
 
-  useEffect(() => () => {
-    destroyPopperInstance();
-  }, []);
+  useEffect(
+    () => () => {
+      destroyPopperInstance();
+    },
+    []
+  );
 
   return children({
     targetRef,

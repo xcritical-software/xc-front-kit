@@ -6,29 +6,26 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import Select from '../../select/src';
 
-import {
-  IDictionary,
-} from './interfaces';
-
+import { IDictionary } from './interfaces';
 
 export const DictionarySelector = (dictionaries: IDictionary[]) => (
   value: any,
-  onChange: (value: any) => void,
+  onChange: (value: any) => void
 ): ReactElement => (
   <Select
-    options={ dictionaries }
+    options={dictionaries}
     shouldFitContainer
-    onChange={ onChange }
-    value={ value }
+    onChange={onChange}
+    value={value}
   />
 );
 
 export const BooleanSelector = (
   value: any,
-  onChange: (value: any) => void,
+  onChange: (value: any) => void
 ): ReactElement => (
-  <select defaultValue="yes" onChange={ (e) => onChange(e.target.value) }>
-    { !value && <option selected>Please select...</option> }
+  <select defaultValue="yes" onChange={(e) => onChange(e.target.value)}>
+    {!value && <option selected>Please select...</option>}
     <option key="yes" value="yes">
       Yes
     </option>
@@ -40,7 +37,7 @@ export const BooleanSelector = (
 
 export const DateSelector = (
   value: any,
-  onChange: (value: any) => void,
+  onChange: (value: any) => void
 ): ReactElement => {
   const [focus, changeFocus] = useState(false);
   const handleChangeFocus = (): void => {
@@ -50,10 +47,10 @@ export const DateSelector = (
   return (
     <SingleDatePicker
       id="date_input"
-      focused={ focus }
-      date={ value }
-      onDateChange={ onChange }
-      onFocusChange={ handleChangeFocus }
+      focused={focus}
+      date={value}
+      onDateChange={onChange}
+      onFocusChange={handleChangeFocus}
       small
     />
   );

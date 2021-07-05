@@ -1,7 +1,8 @@
 import { css, CSSObject, FlattenSimpleInterpolation } from 'styled-components';
 
-
-export const ToastContainer = (containerStyles: CSSObject): FlattenSimpleInterpolation => css`
+export const ToastContainer = (
+  containerStyles: CSSObject
+): FlattenSimpleInterpolation => css`
   .Toastify__toast-container {
     ${containerStyles}
   }
@@ -37,7 +38,7 @@ export const ToastContainer = (containerStyles: CSSObject): FlattenSimpleInterpo
     bottom: 1em;
     right: 1em;
   }
-  
+
   .Toastify__toast:last-child {
     margin-bottom: 0;
   }

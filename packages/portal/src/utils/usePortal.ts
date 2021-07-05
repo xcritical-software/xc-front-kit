@@ -2,12 +2,14 @@ import { useRef, useEffect, MutableRefObject } from 'react';
 
 import { Maybe } from '../interfaces';
 
-
 /**
  * Creates DOM element to be used as React root.
  * @returns {HTMLElement}
  */
-export const createRootElement = (id: string, zIndex: number | string): HTMLElement => {
+export const createRootElement = (
+  id: string,
+  zIndex: number | string
+): HTMLElement => {
   const rootContainer = document.createElement('div');
   rootContainer.setAttribute('id', id);
   rootContainer.setAttribute('style', `z-index: ${zIndex};`);
@@ -23,7 +25,7 @@ export const addRootElement = (rootElem: HTMLElement) => {
   if (document.body.lastElementChild) {
     document.body.insertBefore(
       rootElem,
-      document.body.lastElementChild.nextElementSibling,
+      document.body.lastElementChild.nextElementSibling
     );
   }
 };
@@ -46,7 +48,8 @@ export const usePortal = (id: string, zIndex: number | string = 0) => {
     // Look for existing target dom element to append to
     const existingParent: Maybe<HTMLElement> = document.querySelector(`#${id}`);
     // Parent is either a new root or the existing dom element
-    const parentElem: HTMLElement = existingParent ?? createRootElement(id, zIndex);
+    const parentElem: HTMLElement =
+      existingParent ?? createRootElement(id, zIndex);
 
     // If there is no existing DOM element, add a new one.
     if (!existingParent) {

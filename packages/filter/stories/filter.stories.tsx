@@ -9,7 +9,6 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 import { ThemeProvider } from 'styled-components';
-
 import { darken } from 'polished';
 
 import { IThemeNamespace, colors } from '@xcritical/theme';
@@ -27,12 +26,10 @@ import {
 import { CompactFilterContainer, ExternalFilterContainer } from './pages';
 import { salesStatus, simpleData } from './data/simpleData';
 
-
 export const store = createStore(
   combineReducers({ filter: filterReducer }),
-  devToolsEnhancer({}),
+  devToolsEnhancer({})
 );
-
 
 const themeTwo: IThemeNamespace = {
   [buttonThemeNamespace]: {
@@ -105,43 +102,47 @@ const themeTwo: IThemeNamespace = {
   } as IFilterTheme,
 };
 
-const withProvider = (story) => (
-  <Provider store={ store }>
-    { story() }
-  </Provider>
-);
+const withProvider = (story) => <Provider store={store}>{story()}</Provider>;
 
 storiesOf('Filter', module)
   .addDecorator(withProvider)
-  .add('Simple Filter', () => (
-    <CompactFilterContainer />
-  ))
+  .add('Simple Filter', () => <CompactFilterContainer />)
   .add('With Theme', () => (
-    <ThemeProvider theme={ themeTwo }>
+    <ThemeProvider theme={themeTwo}>
       <CompactFilterContainer />
     </ThemeProvider>
   ))
-  .add('With Disabled', () => (
-    <CompactFilterContainer disabled />
-  ))
+  .add('With Disabled', () => <CompactFilterContainer disabled />)
   .add('With Prefix', () => (
-    <CompactFilter name="withPrefix" filters={ [] } prefix={ <div>Prefix</div> } />
+    <CompactFilter name="withPrefix" filters={[]} prefix={<div>Prefix</div>} />
   ))
   .add('With Postfix', () => (
-    <CompactFilter name="withPostfix" filters={ [] } postfix={ <div>Postfix</div> } />
+    <CompactFilter
+      name="withPostfix"
+      filters={[]}
+      postfix={<div>Postfix</div>}
+    />
   ))
   .add('With Auto Select First Condition', () => (
-    <CompactFilter name="withAutoSelectFirstCondition" isAutoSelectFirstCondition filters={ simpleData } />
+    <CompactFilter
+      name="withAutoSelectFirstCondition"
+      isAutoSelectFirstCondition
+      filters={simpleData}
+    />
   ))
   .add('With Auto Open Added Tag', () => (
-    <CompactFilter name="withAutoOpenAddedTag" isAutoOpenAddedTag filters={ simpleData } />
+    <CompactFilter
+      name="withAutoOpenAddedTag"
+      isAutoOpenAddedTag
+      filters={simpleData}
+    />
   ))
   .add('With Auto Open Added Tag And Select First Condition', () => (
     <CompactFilter
       isAutoOpenAddedTag
       isAutoSelectFirstCondition
       name="withAutoOpenAddedTagAndSelectFirstCondition"
-      filters={ simpleData }
+      filters={simpleData}
     />
   ))
   .add('With Custom Names', () => (
@@ -150,7 +151,7 @@ storiesOf('Filter', module)
       moreName="Add Field Name"
       resetName="Reset Filters"
       searchName="Start Search"
-      filters={ simpleData }
+      filters={simpleData}
     />
   ))
   .add('With Validation', () => {
@@ -158,16 +159,18 @@ storiesOf('Filter', module)
       value: any,
       onChange: (value: any) => void,
       _condition?: string,
-      validationError?: string,
+      validationError?: string
     ) => (
       <>
         <Select
-          options={ salesStatus }
+          options={salesStatus}
           shouldFitContainer
-          onChange={ onChange }
-          value={ value }
+          onChange={onChange}
+          value={value}
         />
-        { validationError && <div style={ { color: colors.DANGER } }>{ validationError }</div> }
+        {validationError && (
+          <div style={{ color: colors.DANGER }}>{validationError}</div>
+        )}
       </>
     );
 
@@ -195,12 +198,10 @@ storiesOf('Filter', module)
     });
 
     return (
-      <CompactFilter name="withValidation" filters={ filtersWithValidation } />
+      <CompactFilter name="withValidation" filters={filtersWithValidation} />
     );
   })
   .add('With Hidden Tags', () => (
-    <CompactFilterContainer isTagsVisible={ false } />
+    <CompactFilterContainer isTagsVisible={false} />
   ))
-  .add('External Filter', () => (
-    <ExternalFilterContainer />
-  ));
+  .add('External Filter', () => <ExternalFilterContainer />);

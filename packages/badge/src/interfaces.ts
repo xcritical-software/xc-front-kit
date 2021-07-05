@@ -1,9 +1,4 @@
-import {
-  ITheme,
-  IThemeNamespace,
-  ICSSProperties,
-} from '@xcritical/theme';
-
+import { ITheme, IThemeNamespace, ICSSProperties } from '@xcritical/theme';
 
 export interface IBaseBadgeTheme extends ICSSProperties {
   ghost?: ICSSProperties;
