@@ -7,7 +7,6 @@ import { ThemeProvider } from 'styled-components';
 
 import Blanket, { blanketThemeNamespace, IBlanketTheme } from '../src';
 
-
 const emptyTheme = {};
 
 const theme = {
@@ -28,17 +27,13 @@ const BasicBlanket: React.FC<any> = ({ blanketTheme }) => {
   };
 
   return (
-    <ThemeProvider theme={ blanketTheme }>
-      <Blanket isTinted={ isTinted } onBlanketClicked={ handleClick } />
+    <ThemeProvider theme={blanketTheme}>
+      <Blanket isTinted={isTinted} onBlanketClicked={handleClick} />
       <div>Click to any place for show/hide Blanket</div>
     </ThemeProvider>
   );
 };
 
 storiesOf('Blanket', module)
-  .add('Basic', () => (
-    <BasicBlanket blanketTheme={ emptyTheme } />
-  ))
-  .add('With Theme', () => (
-    <BasicBlanket blanketTheme={ theme } />
-  ));
+  .add('Basic', () => <BasicBlanket blanketTheme={emptyTheme} />)
+  .add('With Theme', () => <BasicBlanket blanketTheme={theme} />);

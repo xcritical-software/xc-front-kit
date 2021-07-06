@@ -2,7 +2,6 @@ import { colors } from '@xcritical/theme';
 
 import { IFilterTheme } from './interfaces';
 
-
 export const filterThemeNamespace = '@xcritical\\filter';
 
 export const defaultTheme: IFilterTheme = {
@@ -25,7 +24,8 @@ export const defaultTheme: IFilterTheme = {
   popover: {
     content: {
       backgroundColor: colors.WHITE,
-      boxShadow: 'rgba(13, 22, 38, 0.1) 0px 0px 0px 1px, rgba(13, 22, 38, 0.1) 0px 4px 11px',
+      boxShadow:
+        'rgba(13, 22, 38, 0.1) 0px 0px 0px 1px, rgba(13, 22, 38, 0.1) 0px 4px 11px',
       borderRadius: '4px',
       zIndex: 200,
     },

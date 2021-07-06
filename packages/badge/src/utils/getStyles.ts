@@ -7,95 +7,103 @@ import {
   IThemeNamespace,
 } from '@xcritical/theme';
 
-import {
-  badgeThemeNamespace,
-  defaultBadgeTheme,
-} from '../theme';
-import {
-  BadgeTheme,
-} from '../interfaces';
+import { badgeThemeNamespace, defaultBadgeTheme } from '../theme';
+import { BadgeTheme } from '../interfaces';
 
+const badgeTheme = memoize(
+  (
+    theme: IThemeNamespace<BadgeTheme> = {},
+    propertyPath?: string | string[]
+  ): BadgeTheme | any => {
+    const func = getThemedState(badgeThemeNamespace, defaultBadgeTheme);
 
-const badgeTheme = memoize((
-  theme: IThemeNamespace<BadgeTheme> = {},
-  propertyPath?: string | string[],
-): BadgeTheme | any => {
-  const func = getThemedState(badgeThemeNamespace, defaultBadgeTheme);
+    return func(theme, propertyPath);
+  }
+);
 
-  return func(theme, propertyPath);
-});
+const badgeApperanceTheme = memoize(
+  (
+    theme: IThemeNamespace<BadgeTheme> = {},
+    appearanceName: string,
+    baseAppearance: string,
+    propertyPath?: string | string[]
+  ): BadgeTheme | any => {
+    const func = getAppearanceTheme(badgeThemeNamespace, defaultBadgeTheme);
 
+    return func(theme, appearanceName, propertyPath, baseAppearance);
+  }
+);
 
-const badgeApperanceTheme = memoize((
-  theme: IThemeNamespace<BadgeTheme> = {},
-  appearanceName: string,
-  baseAppearance: string,
-  propertyPath?: string | string[],
-): BadgeTheme | any => {
-  const func = getAppearanceTheme(badgeThemeNamespace, defaultBadgeTheme);
+export const getRootBadgeStyles = memoize(
+  (
+    theme: IThemeNamespace<BadgeTheme> = {},
+    appearance: string,
+    baseAppearance: string
+  ): any => ({
+    ...badgeTheme(theme),
+    ...badgeApperanceTheme(theme, appearance, baseAppearance),
+  })
+);
 
-  return func(theme, appearanceName, propertyPath, baseAppearance);
-});
+const getRootBadgeStatesStyle = memoize(
+  (
+    theme: IThemeNamespace<BadgeTheme> = {},
+    appearance: string,
+    baseAppearance: string,
+    stateName: string
+  ): any => badgeApperanceTheme(theme, appearance, baseAppearance, [stateName])
+);
 
-export const getRootBadgeStyles = memoize((
-  theme: IThemeNamespace<BadgeTheme> = {},
-  appearance: string,
-  baseAppearance: string,
-): any => ({
-  ...badgeTheme(theme),
-  ...badgeApperanceTheme(theme, appearance, baseAppearance),
-}));
+export const getRootBadgeInteractiveStyles = memoize(
+  (
+    theme: IThemeNamespace<BadgeTheme>,
+    appearance: string,
+    baseAppearance: string,
+    ghost: boolean = false
+  ): any => {
+    const standardFocus = css`
+      &:focus {
+        ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'focus')}
+      }
+    `;
 
-const getRootBadgeStatesStyle = memoize((
-  theme: IThemeNamespace<BadgeTheme> = {},
-  appearance: string,
-  baseAppearance: string,
-  stateName: string,
-): any => badgeApperanceTheme(theme, appearance, baseAppearance, [stateName]));
+    const standardActive = css`
+      &:active {
+        ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'active')};
+      }
+    `;
 
-export const getRootBadgeInteractiveStyles = memoize((
-  theme: IThemeNamespace<BadgeTheme>,
-  appearance: string,
-  baseAppearance: string,
-  ghost: boolean = false,
-): any => {
-  const standardFocus = css`
-    &:focus {
-      ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'focus')}
-    }
-  `;
+    const standardHover = css`
+      &:hover {
+        ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'hover')}
+      }
+    `;
 
-  const standardActive = css`
-    &:active {
-      ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'active')};
-    }
-  `;
+    if (ghost) {
+      return css`
+        ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'ghost')}
 
-  const standardHover = css`
-    &:hover {
-      ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'hover')}
-    }
-  `;
-
-  if (ghost) {
-    return css`
-      ${getRootBadgeStatesStyle(theme, appearance, baseAppearance, 'ghost')}
-
-      ${standardHover}
+        ${standardHover}
       ${standardFocus};
+      `;
+    }
+
+    return css`
+      ${standardActive}
+      ${standardHover}
+    ${standardFocus}
     `;
   }
+);
 
-
-  return css`
-    ${standardActive}
-    ${standardHover}
-    ${standardFocus}
-  `;
-});
-
-export const getBadgeStatesStyle = (stateName: string) => memoize((
-  theme: IThemeNamespace<BadgeTheme> = {},
-  appearance: string,
-  baseAppearance: string,
-): any => badgeApperanceTheme(theme, appearance || '', baseAppearance || '', [stateName]));
+export const getBadgeStatesStyle = (stateName: string) =>
+  memoize(
+    (
+      theme: IThemeNamespace<BadgeTheme> = {},
+      appearance: string,
+      baseAppearance: string
+    ): any =>
+      badgeApperanceTheme(theme, appearance || '', baseAppearance || '', [
+        stateName,
+      ])
+  );

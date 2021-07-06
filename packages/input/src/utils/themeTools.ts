@@ -4,7 +4,6 @@ import { colors } from '@xcritical/theme';
 
 import { IBaseInputTheme } from '../interfaces';
 
-
 export const generateApperance = ({
   background,
   color,

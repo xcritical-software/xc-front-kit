@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
+import { IHeader, ITotalCellContent, ITotal, ITotalCell } from '../interfaces';
+
 import {
-  IHeader, ITotalCellContent, ITotal, ITotalCell,
-} from '../interfaces';
-
-import { getTotalStyles, getTotalCellStyles, getTotalCellContentStyles } from './utils';
-
+  getTotalStyles,
+  getTotalCellStyles,
+  getTotalCellContentStyles,
+} from './utils';
 
 export const TotalBlock = styled.div.attrs(({ translateX }: ITotal) => ({
   style: {
@@ -19,7 +20,6 @@ export const TotalBlock = styled.div.attrs(({ translateX }: ITotal) => ({
   ${getTotalStyles}
 `;
 
-
 export const TotalCell = styled.div.attrs(({ width }: ITotalCell) => ({
   style: {
     width: `${width}px`,
@@ -32,7 +32,6 @@ export const TotalCell = styled.div.attrs(({ width }: ITotalCell) => ({
   box-sizing: border-box;
   ${getTotalCellStyles}
 `;
-
 
 export const TotalCellContent = styled.div<ITotalCellContent>`
   width: 100%;

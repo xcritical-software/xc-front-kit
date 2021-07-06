@@ -1,6 +1,5 @@
 import { ITheme, ICSSProperties, AllType } from '@xcritical/theme';
 
-
 export interface IBlanketTheme extends ICSSProperties {
   background: string;
   color: string;

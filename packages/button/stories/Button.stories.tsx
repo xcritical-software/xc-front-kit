@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { forwardRef, AllHTMLAttributes } from 'react';
@@ -10,11 +11,9 @@ import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import { IThemeNamespace } from '@xcritical/theme';
 
 import Button, { buttonThemeNamespace } from '../src';
-
 import { ButtonTheme } from '../src/interfaces';
 
 import { MasterCardIcon, ChevronDown, ChevronUp } from './Icons';
-
 
 const appearances = [
   'default',
@@ -30,20 +29,17 @@ const appearances = [
 ];
 
 const Table = (props: any) => (
-  <div style={ { display: 'table', minWidth: '280px' } } { ...props } />
+  <div style={{ display: 'table', minWidth: '280px' }} {...props} />
 );
-const Row = (props: any) => (
-  <div style={ { display: 'table-row' } } { ...props } />
-);
+const Row = (props: any) => <div style={{ display: 'table-row' }} {...props} />;
 const Cell = (props: any) => (
-  <div style={ { display: 'table-cell', padding: 4 } } { ...props } />
+  <div style={{ display: 'table-cell', padding: 4 }} {...props} />
 );
 
 function capitalize(str: string) {
   // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
-
 
 const theme: IThemeNamespace<ButtonTheme> = {
   [buttonThemeNamespace]: {
@@ -164,10 +160,9 @@ storiesOf('Button', module)
   .add('Basic', () => (
     <Button
       key="button"
-      disabled={ boolean('Disabled', false) }
-      ghost={ boolean('Ghost', false) }
-    >
-      { text('Button Text', 'Button') }
+      disabled={boolean('Disabled', false)}
+      ghost={boolean('Ghost', false)}>
+      {text('Button Text', 'Button')}
     </Button>
   ))
   .add('Other', () => (
@@ -176,43 +171,50 @@ storiesOf('Button', module)
         <Cell>
           <span>
             You need to click
-            <Button
-              onClick={ () => console.log('clicking the Component') }
-            >
+            <Button onClick={() => console.log('clicking the Component')}>
               Pay
             </Button>
             button
           </span>
-
         </Cell>
-
       </Row>
-
     </Table>
   ))
 
   .add('Link', () => (
     <Table>
-      <Row><Cell><Button href="/ro" target="_blank">Pay</Button></Cell></Row>
-      <Row><Cell><Button href="/ro" disabled target="_blank">Pay</Button></Cell></Row>
+      <Row>
+        <Cell>
+          <Button href="/ro" target="_blank">
+            Pay
+          </Button>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Button href="/ro" disabled target="_blank">
+            Pay
+          </Button>
+        </Cell>
+      </Row>
     </Table>
   ))
   .add('Router Link', () => (
-    <ThemeProvider theme={ {} }>
+    <ThemeProvider theme={{}}>
       <MemoryRouter>
         <Table>
           <Row>
             <Cell>
               <Button
                 href="/ro"
-                component={
-                  forwardRef<HTMLAnchorElement, Link & AllHTMLAttributes<HTMLAnchorElement>>(({ href = '', children, ...rest }, ref) => (
-                    <Link { ...rest } to={ href } innerRef={ ref }>
-                      { children }
-                    </Link>
-                  ))
-                }
-              >
+                component={forwardRef<
+                  HTMLAnchorElement,
+                  Link & AllHTMLAttributes<HTMLAnchorElement>
+                >(({ href = '', children, ...rest }, ref) => (
+                  <Link {...rest} to={href} innerRef={ref}>
+                    {children}
+                  </Link>
+                ))}>
                 Go to
               </Button>
             </Cell>
@@ -222,22 +224,25 @@ storiesOf('Button', module)
     </ThemeProvider>
   ))
   .add('Themed', () => (
-    <ThemeProvider theme={ theme }>
+    <ThemeProvider theme={theme}>
       <Table>
-        <Row><Cell><Button height="45px" appearance="primary" shouldFitContent>Pay</Button></Cell></Row>
-        <Row><Cell><Button height="45px" appearance="pay" shouldFitContent selected>Pay</Button></Cell></Row>
-        <Row><Cell><Button height="45px" appearance="pay" shouldFitContent disabled>Pay</Button></Cell></Row>
         <Row>
           <Cell>
-            <Button
-
-              postfix={ <MasterCardIcon /> }
-              height="45px"
-              appearance="pay"
-              theme={
-                theme
-              }
-            >
+            <Button height="45px" appearance="primary" shouldFitContent>
+              Pay
+            </Button>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Button height="45px" appearance="pay" shouldFitContent selected>
+              Pay
+            </Button>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Button height="45px" appearance="pay" shouldFitContent disabled>
               Pay
             </Button>
           </Cell>
@@ -245,15 +250,22 @@ storiesOf('Button', module)
         <Row>
           <Cell>
             <Button
-
-              postfix={ <MasterCardIcon /> }
+              postfix={<MasterCardIcon />}
+              height="45px"
+              appearance="pay"
+              theme={theme}>
+              Pay
+            </Button>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Button
+              postfix={<MasterCardIcon />}
               height="45px"
               appearance="pay"
               shouldFitContent
-              theme={
-                theme
-              }
-            >
+              theme={theme}>
               Pay
             </Button>
           </Cell>
@@ -261,15 +273,12 @@ storiesOf('Button', module)
         <Row>
           <Cell>
             <Button
-              prefix={ <MasterCardIcon /> }
+              prefix={<MasterCardIcon />}
               height="45px"
               appearance="pay"
               textPosition="left"
               shouldFitContent
-              theme={
-                theme
-              }
-            >
+              theme={theme}>
               Pay
             </Button>
           </Cell>
@@ -277,15 +286,12 @@ storiesOf('Button', module)
         <Row>
           <Cell>
             <Button
-              prefix={ <MasterCardIcon /> }
-              postfix={ <MasterCardIcon /> }
+              prefix={<MasterCardIcon />}
+              postfix={<MasterCardIcon />}
               height="45px"
               appearance="pay"
               shouldFitContent
-              theme={
-                theme
-              }
-            >
+              theme={theme}>
               Pay
             </Button>
           </Cell>
@@ -294,77 +300,56 @@ storiesOf('Button', module)
     </ThemeProvider>
   ))
   .add('Apperance', () => (
-    <ThemeProvider theme={ {} }>
+    <ThemeProvider theme={{}}>
       <Table>
-        { appearances.map((a) => (
-          <Row key={ a }>
+        {appearances.map((a) => (
+          <Row key={a}>
             <Cell>
-              <Button appearance={ a } key={ `${a}` }>
-                { capitalize(a) }
+              <Button appearance={a} key={`${a}`}>
+                {capitalize(a)}
               </Button>
             </Cell>
 
             <Cell>
-              <Button
-                key={ `${a}_disabled` }
-                appearance={ a }
-                disabled
-              >
+              <Button key={`${a}_disabled`} appearance={a} disabled>
                 Disabled
               </Button>
             </Cell>
             <Cell>
-              <Button
-                key={ `${a}_disabled_selected` }
-                appearance={ a }
-                selected
-              >
+              <Button key={`${a}_disabled_selected`} appearance={a} selected>
                 Selected
               </Button>
             </Cell>
             <Cell>
-              <Button appearance={ a } ghost key={ `${a}_ghost` }>
-                { capitalize(a) }
+              <Button appearance={a} ghost key={`${a}_ghost`}>
+                {capitalize(a)}
               </Button>
             </Cell>
 
             <Cell>
-              <Button
-                appearance={ a }
-                ghost
-                key={ `${a}_ghost_disabled` }
-                disabled
-              >
+              <Button appearance={a} ghost key={`${a}_ghost_disabled`} disabled>
                 Disabled
               </Button>
             </Cell>
             <Cell>
-              <Button
-                appearance={ a }
-                ghost
-                selected
-                key={ `${a}_ghost_selected` }
-              >
+              <Button appearance={a} ghost selected key={`${a}_ghost_selected`}>
                 Selected
               </Button>
             </Cell>
           </Row>
-        )) }
+        ))}
       </Table>
     </ThemeProvider>
   ))
   .add('Select', () => (
-    <ThemeProvider theme={ theme }>
+    <ThemeProvider theme={theme}>
       <Table>
         <Row>
           <Cell>
             <Button
               appearance="select"
               shouldFitContent
-              postfix={
-                <ChevronDown />
-              }
-            >
+              postfix={<ChevronDown />}>
               5536 91** **** 8402
             </Button>
           </Cell>
@@ -375,10 +360,7 @@ storiesOf('Button', module)
               appearance="select"
               shouldFitContent
               selected
-              postfix={
-                <ChevronUp />
-              }
-            >
+              postfix={<ChevronUp />}>
               5536 91** **** 8402
             </Button>
           </Cell>
@@ -386,14 +368,11 @@ storiesOf('Button', module)
         <Row>
           <Cell>
             <Button
-              prefix={ <MasterCardIcon /> }
+              prefix={<MasterCardIcon />}
               appearance="select"
               shouldFitContent
               textPosition="left"
-              postfix={
-                <ChevronDown />
-              }
-            >
+              postfix={<ChevronDown />}>
               5536 91** **** 8402
             </Button>
           </Cell>
@@ -401,15 +380,12 @@ storiesOf('Button', module)
         <Row>
           <Cell>
             <Button
-              prefix={ <MasterCardIcon /> }
+              prefix={<MasterCardIcon />}
               appearance="select"
               shouldFitContent
               selected
               textPosition="left"
-              postfix={
-                <ChevronUp />
-              }
-            >
+              postfix={<ChevronUp />}>
               5536 91** **** 8402
             </Button>
           </Cell>
@@ -421,11 +397,28 @@ storiesOf('Button', module)
     <Table>
       <Row>
         <Cell>
-          <Button
-            isRTL
-            height="45px"
-            shouldFitContent
-          >
+          <Button isRTL height="45px" shouldFitContent>
+            Pay
+          </Button>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Button isRTL height="45px" shouldFitContent selected>
+            Pay
+          </Button>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Button isRTL height="45px" shouldFitContent disabled>
+            Pay
+          </Button>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Button isRTL postfix={<MasterCardIcon />} height="45px">
             Pay
           </Button>
         </Cell>
@@ -434,10 +427,9 @@ storiesOf('Button', module)
         <Cell>
           <Button
             isRTL
+            postfix={<MasterCardIcon />}
             height="45px"
-            shouldFitContent
-            selected
-          >
+            shouldFitContent>
             Pay
           </Button>
         </Cell>
@@ -446,46 +438,10 @@ storiesOf('Button', module)
         <Cell>
           <Button
             isRTL
-            height="45px"
-            shouldFitContent
-            disabled
-          >
-            Pay
-          </Button>
-        </Cell>
-      </Row>
-      <Row>
-        <Cell>
-          <Button
-            isRTL
-            postfix={ <MasterCardIcon /> }
-            height="45px"
-          >
-            Pay
-          </Button>
-        </Cell>
-      </Row>
-      <Row>
-        <Cell>
-          <Button
-            isRTL
-            postfix={ <MasterCardIcon /> }
-            height="45px"
-            shouldFitContent
-          >
-            Pay
-          </Button>
-        </Cell>
-      </Row>
-      <Row>
-        <Cell>
-          <Button
-            isRTL
-            prefix={ <MasterCardIcon /> }
+            prefix={<MasterCardIcon />}
             height="45px"
             textPosition="left"
-            shouldFitContent
-          >
+            shouldFitContent>
             Pay
           </Button>
         </Cell>
@@ -494,11 +450,10 @@ storiesOf('Button', module)
         <Cell>
           <Button
             isRTL
-            prefix={ <MasterCardIcon /> }
-            postfix={ <MasterCardIcon /> }
+            prefix={<MasterCardIcon />}
+            postfix={<MasterCardIcon />}
             height="45px"
-            shouldFitContent
-          >
+            shouldFitContent>
             Pay
           </Button>
         </Cell>

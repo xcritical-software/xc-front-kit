@@ -2,7 +2,6 @@ import { colors } from '@xcritical/theme';
 
 import { IPaginationTheme } from './interfaces';
 
-
 export const paginationThemeNamespace = '@xcritical\\pagination';
 
 export const defaultPaginationTheme: IPaginationTheme = {

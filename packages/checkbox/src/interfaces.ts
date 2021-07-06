@@ -1,6 +1,5 @@
 import { ITheme, ICSSProperties } from '@xcritical/theme';
 
-
 export interface ICheckboxTheme extends ICSSProperties {
   checkboxLabel?: ICSSProperties;
   checkboxWrapper?: ICSSProperties;
@@ -23,7 +22,10 @@ export interface ICheckboxProps extends IStyledProps {
   checked?: boolean;
   disabled?: boolean;
   checkIcon?: React.ReactElement;
-  onChange?: (checked: boolean, event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (
+    checked: boolean,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
 }
 
 export interface IStyledCheckboxProps {

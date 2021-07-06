@@ -1,6 +1,5 @@
 import { ButtonTags } from '../interfaces';
 
-
 export * from './getStyles';
 
 export const getElement = (disabled: boolean, href?: string): ButtonTags => {

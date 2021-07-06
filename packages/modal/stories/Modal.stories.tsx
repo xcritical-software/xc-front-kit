@@ -1,7 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, {
-  useState, useCallback, useMemo,
-} from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Provider, connect } from 'react-redux';
 import { storiesOf } from '@storybook/react';
@@ -21,7 +19,6 @@ import ModalPortal, {
 
 import { store } from './store';
 
-
 const emptyTheme = {};
 
 const theme = {
@@ -31,8 +28,7 @@ const theme = {
     },
     appearance: {
       default: {
-        content: {
-        },
+        content: {},
         headerWrapper: {
           padding: '24px',
           borderBottom: `1px solid ${colors.GRAY}`,
@@ -83,7 +79,6 @@ const theme = {
   },
 };
 
-
 const StyledButton = styled.button`
   display: block;
   cursor: pointer;
@@ -92,43 +87,48 @@ const StyledButton = styled.button`
   padding: 10px;
   margin-bottom: 15px;
   background: #f8f9fa;
-  color: #31394C;
+  color: #31394c;
   border: 1px solid rgba(49, 57, 76, 0.1);
   border-radius: 5px;
 `;
 
-const ModalWithPayload: React.FC<{id?: number}> = ({ id }) => (
+const ModalWithPayload: React.FC<{ id?: number }> = ({ id }) => (
   <>
     <StyledButton
-      onClick={ () => store.dispatch(xcriticalModalOpen('modalWithPayload', {
-        id: 1,
-      })) }
-    >
+      onClick={() =>
+        store.dispatch(
+          xcriticalModalOpen('modalWithPayload', {
+            id: 1,
+          })
+        )
+      }>
       Open Modal With Payload
     </StyledButton>
 
     <ConnectedModal title="Modal With Payload" name="modalWithPayload">
-      <div>{ `Payload value: ${id}` }</div>
+      <div>{`Payload value: ${id}`}</div>
     </ConnectedModal>
   </>
 );
 
 const ThemedModal = ({ appearance }: { appearance: string }) => (
   <>
-    <StyledButton onClick={ () => store.dispatch(xcriticalModalOpen(appearance)) }>
-      Open
-      { ' ' }
-      { appearance }
-      { ' ' }
-      Modal
+    <StyledButton
+      onClick={() => store.dispatch(xcriticalModalOpen(appearance))}>
+      Open {appearance} Modal
     </StyledButton>
-    <ConnectedModal title={ `Appearance: ${appearance}` } name={ appearance } appearance={ appearance }>
+    <ConnectedModal
+      title={`Appearance: ${appearance}`}
+      name={appearance}
+      appearance={appearance}>
       <div>Body example</div>
-      <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident,
+        rem!
+      </div>
     </ConnectedModal>
   </>
 );
-
 
 const mapStateToProps = (state) => {
   const modal = getModalByName(state, 'modalWithPayload');
@@ -162,23 +162,37 @@ const Modals = ({ component: ModalComponent }): React.ReactElement => {
 
   return (
     <>
-      <button type="button" onClick={ handleFirstOpen }>Open first</button>
-      <ModalComponent isOpen={ isFirstOpen } title="First Modal" name="first" onModalCancel={ handleFirstClose }>
-        <button type="button" onClick={ handleSecondOpen }>Open second</button>
+      <button type="button" onClick={handleFirstOpen}>
+        Open first
+      </button>
+      <ModalComponent
+        isOpen={isFirstOpen}
+        title="First Modal"
+        name="first"
+        onModalCancel={handleFirstClose}>
+        <button type="button" onClick={handleSecondOpen}>
+          Open second
+        </button>
       </ModalComponent>
-      {
-        ModalComponent === Modal ? (
-          <ModalProvider>
-            <ModalComponent isOpen={ isSecondOpen } title="Second Modal" name="second" onModalCancel={ handleSecondClose }>
-              Second
-            </ModalComponent>
-          </ModalProvider>
-        ) : (
-          <ModalComponent isOpen={ isSecondOpen } title="Second Modal" name="second" onModalCancel={ handleSecondClose }>
+      {ModalComponent === Modal ? (
+        <ModalProvider>
+          <ModalComponent
+            isOpen={isSecondOpen}
+            title="Second Modal"
+            name="second"
+            onModalCancel={handleSecondClose}>
             Second
           </ModalComponent>
-        )
-      }
+        </ModalProvider>
+      ) : (
+        <ModalComponent
+          isOpen={isSecondOpen}
+          title="Second Modal"
+          name="second"
+          onModalCancel={handleSecondClose}>
+          Second
+        </ModalComponent>
+      )}
     </>
   );
 };
@@ -186,68 +200,75 @@ const Modals = ({ component: ModalComponent }): React.ReactElement => {
 storiesOf('ConnectedModal', module)
   .addDecorator(withKnobs)
   .add('Default', () => (
-    <Provider store={ store }>
-      <ThemeProvider theme={ emptyTheme }>
-        <StyledButton onClick={ () => store.dispatch(xcriticalModalOpen('defaultModal')) }>
+    <Provider store={store}>
+      <ThemeProvider theme={emptyTheme}>
+        <StyledButton
+          onClick={() => store.dispatch(xcriticalModalOpen('defaultModal'))}>
           Open Default Modal
         </StyledButton>
 
         <ConnectedModal
           title="Default Modal"
           name="defaultModal"
-          width={ text('Width', 'auto') }
-          minWidth={ text('Min width', '100px') }
-          maxWidth={ text('Max width', '300px') }
-        >
+          width={text('Width', 'auto')}
+          minWidth={text('Min width', '100px')}
+          maxWidth={text('Max width', '300px')}>
           <div>Body example</div>
-          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident,
+            rem!
+          </div>
         </ConnectedModal>
       </ThemeProvider>
     </Provider>
   ))
   .add('With custom icon close', () => (
-    <Provider store={ store }>
-      <ThemeProvider theme={ emptyTheme }>
-        <StyledButton onClick={ () => store.dispatch(xcriticalModalOpen('withCustomIconClose')) }>
+    <Provider store={store}>
+      <ThemeProvider theme={emptyTheme}>
+        <StyledButton
+          onClick={() =>
+            store.dispatch(xcriticalModalOpen('withCustomIconClose'))
+          }>
           Open Modal With Custom Close Icon
         </StyledButton>
 
         <ConnectedModal
           title="Modal With Custom Icon Close"
           name="withCustomIconClose"
-          iconClose={ <CloseCircleOutlineIcon size="100%" /> }
-        >
+          iconClose={<CloseCircleOutlineIcon size="100%" />}>
           <div>Body example</div>
-          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, rem!</div>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident,
+            rem!
+          </div>
         </ConnectedModal>
       </ThemeProvider>
     </Provider>
   ))
   .add('With payload', () => (
-    <Provider store={ store }>
-      <ThemeProvider theme={ emptyTheme }>
+    <Provider store={store}>
+      <ThemeProvider theme={emptyTheme}>
         <ConnectedModalWithPayload />
       </ThemeProvider>
     </Provider>
   ))
   .add('With Theme', () => (
-    <Provider store={ store }>
-      <ThemeProvider theme={ theme }>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
         <ThemedModal appearance="themedModal" />
 
         <ThemedModal appearance="mobile" />
-
       </ThemeProvider>
     </Provider>
   ))
   .add('Two Modals', () => (
-    <ThemeProvider theme={ emptyTheme }>
-      <Modals component={ Modal } />
+    <ThemeProvider theme={emptyTheme}>
+      <Modals component={Modal} />
     </ThemeProvider>
   ))
   .add('Two Modals Portal', () => (
-    <ThemeProvider theme={ emptyTheme }>
-      <Modals component={ ModalPortal } />
+    <ThemeProvider theme={emptyTheme}>
+      <Modals component={ModalPortal} />
     </ThemeProvider>
   ))
   .add('Full Screen', () => {
@@ -265,39 +286,41 @@ storiesOf('ConnectedModal', module)
       setIsFullScreen(!isFullScreen);
     }, [isFullScreen]);
 
-
     const modalSizes = useMemo(() => {
       if (isFullScreen) {
         return {
           width: '100%',
           height: '100%',
           maxWidth: '100%',
-
         };
       }
 
-      return { };
+      return {};
     }, [isFullScreen]);
 
     return (
-      <ThemeProvider theme={ theme }>
-        <button type="button" onClick={ handleOpen }>Open modal</button>
+      <ThemeProvider theme={theme}>
+        <button type="button" onClick={handleOpen}>
+          Open modal
+        </button>
         <br />
         <label htmlFor="change-fullscreen">
-          <input id="change-fullscreen" type="checkbox" onChange={ handleChangeFullScreen } checked={ isFullScreen } />
+          <input
+            id="change-fullscreen"
+            type="checkbox"
+            onChange={handleChangeFullScreen}
+            checked={isFullScreen}
+          />
           Is Full Screen
         </label>
         <ModalPortal
           name="full-screen"
           title="Full Screen"
-          isOpen={ isOpen }
-          onModalCancel={ handleClose }
-          { ...modalSizes }
-        >
+          isOpen={isOpen}
+          onModalCancel={handleClose}
+          {...modalSizes}>
           <div>
-            <h1>
-              This is Full Screen Modal
-            </h1>
+            <h1>This is Full Screen Modal</h1>
           </div>
         </ModalPortal>
       </ThemeProvider>

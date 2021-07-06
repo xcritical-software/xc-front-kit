@@ -2,7 +2,6 @@ import { CSSObject } from 'styled-components';
 
 import { ITheme, ICSSProperties } from '@xcritical/theme';
 
-
 export interface IDivided {
   color: string;
 }
@@ -45,7 +44,6 @@ export interface IItemGroupProps {
   appearance?: string;
   baseAppearance?: string;
 }
-
 
 export interface IPrefixPostfixProps {
   theme: ItemTheme;

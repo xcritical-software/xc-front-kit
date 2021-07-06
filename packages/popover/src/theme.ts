@@ -1,6 +1,5 @@
 import { IPopoverTheme } from './interfaces';
 
-
 export const popoverThemeNamespace = '@xcritical\\xc-popover';
 
 export const defaultPopoverTheme: IPopoverTheme = {

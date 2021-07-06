@@ -2,7 +2,6 @@ import { Placement } from 'popper.js';
 
 import { Position } from '../interfaces';
 
-
 const positionMap: Record<Position, Placement> = {
   'top left': 'top-start',
   'top center': 'top',
@@ -18,12 +17,15 @@ const positionMap: Record<Position, Placement> = {
   'left bottom': 'left-end',
 };
 
-export const getPopperPlacementByPosition = (position: Position): Placement => (
-  positionMap[position]
-);
+export const getPopperPlacementByPosition = (position: Position): Placement =>
+  positionMap[position];
 
-export const getPositionByPopperPlacement = (placement: Placement): Position => {
-  const position = Object.keys(positionMap).find((key) => positionMap[key] === placement);
+export const getPositionByPopperPlacement = (
+  placement: Placement
+): Position => {
+  const position = Object.keys(positionMap).find(
+    (key) => positionMap[key] === placement
+  );
 
   return position as Position;
 };

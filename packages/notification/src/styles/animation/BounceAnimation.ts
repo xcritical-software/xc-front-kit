@@ -1,6 +1,5 @@
 import { css } from 'styled-components';
 
-
 export const BounceAnimation = css`
   @keyframes Toastify__bounceInRight {
     from,
@@ -166,34 +165,34 @@ export const BounceAnimation = css`
   .Toastify__bounce-enter--bottom-left {
     animation-name: Toastify__bounceInLeft;
   }
-  
+
   .Toastify__bounce-enter--top-right,
   .Toastify__bounce-enter--bottom-right {
     animation-name: Toastify__bounceInRight;
   }
-  
+
   .Toastify__bounce-enter--top-center {
     animation-name: Toastify__bounceInDown;
   }
-  
+
   .Toastify__bounce-enter--bottom-center {
     animation-name: Toastify__bounceInUp;
   }
-  
+
   .Toastify__bounce-exit--top-left,
   .Toastify__bounce-exit--bottom-left {
     animation-name: Toastify__bounceOutLeft;
   }
-  
+
   .Toastify__bounce-exit--top-right,
   .Toastify__bounce-exit--bottom-right {
     animation-name: Toastify__bounceOutRight;
   }
-  
+
   .Toastify__bounce-exit--top-center {
     animation-name: Toastify__bounceOutUp;
   }
-  
+
   .Toastify__bounce-exit--bottom-center {
     animation-name: Toastify__bounceOutDown;
   }

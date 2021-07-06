@@ -3,16 +3,17 @@ import styled, { css } from 'styled-components';
 import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
 
 import {
-  getBodyCellStyles, getBodyCellContentStyles, getBodyCellOffsetStyles, getExpandButtonStyles,
+  getBodyCellStyles,
+  getBodyCellContentStyles,
+  getBodyCellOffsetStyles,
+  getExpandButtonStyles,
 } from './utils';
-
 
 const scrollbarSize = 8;
 
 export const TotalsShift = styled.div`
   height: ${scrollbarSize}px;
 `;
-
 
 const hiddenScrollbar = css`
   div {
@@ -21,15 +22,15 @@ const hiddenScrollbar = css`
       height: 0px;
     }
     ::-webkit-scrollbar-track {
-      background: rgba(0,0,0,0);
+      background: rgba(0, 0, 0, 0);
     }
     ::-webkit-scrollbar-thumb {
-      background: rgba(0,0,0,0);
+      background: rgba(0, 0, 0, 0);
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(0,0,0,0);
+      background: rgba(0, 0, 0, 0);
     }
-    scrollbar-color: rgba(0,0,0,0) rgba(0,0,0,0);
+    scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
     scrollbar-width: thin;
     :focus {
       outline: none;
@@ -43,15 +44,15 @@ const rightScrollbar = css`
       height: 0px;
     }
     ::-webkit-scrollbar-track {
-      background: rgba(0,0,0,0);
+      background: rgba(0, 0, 0, 0);
     }
     ::-webkit-scrollbar-thumb {
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 0, 0, 0.2);
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
     }
-    scrollbar-color: rgba(0,0,0,0.2) rgba(0,0,0,0);
+    scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0);
     scrollbar-width: thin;
     :focus {
       outline: none;
@@ -65,15 +66,15 @@ const bottomScrollbar = css`
       height: ${scrollbarSize}px;
     }
     ::-webkit-scrollbar-track {
-      background: rgba(0,0,0,0);
+      background: rgba(0, 0, 0, 0);
     }
     ::-webkit-scrollbar-thumb {
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 0, 0, 0.2);
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
     }
-    scrollbar-color: rgba(0,0,0,0.2) rgba(0,0,0,0);
+    scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0);
     scrollbar-width: thin;
     :focus {
       outline: none;
@@ -81,21 +82,21 @@ const bottomScrollbar = css`
   }
 `;
 const fullScrollbar = css`
- div {
+  div {
     ::-webkit-scrollbar {
       width: ${scrollbarSize}px;
       height: ${scrollbarSize}px;
     }
     ::-webkit-scrollbar-track {
-      background: rgba(0,0,0,0);
+      background: rgba(0, 0, 0, 0);
     }
     ::-webkit-scrollbar-thumb {
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 0, 0, 0.2);
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
     }
-    scrollbar-color: rgba(0,0,0,0.2) rgba(0,0,0,0);
+    scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0);
     scrollbar-width: thin;
     :focus {
       outline: none;
@@ -103,11 +104,7 @@ const fullScrollbar = css`
   }
 `;
 
-
-const getScrollbar = ({
-  rightScroll,
-  bottomScroll,
-}) => {
+const getScrollbar = ({ rightScroll, bottomScroll }) => {
   if (rightScroll && bottomScroll) return fullScrollbar;
 
   if (rightScroll) return rightScrollbar;
@@ -152,7 +149,6 @@ export const ExpandButtonWrapper = styled.button`
   padding: 0;
   ${getExpandButtonStyles}
 `;
-
 
 export const ShiftInsteadButton = styled.div`
   width: 16px;

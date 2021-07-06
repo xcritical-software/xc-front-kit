@@ -1,7 +1,6 @@
 import { ToastContainerProps } from 'react-toastify';
 import { CSSObject } from 'styled-components';
 
-
 interface IToast {
   toast?: CSSObject;
   closeButton?: CSSObject;

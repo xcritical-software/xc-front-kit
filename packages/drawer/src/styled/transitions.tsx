@@ -10,7 +10,6 @@ import {
 } from '../interfaces';
 import { getElementStyles } from '../utils';
 
-
 const defaultTransitionProps = {
   appear: true,
   mountOnEnter: true,
@@ -18,80 +17,93 @@ const defaultTransitionProps = {
 };
 
 const TransitionHandler = forwardRef<
-HTMLElement, ITransitionProps & IDrawerProps & IHandlerProps
->(({
-  component = 'div',
-  in: inProp,
-  onExited,
-  defaultStyles,
-  transitionStyles,
-  transitionProps = defaultTransitionProps,
-  ...rest
-}: ITransitionProps & IHandlerProps, ref) => {
-  const timeout = { enter: 0, exit: transitionDurationMs };
+  HTMLElement,
+  ITransitionProps & IDrawerProps & IHandlerProps
+>(
+  (
+    {
+      component = 'div',
+      in: inProp,
+      onExited,
+      defaultStyles,
+      transitionStyles,
+      transitionProps = defaultTransitionProps,
+      ...rest
+    }: ITransitionProps & IHandlerProps,
+    ref
+  ) => {
+    const timeout = { enter: 0, exit: transitionDurationMs };
 
-  return (
-    <Transition
-      in={ inProp }
-      onExited={ onExited }
-      timeout={ timeout }
-      { ...transitionProps }
-    >
-      { (state: keyof IHandlerProps['transitionStyles']) => {
-        const style = {
-          ...defaultStyles,
-          ...transitionStyles[state],
-        };
+    return (
+      <Transition
+        in={inProp}
+        onExited={onExited}
+        timeout={timeout}
+        {...transitionProps}>
+        {(state: keyof IHandlerProps['transitionStyles']) => {
+          const style = {
+            ...defaultStyles,
+            ...transitionStyles[state],
+          };
 
-        const Tag: ComponentType<any> | string = component;
+          const Tag: ComponentType<any> | string = component;
 
-        return <Tag ref={ ref } style={ style } { ...rest } />;
-      } }
-    </Transition>
-  );
-});
+          return <Tag ref={ref} style={style} {...rest} />;
+        }}
+      </Transition>
+    );
+  }
+);
 
 export const Fade = forwardRef<
-HTMLElement, ITransitionProps & RefAttributes<HTMLElement>
+  HTMLElement,
+  ITransitionProps & RefAttributes<HTMLElement>
 >(({ ...props }, ref) => (
   <TransitionHandler
-    ref={ ref }
-    defaultStyles={ {
+    ref={ref}
+    defaultStyles={{
       transition: `opacity ${transitionDurationMs}ms ${transitionTimingFunction}`,
       opacity: 0,
       position: 'fixed',
-      zIndex: props.zIndex ?? getElementStyles(props.theme, 'drawerWrapper', props.appearance, props.baseAppearance).zIndex ?? 'auto',
-    } }
-    transitionStyles={ {
+      zIndex:
+        props.zIndex ??
+        getElementStyles(
+          props.theme,
+          'drawerWrapper',
+          props.appearance,
+          props.baseAppearance
+        ).zIndex ??
+        'auto',
+    }}
+    transitionStyles={{
       entering: { opacity: 0 },
       entered: { opacity: 1 },
-    } }
-    { ...props }
+    }}
+    {...props}
   />
 ));
 
-export const Slide = forwardRef<HTMLElement, ITransitionProps & IDrawerProps & IDrawerStates>(({
-  shouldUnmountOnExit = true,
-  isRTL,
-  ...props
-}, ref) => (
+export const Slide = forwardRef<
+  HTMLElement,
+  ITransitionProps & IDrawerProps & IDrawerStates
+>(({ shouldUnmountOnExit = true, isRTL, ...props }, ref) => (
   <TransitionHandler
-    ref={ ref }
-    isRTL={ isRTL }
-    defaultStyles={ {
+    ref={ref}
+    isRTL={isRTL}
+    defaultStyles={{
       transition:
-        `transform ${transitionDurationMs}ms ${transitionTimingFunction}, `
-        + `width ${transitionDurationMs}ms ${transitionTimingFunction}`,
+        `transform ${transitionDurationMs}ms ${transitionTimingFunction}, ` +
+        `width ${transitionDurationMs}ms ${transitionTimingFunction}`,
       transform: `translate3d(${isRTL ? '100%' : '-100%'},0,0)`,
-    } }
-    transitionStyles={ {
+    }}
+    transitionStyles={{
       entered: { transform: null },
       exited: { transform: `translate3d(${isRTL ? '100%' : '-100%'},0,0)` },
-    } }
-    transitionProps={ {
+    }}
+    transitionProps={{
       ...defaultTransitionProps,
       ...{ unmountOnExit: shouldUnmountOnExit },
-    } }
-    { ...props }
+    }}
+    {...props}
   />
 ));

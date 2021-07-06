@@ -1,14 +1,10 @@
-
 import { setIn } from 'utilitify';
 
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
 import { gridThemeNamespace, defaultTheme } from './theme';
-import {
-  IGridTheme, IMappedItem, IColumn, IItem,
-} from './interfaces';
+import { IGridTheme, IMappedItem, IColumn, IItem } from './interfaces';
 import { GridPositions } from './consts';
-
 
 export const guid = () => {
   function s4() {
@@ -17,35 +13,33 @@ export const guid = () => {
       .substring(1);
   }
 
-  return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}${s4()
-    + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
+  return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}${
+    s4() + s4()
+  }-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
 };
 
 export const addOrDeleteItemFromArray = (array: string[], item: string) => {
-  if (array.some((el: string) => el === item)) return array.filter((el: string) => el !== item);
+  if (array.some((el: string) => el === item))
+    return array.filter((el: string) => el !== item);
 
   return [...array, item];
 };
 
 export function gridTheme(
   theme: IThemeNamespace,
-  propertyPath?: string | undefined,
+  propertyPath?: string | undefined
 ): IGridTheme {
   const func = getThemedState(gridThemeNamespace, defaultTheme);
 
   return func(theme, propertyPath) as IGridTheme;
 }
 
-export const deleteSystemPropsFromObject = (item?: IMappedItem): IItem | undefined => {
+export const deleteSystemPropsFromObject = (
+  item?: IMappedItem
+): IItem | undefined => {
   if (item) {
     /* eslint-disable @typescript-eslint/no-unused-vars */
-    const {
-      __key,
-      __expandLevel,
-      __isExpand,
-      __parent,
-      ...rest
-    } = item;
+    const { __key, __expandLevel, __isExpand, __parent, ...rest } = item;
     /* eslint-enable @typescript-eslint/no-unused-vars */
 
     return rest;
@@ -54,9 +48,8 @@ export const deleteSystemPropsFromObject = (item?: IMappedItem): IItem | undefin
   return undefined;
 };
 
-export const deleteSystemPropsFromObjects = (arr: IMappedItem[]): IItem => arr
-  .map((el: IMappedItem) => deleteSystemPropsFromObject(el));
-
+export const deleteSystemPropsFromObjects = (arr: IMappedItem[]): IItem =>
+  arr.map((el: IMappedItem) => deleteSystemPropsFromObject(el));
 
 export const searchLastVisible = (arr: IColumn[], idx: number) => {
   let lastVisible = 0;
@@ -81,17 +74,17 @@ export const searchNextVisible = (arr: IColumn[], idx: number) => {
   return nextVisible;
 };
 
+export const getFullWidth = (columns: IColumn[]) =>
+  columns
+    .filter(({ visible }: IColumn) => visible)
+    .reduce((acc: number, { width: colWidth }) => acc + colWidth, 0);
 
-export const getFullWidth = (columns: IColumn[]) => columns
-  .filter(({ visible }: IColumn) => visible).reduce(
-    (acc: number, { width: colWidth }) => (acc + colWidth), 0,
-  );
-
-export const removeSorting = (columns) => columns
-  .map((el) => {
+export const removeSorting = (columns) =>
+  columns.map((el) => {
     if (el.sortable && el.sortOrder) {
       return {
-        ...el, sortOrder: null,
+        ...el,
+        sortOrder: null,
       };
     }
 
@@ -115,37 +108,31 @@ export const changeGridSort = ({
     setCenterMappedColumns(centerColumns);
     setRightMappedColumns(rightColumns);
 
-    return [
-      ...newLeftColumns,
-      ...centerColumns,
-      ...rightColumns,
-    ];
+    return [...newLeftColumns, ...centerColumns, ...rightColumns];
   }
 
   if (gridPosition === GridPositions.CENTER) {
-    const newCenterColumns = setIn(centerColumns, sortOrder, [index, 'sortOrder']);
+    const newCenterColumns = setIn(centerColumns, sortOrder, [
+      index,
+      'sortOrder',
+    ]);
     setLeftMappedColumns(leftColumns);
     setCenterMappedColumns(newCenterColumns);
     setRightMappedColumns(rightColumns);
 
-    return [
-      ...leftColumns,
-      ...newCenterColumns,
-      ...rightColumns,
-    ];
+    return [...leftColumns, ...newCenterColumns, ...rightColumns];
   }
 
   if (gridPosition === GridPositions.RIGHT) {
-    const newRightColumns = setIn(rightColumns, sortOrder, [index, 'sortOrder']);
+    const newRightColumns = setIn(rightColumns, sortOrder, [
+      index,
+      'sortOrder',
+    ]);
     setLeftMappedColumns(leftColumns);
     setCenterMappedColumns(centerColumns);
     setRightMappedColumns(newRightColumns);
 
-    return [
-      ...leftColumns,
-      ...centerColumns,
-      ...newRightColumns,
-    ];
+    return [...leftColumns, ...centerColumns, ...newRightColumns];
   }
 
   return [];

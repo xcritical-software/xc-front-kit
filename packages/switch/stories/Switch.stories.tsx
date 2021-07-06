@@ -1,15 +1,11 @@
 import React, { useCallback, useState } from 'react';
-
 import { storiesOf } from '@storybook/react';
-import {
-  boolean, withKnobs, text, select,
-} from '@storybook/addon-knobs';
+import { boolean, withKnobs, text, select } from '@storybook/addon-knobs';
 import { ThemeProvider } from 'styled-components';
 
 import { Switch } from '../src/Switch';
 import { BaseSwitch } from '../src/interfaces';
 import { switchThemeNamespace } from '../src/theme';
-
 
 const BasicSwitch: React.FC<BaseSwitch> = ({ theme: innerTheme, ...props }) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -19,8 +15,8 @@ const BasicSwitch: React.FC<BaseSwitch> = ({ theme: innerTheme, ...props }) => {
   }, [setIsChecked]);
 
   return (
-    <ThemeProvider theme={ innerTheme }>
-      <Switch onChange={ handlerChange } checked={ isChecked } { ...props } />
+    <ThemeProvider theme={innerTheme}>
+      <Switch onChange={handlerChange} checked={isChecked} {...props} />
     </ThemeProvider>
   );
 };
@@ -96,36 +92,36 @@ storiesOf('Switch', module)
   .addDecorator(withKnobs)
   .add('Basic', () => (
     <BasicSwitch
-      theme={ emptyTheme }
-      disabled={ boolean('Disabled', false) }
-      label={ text('Label', 'Test Label') }
-      labelPosition={ select('Label position', ['left', 'right'], 'right') }
+      theme={emptyTheme}
+      disabled={boolean('Disabled', false)}
+      label={text('Label', 'Test Label')}
+      labelPosition={select('Label position', ['left', 'right'], 'right')}
     />
   ))
   .add('With Custom Theme', () => (
     <>
       <BasicSwitch
-        theme={ { [switchThemeNamespace]: theme } }
+        theme={{ [switchThemeNamespace]: theme }}
         appearance="customTheme"
-        disabled={ boolean('Disabled', false) }
-        label={ text('Label', 'Test Label') }
-        labelPosition={ select('Label position', ['left', 'right'], 'right') }
+        disabled={boolean('Disabled', false)}
+        label={text('Label', 'Test Label')}
+        labelPosition={select('Label position', ['left', 'right'], 'right')}
       />
       <br />
       <BasicSwitch
-        theme={ { [switchThemeNamespace]: theme } }
+        theme={{ [switchThemeNamespace]: theme }}
         appearance="mini"
-        disabled={ boolean('Disabled', false) }
-        label={ text('Label', 'Test Label') }
-        labelPosition={ select('Label position', ['left', 'right'], 'right') }
+        disabled={boolean('Disabled', false)}
+        label={text('Label', 'Test Label')}
+        labelPosition={select('Label position', ['left', 'right'], 'right')}
       />
       <br />
       <BasicSwitch
-        theme={ { [switchThemeNamespace]: theme } }
+        theme={{ [switchThemeNamespace]: theme }}
         appearance="myAccount"
-        disabled={ boolean('Disabled', false) }
-        label={ text('Label', 'Test Label') }
-        labelPosition={ select('Label position', ['left', 'right'], 'right') }
+        disabled={boolean('Disabled', false)}
+        label={text('Label', 'Test Label')}
+        labelPosition={select('Label position', ['left', 'right'], 'right')}
       />
     </>
   ));

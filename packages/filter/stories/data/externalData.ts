@@ -2,7 +2,6 @@ import { IFilter } from '../../src/interfaces';
 import { DictionarySelector } from '../createValueElement';
 import { IDictionary } from '../interfaces';
 
-
 export const salesStatus: IDictionary[] = [
   {
     value: 3,
@@ -81,145 +80,149 @@ export const salesStatus: IDictionary[] = [
   },
 ];
 
-
-export const simpleData: IFilter[] = [{
-  field: 'userName',
-  isHidden: true,
-  displayName: 'User Name',
-  conditions: {
-    equalsTo: {
-      name: 'Equals to',
-      hasValue: true,
-    },
-    startsWith: {
-      name: 'Starts with',
-      hasValue: true,
-    },
-    endsWith: {
-      name: 'Ends with',
-      hasValue: true,
-    },
-    contains: {
-      name: 'Contains',
-      hasValue: true,
-    },
-    isEmpty: {
-      name: 'Is empty',
-      hasValue: false,
-    },
-    notEqualsTo: {
-      name: 'Not equalsTo',
-      hasValue: true,
-    },
-    in: {
-      name: 'In',
-      hasValue: true,
-    },
-    notIn: {
-      name: 'Not in',
-      hasValue: true,
-    },
-    notEmpty: {
-      name: 'Not empty',
-      hasValue: false,
-    },
-  },
-}, {
-  field: 'status',
-  displayName: 'Sale Status',
-  conditions: {
-    equalsTo: {
-      name: 'Equals to',
-      hasValue: true,
-    },
-    startsWith: {
-      name: 'Starts with',
-      hasValue: true,
-    },
-    endsWith: {
-      name: 'Ends with',
-      hasValue: true,
-    },
-    contains: {
-      name: 'Contains',
-      hasValue: true,
+export const simpleData: IFilter[] = [
+  {
+    field: 'userName',
+    isHidden: true,
+    displayName: 'User Name',
+    conditions: {
+      equalsTo: {
+        name: 'Equals to',
+        hasValue: true,
+      },
+      startsWith: {
+        name: 'Starts with',
+        hasValue: true,
+      },
+      endsWith: {
+        name: 'Ends with',
+        hasValue: true,
+      },
+      contains: {
+        name: 'Contains',
+        hasValue: true,
+      },
+      isEmpty: {
+        name: 'Is empty',
+        hasValue: false,
+      },
+      notEqualsTo: {
+        name: 'Not equalsTo',
+        hasValue: true,
+      },
+      in: {
+        name: 'In',
+        hasValue: true,
+      },
+      notIn: {
+        name: 'Not in',
+        hasValue: true,
+      },
+      notEmpty: {
+        name: 'Not empty',
+        hasValue: false,
+      },
     },
   },
-  Element: DictionarySelector(salesStatus),
-}, {
-  field: 'country',
-  displayName: 'Country',
-  conditions: {
-    equalsTo: {
-      name: 'Equals to',
-      hasValue: true,
+  {
+    field: 'status',
+    displayName: 'Sale Status',
+    conditions: {
+      equalsTo: {
+        name: 'Equals to',
+        hasValue: true,
+      },
+      startsWith: {
+        name: 'Starts with',
+        hasValue: true,
+      },
+      endsWith: {
+        name: 'Ends with',
+        hasValue: true,
+      },
+      contains: {
+        name: 'Contains',
+        hasValue: true,
+      },
     },
-    startsWith: {
-      name: 'Starts with',
-      hasValue: true,
-    },
-    endsWith: {
-      name: 'Ends with',
-      hasValue: true,
-    },
-    contains: {
-      name: 'Contains',
-      hasValue: true,
-    },
-
+    Element: DictionarySelector(salesStatus),
   },
-}, {
-  field: 'firstName',
-  displayName: 'First Name',
-  conditions: {
-    last7Days: {
-      name: 'Last 7 days',
-      hasValue: false,
-    },
-    last30Days: {
-      name: 'Last 30 days',
-      hasValue: false,
-    },
-    last60Days: {
-      name: 'Last 60 days',
-      hasValue: false,
-    },
-    last90Days: {
-      name: 'Last 90 days',
-      hasValue: false,
-    },
-  },
-}, {
-  field: 'lastName',
-  displayName: 'Last Name',
-  conditions: {
-    equalsTo: {
-      name: 'Equals to',
-      hasValue: true,
-    },
-    contains: {
-      name: 'Contains',
-      hasValue: true,
-    },
-    isEmpty: {
-      name: 'Is empty',
-      hasValue: false,
-    },
-    notEquals: {
-      name: 'Not equals',
-      hasValue: true,
-    },
-    in: {
-      name: 'In',
-      hasValue: true,
-    },
-    notIn: {
-      name: 'Not in',
-      hasValue: true,
-    },
-    notEmpty: {
-      name: 'Not empty',
-      hasValue: false,
+  {
+    field: 'country',
+    displayName: 'Country',
+    conditions: {
+      equalsTo: {
+        name: 'Equals to',
+        hasValue: true,
+      },
+      startsWith: {
+        name: 'Starts with',
+        hasValue: true,
+      },
+      endsWith: {
+        name: 'Ends with',
+        hasValue: true,
+      },
+      contains: {
+        name: 'Contains',
+        hasValue: true,
+      },
     },
   },
-}];
+  {
+    field: 'firstName',
+    displayName: 'First Name',
+    conditions: {
+      last7Days: {
+        name: 'Last 7 days',
+        hasValue: false,
+      },
+      last30Days: {
+        name: 'Last 30 days',
+        hasValue: false,
+      },
+      last60Days: {
+        name: 'Last 60 days',
+        hasValue: false,
+      },
+      last90Days: {
+        name: 'Last 90 days',
+        hasValue: false,
+      },
+    },
+  },
+  {
+    field: 'lastName',
+    displayName: 'Last Name',
+    conditions: {
+      equalsTo: {
+        name: 'Equals to',
+        hasValue: true,
+      },
+      contains: {
+        name: 'Contains',
+        hasValue: true,
+      },
+      isEmpty: {
+        name: 'Is empty',
+        hasValue: false,
+      },
+      notEquals: {
+        name: 'Not equals',
+        hasValue: true,
+      },
+      in: {
+        name: 'In',
+        hasValue: true,
+      },
+      notIn: {
+        name: 'Not in',
+        hasValue: true,
+      },
+      notEmpty: {
+        name: 'Not empty',
+        hasValue: false,
+      },
+    },
+  },
+];

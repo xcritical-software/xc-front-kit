@@ -1,18 +1,11 @@
-import {
-  getThemedState,
-  IThemeNamespace,
-} from '@xcritical/theme';
+import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
-import {
-  filterThemeNamespace,
-  defaultTheme,
-} from '../theme';
+import { filterThemeNamespace, defaultTheme } from '../theme';
 import { IFilterTheme, IThemeProp } from '../interfaces';
-
 
 export function getFilterTheme<T>(
   theme: IThemeNamespace,
-  propertyPath?: string | undefined,
+  propertyPath?: string | undefined
 ): IFilterTheme | IThemeProp<T> {
   const func = getThemedState(filterThemeNamespace, defaultTheme);
 

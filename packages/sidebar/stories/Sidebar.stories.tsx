@@ -4,16 +4,13 @@ import React, { useState } from 'react';
 import { MdiReactIconComponentType } from 'mdi-react';
 import { storiesOf } from '@storybook/react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
-import {
-  NavLink, BrowserRouter, Switch, Route,
-} from 'react-router-dom';
+import { NavLink, BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { IThemeNamespace } from '@xcritical/theme';
 
 import Sidebar, { sidebarThemeNamespace } from '../src';
 
 import { routerConfig } from './routerConfig';
-
 
 export const GlobalStyle = createGlobalStyle`
   html,
@@ -35,15 +32,15 @@ export const GlobalStyle = createGlobalStyle`
 
 const list: any = (n: number) => (
   <div>
-    <ul style={ { listStyleType: 'none' } }>
-      { new Array(n).fill(true).map((_el, i) => `This is list item number ${i}`).map((el) => (
-        <li
-          key={ el }
-          style={ { padding: '10px 10px 10px 10px' } }
-        >
-          { el }
-        </li>
-      )) }
+    <ul style={{ listStyleType: 'none' }}>
+      {new Array(n)
+        .fill(true)
+        .map((_el, i) => `This is list item number ${i}`)
+        .map((el) => (
+          <li key={el} style={{ padding: '10px 10px 10px 10px' }}>
+            {el}
+          </li>
+        ))}
     </ul>
   </div>
 );
@@ -64,7 +61,7 @@ const SidebarNavigate = styled.div`
 
   a:hover {
     ::before {
-      content: " ";
+      content: ' ';
       height: 100%;
       width: 2px;
       position: absolute;
@@ -74,7 +71,7 @@ const SidebarNavigate = styled.div`
   }
 
   &__item_active::before {
-    content: " ";
+    content: ' ';
     height: 100%;
     width: 2px;
     position: absolute;
@@ -97,7 +94,7 @@ const SidebarNavigate = styled.div`
 `;
 
 const NavPanelWrapper = styled.div`
-  background-color: #31394C;
+  background-color: #31394c;
   min-height: 100%;
 `;
 
@@ -126,7 +123,11 @@ const NavPanel: React.FC = () => (
   <NavPanelWrapper>
     <NavPanelContent>
       <NavPanelLogo>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="#FD5200" height="50" viewBox="0 0 83.93 83.37">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#FD5200"
+          height="50"
+          viewBox="0 0 83.93 83.37">
           <title>XCritical_logo_Mini</title>
           <path
             className="cls-1"
@@ -150,18 +151,12 @@ const NavPanel: React.FC = () => (
         </svg>
       </NavPanelLogo>
       <SidebarNavigate>
-        { routerConfig.map(({
-          path, exact, title, Icon,
-        }: IRouterConfig) => (
-          <NavLink
-            to={ path }
-            exact={ exact }
-            key={ path }
-          >
+        {routerConfig.map(({ path, exact, title, Icon }: IRouterConfig) => (
+          <NavLink to={path} exact={exact} key={path}>
             <Icon />
-            <span>{ title }</span>
+            <span>{title}</span>
           </NavLink>
-        )) }
+        ))}
       </SidebarNavigate>
     </NavPanelContent>
   </NavPanelWrapper>
@@ -233,63 +228,64 @@ storiesOf('Sidebar', module)
   .add('Basic', () => (
     <BrowserRouter>
       <GlobalStyle />
-      <Sidebar { ...props }>
-        { list(100) }
-      </Sidebar>
+      <Sidebar {...props}>{list(100)}</Sidebar>
       <Switch>
-        { routerConfig.map(({ path, component, exact }: any) => (
-          <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+        {routerConfig.map(({ path, component, exact }: any) => (
+          <Route key={path} path={path} component={component} exact={exact} />
+        ))}
       </Switch>
     </BrowserRouter>
   ))
   .add('Only left panel', () => (
     <BrowserRouter>
       <GlobalStyle />
-      <Sidebar { ...props } />
+      <Sidebar {...props} />
       <Switch>
-        { routerConfig.map(({ path, component, exact }: any) => (
-          <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+        {routerConfig.map(({ path, component, exact }: any) => (
+          <Route key={path} path={path} component={component} exact={exact} />
+        ))}
       </Switch>
     </BrowserRouter>
   ))
   .add('Right position', () => (
-    <ThemeProvider theme={ rightTheme }>
+    <ThemeProvider theme={rightTheme}>
       <BrowserRouter>
         <GlobalStyle />
-        <Sidebar { ...props } isRTL>
-          { list(100) }
+        <Sidebar {...props} isRTL>
+          {list(100)}
         </Sidebar>
         <Switch>
-          { routerConfig.map(({ path, component, exact }: any) => (
-            <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+          {routerConfig.map(({ path, component, exact }: any) => (
+            <Route key={path} path={path} component={component} exact={exact} />
+          ))}
         </Switch>
       </BrowserRouter>
     </ThemeProvider>
   ))
   .add('With theme provider', () => (
-    <ThemeProvider theme={ theme }>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <BrowserRouter>
-        <Sidebar { ...props }>
-          { list(100) }
-        </Sidebar>
+        <Sidebar {...props}>{list(100)}</Sidebar>
         <Switch>
-          { routerConfig.map(({ path, component, exact }: any) => (
-            <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+          {routerConfig.map(({ path, component, exact }: any) => (
+            <Route key={path} path={path} component={component} exact={exact} />
+          ))}
         </Switch>
       </BrowserRouter>
     </ThemeProvider>
   ))
   .add('Theme in props', () => (
-    <ThemeProvider theme={ theme }>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <BrowserRouter>
-        <Sidebar { ...props } theme={ propsTheme }>
-          { list(100) }
+        <Sidebar {...props} theme={propsTheme}>
+          {list(100)}
         </Sidebar>
         <Switch>
-          { routerConfig.map(({ path, component, exact }: any) => (
-            <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+          {routerConfig.map(({ path, component, exact }: any) => (
+            <Route key={path} path={path} component={component} exact={exact} />
+          ))}
         </Switch>
       </BrowserRouter>
     </ThemeProvider>
@@ -300,11 +296,10 @@ storiesOf('Sidebar', module)
       sSParams
         ? JSON.parse(sSParams)
         : {
-          collapsed: false,
-          width: 300,
-        },
+            collapsed: false,
+            width: 300,
+          }
     );
-
 
     const onChangeState = (newParams) => {
       sessionStorage.setItem('sidebar-params', JSON.stringify(newParams));
@@ -315,17 +310,17 @@ storiesOf('Sidebar', module)
       <BrowserRouter>
         <GlobalStyle />
         <Sidebar
-          { ...props }
-          collapsed={ params.collapsed }
-          width={ params.width }
-          onChangeState={ onChangeState }
-          theme={ propsTheme }
-        >
-          { list(100) }
+          {...props}
+          collapsed={params.collapsed}
+          width={params.width}
+          onChangeState={onChangeState}
+          theme={propsTheme}>
+          {list(100)}
         </Sidebar>
         <Switch>
-          { routerConfig.map(({ path, component, exact }: any) => (
-            <Route key={ path } path={ path } component={ component } exact={ exact } />)) }
+          {routerConfig.map(({ path, component, exact }: any) => (
+            <Route key={path} path={path} component={component} exact={exact} />
+          ))}
         </Switch>
       </BrowserRouter>
     );

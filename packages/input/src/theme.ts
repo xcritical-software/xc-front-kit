@@ -3,7 +3,6 @@ import { colors } from '@xcritical/theme';
 
 import { InputTheme } from './interfaces';
 
-
 export const inputThemeNamespace = '@xcritical\\input';
 
 const color = colors.CHAROCOAL;

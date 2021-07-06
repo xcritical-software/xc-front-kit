@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 
-
 export const Page = styled.div`
   width: 100%;
   height: 100%;
 `;
 
 export const Content = styled.div`
-display: flex;
-flex-direction: column;
-height: 100vh;
-padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0 20px;
 `;
 
 export const GridWrapper = styled.div`

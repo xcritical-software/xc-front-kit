@@ -4,7 +4,6 @@ import { IThemed } from '../interfaces';
 
 import { getPopperProperty, getArrowSizes, getArrowBorderWidth } from './utils';
 
-
 export const Arrow = styled.div<IThemed>`
   position: absolute;
   display: block;
@@ -22,16 +21,19 @@ export const Arrow = styled.div<IThemed>`
     ${(props) => getArrowSizes(props, 'top')};
     margin: 0 ${(props) => getPopperProperty(props)(['arrow', 'offset'])};
     bottom: ${(props) => `-${getPopperProperty(props)(['arrow', 'size'])}`};
-  
+
     &:before {
       border-width: ${(props) => getArrowBorderWidth(props, 'top')};
-      border-top-color: ${(props) => getPopperProperty(props)(['arrow', 'border', 'color'])};
+      border-top-color: ${(props) =>
+        getPopperProperty(props)(['arrow', 'border', 'color'])};
     }
-  
+
     &:after {
-      bottom: ${(props) => getPopperProperty(props)(['arrow', 'border', 'width'])};
+      bottom: ${(props) =>
+        getPopperProperty(props)(['arrow', 'border', 'width'])};
       border-width: ${(props) => getArrowBorderWidth(props, 'top')};
-      border-top-color: ${(props) => getPopperProperty(props)(['arrow', 'background'])};
+      border-top-color: ${(props) =>
+        getPopperProperty(props)(['arrow', 'background'])};
     }
   }
 
@@ -39,16 +41,19 @@ export const Arrow = styled.div<IThemed>`
     ${(props) => getArrowSizes(props, 'right')};
     margin: ${(props) => getPopperProperty(props)(['arrow', 'offset'])} 0;
     left: ${(props) => `-${getPopperProperty(props)(['arrow', 'size'])}`};
-  
+
     &:before {
       border-width: ${(props) => getArrowBorderWidth(props, 'right')};
-      border-right-color: ${(props) => getPopperProperty(props)(['arrow', 'border', 'color'])};
+      border-right-color: ${(props) =>
+        getPopperProperty(props)(['arrow', 'border', 'color'])};
     }
-  
+
     &:after {
-      left: ${(props) => getPopperProperty(props)(['arrow', 'border', 'width'])};
+      left: ${(props) =>
+        getPopperProperty(props)(['arrow', 'border', 'width'])};
       border-width: ${(props) => getArrowBorderWidth(props, 'right')};
-      border-right-color: ${(props) => getPopperProperty(props)(['arrow', 'background'])};
+      border-right-color: ${(props) =>
+        getPopperProperty(props)(['arrow', 'background'])};
     }
   }
 
@@ -56,16 +61,18 @@ export const Arrow = styled.div<IThemed>`
     ${(props) => getArrowSizes(props, 'bottom')};
     margin: 0 ${(props) => getPopperProperty(props)(['arrow', 'offset'])};
     top: ${(props) => `-${getPopperProperty(props)(['arrow', 'size'])}`};
-  
+
     &:before {
       border-width: ${(props) => getArrowBorderWidth(props, 'bottom')};
-      border-bottom-color: ${(props) => getPopperProperty(props)(['arrow', 'border', 'color'])};
+      border-bottom-color: ${(props) =>
+        getPopperProperty(props)(['arrow', 'border', 'color'])};
     }
-  
+
     &:after {
       top: ${(props) => getPopperProperty(props)(['arrow', 'border', 'width'])};
       border-width: ${(props) => getArrowBorderWidth(props, 'bottom')};
-      border-bottom-color: ${(props) => getPopperProperty(props)(['arrow', 'background'])};
+      border-bottom-color: ${(props) =>
+        getPopperProperty(props)(['arrow', 'background'])};
     }
   }
 
@@ -73,16 +80,19 @@ export const Arrow = styled.div<IThemed>`
     ${(props) => getArrowSizes(props, 'left')};
     margin: ${(props) => getPopperProperty(props)(['arrow', 'offset'])} 0;
     right: ${(props) => `-${getPopperProperty(props)(['arrow', 'size'])}`};
-  
+
     &:before {
       border-width: ${(props) => getArrowBorderWidth(props, 'left')};
-      border-left-color: ${(props) => getPopperProperty(props)(['arrow', 'border', 'color'])};
+      border-left-color: ${(props) =>
+        getPopperProperty(props)(['arrow', 'border', 'color'])};
     }
-    
+
     &:after {
-      right: ${(props) => getPopperProperty(props)(['arrow', 'border', 'width'])};
+      right: ${(props) =>
+        getPopperProperty(props)(['arrow', 'border', 'width'])};
       border-width: ${(props) => getArrowBorderWidth(props, 'left')};
-      border-left-color: ${(props) => getPopperProperty(props)(['arrow', 'background'])};
+      border-left-color: ${(props) =>
+        getPopperProperty(props)(['arrow', 'background'])};
     }
   }
 `;

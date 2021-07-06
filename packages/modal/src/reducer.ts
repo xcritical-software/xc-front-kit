@@ -1,14 +1,15 @@
 import { XCRITICAL_MODAL_OPEN, XCRITICAL_MODAL_CLOSE } from './consts';
 import { IModalStore, ModalActions } from './interfaces';
 
-
 export const modalReducer = (
   state: IModalStore = {},
-  action: ModalActions,
+  action: ModalActions
 ): IModalStore => {
   switch (action.type) {
     case XCRITICAL_MODAL_OPEN: {
-      const { meta: { name } } = action;
+      const {
+        meta: { name },
+      } = action;
 
       return {
         ...state,
@@ -19,7 +20,9 @@ export const modalReducer = (
       };
     }
     case XCRITICAL_MODAL_CLOSE: {
-      const { meta: { name } } = action;
+      const {
+        meta: { name },
+      } = action;
 
       if (state[name]) {
         const newState = { ...state };

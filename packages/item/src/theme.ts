@@ -4,7 +4,6 @@ import { colors } from '@xcritical/theme';
 
 import { ItemTheme } from './interfaces';
 
-
 export const itemThemeNamespace = '@xcritical\\xc-item';
 
 export const itemThemeStyle: ItemTheme = {

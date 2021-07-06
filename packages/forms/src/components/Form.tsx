@@ -1,13 +1,11 @@
 import React from 'react';
 import { isNil, isObject } from 'utilitify';
 
-import { IFormProps, IForm } from '../interfaces';
+import { IFormProps } from '../interfaces';
 
-import { withForm, FormProvider } from './FormContext';
-import { FormField } from './ConnectedFormField';
+import { FormProvider } from './FormContext';
 
-
-export const PureForm: React.FC<IFormProps> & IForm = ({
+export const PureForm: React.FC<IFormProps> = ({
   name,
   children,
   namespace,
@@ -36,17 +34,12 @@ export const PureForm: React.FC<IFormProps> & IForm = ({
   React.Children.forEach(children, findChildPropName);
 
   return (
-    <form name={ name } { ...otherProps }>
-      <FormProvider value={ { formName: name, fields: fieldNames, namespace } }>
-        { children }
+    <form name={name} {...otherProps}>
+      <FormProvider value={{ formName: name, fields: fieldNames, namespace }}>
+        {children}
       </FormProvider>
     </form>
   );
 };
-
-/*
- * @deprecated Use FormField instead
- */
-PureForm.Field = withForm(FormField);
 
 export default PureForm;

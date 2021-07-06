@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-
 import { withTheme } from 'styled-components';
 
 import {
@@ -9,9 +8,7 @@ import {
   SwitchHandle,
   SwitchHiddenCheckbox,
 } from './styled';
-
 import { ISwitchProps } from './interfaces';
-
 
 const PureSwitch: React.FC<ISwitchProps> = ({
   name,
@@ -23,47 +20,47 @@ const PureSwitch: React.FC<ISwitchProps> = ({
   appearance = 'default',
   baseAppearance = 'default',
 }) => {
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.checked, e);
-  }, [onChange]);
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange(e.target.checked, e);
+    },
+    [onChange]
+  );
 
   return (
     <SwitchLabel
-      disabled={ disabled }
-      appearance={ appearance }
-      baseAppearance={ baseAppearance }
-      labelPosition={ labelPosition }
-    >
+      disabled={disabled}
+      appearance={appearance}
+      baseAppearance={baseAppearance}
+      labelPosition={labelPosition}>
       <SwitchHiddenCheckbox
         type="checkbox"
-        name={ name ?? label ?? '' }
-        checked={ checked }
-        disabled={ disabled }
-        onChange={ handleInputChange }
+        name={name ?? label ?? ''}
+        checked={checked}
+        disabled={disabled}
+        onChange={handleInputChange}
       />
 
       <SwitchContainer
-        disabled={ disabled }
-        checked={ checked }
-        appearance={ appearance }
-        baseAppearance={ baseAppearance }
-      >
+        disabled={disabled}
+        checked={checked}
+        appearance={appearance}
+        baseAppearance={baseAppearance}>
         <SwitchHandle
-          checked={ checked }
-          appearance={ appearance }
-          baseAppearance={ baseAppearance }
+          checked={checked}
+          appearance={appearance}
+          baseAppearance={baseAppearance}
         />
       </SwitchContainer>
 
-      { label && (
+      {label && (
         <SwitchLabelText
-          labelPosition={ labelPosition }
-          appearance={ appearance }
-          baseAppearance={ baseAppearance }
-        >
-          { label }
+          labelPosition={labelPosition}
+          appearance={appearance}
+          baseAppearance={baseAppearance}>
+          {label}
         </SwitchLabelText>
-      ) }
+      )}
     </SwitchLabel>
   );
 };

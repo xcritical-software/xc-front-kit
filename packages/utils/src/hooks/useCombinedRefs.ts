@@ -1,6 +1,5 @@
 import React, { MutableRefObject } from 'react';
 
-
 export function useCombinedRefs<T>(
   initialValue: T | null,
   ...refs: MutableRefObject<T>[]

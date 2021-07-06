@@ -2,13 +2,11 @@ import React from 'react';
 import { withTheme } from 'styled-components';
 
 import Select from '@xcritical/select';
-
 import Button, { ButtonGroup } from '@xcritical/button';
 
 import { IPagination, IPageSizeOption } from './interfaces';
 import { PaginationWrapper } from './styles';
 import { Totals } from './Totals';
-
 import {
   getVisiblePagesArray,
   getPaginationButtonGroupTheme,
@@ -16,7 +14,6 @@ import {
   getPaginationSelectTheme,
   mapPageSizeOption,
 } from './utils';
-
 
 const PurePagination: React.FC<IPagination> = ({
   currentPage = 1,
@@ -46,7 +43,7 @@ const PurePagination: React.FC<IPagination> = ({
   const toNext = (
     availableVisibleRangeCenter: number,
     visibleCenterPage: number,
-    totalPages: number,
+    totalPages: number
   ): void => {
     const newCurrentPage = visibleCenterPage + visibleRange;
     const isEndRange = newCurrentPage > totalPages - visibleRange;
@@ -60,7 +57,8 @@ const PurePagination: React.FC<IPagination> = ({
 
   const changePageSize = (pageSizeOption: IPageSizeOption): void => {
     const newTotalPages = Math.ceil(total / pageSizeOption.value);
-    const newCurrentPage = currentPage > newTotalPages ? newTotalPages : currentPage;
+    const newCurrentPage =
+      currentPage > newTotalPages ? newTotalPages : currentPage;
 
     if (onChangePageSize) {
       onChangePageSize(newCurrentPage, pageSizeOption.value);
@@ -75,7 +73,9 @@ const PurePagination: React.FC<IPagination> = ({
   const needLastPage = totalPages >= 2;
 
   const isAvailableVisibleRange = totalVisiblePages > visibleRange;
-  const availableVisibleRange = isAvailableVisibleRange ? visibleRange : totalVisiblePages;
+  const availableVisibleRange = isAvailableVisibleRange
+    ? visibleRange
+    : totalVisiblePages;
   const availableVisibleRangeCenter = Math.ceil(availableVisibleRange / 2);
 
   const visiblePagesArray = getVisiblePagesArray(
@@ -83,16 +83,18 @@ const PurePagination: React.FC<IPagination> = ({
     totalPages,
     isAvailableVisibleRange,
     availableVisibleRange,
-    availableVisibleRangeCenter,
+    availableVisibleRangeCenter
   );
   // eslint-disable-next-line prefer-destructuring
   const visibleCenterPage = visiblePagesArray[availableVisibleRangeCenter - 1];
 
-  const showPrevious = isAvailableVisibleRange
-    && visibleCenterPage - availableVisibleRangeCenter > 1;
+  const showPrevious =
+    isAvailableVisibleRange &&
+    visibleCenterPage - availableVisibleRangeCenter > 1;
 
-  const showNext = isAvailableVisibleRange
-    && visibleCenterPage + availableVisibleRangeCenter < totalPages;
+  const showNext =
+    isAvailableVisibleRange &&
+    visibleCenterPage + availableVisibleRangeCenter < totalPages;
 
   const mappedPageSizeOption = mapPageSizeOption(pageSize);
   const mappedPageSizeOptions = pageSizeOptions.map(mapPageSizeOption);
@@ -103,80 +105,80 @@ const PurePagination: React.FC<IPagination> = ({
 
   return (
     <PaginationWrapper>
-      { showTotals && <Totals currentPage={ currentPage } pageSize={ pageSize } total={ total } /> }
+      {showTotals && (
+        <Totals currentPage={currentPage} pageSize={pageSize} total={total} />
+      )}
 
-      <ButtonGroup theme={ paginationButtonGroupTheme }>
-        { needFirstPage && (
+      <ButtonGroup theme={paginationButtonGroupTheme}>
+        {needFirstPage && (
           <Button
-            theme={ paginationButtonTheme }
+            theme={paginationButtonTheme}
             appearance="paginationButton"
-            selected={ currentPage === 1 }
-            disabled={ disabled }
-            onClick={ () => onChangePage(1) }
-          >
+            selected={currentPage === 1}
+            disabled={disabled}
+            onClick={() => onChangePage(1)}>
             1
           </Button>
-        ) }
+        )}
 
-        { showPrevious && (
+        {showPrevious && (
           <Button
-            theme={ paginationButtonTheme }
+            theme={paginationButtonTheme}
             appearance="paginationButton"
-            disabled={ disabled }
-            onClick={ () => toPrevious(availableVisibleRangeCenter) }
-          >
+            disabled={disabled}
+            onClick={() => toPrevious(availableVisibleRangeCenter)}>
             <span>&lsaquo;</span>
           </Button>
-        ) }
+        )}
 
-        { needVisiblePages && visiblePagesArray.map((visiblePage: number) => (
-          <Button
-            key={ visiblePage }
-            theme={ paginationButtonTheme }
-            appearance="paginationButton"
-            selected={ currentPage === visiblePage }
-            disabled={ disabled }
-            onClick={ () => onChangePage(visiblePage) }
-          >
-            { visiblePage }
-          </Button>
-        )) }
+        {needVisiblePages &&
+          visiblePagesArray.map((visiblePage: number) => (
+            <Button
+              key={visiblePage}
+              theme={paginationButtonTheme}
+              appearance="paginationButton"
+              selected={currentPage === visiblePage}
+              disabled={disabled}
+              onClick={() => onChangePage(visiblePage)}>
+              {visiblePage}
+            </Button>
+          ))}
 
-        { showNext && (
+        {showNext && (
           <Button
-            theme={ paginationButtonTheme }
+            theme={paginationButtonTheme}
             appearance="paginationButton"
-            disabled={ disabled }
-            onClick={ () => toNext(availableVisibleRangeCenter, visibleCenterPage, totalPages) }
-          >
+            disabled={disabled}
+            onClick={() =>
+              toNext(availableVisibleRangeCenter, visibleCenterPage, totalPages)
+            }>
             <span>&rsaquo;</span>
           </Button>
-        ) }
+        )}
 
-        { needLastPage && (
+        {needLastPage && (
           <Button
-            theme={ paginationButtonTheme }
+            theme={paginationButtonTheme}
             appearance="paginationButton"
-            selected={ currentPage === totalPages }
-            disabled={ disabled }
-            onClick={ () => onChangePage(totalPages) }
-          >
-            { totalPages }
+            selected={currentPage === totalPages}
+            disabled={disabled}
+            onClick={() => onChangePage(totalPages)}>
+            {totalPages}
           </Button>
-        ) }
+        )}
       </ButtonGroup>
 
-      { showSizeChanger && (
+      {showSizeChanger && (
         <Select
-          theme={ paginationSelectTheme }
+          theme={paginationSelectTheme}
           appearance="paginationSelect"
-          options={ mappedPageSizeOptions }
-          value={ mappedPageSizeOption }
-          isDisabled={ disabled }
-          onChange={ changePageSize }
-          { ...pageSizeProps }
+          options={mappedPageSizeOptions}
+          value={mappedPageSizeOption}
+          isDisabled={disabled}
+          onChange={changePageSize}
+          {...pageSizeProps}
         />
-      ) }
+      )}
     </PaginationWrapper>
   );
 };

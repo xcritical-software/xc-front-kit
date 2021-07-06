@@ -10,11 +10,9 @@ import {
   ModalBody,
   ModalIconClose,
 } from './styled';
-
 import { IModalProps } from './interfaces';
 import { getModalBlanketTheme } from './utils';
 import { IconClose } from './IconClose';
-
 
 export const ModalPortal: React.FC<IModalProps> = ({
   name,
@@ -40,42 +38,28 @@ export const ModalPortal: React.FC<IModalProps> = ({
   const modalBlanketTheme = getModalBlanketTheme(theme);
 
   return (
-    <Portal id={ name } zIndex="unset">
+    <Portal id={name} zIndex="unset">
       <Blanket
         isTinted
-        zIndex={ zIndex }
-        theme={ modalBlanketTheme }
-        onBlanketClicked={ onModalCancel }
+        zIndex={zIndex}
+        theme={modalBlanketTheme}
+        onBlanketClicked={onModalCancel}
       />
       <ModalContent
-        width={ width }
-        maxWidth={ maxWidth }
-        minWidth={ minWidth }
-        height={ height }
-        maxHeight={ maxHeight }
-        minHeight={ minHeight }
-        appearance={ appearance }
-      >
-        <ModalHeaderWrapper
-          appearance={ appearance }
-        >
-          <ModalHeader
-            appearance={ appearance }
-          >
-            { title }
-          </ModalHeader>
-          <ModalIconClose
-            onClick={ onModalCancel }
-            appearance={ appearance }
-          >
-            { iconClose || <IconClose /> }
+        width={width}
+        maxWidth={maxWidth}
+        minWidth={minWidth}
+        height={height}
+        maxHeight={maxHeight}
+        minHeight={minHeight}
+        appearance={appearance}>
+        <ModalHeaderWrapper appearance={appearance}>
+          <ModalHeader appearance={appearance}>{title}</ModalHeader>
+          <ModalIconClose onClick={onModalCancel} appearance={appearance}>
+            {iconClose || <IconClose />}
           </ModalIconClose>
         </ModalHeaderWrapper>
-        <ModalBody
-          appearance={ appearance }
-        >
-          { children }
-        </ModalBody>
+        <ModalBody appearance={appearance}>{children}</ModalBody>
       </ModalContent>
     </Portal>
   );
