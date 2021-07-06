@@ -1,5 +1,4 @@
 import { v1 as uuid } from 'uuid';
-
 import { setIn } from 'utilitify';
 
 import {
@@ -12,7 +11,6 @@ import {
   IStateFilter,
 } from '../interfaces';
 
-
 export const defaultFilter = {
   column: '',
   condition: '',
@@ -21,27 +19,23 @@ export const defaultFilter = {
 
 export const addFilters = (
   state: any,
-  { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
+  { payload: { filters } }: IFilterAction<IPayloadInitFilters>
 ): IFilterStore => {
   const mappedFilters = filters.map((filter) => ({
     ...filter,
     key: filter.key ?? uuid(),
   }));
 
-  return setIn(state, [
-    ...state.drafts,
-    ...mappedFilters,
-  ], 'drafts');
+  return setIn(state, [...state.drafts, ...mappedFilters], 'drafts');
 };
 
 export const removeFilter = (
   state: IFilterStore,
-  { payload: { guid, name } }: IFilterAction<IPayloadRemoveFilter>,
+  { payload: { guid, name } }: IFilterAction<IPayloadRemoveFilter>
 ): IFilterStore => {
-  const newActiveFilters = state.drafts.filter(({
-    key,
-    column,
-  }) => !((guid && key === guid) || (name && column === name)));
+  const newActiveFilters = state.drafts.filter(
+    ({ key, column }) => !((guid && key === guid) || (name && column === name))
+  );
 
   if (!newActiveFilters.length) {
     newActiveFilters.push({ ...defaultFilter, key: uuid() });
@@ -52,19 +46,23 @@ export const removeFilter = (
 
 export const changeFilter = (
   state: IFilterStore,
-  { payload }: IFilterAction<PayloadChangeFilterType>,
+  { payload }: IFilterAction<PayloadChangeFilterType>
 ): IFilterStore => {
   const { guid: id, field, value } = payload;
 
   const index = state.drafts.findIndex(({ key }: any) => key === id);
 
   if (field === 'column') {
-    return setIn(state, {
-      column: value,
-      key: id,
-      condition: '',
-      value: '',
-    }, ['drafts', `${index}`]);
+    return setIn(
+      state,
+      {
+        column: value,
+        key: id,
+        condition: '',
+        value: '',
+      },
+      ['drafts', `${index}`]
+    );
   }
 
   if (payload.field === 'condition') {
@@ -84,42 +82,32 @@ export const changeFilter = (
 
 export const initFilters = (
   state: IFilterStore,
-  { payload: { filters, search = '' } }: IFilterAction<IPayloadInitFilters>,
+  { payload: { filters, search = '' } }: IFilterAction<IPayloadInitFilters>
 ): IFilterStore => {
   const mappedFilters = filters.map((filter: IStateRecivedFilter) => ({
     ...filter,
     key: filter.key ?? uuid(),
   }));
 
-  let $state = setIn(
-    state,
-    mappedFilters,
-    'drafts',
-  );
+  let $state = setIn(state, mappedFilters, 'drafts');
 
-  $state = setIn(
-    $state,
-    search,
-    'search',
-  );
+  $state = setIn($state, search, 'search');
 
-  return setIn(
-    $state,
-    mappedFilters,
-    'applied',
-  );
+  return setIn($state, mappedFilters, 'applied');
 };
 
 export const updateSelectedFilters = (
   state: IFilterStore,
-  { payload: { filters } }: IFilterAction<IPayloadInitFilters>,
+  { payload: { filters } }: IFilterAction<IPayloadInitFilters>
 ): IFilterStore => {
   const { drafts } = state;
 
   let newFilters: IStateFilter[] = [];
 
   filters.forEach((filter) => {
-    const filterDrafts = drafts.filter((draftItem) => draftItem.column === filter.column);
+    const filterDrafts = drafts.filter(
+      (draftItem) => draftItem.column === filter.column
+    );
 
     if (filterDrafts.length) {
       newFilters = [...newFilters, ...filterDrafts];
@@ -138,10 +126,11 @@ export const updateSelectedFilters = (
 
 export const updateSearchInput = (
   state: IFilterStore,
-  { payload }: IFilterAction<string>,
+  { payload }: IFilterAction<string>
 ): IFilterStore => setIn(state, payload, 'search');
 
+export const resetFilters = (state: IFilterStore): IFilterStore =>
+  setIn(state, state.applied, 'drafts');
 
-export const resetFilters = (state: IFilterStore): IFilterStore => setIn(state, state.applied, 'drafts');
-
-export const applyFilters = (state: IFilterStore): IFilterStore => setIn(state, state.drafts, 'applied');
+export const applyFilters = (state: IFilterStore): IFilterStore =>
+  setIn(state, state.drafts, 'applied');

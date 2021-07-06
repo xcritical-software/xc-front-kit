@@ -6,8 +6,11 @@ import { Link, MemoryRouter } from 'react-router-dom';
 
 import { colors } from '@xcritical/theme';
 
-import Button, { ButtonGroup, buttonGroupThemeNamespace, buttonThemeNamespace } from '../src';
-
+import Button, {
+  ButtonGroup,
+  buttonGroupThemeNamespace,
+  buttonThemeNamespace,
+} from '../src';
 
 const buttonTheme = {
   appearance: {
@@ -47,40 +50,41 @@ const Wrapper = styled.div`
 
 storiesOf('ButtonGroup', module)
   .add('One button', () => (
-    <ThemeProvider theme={ themeWithButton }>
+    <ThemeProvider theme={themeWithButton}>
       <ButtonGroup>
         <Button appearance="pagination">1</Button>
       </ButtonGroup>
     </ThemeProvider>
   ))
   .add('Two buttons (with states)', () => (
-    <ThemeProvider theme={ themeWithButton }>
+    <ThemeProvider theme={themeWithButton}>
       <ButtonGroup>
-        <Button appearance="pagination" disabled>1</Button>
-        <Button appearance="pagination" selected>2</Button>
+        <Button appearance="pagination" disabled>
+          1
+        </Button>
+        <Button appearance="pagination" selected>
+          2
+        </Button>
       </ButtonGroup>
     </ThemeProvider>
   ))
   .add('Three buttons (with links)', () => (
     <MemoryRouter>
-      <ThemeProvider theme={ themeWithButton }>
+      <ThemeProvider theme={themeWithButton}>
         <ButtonGroup>
           <Button appearance="pagination">1</Button>
-          <Button appearance="pagination" href="/2">2</Button>
+          <Button appearance="pagination" href="/2">
+            2
+          </Button>
           <Button
             appearance="pagination"
-            component={
-              forwardRef(({ children, className }, ref: RefObject<HTMLAnchorElement>) => (
-                <Link
-                  innerRef={ ref }
-                  className={ className }
-                  to="/3"
-                >
-                  { children }
+            component={forwardRef(
+              ({ children, className }, ref: RefObject<HTMLAnchorElement>) => (
+                <Link innerRef={ref} className={className} to="/3">
+                  {children}
                 </Link>
-              ))
-            }
-          >
+              )
+            )}>
             3
           </Button>
         </ButtonGroup>
@@ -88,7 +92,7 @@ storiesOf('ButtonGroup', module)
     </MemoryRouter>
   ))
   .add('Themed', () => (
-    <ThemeProvider theme={ complexTheme }>
+    <ThemeProvider theme={complexTheme}>
       <Wrapper>
         <ButtonGroup>
           <Button appearance="pagination">1</Button>
@@ -97,7 +101,7 @@ storiesOf('ButtonGroup', module)
         </ButtonGroup>
       </Wrapper>
       <Wrapper>
-        <ButtonGroup theme={ specificButtonGroupTheme }>
+        <ButtonGroup theme={specificButtonGroupTheme}>
           <Button appearance="pagination">1</Button>
           <Button appearance="pagination">2</Button>
           <Button appearance="pagination">3</Button>

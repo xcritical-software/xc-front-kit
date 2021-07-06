@@ -1,29 +1,30 @@
-import React, {
-  useState, useEffect, useCallback,
-} from 'react';
-
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { InlineEditUncontrolled } from './InlineEditUncontrolled';
 import { IInlineEditProps, IReadViewProps } from './interfaces';
 
-
 export const PureInlineEdit = function <
   TEditViewProps,
   TViewProps extends IReadViewProps<TFieldValue>,
-  TFieldValue>(
-  {
-    appearance = 'default',
-    startWithEditViewOpen = false,
-    onConfirm,
-    onCancel,
-    value: valueProp,
-    disabled = false,
-    invalid = false,
-    isEditing,
-    onIsEditingChange,
-    ...rest
-  }: IInlineEditProps<TEditViewProps, TViewProps, TFieldValue>,
-): React.ReactElement<IInlineEditProps<TEditViewProps, TViewProps, TFieldValue>> {
+  TFieldValue
+>({
+  appearance = 'default',
+  startWithEditViewOpen = false,
+  onConfirm,
+  onCancel,
+  value: valueProp,
+  disabled = false,
+  invalid = false,
+  isEditing,
+  onIsEditingChange,
+  ...rest
+}: IInlineEditProps<
+  TEditViewProps,
+  TViewProps,
+  TFieldValue
+>): React.ReactElement<
+  IInlineEditProps<TEditViewProps, TViewProps, TFieldValue>
+> {
   const [isEditingAuto, setIsEditingAutoMode] = useState(startWithEditViewOpen);
   const [value, setValue] = useState(valueProp);
 
@@ -35,14 +36,17 @@ export const PureInlineEdit = function <
 
   useEffect(() => setValue(valueProp), [valueProp]);
 
-  const handleConfirm = useCallback((newValue: TFieldValue): void => {
-    setValue(newValue);
-    onConfirm?.(newValue);
+  const handleConfirm = useCallback(
+    (newValue: TFieldValue): void => {
+      setValue(newValue);
+      onConfirm?.(newValue);
 
-    if (isEditing) return;
+      if (isEditing) return;
 
-    setIsEditingAutoMode(false);
-  }, [onConfirm, isEditing]);
+      setIsEditingAutoMode(false);
+    },
+    [onConfirm, isEditing]
+  );
 
   const handleCancel = useCallback((): void => {
     setValue(valueProp);
@@ -68,15 +72,15 @@ export const PureInlineEdit = function <
 
   return (
     <InlineEditUncontrolled
-      { ...rest }
-      invalid={ invalid }
-      value={ value }
-      onConfirm={ handleConfirm }
-      onCancel={ handleCancel }
-      isEditing={ isEditing !== undefined ? isEditing : isEditingAuto }
-      disabled={ disabled }
-      onEditRequested={ handleEditRequested }
-      appearance={ appearance }
+      {...rest}
+      invalid={invalid}
+      value={value}
+      onConfirm={handleConfirm}
+      onCancel={handleCancel}
+      isEditing={isEditing !== undefined ? isEditing : isEditingAuto}
+      disabled={disabled}
+      onEditRequested={handleEditRequested}
+      appearance={appearance}
     />
   );
 };

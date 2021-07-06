@@ -15,7 +15,6 @@ import {
   ITotal,
 } from '../interfaces';
 
-
 export const getHeaderStyles = ({ theme }: IHeader) => {
   if (theme.border !== 'none') {
     return css`
@@ -25,9 +24,9 @@ export const getHeaderStyles = ({ theme }: IHeader) => {
   }
 
   return css`
-      background-color: ${theme.header?.backgroundColor};
-      border: ${theme.header?.border};
-    `;
+    background-color: ${theme.header?.backgroundColor};
+    border: ${theme.header?.border};
+  `;
 };
 
 export const getTotalStyles = ({ theme }: ITotal) => {
@@ -38,13 +37,17 @@ export const getTotalStyles = ({ theme }: ITotal) => {
   }
 
   return css`
-      border: ${theme.totals?.border};
-    `;
+    border: ${theme.totals?.border};
+  `;
 };
 
 export const getBodyCellStyles = ({
   theme: {
-    evenRowBackground, selectedRowBackgroundColor, row, rowCellBorder, header,
+    evenRowBackground,
+    selectedRowBackgroundColor,
+    row,
+    rowCellBorder,
+    header,
   },
   selected,
   even,
@@ -69,10 +72,10 @@ export const getBodyCellStyles = ({
       `;
 
   return css`
-      background: ${background};
-      border-top: ${borderTop};
-      ${rowCellBorder !== 'none' ? cellBorder : ''};
-    `;
+    background: ${background};
+    border-top: ${borderTop};
+    ${rowCellBorder !== 'none' ? cellBorder : ''};
+  `;
 };
 
 export const getTotalCellStyles = ({ theme }: ITotalCell) => {
@@ -80,11 +83,13 @@ export const getTotalCellStyles = ({ theme }: ITotalCell) => {
   const wrapperBorder = theme.border !== 'none';
   const totalsBorder = theme.totals?.border !== 'none';
 
-  if (totalsBorder && wrapperBorder) border = `border-right: ${theme.totalsCellBorder}`;
+  if (totalsBorder && wrapperBorder)
+    border = `border-right: ${theme.totalsCellBorder}`;
   else if (wrapperBorder && !totalsBorder) {
     border = `border-top: ${theme.totalsCellBorder}
               border-right: ${theme.totalsCellBorder}`;
-  } else if (!totalsBorder && !wrapperBorder) border = `border: ${theme.totalsCellBorder}`;
+  } else if (!totalsBorder && !wrapperBorder)
+    border = `border: ${theme.totalsCellBorder}`;
   else if (!wrapperBorder && totalsBorder) {
     border = `border-right: ${theme.totalsCellBorder}`;
   }
@@ -114,7 +119,11 @@ export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
       `;
 
 export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
-      background-color: ${isEmpty ? theme.emptyHeaderCellBackground : theme.header?.backgroundColor};
+      background-color: ${
+        isEmpty
+          ? theme.emptyHeaderCellBackground
+          : theme.header?.backgroundColor
+      };
       border-right: ${theme.headerCellBorder};
     `;
 
@@ -124,22 +133,27 @@ export const getBodyCellContentStyles = ({
   rowHeight,
   center,
 }: IBodyCellContent) => css`
-    padding: ${row?.padding};
-    ${rowHeight ? `height: ${rowHeight}px` : null};
-    ${center ? css`justify-content: center` : null};
-    span {
-      font-size: ${row?.fontSize};
-      color: ${selected ? selectedRowColor : row?.color};
-      display: flex;
-      ${rowHeight ? css`
+  padding: ${row?.padding};
+  ${rowHeight ? `height: ${rowHeight}px` : null};
+  ${center
+    ? css`
+        justify-content: center;
+      `
+    : null};
+  span {
+    font-size: ${row?.fontSize};
+    color: ${selected ? selectedRowColor : row?.color};
+    display: flex;
+    ${rowHeight
+      ? css`
           white-space: nowrap;
           overflow: hidden;
           display: block;
           text-overflow: ellipsis;
-          ` : null
-}
-    }
-    `;
+        `
+      : null}
+  }
+`;
 
 export const getBodyCellOffsetStyles = ({
   theme: { offsetExpand },
@@ -149,7 +163,9 @@ export const getBodyCellOffsetStyles = ({
     width: ${expandLevel * (center ? offsetExpand! * 2 : offsetExpand!)}px;
     `;
 
-export const getWrapperStyles = ({ theme: { border, borderRadius } }: IWrapper) => `
+export const getWrapperStyles = ({
+  theme: { border, borderRadius },
+}: IWrapper) => `
     border: ${border};
     border-radius: ${borderRadius}px;
   `;
@@ -179,7 +195,9 @@ export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
 
   return `
   height: ${theme.header?.height}px;
-  background-color: ${isEmpty ? theme.emptyHeaderCellBackground : theme.header?.backgroundColor};
+  background-color: ${
+    isEmpty ? theme.emptyHeaderCellBackground : theme.header?.backgroundColor
+  };
   ${border}
   `;
 };

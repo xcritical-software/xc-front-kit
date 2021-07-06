@@ -4,7 +4,6 @@ import { colors, ITheme } from '@xcritical/theme';
 
 import { ISelectBaseTheme } from './interfaces';
 
-
 export const selectThemeNamespace = '@xcritical\\select';
 
 export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
@@ -101,6 +100,7 @@ export const selectThemeStyle: ITheme<ISelectBaseTheme> = {
         focus: {
           boxShadow: 'none',
         },
+        filled: {},
       },
 
       indicatorsContainer: {

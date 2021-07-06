@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 import { INotification } from './interfaces';
-import { getNotificationThemeGeneralStyles, getNotificationThemeTypeStyles } from './utils';
+import {
+  getNotificationThemeGeneralStyles,
+  getNotificationThemeTypeStyles,
+} from './utils';
 import { NotificationContainer } from './NotificationContainer';
-
 import {
   BounceAnimation,
   ZoomAnimation,
@@ -11,15 +13,14 @@ import {
   SlideAnimation,
 } from './styles';
 
-
 export const Notification = styled(NotificationContainer)<INotification>`
   ${BounceAnimation};
   ${ZoomAnimation};
   ${FlipAnimation};
   ${SlideAnimation};
-  
+
   ${getNotificationThemeGeneralStyles}
-  
+
   ${(props) => getNotificationThemeTypeStyles(props)('default')}
   ${(props) => getNotificationThemeTypeStyles(props)('info')}
   ${(props) => getNotificationThemeTypeStyles(props)('warning')}

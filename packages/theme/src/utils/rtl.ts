@@ -19,7 +19,9 @@ export interface IIsRTL {
 }
 
 export const rtlSwapper = (
-  isRTL: boolean, left: number | string, right: number | string,
+  isRTL: boolean,
+  left: number | string,
+  right: number | string
 ): ArrayOfStringsOrNumbers => {
   if (isRTL) {
     return [right, left];

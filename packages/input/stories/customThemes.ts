@@ -1,6 +1,5 @@
 import { inputThemeNamespace } from '../src/theme';
 
-
 export const customTheme1 = {
   [inputThemeNamespace]: {
     appearance: {
@@ -89,7 +88,6 @@ export const additionalTheme = {
           background: '#EEEEEE',
           opacity: 0.5,
         },
-
       },
     },
   },

@@ -32,12 +32,8 @@ import {
 } from './styled';
 import { AddIcon, RemoveIcon } from './icons';
 import { searchLastVisible, getFullWidth } from './utils';
-
 import { HeaderWrapper } from './HeaderWrapper';
-import {
-  IColumn, IInternalGrid,
-} from './interfaces';
-
+import { IColumn, IInternalGrid } from './interfaces';
 
 const InternalGrid: React.FC<IInternalGrid> = ({
   rightScroll = true,
@@ -69,7 +65,9 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   minColumnWidth,
   gridProps,
 }) => {
-  const [mappedColumns, setMappedColumns] = useState<IColumn[]>(gridHOCMappedColumns);
+  const [mappedColumns, setMappedColumns] = useState<IColumn[]>(
+    gridHOCMappedColumns
+  );
   const fullWidthRef = useRef(getFullWidth(mappedColumns));
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [changingColumns, setChangingColumns] = useState<string>('');
@@ -79,12 +77,13 @@ const InternalGrid: React.FC<IInternalGrid> = ({
       fixedWidth: true,
       fixedHeight: Boolean(rowHeight),
       defaultHeight: rowHeight ?? 100,
-    }),
+    })
   );
 
-  const filteredColums = useMemo<IColumn[]>(() => (
-    mappedColumns.filter(({ visible }) => visible)
-  ), [mappedColumns]);
+  const filteredColums = useMemo<IColumn[]>(
+    () => mappedColumns.filter(({ visible }) => visible),
+    [mappedColumns]
+  );
 
   useEffect(() => {
     const newFullWidth = getFullWidth(gridHOCMappedColumns);
@@ -92,9 +91,16 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     fullWidthRef.current = newFullWidth;
 
     if (newFullWidth < width && shouldFitLastColumn) {
-      const lastElemIdx = searchLastVisible(gridHOCMappedColumns, gridHOCMappedColumns.length);
+      const lastElemIdx = searchLastVisible(
+        gridHOCMappedColumns,
+        gridHOCMappedColumns.length
+      );
       const widthLast = gridHOCMappedColumns[lastElemIdx].width;
-      const newColumns = setIn(gridHOCMappedColumns, Number(widthLast) + (width - newFullWidth), [String(lastElemIdx), 'width']);
+      const newColumns = setIn(
+        gridHOCMappedColumns,
+        Number(widthLast) + (width - newFullWidth),
+        [String(lastElemIdx), 'width']
+      );
       setMappedColumns(newColumns);
 
       return;
@@ -103,13 +109,16 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     setMappedColumns(gridHOCMappedColumns);
   }, [gridHOCMappedColumns, width, shouldFitLastColumn]);
 
-  const handleScroll = useCallback((e: ScrollPosition) => {
-    setScrollLeft(-e.scrollLeft);
+  const handleScroll = useCallback(
+    (e: ScrollPosition) => {
+      setScrollLeft(-e.scrollLeft);
 
-    if (onScrollsyncScroll) {
-      onScrollsyncScroll(e);
-    }
-  }, [setScrollLeft, onScrollsyncScroll]);
+      if (onScrollsyncScroll) {
+        onScrollsyncScroll(e);
+      }
+    },
+    [setScrollLeft, onScrollsyncScroll]
+  );
 
   const cellRenderer: React.FC<GridCellProps> = ({
     columnIndex,
@@ -121,96 +130,87 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     const isFirstColumn = columnIndex === 0;
 
     const row = mappedItems[rowIndex];
-    const {
-      __key,
-      __parent,
-      __isExpand,
-    } = mappedItems[rowIndex];
+    const { __key, __parent, __isExpand } = mappedItems[rowIndex];
     const column = filteredColums[columnIndex];
 
-    const expandLevel = isFirstColumn && shiftFirstColumn ? row.__expandLevel : 0;
+    const expandLevel =
+      isFirstColumn && shiftFirstColumn ? row.__expandLevel : 0;
 
     const { field, render: renderFunction } = column;
-    const {
-      [field]: content,
-    } = row;
+    const { [field]: content } = row;
 
-    const cellContent = renderFunction ? renderFunction(
-      content,
-      field,
-      row,
-      rowIndex,
-      {
-        expandLevel,
-        isExpanded: __isExpand,
-        parentItem: __parent,
-        key: __key,
-      },
-    ) : content;
+    const cellContent = renderFunction
+      ? renderFunction(content, field, row, rowIndex, {
+          expandLevel,
+          isExpanded: __isExpand,
+          parentItem: __parent,
+          key: __key,
+        })
+      : content;
 
     const handleExpand = () => {
       onChangeExpand(
         rowIndex,
         mappedItems[rowIndex].children,
-        mappedItems[rowIndex],
+        mappedItems[rowIndex]
       );
     };
-    const isSelected = selectedRows
-      .some((k: string) => k === mappedItems[rowIndex].__key);
+    const isSelected = selectedRows.some(
+      (k: string) => k === mappedItems[rowIndex].__key
+    );
 
     return (
       <CellMeasurer
-        cache={ cacheRef.current }
-        columnIndex={ columnIndex }
-        key={ key }
-        parent={ parent }
-        rowIndex={ rowIndex }
-      >
+        cache={cacheRef.current}
+        columnIndex={columnIndex}
+        key={key}
+        parent={parent}
+        rowIndex={rowIndex}>
         <BodyCell
-          aria-rowindex={ rowIndex }
-          aria-colindex={ columnIndex }
-          data-column-name={ field }
+          aria-rowindex={rowIndex}
+          aria-colindex={columnIndex}
+          data-column-name={field}
           role="gridcell"
-          onClick={ (e: MouseEvent) => {
+          onClick={(e: MouseEvent) => {
             handleSelect(e, mappedItems[rowIndex].__key);
-          } }
-          key={ key }
-          selected={ isSelected }
-          style={ {
+          }}
+          key={key}
+          selected={isSelected}
+          style={{
             ...style,
             width: column.width,
-          } }
-          firstRow={ rowIndex === 0 }
-          even={ !!(rowIndex % 2) }
-          theme={ themeRef.current }
-        >
+          }}
+          firstRow={rowIndex === 0}
+          even={!!(rowIndex % 2)}
+          theme={themeRef.current}>
           <BodyCellOffset
-            center={ !!column.center }
-            expandLevel={ expandLevel }
-            theme={ themeRef.current }
+            center={!!column.center}
+            expandLevel={expandLevel}
+            theme={themeRef.current}
           />
 
-
           <BodyCellContent
-            theme={ themeRef.current }
-            center={ !!column.center }
-            selected={ isSelected }
-            rowHeight={ rowHeight }
-          >
-
-            { column.isExpandable && mappedItems[rowIndex].children && (
-              <ExpandButtonWrapper onClick={ handleExpand } theme={ themeRef.current }>
-                { mappedItems[rowIndex].__isExpand
-                  ? <RemoveIcon />
-                  : <AddIcon /> }
+            theme={themeRef.current}
+            center={!!column.center}
+            selected={isSelected}
+            rowHeight={rowHeight}>
+            {column.isExpandable && mappedItems[rowIndex].children && (
+              <ExpandButtonWrapper
+                onClick={handleExpand}
+                theme={themeRef.current}>
+                {mappedItems[rowIndex].__isExpand ? (
+                  <RemoveIcon />
+                ) : (
+                  <AddIcon />
+                )}
               </ExpandButtonWrapper>
-            ) }
+            )}
 
-            { column.isExpandable && !mappedItems[rowIndex].children && (
-              <ShiftInsteadButton theme={ themeRef.current } />
-            ) }
+            {column.isExpandable && !mappedItems[rowIndex].children && (
+              <ShiftInsteadButton theme={themeRef.current} />
+            )}
 
-            <span>{ cellContent }</span>
+            <span>{cellContent}</span>
           </BodyCellContent>
         </BodyCell>
       </CellMeasurer>
@@ -219,27 +219,30 @@ const InternalGrid: React.FC<IInternalGrid> = ({
 
   const handleChangeWidth = useCallback(
     (index, newWidth) => {
-      let newColumns: IColumn[] = setIn(mappedColumns, newWidth, [index, 'width']);
+      let newColumns: IColumn[] = setIn(mappedColumns, newWidth, [
+        index,
+        'width',
+      ]);
       let newFullWidth: number = newColumns.reduce(
-        (acc, { width: colWidth }) => (acc + colWidth),
-        0,
+        (acc, { width: colWidth }) => acc + colWidth,
+        0
       );
 
       if (
-        newFullWidth < width
-        && !resizeGridAfterResizeLastColumn
-        && shouldFitLastColumn
+        newFullWidth < width &&
+        !resizeGridAfterResizeLastColumn &&
+        shouldFitLastColumn
       ) {
         const lastColIdx = searchLastVisible(newColumns, newColumns.length);
         newColumns = setIn(
           newColumns,
           newColumns[lastColIdx].width + (width - newFullWidth),
-          [String(lastColIdx), 'width'],
+          [String(lastColIdx), 'width']
         );
 
         newFullWidth = newColumns.reduce(
-          (acc, { width: colWidth }) => (acc + colWidth),
-          0,
+          (acc, { width: colWidth }) => acc + colWidth,
+          0
         );
       }
 
@@ -248,16 +251,15 @@ const InternalGrid: React.FC<IInternalGrid> = ({
       setMappedColumns(newColumns);
       onChangeColumns(newColumns, gridPosition);
     },
-    [mappedColumns, onChangeColumns, width, gridPosition, shouldFitLastColumn],
+    [mappedColumns, onChangeColumns, width, gridPosition, shouldFitLastColumn]
   );
-
 
   const handleChangeColumns = useCallback(
     (newColumns) => {
       setMappedColumns(newColumns);
       onChangeColumns(newColumns, gridPosition);
     },
-    [onChangeColumns, gridPosition],
+    [onChangeColumns, gridPosition]
   );
 
   useEffect(() => {
@@ -279,78 +281,80 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     totals: { height: totalsHeight = 0 } = {},
   } = themeRef.current!;
 
-  const gridHeight = useMemo(() => Number(
-    height
-      - Number(headerHeight)
-      - Number(totals ? totalsHeight : 0)
-      - (resizeGridAfterResizeLastColumn ? 8 : 0),
-  ), [height,
-    headerHeight,
-    totals,
-    totalsHeight,
-    resizeGridAfterResizeLastColumn]);
+  const gridHeight = useMemo(
+    () =>
+      Number(
+        height -
+          Number(headerHeight) -
+          Number(totals ? totalsHeight : 0) -
+          (resizeGridAfterResizeLastColumn ? 8 : 0)
+      ),
+    [
+      height,
+      headerHeight,
+      totals,
+      totalsHeight,
+      resizeGridAfterResizeLastColumn,
+    ]
+  );
 
   return (
-    <Wrapper theme={ themeRef.current } width={ width } changingColumns={ changingColumns }>
+    <Wrapper
+      theme={themeRef.current}
+      width={width}
+      changingColumns={changingColumns}>
       <HeaderWrapper
-        fullWidth={ fullWidthRef.current }
-        columns={ mappedColumns }
-        translateX={ scrollLeft }
-        onChangeWidth={ handleChangeWidth }
-        onChangeColumns={ handleChangeColumns }
-        setChangingColumns={ setChangingColumns }
-        theme={ themeRef.current! }
-        shouldMovingColumns={ shouldMovingColumns }
-        shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-        gridPosition={ gridPosition }
-        minColumnWidth={ minColumnWidth }
-        onChangeSort={ onChangeSort }
+        fullWidth={fullWidthRef.current}
+        columns={mappedColumns}
+        translateX={scrollLeft}
+        onChangeWidth={handleChangeWidth}
+        onChangeColumns={handleChangeColumns}
+        setChangingColumns={setChangingColumns}
+        theme={themeRef.current!}
+        shouldMovingColumns={shouldMovingColumns}
+        shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+        gridPosition={gridPosition}
+        minColumnWidth={minColumnWidth}
+        onChangeSort={onChangeSort}
       />
-      <Body
-        rightScroll={ rightScroll }
-        bottomScroll={ bottomScroll }
-      >
+      <Body rightScroll={rightScroll} bottomScroll={bottomScroll}>
         <VirtualisedGrid
-          ref={ gridRef as MutableRefObject<VirtualisedGrid> }
-          columnCount={ filteredColums.length }
-          columnWidth={ ({ index }: any) => filteredColums[index].width }
-          deferredMeasurementCache={ cacheRef.current }
-          height={ gridHeight }
-          cellRenderer={ cellRenderer }
-          rowCount={ mappedItems.length }
-          rowHeight={ cacheRef.current.rowHeight }
-          width={ width }
-          onScroll={ handleScroll }
-          scrollTop={ scrollTop }
-          isScrollingOptOut={ isScrollingOptOut }
-          overscanColumnCount={ overscanColumnCount }
-          overscanRowCount={ overscanRowCount }
-          { ...gridProps }
+          ref={gridRef as MutableRefObject<VirtualisedGrid>}
+          columnCount={filteredColums.length}
+          columnWidth={({ index }: any) => filteredColums[index].width}
+          deferredMeasurementCache={cacheRef.current}
+          height={gridHeight}
+          cellRenderer={cellRenderer}
+          rowCount={mappedItems.length}
+          rowHeight={cacheRef.current.rowHeight}
+          width={width}
+          onScroll={handleScroll}
+          scrollTop={scrollTop}
+          isScrollingOptOut={isScrollingOptOut}
+          overscanColumnCount={overscanColumnCount}
+          overscanRowCount={overscanRowCount}
+          {...gridProps}
         />
       </Body>
-      {
-        resizeGridAfterResizeLastColumn && (
-          <TotalsShift />
-        )
-      }
-      { totals && (
+      {resizeGridAfterResizeLastColumn && <TotalsShift />}
+      {totals && (
         <TotalBlock
-          width={ fullWidthRef.current }
-          translateX={ scrollLeft }
-          theme={ themeRef.current }
-        >
-          { filteredColums.map((el: IColumn, index: number) => (
+          width={fullWidthRef.current}
+          translateX={scrollLeft}
+          theme={themeRef.current}>
+          {filteredColums.map((el: IColumn, index: number) => (
             <TotalCell
-              theme={ themeRef.current }
-              width={ filteredColums.length === index + 1 ? el.width + 8 : el.width }
-            >
-              <TotalCellContent center={ !!el.center } theme={ themeRef.current }>
-                <span>{ totals[el.field] }</span>
+              theme={themeRef.current}
+              width={
+                filteredColums.length === index + 1 ? el.width + 8 : el.width
+              }>
+              <TotalCellContent center={!!el.center} theme={themeRef.current}>
+                <span>{totals[el.field]}</span>
               </TotalCellContent>
             </TotalCell>
-          )) }
+          ))}
         </TotalBlock>
-      ) }
+      )}
     </Wrapper>
   );
 };

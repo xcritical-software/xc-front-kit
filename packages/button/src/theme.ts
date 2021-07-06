@@ -3,7 +3,6 @@ import { colors } from '@xcritical/theme';
 import { generateApperance } from './utils/themeTools';
 import { ButtonTheme, ButtonGroupTheme } from './interfaces';
 
-
 export const buttonThemeNamespace = '@xcritical\\button';
 export const buttonGroupThemeNamespace = '@xcritical\\button-group';
 
@@ -23,14 +22,32 @@ export const buttonThemeStyle: ButtonTheme = {
         },
       }),
     },
-    primary: generateApperance({ background: colors.PRIMARY, color: colors.WHITE }),
-    secondary: generateApperance({ background: colors.SECONDARY, color: colors.WHITE }),
-    success: generateApperance({ background: colors.SUCCESS, color: colors.WHITE }),
-    danger: generateApperance({ background: colors.DANGER, color: colors.WHITE }),
-    warning: generateApperance({ background: colors.WARNING, color: colors.WHITE }),
+    primary: generateApperance({
+      background: colors.PRIMARY,
+      color: colors.WHITE,
+    }),
+    secondary: generateApperance({
+      background: colors.SECONDARY,
+      color: colors.WHITE,
+    }),
+    success: generateApperance({
+      background: colors.SUCCESS,
+      color: colors.WHITE,
+    }),
+    danger: generateApperance({
+      background: colors.DANGER,
+      color: colors.WHITE,
+    }),
+    warning: generateApperance({
+      background: colors.WARNING,
+      color: colors.WHITE,
+    }),
     info: generateApperance({ background: colors.INFO, color: colors.WHITE }),
     dark: generateApperance({ background: colors.DARK, color: colors.WHITE }),
-    light: generateApperance({ background: colors.LIGHT, color: colors.CHAROCOAL }),
+    light: generateApperance({
+      background: colors.LIGHT,
+      color: colors.CHAROCOAL,
+    }),
     link: generateApperance({
       background: 'transparent',
       color: colors.PRIMARY,

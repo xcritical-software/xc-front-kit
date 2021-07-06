@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import { IBlanketProps } from '../../interfaces';
 
-
 export const RootPanel = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -43,8 +42,8 @@ export const TopPanelTags = styled.div`
 `;
 
 export const TopPanelButtons = styled.div`
-  flex:  0 0 220px;
-  height: 36px ;
+  flex: 0 0 220px;
+  height: 36px;
   display: flex;
   justify-content: space-between;
   margin-top: 4px;
@@ -63,7 +62,7 @@ export const Postfix = styled.div`
 
 export const DropdownRoot = styled.div`
   position: relative;
-  padding-right: 10px; 
+  padding-right: 10px;
   padding-bottom: 10px;
 `;
 

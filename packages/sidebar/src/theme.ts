@@ -2,7 +2,6 @@ import { colors } from '@xcritical/theme';
 
 import { ISidebarTheme } from './interfaces';
 
-
 export const sidebarThemeNamespace = '@xcritical\\sidebar';
 
 export const defaultSidebarTheme: ISidebarTheme = {

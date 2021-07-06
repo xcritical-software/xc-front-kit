@@ -1,10 +1,8 @@
 import get from 'lodash.get';
 import { Reducer } from 'redux';
-
 import { v1 as uuid } from 'uuid';
 
 import * as actions from '../actions/const';
-
 import { reducerDictionary } from '../utils';
 import { IFilterStore, FilterActionType, IFilterAction } from '../interfaces';
 
@@ -19,7 +17,6 @@ import {
   updateSelectedFilters,
   updateSearchInput,
 } from './func';
-
 
 const behaviors: Record<FilterActionType, Function> = {
   [actions.FILTERS_ADD]: addFilters,
@@ -38,13 +35,19 @@ const defaultFilterState = {
   search: '',
 };
 
-const reducer: Reducer<IFilterStore, IFilterAction> = (state = defaultFilterState, action) => {
+const reducer: Reducer<IFilterStore, IFilterAction> = (
+  state = defaultFilterState,
+  action
+) => {
   const { [action.type]: behavior } = behaviors;
 
   return behavior ? behavior(state, action) : state;
 };
 
-export const filterSelector = (state: any, filterName: string): IFilterStore => {
+export const filterSelector = (
+  state: any,
+  filterName: string
+): IFilterStore => {
   if (!filterName) {
     return state;
   }

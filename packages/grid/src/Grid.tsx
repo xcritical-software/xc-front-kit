@@ -1,19 +1,19 @@
 /* eslint-disable no-underscore-dangle */
 import React, {
-  useState, useEffect, useRef, useCallback, useMemo, useContext,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+  useContext,
 } from 'react';
-
-
 import { ThemeContext } from 'styled-components';
 import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
-
 import { ScrollSync } from 'react-virtualized';
 
 import InternalGrid from './InternalGrid';
-import {
-  IMappedItem, IItem, IGridProps, IColumn,
-} from './interfaces';
+import { IMappedItem, IItem, IGridProps, IColumn } from './interfaces';
 import {
   guid,
   addOrDeleteItemFromArray,
@@ -27,7 +27,6 @@ import {
 import { MultiGrid } from './MultiGrid';
 import { GridPositions, GridSort } from './consts';
 import { MultiGridWrapper } from './styled';
-
 
 const Grid: React.FC<IGridProps> = ({
   shouldFitContainer,
@@ -58,7 +57,9 @@ const Grid: React.FC<IGridProps> = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
-    items.map((el: IItem): IMappedItem => ({ __expandLevel: 0, ...el, __key: guid() })),
+    items.map(
+      (el: IItem): IMappedItem => ({ __expandLevel: 0, ...el, __key: guid() })
+    )
   );
 
   const contextTheme = useContext(ThemeContext);
@@ -67,7 +68,6 @@ const Grid: React.FC<IGridProps> = ({
   useEffect(() => {
     themeRef.current = gridTheme(theme ?? contextTheme);
   }, [theme, contextTheme]);
-
 
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
@@ -93,7 +93,9 @@ const Grid: React.FC<IGridProps> = ({
     return observer;
   };
 
-  const observerRef: React.MutableRefObject<ResizeObserver | undefined> = useRef();
+  const observerRef: React.MutableRefObject<
+    ResizeObserver | undefined
+  > = useRef();
 
   useEffect(() => {
     if (shouldFitContainer) observerRef.current = createObserver();
@@ -106,7 +108,7 @@ const Grid: React.FC<IGridProps> = ({
         observerRef.current.disconnect();
       }
     },
-    [observerRef, shouldFitContainer],
+    [observerRef, shouldFitContainer]
   );
 
   const onChangeExpand = useCallback(
@@ -140,7 +142,7 @@ const Grid: React.FC<IGridProps> = ({
             __expandLevel: parentExpandLevel + 1,
             __parent: parent,
             __key: guid(),
-          }),
+          })
         );
         const newMappedItems = [
           ...mappedItems.slice(0, index + 1),
@@ -148,7 +150,10 @@ const Grid: React.FC<IGridProps> = ({
           ...mappedItems.slice(index + 1),
         ];
         const isExpanded = true;
-        const withNewExpand = setIn(newMappedItems, isExpanded, [String(index), '__isExpand']);
+        const withNewExpand = setIn(newMappedItems, isExpanded, [
+          String(index),
+          '__isExpand',
+        ]);
 
         if (onChangeExpandFromProps !== undefined) {
           onChangeExpandFromProps(mappedItems[index], isExpanded);
@@ -157,16 +162,18 @@ const Grid: React.FC<IGridProps> = ({
         setMappedItems(withNewExpand);
       }
     },
-    [mappedItems, onChangeExpandFromProps],
+    [mappedItems, onChangeExpandFromProps]
   );
 
   const handleSelect = useCallback(
     (e, key) => {
-      if (isDisableSelect
-             || e.target.tagName === 'svg'
-             || e.target.tagName === 'path'
-             || e.target.tagName === 'BUTTON'
-      ) return;
+      if (
+        isDisableSelect ||
+        e.target.tagName === 'svg' ||
+        e.target.tagName === 'path' ||
+        e.target.tagName === 'BUTTON'
+      )
+        return;
 
       if (isMultiSelect) {
         const newSelectedRows = addOrDeleteItemFromArray(selectedRows, key);
@@ -174,8 +181,10 @@ const Grid: React.FC<IGridProps> = ({
         if (onSelect) {
           onSelect(
             deleteSystemPropsFromObjects(
-              mappedItems.filter((el) => newSelectedRows.some((id) => id === el.__key)),
-            ),
+              mappedItems.filter((el) =>
+                newSelectedRows.some((id) => id === el.__key)
+              )
+            )
           );
         }
 
@@ -191,8 +200,7 @@ const Grid: React.FC<IGridProps> = ({
 
         setSelectedRows([]);
       } else {
-        const selectedRow = mappedItems
-          .find((el) => el.__key === key);
+        const selectedRow = mappedItems.find((el) => el.__key === key);
 
         if (onSelect) {
           onSelect(deleteSystemPropsFromObject(selectedRow));
@@ -201,120 +209,124 @@ const Grid: React.FC<IGridProps> = ({
         setSelectedRows([key]);
       }
     },
-    [isDisableSelect, isMultiSelect, selectedRows, onSelect, mappedItems],
+    [isDisableSelect, isMultiSelect, selectedRows, onSelect, mappedItems]
   );
 
-
   useEffect(() => {
-    setMappedItems(items.map((el) => ({ __expandLevel: 0, ...el, __key: guid() })));
+    setMappedItems(
+      items.map((el) => ({ __expandLevel: 0, ...el, __key: guid() }))
+    );
   }, [items]);
 
-  const isMultiGrid = useMemo(() => columns
-    .some(({ fixedPosition }: IColumn) => Boolean(fixedPosition)), [columns]);
-
+  const isMultiGrid = useMemo(
+    () => columns.some(({ fixedPosition }: IColumn) => Boolean(fixedPosition)),
+    [columns]
+  );
 
   const mappedColumns = useMemo(() => [...columns], [columns]);
 
   const [leftMappedColumns, setLeftMappedColumns] = useState<IColumn[]>(
-    mappedColumns.filter(({ fixedPosition }) => fixedPosition === GridPositions.LEFT),
+    mappedColumns.filter(
+      ({ fixedPosition }) => fixedPosition === GridPositions.LEFT
+    )
   );
 
   const [centerMappedColumns, setCenterMappedColumns] = useState<IColumn[]>(
-    mappedColumns.filter(({ fixedPosition }) => !fixedPosition),
+    mappedColumns.filter(({ fixedPosition }) => !fixedPosition)
   );
 
   const [rightMappedColumns, setRightMappedColumns] = useState<IColumn[]>(
-    mappedColumns.filter(({ fixedPosition }) => fixedPosition === GridPositions.RIGHT),
+    mappedColumns.filter(
+      ({ fixedPosition }) => fixedPosition === GridPositions.RIGHT
+    )
   );
 
   const [leftFixedWidth, setLeftFixedWidth] = useState(0);
   const [rightFixedWidth, setRightFixedWidth] = useState(0);
 
-
   useEffect(() => {
-    setLeftMappedColumns(mappedColumns
-      .filter(({ fixedPosition }: IColumn) => fixedPosition === GridPositions.LEFT));
+    setLeftMappedColumns(
+      mappedColumns.filter(
+        ({ fixedPosition }: IColumn) => fixedPosition === GridPositions.LEFT
+      )
+    );
 
-    setCenterMappedColumns(mappedColumns
-      .filter(({ fixedPosition }: IColumn) => !fixedPosition));
+    setCenterMappedColumns(
+      mappedColumns.filter(({ fixedPosition }: IColumn) => !fixedPosition)
+    );
 
-    setRightMappedColumns(mappedColumns
-      .filter(({ fixedPosition }: IColumn) => fixedPosition === GridPositions.RIGHT));
+    setRightMappedColumns(
+      mappedColumns.filter(
+        ({ fixedPosition }: IColumn) => fixedPosition === GridPositions.RIGHT
+      )
+    );
   }, [mappedColumns]);
 
   useEffect(() => {
-    setLeftFixedWidth(
-      getFullWidth(leftMappedColumns),
-    );
-    setRightFixedWidth(
-      getFullWidth(rightMappedColumns),
-    );
+    setLeftFixedWidth(getFullWidth(leftMappedColumns));
+    setRightFixedWidth(getFullWidth(rightMappedColumns));
   }, [leftMappedColumns, rightMappedColumns]);
 
-  const onChangeColumns = useCallback((cols, gridPosition) => {
-    if (gridPosition === GridPositions.LEFT) {
-      setLeftMappedColumns(cols);
-      onChangeColumnsFromProps([
-        ...cols,
-        ...centerMappedColumns,
-        ...rightMappedColumns,
-      ]);
-    } else if (gridPosition === GridPositions.CENTER) {
-      setCenterMappedColumns(cols);
-      onChangeColumnsFromProps([
-        ...leftMappedColumns,
-        ...cols,
-        ...rightMappedColumns,
-      ]);
-    } else {
-      setRightMappedColumns(cols);
-      onChangeColumnsFromProps([
-        ...leftMappedColumns,
-        ...centerMappedColumns,
-        ...cols,
-      ]);
-    }
-  }, [
-    leftMappedColumns,
-    centerMappedColumns,
-    rightMappedColumns,
-  ]);
+  const onChangeColumns = useCallback(
+    (cols, gridPosition) => {
+      if (gridPosition === GridPositions.LEFT) {
+        setLeftMappedColumns(cols);
+        onChangeColumnsFromProps([
+          ...cols,
+          ...centerMappedColumns,
+          ...rightMappedColumns,
+        ]);
+      } else if (gridPosition === GridPositions.CENTER) {
+        setCenterMappedColumns(cols);
+        onChangeColumnsFromProps([
+          ...leftMappedColumns,
+          ...cols,
+          ...rightMappedColumns,
+        ]);
+      } else {
+        setRightMappedColumns(cols);
+        onChangeColumnsFromProps([
+          ...leftMappedColumns,
+          ...centerMappedColumns,
+          ...cols,
+        ]);
+      }
+    },
+    [leftMappedColumns, centerMappedColumns, rightMappedColumns]
+  );
 
+  const onChangeSort = useCallback(
+    (sortable, sortOrder, index, gridPosition) => {
+      if (!sortable) return;
 
-  const onChangeSort = useCallback((sortable, sortOrder, index, gridPosition) => {
-    if (!sortable) return;
+      // ask => desk => null => ask
+      let newSortOrder: GridSort.ASC | GridSort.DESC | null = null;
 
-    // ask => desk => null => ask
-    let newSortOrder: GridSort.ASC | GridSort.DESC | null = null;
+      if (!sortOrder) newSortOrder = GridSort.ASC;
 
-    if (!sortOrder) newSortOrder = GridSort.ASC;
+      if (sortOrder === GridSort.ASC) newSortOrder = GridSort.DESC;
 
-    if (sortOrder === GridSort.ASC) newSortOrder = GridSort.DESC;
+      if (sortOrder === GridSort.DESC) newSortOrder = null;
 
-    if (sortOrder === GridSort.DESC) newSortOrder = null;
+      const newLeftColumns = removeSorting(leftMappedColumns);
+      const newCenterColumns = removeSorting(centerMappedColumns);
+      const newRightColumns = removeSorting(rightMappedColumns);
 
-    const newLeftColumns = removeSorting(leftMappedColumns);
-    const newCenterColumns = removeSorting(centerMappedColumns);
-    const newRightColumns = removeSorting(rightMappedColumns);
-
-    const newAllColumns = changeGridSort({
-      sortOrder: newSortOrder,
-      index,
-      gridPosition,
-      leftColumns: newLeftColumns,
-      centerColumns: newCenterColumns,
-      rightColumns: newRightColumns,
-      setLeftMappedColumns,
-      setCenterMappedColumns,
-      setRightMappedColumns,
-    });
-    onSortChanged(newAllColumns);
-  }, [
-    leftMappedColumns,
-    centerMappedColumns,
-    rightMappedColumns,
-  ]);
-
+      const newAllColumns = changeGridSort({
+        sortOrder: newSortOrder,
+        index,
+        gridPosition,
+        leftColumns: newLeftColumns,
+        centerColumns: newCenterColumns,
+        rightColumns: newRightColumns,
+        setLeftMappedColumns,
+        setCenterMappedColumns,
+        setRightMappedColumns,
+      });
+      onSortChanged(newAllColumns);
+    },
+    [leftMappedColumns, centerMappedColumns, rightMappedColumns]
+  );
 
   if (isMultiGrid) {
     const multiGridProps = {
@@ -331,7 +343,6 @@ const Grid: React.FC<IGridProps> = ({
       leftMappedColumns,
       centerMappedColumns,
       rightMappedColumns,
-
 
       setLeftMappedColumns,
       setCenterMappedColumns,
@@ -362,36 +373,30 @@ const Grid: React.FC<IGridProps> = ({
 
       return (
         <ScrollSync>
-          { ({
-            onScroll,
-            scrollTop,
-          }) => (
-            <MultiGridWrapper height="100%" ref={ wrapperRef }>
+          {({ onScroll, scrollTop }) => (
+            <MultiGridWrapper height="100%" ref={wrapperRef}>
               <MultiGrid
-                { ...multiGridProps }
-                onScroll={ onScroll }
-                scrollTop={ scrollTop }
+                {...multiGridProps}
+                onScroll={onScroll}
+                scrollTop={scrollTop}
               />
             </MultiGridWrapper>
-          ) }
+          )}
         </ScrollSync>
       );
     }
 
     return (
       <ScrollSync>
-        { ({
-          onScroll,
-          scrollTop,
-        }) => (
-          <MultiGridWrapper ref={ wrapperRef }>
+        {({ onScroll, scrollTop }) => (
+          <MultiGridWrapper ref={wrapperRef}>
             <MultiGrid
-              { ...multiGridProps }
-              onScroll={ onScroll }
-              scrollTop={ scrollTop }
+              {...multiGridProps}
+              onScroll={onScroll}
+              scrollTop={scrollTop}
             />
           </MultiGridWrapper>
-        ) }
+        )}
       </ScrollSync>
     );
   }
@@ -421,27 +426,25 @@ const Grid: React.FC<IGridProps> = ({
 
   if (shouldFitContainer) {
     return (
-      <div ref={ wrapperRef } style={ { height: '100%' } }>
+      <div ref={wrapperRef} style={{ height: '100%' }}>
         <InternalGrid
-          width={ wrapperSize.width }
-          height={ wrapperSize.height }
-          gridPosition={ GridPositions.CENTER }
-          { ...singleGridProps }
+          width={wrapperSize.width}
+          height={wrapperSize.height}
+          gridPosition={GridPositions.CENTER}
+          {...singleGridProps}
         />
       </div>
     );
   }
 
-
   return (
     <InternalGrid
-      width={ width }
-      height={ height }
-      gridPosition={ GridPositions.CENTER }
-      { ...singleGridProps }
+      width={width}
+      height={height}
+      gridPosition={GridPositions.CENTER}
+      {...singleGridProps}
     />
   );
 };
-
 
 export default Grid;

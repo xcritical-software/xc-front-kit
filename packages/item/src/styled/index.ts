@@ -7,26 +7,34 @@ import {
   getBaseStyle,
   getItemInteractiveStyles,
 } from '../utils';
-import { IPrefixPostfixProps, IContentProps, IRootProps } from '../interfaces';
-
+import {
+  IPrefixPostfixProps,
+  IContentWrapperProps,
+  IRootProps,
+  IWrapperProps,
+} from '../interfaces';
 
 export const Root = styled.div<IRootProps>`
   ${getBaseStyle}
   box-sizing: border-box;
   display: ${({ isHidden }): string => (isHidden ? 'none' : 'flex')};
-  border-radius: ${({ theme, appearance, baseAppearance }): string => itemAppearanceTheme(theme, appearance, baseAppearance, 'borderRadius')}px;
+  border-radius: ${({ theme, appearance, baseAppearance }): string =>
+    itemAppearanceTheme(theme, appearance, baseAppearance, 'borderRadius')}px;
   flex: none;
   direction: ${({ isRTL }): string => (isRTL ? 'rtl' : 'ltr')};
   ${getItemInteractiveStyles}
 
-  ${({
-    theme, appearance, baseAppearance, divided,
-  }): any => divided
-    && `
-    border-bottom: solid 1px ${itemAppearanceTheme(theme, appearance, baseAppearance, ['divided', 'color'])};
+  ${({ theme, appearance, baseAppearance, divided }): any =>
+    divided &&
+    `
+    border-bottom: solid 1px ${itemAppearanceTheme(
+      theme,
+      appearance,
+      baseAppearance,
+      ['divided', 'color']
+    )};
   `};
 `;
-
 
 const PrefixPostfixBase = styled.span<IPrefixPostfixProps>`
   align-items: center;
@@ -36,32 +44,33 @@ const PrefixPostfixBase = styled.span<IPrefixPostfixProps>`
 `;
 
 export const Prefix = styled(PrefixPostfixBase)<IPrefixPostfixProps>`
-  margin-${({ isRTL }): string => (isRTL ? 'left' : 'right')}: ${({ theme, appearance, baseAppearance }): string => itemAppearanceTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
+  margin-${({ isRTL }): string => (isRTL ? 'left' : 'right')}: ${({
+  theme,
+  appearance,
+  baseAppearance,
+}): string =>
+  itemAppearanceTheme(theme, appearance, baseAppearance, 'prefixSpacing')}px;
 `;
 
 export const Postfix = styled(PrefixPostfixBase)`
-  margin-${({ isRTL }): string => (isRTL ? 'right' : 'left')}: ${({ theme, appearance, baseAppearance }): string => itemAppearanceTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
+  margin-${({ isRTL }): string => (isRTL ? 'right' : 'left')}: ${({
+  theme,
+  appearance,
+  baseAppearance,
+}): string =>
+  itemAppearanceTheme(theme, appearance, baseAppearance, 'postfixSpacing')}px;
 `;
 
-
-export const ContentWrapper = styled.span`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  margin: 0;
-  overflow: hidden;
-
-  &:first-child {
-    margin: 0;
-  }
+export const Wrapper = styled.span<IWrapperProps>`
+  ${({ theme, appearance, baseAppearance }) =>
+    itemAppearanceTheme(theme, appearance, baseAppearance, 'wrapper')};
 `;
 
-
-export const Content = styled.span<IContentProps>`
-  display: block;
-  flex: 1 1 auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: ${({ allowMultiline }): string => (allowMultiline ? 'normal' : 'nowrap')};
-  text-align: ${({ isRTL, textPosition = 'center' }): string => rtlSide(isRTL, textPosition)};
+export const ContentWrapper = styled.span<IContentWrapperProps>`
+  white-space: ${({ allowMultiline }): string =>
+    allowMultiline ? 'normal' : 'nowrap'};
+  text-align: ${({ isRTL, textPosition = 'center' }): string =>
+    rtlSide(isRTL, textPosition)};
+  ${({ theme, appearance, baseAppearance }) =>
+    itemAppearanceTheme(theme, appearance, baseAppearance, 'contentWrapper')};
 `;

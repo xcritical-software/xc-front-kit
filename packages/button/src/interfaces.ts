@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { CSSObject } from 'styled-components';
 
 import {
@@ -40,7 +39,7 @@ export interface IIsRTL {
   isRTL?: boolean;
 }
 
-export interface IPrefixProps extends IInnerComponentAppearanceProps, IIsRTL { }
+export interface IPrefixProps extends IInnerComponentAppearanceProps, IIsRTL {}
 
 export interface IContentProps extends IIsRTL, IInnerComponentAppearanceProps {
   textPosition?: string;
@@ -66,12 +65,12 @@ export interface IOnlyButtonProps {
   component?: React.ElementType;
 }
 
-export interface IButtonProps extends
-  IButtonAppearanceProps,
-  IIsRTL,
-  ISpacing,
-  IShouldFitContent,
-  IOnlyButtonProps {
+export interface IButtonProps
+  extends IButtonAppearanceProps,
+    IIsRTL,
+    ISpacing,
+    IShouldFitContent,
+    IOnlyButtonProps {
   [key: string]: any;
 }
 

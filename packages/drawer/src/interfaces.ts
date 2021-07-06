@@ -1,12 +1,6 @@
-import {
-  ReactChildren,
-  ComponentType,
-  RefObject,
-  ReactNode,
-} from 'react';
+import { ReactChildren, ComponentType, RefObject, ReactNode } from 'react';
 
 import { ITheme, ICSSProperties, AllType } from '@xcritical/theme';
-
 
 export interface IDrawerTheme extends ICSSProperties {
   borderRadius?: number;
@@ -29,7 +23,9 @@ export interface IDrawerProps {
   closeIconComponent?: ReactNode;
   minWidth?: number;
   maxWidth?: number;
-  onOutsideClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onOutsideClick?: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void;
   onClose?: () => void;
   withBlanket?: boolean;
   zIndex?: number;
@@ -45,7 +41,7 @@ export interface IReturnFunction<TValue> {
     theme: DrawerTheme,
     elementName: string,
     appearance?: string,
-    baseAppearance?: string,
+    baseAppearance?: string
   ): TValue;
 }
 
@@ -59,10 +55,8 @@ export interface IStyles {
   [index: string]: string | number | null;
 }
 
-export interface ITransitionProps extends Pick<
-IDrawerProps,
-'appearance' | 'baseAppearance' | 'zIndex'
->{
+export interface ITransitionProps
+  extends Pick<IDrawerProps, 'appearance' | 'baseAppearance' | 'zIndex'> {
   component?: ComponentType<any> | string;
   children?: any;
   onExited?: (node: HTMLElement) => void;

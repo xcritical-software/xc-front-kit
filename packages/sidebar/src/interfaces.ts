@@ -3,7 +3,6 @@ import { CSSObject } from 'styled-components';
 
 import { IThemeNamespace } from '@xcritical/theme';
 
-
 export interface ISidebarTheme {
   rootContainer?: CSSObject;
   sidebarContainer?: CSSObject;

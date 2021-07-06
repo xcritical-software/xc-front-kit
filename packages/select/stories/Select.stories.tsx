@@ -9,19 +9,50 @@ import Select from '../src';
 import { MasterCardIcon } from './MasterCardIcon';
 import { customTheme } from './customThemes';
 
-
 const options = [
-  { value: 'firstCard', label: '1234 1234 1234 1234', prefix: <MasterCardIcon /> },
-  { value: 'secondCard', label: '4321 4321 4321 4321', prefix: <MasterCardIcon /> },
-  { value: 'thirdCard', label: '4567 4567 4567 4567', prefix: <MasterCardIcon /> },
-  { value: 'fourthCard', label: '0123 0123 0123 0123', prefix: <MasterCardIcon /> },
+  {
+    value: 'firstCard',
+    label: '1234 1234 1234 1234',
+    prefix: <MasterCardIcon />,
+  },
+  {
+    value: 'secondCard',
+    label: '4321 4321 4321 4321',
+    prefix: <MasterCardIcon />,
+  },
+  {
+    value: 'thirdCard',
+    label: '4567 4567 4567 4567',
+    prefix: <MasterCardIcon />,
+  },
+  {
+    value: 'fourthCard',
+    label: '0123 0123 0123 0123',
+    prefix: <MasterCardIcon />,
+  },
 ];
 
 const options2 = [
-  { value: 'firstCard', label: '111111111111111111', prefix: <MasterCardIcon /> },
-  { value: 'secondCard', label: '222222222222222222', prefix: <MasterCardIcon /> },
-  { value: 'thirdCard', label: '333333333333333333', prefix: <MasterCardIcon /> },
-  { value: 'fourthCard', label: '444444444444444444', prefix: <MasterCardIcon /> },
+  {
+    value: 'firstCard',
+    label: '111111111111111111',
+    prefix: <MasterCardIcon />,
+  },
+  {
+    value: 'secondCard',
+    label: '222222222222222222',
+    prefix: <MasterCardIcon />,
+  },
+  {
+    value: 'thirdCard',
+    label: '333333333333333333',
+    prefix: <MasterCardIcon />,
+  },
+  {
+    value: 'fourthCard',
+    label: '444444444444444444',
+    prefix: <MasterCardIcon />,
+  },
 ];
 
 const options3 = [
@@ -66,63 +97,61 @@ const ChangeOptions = () => {
   return (
     <>
       <button
-        style={ { width: '60px', height: '38px', margin: '10px' } }
-        onClick={ () => changeIsFirstOptions(true) }
-      >
+        style={{ width: '60px', height: '38px', margin: '10px' }}
+        onClick={() => changeIsFirstOptions(true)}>
         One
       </button>
       <button
-        style={ { width: '60px', height: '38px', margin: '20px ' } }
-        onClick={ () => changeIsFirstOptions(false) }
-      >
+        style={{ width: '60px', height: '38px', margin: '20px ' }}
+        onClick={() => changeIsFirstOptions(false)}>
         Two
       </button>
-      <Select options={ isFirstOptions ? options : options2 } />
+      <Select options={isFirstOptions ? options : options2} />
     </>
   );
 };
 
-
 storiesOf('Select', module)
   .add('Basic', () => (
     <>
-      <Select options={ options } />
-      <Select isSearchable textPosition="left" options={ options } />
+      <Select options={options} />
+      <Select isSearchable textPosition="left" options={options} />
     </>
   ))
-  .add('Empty', () => (
-    <Select />
-  ))
+  .add('Empty', () => <Select />)
   .add('Themed', () => (
-    <Select theme={ customTheme } textPosition="left" options={ options } />
+    <Select theme={customTheme} textPosition="left" options={options} />
   ))
   .add('RTL Support', () => (
-    <Select theme={ customTheme } isRTL textPosition="left" options={ options } />
+    <Select theme={customTheme} isRTL textPosition="left" options={options} />
   ))
   .add('Disabled', () => (
-    <Select disabled textPosition="left" options={ options } />
+    <Select disabled textPosition="left" options={options} />
   ))
   .add('Autocomplete', () => (
-    <Select isSearchable textPosition="left" options={ options } />
+    <Select isSearchable textPosition="left" options={options} />
   ))
   .add('Multi Select', () => (
-    <Select textPosition="left" options={ options } isMulti />
+    <Select textPosition="left" options={options} isMulti />
   ))
-  .add('Change Options', () => (
-    <ChangeOptions />
-  ))
+  .add('Change Options', () => <ChangeOptions />)
   .add('With default option', () => (
-    <Select isSearchable isClearable defaultValue={ options[2] } options={ options } />
+    <Select
+      isSearchable
+      isClearable
+      defaultValue={options[2]}
+      options={options}
+    />
   ))
   .add('Only default option', () => (
-    <Select isSearchable isClearable defaultValue={ options[3] } />
+    <Select isSearchable isClearable defaultValue={options[3]} />
   ))
   .add('With groups', () => (
     <>
-      <span style={ { margin: '10px' } }>Default with disabled options:</span>
-      <Select options={ groupOptions } placeholder="Search.." />
-      <span style={ { margin: '10px' } }>With prefix:</span>
-      <Select options={ groupOptionsPrefix } placeholder="Search.." />
+      <span style={{ margin: '10px' }}>Default with disabled options:</span>
+      <Select options={groupOptions} placeholder="Search.." />
+      <span style={{ margin: '10px' }}>With prefix:</span>
+      <Select options={groupOptionsPrefix} placeholder="Search.." />
     </>
   ))
   .add('Save input value and open after select value', () => {
@@ -142,14 +171,14 @@ storiesOf('Select', module)
       <>
         <Select
           textPosition="left"
-          options={ options }
+          options={options}
           isMulti
-          inputValue={ inputValue }
-          onInputChange={ onInputChange }
+          inputValue={inputValue}
+          onInputChange={onInputChange}
           isClearable
           isSearchable
-          isCloseMenuOnSelect={ false }
-          onMenuClose={ onMenuClose }
+          isCloseMenuOnSelect={false}
+          onMenuClose={onMenuClose}
         />
       </>
     );

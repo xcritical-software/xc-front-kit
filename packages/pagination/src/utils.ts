@@ -2,7 +2,6 @@ import range from 'lodash.range';
 
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 import { selectThemeNamespace, ISelectBaseTheme } from '@xcritical/select';
-
 import {
   buttonThemeNamespace,
   buttonGroupThemeNamespace,
@@ -13,10 +12,9 @@ import {
 import { IPaginationTheme, IPageSizeOption } from './interfaces';
 import { paginationThemeNamespace, defaultPaginationTheme } from './theme';
 
-
 export const getPaginationStyles = (
   theme?: IThemeNamespace<IPaginationTheme>,
-  propertyPath?: string[],
+  propertyPath?: string[]
 ): any => {
   const func = getThemedState(paginationThemeNamespace, defaultPaginationTheme);
 
@@ -24,13 +22,13 @@ export const getPaginationStyles = (
 };
 
 export const getPaginationButtonGroupTheme = (
-  theme?: IThemeNamespace<IPaginationTheme>,
+  theme?: IThemeNamespace<IPaginationTheme>
 ): IThemeNamespace<ButtonGroupTheme> => ({
   [buttonGroupThemeNamespace]: getPaginationStyles(theme, ['buttonGroup']),
 });
 
 export const getPaginationButtonTheme = (
-  theme?: IThemeNamespace<IPaginationTheme>,
+  theme?: IThemeNamespace<IPaginationTheme>
 ): IThemeNamespace<ButtonTheme> => ({
   [buttonThemeNamespace]: {
     appearance: {
@@ -40,7 +38,7 @@ export const getPaginationButtonTheme = (
 });
 
 export const getPaginationSelectTheme = (
-  theme?: IThemeNamespace<IPaginationTheme>,
+  theme?: IThemeNamespace<IPaginationTheme>
 ): IThemeNamespace<ISelectBaseTheme> => ({
   [selectThemeNamespace]: {
     appearance: {
@@ -59,7 +57,7 @@ export const getVisiblePagesArray = (
   totalPages: number,
   isAvailableVisibleRange: boolean,
   availableVisibleRange: number,
-  availableVisibleRangeCenter: number,
+  availableVisibleRangeCenter: number
 ): number[] => {
   if (isAvailableVisibleRange) {
     const isStartRange = currentPage <= availableVisibleRangeCenter;
@@ -68,7 +66,8 @@ export const getVisiblePagesArray = (
 
     const isEndRange = currentPage + availableVisibleRangeCenter >= totalPages;
 
-    if (isEndRange) return range(totalPages - availableVisibleRange, totalPages);
+    if (isEndRange)
+      return range(totalPages - availableVisibleRange, totalPages);
 
     const visiblePagesStart = currentPage - availableVisibleRangeCenter + 1;
     const visiblePagesEnd = visiblePagesStart + availableVisibleRange;

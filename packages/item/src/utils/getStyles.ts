@@ -1,5 +1,8 @@
 import {
-  css, FlattenSimpleInterpolation, FlattenInterpolation, ThemeProps,
+  css,
+  FlattenSimpleInterpolation,
+  FlattenInterpolation,
+  ThemeProps,
 } from 'styled-components';
 
 import {
@@ -12,10 +15,9 @@ import {
 import { itemThemeNamespace, itemThemeStyle } from '../theme';
 import { IItemTheme, IItemProps } from '../interfaces';
 
-
 export const itemTheme = (
   theme: ITheme<IItemTheme>,
-  propertyPath?: string | string[],
+  propertyPath?: string | string[]
 ): AllType => {
   const func = getThemedState(itemThemeNamespace, itemThemeStyle);
 
@@ -26,7 +28,7 @@ export const itemAppearanceTheme = (
   theme: ITheme<IItemTheme>,
   appearanceName: string,
   baseAppearance: string,
-  propertyPath?: string | string[],
+  propertyPath?: string | string[]
 ): AllType => {
   const func = getAppearanceTheme(itemThemeNamespace, itemThemeStyle);
 
@@ -38,11 +40,21 @@ export const getBaseStyle = ({
   appearance = 'default',
   baseAppearance = 'default',
 }: IItemProps): FlattenSimpleInterpolation => {
-  const background: string = itemAppearanceTheme(theme, appearance, baseAppearance, 'background');
+  const background: string = itemAppearanceTheme(
+    theme,
+    appearance,
+    baseAppearance,
+    'background'
+  );
   const color = itemAppearanceTheme(theme, appearance, baseAppearance, 'color');
   const baseStyles = itemTheme(theme);
   const styles = itemAppearanceTheme(theme, appearance, baseAppearance);
-  const fontWeight = itemAppearanceTheme(theme, appearance, baseAppearance, 'fontWeight');
+  const fontWeight = itemAppearanceTheme(
+    theme,
+    appearance,
+    baseAppearance,
+    'fontWeight'
+  );
 
   return css`
     ${baseStyles}
@@ -62,7 +74,12 @@ export const getHeightStyle = ({
   appearance = 'default',
   baseAppearance = 'default',
 }: IItemProps): FlattenSimpleInterpolation | string => {
-  const height = itemAppearanceTheme(theme, appearance, baseAppearance, 'height');
+  const height = itemAppearanceTheme(
+    theme,
+    appearance,
+    baseAppearance,
+    'height'
+  );
 
   return height
     ? css`
@@ -76,7 +93,12 @@ export const getItemStatesStyle = (stateName: string) => ({
   baseAppearance = 'default',
   appearance = 'default',
 }: IItemProps): FlattenInterpolation<any> => {
-  const styles = itemAppearanceTheme(theme, appearance, baseAppearance, stateName);
+  const styles = itemAppearanceTheme(
+    theme,
+    appearance,
+    baseAppearance,
+    stateName
+  );
 
   return css`
     ${styles}
@@ -96,25 +118,36 @@ export const getItemInteractiveStyles = ({
 }: IItemProps): FlattenInterpolation<ThemeProps<IItemProps>> => {
   const standardFocus = css`
     &:focus {
-      box-shadow: 0 0 0 2px ${itemAppearanceTheme(theme, appearance, baseAppearance, ['focus', 'outline'])} inset;
+      box-shadow: 0 0 0 2px
+        ${itemAppearanceTheme(theme, appearance, baseAppearance, [
+          'focus',
+          'outline',
+        ])}
+        inset;
     }
   `;
 
-  const standardHover = !disabled ? css`
-    &:hover {
-      ${getItemStatesStyle('hover')};
-    }
-  ` : null;
+  const standardHover = !disabled
+    ? css`
+        &:hover {
+          ${getItemStatesStyle('hover')};
+        }
+      `
+    : null;
 
-  const standardActive = !disabled ? css`
-    &:active {
-      ${getItemStatesStyle('active')};
-    }
-  ` : null;
+  const standardActive = !disabled
+    ? css`
+        &:active {
+          ${getItemStatesStyle('active')};
+        }
+      `
+    : null;
 
-  const standardDisable = disabled ? css`
-    ${getItemStatesStyle('disabled')}
-  ` : null;
+  const standardDisable = disabled
+    ? css`
+        ${getItemStatesStyle('disabled')}
+      `
+    : null;
 
   const standardSelected = selected ? getItemStatesStyle('selected') : null;
 

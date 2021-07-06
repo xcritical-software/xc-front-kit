@@ -1,7 +1,8 @@
 import { css, CSSObject, FlattenSimpleInterpolation } from 'styled-components';
 
-
-export const ProgressBar = (progressBarStyles: CSSObject): FlattenSimpleInterpolation => css`
+export const ProgressBar = (
+  progressBarStyles: CSSObject
+): FlattenSimpleInterpolation => css`
   .Toastify__progress-bar {
     ${progressBarStyles}
   }
@@ -20,7 +21,7 @@ export const ProgressBar = (progressBarStyles: CSSObject): FlattenSimpleInterpol
   }
 
   .Toastify__progress-bar--controlled {
-    transition: transform .2s;
+    transition: transform 0.2s;
   }
 
   .Toastify__progress-bar--rtl {

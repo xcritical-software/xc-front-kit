@@ -1,17 +1,16 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useCallback, useEffect } from 'react';
 import { storiesOf } from '@storybook/react';
 import { darken, lighten } from 'polished';
 import { Provider } from 'react-redux';
-
 import { setIn } from 'utilitify';
 
 import { colors } from '@xcritical/theme';
 
 import Grid from '../src';
 import { IColumn, IItem } from '../src/interfaces';
-
 import { gridThemeNamespace } from '../src/theme';
 import Sidebar from '../../sidebar/src';
 import { CompactFilterContainer } from '../../filter/stories/pages';
@@ -40,18 +39,17 @@ import {
 } from './styled';
 import './reset.css';
 
-
 const list: any = (n: number) => (
   <div>
-    <ul style={ { listStyleType: 'none' } }>
-      { new Array(n).fill(true).map((_el, i) => `This is list item number ${i}`).map((el) => (
-        <li
-          key={ el }
-          style={ { padding: '10px 10px 10px 10px' } }
-        >
-          { el }
-        </li>
-      )) }
+    <ul style={{ listStyleType: 'none' }}>
+      {new Array(n)
+        .fill(true)
+        .map((_el, i) => `This is list item number ${i}`)
+        .map((el) => (
+          <li key={el} style={{ padding: '10px 10px 10px 10px' }}>
+            {el}
+          </li>
+        ))}
     </ul>
   </div>
 );
@@ -113,58 +111,75 @@ const AMStheme = {
 storiesOf('Grid', module)
   .add('Basic', () => {
     const [shouldMovingColumns, changeShouldMovingColumns] = useState(true);
-    const [shouldChangeColumnsWidth, changeShouldChangeColumnsWidth] = useState(true);
+    const [shouldChangeColumnsWidth, changeShouldChangeColumnsWidth] = useState(
+      true
+    );
     const [shouldFitLastColumn, changeShouldFitLastColumn] = useState(true);
 
     return (
       <>
-        <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
+        <label
+          style={{
+            padding: '10px',
+            fontSize: '20px',
+            display: 'inline-block',
+          }}>
           Should moving columns
           <input
-            style={ { marginLeft: '30px' } }
+            style={{ marginLeft: '30px' }}
             type="checkbox"
-            checked={ shouldMovingColumns }
-            onChange={ (e) => changeShouldMovingColumns(e.target.checked) }
+            checked={shouldMovingColumns}
+            onChange={(e) => changeShouldMovingColumns(e.target.checked)}
           />
         </label>
-        <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
+        <label
+          style={{
+            padding: '10px',
+            fontSize: '20px',
+            display: 'inline-block',
+          }}>
           Should change columns width
           <input
-            style={ { marginLeft: '30px' } }
+            style={{ marginLeft: '30px' }}
             type="checkbox"
-            checked={ shouldChangeColumnsWidth }
-            onChange={ (e) => changeShouldChangeColumnsWidth(e.target.checked) }
+            checked={shouldChangeColumnsWidth}
+            onChange={(e) => changeShouldChangeColumnsWidth(e.target.checked)}
           />
         </label>
-        <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
+        <label
+          style={{
+            padding: '10px',
+            fontSize: '20px',
+            display: 'inline-block',
+          }}>
           Should fit last column
           <input
-            style={ { marginLeft: '30px' } }
+            style={{ marginLeft: '30px' }}
             type="checkbox"
-            checked={ shouldFitLastColumn }
-            onChange={ (e) => changeShouldFitLastColumn(e.target.checked) }
+            checked={shouldFitLastColumn}
+            onChange={(e) => changeShouldFitLastColumn(e.target.checked)}
           />
         </label>
         <Grid
-          columns={ columns }
-          items={ rows }
-          totals={ totals }
-          width={ document.documentElement.clientWidth - 100 }
-          height={ document.documentElement.clientHeight - 100 }
-          shouldMovingColumns={ shouldMovingColumns }
-          shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-          shouldFitLastColumn={ shouldFitLastColumn }
+          columns={columns}
+          items={rows}
+          totals={totals}
+          width={document.documentElement.clientWidth - 100}
+          height={document.documentElement.clientHeight - 100}
+          shouldMovingColumns={shouldMovingColumns}
+          shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+          shouldFitLastColumn={shouldFitLastColumn}
         />
       </>
     );
   })
   .add('With childrens', () => (
     <Grid
-      columns={ columns }
-      items={ rowsWithChildren }
-      totals={ totals }
-      width={ document.documentElement.clientWidth - 100 }
-      height={ document.documentElement.clientHeight - 100 }
+      columns={columns}
+      items={rowsWithChildren}
+      totals={totals}
+      width={document.documentElement.clientWidth - 100}
+      height={document.documentElement.clientHeight - 100}
     />
   ))
   .add('Handler change and select columns (see consol)', () => {
@@ -172,33 +187,38 @@ storiesOf('Grid', module)
 
     return (
       <>
-        <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
+        <label
+          style={{
+            padding: '10px',
+            fontSize: '20px',
+            display: 'inline-block',
+          }}>
           Is multi select
           <input
-            style={ { marginLeft: '30px' } }
+            style={{ marginLeft: '30px' }}
             type="checkbox"
-            onChange={ (e) => changeIsMultySelect(e.target.checked) }
+            onChange={(e) => changeIsMultySelect(e.target.checked)}
           />
         </label>
         <Grid
-          columns={ columns }
-          items={ rowsWithChildren }
-          totals={ totals }
-          width={ document.documentElement.clientWidth - 100 }
-          height={ document.documentElement.clientHeight - 100 }
-          onChangeColumns={ (cols: IColumn) => console.log(cols) }
-          onSelect={ (cols: any) => console.log(cols) }
-          isMultiSelect={ isMultiSelect }
+          columns={columns}
+          items={rowsWithChildren}
+          totals={totals}
+          width={document.documentElement.clientWidth - 100}
+          height={document.documentElement.clientHeight - 100}
+          onChangeColumns={(cols: IColumn) => console.log(cols)}
+          onSelect={(cols: any) => console.log(cols)}
+          isMultiSelect={isMultiSelect}
         />
       </>
     );
   })
   .add('Group', () => (
     <Grid
-      columns={ countries.columns }
-      items={ countries.items }
-      width={ document.documentElement.clientWidth - 100 }
-      height={ document.documentElement.clientHeight - 100 }
+      columns={countries.columns}
+      items={countries.items}
+      width={document.documentElement.clientWidth - 100}
+      height={document.documentElement.clientHeight - 100}
     />
   ))
   .add('Themed and multi select', () => {
@@ -206,13 +226,17 @@ storiesOf('Grid', module)
 
     return (
       <>
-        <input type="color" value={ color } onChange={ (e) => changeColor(e.target.value) } />
+        <input
+          type="color"
+          value={color}
+          onChange={(e) => changeColor(e.target.value)}
+        />
         <Grid
-          columns={ countries.columns }
-          items={ countries.items }
-          width={ document.documentElement.clientWidth - 100 }
-          height={ document.documentElement.clientHeight - 100 }
-          theme={ generateTheme(color) }
+          columns={countries.columns}
+          items={countries.items}
+          width={document.documentElement.clientWidth - 100}
+          height={document.documentElement.clientHeight - 100}
+          theme={generateTheme(color)}
           isMultiSelect
         />
       </>
@@ -220,12 +244,12 @@ storiesOf('Grid', module)
   })
   .add('AMS theme', () => (
     <Grid
-      columns={ columns.map((el) => ({ ...el, center: true })) }
-      items={ rows }
-      width={ document.documentElement.clientWidth - 100 }
-      height={ document.documentElement.clientHeight - 100 }
-      theme={ AMStheme }
-      rowHeight={ 40 }
+      columns={columns.map((el) => ({ ...el, center: true }))}
+      items={rows}
+      width={document.documentElement.clientWidth - 100}
+      height={document.documentElement.clientHeight - 100}
+      theme={AMStheme}
+      rowHeight={40}
     />
   ))
   .add('Dinamic size', () => {
@@ -237,23 +261,27 @@ storiesOf('Grid', module)
     };
 
     return (
-      <Provider store={ store }>
+      <Provider store={store}>
         <Page>
-          <Sidebar>{ list(100) }</Sidebar>
+          <Sidebar>{list(100)}</Sidebar>
           <Content>
             <div>
               <CompactFilterContainer />
             </div>
             <GridWrapper>
               <Grid
-                columns={ columns.map((el) => ({ ...el, center: true })) }
-                items={ rows }
-                theme={ AMStheme }
+                columns={columns.map((el) => ({ ...el, center: true }))}
+                items={rows}
+                theme={AMStheme}
                 shouldFitContainer
               />
             </GridWrapper>
-            <input placeholder="some block height (max 300)" value={ someBlockHeight } onChange={ handleChangeHeight } />
-            <SomeBlock height={ someBlockHeight }> max height =  300px  </SomeBlock>
+            <input
+              placeholder="some block height (max 300)"
+              value={someBlockHeight}
+              onChange={handleChangeHeight}
+            />
+            <SomeBlock height={someBlockHeight}> max height = 300px </SomeBlock>
           </Content>
         </Page>
       </Provider>
@@ -262,11 +290,17 @@ storiesOf('Grid', module)
   .add('Selector columns', () => {
     const [mappedColumns, setMappedColumns] = useState<IColumn[]>(columns);
 
-    const handleChangeVisibleColumns = useCallback((i) => {
-      const newColumns = setIn(mappedColumns, !mappedColumns[i].visible, [String(i), 'visible']);
-      console.log(newColumns);
-      setMappedColumns(newColumns);
-    }, [mappedColumns]);
+    const handleChangeVisibleColumns = useCallback(
+      (i) => {
+        const newColumns = setIn(mappedColumns, !mappedColumns[i].visible, [
+          String(i),
+          'visible',
+        ]);
+        console.log(newColumns);
+        setMappedColumns(newColumns);
+      },
+      [mappedColumns]
+    );
 
     const handleChangeColumns = (newColumns: IColumn[]) => {
       setMappedColumns(newColumns);
@@ -276,59 +310,57 @@ storiesOf('Grid', module)
     return (
       <>
         <div>
-          {
-            mappedColumns.map((col, i) => (
-              <div>
-                <label htmlFor={ col.field }>
-
-                  { col.headerName }
-
-                </label>
-                <input type="checkbox" checked={ col.visible } onChange={ () => handleChangeVisibleColumns(i) } />
-              </div>
-            ))
-          }
+          {mappedColumns.map((col, i) => (
+            <div>
+              <label htmlFor={col.field}>{col.headerName}</label>
+              <input
+                type="checkbox"
+                checked={col.visible}
+                onChange={() => handleChangeVisibleColumns(i)}
+              />
+            </div>
+          ))}
         </div>
         <Grid
-          columns={ mappedColumns.map((el) => ({ ...el, center: true })) }
-          items={ rows }
-          width={ document.documentElement.clientWidth - 20 }
-          height={ document.documentElement.clientHeight - 350 }
-          theme={ AMStheme }
-          totals={ totals }
-          onChangeColumns={ handleChangeColumns }
+          columns={mappedColumns.map((el) => ({ ...el, center: true }))}
+          items={rows}
+          width={document.documentElement.clientWidth - 20}
+          height={document.documentElement.clientHeight - 350}
+          theme={AMStheme}
+          totals={totals}
+          onChangeColumns={handleChangeColumns}
         />
       </>
     );
   })
   .add('Render cell function', () => (
     <Grid
-      columns={ columnsWithRender }
-      items={ createRowsWithRender() }
-      width={ document.documentElement.clientWidth - 100 }
-      height={ document.documentElement.clientHeight - 100 }
-      rowHeight={ 30 }
+      columns={columnsWithRender}
+      items={createRowsWithRender()}
+      width={document.documentElement.clientWidth - 100}
+      height={document.documentElement.clientHeight - 100}
+      rowHeight={30}
     />
   ))
   .add('fixed columns (left+right)', () => (
     <Grid
-      columns={ columnsFixed('both').map((el) => ({ ...el, sortable: true })) }
-      items={ rowsFixed }
-      width={ document.documentElement.clientWidth - 100 }
-      height={ document.documentElement.clientHeight - 100 }
-      rowHeight={ 30 }
-      theme={ AMStheme }
-      onSortChanged={ (cols) => console.table(cols) }
+      columns={columnsFixed('both').map((el) => ({ ...el, sortable: true }))}
+      items={rowsFixed}
+      width={document.documentElement.clientWidth - 100}
+      height={document.documentElement.clientHeight - 100}
+      rowHeight={30}
+      theme={AMStheme}
+      onSortChanged={(cols) => console.table(cols)}
     />
   ))
   .add('fixed columns (left)', () => (
     <Grid
-      columns={ columnsFixed('left') }
-      items={ rowsFixed }
-      width={ document.documentElement.clientWidth - 100 }
-      height={ document.documentElement.clientHeight - 100 }
-      rowHeight={ 30 }
-      theme={ AMStheme }
+      columns={columnsFixed('left')}
+      items={rowsFixed}
+      width={document.documentElement.clientWidth - 100}
+      height={document.documentElement.clientHeight - 100}
+      rowHeight={30}
+      theme={AMStheme}
     />
   ))
   .add('Fixed columns + Dinamic size', () => {
@@ -340,25 +372,29 @@ storiesOf('Grid', module)
     };
 
     return (
-      <Provider store={ store }>
+      <Provider store={store}>
         <Page>
-          <Sidebar maxWidth={ 300 }>{ list(100) }</Sidebar>
+          <Sidebar maxWidth={300}>{list(100)}</Sidebar>
           <Content>
             <div>
               <CompactFilterContainer />
             </div>
             <GridWrapper>
               <Grid
-                columns={ columnsFixed('both') }
-                items={ rowsFixed }
-                totals={ totalsFixed }
-                theme={ AMStheme }
-                rowHeight={ 30 }
+                columns={columnsFixed('both')}
+                items={rowsFixed}
+                totals={totalsFixed}
+                theme={AMStheme}
+                rowHeight={30}
                 shouldFitContainer
               />
             </GridWrapper>
-            <input placeholder="some block height (max 300)" value={ someBlockHeight } onChange={ handleChangeHeight } />
-            <SomeBlock height={ someBlockHeight }> max height =  300px  </SomeBlock>
+            <input
+              placeholder="some block height (max 300)"
+              value={someBlockHeight}
+              onChange={handleChangeHeight}
+            />
+            <SomeBlock height={someBlockHeight}> max height = 300px </SomeBlock>
           </Content>
         </Page>
       </Provider>
@@ -367,11 +403,17 @@ storiesOf('Grid', module)
   .add('Selector columns + fixeds', () => {
     const [mappedColumns, setMappedColumns] = useState(columnsFixed('both'));
 
-    const handleChangeVisibleColumns = useCallback((i) => {
-      const newColumns = setIn(mappedColumns, !mappedColumns[i].visible, [String(i), 'visible']);
-      console.log(newColumns);
-      setMappedColumns(newColumns);
-    }, [mappedColumns]);
+    const handleChangeVisibleColumns = useCallback(
+      (i) => {
+        const newColumns = setIn(mappedColumns, !mappedColumns[i].visible, [
+          String(i),
+          'visible',
+        ]);
+        console.log(newColumns);
+        setMappedColumns(newColumns);
+      },
+      [mappedColumns]
+    );
 
     const handleChangeColumns = (newColumns) => {
       setMappedColumns(newColumns);
@@ -381,55 +423,53 @@ storiesOf('Grid', module)
     return (
       <>
         <SelectorColumnsWrapper>
-          {
-            mappedColumns.map((col, i) => (
-              <div>
-                <label htmlFor={ col.field }>
-
-                  { col.headerName }
-
-                </label>
-                <input type="checkbox" checked={ col.visible } onChange={ () => handleChangeVisibleColumns(i) } />
-              </div>
-            ))
-          }
+          {mappedColumns.map((col, i) => (
+            <div>
+              <label htmlFor={col.field}>{col.headerName}</label>
+              <input
+                type="checkbox"
+                checked={col.visible}
+                onChange={() => handleChangeVisibleColumns(i)}
+              />
+            </div>
+          ))}
         </SelectorColumnsWrapper>
         <Grid
-          columns={ mappedColumns }
-          items={ rowsFixed }
-          width={ document.documentElement.clientWidth - 100 }
-          height={ document.documentElement.clientHeight - 100 }
-          rowHeight={ 30 }
-          theme={ AMStheme }
-          onChangeColumns={ handleChangeColumns }
+          columns={mappedColumns}
+          items={rowsFixed}
+          width={document.documentElement.clientWidth - 100}
+          height={document.documentElement.clientHeight - 100}
+          rowHeight={30}
+          theme={AMStheme}
+          onChangeColumns={handleChangeColumns}
         />
       </>
     );
   })
   .add('Sortable', () => (
     <Grid
-      columns={ columns.map((el) => ({
+      columns={columns.map((el) => ({
         ...el,
         sortable: true,
-      })) }
-      items={ rows }
-      totals={ totals }
-      width={ document.documentElement.clientWidth - 100 }
-      height={ document.documentElement.clientHeight - 100 }
-      onSortChanged={ (cols) => console.table(cols) }
+      }))}
+      items={rows}
+      totals={totals}
+      width={document.documentElement.clientWidth - 100}
+      height={document.documentElement.clientHeight - 100}
+      onSortChanged={(cols) => console.table(cols)}
     />
   ))
   .add('Header cell - ReactElement', () => (
     <Grid
-      columns={ columns.map((el) => ({
+      columns={columns.map((el) => ({
         ...el,
-        headerName: <CustomReactHeaderName text={ el.headerName } />,
-      })) }
-      items={ rows }
-      totals={ totals }
-      width={ document.documentElement.clientWidth - 100 }
-      height={ document.documentElement.clientHeight - 100 }
-      onSortChanged={ (cols) => console.table(cols) }
+        headerName: <CustomReactHeaderName text={el.headerName} />,
+      }))}
+      items={rows}
+      totals={totals}
+      width={document.documentElement.clientWidth - 100}
+      height={document.documentElement.clientHeight - 100}
+      onSortChanged={(cols) => console.table(cols)}
     />
   ))
   .add('Dinamic size + toggler should fit last column', () => {
@@ -437,37 +477,47 @@ storiesOf('Grid', module)
     const [columnsCount, setColumnsCount] = useState(3);
 
     return (
-      <Provider store={ store }>
+      <Provider store={store}>
         <Page>
           <Sidebar>
-            <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
+            <label
+              style={{
+                padding: '10px',
+                fontSize: '20px',
+                display: 'inline-block',
+              }}>
               Should fit last column
               <input
-                style={ { marginLeft: '30px' } }
+                style={{ marginLeft: '30px' }}
                 type="checkbox"
-                checked={ shouldFitLastColumn }
-                onChange={ (e) => changeShouldFitLastColumn(e.target.checked) }
+                checked={shouldFitLastColumn}
+                onChange={(e) => changeShouldFitLastColumn(e.target.checked)}
               />
             </label>
-            <label style={ { padding: '10px', fontSize: '20px', display: 'inline-block' } }>
+            <label
+              style={{
+                padding: '10px',
+                fontSize: '20px',
+                display: 'inline-block',
+              }}>
               Columns count
               <input
-                style={ { marginLeft: '30px' } }
-                value={ columnsCount }
-                onChange={ (e) => setColumnsCount(Number(e.target.value)) }
+                style={{ marginLeft: '30px' }}
+                value={columnsCount}
+                onChange={(e) => setColumnsCount(Number(e.target.value))}
               />
             </label>
-            { list(100) }
+            {list(100)}
           </Sidebar>
           <Content>
             <GridWrapper>
               <Grid
-                columns={ columnsFixed('both').slice(0, columnsCount || 1) }
-                items={ rowsFixed }
-                rowHeight={ 40 }
-                theme={ AMStheme }
+                columns={columnsFixed('both').slice(0, columnsCount || 1)}
+                items={rowsFixed}
+                rowHeight={40}
+                theme={AMStheme}
                 shouldFitContainer
-                shouldFitLastColumn={ shouldFitLastColumn }
+                shouldFitLastColumn={shouldFitLastColumn}
               />
             </GridWrapper>
           </Content>
@@ -477,12 +527,12 @@ storiesOf('Grid', module)
   })
   .add('Min Column Width', () => (
     <Grid
-      columns={ columns }
-      items={ rows }
-      totals={ totals }
-      width={ document.documentElement.clientWidth - 100 }
-      height={ document.documentElement.clientHeight - 100 }
-      minColumnWidth={ 60 }
+      columns={columns}
+      items={rows}
+      totals={totals}
+      width={document.documentElement.clientWidth - 100}
+      height={document.documentElement.clientHeight - 100}
+      minColumnWidth={60}
     />
   ))
   .add('Control Expanded Items Outside Grid', () => {
@@ -492,9 +542,12 @@ storiesOf('Grid', module)
       'Andrey Prokopievich': true,
     });
 
-    const handleChangeExpand = useCallback((row: IItem, isExpand: boolean) => {
-      setExpandedRows({ ...expandedRows, [row.model]: isExpand });
-    }, [setExpandedRows, expandedRows]);
+    const handleChangeExpand = useCallback(
+      (row: IItem, isExpand: boolean) => {
+        setExpandedRows({ ...expandedRows, [row.model]: isExpand });
+      },
+      [setExpandedRows, expandedRows]
+    );
 
     useEffect(() => {
       const mappedGridItems = rowsWithChild.map((row) => {
@@ -528,11 +581,11 @@ storiesOf('Grid', module)
 
     return (
       <Grid
-        columns={ columns }
-        items={ mappedItems }
-        width={ document.documentElement.clientWidth - 100 }
-        height={ document.documentElement.clientHeight - 100 }
-        onChangeExpand={ handleChangeExpand }
+        columns={columns}
+        items={mappedItems}
+        width={document.documentElement.clientWidth - 100}
+        height={document.documentElement.clientHeight - 100}
+        onChangeExpand={handleChangeExpand}
       />
     );
   });

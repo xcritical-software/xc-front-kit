@@ -2,9 +2,7 @@ import { CSSObject } from 'styled-components';
 
 import { IThemeNamespace } from '@xcritical/theme';
 import { ISelectBaseTheme, SelectProps } from '@xcritical/select';
-
 import { ButtonGroupTheme, ButtonTheme } from '@xcritical/button';
-
 
 export interface IPagination {
   currentPage?: number;

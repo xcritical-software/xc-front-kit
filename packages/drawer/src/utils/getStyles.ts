@@ -11,28 +11,29 @@ import {
   IIconWrapperProps,
 } from '../interfaces';
 
-
 export const drawerAppearanceTheme = (
   theme: DrawerTheme,
   appearanceName: string,
   baseAppearance: string,
-  propertyPath?: string | string[],
+  propertyPath?: string | string[]
 ): AllType => {
   const func = getAppearanceTheme(drawerThemeNamespace, defaultDrawerTheme);
 
   return func(theme, appearanceName, propertyPath, baseAppearance);
 };
 
-export const getElementStyles: IReturnFunction<any> = memoizee((
-  theme,
-  elementName,
-  appearance = 'default',
-  baseAppearance = 'default',
-) => {
-  const styles = drawerAppearanceTheme(theme, appearance, baseAppearance, elementName);
+export const getElementStyles: IReturnFunction<any> = memoizee(
+  (theme, elementName, appearance = 'default', baseAppearance = 'default') => {
+    const styles = drawerAppearanceTheme(
+      theme,
+      appearance,
+      baseAppearance,
+      elementName
+    );
 
-  return styles;
-});
+    return styles;
+  }
+);
 
 export const getDrawerIconInteractiveStyles = ({
   theme,
@@ -40,7 +41,12 @@ export const getDrawerIconInteractiveStyles = ({
   baseAppearance = 'default',
   onClick,
 }: IDrawerProps & IIconWrapperProps): FlattenInterpolation<any> => {
-  const iconStyles = getElementStyles(theme, 'iconWrapper', appearance, baseAppearance);
+  const iconStyles = getElementStyles(
+    theme,
+    'iconWrapper',
+    appearance,
+    baseAppearance
+  );
 
   if (!iconStyles) return css``;
 
@@ -52,7 +58,8 @@ export const getDrawerIconInteractiveStyles = ({
     }
 
     &:active {
-      background-color:  ${() => (onClick ? active?.backgroundColor : undefined)};
+      background-color: ${() =>
+        onClick ? active?.backgroundColor : undefined};
       outline: 0;
     }
   `;

@@ -12,7 +12,6 @@ import { IHeaderWrapper, IColumn } from './interfaces';
 import { searchLastVisible, searchNextVisible } from './utils';
 import { HeaderCellContentWrapper } from './HeaderCellContentWrapper';
 
-
 export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
   fullWidth,
   translateX,
@@ -50,13 +49,23 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
       const moveMouse = clientX - clickXRef.current;
 
       const emptyIdx = emptyColumnIndexRef.current ?? 0;
-      const leftColumnIndex = searchLastVisible(mappedColumnsRef.current, emptyIdx);
-      const rightColumnIndex = searchNextVisible(mappedColumnsRef.current, emptyIdx);
+      const leftColumnIndex = searchLastVisible(
+        mappedColumnsRef.current,
+        emptyIdx
+      );
+      const rightColumnIndex = searchNextVisible(
+        mappedColumnsRef.current,
+        emptyIdx
+      );
 
       if (moveMouse < 0) {
         if (mappedColumnsRef.current[leftColumnIndex]) {
-          if (-moveMouse >= mappedColumnsRef.current[leftColumnIndex].width / 2) {
-            clickXRef.current -= mappedColumnsRef.current[leftColumnIndex].width;
+          if (
+            -moveMouse >=
+            mappedColumnsRef.current[leftColumnIndex].width / 2
+          ) {
+            clickXRef.current -=
+              mappedColumnsRef.current[leftColumnIndex].width;
 
             const newMappedColumns = [...mappedColumnsRef.current];
 
@@ -71,8 +80,12 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
         }
       } else if (moveMouse > 0) {
         if (mappedColumnsRef.current[rightColumnIndex]) {
-          if (moveMouse >= mappedColumnsRef.current[rightColumnIndex].width / 2) {
-            clickXRef.current += mappedColumnsRef.current[rightColumnIndex].width;
+          if (
+            moveMouse >=
+            mappedColumnsRef.current[rightColumnIndex].width / 2
+          ) {
+            clickXRef.current +=
+              mappedColumnsRef.current[rightColumnIndex].width;
             const newMappedColumns = [...mappedColumnsRef.current];
 
             [newMappedColumns[emptyIdx], newMappedColumns[rightColumnIndex]] = [
@@ -88,7 +101,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
 
       setMouseMove(clientX - startClickXRef.current);
     },
-    [emptyColumnIndexRef],
+    [emptyColumnIndexRef]
   );
 
   const handleMouseUp = () => {
@@ -123,46 +136,49 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
   };
 
   return (
-    <Header ref={ headerRef } width={ fullWidth } translateX={ translateX } theme={ theme }>
-      { mappedColumnsRef.current.map((el: IColumn, index: number) => (
-        el.visible
-        && (
-          <HeaderCellWrapper
-            sortable={ el.sortable }
-            sortOrder={ el.sortOrder }
-            key={ el.field }
-            isEmpty={ isMoving && index === emptyColumnIndexRef.current }
-            onMouseDown={ handleMouseDown }
-            width={ el.width }
-            minColumnWidth={ minColumnWidth }
-            content={ el.headerName }
-            onChangeWidth={ onChangeWidth }
-            index={ index }
-            setChangingColumns={ setChangingColumns }
-            center={ !!el.center }
-            theme={ theme }
-            shouldMovingColumns={ shouldMovingColumns }
-            shouldChangeColumnsWidth={ shouldChangeColumnsWidth }
-            gridPosition={ gridPosition }
-            onChangeSort={ onChangeSort }
-          />
-        )
-      )) }
-      { isMoving && (
+    <Header
+      ref={headerRef}
+      width={fullWidth}
+      translateX={translateX}
+      theme={theme}>
+      {mappedColumnsRef.current.map(
+        (el: IColumn, index: number) =>
+          el.visible && (
+            <HeaderCellWrapper
+              sortable={el.sortable}
+              sortOrder={el.sortOrder}
+              key={el.field}
+              isEmpty={isMoving && index === emptyColumnIndexRef.current}
+              onMouseDown={handleMouseDown}
+              width={el.width}
+              minColumnWidth={minColumnWidth}
+              content={el.headerName}
+              onChangeWidth={onChangeWidth}
+              index={index}
+              setChangingColumns={setChangingColumns}
+              center={!!el.center}
+              theme={theme}
+              shouldMovingColumns={shouldMovingColumns}
+              shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+              gridPosition={gridPosition}
+              onChangeSort={onChangeSort}
+            />
+          )
+      )}
+      {isMoving && (
         <MovingElem
-          startCoord={ startCoord }
-          mouseMove={ mouseMove }
-          width={ movingColumnDataRef.current?.width ?? 0 }
-          center={ !!movingColumnDataRef.current?.center }
-          theme={ theme }
-        >
+          startCoord={startCoord}
+          mouseMove={mouseMove}
+          width={movingColumnDataRef.current?.width ?? 0}
+          center={!!movingColumnDataRef.current?.center}
+          theme={theme}>
           <HeaderCellContentWrapper
-            theme={ theme }
-            content={ movingColumnDataRef.current?.headerName }
-            sortOrder={ movingColumnDataRef.current?.sortOrder }
+            theme={theme}
+            content={movingColumnDataRef.current?.headerName}
+            sortOrder={movingColumnDataRef.current?.sortOrder}
           />
         </MovingElem>
-      ) }
+      )}
     </Header>
   );
 };

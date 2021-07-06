@@ -14,13 +14,11 @@ import Select from '@xcritical/select';
 import { AllType } from '@xcritical/theme';
 
 import InlineEdit, { inlineEditThemeNamespace } from '../src';
-
 import { InlineEditTheme } from '../src/interfaces';
-
 
 const generateTheme = (
   baseBgColor: string,
-  textColor: string,
+  textColor: string
 ): InlineEditTheme => ({
   backgroundColor: baseBgColor,
   color: textColor,
@@ -77,39 +75,39 @@ const BasicInlineEditInput: React.FC<AllType> = ({
   appearance = 'default',
   cancelIcon,
   confirmIcon,
+  isDoubleClickMode,
+  defaultValue = '',
   ...rest
 }) => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState(defaultValue);
 
-  const getReadView = React.useCallback(() => (
-    <div>
-      { value || 'Click to enter value' }
-    </div>
-  ), [value]);
+  const getReadView = React.useCallback(
+    () => <div>{value || 'Click to enter value'}</div>,
+    [value]
+  );
 
-  const getEditView = React.useCallback((fieldProps) => (
-    <Input
-      { ...fieldProps }
-      { ...rest }
-      autoFocus
-      shouldFitContainer
-    />
-  ), [rest]);
+  const getEditView = React.useCallback(
+    (fieldProps) => (
+      <Input {...fieldProps} {...rest} autoFocus shouldFitContainer />
+    ),
+    [rest]
+  );
 
   const handleConfirm = React.useCallback((v: AllType) => {
     setValue(v);
   }, []);
 
   return (
-    <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
+    <ThemeProvider theme={{ [inlineEditThemeNamespace]: theme }}>
       <InlineEdit
-        appearance={ appearance }
-        value={ value }
-        readView={ getReadView }
-        editView={ getEditView }
-        onConfirm={ handleConfirm }
-        cancelIcon={ cancelIcon }
-        confirmIcon={ confirmIcon }
+        appearance={appearance}
+        value={value}
+        readView={getReadView}
+        editView={getEditView}
+        onConfirm={handleConfirm}
+        cancelIcon={cancelIcon}
+        confirmIcon={confirmIcon}
+        isDoubleClickMode={isDoubleClickMode}
       />
     </ThemeProvider>
   );
@@ -119,35 +117,35 @@ const BasicInlineEditSelect: React.FC<AllType> = ({
   appearance = 'default',
   ...rest
 }) => {
-  const [selectValue, setSelectValue] = React.useState<{value: number; label: string}>({ value: 0, label: 'Select value' });
+  const [selectValue, setSelectValue] = React.useState<{
+    value: number;
+    label: string;
+  }>({ value: 0, label: 'Select value' });
 
-  const getReadView = React.useCallback(() => (
-    <div>
-      { selectValue.label || 'Click to enter value' }
-    </div>
-  ), [selectValue]);
+  const getReadView = React.useCallback(
+    () => <div>{selectValue.label || 'Click to enter value'}</div>,
+    [selectValue]
+  );
 
-  const getEditView = React.useCallback((fieldProps) => (
-    <Select
-      { ...fieldProps }
-      { ...rest }
-      autoFocus
-      shouldFitContainer
-    />
-  ), [rest]);
+  const getEditView = React.useCallback(
+    (fieldProps) => (
+      <Select {...fieldProps} {...rest} autoFocus shouldFitContainer />
+    ),
+    [rest]
+  );
 
   const handleConfirm = React.useCallback((v: AllType) => {
     setSelectValue(v);
   }, []);
 
   return (
-    <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
+    <ThemeProvider theme={{ [inlineEditThemeNamespace]: theme }}>
       <InlineEdit
-        appearance={ appearance }
-        value={ selectValue }
-        readView={ getReadView }
-        editView={ getEditView }
-        onConfirm={ handleConfirm }
+        appearance={appearance}
+        value={selectValue}
+        readView={getReadView}
+        editView={getEditView}
+        onConfirm={handleConfirm}
       />
     </ThemeProvider>
   );
@@ -162,29 +160,31 @@ const InlineEditInputWithValidation: React.FC<AllType> = ({
   const [innerError, setError] = React.useState('');
   const [withError, setWithError] = React.useState(false);
 
-  const getReadView = React.useCallback(() => (
-    <div>
-      { value || 'Click and try to enter \'123\'' }
-    </div>
-  ), [value]);
+  const getReadView = React.useCallback(
+    () => <div>{value || "Click and try to enter '123'"}</div>,
+    [value]
+  );
 
-  const getEditView = React.useCallback(({ invalid, error, ...fieldProps }) => (
-    <>
-      { invalid && <ErrorMessage>{ error }</ErrorMessage> }
-      <Input
-        { ...fieldProps }
-        { ...rest }
-        invalid={ invalid }
-        autoFocus
-        shouldFitContainer
-      />
-    </>
-  ), [rest]);
+  const getEditView = React.useCallback(
+    ({ invalid, error, ...fieldProps }) => (
+      <>
+        {invalid && <ErrorMessage>{error}</ErrorMessage>}
+        <Input
+          {...fieldProps}
+          {...rest}
+          invalid={invalid}
+          autoFocus
+          shouldFitContainer
+        />
+      </>
+    ),
+    [rest]
+  );
 
   const handleConfirm = React.useCallback((v: AllType) => {
     if (v === '123') {
       setWithError(true);
-      setError('You can\'t use \'123\' as value.');
+      setError("You can't use '123' as value.");
     } else {
       setWithError(false);
       setValue(v);
@@ -198,18 +198,18 @@ const InlineEditInputWithValidation: React.FC<AllType> = ({
   }, []);
 
   return (
-    <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
+    <ThemeProvider theme={{ [inlineEditThemeNamespace]: theme }}>
       <InlineEdit
-        appearance={ appearance }
-        value={ value }
-        readView={ getReadView }
-        editView={ getEditView }
-        onConfirm={ handleConfirm }
-        onCancel={ onCancel }
-        invalid={ withError }
-        error={ innerError }
-        isEditing={ isEditing }
-        onIsEditingChange={ setIsEditing }
+        appearance={appearance}
+        value={value}
+        readView={getReadView}
+        editView={getEditView}
+        onConfirm={handleConfirm}
+        onCancel={onCancel}
+        invalid={withError}
+        error={innerError}
+        isEditing={isEditing}
+        onIsEditingChange={setIsEditing}
       />
     </ThemeProvider>
   );
@@ -224,40 +224,43 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
   const [innerError, setError] = React.useState('');
   const [withError, setWithError] = React.useState(false);
 
-  const getReadView = React.useCallback(() => (
-    <div>
-      { value.label || 'Click and try to save it without value' }
-    </div>
-  ), [value]);
+  const getReadView = React.useCallback(
+    () => <div>{value.label || 'Click and try to save it without value'}</div>,
+    [value]
+  );
 
-  const getEditView = React.useCallback(({ invalid, error, ...fieldProps }) => (
-    <>
-      { invalid && <ErrorMessage>{ error }</ErrorMessage> }
-      <Select
-        { ...fieldProps }
-        { ...rest }
-        autoFocus
-        shouldFitContainer
-      />
-    </>
-  ), [rest]);
+  const getEditView = React.useCallback(
+    ({ invalid, error, ...fieldProps }) => (
+      <>
+        {invalid && <ErrorMessage>{error}</ErrorMessage>}
+        <Select {...fieldProps} {...rest} autoFocus shouldFitContainer />
+      </>
+    ),
+    [rest]
+  );
 
-  const handleConfirm = React.useCallback((v: { value: string; label: string }) => {
-    if (v.value === '') {
-      setWithError(true);
-      setError('You should select something.');
-    } else {
-      setWithError(false);
-      setValue(v);
-      setIsEditing(false);
-    }
-  }, []);
+  const handleConfirm = React.useCallback(
+    (v: { value: string; label: string }) => {
+      if (v.value === '') {
+        setWithError(true);
+        setError('You should select something.');
+      } else {
+        setWithError(false);
+        setValue(v);
+        setIsEditing(false);
+      }
+    },
+    []
+  );
 
-  const handleOnIsEditingChange = React.useCallback((isEditingState: boolean) => {
-    if (isEditingState) {
-      setIsEditing(true);
-    }
-  }, []);
+  const handleOnIsEditingChange = React.useCallback(
+    (isEditingState: boolean) => {
+      if (isEditingState) {
+        setIsEditing(true);
+      }
+    },
+    []
+  );
 
   const onCancel = React.useCallback(() => {
     setWithError(false);
@@ -265,68 +268,66 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
   }, []);
 
   return (
-    <ThemeProvider theme={ { [inlineEditThemeNamespace]: theme } }>
+    <ThemeProvider theme={{ [inlineEditThemeNamespace]: theme }}>
       <InlineEdit
-        appearance={ appearance }
-        value={ value }
-        readView={ getReadView }
-        editView={ getEditView }
-        onConfirm={ handleConfirm }
-        onCancel={ onCancel }
-        invalid={ withError }
-        error={ innerError }
-        isEditing={ isEditing }
-        onIsEditingChange={ handleOnIsEditingChange }
+        appearance={appearance}
+        value={value}
+        readView={getReadView}
+        editView={getEditView}
+        onConfirm={handleConfirm}
+        onCancel={onCancel}
+        invalid={withError}
+        error={innerError}
+        isEditing={isEditing}
+        onIsEditingChange={handleOnIsEditingChange}
       />
     </ThemeProvider>
   );
 };
 
-
 storiesOf('InlineEdit', module)
   .add('Basic', () => (
-    <div style={ { width: '200px' } }>
-      <BasicInlineEditInput editView={ Input } />
+    <div style={{ width: '200px' }}>
+      <BasicInlineEditInput editView={Input} />
     </div>
   ))
   .add('Themed', () => (
-    <div style={ { width: '200px' } }>
-      <BasicInlineEditInput
-        editView={ Input }
-        appearance="crm"
-      />
+    <div style={{ width: '200px' }}>
+      <BasicInlineEditInput editView={Input} appearance="crm" />
     </div>
   ))
   .add('Select', () => (
-    <div style={ { width: '200px' } }>
-      <BasicInlineEditSelect
-        options={ options }
-        appearance="crm"
-      />
+    <div style={{ width: '200px' }}>
+      <BasicInlineEditSelect options={options} appearance="crm" />
     </div>
   ))
   .add('CustomButtonIcon', () => (
-    <div style={ { width: '200px' } }>
+    <div style={{ width: '200px' }}>
       <BasicInlineEditInput
-        cancelIcon={ () => <BookIcon color="red" /> }
-        confirmIcon={ CreditCardIcon }
+        cancelIcon={() => <BookIcon color="red" />}
+        confirmIcon={CreditCardIcon}
         appearance="crm"
       />
     </div>
   ))
   .add('InlineEdit with custom validation', () => (
-    <div style={ { display: 'flex' } }>
-      <div style={ { width: '300px', marginLeft: '10px' } }>
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '300px', marginLeft: '10px' }}>
         <p>Input InlineEdit</p>
-        <InlineEditInputWithValidation
-          editView={ Input }
-        />
+        <InlineEditInputWithValidation editView={Input} />
       </div>
-      <div style={ { width: '300px', marginLeft: '50px' } }>
+      <div style={{ width: '300px', marginLeft: '50px' }}>
         <p>Select InlineEdit</p>
-        <InlineEditSelectWithValidation
-          options={ options }
-        />
+        <InlineEditSelectWithValidation options={options} />
       </div>
+    </div>
+  ))
+  .add('Edit view on double click', () => (
+    <div style={{ width: '200px' }}>
+      <BasicInlineEditInput
+        editView={Input}
+        isDoubleClickMode
+        defaultValue="Edit view on double click"
+      />
     </div>
   ));

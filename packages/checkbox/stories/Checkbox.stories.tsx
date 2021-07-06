@@ -12,7 +12,6 @@ import Checkbox, { SwitchGroup, checkboxThemeNamespace } from '../src';
 import { CheckboxTheme, ICheckboxProps, IOption } from '../src/interfaces';
 import { Check } from '../src/Icons';
 
-
 const groupOptions = [
   {
     value: '1',
@@ -69,7 +68,7 @@ const TextBlock = styled.div`
 const generateTheme = (
   padding: string,
   baseBgColor: string,
-  textColor: string,
+  textColor: string
 ): CheckboxTheme => ({
   appearance: {
     default: {
@@ -192,15 +191,15 @@ const BasicCheckbox = ({
   };
 
   return (
-    <ThemeProvider theme={ innerTheme }>
+    <ThemeProvider theme={innerTheme}>
       <Checkbox
-        appearance={ appearance }
-        type={ type }
-        checked={ isChecked }
-        disabled={ disabled }
-        onChange={ handleChange }
-        label={ label }
-        checkIcon={ checkIcon }
+        appearance={appearance}
+        type={type}
+        checked={isChecked}
+        disabled={disabled}
+        onChange={handleChange}
+        label={label}
+        checkIcon={checkIcon}
       />
     </ThemeProvider>
   );
@@ -222,36 +221,37 @@ const BasicSwitchGroup = ({
     setIsAll(false);
   };
 
-  const handleAllChange = React.useCallback((checked: boolean) => {
-    if (checked) {
-      setValues(options.map((option: IOption) => option.value));
-    } else {
-      setValues([]);
-    }
+  const handleAllChange = React.useCallback(
+    (checked: boolean) => {
+      if (checked) {
+        setValues(options.map((option: IOption) => option.value));
+      } else {
+        setValues([]);
+      }
 
-    setIsAll(checked);
-  }, [options]);
+      setIsAll(checked);
+    },
+    [options]
+  );
 
   return (
-    <ThemeProvider theme={ innerTheme }>
-      {
-        type === 'checkbox' && withAllGroup && (
-          <Checkbox
-            appearance={ appearance }
-            label="Choose all"
-            checked={ isAll }
-            disabled={ disabled }
-            onChange={ handleAllChange }
-          />
-        )
-      }
+    <ThemeProvider theme={innerTheme}>
+      {type === 'checkbox' && withAllGroup && (
+        <Checkbox
+          appearance={appearance}
+          label="Choose all"
+          checked={isAll}
+          disabled={disabled}
+          onChange={handleAllChange}
+        />
+      )}
       <SwitchGroup
-        type={ type }
-        appearance={ appearance }
-        onChange={ handleChange }
-        options={ options }
-        values={ values }
-        disabled={ disabled }
+        type={type}
+        appearance={appearance}
+        onChange={handleChange}
+        options={options}
+        values={values}
+        disabled={disabled}
       />
     </ThemeProvider>
   );
@@ -262,7 +262,7 @@ storiesOf('Checkbox', module)
     <div>
       <GlobalStyle />
       <BasicCheckbox
-        theme={ { [checkboxThemeNamespace]: theme } }
+        theme={{ [checkboxThemeNamespace]: theme }}
         label="Checkbox"
       />
     </div>
@@ -271,9 +271,9 @@ storiesOf('Checkbox', module)
     <div>
       <GlobalStyle />
       <BasicCheckbox
-        theme={ { [checkboxThemeNamespace]: theme } }
+        theme={{ [checkboxThemeNamespace]: theme }}
         label="Custom Check Icon"
-        checkIcon={ <Check /> }
+        checkIcon={<Check />}
       />
     </div>
   ))
@@ -281,7 +281,7 @@ storiesOf('Checkbox', module)
     <div>
       <GlobalStyle />
       <BasicCheckbox
-        theme={ { [checkboxThemeNamespace]: theme } }
+        theme={{ [checkboxThemeNamespace]: theme }}
         label="Radio"
         type="radio"
       />
@@ -291,9 +291,9 @@ storiesOf('Checkbox', module)
     <div>
       <GlobalStyle />
       <BasicSwitchGroup
-        theme={ { [checkboxThemeNamespace]: theme } }
+        theme={{ [checkboxThemeNamespace]: theme }}
         type="radio"
-        options={ groupOptions }
+        options={groupOptions}
         appearance="default"
       />
     </div>
@@ -302,9 +302,9 @@ storiesOf('Checkbox', module)
     <div>
       <GlobalStyle />
       <BasicSwitchGroup
-        theme={ { [checkboxThemeNamespace]: theme } }
+        theme={{ [checkboxThemeNamespace]: theme }}
         type="checkbox"
-        options={ groupOptions }
+        options={groupOptions}
         appearance="default"
       />
     </div>
@@ -313,9 +313,9 @@ storiesOf('Checkbox', module)
     <div>
       <GlobalStyle />
       <BasicSwitchGroup
-        theme={ { [checkboxThemeNamespace]: theme } }
+        theme={{ [checkboxThemeNamespace]: theme }}
         type="checkbox"
-        options={ groupOptions }
+        options={groupOptions}
         appearance="default"
         withAllGroup
       />
@@ -325,17 +325,17 @@ storiesOf('Checkbox', module)
     <div>
       <GlobalStyle />
       <BasicCheckbox
-        theme={ { [checkboxThemeNamespace]: theme } }
+        theme={{ [checkboxThemeNamespace]: theme }}
         label="Disabled Checkbox"
         disabled
       />
     </div>
   ))
   .add('Prevent bubbling', () => (
-    <div onClick={ action('bubbling') }>
+    <div onClick={action('bubbling')}>
       <GlobalStyle />
       <BasicCheckbox
-        theme={ { [checkboxThemeNamespace]: theme } }
+        theme={{ [checkboxThemeNamespace]: theme }}
         label="Checkbox"
       />
     </div>
@@ -344,13 +344,13 @@ storiesOf('Checkbox', module)
     <div>
       <GlobalStyle />
       <BasicCheckbox
-        theme={ { [checkboxThemeNamespace]: theme } }
+        theme={{ [checkboxThemeNamespace]: theme }}
         label="Themed Checkbox"
         appearance="customCheckbox"
       />
       <div>
         <BasicCheckbox
-          theme={ { [checkboxThemeNamespace]: theme } }
+          theme={{ [checkboxThemeNamespace]: theme }}
           label="Themed Radio"
           type="radio"
           appearance="customRadio"
@@ -358,16 +358,16 @@ storiesOf('Checkbox', module)
       </div>
       <TextBlock>Themed Radio Group</TextBlock>
       <BasicSwitchGroup
-        theme={ { [checkboxThemeNamespace]: theme } }
+        theme={{ [checkboxThemeNamespace]: theme }}
         type="radio"
-        options={ groupOptions }
+        options={groupOptions}
         appearance="customRadio"
       />
       <TextBlock>Themed Checkbox Group</TextBlock>
       <BasicSwitchGroup
-        theme={ { [checkboxThemeNamespace]: theme } }
+        theme={{ [checkboxThemeNamespace]: theme }}
         type="checkbox"
-        options={ groupOptions }
+        options={groupOptions}
         appearance="horizontal"
       />
     </div>

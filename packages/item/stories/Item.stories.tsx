@@ -7,26 +7,38 @@ import { ThemeProvider } from 'styled-components';
 import { darken, mix } from 'polished';
 import { action } from '@storybook/addon-actions';
 
-import Item, { ItemGroup, itemThemeNamespace } from '../src';
+import InlineEdit from '@xcritical/inline-edit';
+import PureInput from '@xcritical/input';
 
+import Item, { ItemGroup, itemThemeNamespace } from '../src';
 import { ItemTheme } from '../src/interfaces';
 
 import { MasterCardIcon } from './Icons';
-
 
 const generateTheme = (
   padding: number,
   baseBgColor: string,
   textColor: string,
   focusColor: string,
-  dividedColor: string,
+  dividedColor: string
 ): ItemTheme => ({
   appearance: {
+    default: {
+      wrapper: {
+        overflow: 'inherit',
+        width: '100%',
+      },
+      contentWrapper: {
+        overflow: 'inherit',
+        width: '100%',
+      },
+    },
     myaccount: {
       prefixSpacing: padding,
       postfixSpacing: padding,
       borderRadius: 0,
       cursor: 'help',
+      width: '100%',
       focus: {
         outline: focusColor || '',
       },
@@ -34,12 +46,10 @@ const generateTheme = (
         color: dividedColor,
       },
       padding: {
-
         bottom: padding,
         left: padding,
         right: padding,
         top: padding,
-
       },
 
       background: baseBgColor,
@@ -68,27 +78,21 @@ const generateTheme = (
       },
     },
   },
-
 });
 
-const theme = generateTheme(20, '#575857', '#A7A7A7', '#E6E5E9', '#4D4D4D');
-
+const theme = generateTheme(0, '#575857', '#A7A7A7', '#E6E5E9', '#4D4D4D');
 
 storiesOf('Item', module)
   .add('Basic', () => (
     <div>
       <ItemGroup divided>
         <Item
-          onClick={ action('item-first-click') }
-          value={ { id: 1 } }
-          prefix={ <MasterCardIcon /> }
-        >
+          onClick={action('item-first-click')}
+          value={{ id: 1 }}
+          prefix={<MasterCardIcon />}>
           This is just a standard item
         </Item>
-        <Item
-          prefix={ <MasterCardIcon /> }
-          postfix={ <MasterCardIcon /> }
-        >
+        <Item prefix={<MasterCardIcon />} postfix={<MasterCardIcon />}>
           This is just a standard item
         </Item>
         <Item>This is just a standard item</Item>
@@ -96,38 +100,66 @@ storiesOf('Item', module)
       <ItemGroup>
         <Item disabled>This is just a standard item</Item>
         <Item selected>This is just a standard item</Item>
-        <Item selected disabled>This is just a standard item</Item>
+        <Item selected disabled>
+          This is just a standard item
+        </Item>
         <Item>This is just a standard item</Item>
       </ItemGroup>
     </div>
   ))
-  .add('Themed', () => (
-    <ThemeProvider theme={ { [itemThemeNamespace]: theme } }>
-      <div>
-        <ItemGroup divided appearance="myaccount">
-          <Item prefix={ <MasterCardIcon /> }>This is just a standard item</Item>
-          <Item
-            prefix={ <MasterCardIcon /> }
-            postfix={ <MasterCardIcon /> }
-          >
-            This is just a standard item
-          </Item>
-          <Item>This is just a standard item</Item>
-        </ItemGroup>
-        <ItemGroup appearance="myaccount">
-          <Item>This is just a standard item</Item>
-          <Item disabled>This is just a standard item</Item>
-          <Item selected disabled>This is just a standard item</Item>
-          <Item
-            prefix={ <MasterCardIcon /> }
-            postfix={ <MasterCardIcon /> }
-            isRTL
-          >
-            This is just a standard item with RTL
+  .add('Themed', () => {
+    const [value, setValue] = React.useState('');
 
-          </Item>
-        </ItemGroup>
+    const getReadView = React.useCallback(
+      () => <div>{value || 'Click to enter value'}</div>,
+      [value]
+    );
 
-      </div>
-    </ThemeProvider>
-  ));
+    const getEditView = React.useCallback(
+      (fieldProps) => (
+        <PureInput {...fieldProps} autoFocus shouldFitContainer />
+      ),
+      []
+    );
+
+    const handleConfirm = React.useCallback((v: string) => {
+      setValue(v);
+    }, []);
+
+    return (
+      <ThemeProvider theme={{ [itemThemeNamespace]: theme }}>
+        <div>
+          <ItemGroup divided appearance="myaccount">
+            <Item prefix={<MasterCardIcon />}>
+              This is just a standard item
+            </Item>
+            <Item prefix={<MasterCardIcon />} postfix={<MasterCardIcon />}>
+              This is just a standard item
+            </Item>
+            <Item>This is just a standard item</Item>
+          </ItemGroup>
+          <ItemGroup appearance="myaccount">
+            <Item>This is just a standard item</Item>
+            <Item disabled>This is just a standard item</Item>
+            <Item selected disabled>
+              This is just a standard item
+            </Item>
+            <Item
+              prefix={<MasterCardIcon />}
+              postfix={<MasterCardIcon />}
+              isRTL>
+              This is just a standard item with RTL
+            </Item>
+          </ItemGroup>
+        </div>
+        <Item>
+          <InlineEdit
+            value={value}
+            readView={getReadView}
+            editView={getEditView}
+            onConfirm={handleConfirm}
+          />
+        </Item>
+      </ThemeProvider>
+    );
+  });

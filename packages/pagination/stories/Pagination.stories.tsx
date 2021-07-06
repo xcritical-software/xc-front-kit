@@ -7,7 +7,6 @@ import { colors } from '@xcritical/theme';
 
 import { Pagination, paginationThemeNamespace } from '../src';
 
-
 const emptyTheme = {};
 
 const theme = {
@@ -49,19 +48,19 @@ storiesOf('Pagination', module)
     const [pageSize, setPageSize] = useState(25);
 
     return (
-      <ThemeProvider theme={ emptyTheme }>
+      <ThemeProvider theme={emptyTheme}>
         <Pagination
-          total={ 200 }
-          visibleRange={ 3 }
-          pageSize={ pageSize }
-          currentPage={ currentPage }
-          onChangePage={ (newCurrentPage) => {
+          total={200}
+          visibleRange={3}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onChangePage={(newCurrentPage) => {
             setCurrentPage(newCurrentPage);
-          } }
-          onChangePageSize={ (newPage, newPageSize) => {
+          }}
+          onChangePageSize={(newPage, newPageSize) => {
             setCurrentPage(newPage);
             setPageSize(newPageSize);
-          } }
+          }}
         />
       </ThemeProvider>
     );
@@ -70,15 +69,15 @@ storiesOf('Pagination', module)
     const [currentPage, setCurrentPage] = useState(1);
 
     return (
-      <ThemeProvider theme={ emptyTheme }>
+      <ThemeProvider theme={emptyTheme}>
         <Pagination
-          total={ 150 }
-          visibleRange={ 3 }
-          currentPage={ currentPage }
-          showSizeChanger={ false }
-          onChangePage={ (newCurrentPage) => {
+          total={150}
+          visibleRange={3}
+          currentPage={currentPage}
+          showSizeChanger={false}
+          onChangePage={(newCurrentPage) => {
             setCurrentPage(newCurrentPage);
-          } }
+          }}
         />
       </ThemeProvider>
     );
@@ -88,20 +87,20 @@ storiesOf('Pagination', module)
     const [pageSize, setPageSize] = useState(10);
 
     return (
-      <ThemeProvider theme={ emptyTheme }>
+      <ThemeProvider theme={emptyTheme}>
         <Pagination
-          total={ 70 }
-          visibleRange={ 3 }
-          currentPage={ currentPage }
-          pageSize={ pageSize }
-          pageSizeOptions={ [10, 20, 30] }
-          onChangePage={ (newCurrentPage) => {
+          total={70}
+          visibleRange={3}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          pageSizeOptions={[10, 20, 30]}
+          onChangePage={(newCurrentPage) => {
             setCurrentPage(newCurrentPage);
-          } }
-          onChangePageSize={ (newPage, newPageSize) => {
+          }}
+          onChangePageSize={(newPage, newPageSize) => {
             setCurrentPage(newPage);
             setPageSize(newPageSize);
-          } }
+          }}
         />
       </ThemeProvider>
     );
@@ -111,20 +110,20 @@ storiesOf('Pagination', module)
     const [pageSize, setPageSize] = useState(10);
 
     return (
-      <ThemeProvider theme={ emptyTheme }>
+      <ThemeProvider theme={emptyTheme}>
         <Pagination
-          total={ 140 }
-          visibleRange={ 5 }
-          currentPage={ currentPage }
-          pageSize={ pageSize }
-          pageSizeOptions={ [10, 20, 30] }
-          onChangePage={ (newCurrentPage) => {
+          total={140}
+          visibleRange={5}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          pageSizeOptions={[10, 20, 30]}
+          onChangePage={(newCurrentPage) => {
             setCurrentPage(newCurrentPage);
-          } }
-          onChangePageSize={ (newPage, newPageSize) => {
+          }}
+          onChangePageSize={(newPage, newPageSize) => {
             setCurrentPage(newPage);
             setPageSize(newPageSize);
-          } }
+          }}
         />
       </ThemeProvider>
     );
@@ -134,20 +133,20 @@ storiesOf('Pagination', module)
     const [pageSize, setPageSize] = useState(10);
 
     return (
-      <ThemeProvider theme={ theme }>
+      <ThemeProvider theme={theme}>
         <Pagination
-          total={ 150 }
-          visibleRange={ 3 }
-          currentPage={ currentPage }
-          pageSize={ pageSize }
-          pageSizeOptions={ [10, 20, 30] }
-          onChangePage={ (newCurrentPage) => {
+          total={150}
+          visibleRange={3}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          pageSizeOptions={[10, 20, 30]}
+          onChangePage={(newCurrentPage) => {
             setCurrentPage(newCurrentPage);
-          } }
-          onChangePageSize={ (newPage, newPageSize) => {
+          }}
+          onChangePageSize={(newPage, newPageSize) => {
             setCurrentPage(newPage);
             setPageSize(newPageSize);
-          } }
+          }}
         />
       </ThemeProvider>
     );
@@ -157,23 +156,23 @@ storiesOf('Pagination', module)
     const [pageSize, setPageSize] = useState(25);
 
     return (
-      <ThemeProvider theme={ emptyTheme }>
+      <ThemeProvider theme={emptyTheme}>
         <Pagination
-          total={ 200 }
-          currentPage={ currentPage }
-          pageSize={ pageSize }
-          pageSizeProps={ {
+          total={200}
+          currentPage={currentPage}
+          pageSize={pageSize}
+          pageSizeProps={{
             components: {
               IndicatorSeparator: null,
             },
-          } }
-          onChangePage={ (newCurrentPage) => {
+          }}
+          onChangePage={(newCurrentPage) => {
             setCurrentPage(newCurrentPage);
-          } }
-          onChangePageSize={ (newPage, newPageSize) => {
+          }}
+          onChangePageSize={(newPage, newPageSize) => {
             setCurrentPage(newPage);
             setPageSize(newPageSize);
-          } }
+          }}
         />
       </ThemeProvider>
     );
@@ -183,19 +182,19 @@ storiesOf('Pagination', module)
     const [pageSize, setPageSize] = useState(25);
 
     return (
-      <ThemeProvider theme={ emptyTheme }>
+      <ThemeProvider theme={emptyTheme}>
         <Pagination
           disabled
-          total={ 200 }
-          pageSize={ pageSize }
-          currentPage={ currentPage }
-          onChangePage={ (newCurrentPage) => {
+          total={200}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onChangePage={(newCurrentPage) => {
             setCurrentPage(newCurrentPage);
-          } }
-          onChangePageSize={ (newPage, newPageSize) => {
+          }}
+          onChangePageSize={(newPage, newPageSize) => {
             setCurrentPage(newPage);
             setPageSize(newPageSize);
-          } }
+          }}
         />
       </ThemeProvider>
     );
@@ -205,19 +204,19 @@ storiesOf('Pagination', module)
     const [pageSize, setPageSize] = useState(25);
 
     return (
-      <ThemeProvider theme={ emptyTheme }>
+      <ThemeProvider theme={emptyTheme}>
         <Pagination
           showTotals
-          total={ 270 }
-          pageSize={ pageSize }
-          currentPage={ currentPage }
-          onChangePage={ (newCurrentPage) => {
+          total={270}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onChangePage={(newCurrentPage) => {
             setCurrentPage(newCurrentPage);
-          } }
-          onChangePageSize={ (newPage, newPageSize) => {
+          }}
+          onChangePageSize={(newPage, newPageSize) => {
             setCurrentPage(newPage);
             setPageSize(newPageSize);
-          } }
+          }}
         />
       </ThemeProvider>
     );

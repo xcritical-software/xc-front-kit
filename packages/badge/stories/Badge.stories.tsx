@@ -5,13 +5,11 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { darken } from 'polished';
-
 import { withKnobs } from '@storybook/addon-knobs';
 import styled, { ThemeProvider } from 'styled-components';
 
 import Badge, { badgeThemeNamespace } from '@xcritical/badge';
 import { colors } from '@xcritical/theme';
-
 
 const Head = styled.h1<any>`
   font-size: ${({ size }: any) => `${size}px`};
@@ -115,13 +113,11 @@ const appearances = [
 ];
 
 const Table = (props: any) => (
-  <div style={ { display: 'table', minWidth: '280px' } } { ...props } />
+  <div style={{ display: 'table', minWidth: '280px' }} {...props} />
 );
-const Row = (props: any) => (
-  <div style={ { display: 'table-row' } } { ...props } />
-);
+const Row = (props: any) => <div style={{ display: 'table-row' }} {...props} />;
 const Cell = (props: any) => (
-  <div style={ { display: 'table-cell', padding: 4 } } { ...props } />
+  <div style={{ display: 'table-cell', padding: 4 }} {...props} />
 );
 
 function capitalize(str: string) {
@@ -134,68 +130,68 @@ storiesOf('Badge', module)
   .add('Basic', () => (
     <>
       A simple text with
-
       <Badge>badge</Badge>
-      <Head size={ 13 }>
+      <Head size={13}>
         Example heading
         <Badge>New</Badge>
       </Head>
-      <Head size={ 15 }>
+      <Head size={15}>
         Example heading
         <Badge>New</Badge>
       </Head>
-      <Head size={ 16 }>
+      <Head size={16}>
         Example heading
         <Badge>New</Badge>
       </Head>
-      <Head size={ 17 }>
+      <Head size={17}>
         Example heading
         <Badge>New</Badge>
       </Head>
-      <Head size={ 18 }>
+      <Head size={18}>
         Example heading
         <Badge>New</Badge>
       </Head>
-      <Head size={ 19 }>
+      <Head size={19}>
         Example heading
         <Badge>New</Badge>
       </Head>
     </>
-  )).add('Apperance', () => (
+  ))
+  .add('Apperance', () => (
     <Table>
-      { appearances.map((a) => (
-        <Row key={ a }>
+      {appearances.map((a) => (
+        <Row key={a}>
           <Cell>
-            <Badge appearance={ a } key={ `${a}` }>
-              { capitalize(a) }
+            <Badge appearance={a} key={`${a}`}>
+              {capitalize(a)}
             </Badge>
           </Cell>
           <Cell>
-            <Badge appearance={ a } ghost key={ `${a}_outline` }>
-              { capitalize(a) }
+            <Badge appearance={a} ghost key={`${a}_outline`}>
+              {capitalize(a)}
             </Badge>
           </Cell>
         </Row>
-      )) }
+      ))}
     </Table>
   ))
   .add('Custom theme', () => (
-    <ThemeProvider theme={ theme }>
+    <ThemeProvider theme={theme}>
       <Table>
-        { appearances.map((a) => (
-          <Row key={ a }>
+        {appearances.map((a) => (
+          <Row key={a}>
             <Cell>
-              <Badge appearance={ a } key={ `${a}` }>
-                { capitalize(a) }
+              <Badge appearance={a} key={`${a}`}>
+                {capitalize(a)}
               </Badge>
             </Cell>
             <Cell>
-              <Badge appearance={ a } ghost key={ `${a}_outline` }>
-                { capitalize(a) }
+              <Badge appearance={a} ghost key={`${a}_outline`}>
+                {capitalize(a)}
               </Badge>
             </Cell>
           </Row>
-        )) }
+        ))}
       </Table>
     </ThemeProvider>
   ));

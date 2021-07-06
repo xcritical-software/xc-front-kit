@@ -2,16 +2,13 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import PureCompactFilter from './CompactFilter';
-
 import {
   xcriticalFiltersApply,
   xcriticalFiltersReset,
   xcriticalFiltersUpdateSelectedFilters,
   xcriticalFiltersSearchUpdate,
 } from './actions';
-
 import { filterSelector } from './reducer';
-
 import {
   IFilterProps,
   IMapDispatchFilter,
@@ -21,15 +18,11 @@ import {
   IFilterContainerProps,
 } from './interfaces';
 
-
 const mapStateToProps = (
   state: any,
-  ownProps: IFilterProps,
+  ownProps: IFilterProps
 ): IFilterContainerProps => {
-  const {
-    drafts = [],
-    search,
-  } = filterSelector(state, ownProps.name);
+  const { drafts = [], search } = filterSelector(state, ownProps.name);
 
   return {
     activeFilters: drafts,
@@ -40,18 +33,16 @@ const mapStateToProps = (
 const mapDispatchToProps = () => {
   let dispatchProps: IMapDispatchFilter;
 
-  return (
-    dispatch: Dispatch,
-    { name }: IFilterProps,
-  ) => {
+  return (dispatch: Dispatch, { name }: IFilterProps) => {
     if (!dispatchProps) {
       dispatchProps = {
-        onApply: (filters, search) => dispatch(xcriticalFiltersApply(name, filters ?? [], search ?? '')),
+        onApply: (filters, search) =>
+          dispatch(xcriticalFiltersApply(name, filters ?? [], search ?? '')),
         onResetFilters: () => dispatch(xcriticalFiltersReset(name)),
-        onChangeFilters: (
-          values: IStateRecivedFilter[],
-        ) => dispatch(xcriticalFiltersUpdateSelectedFilters(name, values)),
-        onSearchInputChange: (value) => dispatch(xcriticalFiltersSearchUpdate(name, value)),
+        onChangeFilters: (values: IStateRecivedFilter[]) =>
+          dispatch(xcriticalFiltersUpdateSelectedFilters(name, values)),
+        onSearchInputChange: (value) =>
+          dispatch(xcriticalFiltersSearchUpdate(name, value)),
       };
     }
 
@@ -61,9 +52,9 @@ const mapDispatchToProps = () => {
 
 const filterToApply = (
   activeFilters: IStateRecivedFilter[],
-  filters: IFilter[],
-): IStateRecivedFilter[] => activeFilters
-  .filter(({ column, condition, value }) => {
+  filters: IFilter[]
+): IStateRecivedFilter[] =>
+  activeFilters.filter(({ column, condition, value }) => {
     if (value) return true;
 
     if (!condition) return false;
@@ -77,23 +68,23 @@ const filterToApply = (
     return false;
   });
 
-
 const mergeProps = (
   stateProps: IFilterContainerProps,
   dispatchProps: IMapDispatchFilter,
-  ownProps: IFilterProps,
+  ownProps: IFilterProps
 ): IFilterComponentProps => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  onApply: () => dispatchProps.onApply(
-    filterToApply(stateProps.activeFilters, ownProps.filters),
-    stateProps.searchInput,
-  ),
+  onApply: () =>
+    dispatchProps.onApply(
+      filterToApply(stateProps.activeFilters, ownProps.filters),
+      stateProps.searchInput
+    ),
 });
 
 export const CompactFilter = connect(
   mapStateToProps,
   mapDispatchToProps,
-  mergeProps,
+  mergeProps
 )(PureCompactFilter);

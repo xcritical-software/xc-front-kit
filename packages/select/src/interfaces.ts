@@ -1,12 +1,8 @@
 import { OptionTypeBase } from 'react-select/src/types';
 import { FormatOptionLabelContext, Props } from 'react-select/src/Select';
-
 import { IndicatorProps } from 'react-select/src/components/indicators';
 
-import {
-  IThemeNamespace, ICSSProperties, IThemeBase,
-} from '@xcritical/theme';
-
+import { IThemeNamespace, ICSSProperties, IThemeBase } from '@xcritical/theme';
 
 export type DropdownIndicatorProps = IndicatorProps<IOptionItem> & {
   getStyles: any;
@@ -48,7 +44,8 @@ export interface ISelectOnlyProps {
   theme?: IThemeNamespace<ISelectBaseTheme>;
 }
 
-export type SelectProps = Omit<Props<IOptionProps>, 'theme' | 'value'> & ISelectOnlyProps;
+export type SelectProps = Omit<Props<IOptionProps>, 'theme' | 'value'> &
+  ISelectOnlyProps;
 
 export interface ISubComponents {
   button?: IThemeBase<ISelectCssTheme>;
@@ -79,6 +76,7 @@ export interface ISelectCssTheme extends ICSSProperties {
   boxShadow?: string;
   prefixSpacing?: number;
   postfixSpacing?: number;
+  filled?: ICSSProperties;
 }
 
 export interface ILabelTextCssTheme extends ISelectCssTheme {
@@ -86,8 +84,7 @@ export interface ILabelTextCssTheme extends ISelectCssTheme {
   postfixSpacing?: number;
 }
 
-export interface ISelectBaseTheme extends ISelectCssTheme, ISubComponents {
-}
+export interface ISelectBaseTheme extends ISelectCssTheme, ISubComponents {}
 
 export interface IReturnFunction<TValue> {
   (
@@ -101,9 +98,9 @@ export interface IReturnWithArgsFunction<TProp, TValue> {
   (elementName: string, ...props: TProp[]): TValue;
 }
 
-export type GetStyles<TResult = { [key: string]: any }> =
-  IReturnFunction<IReturnWithArgsFunction<any, TResult>>;
-
+export type GetStyles<TResult = { [key: string]: any }> = IReturnFunction<
+  IReturnWithArgsFunction<any, TResult>
+>;
 
 export interface IOptionProps extends IThemeProps, OptionTypeBase {
   prefix?: React.ReactElement;
@@ -118,5 +115,4 @@ export interface IOptionItem extends OptionTypeBase {
   name: any;
 }
 
-export interface IPrefixProps extends IThemeProps, IIsRTL {
-}
+export interface IPrefixProps extends IThemeProps, IIsRTL {}

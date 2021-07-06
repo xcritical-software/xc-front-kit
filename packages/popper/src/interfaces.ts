@@ -1,9 +1,8 @@
 import { MutableRefObject } from 'react';
 import { Modifiers } from 'popper.js';
 
-
 export type Position =
-  'top left'
+  | 'top left'
   | 'top center'
   | 'top right'
   | 'right top'

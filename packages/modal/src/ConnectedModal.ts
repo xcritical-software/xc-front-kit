@@ -4,7 +4,6 @@ import { withTheme } from 'styled-components';
 
 import { xcriticalModalClose } from './actions';
 import { getModalByName } from './selectors';
-
 import {
   IStoreWithModal,
   IModalOwnProps,
@@ -12,13 +11,11 @@ import {
   IModalDispatchProps,
   ModalActions,
 } from './interfaces';
-
 import { Modal } from './Modal';
-
 
 const mapStateToProps = (
   state: IStoreWithModal,
-  { name }: IModalOwnProps,
+  { name }: IModalOwnProps
 ): IModalStoreProps => {
   const modal = getModalByName(state, name);
 
@@ -29,7 +26,7 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (
   dispatch: Dispatch<ModalActions>,
-  { name, onCancel }: IModalOwnProps,
+  { name, onCancel }: IModalOwnProps
 ): IModalDispatchProps => ({
   onModalCancel: () => {
     dispatch(xcriticalModalClose(name));
@@ -42,5 +39,5 @@ const mapDispatchToProps = (
 
 export const ConnectedModal = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(withTheme(Modal));

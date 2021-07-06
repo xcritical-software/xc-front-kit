@@ -2,10 +2,13 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
-import { CompactFilter, xcriticalFiltersInit, xcriticalFiltersAdd } from '../../src';
+import {
+  CompactFilter,
+  xcriticalFiltersInit,
+  xcriticalFiltersAdd,
+} from '../../src';
 import { simpleData } from '../data/simpleData';
 import { IPage } from '../interfaces';
-
 
 const threeFilters = [
   {
@@ -42,7 +45,6 @@ const threeFiltersAdd = [
   },
 ];
 
-
 const pageName = 'compactFilter';
 const CompactFilterPage: React.FC<IPage> = ({
   isSearchable,
@@ -56,15 +58,14 @@ const CompactFilterPage: React.FC<IPage> = ({
 
   return (
     <CompactFilter
-      name={ pageName }
-      filters={ simpleData }
-      isSearchable={ isSearchable }
-      disabled={ disabled }
-      isTagsVisible={ isTagsVisible }
+      name={pageName}
+      filters={simpleData}
+      isSearchable={isSearchable}
+      disabled={disabled}
+      isTagsVisible={isTagsVisible}
     />
   );
 };
-
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onInit: () => {
@@ -75,5 +76,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
 export const CompactFilterContainer = connect(
   null,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(CompactFilterPage);

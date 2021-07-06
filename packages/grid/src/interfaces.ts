@@ -1,11 +1,9 @@
 import { ReactElement, CSSProperties, RefObject } from 'react';
-
 import { Alignment } from 'react-virtualized';
 
 import { ITheme } from '@xcritical/theme';
 
 import { GridPositions, GridSort } from './consts';
-
 
 type CellContent = string | number | ReactElement | any;
 
@@ -88,7 +86,6 @@ export interface IGridProps {
   onChangeExpand?: Function;
 }
 
-
 export interface IMultiGrid {
   width: number;
   height: number;
@@ -126,7 +123,6 @@ interface IAllGridsProps {
   gridProps: IInternalGridProps;
 }
 
-
 export interface IInternalGrid {
   rightScroll?: boolean;
   bottomScroll?: boolean;
@@ -143,7 +139,11 @@ export interface IInternalGrid {
   onChangeColumns?: Function;
   totals?: ITotals;
   handleSelect: Function;
-  onChangeExpand: (rowIndex: number, chidrens: IMappedItem[], parent: IMappedItem) => void;
+  onChangeExpand: (
+    rowIndex: number,
+    chidrens: IMappedItem[],
+    parent: IMappedItem
+  ) => void;
   mappedItems: IMappedItem[];
   selectedRows: string[];
   themeRef: RefObject<IGridTheme>;
@@ -198,7 +198,6 @@ export interface IHeaderWrapper {
   minColumnWidth: number;
   onChangeSort: Function;
 }
-
 
 export interface IHeader {
   theme: IGridTheme;

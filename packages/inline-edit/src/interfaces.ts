@@ -3,7 +3,6 @@ import { SyntheticEvent, FC } from 'react';
 
 import { ITheme, ICSSProperties, AllType } from '@xcritical/theme';
 
-
 export interface IInlineEditTheme extends ICSSProperties {
   borderRadius?: number;
   contentWrapper?: CSSObject;
@@ -14,7 +13,6 @@ export interface IInlineEditTheme extends ICSSProperties {
 }
 
 export type InlineEditTheme = ITheme<IInlineEditTheme>;
-
 
 export type IEditViewProps<TValue> = {} & {
   value?: TValue;
@@ -36,7 +34,6 @@ export interface ICommonProps {
   readViewFitContainerWidth?: boolean;
   disabled?: boolean;
 }
-
 
 export type IInlineEditUncontrolledProps<
   TFieldValue
@@ -65,11 +62,11 @@ export type IInlineEditUncontrolledProps<
   confirmIcon?: FC;
   invalid?: boolean;
   error?: string | string[];
+  /** Change 'Read View' to 'Edit View' by double click instead of single click */
+  isDoubleClickMode?: boolean;
 };
 
-export type InlineEditCommonProps<
-  TFieldValue
-> = ICommonProps & {
+export type InlineEditCommonProps<TFieldValue> = ICommonProps & {
   /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
   value?: TFieldValue;
   /**
@@ -85,13 +82,16 @@ export type IInlineEditProps<
   TEditViewProps,
   TViewProps,
   TFieldValue
-> = InlineEditCommonProps< TFieldValue> & {
+> = InlineEditCommonProps<TFieldValue> & {
   /** Component to be shown when not in edit view. */
   readView: FC<TViewProps & IReadViewProps<TFieldValue>>;
   readViewProps?: Omit<TViewProps, keyof IReadViewProps<TFieldValue>>;
   /** Component to be shown when editing. */
   editView: FC<TEditViewProps & IEditViewProps<TFieldValue>>;
-  editViewProps?: Omit<TEditViewProps, 'value' | 'onChange' | 'invalid' | 'error'>;
+  editViewProps?: Omit<
+    TEditViewProps,
+    'value' | 'onChange' | 'invalid' | 'error'
+  >;
   /** If this prop is truthy, the editView component is active. */
   isEditing?: boolean;
   /** Callback for changing prop "isEditing" outside the InlineEdit component.
@@ -107,15 +107,16 @@ export type IInlineEditProps<
   /** Change default successIcon */
   confirmIcon?: FC;
   onCancel?: (value?: TFieldValue) => void;
+  /** Change 'Read View' to 'Edit View' by double click instead of single click */
+  isDoubleClickMode?: boolean;
 };
-
 
 export interface IReturnFunction<TValue> {
   (
     theme: InlineEditTheme,
     elementName: string,
     appearance?: string,
-    baseAppearance?: string,
+    baseAppearance?: string
   ): TValue;
 }
 
@@ -123,5 +124,6 @@ export interface IReturnWithArgsFunction<TProp, TValue> {
   (elementName: string, ...props: TProp[]): TValue;
 }
 
-export type GetPropStyles<TResult> =
-  IReturnFunction<IReturnWithArgsFunction<AllType, TResult>>;
+export type GetPropStyles<TResult> = IReturnFunction<
+  IReturnWithArgsFunction<AllType, TResult>
+>;

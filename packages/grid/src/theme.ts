@@ -2,7 +2,6 @@ import { colors } from '@xcritical/theme';
 
 import { IGridTheme } from './interfaces';
 
-
 export const gridThemeNamespace = '@xcritical\\grid';
 
 export const defaultTheme: IGridTheme = {

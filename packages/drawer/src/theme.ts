@@ -2,7 +2,6 @@ import { colors } from '@xcritical/theme';
 
 import { DrawerTheme } from './interfaces';
 
-
 export const drawerThemeNamespace = '@xcritical\\drawer';
 
 export const defaultDrawerTheme: DrawerTheme = {

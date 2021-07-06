@@ -4,11 +4,10 @@ import { setIn } from 'utilitify';
 
 import { IFormAction } from '../actions';
 
-
-export const reducerDictionary = (
-  $reducer: Reducer,
-  propName: string,
-) => (state: Store, action: Action<IFormAction>) => {
+export const reducerDictionary = ($reducer: Reducer, propName: string) => (
+  state: Store,
+  action: Action<IFormAction>
+) => {
   const name = get(action, ['meta', propName]);
 
   if (!name) {
@@ -21,18 +20,16 @@ export const reducerDictionary = (
   return result === reducerState ? state : setIn(state, result, name);
 };
 
-
 export const isEvent = ({
-  stopPropagation, preventDefault,
-}: Event): boolean => !!(stopPropagation && preventDefault);
+  stopPropagation,
+  preventDefault,
+}: Record<string, any>): boolean => !!(stopPropagation && preventDefault);
 
 export const getValueFromNativeComponent = (event: Event): any => {
   if (isEvent(event)) {
     const detypedEvent: any = event;
     const {
-      target: {
-        type, value, checked, files, options,
-      },
+      target: { type, value, checked, files, options },
       dataTransfer,
     } = detypedEvent;
 
@@ -41,7 +38,7 @@ export const getValueFromNativeComponent = (event: Event): any => {
     }
 
     if (type === 'file') {
-      return files || (dataTransfer?.files);
+      return files || dataTransfer?.files;
     }
 
     if (type === 'select-multiple') {

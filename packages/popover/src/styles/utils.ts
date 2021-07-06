@@ -5,15 +5,15 @@ import { getAppearanceTheme } from '@xcritical/theme';
 import { IThemed, ArrowDirection } from '../interfaces';
 import { popoverThemeNamespace, defaultPopoverTheme } from '../theme';
 
-
 export const getPopperProperty = ({
   theme,
   appearance,
   baseAppearance,
-}: IThemed): (propertyPath: string[]) => any => {
+}: IThemed): ((propertyPath: string[]) => any) => {
   const func = getAppearanceTheme(popoverThemeNamespace, defaultPopoverTheme);
 
-  return (propertyPath) => func(theme, appearance, propertyPath, baseAppearance);
+  return (propertyPath) =>
+    func(theme, appearance, propertyPath, baseAppearance);
 };
 
 export const getContentStyles = (props: IThemed): CSSObject => {
@@ -25,7 +25,7 @@ export const getContentStyles = (props: IThemed): CSSObject => {
 
 export const getArrowSizes = (
   props: IThemed,
-  arrowDirection: ArrowDirection,
+  arrowDirection: ArrowDirection
 ): {
   width: string;
   height: string;
@@ -47,21 +47,30 @@ export const getArrowSizes = (
         height: `calc(${size} * 2)`,
       };
     }
-    default: return {
-      width: '0',
-      height: '0',
-    };
+    default:
+      return {
+        width: '0',
+        height: '0',
+      };
   }
 };
 
-export const getArrowBorderWidth = (props: IThemed, arrowDirection: ArrowDirection): string => {
+export const getArrowBorderWidth = (
+  props: IThemed,
+  arrowDirection: ArrowDirection
+): string => {
   const size = getPopperProperty(props)(['arrow', 'size']);
 
   switch (arrowDirection) {
-    case 'top': return `${size} ${size} 0 ${size}`;
-    case 'right': return `${size} ${size} ${size} 0`;
-    case 'bottom': return `0 ${size} ${size} ${size}`;
-    case 'left': return `${size} 0 ${size} ${size}`;
-    default: return '';
+    case 'top':
+      return `${size} ${size} 0 ${size}`;
+    case 'right':
+      return `${size} ${size} ${size} 0`;
+    case 'bottom':
+      return `0 ${size} ${size} ${size}`;
+    case 'left':
+      return `${size} 0 ${size} ${size}`;
+    default:
+      return '';
   }
 };

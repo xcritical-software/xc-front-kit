@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 import {
-  IHeader, IHeaderCell, IHeaderCellContent, IRightBorder, IMovingElem,
+  IHeader,
+  IHeaderCell,
+  IHeaderCellContent,
+  IRightBorder,
+  IMovingElem,
 } from '../interfaces';
 
 import {
@@ -11,7 +15,6 @@ import {
   getRightBorderStyles,
   getMovingElemStyles,
 } from './utils';
-
 
 export const Header = styled.div.attrs(({ translateX }: IHeader) => ({
   style: {
@@ -37,7 +40,6 @@ export const HeaderCell = styled.div.attrs(({ width }: IHeaderCell) => ({
   ${getHeaderCellStyles}
 `;
 
-
 export const MovingElem = styled.div.attrs(({ mouseMove }: IMovingElem) => ({
   style: {
     transform: `translateX(${mouseMove}px)`,
@@ -46,7 +48,7 @@ export const MovingElem = styled.div.attrs(({ mouseMove }: IMovingElem) => ({
   position: absolute;
   left: ${({ startCoord: { x } }) => `${x - 8}px`};
   width: ${({ width }) => `${width}px`};
-  outline: "1px solid black";
+  outline: '1px solid black';
   z-index: 9999999999;
   cursor: grabbing;
   display: flex;
@@ -57,7 +59,6 @@ export const MovingElem = styled.div.attrs(({ mouseMove }: IMovingElem) => ({
   ${getMovingElemStyles}
 `;
 
-
 export const HeaderCellContent = styled.div<IHeaderCellContent>`
   width: calc(100% - 8px);
   overflow: hidden;
@@ -65,8 +66,9 @@ export const HeaderCellContent = styled.div<IHeaderCellContent>`
   align-items: center;
 
   cursor: ${({ shouldMovingColumns }) => shouldMovingColumns && 'grab'};
-  ${({ center }) => center
-    && `justify-content: center;
+  ${({ center }) =>
+    center &&
+    `justify-content: center;
      margin-left: 8px;`}
   ${getHeaderCellContentStyles}
 `;
@@ -78,11 +80,11 @@ export const SortIconWrapper = styled.div`
   flex-shrink: 0;
 `;
 
-
 export const RightBorder = styled.div<IRightBorder>`
   width: 8px;
   position: relative;
   z-index: 9999999;
-  cursor: ${({ shouldChangeColumnsWidth }) => shouldChangeColumnsWidth && 'w-resize'};
+  cursor: ${({ shouldChangeColumnsWidth }) =>
+    shouldChangeColumnsWidth && 'w-resize'};
   ${getRightBorderStyles}
 `;

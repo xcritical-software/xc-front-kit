@@ -4,7 +4,6 @@ import { colors } from '@xcritical/theme';
 
 import { ItemTheme } from './interfaces';
 
-
 export const itemThemeNamespace = '@xcritical\\xc-item';
 
 export const itemThemeStyle: ItemTheme = {
@@ -17,6 +16,19 @@ export const itemThemeStyle: ItemTheme = {
   borderRadius: 0,
   font: { weight: 'normal' },
   cursor: 'pointer',
+  contentWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: '1',
+    margin: '0',
+    overflow: 'hidden',
+  },
+  content: {
+    display: 'block',
+    flex: '1 1 auto',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
   divided: {
     color: '#F0F0F0',
   },

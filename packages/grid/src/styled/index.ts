@@ -4,11 +4,9 @@ import { IWrapper } from '../interfaces';
 
 import { getWrapperStyles } from './utils';
 
-
 export * from './body';
 export * from './header';
 export * from './totals';
-
 
 export const Wrapper = styled.div.attrs(({ width }: IWrapper) => ({
   style: {
@@ -38,7 +36,6 @@ export const Wrapper = styled.div.attrs(({ width }: IWrapper) => ({
   }}
   ${getWrapperStyles}
 `;
-
 
 export const MultiGridWrapper = styled.div<{ height?: string }>`
   display: flex;
