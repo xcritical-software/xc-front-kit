@@ -34,9 +34,9 @@ const initData = {
 const FORM_NAME = 'error-form';
 
 const validate = (model) => ({
-  firstName: model.firstName === '123' ? errors.firstName : null,
-  lastName: model.lastName === '123' ? errors.lastName : null,
-  age: model.age === '123' ? errors.age : null,
+  firstName: model?.firstName === '123' ? errors.firstName : null,
+  lastName: model?.lastName === '123' ? errors.lastName : null,
+  age: model?.age === '123' ? errors.age : null,
 });
 
 const InputWithError = ({
