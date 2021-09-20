@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-autofocus */
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useCombinedRefs } from '@xcritical/utils';
 
@@ -43,13 +43,32 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
     ref: React.MutableRefObject<HTMLInputElement>
   ) => {
     const [isFocused, setIsFocused] = useState(false);
+    const [isInvalid, setIsInvalid] = useState(false);
     const innerRef = useRef<HTMLInputElement>(null);
     const combinedRef = useCombinedRefs(null, ref, innerRef);
 
+    useEffect(() => {
+      setIsInvalid(invalid);
+    }, [invalid]);
+
     const inputOnChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (onValidate && pattern) {
-          onValidate(RegExp(pattern).test(e.target.value));
+        if (pattern) {
+          const isValid = RegExp(pattern).test(e.target.value);
+
+          if (!onValidate && !isValid) {
+            setIsInvalid(true);
+
+            setTimeout(() => {
+              setIsInvalid(false);
+            }, 1000);
+
+            return;
+          }
+
+          if (onValidate) {
+            onValidate(isValid);
+          }
         }
 
         if (onChange) {
@@ -91,7 +110,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
         baseAppearance={baseAppearance}
         isRTL={isRTL}
         disabled={disabled}
-        invalid={invalid}
+        invalid={isInvalid}
         css={css}
         shouldFitContainer={shouldFitContainer}
         onClick={handleClick}
@@ -112,7 +131,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
           isRTL={isRTL}
           isDivided={isDivided}
           disabled={disabled}
-          invalid={invalid}
+          invalid={isInvalid}
           onChange={inputOnChange}
           type={type}
           ref={combinedRef}
@@ -129,7 +148,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
             baseAppearance={baseAppearance}
             onClick={inputOnClear}
             disabled={disabled}
-            invalid={invalid}
+            invalid={isInvalid}
             hasValue={!!value}
             focusOnInput={isFocused}>
             <ClearIcon />

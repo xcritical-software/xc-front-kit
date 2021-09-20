@@ -110,9 +110,34 @@ const ValidationInput = () => {
   );
 };
 
+const EnteredValueValidationInput = () => {
+  const [value, setValue] = useState('');
+
+  const handleChange = (v: string): void => {
+    setValue(v);
+    action('Value Changed');
+  };
+
+  return (
+    <Input
+      disabled={boolean('Disabled', false)}
+      invalid={boolean('Invalid', false)}
+      isClearable={boolean('isClearable', false)}
+      id="entered-value-validation-input"
+      name="entered-value-validation-input"
+      placeholder="Enter value"
+      pattern="^(\s*|((?!(0))[0-9]{1,5}))$"
+      value={value}
+      onChange={handleChange}
+      onFocus={() => action('onFocused')}
+    />
+  );
+};
+
 storiesOf('Input', module)
   .addDecorator(withKnobs)
   .add('Basic', () => <BasicInput />)
+  .add('Entered value validation', () => <EnteredValueValidationInput />)
   .add('With value', () => (
     <Input
       disabled={boolean('Disabled', false)}
