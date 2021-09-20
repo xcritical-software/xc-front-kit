@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
   ITheme,
   IThemeNamespace,
@@ -31,7 +33,10 @@ export interface IBaseItemProps {
   postfix?: React.ReactNode;
   invalid?: boolean;
   isDivided?: boolean;
-  onValidate?: (result: boolean) => void;
+  onValidate?: (
+    result: boolean,
+    e?: React.ChangeEvent<HTMLInputElement>
+  ) => void;
   onChange?: (value: string, e?: React.ChangeEvent<HTMLInputElement>) => void;
   isClearable?: boolean;
   clearIcon?: React.FC;
