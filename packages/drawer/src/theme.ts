@@ -18,6 +18,7 @@ export const defaultDrawerTheme: DrawerTheme = {
       },
       contentWrapper: {
         overflowX: 'hidden',
+        marginTop: '30px',
       },
       separator: {
         marginRight: '-5px',
@@ -34,6 +35,7 @@ export const defaultDrawerTheme: DrawerTheme = {
       },
       closeIconWrapper: {
         border: 0,
+        position: 'absolute',
         borderRadius: '50%',
         display: 'flex',
         alignItems: 'center',
