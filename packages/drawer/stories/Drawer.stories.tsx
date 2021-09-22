@@ -1,12 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { ReactNode, useMemo, useState } from 'react';
 import { storiesOf } from '@storybook/react';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { darken, mix, lighten } from 'polished';
 
 import Modal from '@xcritical/modal';
 
 import Drawer, { drawerThemeNamespace, DrawerTheme } from '../src';
+
+import { GlobalStyle } from './GlobalStyle';
 
 interface IBasicDrawerProps {
   appearance?: string;
@@ -80,53 +82,41 @@ const generateTheme = (
 
 const theme = generateTheme(20, '#fff', '#000');
 
-export const GlobalStyle = createGlobalStyle`
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-  }
-  
-  html {
-    box-sizing: border-box;
-  }
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
-`;
-
 const BasicDrawer = ({
   appearance = 'myaccount',
   isRTL = false,
   isMovable = false,
   withCloseButton = false,
   closeIconComponent,
-  onClose,
   withBlanket,
+  onClose,
 }: IBasicDrawerProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const handleClick = (): void => {
-    setIsOpen(!isOpen);
+  const handleChangeState = (): void => {
+    const newIsOpen = !isOpen;
+    setIsOpen(newIsOpen);
+
+    if (!newIsOpen) onClose?.();
   };
 
   return (
     <ThemeProvider theme={{ [drawerThemeNamespace]: theme }}>
       <Drawer
         isOpen={isOpen}
-        onOutsideClick={handleClick}
         appearance={appearance}
         isRTL={isRTL}
         isMovable={isMovable}
         withCloseButton={withCloseButton}
         closeIconComponent={closeIconComponent}
-        onClose={onClose}
+        onClose={handleChangeState}
         withBlanket={withBlanket}>
         <div>Content</div>
+        <div>
+          <p>{'lorem impsum long text '.repeat(600)}</p>
+        </div>
       </Drawer>
-      <button type="button" onClick={handleClick}>
+      <button type="button" onClick={handleChangeState}>
         Click for show/hide Drawer
       </button>
     </ThemeProvider>
@@ -139,7 +129,6 @@ const DynamicDrawer = ({
   isMovable = true,
   withCloseButton = false,
   closeIconComponent,
-  onClose,
   withBlanket,
 }: IBasicDrawerProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -162,13 +151,12 @@ const DynamicDrawer = ({
     <ThemeProvider theme={{ [drawerThemeNamespace]: theme }}>
       <Drawer
         isOpen={isOpen}
-        onOutsideClick={handleClick}
+        onClose={handleClick}
         appearance={appearance}
         isRTL={isRTL}
         isMovable={isMovable}
         withCloseButton={withCloseButton}
         closeIconComponent={closeIconComponent}
-        onClose={onClose}
         withBlanket={withBlanket}
         minWidth={minWidthProp}
         maxWidth={maxWidthProp}>

@@ -12,6 +12,6 @@ export const defaultBlanketTheme = {
   top: 0,
   bottom: 0,
   left: 0,
-  transition: 'opacity 220ms',
+  transition: 'opacity 1220ms',
   boxSizing: 'border-box',
 };
