@@ -48,8 +48,16 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
 
     const inputOnChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (onValidate && pattern) {
-          onValidate(RegExp(pattern).test(e.target.value));
+        if (pattern) {
+          const isValid = RegExp(pattern).test(e.target.value);
+
+          if (!onValidate && !isValid) {
+            return;
+          }
+
+          if (onValidate) {
+            onValidate(isValid, e);
+          }
         }
 
         if (onChange) {
