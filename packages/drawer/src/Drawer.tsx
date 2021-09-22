@@ -43,7 +43,7 @@ export interface IDrawerProps {
   ) => void;
   onClose?: () => void;
   withBlanket?: boolean;
-  onChangeWidth?: (oldWidth: number, newWidth: number) => void;
+  onChangeWidth?: (newWidth: number, oldWidth: number) => void;
 }
 
 export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
@@ -139,7 +139,7 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
       document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mousemove', handleMouseMove);
       setAntiSelectLayer(false);
-      onChangeWidth(width, widthRef.current);
+      onChangeWidth(widthRef.current, width);
     }, [minWidth, handleSelectStart, handleMouseMove, onChangeWidth]);
 
     const handleMouseDown = useCallback(

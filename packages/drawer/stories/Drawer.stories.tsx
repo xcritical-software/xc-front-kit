@@ -157,4 +157,42 @@ storiesOf('Drawer', module)
         </button>
       </ThemeProvider>
     );
+  })
+  .add('Open with prev width', () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const [width, setWidth] = React.useState(800);
+
+    const handleChangeState = (): void => {
+      setIsOpen(!isOpen);
+    };
+
+    return (
+      <>
+        <Drawer
+          isOpen={isOpen}
+          appearance={text('appearance', 'default')}
+          isRTL={boolean('isRTL', false)}
+          isMovable={boolean('isMovable', true)}
+          withCloseButton={boolean('withCloseButton', true)}
+          onClose={handleChangeState}
+          onChangeWidth={setWidth}
+          width={width}
+          closeIconComponent={
+            boolean('With Custom Close Icon', true) ? <div>X</div> : undefined
+          }
+          withBlanket={boolean('withBlanket', true)}>
+          <div>Content</div>
+          <div>
+            <p>
+              {'lorem impsum long text '.repeat(
+                number('Repeat children text', 10)
+              )}
+            </p>
+          </div>
+        </Drawer>
+        <button type="button" onClick={handleChangeState}>
+          Click for show/hide Drawer
+        </button>
+      </>
+    );
   });
