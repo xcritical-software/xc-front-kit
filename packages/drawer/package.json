@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/drawer",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "XCritical Drawer Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
