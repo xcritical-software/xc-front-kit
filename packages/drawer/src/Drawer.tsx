@@ -16,18 +16,22 @@ import Blanket from '@xcritical/blanket';
 
 import { DrawerTheme } from './interfaces';
 import {
-  Content,
+  Body,
   BlanketWrapper,
   Wrapper,
   Separator,
   AntiSelect,
   CloseIconWrapper,
+  HeaderWrapper,
+  TitleWrapper,
+  Content,
 } from './styled';
 import { ArrowLeft, ArrowRight } from './Icons';
 import { getElementStyles } from './utils';
 
 export interface IDrawerProps {
   appearance?: string;
+  title?: string | number | JSX.Element;
   baseAppearance?: string;
   isOpen?: boolean;
   theme?: DrawerTheme;
@@ -62,6 +66,7 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
     closeIconComponent,
     onClose,
     withBlanket = true,
+    title,
     onChangeWidth = () => {},
   }) => {
     const [animate, setAnimate] = useState(true);
@@ -159,6 +164,11 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
       [animate, transition]
     );
 
+    const needRenderHeader = useMemo(() => title || withCloseButton, [
+      title,
+      withCloseButton,
+    ]);
+
     return (
       <ThemeProvider theme={innerTheme}>
         <Portal id="drawer" zIndex="unset">
@@ -166,39 +176,46 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
             appearance={appearance}
             baseAppearance={baseAppearance}
             width={width}
-            animate={animate}
             isRTL={isRTL}
             transition={componentTransitionTime}>
-            {isRenderContent && (
-              <>
-                {withCloseButton && (
-                  <CloseIconWrapper
-                    onClick={onClose}
+            <Content appearance={appearance} baseAppearance={baseAppearance}>
+              {isRenderContent && needRenderHeader && (
+                <HeaderWrapper
+                  appearance={appearance}
+                  baseAppearance={baseAppearance}>
+                  {withCloseButton && (
+                    <CloseIconWrapper
+                      onClick={onClose}
+                      appearance={appearance}
+                      baseAppearance={baseAppearance}>
+                      {closeIconComponent ??
+                        (isRTL ? <ArrowRight /> : <ArrowLeft />)}
+                    </CloseIconWrapper>
+                  )}
+
+                  <TitleWrapper
                     appearance={appearance}
                     baseAppearance={baseAppearance}>
-                    {closeIconComponent ??
-                      (isRTL ? <ArrowRight /> : <ArrowLeft />)}
-                  </CloseIconWrapper>
-                )}
-                <Content
-                  appearance={appearance}
-                  baseAppearance={baseAppearance}
-                  width={width}
-                  animate={animate}
-                  transition={componentTransitionTime}>
-                  {children}
-                </Content>
+                    {title}
+                  </TitleWrapper>
+                </HeaderWrapper>
+              )}
 
-                <Separator
-                  appearance={appearance}
-                  baseAppearance={baseAppearance}
-                  onMouseDown={handleMouseDown}
-                  onMouseUp={handleMouseUp}
-                  isMovable={isMovable}
-                />
-              </>
-            )}
+              <Body appearance={appearance} baseAppearance={baseAppearance}>
+                {isRenderContent && children}
+              </Body>
+            </Content>
+
+            <Separator
+              appearance={appearance}
+              baseAppearance={baseAppearance}
+              onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
+              isMovable={isMovable}
+              isRTL={isRTL}
+            />
           </Wrapper>
+
           {antiSelectLayer && (
             <AntiSelect
               appearance={appearance}

@@ -9,7 +9,6 @@ export interface IThemeProps {
 
 interface IWrapperProps extends IThemeProps {
   width: number;
-  animate: boolean;
   isRTL: boolean;
   transition: string;
 }
@@ -22,32 +21,37 @@ export const Wrapper = styled.div.attrs(
   })
 )<IWrapperProps>`
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
-  left: ${({ isRTL, width }) => (isRTL ? `calc(100vw - ${width}px)` : '0px')};
+  ${({ isRTL }) => (isRTL ? 'right: 0px' : 'left: 0px')};
   ${({ theme, appearance, baseAppearance }) =>
     getElementStyles(theme, 'wrapper', appearance, baseAppearance)};
 `;
 
-interface IContentProps extends IThemeProps {
-  width: number;
-  animate: boolean;
-  transition: string;
-}
-export const Content = styled.div.attrs(
-  ({ width, transition }: IContentProps) => ({
-    style: {
-      width: `${width}px`,
-      transition,
-    },
-  })
-)<IContentProps>`
+export const Content = styled.div<IThemeProps>`
   ${({ theme, appearance, baseAppearance }) =>
-    getElementStyles(theme, 'contentWrapper', appearance, baseAppearance)}
+    getElementStyles(theme, 'contentWrapper', appearance, baseAppearance)};
+`;
+
+export const HeaderWrapper = styled.div<IThemeProps>`
+  ${({ theme, appearance, baseAppearance }) =>
+    getElementStyles(theme, 'headerWrapper', appearance, baseAppearance)}
+`;
+
+export const TitleWrapper = styled.div<IThemeProps>`
+  ${({ theme, appearance, baseAppearance }) =>
+    getElementStyles(theme, 'titleWrapper', appearance, baseAppearance)}
+`;
+
+export const Body = styled.div<IThemeProps>`
+  ${({ theme, appearance, baseAppearance }) =>
+    getElementStyles(theme, 'body', appearance, baseAppearance)}
 `;
 
 interface ISeparatorProps extends IThemeProps {
   isMovable: boolean;
+  isRTL: boolean;
 }
 export const Separator = styled.div<ISeparatorProps>`
+  ${({ isRTL }) => (isRTL ? 'left: 0' : 'right: 0')};
   cursor: ${({ isMovable }) => (isMovable ? 'w-resize' : 'default')};
   ${({ theme, appearance, baseAppearance }) =>
     getElementStyles(theme, 'separator', appearance, baseAppearance)}
@@ -62,9 +66,7 @@ export const AntiSelect = styled.div<IAntiSelectProps>`
     getElementStyles(theme, 'antiSelect', appearance, baseAppearance)}
 `;
 
-interface ICloseIconWrapperProps extends IThemeProps {}
-
-export const CloseIconWrapper = styled.button<ICloseIconWrapperProps>`
+export const CloseIconWrapper = styled.button<IThemeProps>`
   ${({ theme, appearance, baseAppearance }) =>
     getElementStyles(theme, 'closeIconWrapper', appearance, baseAppearance)}
 `;
