@@ -10,6 +10,8 @@ import Modal from '@xcritical/modal';
 import Drawer, { drawerThemeNamespace, DrawerTheme } from '../src';
 import { defaultDrawerTheme } from '../src/theme';
 
+const Title = () => <h1>Custom title</h1>;
+
 storiesOf('Drawer', module)
   .addDecorator(withKnobs)
   .add('Basic', () => {
@@ -24,6 +26,7 @@ storiesOf('Drawer', module)
         <Drawer
           isOpen={isOpen}
           appearance={text('appearance', 'default')}
+          title={text('Title', 'This is Drawer')}
           isRTL={boolean('isRTL', false)}
           isMovable={boolean('isMovable', true)}
           withCloseButton={boolean('withCloseButton', true)}
@@ -36,7 +39,7 @@ storiesOf('Drawer', module)
           <div>
             <p>
               {'lorem impsum long text '.repeat(
-                number('Repeat children text', 10)
+                number('Repeat children text', 600)
               )}
             </p>
           </div>
@@ -65,7 +68,7 @@ storiesOf('Drawer', module)
           <div>
             <p>
               {'lorem impsum long text '.repeat(
-                number('Repeat children text', 10)
+                number('Repeat children text', 600)
               )}
             </p>
           </div>
@@ -130,6 +133,7 @@ storiesOf('Drawer', module)
         <Drawer
           isOpen={isDrawerOpen}
           appearance={text('appearance', 'red')}
+          title={<Title />}
           isRTL={boolean('isRTL', false)}
           isMovable={boolean('isMovable', true)}
           withCloseButton={boolean('withCloseButton', true)}
@@ -171,6 +175,7 @@ storiesOf('Drawer', module)
         <Drawer
           isOpen={isOpen}
           appearance={text('appearance', 'default')}
+          title={text('Title', 'This is Drawer')}
           isRTL={boolean('isRTL', false)}
           isMovable={boolean('isMovable', true)}
           withCloseButton={boolean('withCloseButton', true)}
@@ -185,7 +190,7 @@ storiesOf('Drawer', module)
           <div>
             <p>
               {'lorem impsum long text '.repeat(
-                number('Repeat children text', 10)
+                number('Repeat children text', 600)
               )}
             </p>
           </div>

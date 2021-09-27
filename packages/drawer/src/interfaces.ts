@@ -1,8 +1,18 @@
+import { CSSObject } from 'styled-components';
+
 import { ITheme, ICSSProperties } from '@xcritical/theme';
 
-export interface IDrawerTheme extends ICSSProperties {
-  borderRadius?: number;
-  outline?: string;
+export interface IDrawerTheme {
+  transition?: string;
+  wrapper?: CSSObject;
+  contentWrapper?: CSSObject;
+  headerWrapper?: CSSObject;
+  titleWrapper?: CSSObject;
+  body?: CSSObject;
+  separator?: CSSObject;
+  antiSelect?: CSSObject;
+  closeIconWrapper?: CSSObject;
+  blanketWrapper?: CSSObject;
 }
 
 export type DrawerTheme = ITheme<IDrawerTheme>;
