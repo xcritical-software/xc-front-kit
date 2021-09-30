@@ -39,6 +39,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
   cancelIcon: CustomCancelIcon,
   confirmIcon: CustomConfirmIcon,
   isDoubleClickMode = false,
+  dataAtField = null,
 }: IInlineEditUncontrolledProps<TFieldValue>): React.ReactElement<
   IInlineEditUncontrolledProps<TFieldValue>
 > {
@@ -106,6 +107,9 @@ export const InlineEditUncontrolled = function <TFieldValue>({
               appearance={appearance}
               baseAppearance={baseAppearance}>
               <Button
+                data-at-field={
+                  dataAtField && `${dataAtField}__inline-edit__confirm-button`
+                }
                 appearance={appearance}
                 baseAppearance={baseAppearance}
                 ref={confirmButtonRef}
@@ -126,6 +130,9 @@ export const InlineEditUncontrolled = function <TFieldValue>({
               appearance={appearance}
               baseAppearance={baseAppearance}>
               <Button
+                data-at-field={
+                  dataAtField && `${dataAtField}__inline-edit__cancel-button`
+                }
                 appearance={appearance}
                 baseAppearance={baseAppearance}
                 ref={cancelButtonRef}

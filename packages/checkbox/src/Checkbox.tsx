@@ -20,6 +20,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
   label,
   checkIcon,
   onChange,
+  dataAtField = null,
 }) => {
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +35,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
 
   return (
     <CheckboxLabel
+      data-at-field={dataAtField && `${dataAtField}__checkbox-block`}
       appearance={appearance}
       baseAppearance={baseAppearance}
       disabled={disabled}
@@ -46,17 +48,20 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
         onChange={handleInputChange}
       />
       <CheckboxWrapper
+        data-at-field={dataAtField && `${dataAtField}__checkbox-wrapper`}
         appearance={appearance}
         baseAppearance={baseAppearance}
         type={type}>
         {checkIcon ? (
           <StyledCheckbox
+            data-at-field={dataAtField && `${dataAtField}__styled-checkbox`}
             appearance={appearance}
             baseAppearance={baseAppearance}>
             {checked && checkIcon}
           </StyledCheckbox>
         ) : (
           <DefaultCheckbox
+            data-at-field={dataAtField && `${dataAtField}__default-checkbox`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             checked={checked}
@@ -65,7 +70,10 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
         )}
       </CheckboxWrapper>
       {label && (
-        <LabelWrapper appearance={appearance} baseAppearance={baseAppearance}>
+        <LabelWrapper
+          appearance={appearance}
+          baseAppearance={baseAppearance}
+          data-at-field={dataAtField && `${dataAtField}__checkbox-label`}>
           {label}
         </LabelWrapper>
       )}

@@ -77,10 +77,10 @@ const BasicInlineEditInput: React.FC<AllType> = ({
   confirmIcon,
   isDoubleClickMode,
   defaultValue = '',
+  dataAtField = 'input-name',
   ...rest
 }) => {
   const [value, setValue] = React.useState(defaultValue);
-
   const getReadView = React.useCallback(
     () => <div>{value || 'Click to enter value'}</div>,
     [value]
@@ -108,6 +108,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
         cancelIcon={cancelIcon}
         confirmIcon={confirmIcon}
         isDoubleClickMode={isDoubleClickMode}
+        dataAtField={dataAtField}
       />
     </ThemeProvider>
   );

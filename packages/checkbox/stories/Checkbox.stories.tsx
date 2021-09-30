@@ -182,6 +182,7 @@ const BasicCheckbox = ({
   label,
   checkIcon,
   disabled = false,
+  dataAtField = 'checkbox-name',
 }: ICheckboxProps): React.ReactElement => {
   const [isChecked, setIsChecked] = React.useState(false);
 
@@ -200,6 +201,7 @@ const BasicCheckbox = ({
         onChange={handleChange}
         label={label}
         checkIcon={checkIcon}
+        dataAtField={dataAtField}
       />
     </ThemeProvider>
   );

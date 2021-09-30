@@ -38,6 +38,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
       onFocus,
       onBlur,
       showArrows = false,
+      dataAtField = null,
       ...rest
     },
     ref: React.MutableRefObject<HTMLInputElement>
@@ -129,6 +130,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
           onFocus={handleFocus}
           onBlur={handleBlur}
           showArrows={showArrows}
+          data-at-field={dataAtField && `${dataAtField}__input`}
           {...rest}
         />
         {isClearable && !!value && (

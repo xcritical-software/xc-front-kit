@@ -26,6 +26,7 @@ export interface ICheckboxProps extends IStyledProps {
     checked: boolean,
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
+  dataAtField?: string | null;
 }
 
 export interface IStyledCheckboxProps {

@@ -48,6 +48,7 @@ export interface IInputProps
   css?: any;
   shouldFitContainer?: boolean;
   showArrows?: boolean;
+  dataAtField?: string | null;
 }
 export interface IStyledInput extends HtmlAttributes, ISubComponentProps {
   showArrows: boolean;

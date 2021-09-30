@@ -64,6 +64,8 @@ export type IInlineEditUncontrolledProps<
   error?: string | string[];
   /** Change 'Read View' to 'Edit View' by double click instead of single click */
   isDoubleClickMode?: boolean;
+  /** Property for adding a unique data-attribute name for inlineEdit buttons  */
+  dataAtField?: string | null;
 };
 
 export type InlineEditCommonProps<TFieldValue> = ICommonProps & {
@@ -109,6 +111,8 @@ export type IInlineEditProps<
   onCancel?: (value?: TFieldValue) => void;
   /** Change 'Read View' to 'Edit View' by double click instead of single click */
   isDoubleClickMode?: boolean;
+  /** Property for adding a unique data-attribute name for inlineEdit buttons  */
+  dataAtField?: string;
 };
 
 export interface IReturnFunction<TValue> {
