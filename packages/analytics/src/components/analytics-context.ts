@@ -52,19 +52,23 @@ export const analyticsStore: IAnaliticsStore = {
 export function createAnalyticsMiddleware(eventMap: {
   [actionType: string]: IAnaliyticsEventParams;
 }) {
-  return (store: any) => (next: any) => (action: any) => {
+  return (_store: any) => (next: any) => (action: any) => {
     if (
       typeof action !== 'function' &&
       action?.type &&
       Object.keys(eventMap).length
     ) {
-      store = analyticsStore;
-      const actionParams = eventMap[action.type];
+      const { conversion = undefined, analyticsParams = undefined } =
+        eventMap[action.type] || {};
 
-      if (actionParams)
-        store.analyticsDispatch({
+      if (conversion)
+        analyticsStore.analyticsDispatch({
           gtagAPIMethod: actionTypes.TRY_CALL_EVENT,
-          actionParams,
+          actionParams: {
+            conversion,
+            analyticsParams:
+              analyticsParams === 'payload' ? action.payload : analyticsParams,
+          },
         });
     }
 

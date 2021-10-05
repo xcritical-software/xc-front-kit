@@ -16,9 +16,9 @@ export function googleInstanceConstructor(
       return (this.instance as GA4React).initialize();
     },
     buffer: emptyInstance.buffer,
-    event({ conversion, params }: IClickEventWrapper) {
+    event({ conversion, analyticsParams }: IClickEventWrapper) {
       this.buffer.push(function (this: IServiceInstance<GA4React>) {
-        this.instance.gtag('event', conversion, params);
+        this.instance.gtag('event', conversion, analyticsParams);
       });
     },
     pageView(url: string) {
@@ -27,8 +27,8 @@ export function googleInstanceConstructor(
       });
     },
     activateEventAndPageView() {
-      this.event = ({ conversion, params }: IClickEventWrapper) => {
-        this.instance.gtag('event', conversion, params);
+      this.event = ({ conversion, analyticsParams }: IClickEventWrapper) => {
+        this.instance.gtag('event', conversion, analyticsParams);
       };
       this.pageView = (url: string) => {
         this.instance.pageview(url);

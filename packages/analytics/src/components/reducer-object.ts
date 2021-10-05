@@ -76,6 +76,7 @@ function applyBufferCase(state: IAnaliticsState, action: AnalyticsAction) {
   bufferToApply.forEach((bufferedAction) =>
     bufferedAction.apply(state.instances[instanceName])
   );
+  state.instances[instanceName].buffer = [];
 
   return setIn(state, [], `instances[${instanceName}].buffer`);
 }

@@ -32,7 +32,7 @@ export interface IClickEventWrapper {
   category?: string;
   label?: string;
   conversion: string;
-  params?: any;
+  analyticsParams?: any;
 }
 export interface IGoogleEvent {
   action: string;
@@ -93,5 +93,7 @@ export interface IAnaliticsStore {
 
 export interface IAnaliyticsEventParams {
   conversion: string;
-  params?: any;
+  analyticsParams?: EventParams<any>;
 }
+
+export type EventParams<T> = T | 'payload';

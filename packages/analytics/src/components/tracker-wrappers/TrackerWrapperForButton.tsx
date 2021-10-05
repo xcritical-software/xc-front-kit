@@ -11,17 +11,17 @@ type OnClick = {
 export const TrackerWrapperForButton = <T extends OnClick>(
   Children: React.FC<T>
 ) => (props: T & IClickEventWrapper) => {
-  let { conversion, params, onClick: onClickFromProps } = props;
+  let { conversion, analyticsParams, onClick: onClickFromProps } = props;
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const analyticsDispatch = useAnalyticsDispatch();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const wrapperOnClick = useCallback(
     (...args) => {
-      analyticsDispatch({ conversion, params: params || {} });
+      analyticsDispatch({ conversion, analyticsParams });
       onClickFromProps(args);
     },
-    [conversion, params, onClickFromProps]
+    [conversion, analyticsParams, onClickFromProps]
   );
   const newProps: T = {
     ...props,
