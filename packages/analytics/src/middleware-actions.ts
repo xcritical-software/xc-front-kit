@@ -24,7 +24,7 @@ export const runInitializationFlow = (initSettings: IInitSettings) => (
       return undefined;
     }),
   ]).then(
-    () => { },
-    () => { }
+    () => {},
+    () => {}
   );
 };

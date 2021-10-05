@@ -25,7 +25,7 @@ let defaultState: IAnaliticsState = {
 };
 
 function analyticsReducer(state: IAnaliticsState, action: AnalyticsAction) {
-  const reduce = reducerObject[action.gtagAPIMethod];
+  const reduce = reducerObject[action.APIMethod];
 
   return reduce ? reduce(state, action) : state;
 }
@@ -63,7 +63,7 @@ export function createAnalyticsMiddleware(eventMap: {
 
       if (conversion)
         analyticsStore.analyticsDispatch({
-          gtagAPIMethod: actionTypes.TRY_CALL_EVENT,
+          APIMethod: actionTypes.TRY_CALL_EVENT,
           actionParams: {
             conversion,
             analyticsParams:
@@ -81,7 +81,7 @@ export function useAnalyticsDispatch<T extends IAnaliyticsEventParams>() {
 
   return (event: T) =>
     dispatch({
-      gtagAPIMethod: actionTypes.TRY_CALL_EVENT,
+      APIMethod: actionTypes.TRY_CALL_EVENT,
       actionParams: event,
     });
 }

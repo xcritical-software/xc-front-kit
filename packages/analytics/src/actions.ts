@@ -18,26 +18,26 @@ export const setResolvedAction = (
   resolvedInstance: any,
   instanceName: string
 ) =>
-({
-  gtagAPIMethod: actionTypes.SET_RESOLVED,
-  actionParams: { resolvedInstance, instanceName },
-} as const);
+  ({
+    APIMethod: actionTypes.SET_RESOLVED,
+    actionParams: { resolvedInstance, instanceName },
+  } as const);
 
 export const activateMethodsAction = (instanceName: string) =>
-({
-  gtagAPIMethod: actionTypes.ACTIVATE,
-  actionParams: { instanceName },
-} as const);
+  ({
+    APIMethod: actionTypes.ACTIVATE,
+    actionParams: { instanceName },
+  } as const);
 
 export const applyBufferAction = (instanceName: string) =>
-({
-  gtagAPIMethod: actionTypes.APPLY_BUFFER,
-  actionParams: { instanceName },
-} as const);
+  ({
+    APIMethod: actionTypes.APPLY_BUFFER,
+    actionParams: { instanceName },
+  } as const);
 
 export function createInstanceAction(serviceName: string, serviceId: string) {
   return {
-    gtagAPIMethod: actionTypes.CREATE,
+    APIMethod: actionTypes.CREATE,
     actionParams: {
       serviceName,
       serviceId,
@@ -46,7 +46,7 @@ export function createInstanceAction(serviceName: string, serviceId: string) {
 }
 
 export const tryCallEventAction = (actionParams: IAnaliyticsEventParams) =>
-({
-  gtagAPIMethod: actionTypes.TRY_CALL_EVENT,
-  actionParams,
-} as const);
+  ({
+    APIMethod: actionTypes.TRY_CALL_EVENT,
+    actionParams,
+  } as const);

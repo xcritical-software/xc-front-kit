@@ -96,4 +96,6 @@ export interface IAnaliyticsEventParams {
   analyticsParams?: EventParams<any>;
 }
 
-export type EventParams<T> = T | 'payload';
+export type EventParams<T extends { [actionType: string]: string }> =
+  | T
+  | 'payload';
