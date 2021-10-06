@@ -1,28 +1,19 @@
 import React, { ReactNode } from 'react';
 
 import { analyticsStore } from '..';
-import { createInstanceAction } from '../actions';
-import { runInitializationFlow } from '../middleware-actions';
+import { initAnalytics } from '../helpers';
 import { IInitSettings } from '../types';
 
 import { AnalyticsContext } from './analytics-context';
 
 export const AnalyticsProvider = (props: {
   children: ReactNode;
-  initSettings: IInitSettings;
+  initSettings?: IInitSettings;
 }) => {
   const { children, initSettings } = props;
   const value = React.useMemo(() => analyticsStore, [analyticsStore]);
 
-  const { serviceIds } = initSettings;
-  Object.entries(serviceIds || {}).forEach(([name, serviceId]) => {
-    const instance = value.getState().instances[name];
-
-    if (serviceId && (!instance || instance?.type === 'empty')) {
-      value.analyticsDispatch(createInstanceAction(name, serviceId));
-    }
-  });
-  value.analyticsDispatch(runInitializationFlow(initSettings));
+  if (initSettings) initAnalytics(initSettings);
 
   return (
     <AnalyticsContext.Provider value={value}>

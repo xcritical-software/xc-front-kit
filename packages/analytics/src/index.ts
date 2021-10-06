@@ -6,3 +6,4 @@ export {
   analyticsStore,
   createAnalyticsMiddleware,
 } from './components/analytics-context';
+export { initAnalytics } from './helpers';

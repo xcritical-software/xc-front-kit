@@ -8,6 +8,7 @@ import {
   createAnalyticsMiddleware,
   analyticsStore,
   AnalyticsProvider,
+  initAnalytics,
 } from '@xcritical/analytics';
 import Button from '@xcritical/button';
 
@@ -36,7 +37,7 @@ storiesOf('Analytics', module)
 
     type AppParams = EventParams<{
       videoTitle: string;
-      documentFrmat: string;
+      documentFormat: string;
       contentAuthor: string;
     }>;
 
@@ -94,7 +95,7 @@ storiesOf('Analytics', module)
 
     return null;
   })
-  .add('In side effects', () => {
+  .add('Dispatch in side effects', () => {
     /* import { analyticsStore } from '@xcritical/analytics'; */
 
     analyticsStore.eventDispatch({
@@ -118,13 +119,31 @@ storiesOf('Analytics', module)
     const App = () => <></>;
 
     return (
-      <AnalyticsProvider
-        initSettings={{
-          serviceIds: {
-            google: 'G-236J3ZP12',
-          },
-        }}>
-        <App />
-      </AnalyticsProvider>
+      <>
+        {/* initialization via provider */}
+        <AnalyticsProvider
+          initSettings={{
+            serviceIds: {
+              google: 'G-236J3ZP12',
+            },
+          }}>
+          <App />
+        </AnalyticsProvider>
+
+        {/* initialization in side effects */}
+        <AnalyticsProvider>
+          <App />
+        </AnalyticsProvider>
+      </>
     );
+  })
+  .add('Initialization in side effects', () => {
+    /* import { initAnalytics } from '@xcritical/analytics'; */
+    initAnalytics({
+      serviceIds: {
+        google: 'G-236J3ZP12',
+      },
+    });
+
+    return null;
   });
