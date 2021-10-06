@@ -16,7 +16,9 @@ export const AnalyticsProvider = (props: {
 
   const { serviceIds } = initSettings;
   Object.entries(serviceIds || {}).forEach(([name, serviceId]) => {
-    if (serviceId && value.getState().instances[name].type === 'empty') {
+    const instance = value.getState().instances[name];
+
+    if (serviceId && (!instance || instance?.type === 'empty')) {
       value.analyticsDispatch(createInstanceAction(name, serviceId));
     }
   });

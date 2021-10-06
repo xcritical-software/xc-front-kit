@@ -1,11 +1,15 @@
 import GA4React from 'ga-4-react';
-import { GA4ReactResolveInterface } from 'ga-4-react/dist/models/gtagModels';
 
-import { IClickEventWrapper, IEmptyInstance, IServiceInstance } from '../types';
+import {
+  IClickEventWrapper,
+  IEmptyInstance,
+  IResolvedGA4,
+  IServiceInstance,
+} from '../types';
 export function googleInstanceConstructor(
   emptyInstance: IServiceInstance<IEmptyInstance>,
   googleId: string
-): IServiceInstance<GA4React | GA4ReactResolveInterface> {
+): IServiceInstance<GA4React | IResolvedGA4> {
   const serviceInstance: GA4React = new GA4React(googleId);
 
   return {

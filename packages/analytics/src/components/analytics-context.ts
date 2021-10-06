@@ -2,13 +2,12 @@ import React, { createContext } from 'react';
 
 import { emptyInstance } from '../analytics-instances/empty';
 import { googleInstanceConstructor } from '../analytics-instances/google';
-import { yandexInstanceConstructor } from '../analytics-instances/yandex';
 import {
   IAnaliticsState,
   IAnaliticsStore,
   IAnaliyticsEventParams,
 } from '../types';
-import { AnalyticsAction } from '../actions';
+import { AnalyticsAction, TryCallEventAction } from '../actions';
 import * as actionTypes from '../action-types';
 
 import { reducerObject } from './reducer-object';
@@ -16,11 +15,9 @@ import { reducerObject } from './reducer-object';
 let defaultState: IAnaliticsState = {
   instances: {
     google: emptyInstance(),
-    yandex: emptyInstance(),
   },
   instanceMixins: {
     google: googleInstanceConstructor,
-    yandex: yandexInstanceConstructor,
   },
 };
 
@@ -44,8 +41,13 @@ export const analyticsStore: IAnaliticsStore = {
         action(this.analyticsDispatch, this.getState());
       }
     }
-
-    return action;
+  },
+  eventDispatch(action: IAnaliyticsEventParams) {
+    if (action)
+      defaultState = analyticsReducer(defaultState, {
+        APIMethod: 'TRY_CALL_EVENT',
+        actionParams: action,
+      });
   },
 };
 
@@ -77,13 +79,9 @@ export function createAnalyticsMiddleware(eventMap: {
 }
 
 export function useAnalyticsDispatch<T extends IAnaliyticsEventParams>() {
-  const dispatch = React.useContext(AnalyticsContext).analyticsDispatch;
+  const dispatch = React.useContext(AnalyticsContext).eventDispatch;
 
-  return (event: T) =>
-    dispatch({
-      APIMethod: actionTypes.TRY_CALL_EVENT,
-      actionParams: event,
-    });
+  return (event: T) => dispatch(event);
 }
 
 export const AnalyticsContext = createContext(analyticsStore);

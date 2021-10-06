@@ -1,7 +1,7 @@
 import GA4React from 'ga-4-react';
 import { ReactNode } from 'react';
 
-import { AnalyticsAction } from './actions';
+import { AnalyticsAction, TryCallEventAction } from './actions';
 
 export interface IAnalyticsProviderProps {
   children: ReactNode;
@@ -74,7 +74,9 @@ export interface IAnalyticsContext {
 
 export type AnaliticsDispatch = (
   action: AnalyticsAction | ((dispatch: any, state: IAnaliticsState) => void)
-) => any;
+) => void;
+
+export type EventDispatch = (action: IAnaliyticsEventParams) => void;
 
 export interface IAnaliticsState {
   instances: { [serviceName: string]: WrapperForServiceInstance };
@@ -89,6 +91,7 @@ export interface IAnaliticsState {
 export interface IAnaliticsStore {
   getState(): IAnaliticsState;
   analyticsDispatch: AnaliticsDispatch;
+  eventDispatch: EventDispatch;
 }
 
 export interface IAnaliyticsEventParams {
@@ -96,6 +99,9 @@ export interface IAnaliyticsEventParams {
   analyticsParams?: EventParams<any>;
 }
 
-export type EventParams<T extends { [actionType: string]: string }> =
-  | T
-  | 'payload';
+export interface IResolvedGA4
+  extends Pick<GA4React, 'event' | 'gtag' | 'pageview'> {}
+
+export type EventParams<
+  T extends { [actionType: string]: string | boolean | number }
+> = T | 'payload';

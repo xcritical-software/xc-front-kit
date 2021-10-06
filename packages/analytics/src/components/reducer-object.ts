@@ -34,7 +34,8 @@ function setResolvedCase(state: IAnaliticsState, action: AnalyticsAction) {
 function tryCallEventCase(state: IAnaliticsState, action: AnalyticsAction) {
   const { actionParams } = action as TryCallEventAction;
   let isAnyBufferReplenished: boolean = false;
-  Object.values(state.instances).forEach((instance) => {
+  const copiedState = { ...state };
+  Object.values(copiedState.instances).forEach((instance) => {
     instance.event(actionParams);
 
     if (instance.type === 'empty') {
@@ -42,7 +43,7 @@ function tryCallEventCase(state: IAnaliticsState, action: AnalyticsAction) {
     }
   });
 
-  return isAnyBufferReplenished ? { ...state } : state;
+  return isAnyBufferReplenished ? { ...copiedState } : state;
 }
 
 function createCase(state: IAnaliticsState, action: AnalyticsAction) {
@@ -63,9 +64,10 @@ function activateCase(state: IAnaliticsState, action: AnalyticsAction) {
   const {
     actionParams: { instanceName },
   } = action as ActivateMethodsAction;
-  state.instances[instanceName].activateEventAndPageView();
+  const copiedState = { ...state };
+  copiedState.instances[instanceName].activateEventAndPageView();
 
-  return { ...state };
+  return { ...copiedState };
 }
 
 function applyBufferCase(state: IAnaliticsState, action: AnalyticsAction) {
@@ -76,7 +78,6 @@ function applyBufferCase(state: IAnaliticsState, action: AnalyticsAction) {
   bufferToApply.forEach((bufferedAction) =>
     bufferedAction.apply(state.instances[instanceName])
   );
-  state.instances[instanceName].buffer = [];
 
   return setIn(state, [], `instances[${instanceName}].buffer`);
 }

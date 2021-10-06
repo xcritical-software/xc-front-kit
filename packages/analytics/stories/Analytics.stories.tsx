@@ -18,16 +18,16 @@ storiesOf('Analytics', module)
     return (
       <ButtonWithAnalytics
         conversion="conversion_name"
-        analyticsParams={{ analytics_param: 'param_value' }}
+        analyticsParams={{ analyticParam: 'param_value' }}
         onClick={() => {}}>
         send data to analytics
       </ButtonWithAnalytics>
     );
   })
   .add('EventParams type', () => {
-    type EventParams<T extends { [eventParam: string]: string }> =
-      | T
-      | 'payload';
+    type EventParams<
+      T extends { [actionType: string]: string | boolean | number }
+    > = T | 'payload';
 
     return null;
   })
@@ -35,9 +35,9 @@ storiesOf('Analytics', module)
     type AppConversions = 'download_video' | 'print_document';
 
     type AppParams = EventParams<{
-      ['video_title']: string;
-      ['document_format']: string;
-      ['content_author']: string;
+      videoTitle: string;
+      documentFrmat: string;
+      contentAuthor: string;
     }>;
 
     type AppEvents = {
@@ -52,7 +52,7 @@ storiesOf('Analytics', module)
       analyticsDispatch({
         conversion: 'download_video',
         analyticsParams: {
-          content_author: 'author_name',
+          contentAuthor: 'author_name',
         },
       });
     };
@@ -63,9 +63,9 @@ storiesOf('Analytics', module)
     type AppConversions = 'download_video' | 'print_document';
 
     type AppParams = EventParams<{
-      ['video_title']: string;
-      ['document_format']: string;
-      ['content_author']: string;
+      videoTitle: string;
+      documentFormat: string;
+      contentAuthor: string;
     }>;
 
     type AppEvents = {
@@ -80,7 +80,7 @@ storiesOf('Analytics', module)
       DO_NOT_SEND_PAYLOAD_TO_ANALYTICS: {
         conversion: 'print_document',
         analyticsParams: {
-          content_author: 'author_name',
+          contentAuthor: 'author_name',
         },
       },
       SEND_PAYLOAD_TO_ANALYTICS: {
@@ -97,13 +97,18 @@ storiesOf('Analytics', module)
   .add('In side effects', () => {
     /* import { analyticsStore } from '@xcritical/analytics'; */
 
+    analyticsStore.eventDispatch({
+      conversion: 'conversion_name',
+      analyticsParams: {
+        paramName: 'param_value',
+      },
+    });
+
     analyticsStore.analyticsDispatch({
-      APIMethod: 'TRY_CALL_EVENT',
+      APIMethod: 'CREATE',
       actionParams: {
-        conversion: 'conversion_name',
-        analyticsParams: {
-          param_name: 'param_value',
-        },
+        serviceName: 'google',
+        serviceId: 'G-6Y1094F443XZ1',
       },
     });
 
@@ -117,7 +122,6 @@ storiesOf('Analytics', module)
         initSettings={{
           serviceIds: {
             google: 'G-236J3ZP12',
-            yandex: 'YA-63GV018JKJ78',
           },
         }}>
         <App />
