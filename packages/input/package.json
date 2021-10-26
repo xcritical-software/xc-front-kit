@@ -30,7 +30,7 @@
 	"private": false,
 	"peerDependencies": {
 		"react": ">=16.13.0",
-		"styled-components": "^5.0.0",
+		"styled-components": "v5",
 		"polished": "^3.0.0"
 	},
 	"dependencies": {

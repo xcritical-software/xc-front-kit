@@ -94,7 +94,7 @@
     "csstype": "^3.0.9",
     "react": ">=16.13.0",
     "react-dom": "^16.13.0",
-    "styled-components": "^5.0.1",
+    "styled-components": "v5",
     "styled-css-grid": "^1.2.1",
     "react-router-dom": "^5.0.1"
   },

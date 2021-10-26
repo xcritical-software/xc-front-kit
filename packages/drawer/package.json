@@ -35,7 +35,7 @@
 	"peerDependencies": {
 		"polished": "^3.4.4",
 		"react": ">=16.13.0",
-		"styled-components": "^5.0.0"
+		"styled-components": "v5"
 	},
 	"dependencies": {
 		"@xcritical/blanket": "^1.1.1",
