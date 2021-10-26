@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import React from 'react';
 import { withTheme } from 'styled-components';
 
@@ -55,13 +56,13 @@ const PurePagination: React.FC<IPagination> = ({
     onChangePage(newAvailableCurrentPage);
   };
 
-  const changePageSize = (pageSizeOption: IPageSizeOption): void => {
-    const newTotalPages = Math.ceil(total / pageSizeOption.value);
+  const changePageSize = (pageSizeOption: IPageSizeOption | null): void => {
+    const newTotalPages = Math.ceil(total / (pageSizeOption?.value ?? 1));
     const newCurrentPage =
       currentPage > newTotalPages ? newTotalPages : currentPage;
 
     if (onChangePageSize) {
-      onChangePageSize(newCurrentPage, pageSizeOption.value);
+      onChangePageSize(newCurrentPage, pageSizeOption?.value ?? 1);
     }
   };
 
@@ -175,6 +176,7 @@ const PurePagination: React.FC<IPagination> = ({
           options={mappedPageSizeOptions}
           value={mappedPageSizeOption}
           isDisabled={disabled}
+          isMulti={false}
           onChange={changePageSize}
           {...pageSizeProps}
         />

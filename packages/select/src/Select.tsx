@@ -6,7 +6,11 @@ import React, {
   ReactElement,
   useCallback,
 } from 'react';
-import Select, { GroupBase, OnChangeValue, Props } from 'react-select';
+import Select, {
+  GroupBase,
+  OnChangeValue,
+  SelectComponentsConfig,
+} from 'react-select';
 import { ThemeContext } from 'styled-components';
 
 import { IThemeNamespace } from '@xcritical/theme';
@@ -19,7 +23,7 @@ import {
   getFormatOptionLabel,
 } from './styled';
 import { themeConverter } from './utils';
-import { ISelectBaseTheme, ISelectOnlyProps } from './interfaces';
+import { ISelectBaseTheme, SelectProps } from './interfaces';
 
 export const PureSelect = function <
   Option = unknown,
@@ -42,7 +46,7 @@ export const PureSelect = function <
   styles,
   onChange,
   ...rest
-}: Props<Option, IsMulti, Group> & ISelectOnlyProps): ReactElement {
+}: SelectProps<Option, IsMulti, Group>): ReactElement {
   const themeContext = useContext<IThemeNamespace<ISelectBaseTheme>>(
     ThemeContext
   );
@@ -56,7 +60,7 @@ export const PureSelect = function <
 
   const selectStyles = useMemo(
     () =>
-      themeConverter(
+      themeConverter<Option, IsMulti, Group>(
         innerTheme,
         appearance,
         baseAppearance,
@@ -77,6 +81,14 @@ export const PureSelect = function <
     [onChange, isMulti]
   );
 
+  const _components: SelectComponentsConfig<Option, IsMulti, Group> = {
+    DropdownIndicator,
+    ClearIndicator,
+    MultiValueRemove,
+    MenuList,
+    ...components,
+  };
+
   return (
     <Select
       ref={selectRef}
@@ -91,13 +103,7 @@ export const PureSelect = function <
       controlShouldRenderValue={isControlShouldRenderValue}
       closeMenuOnSelect={isCloseMenuOnSelect}
       hideSelectedOptions={isHideSelectedOptions}
-      components={{
-        DropdownIndicator,
-        ClearIndicator,
-        MultiValueRemove,
-        MenuList,
-        ...components,
-      }}
+      components={_components}
       onChange={innerOnChange}
       {...rest}
     />

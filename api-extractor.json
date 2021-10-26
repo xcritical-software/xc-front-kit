@@ -95,7 +95,7 @@
        *
        * DEFAULT VALUE: false
        */
-        "skipLibCheck": false,
+        "skipLibCheck": true,
     },
     /**
      * Configures how the API report file (*.api.md) will be generated.

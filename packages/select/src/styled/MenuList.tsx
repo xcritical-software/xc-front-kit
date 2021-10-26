@@ -32,9 +32,13 @@ const renderThumb = (themeStyles): React.FC<{ style }> => ({
 //  which leads to a conflict with react-custom-scrollbars
 const FixScrollbarLogic = () => <div />;
 
-export const MenuList: React.FC<
-  MenuListProps<unknown, false, GroupBase<unknown>>
-> = memo((props) => {
+export const MenuList: <
+  Option = unknown,
+  IsMulti extends boolean = boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
+>(
+  props: MenuListProps<Option, IsMulti, Group>
+) => React.ReactElement | null = memo((props) => {
   const {
     getStyles,
     selectProps: { styles },

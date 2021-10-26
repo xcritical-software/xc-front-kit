@@ -33,7 +33,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{ts,tsx}": [
       "eslint --fix --quiet",
       "git add"
     ]
@@ -91,7 +91,7 @@
   },
   "dependencies": {
     "@types/react-redux": "^7.1.7",
-    "csstype": "^2.6.9",
+    "csstype": "^3.0.9",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "styled-components": "^5.0.1",

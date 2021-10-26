@@ -1,5 +1,5 @@
-import { StylesConfig } from 'react-select/src/styles';
 import { CSSObject } from 'styled-components';
+import { GroupBase, StylesConfig } from 'react-select';
 
 import { IThemeNamespace } from '@xcritical/theme';
 
@@ -16,16 +16,24 @@ import {
   getStatesStyles,
 } from './getStyles';
 
-export interface IStylesConfigCustom extends StylesConfig {
+export interface IStylesConfigCustom<
+  Option = unknown,
+  IsMulti extends boolean = boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
+> extends StylesConfig<Option, IsMulti, Group> {
   menuScrollbar: CSSObject;
 }
 
-export const themeConverter = (
+export const themeConverter = <
+  Option = unknown,
+  IsMulti extends boolean = boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
+>(
   theme: IThemeNamespace<ISelectBaseTheme>,
   appearance: string,
   baseAppearance: string,
   shouldFitContainer: boolean
-): IStylesConfigCustom => {
+) => {
   const getElementStyles = getCommonStyles(theme, appearance, baseAppearance);
   const getInteractiveStyles = getStatesStyles(
     theme,
@@ -43,7 +51,7 @@ export const themeConverter = (
   const getWidth = getWidthStyles(theme, appearance, baseAppearance);
   const getHeight = getHeightStyles(theme, appearance, baseAppearance);
 
-  const styles: IStylesConfigCustom = {
+  const styles: IStylesConfigCustom<Option, IsMulti, Group> = {
     container: (css) => ({
       ...css,
       ...getElementStyles('container'),
@@ -142,16 +150,10 @@ export const themeConverter = (
         hasValue
       ),
     }),
-    loadingMessage: (css, { isDisabled, isFocused, isSelected, hasValue }) => ({
+    loadingMessage: (css, { hasValue }) => ({
       ...css,
       ...getElementStyles('loadingMessage'),
-      ...getInteractiveStyles(
-        'loadingMessage',
-        isDisabled,
-        isFocused,
-        isSelected,
-        hasValue
-      ),
+      ...getInteractiveStyles('loadingMessage', false, false, false, hasValue),
     }),
 
     menu: (css, { hasValue }) => ({
