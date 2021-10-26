@@ -33,7 +33,7 @@
 	"peerDependencies": {
 		"micro-memoize": "4.0.8",
 		"prop-types": "^15.0.0",
-		"react": "^16.9.0",
+		"react": ">=16.13.0",
 		"styled-components": "^5.0.0"
 	},
 	"devDependencies": {

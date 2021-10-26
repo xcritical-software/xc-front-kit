@@ -33,7 +33,7 @@
 	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/notification#readme",
 	"private": false,
 	"peerDependencies": {
-		"react": "^16.8.3",
+		"react": ">=16.13.0",
 		"styled-components": "^5.0.0"
 	},
 	"dependencies": {

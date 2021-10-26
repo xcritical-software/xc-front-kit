@@ -49,7 +49,7 @@
 		"@types/raf-schd": "^4.0.0"
 	},
 	"peerDependencies": {
-		"react": "^16.8.3",
+		"react": ">=16.13.0",
 		"styled-components": "^5.0.0"
 	},
 	"dependencies": {
