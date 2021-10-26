@@ -30,7 +30,6 @@ export interface ISelectOnlyProps {
   appearance?: string;
   baseAppearance?: string;
   disabled?: boolean;
-  isMulti?: boolean;
   isSearchable?: boolean;
   isOpenMenu?: boolean;
   className?: string;
