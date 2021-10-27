@@ -7,6 +7,7 @@ import {
   getBodyCellContentStyles,
   getBodyCellOffsetStyles,
   getExpandButtonStyles,
+  getCellContentWrapperStyles,
 } from './utils';
 
 const scrollbarSize = 8;
@@ -122,10 +123,6 @@ export const BodyCell = styled.div<any>`
   display: flex;
   align-items: center;
   ${getBodyCellStyles}
-  span {
-    display: inline-block;
-    font-weight: 400;
-  }
 `;
 
 export const BodyCellContent = styled.div<IBodyCellContent>`
@@ -154,4 +151,9 @@ export const ShiftInsteadButton = styled.div`
   width: 16px;
   float: left;
   ${getExpandButtonStyles}
+`;
+
+export const CellContentWrapper = styled.span<IBodyCellContent>`
+  display: inline-block;
+  ${getCellContentWrapperStyles}
 `;

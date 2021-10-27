@@ -26,7 +26,7 @@ import {
 } from './utils';
 import { MultiGrid } from './MultiGrid';
 import { GridPositions, GridSort } from './consts';
-import { MultiGridWrapper } from './styled';
+import { MultiGridWrapper, InternalGridWrapper } from './styled';
 
 const Grid: React.FC<IGridProps> = ({
   shouldFitContainer,
@@ -55,7 +55,7 @@ const Grid: React.FC<IGridProps> = ({
   onChangeExpand: onChangeExpandFromProps,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
+  const [wrapperSize, setWrapperSize] = useState({ width, height });
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
     items.map(
       (el: IItem): IMappedItem => ({ __expandLevel: 0, ...el, __key: guid() })
@@ -424,26 +424,18 @@ const Grid: React.FC<IGridProps> = ({
     gridProps,
   };
 
-  if (shouldFitContainer) {
-    return (
-      <div ref={wrapperRef} style={{ height: '100%' }}>
-        <InternalGrid
-          width={wrapperSize.width}
-          height={wrapperSize.height}
-          gridPosition={GridPositions.CENTER}
-          {...singleGridProps}
-        />
-      </div>
-    );
-  }
-
   return (
-    <InternalGrid
-      width={width}
-      height={height}
-      gridPosition={GridPositions.CENTER}
-      {...singleGridProps}
-    />
+    <InternalGridWrapper
+      ref={wrapperRef}
+      shouldFitContainer={shouldFitContainer}>
+      <InternalGrid
+        key={GridPositions.CENTER}
+        width={wrapperSize.width}
+        height={wrapperSize.height}
+        gridPosition={GridPositions.CENTER}
+        {...singleGridProps}
+      />
+    </InternalGridWrapper>
   );
 };
 

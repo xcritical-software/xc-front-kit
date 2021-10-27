@@ -128,8 +128,7 @@ export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
     `;
 
 export const getBodyCellContentStyles = ({
-  theme: { row, selectedRowColor },
-  selected,
+  theme: { row },
   rowHeight,
   center,
 }: IBodyCellContent) => css`
@@ -140,19 +139,25 @@ export const getBodyCellContentStyles = ({
         justify-content: center;
       `
     : null};
-  span {
-    font-size: ${row?.fontSize};
-    color: ${selected ? selectedRowColor : row?.color};
-    display: flex;
-    ${rowHeight
-      ? css`
-          white-space: nowrap;
-          overflow: hidden;
-          display: block;
-          text-overflow: ellipsis;
-        `
-      : null}
-  }
+`;
+
+export const getCellContentWrapperStyles = ({
+  theme: { row, selectedRowColor },
+  selected,
+  rowHeight,
+}: IBodyCellContent) => css`
+  font-size: ${row?.fontSize};
+  font-weight: ${row?.fontWeight};
+  color: ${selected ? selectedRowColor : row?.color};
+  display: flex;
+  ${rowHeight
+    ? css`
+        white-space: nowrap;
+        overflow: hidden;
+        display: block;
+        text-overflow: ellipsis;
+      `
+    : null}
 `;
 
 export const getBodyCellOffsetStyles = ({

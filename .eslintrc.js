@@ -78,6 +78,7 @@ module.exports = {
     '@typescript-eslint/no-shadow': 0,
     '@typescript-eslint/no-redeclare': 0,
     '@typescript-eslint/interface-name-prefix': 'warn',
+    '@typescript-eslint/no-unnecessary-condition': 0,
   },
   globals: {
     APP_PATH: true,

@@ -29,6 +29,7 @@ import {
   TotalCell,
   ShiftInsteadButton,
   TotalsShift,
+  CellContentWrapper,
 } from './styled';
 import { AddIcon, RemoveIcon } from './icons';
 import { searchLastVisible, getFullWidth } from './utils';
@@ -139,14 +140,13 @@ const InternalGrid: React.FC<IInternalGrid> = ({
     const { field, render: renderFunction } = column;
     const { [field]: content } = row;
 
-    const cellContent = renderFunction
-      ? renderFunction(content, field, row, rowIndex, {
-          expandLevel,
-          isExpanded: __isExpand,
-          parentItem: __parent,
-          key: __key,
-        })
-      : content;
+    const cellContent =
+      renderFunction?.(content, field, row, rowIndex, {
+        expandLevel,
+        isExpanded: __isExpand,
+        parentItem: __parent,
+        key: __key,
+      }) ?? content;
 
     const handleExpand = () => {
       onChangeExpand(
@@ -210,7 +210,13 @@ const InternalGrid: React.FC<IInternalGrid> = ({
               <ShiftInsteadButton theme={themeRef.current} />
             )}
 
-            <span>{cellContent}</span>
+            <CellContentWrapper
+              theme={themeRef.current}
+              center={!!column.center}
+              selected={isSelected}
+              rowHeight={rowHeight}>
+              {cellContent}
+            </CellContentWrapper>
           </BodyCellContent>
         </BodyCell>
       </CellMeasurer>

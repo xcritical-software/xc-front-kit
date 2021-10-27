@@ -41,3 +41,7 @@ export const MultiGridWrapper = styled.div<{ height?: string }>`
   display: flex;
   ${({ height }) => height && `height: ${height}`}
 `;
+
+export const InternalGridWrapper = styled.div<{ shouldFitContainer?: boolean }>`
+  ${({ shouldFitContainer }) => shouldFitContainer && `height: 100%;`}
+`;
