@@ -19,6 +19,8 @@ export const PureButton: React.FC<IButtonProps> = ({
   children,
   href,
   theme,
+  className,
+  classNamePrefix,
   type = 'button',
   role = 'button',
   textPosition = 'center',
@@ -56,6 +58,7 @@ export const PureButton: React.FC<IButtonProps> = ({
   return (
     <ThemeProvider theme={innerTheme}>
       <StyledButton
+        className={`${classNamePrefix} ${className}`}
         as={element}
         ref={buttonRef}
         role={role}

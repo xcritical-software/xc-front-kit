@@ -71,6 +71,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
             <SearchInputWrapper>
               <Input
                 prefix={<Search />}
+                className="filters-search"
                 value={searchInput}
                 disabled={disabled}
                 onChange={onSearchInputChange}
@@ -110,6 +111,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
             </MoreFilterSelect>
 
             <Button
+              className="filters-reset"
               appearance="filters-reset"
               baseAppearance="link"
               disabled={disabled}
@@ -118,6 +120,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
             </Button>
 
             <Button
+              className="filters-apply"
               appearance="filters-apply"
               baseAppearance="primary"
               disabled={disabled}

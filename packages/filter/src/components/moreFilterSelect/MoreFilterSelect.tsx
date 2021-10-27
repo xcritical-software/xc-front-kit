@@ -93,6 +93,7 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
       filterTheme={filterTheme}
       target={
         <Button
+          classNamePrefix="filters-more-button"
           appearance="filters-more"
           baseAppearance="link"
           selected={isOpen}
@@ -105,6 +106,7 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
       }>
       <Select
         autoFocus
+        classNamePrefix="filters-more-dropdown"
         appearance="filters-more"
         backspaceRemovesValue={false}
         components={{ DropdownIndicator, IndicatorSeparator: null }}

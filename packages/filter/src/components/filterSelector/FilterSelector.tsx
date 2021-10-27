@@ -24,6 +24,7 @@ export const FilterSelect: React.FC<ISelectedFilterComponent> = React.memo(
 
     return (
       <Select
+        classNamePrefix="filter-select"
         shouldFitContainer
         onChange={onChange}
         options={filterItems}

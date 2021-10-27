@@ -77,6 +77,7 @@ export interface IButtonProps
 export interface IStyledButtonProps extends IButtonProps {
   baseAppearance: string;
   appearance: string;
+  classNamePrefix?: string;
   spacing: 'compact' | 'default' | 'none';
   ghost: boolean;
   shouldFitContent: boolean;

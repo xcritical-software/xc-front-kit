@@ -24,6 +24,7 @@ export const FilterValueElement: React.FC<ISelectedFilterComponent> = React.memo
     ) : (
       <>
         <Input
+          className="filter-value-element"
           shouldFitContainer
           value={value || ''}
           disabled={!condition}
