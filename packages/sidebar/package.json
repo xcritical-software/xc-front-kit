@@ -38,7 +38,7 @@
 	},
 	"devDependencies": {
 		"micro-memoize": "4.0.8",
-		"mdi-react": "^6.7.0",
+		"mdi-react": "^8.1.0",
 		"react-router": "^5.0.1",
 		"react-router-dom": "^5.0.1"
 	},
