@@ -50,7 +50,7 @@
 		"utilitify": "^1.0.3"
 	},
 	"devDependencies": {
-		"@types/react-virtualized": "^9.21.8",
+		"@types/react-virtualized": "^9.21.14",
 		"@xcritical/sidebar": "^1.1.2",
 		"mdi-react": "^6.7.0"
 	}
