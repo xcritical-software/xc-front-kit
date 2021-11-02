@@ -43,6 +43,6 @@
 		"utilitify": "^1.0.3"
 	},
 	"devDependencies": {
-		"@types/react-select": "3.0.10"
+		"@types/react-select": "5.0.1"
 	}
 }
