@@ -42,6 +42,6 @@
 		"@xcritical/theme": "^1.1.1",
 		"lodash.get": "^4.x",
 		"micro-memoize": "^4.0.8",
-		"polished": "^3.4.4"
+		"polished": "^4.1.3"
 	}
 }
