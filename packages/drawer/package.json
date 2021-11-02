@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/drawer",
-	"version": "1.1.6",
+	"version": "2.0.1",
 	"description": "XCritical Drawer Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -11,8 +11,8 @@
 	],
 	"scripts": {
 		"test": "exit 0",
-		"compile": "tsdx build --format cjs,esm --verbose && api-extractor run",
 		"compile:local": "tsdx build --format cjs,esm --verbose && api-extractor run --local",
+		"compile": "tsdx build --format cjs,esm --verbose && api-extractor run",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},
@@ -43,7 +43,6 @@
 		"@xcritical/theme": "^1.1.1",
 		"lodash.get": "4.x",
 		"micro-memoize": "^4.0.8",
-		"polished": "^3.4.4",
-		"react-transition-group": "^4.3.0"
+		"polished": "^3.4.4"
 	}
 }

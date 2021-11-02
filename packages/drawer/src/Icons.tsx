@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-export const ArrowLeft = (): ReactElement => (
+export const ArrowLeft = () => (
   <svg style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24">
     <path
       fill="#000000"
@@ -9,7 +9,7 @@ export const ArrowLeft = (): ReactElement => (
   </svg>
 );
 
-export const ArrowRight = (): ReactElement => (
+export const ArrowRight = () => (
   <svg style={{ width: '24px', height: '24px' }} viewBox="0 0 24 24">
     <path
       fill="#000000"

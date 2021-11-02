@@ -4,60 +4,110 @@ import React, {
   useState,
   useCallback,
   useEffect,
+  memo,
+  ReactNode,
+  useMemo,
 } from 'react';
-import { withTheme, ThemeContext, ThemeProvider } from 'styled-components';
-import { Transition } from 'react-transition-group';
+import { ThemeContext, ThemeProvider } from 'styled-components';
 
 import { IThemeNamespace } from '@xcritical/theme';
 import Portal from '@xcritical/portal';
 import Blanket from '@xcritical/blanket';
 
-import { IDrawerProps, DrawerTheme } from './interfaces';
+import { DrawerTheme } from './interfaces';
 import {
+  Body,
+  BlanketWrapper,
   Wrapper,
-  Content,
-  Fade,
-  Slide,
-  SeparatorWrapper,
   Separator,
   AntiSelect,
-  IconWrapper,
+  CloseIconWrapper,
+  HeaderWrapper,
+  TitleWrapper,
+  Content,
 } from './styled';
 import { ArrowLeft, ArrowRight } from './Icons';
+import { getElementStyles } from './utils';
 
-export const PureDrawer = React.memo<IDrawerProps>(
+export interface IDrawerProps {
+  appearance?: string;
+  title?: string | number | JSX.Element;
+  baseAppearance?: string;
+  isOpen?: boolean;
+  theme?: DrawerTheme;
+  isRTL?: boolean;
+  isMovable?: boolean;
+  withCloseButton?: boolean;
+  closeIconComponent?: ReactNode;
+  minWidth?: number;
+  maxWidth?: number;
+  width?: number;
+  onOutsideClick?: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void;
+  onClose?: () => void;
+  withBlanket?: boolean;
+  onChangeWidth?: (newWidth: number, oldWidth: number) => void;
+}
+
+export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
   ({
     children,
-    // TODO Maybe 'appearance' and 'baseAppearance' doesn't need in future
     appearance = 'default',
     baseAppearance = 'default',
     isOpen = false,
-    onOutsideClick,
     theme,
     minWidth = 30,
     maxWidth = 1000,
+    width: propsWidth = maxWidth,
     isRTL = false,
     isMovable = false,
     withCloseButton = false,
     closeIconComponent,
     onClose,
     withBlanket = true,
-    zIndex,
-  }: IDrawerProps) => {
+    title,
+    onChangeWidth = () => {},
+  }) => {
+    const [animate, setAnimate] = useState(true);
     const themeContext = useContext<IThemeNamespace<DrawerTheme>>(ThemeContext);
-
+    const innerTheme = theme || themeContext || {};
     const clickXRef = useRef(0);
-    const drawerRef = useRef<HTMLElement>(null);
 
-    const [width, setWidth] = useState(maxWidth);
+    const [isRenderContent, setIsRenderContent] = useState(isOpen);
+
+    const [width, setWidth] = useState(isOpen ? propsWidth : 0);
     const [antiSelectLayer, setAntiSelectLayer] = useState(false);
+    const widthRef = useRef(propsWidth);
+
+    const transition = useMemo(
+      () =>
+        getElementStyles(innerTheme, 'transition', appearance, baseAppearance),
+      [innerTheme, appearance, baseAppearance]
+    );
 
     useEffect(() => {
-      setWidth(maxWidth);
-    }, [maxWidth]);
+      setWidth(isOpen ? propsWidth : 0);
+    }, [isOpen, propsWidth]);
+
+    useEffect(() => {
+      let timer: ReturnType<typeof setTimeout> | null = null;
+
+      if (isOpen) {
+        setIsRenderContent(true);
+      } else {
+        timer = setTimeout(() => {
+          setIsRenderContent(false);
+        }, parseInt(transition, 10));
+      }
+
+      return () => {
+        if (timer) clearTimeout(timer);
+      };
+    }, [isOpen, transition]);
 
     const handleMouseMove = useCallback(
-      (e) => {
+      (e: MouseEvent) => {
         if (!isMovable) return;
 
         const { clientX: currentX } = e;
@@ -65,103 +115,125 @@ export const PureDrawer = React.memo<IDrawerProps>(
           ? width - (currentX - clickXRef.current)
           : width + (currentX - clickXRef.current);
 
-        if (newWidth >= maxWidth) return;
+        if (newWidth > maxWidth) {
+          if (widthRef.current < maxWidth) {
+            widthRef.current = maxWidth;
+            setWidth(maxWidth);
+          }
 
-        if (newWidth <= 0) {
-          document.body.removeEventListener('mousemove', handleMouseMove);
-          setWidth(minWidth);
-        } else if (newWidth <= minWidth) {
+          return;
+        }
+
+        if (newWidth <= minWidth) {
+          widthRef.current = minWidth;
           setWidth(minWidth);
         } else {
+          widthRef.current = newWidth;
           setWidth(newWidth);
         }
       },
       [isMovable, isRTL, maxWidth, minWidth, width]
     );
+    const handleSelectStart = useCallback((e) => {
+      e.preventDefault();
+    }, []);
+
+    const handleMouseUp = useCallback(() => {
+      setAnimate(true);
+      document.removeEventListener('selectstart', handleSelectStart);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mousemove', handleMouseMove);
+      setAntiSelectLayer(false);
+      onChangeWidth(widthRef.current, width);
+    }, [minWidth, handleSelectStart, handleMouseMove, onChangeWidth]);
 
     const handleMouseDown = useCallback(
       (e) => {
         clickXRef.current = e.clientX;
+        setAnimate(false);
+        document.addEventListener('selectstart', handleSelectStart);
+        document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('mousemove', handleMouseMove);
         setAntiSelectLayer(true);
-
-        document.body.addEventListener('mousemove', handleMouseMove);
-        document.body.addEventListener('mouseup', () => {
-          document.body.removeEventListener('mousemove', handleMouseMove);
-          setAntiSelectLayer(false);
-        });
       },
-      [handleMouseMove]
+      [handleSelectStart, handleMouseUp, handleMouseMove]
     );
 
-    const handleMouseUp = useCallback(() => {
-      document.body.removeEventListener('mousemove', handleMouseMove);
-    }, [handleMouseMove]);
+    const componentTransitionTime = useMemo(
+      () => (animate ? transition : '0ms'),
+      [animate, transition]
+    );
+
+    const needRenderHeader = useMemo(() => title || withCloseButton, [
+      title,
+      withCloseButton,
+    ]);
 
     return (
-      <ThemeProvider theme={theme || themeContext || {}}>
-        <Transition
-          in={isOpen}
-          timeout={{ enter: 0, exit: 220 }}
-          mountOnEnter
-          unmountOnExit
-          onExited={onClose}>
-          <Portal id="drawer" zIndex="unset">
-            {withBlanket && (
-              <Fade
-                in={isOpen}
-                theme={theme || themeContext || {}}
-                appearance={appearance}
-                baseAppearance={baseAppearance}
-                zIndex={zIndex}>
-                <Blanket isTinted onBlanketClicked={onOutsideClick} />
-              </Fade>
-            )}
-            {antiSelectLayer && <AntiSelect />}
-            <Slide
-              zIndex={zIndex}
-              ref={drawerRef}
-              in={isOpen}
-              component={Wrapper}
-              theme={theme || themeContext || {}}
-              appearance={appearance}
-              baseAppearance={baseAppearance}
-              width={width}
-              isRTL={isRTL}>
-              {withCloseButton && (
-                <IconWrapper
-                  onClick={onOutsideClick}
+      <ThemeProvider theme={innerTheme}>
+        <Portal id="drawer" zIndex="unset">
+          <Wrapper
+            appearance={appearance}
+            baseAppearance={baseAppearance}
+            width={width}
+            isRTL={isRTL}
+            transition={componentTransitionTime}>
+            <Content appearance={appearance} baseAppearance={baseAppearance}>
+              {isRenderContent && needRenderHeader && (
+                <HeaderWrapper
                   appearance={appearance}
                   baseAppearance={baseAppearance}>
-                  {closeIconComponent ??
-                    (isRTL ? <ArrowRight /> : <ArrowLeft />)}
-                </IconWrapper>
+                  {withCloseButton && (
+                    <CloseIconWrapper
+                      onClick={onClose}
+                      appearance={appearance}
+                      baseAppearance={baseAppearance}>
+                      {closeIconComponent ??
+                        (isRTL ? <ArrowRight /> : <ArrowLeft />)}
+                    </CloseIconWrapper>
+                  )}
+
+                  <TitleWrapper
+                    appearance={appearance}
+                    baseAppearance={baseAppearance}>
+                    {title}
+                  </TitleWrapper>
+                </HeaderWrapper>
               )}
-              <Content
-                appearance={appearance}
-                baseAppearance={baseAppearance}
-                isOpen={isOpen}
-                width={width}
-                isRTL={isRTL}>
-                {children}
-              </Content>
-              <SeparatorWrapper
-                appearance={appearance}
-                baseAppearance={baseAppearance}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                isMovable={isMovable}>
-                <Separator
-                  appearance={appearance}
-                  baseAppearance={baseAppearance}
-                  isRTL={isRTL}
-                />
-              </SeparatorWrapper>
-            </Slide>
-          </Portal>
-        </Transition>
+
+              <Body appearance={appearance} baseAppearance={baseAppearance}>
+                {isRenderContent && children}
+              </Body>
+            </Content>
+
+            <Separator
+              appearance={appearance}
+              baseAppearance={baseAppearance}
+              onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
+              isMovable={isMovable}
+              isRTL={isRTL}
+            />
+          </Wrapper>
+
+          {antiSelectLayer && (
+            <AntiSelect
+              appearance={appearance}
+              baseAppearance={baseAppearance}
+              isRTL={isRTL}
+            />
+          )}
+        </Portal>
+        {withBlanket && isRenderContent && (
+          <BlanketWrapper
+            visible={!!width}
+            appearance={appearance}
+            baseAppearance={baseAppearance}
+            transition={transition}>
+            <Blanket isTinted onBlanketClicked={onClose} />
+          </BlanketWrapper>
+        )}
       </ThemeProvider>
     );
   }
 );
-
-export const Drawer = React.memo(withTheme(PureDrawer));
