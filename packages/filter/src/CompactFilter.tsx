@@ -65,10 +65,10 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
     <ThemeProvider theme={filterTheme}>
       <RootPanel>
         <TopPanel>
-          {prefix && <Prefix>{prefix}</Prefix>}
+          {prefix && <Prefix className="at-filter__prefix">{prefix}</Prefix>}
 
           {isSearchable ? (
-            <SearchInputWrapper>
+            <SearchInputWrapper className="at-filter__search-input-wrapper">
               <Input
                 prefix={<Search />}
                 value={searchInput}
@@ -80,7 +80,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
           ) : null}
 
           {isTagsVisible && (
-            <TopPanelTags>
+            <TopPanelTags className="at-filter__top-panel-tags">
               {Object.keys(mergedFilters).map((filterId) => (
                 <Tag
                   name={name}
@@ -98,7 +98,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
             </TopPanelTags>
           )}
 
-          <TopPanelButtons>
+          <TopPanelButtons className="at-filter__top-panel-buttons">
             <MoreFilterSelect
               filters={filters}
               selectedFilters={activeFilters}
@@ -126,7 +126,9 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
             </Button>
           </TopPanelButtons>
 
-          {postfix && <Postfix>{postfix}</Postfix>}
+          {postfix && (
+            <Postfix className="at-filter__postfix">{postfix}</Postfix>
+          )}
         </TopPanel>
       </RootPanel>
     </ThemeProvider>

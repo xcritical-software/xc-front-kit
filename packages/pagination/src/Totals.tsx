@@ -9,7 +9,7 @@ export const Totals = React.memo<ITotalsProps>(
     const to = currentPage * pageSize;
 
     return (
-      <StyledTotals>
+      <StyledTotals className="at-pagination__totals">
         {`${from} - ${to > total ? total : to} of ${total}`}
       </StyledTotals>
     );

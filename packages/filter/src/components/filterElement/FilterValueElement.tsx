@@ -31,7 +31,9 @@ export const FilterValueElement: React.FC<ISelectedFilterComponent> = React.memo
           onChange={onChange}
         />
         {validationError && (
-          <ValidationError>{validationError}</ValidationError>
+          <ValidationError className="at-filter__validation-error">
+            {validationError}
+          </ValidationError>
         )}
       </>
     )

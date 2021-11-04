@@ -372,9 +372,12 @@ const Grid: React.FC<IGridProps> = ({
       multiGridProps.height = wrapperSize.height;
 
       return (
-        <ScrollSync>
+        <ScrollSync className="at-grid__scroll-sync">
           {({ onScroll, scrollTop }) => (
-            <MultiGridWrapper height="100%" ref={wrapperRef}>
+            <MultiGridWrapper
+              className="at-grid__multi-grid__wrapper"
+              height="100%"
+              ref={wrapperRef}>
               <MultiGrid
                 {...multiGridProps}
                 onScroll={onScroll}
@@ -389,7 +392,9 @@ const Grid: React.FC<IGridProps> = ({
     return (
       <ScrollSync>
         {({ onScroll, scrollTop }) => (
-          <MultiGridWrapper ref={wrapperRef}>
+          <MultiGridWrapper
+            className="at-grid__multi-grid__wrapper"
+            ref={wrapperRef}>
             <MultiGrid
               {...multiGridProps}
               onScroll={onScroll}

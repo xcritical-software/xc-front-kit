@@ -9,6 +9,7 @@ interface IIconProps {
 
 export const AddIcon = () => (
   <svg
+    className="at-grid__cell__add-icon"
     xmlns="http://www.w3.org/2000/svg"
     width="16"
     height="16"
@@ -34,6 +35,7 @@ export const AddIcon = () => (
 
 export const RemoveIcon = () => (
   <svg
+    className="at-grid__cell__remove-icon"
     xmlns="http://www.w3.org/2000/svg"
     width="16"
     height="16"
@@ -58,7 +60,13 @@ export const RemoveIcon = () => (
 
 export const SortAscendingIcon = React.memo<IIconProps>(
   ({ color = 'currentColor', size = 24, children: _, ...props }) => (
-    <svg {...props} width={size} height={size} fill={color} viewBox="0 0 24 24">
+    <svg
+      className="at-grid__cell__sort-ascending-icon"
+      {...props}
+      width={size}
+      height={size}
+      fill={color}
+      viewBox="0 0 24 24">
       <path d="M19 7H22L18 3L14 7H17V21H19M2 17H6V19H2M12 5V7H2V5M2 11H9V13H2Z" />
     </svg>
   )
@@ -66,7 +74,13 @@ export const SortAscendingIcon = React.memo<IIconProps>(
 
 export const SortDescendingIcon = React.memo<IIconProps>(
   ({ color = 'currentColor', size = 24, children, ...props }) => (
-    <svg {...props} width={size} height={size} fill={color} viewBox="0 0 24 24">
+    <svg
+      className="at-grid__cell__sort-descending-icon"
+      {...props}
+      width={size}
+      height={size}
+      fill={color}
+      viewBox="0 0 24 24">
       <path d="M19 17H22L18 21L14 17H17V3H19M2 17H6V19H2M12 5V7H2V5M2 11H9V13H2Z" />
     </svg>
   )

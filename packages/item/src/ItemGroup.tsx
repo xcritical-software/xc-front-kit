@@ -24,7 +24,7 @@ const ItemGroup: FunctionComponent<IItemGroupProps> = ({
     );
   };
 
-  return <div>{renderAllItems()}</div>;
+  return <div className="at-item-group">{renderAllItems()}</div>;
 };
 
 export { ItemGroup };

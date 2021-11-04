@@ -73,8 +73,13 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   );
 
   return (
-    <HeaderCell theme={theme} width={newWidth} isEmpty={isEmpty}>
+    <HeaderCell
+      className="at-grid__header-cell"
+      theme={theme}
+      width={newWidth}
+      isEmpty={isEmpty}>
       <HeaderCellContent
+        className="at-grid__header-cell__content"
         theme={theme}
         center={center}
         onMouseDown={(e) => onMouseDown(e, index)}
@@ -87,6 +92,7 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
         />
       </HeaderCellContent>
       <RightBorder
+        className="at-grid__header-cell__right-border"
         theme={theme}
         onMouseDown={handleMouseDown}
         isEmpty={isEmpty}

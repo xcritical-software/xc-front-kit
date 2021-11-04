@@ -6,8 +6,8 @@ import { GridSort } from './consts';
 
 export const HeaderCellContentWrapper = ({ theme, content, sortOrder }) => (
   <>
-    <span>{content}</span>
-    <SortIconWrapper>
+    <span className="at-grid__header-cell__content_span">{content}</span>
+    <SortIconWrapper className="at-grid__sort-icon-wrapper">
       {sortOrder === GridSort.ASC && (
         <SortAscendingIcon size={theme.sortIconSize} />
       )}

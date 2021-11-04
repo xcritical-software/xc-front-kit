@@ -104,7 +104,7 @@ const PurePagination: React.FC<IPagination> = ({
   const paginationSelectTheme = getPaginationSelectTheme(theme);
 
   return (
-    <PaginationWrapper>
+    <PaginationWrapper className="at-pagination__wrapper">
       {showTotals && (
         <Totals currentPage={currentPage} pageSize={pageSize} total={total} />
       )}

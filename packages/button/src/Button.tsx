@@ -56,6 +56,7 @@ export const PureButton: React.FC<IButtonProps> = ({
   return (
     <ThemeProvider theme={innerTheme}>
       <StyledButton
+        className="at-button"
         as={element}
         ref={buttonRef}
         role={role}
@@ -73,6 +74,7 @@ export const PureButton: React.FC<IButtonProps> = ({
         {...rest}>
         {!!prefix && (
           <Prefix
+            className="at-button__prefix"
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>
@@ -80,8 +82,12 @@ export const PureButton: React.FC<IButtonProps> = ({
           </Prefix>
         )}
 
-        <ContentWrapper appearance={appearance} baseAppearance={baseAppearance}>
+        <ContentWrapper
+          className="at-button__content-wrapper"
+          appearance={appearance}
+          baseAppearance={baseAppearance}>
           <Content
+            className="at-button__content"
             textPosition={textPosition}
             isRTL={isRTL}
             appearance={appearance}
@@ -92,6 +98,7 @@ export const PureButton: React.FC<IButtonProps> = ({
 
         {!!postfix && (
           <Postfix
+            className="at-button__postfix"
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>

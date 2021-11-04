@@ -189,11 +189,15 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
 
   return (
     <ThemeProvider theme={(theme ?? themeContext) || {}}>
-      <Root offsetLeft={offsetLeft} isRTL={isRTL}>
-        <SidebarWrapper ref={sidebarRef} isRTL={isRTL}>
+      <Root className="at-sidebar" offsetLeft={offsetLeft} isRTL={isRTL}>
+        <SidebarWrapper
+          className="at-sidebar__wrapper"
+          ref={sidebarRef}
+          isRTL={isRTL}>
           {navComponent && (
-            <NavComponentWrapper>
+            <NavComponentWrapper className="at-sidebar__nav-component-wrapper">
               <Scrollbar
+                className="at-sidebar__scrollbar"
                 width={navWidth}
                 animate={animate}
                 autoHide={isScrollbarAutoHide}>
@@ -202,9 +206,16 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
             </NavComponentWrapper>
           )}
           {children && (
-            <ResponsiveWrapper animate={animate} width={width} isRTL={isRTL}>
-              <ChildWrapper animate={animate}>
+            <ResponsiveWrapper
+              className="at-sidebar__responsive-wrapper"
+              animate={animate}
+              width={width}
+              isRTL={isRTL}>
+              <ChildWrapper
+                className="at-sidebar__child-wrapper"
+                animate={animate}>
                 <Scrollbar
+                  className="at-sidebar__scrollbar"
                   width={width}
                   animate={animate}
                   autoHide={isScrollbarAutoHide}>
@@ -212,15 +223,19 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
                 </Scrollbar>
               </ChildWrapper>
 
-              {antiSelectLayer && <AntiSelect isRTL={isRTL} />}
+              {antiSelectLayer && (
+                <AntiSelect className="at-sidebar__anti-select" isRTL={isRTL} />
+              )}
 
               <SeparatorWrapper
+                className="at-sidebar__separator-wrapper"
                 isRTL={isRTL}
                 separatorWidth={separatorWidth}
                 onMouseDown={handleMouseDown}>
-                <Separator isRTL={isRTL}>
+                <Separator className="at-sidebar__separator" isRTL={isRTL}>
                   {withArrow && (
                     <CloseOpenButton
+                      className="at-sidebar__close-open-button"
                       toRight={arrowToRight}
                       onClick={handleClose}
                       isRTL={isRTL}>

@@ -96,6 +96,7 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
     <div style={labelCSS(context)}>
       {!!prefix && (
         <LabelPrefix
+          className="at-select__label-prefix"
           theme={theme}
           appearance={appearance}
           baseAppearance={baseAppearance}
@@ -104,12 +105,15 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
         </LabelPrefix>
       )}
 
-      <span style={textCSS(isRTL, theme, appearance, baseAppearance)}>
+      <span
+        className="at-select__option-span"
+        style={textCSS(isRTL, theme, appearance, baseAppearance)}>
         {children}
       </span>
 
       {!!postfix && (
         <LabelPostfix
+          className="at-select__label-postfix"
           theme={theme}
           appearance={appearance}
           baseAppearance={baseAppearance}

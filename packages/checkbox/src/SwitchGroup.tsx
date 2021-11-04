@@ -40,7 +40,10 @@ export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
   }, [propValues]);
 
   return (
-    <SwitchGroupWrapper appearance={appearance} baseAppearance={baseAppearance}>
+    <SwitchGroupWrapper
+      className="at-switch-group__wrapper"
+      appearance={appearance}
+      baseAppearance={baseAppearance}>
       {options.map(({ value, label }) => (
         <Checkbox
           checkIcon={checkIcon}

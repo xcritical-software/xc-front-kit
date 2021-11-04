@@ -8,6 +8,6 @@ export const NotificationContainer: React.FC<INotificationContainer> = ({
   ...rest
 }) => (
   <div className={className}>
-    <ToastContainer {...rest} />
+    <ToastContainer className="at-toast-container" {...rest} />
   </div>
 );

@@ -161,12 +161,14 @@ const InternalGrid: React.FC<IInternalGrid> = ({
 
     return (
       <CellMeasurer
+        className="at-grid__cell-measurer"
         cache={cacheRef.current}
         columnIndex={columnIndex}
         key={key}
         parent={parent}
         rowIndex={rowIndex}>
         <BodyCell
+          className="at-grid__cell-body"
           aria-rowindex={rowIndex}
           aria-colindex={columnIndex}
           data-column-name={field}
@@ -184,18 +186,21 @@ const InternalGrid: React.FC<IInternalGrid> = ({
           even={!!(rowIndex % 2)}
           theme={themeRef.current}>
           <BodyCellOffset
+            className="at-grid__cell-body__offset"
             center={!!column.center}
             expandLevel={expandLevel}
             theme={themeRef.current}
           />
 
           <BodyCellContent
+            className="at-grid__cell-body__content"
             theme={themeRef.current}
             center={!!column.center}
             selected={isSelected}
             rowHeight={rowHeight}>
             {column.isExpandable && mappedItems[rowIndex].children && (
               <ExpandButtonWrapper
+                className="at-grid__cell-expand-button__wrapper"
                 onClick={handleExpand}
                 theme={themeRef.current}>
                 {mappedItems[rowIndex].__isExpand ? (
@@ -207,10 +212,12 @@ const InternalGrid: React.FC<IInternalGrid> = ({
             )}
 
             {column.isExpandable && !mappedItems[rowIndex].children && (
-              <ShiftInsteadButton theme={themeRef.current} />
+              <ShiftInsteadButton
+                className="at-grid__cell-button__shift-instead"
+                theme={themeRef.current}
+              />
             )}
-
-            <span>{cellContent}</span>
+            <span className="at-grid__cell-content">{cellContent}</span>
           </BodyCellContent>
         </BodyCell>
       </CellMeasurer>
@@ -300,6 +307,7 @@ const InternalGrid: React.FC<IInternalGrid> = ({
 
   return (
     <Wrapper
+      className="at-grid__wrapper"
       theme={themeRef.current}
       width={width}
       changingColumns={changingColumns}>
@@ -317,8 +325,12 @@ const InternalGrid: React.FC<IInternalGrid> = ({
         minColumnWidth={minColumnWidth}
         onChangeSort={onChangeSort}
       />
-      <Body rightScroll={rightScroll} bottomScroll={bottomScroll}>
+      <Body
+        className="at-grid__body"
+        rightScroll={rightScroll}
+        bottomScroll={bottomScroll}>
         <VirtualisedGrid
+          className="at-virtualised-grid"
           ref={gridRef as MutableRefObject<VirtualisedGrid>}
           columnCount={filteredColums.length}
           columnWidth={({ index }: any) => filteredColums[index].width}
@@ -339,17 +351,24 @@ const InternalGrid: React.FC<IInternalGrid> = ({
       {resizeGridAfterResizeLastColumn && <TotalsShift />}
       {totals && (
         <TotalBlock
+          className="at-grid__total-block"
           width={fullWidthRef.current}
           translateX={scrollLeft}
           theme={themeRef.current}>
           {filteredColums.map((el: IColumn, index: number) => (
             <TotalCell
+              className="at-grid__total-cell"
               theme={themeRef.current}
               width={
                 filteredColums.length === index + 1 ? el.width + 8 : el.width
               }>
-              <TotalCellContent center={!!el.center} theme={themeRef.current}>
-                <span>{totals[el.field]}</span>
+              <TotalCellContent
+                className="at-grid__total-cell-content"
+                center={!!el.center}
+                theme={themeRef.current}>
+                <span className="at-grid__total-cell-content_span">
+                  {totals[el.field]}
+                </span>
               </TotalCellContent>
             </TotalCell>
           ))}

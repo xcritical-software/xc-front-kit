@@ -15,6 +15,7 @@ export const PureBlanket: React.FC<IBlanketProps> = ({
 
   return (
     <Root
+      className="at-blanket"
       theme={theme}
       canClickThrough={canClickThrough}
       isTinted={isTinted}
