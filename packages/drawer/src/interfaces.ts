@@ -29,6 +29,7 @@ export interface IDrawerProps {
   onClose?: () => void;
   withBlanket?: boolean;
   zIndex?: number;
+  className?: string;
 }
 
 export interface IDrawerStates {

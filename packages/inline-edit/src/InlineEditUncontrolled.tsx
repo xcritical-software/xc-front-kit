@@ -39,6 +39,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
   cancelIcon: CustomCancelIcon,
   confirmIcon: CustomConfirmIcon,
   isDoubleClickMode = false,
+  className = '',
 }: IInlineEditUncontrolledProps<TFieldValue>): React.ReactElement<
   IInlineEditUncontrolledProps<TFieldValue>
 > {
@@ -93,7 +94,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
       {isEditing ? (
         <>
           <EditView
-            className="at-inline-edit__edit-view"
+            className={`${className} at-inline-edit__edit-view`}
             {...editViewProps}
             value={value}
             onChange={handleEditValueChange}
@@ -101,15 +102,15 @@ export const InlineEditUncontrolled = function <TFieldValue>({
             error={error}
           />
           <ButtonsWrapper
-            className="at-inline-edit__buttons-wrapper"
+            className={`${className} at-inline-edit__buttons-wrapper`}
             appearance={appearance}
             baseAppearance={baseAppearance}>
             <ButtonWrapper
-              className="at-inline-edit__button-wrapper"
+              className={`${className} at-inline-edit__button-wrapper`}
               appearance={appearance}
               baseAppearance={baseAppearance}>
               <Button
-                className="at-inline-edit__confirm-button"
+                className={`${className} at-inline-edit__confirm-button`}
                 appearance={appearance}
                 baseAppearance={baseAppearance}
                 ref={confirmButtonRef}
@@ -118,7 +119,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
                   <CustomConfirmIcon />
                 ) : (
                   <ConfirmIcon
-                    className="at-inline-edit__confirm-icon"
+                    className={`${className} at-inline-edit__confirm-icon`}
                     appearance={appearance}
                     baseAppearance={baseAppearance}
                     viewBox="0 0 24 24">
@@ -128,11 +129,11 @@ export const InlineEditUncontrolled = function <TFieldValue>({
               </Button>
             </ButtonWrapper>
             <ButtonWrapper
-              className="at-inline-edit__button-wrapper"
+              className={`${className} at-inline-edit__button-wrapper`}
               appearance={appearance}
               baseAppearance={baseAppearance}>
               <Button
-                className="at-inline-edit__cancel-button"
+                className={`${className} at-inline-edit__cancel-button`}
                 appearance={appearance}
                 baseAppearance={baseAppearance}
                 ref={cancelButtonRef}
@@ -141,7 +142,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
                   <CustomCancelIcon />
                 ) : (
                   <CancelIcon
-                    className="at-inline-edit__cancel-icon"
+                    className={`${className} at-inline-edit__cancel-icon`}
                     appearance={appearance}
                     baseAppearance={baseAppearance}
                     viewBox="0 0 24 24">
@@ -155,14 +156,14 @@ export const InlineEditUncontrolled = function <TFieldValue>({
       ) : (
         <ReadViewWrapper>
           <EditButton
-            className="at-inline-edit__edit-button"
+            className={`${className} at-inline-edit__edit-button`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             onClick={onEditRequested}
             ref={editButtonRef}
           />
           <ReadViewContentWrapper
-            className="at-inline-edit__read-view-content-wrapper"
+            className={`${className} at-inline-edit__read-view-content-wrapper`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             readViewFitContainerWidth={readViewFitContainerWidth}

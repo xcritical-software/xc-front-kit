@@ -16,7 +16,7 @@ import { DefaultClearIcon } from './Icons';
 export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
   (
     {
-      className,
+      className = '',
       appearance = 'default',
       baseAppearance = 'default',
       prefix,
@@ -94,7 +94,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
 
     return (
       <Root
-        className={className}
+        className={`${className} at-input__wrapper`}
         appearance={appearance}
         baseAppearance={baseAppearance}
         isRTL={isRTL}
@@ -107,7 +107,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
         focusOnInput={isFocused}>
         {!!prefix && (
           <Prefix
-            className="at-input__prefix"
+            className={`${className} at-input__prefix`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}
@@ -116,7 +116,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
           </Prefix>
         )}
         <StyledInput
-          className="at-input"
+          className={`${className} at-input`}
           appearance={appearance}
           baseAppearance={baseAppearance}
           isRTL={isRTL}
@@ -135,7 +135,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
         />
         {isClearable && !!value && (
           <ClearIconWrapper
-            className="at-input__clear-icon__wrapper"
+            className={`${className} at-input__clear-icon__wrapper`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             onClick={inputOnClear}
@@ -143,12 +143,12 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
             invalid={invalid}
             hasValue={!!value}
             focusOnInput={isFocused}>
-            <ClearIcon />
+            <ClearIcon className={className} />
           </ClearIconWrapper>
         )}
         {!!postfix && (
           <Postfix
-            className="at-input__postfix"
+            className={`${className} at-input__postfix`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}

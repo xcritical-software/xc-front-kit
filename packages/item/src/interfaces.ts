@@ -36,6 +36,7 @@ export interface IItemProps {
   title?: string;
   textPosition?: string;
   onClick?: any;
+  className?: string;
 }
 
 export interface IItemGroupProps {
@@ -43,6 +44,7 @@ export interface IItemGroupProps {
   divided?: boolean;
   appearance?: string;
   baseAppearance?: string;
+  className?: string;
 }
 
 export interface IPrefixPostfixProps {

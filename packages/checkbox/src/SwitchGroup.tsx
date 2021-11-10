@@ -14,6 +14,7 @@ export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
   disabled = false,
   onChange,
   checkIcon,
+  className = '',
 }) => {
   const [values, setValues] = useState(propValues);
 
@@ -41,7 +42,7 @@ export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
 
   return (
     <SwitchGroupWrapper
-      className="at-switch-group__wrapper"
+      className={`${className} at-switch-group__wrapper`}
       appearance={appearance}
       baseAppearance={baseAppearance}>
       {options.map(({ value, label }) => (

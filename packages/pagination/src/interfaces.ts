@@ -17,6 +17,7 @@ export interface IPagination {
   onChangePage: (page: number) => void;
   onChangePageSize?: (page: number, pageSize: number) => void;
   theme?: IThemeNamespace<IPaginationTheme>;
+  className?: string;
 }
 
 export interface IPaginationTheme {
@@ -36,4 +37,5 @@ export interface ITotalsProps {
   currentPage: number;
   pageSize: number;
   total: number;
+  className?: string;
 }

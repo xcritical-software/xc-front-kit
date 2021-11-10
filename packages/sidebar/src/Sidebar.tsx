@@ -39,6 +39,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   navWidth = 90,
   separatorWidth = 10,
   onChangeState = () => {},
+  className = '',
 }) => {
   const themeContext = useContext(ThemeContext);
 
@@ -189,15 +190,19 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
 
   return (
     <ThemeProvider theme={(theme ?? themeContext) || {}}>
-      <Root className="at-sidebar" offsetLeft={offsetLeft} isRTL={isRTL}>
+      <Root
+        className={`${className} at-sidebar`}
+        offsetLeft={offsetLeft}
+        isRTL={isRTL}>
         <SidebarWrapper
-          className="at-sidebar__wrapper"
+          className={`${className} at-sidebar__wrapper`}
           ref={sidebarRef}
           isRTL={isRTL}>
           {navComponent && (
-            <NavComponentWrapper className="at-sidebar__nav-component-wrapper">
+            <NavComponentWrapper
+              className={`${className} at-sidebar__nav-component-wrapper`}>
               <Scrollbar
-                className="at-sidebar__scrollbar"
+                className={`${className} at-sidebar__scrollbar`}
                 width={navWidth}
                 animate={animate}
                 autoHide={isScrollbarAutoHide}>
@@ -207,15 +212,15 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
           )}
           {children && (
             <ResponsiveWrapper
-              className="at-sidebar__responsive-wrapper"
+              className={`${className} at-sidebar__responsive-wrapper`}
               animate={animate}
               width={width}
               isRTL={isRTL}>
               <ChildWrapper
-                className="at-sidebar__child-wrapper"
+                className={`${className} at-sidebar__child-wrapper`}
                 animate={animate}>
                 <Scrollbar
-                  className="at-sidebar__scrollbar"
+                  className={`${className} at-sidebar__scrollbar`}
                   width={width}
                   animate={animate}
                   autoHide={isScrollbarAutoHide}>
@@ -224,18 +229,23 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
               </ChildWrapper>
 
               {antiSelectLayer && (
-                <AntiSelect className="at-sidebar__anti-select" isRTL={isRTL} />
+                <AntiSelect
+                  className={`${className} at-sidebar__anti-select`}
+                  isRTL={isRTL}
+                />
               )}
 
               <SeparatorWrapper
-                className="at-sidebar__separator-wrapper"
+                className={`${className} at-sidebar__separator-wrapper`}
                 isRTL={isRTL}
                 separatorWidth={separatorWidth}
                 onMouseDown={handleMouseDown}>
-                <Separator className="at-sidebar__separator" isRTL={isRTL}>
+                <Separator
+                  className={`${className} at-sidebar__separator`}
+                  isRTL={isRTL}>
                   {withArrow && (
                     <CloseOpenButton
-                      className="at-sidebar__close-open-button"
+                      className={`${className} at-sidebar__close-open-button`}
                       toRight={arrowToRight}
                       onClick={handleClose}
                       isRTL={isRTL}>

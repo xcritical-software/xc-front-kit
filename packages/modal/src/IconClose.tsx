@@ -1,8 +1,10 @@
 import React from 'react';
 
-export const IconClose: React.FC = () => (
+import { IIconCloseProps } from './interfaces';
+
+export const IconClose: React.FC<IIconCloseProps> = ({ className = '' }) => (
   <svg
-    className="at-modal__icon-close"
+    className={`${className} at-modal__icon-close`}
     width="100%"
     height="100%"
     viewBox="0 0 24 24">

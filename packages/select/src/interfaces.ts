@@ -107,6 +107,7 @@ export interface IOptionProps extends IThemeProps, OptionTypeBase {
   postfix?: React.ReactElement;
   context: FormatOptionLabelContext;
   isRTL: boolean;
+  className?: string;
 }
 
 export interface IOptionItem extends OptionTypeBase {

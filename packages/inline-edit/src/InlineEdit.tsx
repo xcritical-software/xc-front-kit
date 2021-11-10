@@ -17,6 +17,7 @@ export const PureInlineEdit = function <
   invalid = false,
   isEditing,
   onIsEditingChange,
+  className,
   ...rest
 }: IInlineEditProps<
   TEditViewProps,
@@ -81,6 +82,7 @@ export const PureInlineEdit = function <
       disabled={disabled}
       onEditRequested={handleEditRequested}
       appearance={appearance}
+      className={className}
     />
   );
 };
