@@ -9,3 +9,7 @@ updates:
   open-pull-requests-limit: 99
   target-branch: master
   rebase-strategy: auto
+  commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope
