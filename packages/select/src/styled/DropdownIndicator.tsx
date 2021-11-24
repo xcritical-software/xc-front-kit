@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp } from '../Icons';
 import { DropdownIndicatorProps } from '../interfaces';
 
 const DropdownIndicator = (props: DropdownIndicatorProps) => {
-  const { getStyles, selectProps, className } = props;
+  const { getStyles, selectProps } = props;
   const dropdownIndicatorStyles = getStyles('dropdownIndicator', props);
 
   return (
