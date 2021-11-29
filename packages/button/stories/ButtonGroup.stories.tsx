@@ -51,7 +51,7 @@ const Wrapper = styled.div`
 storiesOf('ButtonGroup', module)
   .add('One button', () => (
     <ThemeProvider theme={themeWithButton}>
-      <ButtonGroup>
+      <ButtonGroup className="at-custom-class">
         <Button appearance="pagination">1</Button>
       </ButtonGroup>
     </ThemeProvider>

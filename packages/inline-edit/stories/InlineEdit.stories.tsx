@@ -77,6 +77,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
   confirmIcon,
   isDoubleClickMode,
   defaultValue = '',
+  className = '',
   ...rest
 }) => {
   const [value, setValue] = React.useState(defaultValue);
@@ -108,6 +109,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
         cancelIcon={cancelIcon}
         confirmIcon={confirmIcon}
         isDoubleClickMode={isDoubleClickMode}
+        className={className}
       />
     </ThemeProvider>
   );
@@ -288,7 +290,7 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
 storiesOf('InlineEdit', module)
   .add('Basic', () => (
     <div style={{ width: '200px' }}>
-      <BasicInlineEditInput editView={Input} />
+      <BasicInlineEditInput editView={Input} className="at-custom-class" />
     </div>
   ))
   .add('Themed', () => (

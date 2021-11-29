@@ -116,11 +116,11 @@ const PurePagination: React.FC<IPagination> = ({
       )}
 
       <ButtonGroup
-        className={`${className} at-pagination__button-group`}
+        className="at-pagination__button-group"
         theme={paginationButtonGroupTheme}>
         {needFirstPage && (
           <Button
-            className={`${className} at-pagination__button-first`}
+            className="at-pagination__button_first"
             theme={paginationButtonTheme}
             appearance="paginationButton"
             selected={currentPage === 1}
@@ -132,7 +132,7 @@ const PurePagination: React.FC<IPagination> = ({
 
         {showPrevious && (
           <Button
-            className={`${className} at-pagination__button-previous`}
+            className="at-pagination__button_previous"
             theme={paginationButtonTheme}
             appearance="paginationButton"
             disabled={disabled}
@@ -144,7 +144,7 @@ const PurePagination: React.FC<IPagination> = ({
         {needVisiblePages &&
           visiblePagesArray.map((visiblePage: number) => (
             <Button
-              className={`${className} at-pagination__button-visible-page`}
+              className={`at-pagination__button_visible-page_${visiblePage}`}
               key={visiblePage}
               theme={paginationButtonTheme}
               appearance="paginationButton"
@@ -157,7 +157,7 @@ const PurePagination: React.FC<IPagination> = ({
 
         {showNext && (
           <Button
-            className={`${className} at-pagination__button-next`}
+            className="at-pagination__button_next"
             theme={paginationButtonTheme}
             appearance="paginationButton"
             disabled={disabled}
@@ -170,7 +170,7 @@ const PurePagination: React.FC<IPagination> = ({
 
         {needLastPage && (
           <Button
-            className={`${className} at-pagination__button-last-page`}
+            className="at-pagination__button_last-page"
             theme={paginationButtonTheme}
             appearance="paginationButton"
             selected={currentPage === totalPages}
@@ -183,7 +183,7 @@ const PurePagination: React.FC<IPagination> = ({
 
       {showSizeChanger && (
         <Select
-          className={`${className} at-pagination__select`}
+          className="at-pagination__select"
           theme={paginationSelectTheme}
           appearance="paginationSelect"
           options={mappedPageSizeOptions}

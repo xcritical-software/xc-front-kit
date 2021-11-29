@@ -41,7 +41,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
       disabled={disabled}
       onClick={handleClick}>
       <HiddenCheckbox
-        className={`${className} at-checkbox__hidden`}
+        className="at-checkbox_hidden"
         type={type}
         checked={checked}
         disabled={disabled}
@@ -49,20 +49,20 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
         onChange={handleInputChange}
       />
       <CheckboxWrapper
-        className={`${className} at-checkbox__wrapper`}
+        className="at-checkbox__wrapper"
         appearance={appearance}
         baseAppearance={baseAppearance}
         type={type}>
         {checkIcon ? (
           <StyledCheckbox
-            className={`${className} at-checkbox`}
+            className="at-checkbox"
             appearance={appearance}
             baseAppearance={baseAppearance}>
             {checked && checkIcon}
           </StyledCheckbox>
         ) : (
           <DefaultCheckbox
-            className={`${className} at-checkbox__default`}
+            className="at-checkbox_default"
             appearance={appearance}
             baseAppearance={baseAppearance}
             checked={checked}
@@ -72,7 +72,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
       </CheckboxWrapper>
       {label && (
         <LabelWrapper
-          className={`${className} at-checkbox__label-wrapper`}
+          className="at-checkbox__label-wrapper"
           appearance={appearance}
           baseAppearance={baseAppearance}>
           {label}

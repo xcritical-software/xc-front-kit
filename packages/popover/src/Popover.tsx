@@ -212,7 +212,7 @@ export const Popover: React.FC<IPopover> = memo(
               {children}
               {popperProps.visible && (
                 <Content
-                  className={`${className} at-popover__content-wrapper`}
+                  className="at-popover__content"
                   ref={(node) => {
                     const { contentRef } = popperProps;
 
@@ -232,7 +232,7 @@ export const Popover: React.FC<IPopover> = memo(
                   {content}
                   {withArrow && (
                     <Arrow
-                      className={`${className} at-popover__arrow`}
+                      className="at-popover__arrow"
                       x-arrow=""
                       style={popperProps.arrowStyles}
                       data-arrow-position={popperProps.position}

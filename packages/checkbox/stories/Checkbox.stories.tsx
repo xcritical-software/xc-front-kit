@@ -200,6 +200,7 @@ const BasicCheckbox = ({
         onChange={handleChange}
         label={label}
         checkIcon={checkIcon}
+        className="at-custom-class"
       />
     </ThemeProvider>
   );
@@ -252,6 +253,7 @@ const BasicSwitchGroup = ({
         options={options}
         values={values}
         disabled={disabled}
+        className="at-custom-class"
       />
     </ThemeProvider>
   );

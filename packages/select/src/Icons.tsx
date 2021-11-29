@@ -2,7 +2,7 @@ import React from 'react';
 
 export const ChevronUp = ({ fill = '#A7A7A7' }) => (
   <svg
-    className="at-select__chevron-up_icon"
+    className="at-select__icon_chevron-up"
     width="12"
     height="8"
     viewBox="0 0 12 8"
@@ -19,7 +19,7 @@ export const ChevronUp = ({ fill = '#A7A7A7' }) => (
 
 export const ChevronDown = ({ fill = '#A7A7A7' }) => (
   <svg
-    className="at-select__chevron-down_icon"
+    className="at-select__icon_chevron-down"
     width="12"
     height="8"
     viewBox="0 0 12 8"
@@ -36,7 +36,7 @@ export const ChevronDown = ({ fill = '#A7A7A7' }) => (
 
 export const Close = ({ fill = '#A7A7A7', size = 12 }) => (
   <svg
-    className="at-select__close_icon"
+    className="at-select__icon_close"
     xmlns="http://www.w3.org/2000/svg"
     width={size}
     height={size}

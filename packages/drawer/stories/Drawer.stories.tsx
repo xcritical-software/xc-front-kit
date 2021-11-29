@@ -123,7 +123,8 @@ const BasicDrawer = ({
         withCloseButton={withCloseButton}
         closeIconComponent={closeIconComponent}
         onClose={onClose}
-        withBlanket={withBlanket}>
+        withBlanket={withBlanket}
+        className="at-custom-class">
         <div>Content</div>
       </Drawer>
       <button type="button" onClick={handleClick}>

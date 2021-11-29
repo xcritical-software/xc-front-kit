@@ -114,8 +114,13 @@ const ChangeOptions = () => {
 storiesOf('Select', module)
   .add('Basic', () => (
     <>
-      <Select options={options} />
-      <Select isSearchable textPosition="left" options={options} />
+      <Select options={options} className="at-custom-class" />
+      <Select
+        isSearchable
+        textPosition="left"
+        options={options}
+        className="at-custom-class"
+      />
     </>
   ))
   .add('Empty', () => <Select />)

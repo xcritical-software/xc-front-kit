@@ -36,7 +36,7 @@ const PureSwitch: React.FC<ISwitchProps> = ({
       baseAppearance={baseAppearance}
       labelPosition={labelPosition}>
       <SwitchHiddenCheckbox
-        className={`${className} at-switch__hidden-checkbox`}
+        className="at-switch__checkbox_hidden"
         type="checkbox"
         name={name ?? label ?? ''}
         checked={checked}
@@ -45,13 +45,13 @@ const PureSwitch: React.FC<ISwitchProps> = ({
       />
 
       <SwitchContainer
-        className={`${className} at-switch__container`}
+        className="at-switch__container"
         disabled={disabled}
         checked={checked}
         appearance={appearance}
         baseAppearance={baseAppearance}>
         <SwitchHandle
-          className={`${className} at-switch__handle`}
+          className="at-switch__handle"
           checked={checked}
           appearance={appearance}
           baseAppearance={baseAppearance}
@@ -60,7 +60,7 @@ const PureSwitch: React.FC<ISwitchProps> = ({
 
       {label && (
         <SwitchLabelText
-          className={`${className} at-switch__label-text`}
+          className="at-switch__label-text"
           labelPosition={labelPosition}
           appearance={appearance}
           baseAppearance={baseAppearance}>

@@ -208,6 +208,7 @@ storiesOf('ConnectedModal', module)
         </StyledButton>
 
         <ConnectedModal
+          className="at-custom-class"
           title="Default Modal"
           name="defaultModal"
           width={text('Width', 'auto')}

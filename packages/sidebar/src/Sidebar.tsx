@@ -195,14 +195,13 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
         offsetLeft={offsetLeft}
         isRTL={isRTL}>
         <SidebarWrapper
-          className={`${className} at-sidebar__wrapper`}
+          className="at-sidebar__wrapper"
           ref={sidebarRef}
           isRTL={isRTL}>
           {navComponent && (
-            <NavComponentWrapper
-              className={`${className} at-sidebar__nav-component-wrapper`}>
+            <NavComponentWrapper className="at-sidebar__nav-wrapper">
               <Scrollbar
-                className={`${className} at-sidebar__scrollbar`}
+                className="at-sidebar__scrollbar"
                 width={navWidth}
                 animate={animate}
                 autoHide={isScrollbarAutoHide}>
@@ -212,15 +211,15 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
           )}
           {children && (
             <ResponsiveWrapper
-              className={`${className} at-sidebar__responsive-wrapper`}
+              className="at-sidebar__responsive-wrapper"
               animate={animate}
               width={width}
               isRTL={isRTL}>
               <ChildWrapper
-                className={`${className} at-sidebar__child-wrapper`}
+                className="at-sidebar__child-wrapper"
                 animate={animate}>
                 <Scrollbar
-                  className={`${className} at-sidebar__scrollbar`}
+                  className="at-sidebar__scrollbar"
                   width={width}
                   animate={animate}
                   autoHide={isScrollbarAutoHide}>
@@ -229,23 +228,18 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
               </ChildWrapper>
 
               {antiSelectLayer && (
-                <AntiSelect
-                  className={`${className} at-sidebar__anti-select`}
-                  isRTL={isRTL}
-                />
+                <AntiSelect className="at-sidebar__anti-select" isRTL={isRTL} />
               )}
 
               <SeparatorWrapper
-                className={`${className} at-sidebar__separator-wrapper`}
+                className="at-sidebar__separator-wrapper"
                 isRTL={isRTL}
                 separatorWidth={separatorWidth}
                 onMouseDown={handleMouseDown}>
-                <Separator
-                  className={`${className} at-sidebar__separator`}
-                  isRTL={isRTL}>
+                <Separator className="at-sidebar__separator" isRTL={isRTL}>
                   {withArrow && (
                     <CloseOpenButton
-                      className={`${className} at-sidebar__close-open-button`}
+                      className="at-sidebar__button_close-open"
                       toRight={arrowToRight}
                       onClick={handleClose}
                       isRTL={isRTL}>

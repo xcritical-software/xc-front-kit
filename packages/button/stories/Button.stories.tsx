@@ -159,6 +159,7 @@ storiesOf('Button', module)
   .addDecorator(withKnobs)
   .add('Basic', () => (
     <Button
+      className="at-custom-class"
       key="button"
       disabled={boolean('Disabled', false)}
       ghost={boolean('Ghost', false)}>

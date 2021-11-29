@@ -127,10 +127,11 @@ export const PureDrawer = React.memo<IDrawerProps>(
               appearance={appearance}
               baseAppearance={baseAppearance}
               width={width}
-              isRTL={isRTL}>
+              isRTL={isRTL}
+              className={`${className} at-drawer__slide`}>
               {withCloseButton && (
                 <IconWrapper
-                  className={`${className} at-drawer__icon-wrapper`}
+                  className="at-drawer__icon-wrapper"
                   onClick={onOutsideClick}
                   appearance={appearance}
                   baseAppearance={baseAppearance}>
@@ -139,7 +140,7 @@ export const PureDrawer = React.memo<IDrawerProps>(
                 </IconWrapper>
               )}
               <Content
-                className={`${className} at-drawer__content`}
+                className="at-drawer__content"
                 appearance={appearance}
                 baseAppearance={baseAppearance}
                 isOpen={isOpen}
@@ -148,14 +149,14 @@ export const PureDrawer = React.memo<IDrawerProps>(
                 {children}
               </Content>
               <SeparatorWrapper
-                className={`${className} at-drawer__separator-wrapper`}
+                className="at-drawer__separator-wrapper"
                 appearance={appearance}
                 baseAppearance={baseAppearance}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 isMovable={isMovable}>
                 <Separator
-                  className={`${className} at-drawer__separator`}
+                  className="at-drawer__separator"
                   appearance={appearance}
                   baseAppearance={baseAppearance}
                   isRTL={isRTL}

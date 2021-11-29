@@ -28,7 +28,11 @@ const BasicBlanket: React.FC<any> = ({ blanketTheme }) => {
 
   return (
     <ThemeProvider theme={blanketTheme}>
-      <Blanket isTinted={isTinted} onBlanketClicked={handleClick} />
+      <Blanket
+        className="at-custom-class"
+        isTinted={isTinted}
+        onBlanketClicked={handleClick}
+      />
       <div>Click to any place for show/hide Blanket</div>
     </ThemeProvider>
   );

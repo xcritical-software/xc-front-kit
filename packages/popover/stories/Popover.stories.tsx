@@ -110,7 +110,11 @@ storiesOf('Popover', module)
       <Cell center>
         <h1>Top</h1>
         <Wrapper>
-          <Popover position="top left" visible content={popoverContent}>
+          <Popover
+            position="top left"
+            visible
+            content={popoverContent}
+            className="at-custom-class">
             <ComponentWithPopover>Top Left</ComponentWithPopover>
           </Popover>
           <Popover position="top center" visible content={popoverContent}>

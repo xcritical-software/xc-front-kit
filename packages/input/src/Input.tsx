@@ -107,7 +107,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
         focusOnInput={isFocused}>
         {!!prefix && (
           <Prefix
-            className={`${className} at-input__prefix`}
+            className="at-input__prefix"
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}
@@ -116,7 +116,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
           </Prefix>
         )}
         <StyledInput
-          className={`${className} at-input`}
+          className="at-input"
           appearance={appearance}
           baseAppearance={baseAppearance}
           isRTL={isRTL}
@@ -135,7 +135,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
         />
         {isClearable && !!value && (
           <ClearIconWrapper
-            className={`${className} at-input__clear-icon__wrapper`}
+            className="at-input__icon-wrapper_clear"
             appearance={appearance}
             baseAppearance={baseAppearance}
             onClick={inputOnClear}
@@ -143,12 +143,12 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
             invalid={invalid}
             hasValue={!!value}
             focusOnInput={isFocused}>
-            <ClearIcon className={className} />
+            <ClearIcon />
           </ClearIconWrapper>
         )}
         {!!postfix && (
           <Postfix
-            className={`${className} at-input__postfix`}
+            className="at-input__postfix"
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}

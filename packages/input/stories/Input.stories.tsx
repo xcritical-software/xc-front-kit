@@ -62,6 +62,7 @@ const BasicInput = () => {
       value={value}
       onChange={handleChange}
       onFocus={() => action('onFocused')}
+      className="at-custom-class"
     />
   );
 };

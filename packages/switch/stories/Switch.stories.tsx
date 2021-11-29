@@ -96,6 +96,7 @@ storiesOf('Switch', module)
       disabled={boolean('Disabled', false)}
       label={text('Label', 'Test Label')}
       labelPosition={select('Label position', ['left', 'right'], 'right')}
+      className="at-custom-class"
     />
   ))
   .add('With Custom Theme', () => (
