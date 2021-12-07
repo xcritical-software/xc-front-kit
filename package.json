@@ -45,7 +45,7 @@
   "devDependencies": {
     "babel-loader": "^8.0.6",
     "@microsoft/api-extractor": "7.7.13",
-    "@storybook/addon-a11y": "^5.3.19",
+    "@storybook/addon-a11y": "^6.4.8",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-backgrounds": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
