@@ -43,6 +43,6 @@
 		"polished": "3.x",
 		"utilitify": "^1.0.3",
 		"csstype": "^2.6.9",
-		"fast-equals": "2.0.0"
+		"fast-equals": "2.0.4"
 	}
 }
