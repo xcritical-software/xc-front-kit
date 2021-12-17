@@ -75,7 +75,7 @@ export const PureButton: React.FC<IButtonProps> = ({
         {...rest}>
         {!!prefix && (
           <Prefix
-            className="at-button__prefix"
+            className="at-button--prefix"
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>
@@ -84,11 +84,11 @@ export const PureButton: React.FC<IButtonProps> = ({
         )}
 
         <ContentWrapper
-          className="at-button__content-wrapper"
+          className="at-button--content-wrapper"
           appearance={appearance}
           baseAppearance={baseAppearance}>
           <Content
-            className="at-button__content"
+            className="at-button--content"
             textPosition={textPosition}
             isRTL={isRTL}
             appearance={appearance}
@@ -99,7 +99,7 @@ export const PureButton: React.FC<IButtonProps> = ({
 
         {!!postfix && (
           <Postfix
-            className="at-button__postfix"
+            className="at-button--postfix"
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>

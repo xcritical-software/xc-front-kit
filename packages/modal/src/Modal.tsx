@@ -50,10 +50,9 @@ export const Modal: React.FC<IModalProps> = ({
         zIndex={zIndex}
         theme={modalBlanketTheme}
         onBlanketClicked={onModalCancel}
-        className={className}
       />
       <ModalContent
-        className={`${className} at-modal__content`}
+        className={`${className} at-modal--content`}
         zIndex={zIndex}
         width={width}
         maxWidth={maxWidth}
@@ -63,19 +62,19 @@ export const Modal: React.FC<IModalProps> = ({
         minHeight={minHeight}
         appearance={appearance}>
         <ModalHeaderWrapper
-          className="at-modal__header-wrapper"
+          className="at-modal--header-wrapper"
           appearance={appearance}>
-          <ModalHeader className="at-modal__header" appearance={appearance}>
+          <ModalHeader className="at-modal--header" appearance={appearance}>
             {title}
           </ModalHeader>
           <ModalIconClose
-            className="at-modal__icon-wrapper_close"
+            className="at-modal--icon-wrapper-close"
             onClick={onModalCancel}
             appearance={appearance}>
             {iconClose || <IconClose />}
           </ModalIconClose>
         </ModalHeaderWrapper>
-        <ModalBody className="at-modal__body" appearance={appearance}>
+        <ModalBody className="at-modal--body" appearance={appearance}>
           {children}
         </ModalBody>
       </ModalContent>

@@ -32,7 +32,7 @@ export const Dropdown: React.FC<IDropdownProps> = ({
   const { dropdownBlanketZIndex } = filterTheme;
 
   return (
-    <DropdownRoot className="at-filter__dropdown">
+    <DropdownRoot className="at-filter--dropdown">
       <Popover
         preventOverflowViewport
         visible={isOpen}

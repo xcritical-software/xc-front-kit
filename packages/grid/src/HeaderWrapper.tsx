@@ -137,7 +137,6 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
 
   return (
     <Header
-      className="at-grid__header"
       ref={headerRef}
       width={fullWidth}
       translateX={translateX}
@@ -168,7 +167,6 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
       )}
       {isMoving && (
         <MovingElem
-          className="at-grid__header__moving-element"
           startCoord={startCoord}
           mouseMove={mouseMove}
           width={movingColumnDataRef.current?.width ?? 0}

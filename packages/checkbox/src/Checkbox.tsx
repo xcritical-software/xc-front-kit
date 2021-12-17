@@ -35,7 +35,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
 
   return (
     <CheckboxLabel
-      className={`${className} at-checkbox__label`}
+      className={`${className} at-checkbox--label`}
       appearance={appearance}
       baseAppearance={baseAppearance}
       disabled={disabled}
@@ -49,7 +49,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
         onChange={handleInputChange}
       />
       <CheckboxWrapper
-        className="at-checkbox__wrapper"
+        className="at-checkbox--wrapper"
         appearance={appearance}
         baseAppearance={baseAppearance}
         type={type}>
@@ -72,7 +72,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
       </CheckboxWrapper>
       {label && (
         <LabelWrapper
-          className="at-checkbox__label-wrapper"
+          className="at-checkbox--label-wrapper"
           appearance={appearance}
           baseAppearance={baseAppearance}>
           {label}

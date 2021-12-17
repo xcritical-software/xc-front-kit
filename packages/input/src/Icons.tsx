@@ -2,7 +2,7 @@ import React from 'react';
 
 export const DefaultClearIcon = () => (
   <svg
-    className="at-input__icon_clear_default"
+    className="at-input--icon-clear-default"
     width="16"
     height="16"
     fill="inherit"

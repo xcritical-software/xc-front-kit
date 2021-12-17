@@ -48,10 +48,10 @@ export const MenuList: React.FC<IMenuListComponentProps> = memo((props) => {
     <>
       <FixScrollbarLogic />
       <MenuListWrapper
-        className="at-select__menu-list-wrapper"
+        className="at-select--menu-list-wrapper"
         themeStyles={menuListStyles}>
         <Scrollbars
-          className="at-select__scrollbars"
+          className="at-select--scrollbars"
           autoHeight
           renderThumbVertical={renderThumb(styles.menuScrollbar)}
           renderThumbHorizontal={renderThumb(styles.menuScrollbar)}>

@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 export const ArrowLeft = (): ReactElement => (
   <svg
-    className="at-drawer__icon-arrow_left"
+    className="at-drawer--icon-arrow-left"
     style={{ width: '24px', height: '24px' }}
     viewBox="0 0 24 24">
     <path
@@ -14,7 +14,7 @@ export const ArrowLeft = (): ReactElement => (
 
 export const ArrowRight = (): ReactElement => (
   <svg
-    className="at-drawer__icon-arrow_right"
+    className="at-drawer--icon-arrow-right"
     style={{ width: '24px', height: '24px' }}
     viewBox="0 0 24 24">
     <path

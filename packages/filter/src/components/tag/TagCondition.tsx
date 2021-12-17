@@ -77,15 +77,15 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
   }, [guid, onRemoveFilter]);
 
   return (
-    <TagConditionsWrapper className="at-filter__tag-conditions-wrapper">
+    <TagConditionsWrapper className="at-filter--tag-conditions-wrapper">
       <RemoveConditionButton
-        className="at-filter__remove-conditions-button"
+        className="at-filter--remove-conditions-button"
         onClick={onRemoveCondition}>
         <Remove size={20} />
       </RemoveConditionButton>
 
-      <DropdownItem className="at-filter__dropdown-item">
-        <TagLabel className="at-filter__tag-label">Conditions</TagLabel>
+      <DropdownItem className="at-filter--dropdown-item">
+        <TagLabel className="at-filter--tag-label">Conditions</TagLabel>
         <Select
           shouldFitContainer
           appearance="filters-tag-condition"
@@ -101,8 +101,8 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
         />
       </DropdownItem>
       {selectedCondition?.hasValue ? (
-        <DropdownItem className="at-filter__dropdown-item">
-          <TagLabel className="at-filter__tag-label">Value</TagLabel>
+        <DropdownItem className="at-filter--dropdown-item">
+          <TagLabel className="at-filter--tag-label">Value</TagLabel>
           <div>
             <FilterValueElement
               tagConditionsRef={tagConditionsRef}

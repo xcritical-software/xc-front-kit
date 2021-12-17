@@ -2,7 +2,7 @@ import React from 'react';
 
 export const ChevronDown = () => (
   <svg
-    className="at-filter__chevron-down"
+    className="at-filter--chevron-down"
     width="12"
     height="8"
     viewBox="0 0 12 8"

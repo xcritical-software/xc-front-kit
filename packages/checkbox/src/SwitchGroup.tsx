@@ -42,7 +42,7 @@ export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
 
   return (
     <SwitchGroupWrapper
-      className={`${className} at-switch-group__wrapper`}
+      className={`${className} at-switch-group--wrapper`}
       appearance={appearance}
       baseAppearance={baseAppearance}>
       {options.map(({ value, label }) => (

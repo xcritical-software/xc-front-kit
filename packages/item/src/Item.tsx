@@ -32,7 +32,7 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
 
     return (
       <Root
-        className={`${className} at-item__root`}
+        className={`${className} at-item--root`}
         role={role}
         divided={divided}
         isHidden={hidden}
@@ -46,7 +46,7 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
         title={title}>
         {!!prefix && (
           <Prefix
-            className="at-item__prefix"
+            className="at-item--prefix"
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>
@@ -54,11 +54,11 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
           </Prefix>
         )}
         <Wrapper
-          className="at-item__wrapper"
+          className="at-item--wrapper"
           appearance={appearance}
           baseAppearance={baseAppearance}>
           <ContentWrapper
-            className="at-item__content-wrapper"
+            className="at-item--content-wrapper"
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}
@@ -69,7 +69,7 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
         </Wrapper>
         {!!postfix && (
           <Postfix
-            className="at-item__postfix"
+            className="at-item--postfix"
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>
