@@ -79,7 +79,7 @@
     "typescript": "^4.2.3",
     "ts-loader": "^7.0.5",
     "typescript-plugin-styled-components": "1.4.4",
-    "@commitlint/cli": "^8.3.5",
+    "@commitlint/cli": "^16.0.1",
     "@commitlint/config-conventional": "^8.3.4",
     "@commitlint/travis-cli": "8.3.5",
     "tsdx": "^0.14.1",
