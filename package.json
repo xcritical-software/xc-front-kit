@@ -84,7 +84,7 @@
     "@commitlint/travis-cli": "8.3.5",
     "tsdx": "^0.14.1",
     "rollup-plugin-strip-code": "^0.2.7",
-    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-import": "^2.25.4",
     "prettier": "2.2.1",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-config-prettier": "8.2.0"
