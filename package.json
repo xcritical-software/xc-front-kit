@@ -70,7 +70,7 @@
     "boltify": "1.1.5",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
-    "lint-staged": "^10.0.8",
+    "lint-staged": "^12.1.7",
     "react-docgen-typescript-loader": "^3.4.0",
     "redux-devtools-extension": "^2.13.8",
     "rimraf": "^3.0.2",
