@@ -47,7 +47,7 @@
     "@microsoft/api-extractor": "7.7.13",
     "@storybook/addon-a11y": "^5.3.19",
     "@storybook/addon-actions": "^5.3.19",
-    "@storybook/addon-backgrounds": "^5.3.19",
+    "@storybook/addon-backgrounds": "^6.4.13",
     "@storybook/addon-docs": "^5.3.19",
     "@storybook/addon-info": "^5.3.19",
     "@storybook/addon-knobs": "^5.3.19",
