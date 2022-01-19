@@ -64,7 +64,7 @@
     "@types/react-custom-scrollbars": "^4.0.6",
     "@types/react-dates": "^17.1.10",
     "@types/react-router": "^5.1.4",
-    "@types/react-router-dom": "^5.1.2",
+    "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.0.1",
     "@xcritical/eslint-plugin-xcritical": "4.0.1",
     "boltify": "1.1.5",
