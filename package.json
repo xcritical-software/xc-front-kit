@@ -81,7 +81,7 @@
     "typescript-plugin-styled-components": "1.4.4",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@commitlint/travis-cli": "8.3.5",
+    "@commitlint/travis-cli": "16.0.3",
     "tsdx": "^0.14.1",
     "rollup-plugin-strip-code": "^0.2.7",
     "eslint-plugin-import": "^2.21.2",
