@@ -40,7 +40,7 @@
 		"mdi-react": "^6.7.0",
 		"micro-memoize": "4.0.8",
 		"react-router": "^5.0.1",
-		"react-router-dom": "^5.0.1"
+		"react-router-dom": "^6.2.1"
 	},
 	"dependencies": {
 		"@xcritical/theme": "^1.2.0",
