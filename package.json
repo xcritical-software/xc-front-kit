@@ -65,7 +65,7 @@
     "@types/react-router": "^5.1.4",
     "@types/react-router-dom": "^5.1.2",
     "@types/styled-components": "^5.0.1",
-    "@xcritical/eslint-plugin-xcritical": "4.0.1",
+    "@xcritical/eslint-plugin-xcritical": "4.2.0",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.8",
