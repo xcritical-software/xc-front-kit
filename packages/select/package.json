@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/select",
-	"version": "1.2.0",
+	"version": "1.2.1-beta.0",
 	"description": "XCritical Select Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -34,7 +34,7 @@
 		"styled-components": "^5.3.3"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^1.2.0",
+		"@xcritical/theme": "^1.2.1-beta.0",
 		"lodash.isempty": "4.x",
 		"micro-memoize": "^4.0.8",
 		"polished": "^4.1.4",
