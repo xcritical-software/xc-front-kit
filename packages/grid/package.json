@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/grid",
-	"version": "1.2.11",
+	"version": "1.3.0",
 	"description": "XCritical Grid Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -38,20 +38,20 @@
 	},
 	"private": false,
 	"peerDependencies": {
-		"react": "^16.8.3",
-		"styled-components": "^5.0.0",
 		"lodash.get": "^4.x",
-		"polished": "^3.0.0"
+		"polished": "^3.0.0",
+		"react": "^16.8.3",
+		"styled-components": "^5.0.0"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^1.1.1",
+		"@xcritical/theme": "^1.2.0",
 		"react-virtualized": "^9.21.2",
 		"resize-observer-polyfill": "latest",
 		"utilitify": "^1.0.3"
 	},
 	"devDependencies": {
 		"@types/react-virtualized": "^9.21.8",
-		"@xcritical/sidebar": "^1.1.2",
+		"@xcritical/sidebar": "^1.2.0",
 		"mdi-react": "^6.7.0"
 	}
 }

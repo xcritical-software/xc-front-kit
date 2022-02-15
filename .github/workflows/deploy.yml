@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - master
+      - develop
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -53,12 +54,20 @@ jobs:
           git config --local user.email "frontend@xcritical.software"
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-      - name: 'Update version'
-        if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') }}
-        run: 'yarn boltify version --loglevel silly --message "chore(release): Release of components:" --no-push'
-      - name: Publish to NPM
-        if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') }}
-        run: npm run deploy
+      - name: 'Update version develop'
+        if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') && github.event.ref == 'refs/heads/develop' }}
+        run: 'yarn version:beta --no-commit-hooks'
+      - name: 'Update version release'
+        if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') && github.event.ref == 'refs/heads/master' }}
+        run: 'yarn version:release --no-commit-hooks'
+      - name: 'Publish develop'
+        if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') && github.event.ref == 'refs/heads/develop' }}
+        run: 'yarn publish:from-git --canary'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: 'Publish release'
+        if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') && github.event.ref == 'refs/heads/master' }}
+        run: 'yarn publish:from-git '
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Push tags

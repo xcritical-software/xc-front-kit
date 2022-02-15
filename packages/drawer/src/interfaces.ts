@@ -1,6 +1,6 @@
 import { CSSObject } from 'styled-components';
 
-import { ITheme, ICSSProperties } from '@xcritical/theme';
+import { ITheme } from '@xcritical/theme';
 
 export interface IDrawerTheme {
   transition?: string;

@@ -1,5 +1,4 @@
 /* eslint-disable import/named */
-import { css } from 'styled-components';
 
 import {
   getAppearancePath,
