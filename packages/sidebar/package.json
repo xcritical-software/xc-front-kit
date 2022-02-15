@@ -45,7 +45,7 @@
 	"dependencies": {
 		"@xcritical/theme": "^1.2.0",
 		"lodash.get": "^4.x",
-		"polished": "^3.4.4",
+		"polished": "^4.1.4",
 		"react-custom-scrollbars": "^4.2.1",
 		"resize-observer-polyfill": "^1.5.1",
 		"utilitify": "^1.0.3"

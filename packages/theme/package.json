@@ -42,7 +42,7 @@
 		"lodash.get": "4.x",
 		"lodash.isempty": "4.x",
 		"micro-memoize": "^4.0.8",
-		"polished": "3.x",
+		"polished": "4.x",
 		"utilitify": "^1.0.3"
 	}
 }
