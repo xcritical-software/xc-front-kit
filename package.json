@@ -5,11 +5,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "bolt": {
-    "workspaces": [
-      "packages/*"
-    ]
-  },
   "scripts": {
     "test": "jest --config=jest.config.js",
     "lint": "eslint \"packages/**/{src,stories,test}/**/*.{js,jsx,ts,tsx}\"",
@@ -23,7 +18,10 @@
     "check": "npm run lint && npm run test",
     "clean": "yarn boltify run clean",
     "storybook": "start-storybook -p 9009 -s public",
-    "build:lastcommit": "yarn clean && yarn compile --since HEAD~1"
+    "build:lastcommit": "yarn clean && yarn compile --since HEAD~1",
+    "publish:from-git": "lerna publish from-git --yes",
+    "version:release": "lerna version --yes --no-push --conventional-commits --conventional-graduate -m \"chore(release): version update\"",
+    "version:beta": "lerna version --yes --no-push --conventional-commits --conventional-prerelease --preid beta -m \"chore(release): version update\""
   },
   "husky": {
     "hooks": {
@@ -43,6 +41,7 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "lerna": "^4.0.0",
     "babel-loader": "^8.0.6",
     "@microsoft/api-extractor": "7.7.13",
     "@storybook/addon-a11y": "^5.3.19",
@@ -67,7 +66,6 @@
     "@types/react-router-dom": "^5.1.2",
     "@types/styled-components": "^5.0.1",
     "@xcritical/eslint-plugin-xcritical": "4.0.1",
-    "boltify": "1.1.5",
     "husky": "^4.2.3",
     "jest": "^25.1.0",
     "lint-staged": "^10.0.8",
