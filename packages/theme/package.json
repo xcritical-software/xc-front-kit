@@ -37,7 +37,7 @@
 	},
 	"dependencies": {
 		"csstype": "^3.0.9",
-		"fast-equals": "2.0.0",
+		"fast-equals": "3.0.0",
 		"kind-of": "^6.0.3",
 		"lodash.get": "4.x",
 		"lodash.isempty": "4.x",
