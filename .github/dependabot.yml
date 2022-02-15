@@ -7,7 +7,7 @@ updates:
     time: "07:00"
     timezone: Europe/Moscow
   open-pull-requests-limit: 99
-  target-branch: master
+  target-branch: develop
   rebase-strategy: auto
   commit-message:
       prefix: fix
