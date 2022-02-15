@@ -42,7 +42,7 @@
 		"micro-memoize": "^4.0.8",
 		"polished": "3.x",
 		"utilitify": "^1.0.3",
-		"csstype": "^3.0.9",
+		"csstype": "^3.0.10",
 		"fast-equals": "2.0.0"
 	}
 }
