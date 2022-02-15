@@ -31,13 +31,13 @@
 	"peerDependencies": {
 		"lodash.get": "^4.x",
 		"react": "^16.8.3",
-		"styled-components": "^5.0.0"
+		"styled-components": "^5.3.3"
 	},
 	"dependencies": {
 		"@xcritical/theme": "^1.2.0-beta.0",
 		"lodash.isempty": "4.x",
 		"micro-memoize": "^4.0.8",
-		"polished": "^3.4.4",
+		"polished": "^4.1.4",
 		"react-custom-scrollbars": "^4.2.1",
 		"react-select": "5.1.0",
 		"utilitify": "^1.0.3"
