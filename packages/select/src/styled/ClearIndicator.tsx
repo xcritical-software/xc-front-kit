@@ -1,19 +1,21 @@
 import React from 'react';
-import { components } from 'react-select';
+import { ClearIndicatorProps, components, GroupBase } from 'react-select';
+import { CSSObject } from 'styled-components';
 
 import { Close } from '../Icons';
-import { ClearIndicatorProps } from '../interfaces';
 
-const ClearIndicator = (props: ClearIndicatorProps) => {
+const ClearIndicator = function <
+  Option = unknown,
+  IsMulti extends boolean = boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
+>(props: ClearIndicatorProps<Option, IsMulti, Group>) {
   const { getStyles } = props;
-  const clearIndicatorStyles = getStyles('clearIndicator', props);
+  const clearIndicatorStyles = getStyles('clearIndicator', props) as CSSObject;
 
   return (
-    components.ClearIndicator && (
-      <components.ClearIndicator {...props}>
-        <Close fill={clearIndicatorStyles?.color} />
-      </components.ClearIndicator>
-    )
+    <components.ClearIndicator {...props}>
+      <Close fill={clearIndicatorStyles?.color} />
+    </components.ClearIndicator>
   );
 };
 

@@ -1,14 +1,18 @@
 import React from 'react';
-import { components } from 'react-select';
+import { components, GroupBase, MultiValueRemoveProps } from 'react-select';
 
 import { Close } from '../Icons';
-import { MultiValueRemoveProps } from '../interfaces';
 
-const MultiValueRemove = (props: MultiValueRemoveProps) =>
-  components.MultiValueRemove && (
+const MultiValueRemove = function <
+  Option = unknown,
+  IsMulti extends boolean = boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
+>(props: MultiValueRemoveProps<Option, IsMulti, Group>) {
+  return (
     <components.MultiValueRemove {...props}>
       <Close fill="inherit" size={8} />
     </components.MultiValueRemove>
   );
+};
 
 export default MultiValueRemove;

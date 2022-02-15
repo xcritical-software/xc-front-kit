@@ -32,7 +32,6 @@
 		"polished": "^3.4.4",
 		"react": "^16.8.3",
 		"react-redux": "^7.2.0",
-		"react-select": "3.0.8",
 		"redux": "^4.0.5",
 		"styled-components": "^5.0.0"
 	},

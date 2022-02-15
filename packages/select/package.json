@@ -39,10 +39,7 @@
 		"micro-memoize": "^4.0.8",
 		"polished": "^3.4.4",
 		"react-custom-scrollbars": "^4.2.1",
-		"react-select": "3.0.8",
+		"react-select": "5.1.0",
 		"utilitify": "^1.0.3"
-	},
-	"devDependencies": {
-		"@types/react-select": "3.0.10"
 	}
 }

@@ -1,4 +1,4 @@
-import { OptionTypeBase } from 'react-select';
+import { OptionTypeBase } from '@xcritical/select';
 
 import { IFilter, IStateFilter } from '../interfaces';
 
