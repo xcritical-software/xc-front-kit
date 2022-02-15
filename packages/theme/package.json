@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/theme",
-	"version": "1.1.1",
+	"version": "1.2.0-beta.0",
 	"description": "",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -32,17 +32,17 @@
 	},
 	"private": false,
 	"peerDependencies": {
-		"styled-components": "^5.0.0",
-		"react": "^16.9.0"
+		"react": "^16.9.0",
+		"styled-components": "^5.0.0"
 	},
 	"dependencies": {
+		"csstype": "^3.0.9",
+		"fast-equals": "2.0.0",
 		"kind-of": "^6.0.3",
 		"lodash.get": "4.x",
 		"lodash.isempty": "4.x",
 		"micro-memoize": "^4.0.8",
 		"polished": "3.x",
-		"utilitify": "^1.0.3",
-		"csstype": "^3.0.9",
-		"fast-equals": "2.0.0"
+		"utilitify": "^1.0.3"
 	}
 }

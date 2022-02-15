@@ -4,10 +4,11 @@ import React, { useCallback, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 // eslint-disable-next-line import/no-unresolved
-import Select from '../src';
+import { IThemeNamespace } from '@xcritical/theme';
+
+import Select, { ISelectBaseTheme, selectThemeNamespace } from '../src';
 
 import { MasterCardIcon } from './MasterCardIcon';
-import { customTheme } from './customThemes';
 
 const options = [
   {
@@ -91,39 +92,119 @@ const groupOptionsPrefix = [
   },
 ];
 
-const ChangeOptions = () => {
-  const [isFirstOptions, changeIsFirstOptions] = useState(true);
-
-  return (
-    <>
-      <button
-        style={{ width: '60px', height: '38px', margin: '10px' }}
-        onClick={() => changeIsFirstOptions(true)}>
-        One
-      </button>
-      <button
-        style={{ width: '60px', height: '38px', margin: '20px ' }}
-        onClick={() => changeIsFirstOptions(false)}>
-        Two
-      </button>
-      <Select options={isFirstOptions ? options : options2} />
-    </>
-  );
-};
-
 storiesOf('Select', module)
   .add('Basic', () => (
     <>
       <Select options={options} />
-      <Select isSearchable textPosition="left" options={options} />
+    </>
+  ))
+  .add('With Search', () => (
+    <>
+      <Select isSearchable options={options} />
     </>
   ))
   .add('Empty', () => <Select />)
-  .add('Themed', () => (
-    <Select theme={customTheme} textPosition="left" options={options} />
-  ))
+  .add('Themed', () => {
+    const customTheme: IThemeNamespace<ISelectBaseTheme> = {
+      [selectThemeNamespace]: {
+        appearance: {
+          default: {
+            fontSize: '13px',
+            fontWeight: 600,
+            paddingBottom: '11px',
+            paddingLeft: '15px',
+            paddingRight: '15px',
+            paddingTop: '11px',
+            divided: {
+              color: '#4D4D4D',
+            },
+            background: 'linear-gradient(to top, #474747, #383838)',
+            color: '#fff',
+
+            border: {
+              width: 1,
+              style: 'solid',
+              color: '#575857',
+            },
+            hover: {
+              color: '#fff',
+              background: 'linear-gradient(to top, #474747, #383838)',
+            },
+            active: {
+              color: '#fff',
+
+              background: 'linear-gradient(to top, #474747, #383838)',
+            },
+
+            dropdown: {
+              background: '#575857',
+              selected: {
+                background: '#575857',
+              },
+              hover: {
+                background: '#575857',
+              },
+            },
+            dropdownList: {
+              borderRadius: 6,
+              padding: {
+                bottom: 0,
+                left: 0,
+                right: 0,
+                top: 0,
+              },
+            },
+            button: {
+              background: 'linear-gradient(to top, #474747, #383838)',
+              paddingBottom: '11px',
+              paddingLeft: '5px',
+              paddingRight: '5px',
+              paddingTop: '11px',
+              hover: {
+                background: 'linear-gradient(to top, #505050, #424242)',
+              },
+              focus: {
+                boxShadow: 'none',
+              },
+              filled: {
+                border: '1px solid darkorange',
+              },
+            },
+            dropdownIndicator: {
+              background: 'transparent',
+              paddingBottom: 0,
+              paddingLeft: '10px',
+              paddingRight: '10px',
+              paddingTop: 0,
+            },
+            input: {
+              color: '#fff',
+            },
+            option: {
+              background: '#575857',
+              color: '#fff',
+              hover: {
+                background: 'linear-gradient(to top, #474747, #383838)',
+              },
+              selected: {
+                background: 'linear-gradient(to top, #474747, #242424)',
+              },
+              focus: {
+                background: 'linear-gradient(to top, #505050, #424242)',
+              },
+            },
+            singleValue: {
+              color: '#fff',
+            },
+          },
+        },
+      },
+    };
+
+    return <Select theme={customTheme} textPosition="left" options={options} />;
+  })
   .add('RTL Support', () => (
-    <Select theme={customTheme} isRTL textPosition="left" options={options} />
+    <Select isRTL textPosition="left" options={options} />
   ))
   .add('Disabled', () => (
     <Select disabled textPosition="left" options={options} />
@@ -134,7 +215,25 @@ storiesOf('Select', module)
   .add('Multi Select', () => (
     <Select textPosition="left" options={options} isMulti />
   ))
-  .add('Change Options', () => <ChangeOptions />)
+  .add('Change Options', () => {
+    const [isFirstOptions, changeIsFirstOptions] = useState(true);
+
+    return (
+      <>
+        <button
+          style={{ width: '60px', height: '38px', margin: '10px' }}
+          onClick={() => changeIsFirstOptions(true)}>
+          One
+        </button>
+        <button
+          style={{ width: '60px', height: '38px', margin: '20px ' }}
+          onClick={() => changeIsFirstOptions(false)}>
+          Two
+        </button>
+        <Select options={isFirstOptions ? options : options2} />
+      </>
+    );
+  })
   .add('With default option', () => (
     <Select
       isSearchable
@@ -168,18 +267,16 @@ storiesOf('Select', module)
     }, []);
 
     return (
-      <>
-        <Select
-          textPosition="left"
-          options={options}
-          isMulti
-          inputValue={inputValue}
-          onInputChange={onInputChange}
-          isClearable
-          isSearchable
-          isCloseMenuOnSelect={false}
-          onMenuClose={onMenuClose}
-        />
-      </>
+      <Select
+        textPosition="left"
+        options={options}
+        isMulti
+        inputValue={inputValue}
+        onInputChange={onInputChange}
+        isClearable
+        isSearchable
+        isCloseMenuOnSelect={false}
+        onMenuClose={onMenuClose}
+      />
     );
   });

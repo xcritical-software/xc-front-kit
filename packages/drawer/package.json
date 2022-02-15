@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/drawer",
-	"version": "2.0.1",
+	"version": "2.1.0-beta.0",
 	"description": "XCritical Drawer Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -38,9 +38,9 @@
 		"styled-components": "^5.0.0"
 	},
 	"dependencies": {
-		"@xcritical/blanket": "^1.1.1",
-		"@xcritical/portal": "^0.1.1",
-		"@xcritical/theme": "^1.1.1",
+		"@xcritical/blanket": "^1.2.0-beta.0",
+		"@xcritical/portal": "^0.2.0-beta.0",
+		"@xcritical/theme": "^1.2.0-beta.0",
 		"lodash.get": "4.x",
 		"micro-memoize": "^4.0.8",
 		"polished": "^3.4.4"
