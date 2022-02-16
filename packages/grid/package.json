@@ -52,6 +52,6 @@
 	"devDependencies": {
 		"@types/react-virtualized": "^9.21.8",
 		"@xcritical/sidebar": "^1.2.1",
-		"mdi-react": "^6.7.0"
+		"mdi-react": "^8.2.0"
 	}
 }

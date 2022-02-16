@@ -13413,10 +13413,10 @@ mdast-util-to-string@^1.0.0:
   resolved "https://registry.yarnpkg.com/mdast-util-to-string/-/mdast-util-to-string-1.1.0.tgz#27055500103f51637bd07d01da01eb1967a43527"
   integrity sha512-jVU0Nr2B9X3MU4tSK7JP1CMkSvOj7X5l/GboG1tKRw52lLF1x2Ju92Ms9tNetCcbfX3hzlM73zYo2NKkWSfF/A==
 
-mdi-react@^6.7.0:
-  version "6.7.0"
-  resolved "https://registry.yarnpkg.com/mdi-react/-/mdi-react-6.7.0.tgz#d291f919b5f0f99cbbeac111f2c9ca5184607b6b"
-  integrity sha512-Xpl3bXh4Nmuufoll8ejtErsDd0v/Ty+Je+qC9V3owriFUQZno91F/f0CkAdQj9fRqWY+LwjhFcWii+3lFFGKvQ==
+mdi-react@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/mdi-react/-/mdi-react-8.2.0.tgz#af81711fc597f04d4c3f7777424f15ca234d9b80"
+  integrity sha512-94ddMSkWlBSqs8mL+xql+zyh3wjtYSBaPsD5gchwILA06wv31z/lZQ4By83RLco/Ia2me2fUdeAw5TQiO8+sLQ==
 
 mdn-data@2.0.14:
   version "2.0.14"

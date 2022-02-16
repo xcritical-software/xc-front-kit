@@ -37,7 +37,7 @@
 		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {
-		"mdi-react": "^6.7.0",
+		"mdi-react": "^8.2.0",
 		"micro-memoize": "4.0.8",
 		"react-router": "^6.2.1",
 		"react-router-dom": "^5.0.1"
