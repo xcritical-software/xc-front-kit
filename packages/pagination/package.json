@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/pagination",
-	"version": "1.2.1-beta.0",
+	"version": "1.2.1-beta.1",
 	"description": "Pagination component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -41,7 +41,7 @@
 	},
 	"dependencies": {
 		"@xcritical/button": "^2.2.1-beta.0",
-		"@xcritical/select": "^1.2.1-beta.0",
+		"@xcritical/select": "^1.2.1-beta.1",
 		"@xcritical/theme": "^1.2.1-beta.0",
 		"lodash.range": "^3.2.0"
 	}
