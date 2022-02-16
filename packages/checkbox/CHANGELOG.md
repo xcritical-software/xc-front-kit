@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/checkbox@1.2.1-beta.0...@xcritical/checkbox@1.2.1) (2022-02-16)
+
+**Note:** Version bump only for package @xcritical/checkbox
+
+
+
+
+
 ## [1.2.1-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/checkbox@1.2.0...@xcritical/checkbox@1.2.1-beta.0) (2022-02-15)
 
 **Note:** Version bump only for package @xcritical/checkbox

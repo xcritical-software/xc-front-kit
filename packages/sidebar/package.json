@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/sidebar",
-	"version": "1.2.1-beta.0",
+	"version": "1.2.1",
 	"description": "XCritical Sidebar Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -43,7 +43,7 @@
 		"react-router-dom": "^5.0.1"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^1.2.1-beta.0",
+		"@xcritical/theme": "^1.2.1",
 		"lodash.get": "^4.x",
 		"polished": "^4.1.4",
 		"react-custom-scrollbars": "^4.2.1",
