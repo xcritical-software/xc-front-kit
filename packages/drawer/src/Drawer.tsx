@@ -50,6 +50,8 @@ export interface IDrawerProps {
   onChangeWidth?: (newWidth: number, oldWidth: number) => void;
 }
 
+const tempObject = {};
+
 export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
   ({
     children,
@@ -71,7 +73,7 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
   }) => {
     const [animate, setAnimate] = useState(true);
     const themeContext = useContext<IThemeNamespace<DrawerTheme>>(ThemeContext);
-    const innerTheme = theme || themeContext || {};
+    const innerTheme = theme || themeContext || tempObject;
     const clickXRef = useRef(0);
 
     const [isRenderContent, setIsRenderContent] = useState(isOpen);

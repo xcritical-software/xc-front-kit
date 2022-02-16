@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/switch",
-	"version": "1.1.0",
+	"version": "1.1.1-beta.0",
 	"description": "<>",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -36,12 +36,12 @@
 	"peerDependencies": {
 		"fast-equals": "2.0.0",
 		"react": "^16.9.0",
-		"styled-components": "^5.0.0"
+		"styled-components": "^5.3.3"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^1.2.0",
+		"@xcritical/theme": "^1.2.1-beta.0",
 		"lodash.get": "^4.x",
 		"micro-memoize": "^4.0.8",
-		"polished": "^3.4.4"
+		"polished": "^4.1.4"
 	}
 }

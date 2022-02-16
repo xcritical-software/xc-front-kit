@@ -13,7 +13,7 @@ module.exports = {
       },
     },
   },
-  plugins: ['prettier'],
+  plugins: ["react", "react-hooks", 'prettier', "@typescript-eslint"],
   rules: {
     'prettier/prettier': [
       'error',
@@ -34,7 +34,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/no-array-index-key': 'warn',
-    'import/no-unresolved': ['error', { ignore: ['^@crm-package', '^mdi-react\/dist'] }],
+    'import/no-unresolved': ['warn', { ignore: ['^@xcritical', '^mdi-react\/dist'] }],
     'import/order': [
       'error',
       {
@@ -72,12 +72,12 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['warn'],
     '@typescript-eslint/unbound-method': ['warn'],
     '@typescript-eslint/prefer-regexp-exec': 'warn',
+    '@typescript-eslint/no-unsafe-argument': 'warn',
     // Prettier conflicts
     'import/newline-after-import': 0,
     'react/jsx-indent': 0,
     '@typescript-eslint/no-shadow': 0,
     '@typescript-eslint/no-redeclare': 0,
-    '@typescript-eslint/interface-name-prefix': 'warn',
   },
   globals: {
     APP_PATH: true,
@@ -90,4 +90,9 @@ module.exports = {
     },
     tsconfigRootDir: __dirname,
   },
+  settings: {
+    "react": {
+      "version": "detect"
+    }
+  }
 };

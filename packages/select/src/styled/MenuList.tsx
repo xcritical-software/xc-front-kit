@@ -5,8 +5,6 @@ import styled, { CSSObject } from 'styled-components';
 
 import { IStylesConfigCustom } from '../utils/themeConverter';
 
-// eslint-disable-next-line @typescript-eslint/interface-name-prefix
-
 interface IThumbProps {
   themeStyles: CSSObject;
 }

@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/modal",
-	"version": "1.5.0",
+	"version": "1.5.1-beta.0",
 	"description": "Modal component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -36,16 +36,16 @@
 		"react": "^16.8.3",
 		"react-redux": "^7.0.2",
 		"redux": "^4.0.4",
-		"styled-components": "^5.0.0"
+		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {
 		"mdi-react": "^6.7.0"
 	},
 	"dependencies": {
-		"@xcritical/blanket": "^1.2.0",
-		"@xcritical/portal": "^0.2.0",
-		"@xcritical/theme": "^1.2.0",
-		"@xcritical/utils": "^0.3.0",
+		"@xcritical/blanket": "^1.2.1-beta.0",
+		"@xcritical/portal": "^0.2.1-beta.0",
+		"@xcritical/theme": "^1.2.1-beta.0",
+		"@xcritical/utils": "^0.3.1-beta.0",
 		"micro-memoize": "^4.0.8"
 	}
 }

@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable import/extensions */
 import React, { useState, useCallback, useEffect } from 'react';
 import { storiesOf } from '@storybook/react';
 import { darken, lighten } from 'polished';
