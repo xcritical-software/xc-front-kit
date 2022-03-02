@@ -23,6 +23,7 @@ export interface IPopover {
   baseAppearance?: string;
   convertStyles?: (styles: CSSProperties) => CSSProperties;
   className?: string;
+  classNamePrefix?: string;
 }
 
 export interface IPopoverTheme {

@@ -32,7 +32,8 @@ export const PureButton: React.FC<IButtonProps> = ({
   shouldFitContent = false,
   component: CustomComponent,
   onClick: onClickProps,
-  className = '',
+  className,
+  classNamePrefix,
   ...rest
 }) => {
   const themeContext = useContext<IThemeNamespace<ButtonTheme>>(ThemeContext);
@@ -57,7 +58,7 @@ export const PureButton: React.FC<IButtonProps> = ({
   return (
     <ThemeProvider theme={innerTheme}>
       <StyledButton
-        className={`${className} at-button`}
+        className={className}
         as={element}
         ref={buttonRef}
         role={role}
@@ -75,7 +76,7 @@ export const PureButton: React.FC<IButtonProps> = ({
         {...rest}>
         {!!prefix && (
           <Prefix
-            className="at-button--prefix"
+            className={classNamePrefix && `${classNamePrefix}--prefix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>
@@ -84,11 +85,11 @@ export const PureButton: React.FC<IButtonProps> = ({
         )}
 
         <ContentWrapper
-          className="at-button--content-wrapper"
+          className={classNamePrefix && `${classNamePrefix}--content-wrapper`}
           appearance={appearance}
           baseAppearance={baseAppearance}>
           <Content
-            className="at-button--content"
+            className={classNamePrefix && `${classNamePrefix}--content`}
             textPosition={textPosition}
             isRTL={isRTL}
             appearance={appearance}
@@ -99,7 +100,7 @@ export const PureButton: React.FC<IButtonProps> = ({
 
         {!!postfix && (
           <Postfix
-            className="at-button--postfix"
+            className={classNamePrefix && `${classNamePrefix}--postfix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>

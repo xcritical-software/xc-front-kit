@@ -77,7 +77,8 @@ const BasicInlineEditInput: React.FC<AllType> = ({
   confirmIcon,
   isDoubleClickMode,
   defaultValue = '',
-  className = '',
+  className,
+  classNamePrefix,
   ...rest
 }) => {
   const [value, setValue] = React.useState(defaultValue);
@@ -89,7 +90,14 @@ const BasicInlineEditInput: React.FC<AllType> = ({
 
   const getEditView = React.useCallback(
     (fieldProps) => (
-      <Input {...fieldProps} {...rest} autoFocus shouldFitContainer />
+      <Input
+        {...fieldProps}
+        {...rest}
+        autoFocus
+        shouldFitContainer
+        className="at-input-root"
+        classNamePrefix="at-input"
+      />
     ),
     [rest]
   );
@@ -110,6 +118,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
         confirmIcon={confirmIcon}
         isDoubleClickMode={isDoubleClickMode}
         className={className}
+        classNamePrefix={classNamePrefix}
       />
     </ThemeProvider>
   );
@@ -290,7 +299,7 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
 storiesOf('InlineEdit', module)
   .add('Basic', () => (
     <div style={{ width: '200px' }}>
-      <BasicInlineEditInput editView={Input} className="at-custom-class" />
+      <BasicInlineEditInput editView={Input} />
     </div>
   ))
   .add('Themed', () => (
@@ -330,6 +339,17 @@ storiesOf('InlineEdit', module)
         editView={Input}
         isDoubleClickMode
         defaultValue="Edit view on double click"
+      />
+    </div>
+  ))
+  .add('className & Prefix', () => (
+    <div style={{ width: '200px' }}>
+      <BasicInlineEditInput
+        cancelIcon={() => <BookIcon color="red" className="at-book-icon" />}
+        confirmIcon={() => <CreditCardIcon className="at-credit-card-icon" />}
+        appearance="crm"
+        className="at-inline-edit-root"
+        classNamePrefix="at-inline-edit"
       />
     </div>
   ));

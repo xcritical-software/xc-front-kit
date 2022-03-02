@@ -8,11 +8,16 @@ import { Maybe } from '../interfaces';
  */
 export const createRootElement = (
   id: string,
-  zIndex: number | string
+  zIndex: number | string,
+  className: string
 ): HTMLElement => {
   const rootContainer = document.createElement('div');
   rootContainer.setAttribute('id', id);
   rootContainer.setAttribute('style', `z-index: ${zIndex};`);
+
+  if (className) {
+    rootContainer.setAttribute('class', className);
+  }
 
   return rootContainer;
 };
@@ -41,7 +46,11 @@ export const addRootElement = (rootElem: HTMLElement) => {
  * @param {String} id The id of the target container, e.g 'modal' or 'spotlight'
  * @returns {HTMLElement} The DOM node to use as the Portal target.
  */
-export const usePortal = (id: string, zIndex: number | string = 0) => {
+export const usePortal = (
+  id: string,
+  zIndex: number | string = 0,
+  className: string
+) => {
   const rootElemRef: MutableRefObject<Maybe<HTMLElement>> = useRef(null);
 
   useEffect(() => {
@@ -49,7 +58,7 @@ export const usePortal = (id: string, zIndex: number | string = 0) => {
     const existingParent: Maybe<HTMLElement> = document.querySelector(`#${id}`);
     // Parent is either a new root or the existing dom element
     const parentElem: HTMLElement =
-      existingParent ?? createRootElement(id, zIndex);
+      existingParent ?? createRootElement(id, zIndex, className);
 
     // If there is no existing DOM element, add a new one.
     if (!existingParent) {

@@ -71,6 +71,7 @@ export interface IModalProps
     IModalStoreProps,
     IModalDispatchProps {
   className?: string;
+  classNamePrefix?: string;
 }
 
 export interface IBaseModalTheme {

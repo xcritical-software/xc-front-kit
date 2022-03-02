@@ -16,7 +16,8 @@ import { MenuList } from './styled/MenuList';
 
 export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(
   ({
-    className = '',
+    className,
+    classNamePrefix,
     disabled = false,
     isMulti = false,
     isSearchable = false,
@@ -42,8 +43,15 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(
     const selectRef = useRef<any>();
 
     const formatOptionLabel = useMemo(
-      () => getFormatOptionLabel(innerTheme, appearance, baseAppearance, isRTL),
-      [appearance, baseAppearance, innerTheme, isRTL]
+      () =>
+        getFormatOptionLabel(
+          classNamePrefix,
+          innerTheme,
+          appearance,
+          baseAppearance,
+          isRTL
+        ),
+      [appearance, baseAppearance, innerTheme, isRTL, classNamePrefix]
     );
 
     const selectStyles = useMemo(
@@ -60,8 +68,8 @@ export const PureSelect: React.FC<SelectProps> = React.memo<SelectProps>(
     return (
       <Select
         ref={selectRef}
-        className={`${className} at-select`}
-        classNamePrefix={className}
+        className={className}
+        classNamePrefix={classNamePrefix}
         formatOptionLabel={formatOptionLabel}
         styles={{ ...selectStyles, ...styles }}
         isDisabled={disabled}

@@ -96,7 +96,6 @@ storiesOf('Switch', module)
       disabled={boolean('Disabled', false)}
       label={text('Label', 'Test Label')}
       labelPosition={select('Label position', ['left', 'right'], 'right')}
-      className="at-custom-class"
     />
   ))
   .add('With Custom Theme', () => (
@@ -125,4 +124,14 @@ storiesOf('Switch', module)
         labelPosition={select('Label position', ['left', 'right'], 'right')}
       />
     </>
+  ))
+  .add('className & Prefix', () => (
+    <BasicSwitch
+      theme={emptyTheme}
+      disabled={boolean('Disabled', false)}
+      label={text('Label', 'Test Label')}
+      labelPosition={select('Label position', ['left', 'right'], 'right')}
+      className="at-switch-root"
+      classNamePrefix="at-switch"
+    />
   ));

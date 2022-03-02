@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 
-export const ArrowLeft = (): ReactElement => (
+export const ArrowLeft = ({ className }): ReactElement => (
   <svg
-    className="at-drawer--icon-arrow-left"
+    className={className}
     style={{ width: '24px', height: '24px' }}
     viewBox="0 0 24 24">
     <path
@@ -12,9 +12,9 @@ export const ArrowLeft = (): ReactElement => (
   </svg>
 );
 
-export const ArrowRight = (): ReactElement => (
+export const ArrowRight = ({ className }): ReactElement => (
   <svg
-    className="at-drawer--icon-arrow-right"
+    className={className}
     style={{ width: '24px', height: '24px' }}
     viewBox="0 0 24 24">
     <path

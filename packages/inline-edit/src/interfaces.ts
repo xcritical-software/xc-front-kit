@@ -65,6 +65,7 @@ export type IInlineEditUncontrolledProps<
   /** Change 'Read View' to 'Edit View' by double click instead of single click */
   isDoubleClickMode?: boolean;
   className?: string;
+  classNamePrefix?: string;
 };
 
 export type InlineEditCommonProps<TFieldValue> = ICommonProps & {
@@ -111,6 +112,7 @@ export type IInlineEditProps<
   /** Change 'Read View' to 'Edit View' by double click instead of single click */
   isDoubleClickMode?: boolean;
   className?: string;
+  classNamePrefix?: string;
 };
 
 export interface IReturnFunction<TValue> {

@@ -119,7 +119,8 @@ storiesOf('Select', module)
         isSearchable
         textPosition="left"
         options={options}
-        className="at-custom-class"
+        className="at-select-root"
+        classNamePrefix="at-select"
       />
     </>
   ))

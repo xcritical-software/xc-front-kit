@@ -22,7 +22,8 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
     value,
     title,
     onClick: propsOnClick,
-    className = '',
+    className,
+    classNamePrefix,
   }: IItemProps) => {
     const onClick = (event: Event): void => {
       if (!disabled && propsOnClick) {
@@ -32,7 +33,7 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
 
     return (
       <Root
-        className={`${className} at-item--root`}
+        className={className}
         role={role}
         divided={divided}
         isHidden={hidden}
@@ -46,7 +47,7 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
         title={title}>
         {!!prefix && (
           <Prefix
-            className="at-item--prefix"
+            className={classNamePrefix && `${classNamePrefix}--prefix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>
@@ -54,11 +55,11 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
           </Prefix>
         )}
         <Wrapper
-          className="at-item--wrapper"
+          className={classNamePrefix && `${classNamePrefix}--wrapper`}
           appearance={appearance}
           baseAppearance={baseAppearance}>
           <ContentWrapper
-            className="at-item--content-wrapper"
+            className={classNamePrefix && `${classNamePrefix}--content-wrapper`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}
@@ -69,7 +70,7 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
         </Wrapper>
         {!!postfix && (
           <Postfix
-            className="at-item--postfix"
+            className={classNamePrefix && `${classNamePrefix}--postfix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>

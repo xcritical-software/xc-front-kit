@@ -29,7 +29,8 @@ export const Modal: React.FC<IModalProps> = ({
   maxHeight,
   minHeight,
   appearance = 'default',
-  className = '',
+  className,
+  classNamePrefix,
 }) => {
   const maxZIndex: number = useContext(MaxZIndexContext);
   const zIndex = useMemo(() => zIndexProp ?? maxZIndex + 1, [
@@ -46,13 +47,14 @@ export const Modal: React.FC<IModalProps> = ({
   return (
     <>
       <Blanket
+        className={classNamePrefix && `${classNamePrefix}--blanket`}
         isTinted
         zIndex={zIndex}
         theme={modalBlanketTheme}
         onBlanketClicked={onModalCancel}
       />
       <ModalContent
-        className={`${className} at-modal--content`}
+        className={className}
         zIndex={zIndex}
         width={width}
         maxWidth={maxWidth}
@@ -62,19 +64,29 @@ export const Modal: React.FC<IModalProps> = ({
         minHeight={minHeight}
         appearance={appearance}>
         <ModalHeaderWrapper
-          className="at-modal--header-wrapper"
+          className={classNamePrefix && `${classNamePrefix}--header-wrapper`}
           appearance={appearance}>
-          <ModalHeader className="at-modal--header" appearance={appearance}>
+          <ModalHeader
+            className={classNamePrefix && `${classNamePrefix}--header`}
+            appearance={appearance}>
             {title}
           </ModalHeader>
           <ModalIconClose
-            className="at-modal--icon-wrapper-close"
+            className={
+              classNamePrefix && `${classNamePrefix}--icon-wrapper-close`
+            }
             onClick={onModalCancel}
             appearance={appearance}>
-            {iconClose || <IconClose />}
+            {iconClose || (
+              <IconClose
+                className={classNamePrefix && `${classNamePrefix}--icon-close`}
+              />
+            )}
           </ModalIconClose>
         </ModalHeaderWrapper>
-        <ModalBody className="at-modal--body" appearance={appearance}>
+        <ModalBody
+          className={classNamePrefix && `${classNamePrefix}--body`}
+          appearance={appearance}>
           {children}
         </ModalBody>
       </ModalContent>

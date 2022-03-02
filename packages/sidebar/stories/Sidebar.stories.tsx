@@ -228,7 +228,10 @@ storiesOf('Sidebar', module)
   .add('Basic', () => (
     <BrowserRouter>
       <GlobalStyle />
-      <Sidebar {...props} className="at-custom-class">
+      <Sidebar
+        {...props}
+        className="at-sidebar-root"
+        classNamePrefix="at-sidebar">
         {list(100)}
       </Sidebar>
       <Switch>

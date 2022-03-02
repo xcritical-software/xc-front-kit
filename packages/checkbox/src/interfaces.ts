@@ -15,6 +15,7 @@ export interface IStyledProps {
   appearance?: string;
   baseAppearance?: string;
   className?: string;
+  classNamePrefix?: string;
 }
 
 export interface ICheckboxProps extends IStyledProps {
@@ -50,5 +51,4 @@ export interface ISwitchGroupProps extends IStyledProps {
   options: IOption[];
   disabled?: boolean;
   onChange: (values: (string | number)[]) => void;
-  className?: string;
 }

@@ -33,6 +33,7 @@ export interface ISwitchProps extends ISwitchStyledProps, ISwitchStateProps {
   label?: string;
   name?: string;
   className?: string;
+  classNamePrefix?: string;
 }
 
 export type StyledSwitchProps = Required<ISwitchStyledProps> &

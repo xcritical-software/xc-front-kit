@@ -18,6 +18,7 @@ export interface IPagination {
   onChangePageSize?: (page: number, pageSize: number) => void;
   theme?: IThemeNamespace<IPaginationTheme>;
   className?: string;
+  classNamePrefix?: string;
 }
 
 export interface IPaginationTheme {

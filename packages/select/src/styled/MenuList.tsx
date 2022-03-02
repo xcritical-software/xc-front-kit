@@ -9,6 +9,7 @@ interface IMenuListComponentProps
     styles: {
       menuScrollbar: CSSObject;
     };
+    classNamePrefix: string;
   };
 }
 
@@ -40,7 +41,7 @@ const FixScrollbarLogic = () => <div />;
 export const MenuList: React.FC<IMenuListComponentProps> = memo((props) => {
   const {
     getStyles,
-    selectProps: { styles },
+    selectProps: { styles, classNamePrefix },
   } = props;
   const menuListStyles = getStyles('menuList', props);
 
@@ -48,10 +49,10 @@ export const MenuList: React.FC<IMenuListComponentProps> = memo((props) => {
     <>
       <FixScrollbarLogic />
       <MenuListWrapper
-        className="at-select--menu-list-wrapper"
+        className={classNamePrefix && `${classNamePrefix}--menu-list-wrapper`}
         themeStyles={menuListStyles}>
         <Scrollbars
-          className="at-select--scrollbars"
+          className={classNamePrefix && `${classNamePrefix}--scrollbars`}
           autoHeight
           renderThumbVertical={renderThumb(styles.menuScrollbar)}
           renderThumbHorizontal={renderThumb(styles.menuScrollbar)}>

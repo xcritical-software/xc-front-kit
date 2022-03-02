@@ -20,7 +20,8 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
   label,
   checkIcon,
   onChange,
-  className = '',
+  className,
+  classNamePrefix,
 }) => {
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,13 +36,13 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
 
   return (
     <CheckboxLabel
-      className={`${className} at-checkbox--label`}
+      className={className}
       appearance={appearance}
       baseAppearance={baseAppearance}
       disabled={disabled}
       onClick={handleClick}>
       <HiddenCheckbox
-        className="at-checkbox_hidden"
+        className={classNamePrefix && `${classNamePrefix}_hidden`}
         type={type}
         checked={checked}
         disabled={disabled}
@@ -49,20 +50,20 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
         onChange={handleInputChange}
       />
       <CheckboxWrapper
-        className="at-checkbox--wrapper"
+        className={classNamePrefix && `${classNamePrefix}--wrapper`}
         appearance={appearance}
         baseAppearance={baseAppearance}
         type={type}>
         {checkIcon ? (
           <StyledCheckbox
-            className="at-checkbox"
+            className={classNamePrefix && `${classNamePrefix}_styled`}
             appearance={appearance}
             baseAppearance={baseAppearance}>
             {checked && checkIcon}
           </StyledCheckbox>
         ) : (
           <DefaultCheckbox
-            className="at-checkbox_default"
+            className={classNamePrefix && `${classNamePrefix}_default`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             checked={checked}
@@ -72,7 +73,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
       </CheckboxWrapper>
       {label && (
         <LabelWrapper
-          className="at-checkbox--label-wrapper"
+          className={classNamePrefix && `${classNamePrefix}--label-wrapper`}
           appearance={appearance}
           baseAppearance={baseAppearance}>
           {label}

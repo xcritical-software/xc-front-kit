@@ -5,13 +5,19 @@ import { Close } from '../Icons';
 import { ClearIndicatorProps } from '../interfaces';
 
 const ClearIndicator = (props: ClearIndicatorProps) => {
-  const { getStyles } = props;
+  const {
+    getStyles,
+    selectProps: { classNamePrefix },
+  } = props;
   const clearIndicatorStyles = getStyles('clearIndicator', props);
 
   return (
     components.ClearIndicator && (
       <components.ClearIndicator {...props}>
-        <Close fill={clearIndicatorStyles?.color} />
+        <Close
+          className={classNamePrefix && `${classNamePrefix}--icon-close`}
+          fill={clearIndicatorStyles?.color}
+        />
       </components.ClearIndicator>
     )
   );

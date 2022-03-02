@@ -37,6 +37,7 @@ export interface IItemProps {
   textPosition?: string;
   onClick?: any;
   className?: string;
+  classNamePrefix?: string;
 }
 
 export interface IItemGroupProps {

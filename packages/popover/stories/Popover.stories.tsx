@@ -114,7 +114,8 @@ storiesOf('Popover', module)
             position="top left"
             visible
             content={popoverContent}
-            className="at-custom-class">
+            className="at-popover-root"
+            classNamePrefix="at-popover">
             <ComponentWithPopover>Top Left</ComponentWithPopover>
           </Popover>
           <Popover position="top center" visible content={popoverContent}>

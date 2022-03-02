@@ -124,7 +124,7 @@ const BasicDrawer = ({
         closeIconComponent={closeIconComponent}
         onClose={onClose}
         withBlanket={withBlanket}
-        className="at-custom-class">
+        classNamePrefix="at-drawer">
         <div>Content</div>
       </Drawer>
       <button type="button" onClick={handleClick}>

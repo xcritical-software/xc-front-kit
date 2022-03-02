@@ -54,7 +54,8 @@ storiesOf('Pagination', module)
           visibleRange={3}
           pageSize={pageSize}
           currentPage={currentPage}
-          className="at-custom-class"
+          className="at-pagination-root"
+          classNamePrefix="at-pagination"
           onChangePage={(newCurrentPage) => {
             setCurrentPage(newCurrentPage);
           }}

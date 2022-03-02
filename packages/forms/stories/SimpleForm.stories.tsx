@@ -34,7 +34,7 @@ storiesOf('Form', module)
     };
 
     return (
-      <Form name="default" className="at-custom-class">
+      <Form name="default" className="at-form">
         <div>
           <button onClick={handleFocus}>Focus to FirstName</button>
           <br />

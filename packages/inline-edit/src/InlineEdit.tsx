@@ -18,6 +18,7 @@ export const PureInlineEdit = function <
   isEditing,
   onIsEditingChange,
   className,
+  classNamePrefix,
   ...rest
 }: IInlineEditProps<
   TEditViewProps,
@@ -83,6 +84,7 @@ export const PureInlineEdit = function <
       onEditRequested={handleEditRequested}
       appearance={appearance}
       className={className}
+      classNamePrefix={classNamePrefix}
     />
   );
 };

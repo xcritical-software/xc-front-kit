@@ -43,7 +43,7 @@ export const PureDrawer = React.memo<IDrawerProps>(
     onClose,
     withBlanket = true,
     zIndex,
-    className = '',
+    classNamePrefix,
   }: IDrawerProps) => {
     const themeContext = useContext<IThemeNamespace<DrawerTheme>>(ThemeContext);
 
@@ -106,7 +106,10 @@ export const PureDrawer = React.memo<IDrawerProps>(
           mountOnEnter
           unmountOnExit
           onExited={onClose}>
-          <Portal id="drawer" zIndex="unset">
+          <Portal
+            className={classNamePrefix && `${classNamePrefix}--portal`}
+            id="drawer"
+            zIndex="unset">
             {withBlanket && (
               <Fade
                 in={isOpen}
@@ -114,11 +117,16 @@ export const PureDrawer = React.memo<IDrawerProps>(
                 appearance={appearance}
                 baseAppearance={baseAppearance}
                 zIndex={zIndex}>
-                <Blanket isTinted onBlanketClicked={onOutsideClick} />
+                <Blanket
+                  className={classNamePrefix && `${classNamePrefix}--blanket`}
+                  isTinted
+                  onBlanketClicked={onOutsideClick}
+                />
               </Fade>
             )}
             {antiSelectLayer && <AntiSelect />}
             <Slide
+              className={classNamePrefix && `${classNamePrefix}--slide`}
               zIndex={zIndex}
               ref={drawerRef}
               in={isOpen}
@@ -127,20 +135,35 @@ export const PureDrawer = React.memo<IDrawerProps>(
               appearance={appearance}
               baseAppearance={baseAppearance}
               width={width}
-              isRTL={isRTL}
-              className={`${className} at-drawer--slide`}>
+              isRTL={isRTL}>
               {withCloseButton && (
                 <IconWrapper
-                  className="at-drawer--icon-wrapper"
+                  className={
+                    classNamePrefix && `${classNamePrefix}--icon-wrapper`
+                  }
                   onClick={onOutsideClick}
                   appearance={appearance}
                   baseAppearance={baseAppearance}>
                   {closeIconComponent ??
-                    (isRTL ? <ArrowRight /> : <ArrowLeft />)}
+                    (isRTL ? (
+                      <ArrowRight
+                        className={
+                          classNamePrefix &&
+                          `${classNamePrefix}--icon-arrow-right`
+                        }
+                      />
+                    ) : (
+                      <ArrowLeft
+                        className={
+                          classNamePrefix &&
+                          `${classNamePrefix}--icon-arrow-left`
+                        }
+                      />
+                    ))}
                 </IconWrapper>
               )}
               <Content
-                className="at-drawer--content"
+                className={classNamePrefix && `${classNamePrefix}--content`}
                 appearance={appearance}
                 baseAppearance={baseAppearance}
                 isOpen={isOpen}
@@ -149,14 +172,16 @@ export const PureDrawer = React.memo<IDrawerProps>(
                 {children}
               </Content>
               <SeparatorWrapper
-                className="at-drawer--separator-wrapper"
+                className={
+                  classNamePrefix && `${classNamePrefix}--separator-wrapper`
+                }
                 appearance={appearance}
                 baseAppearance={baseAppearance}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 isMovable={isMovable}>
                 <Separator
-                  className="at-drawer--separator"
+                  className={classNamePrefix && `${classNamePrefix}--separator`}
                   appearance={appearance}
                   baseAppearance={baseAppearance}
                   isRTL={isRTL}

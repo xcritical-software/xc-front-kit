@@ -5,9 +5,13 @@ import { INotificationContainer } from './interfaces';
 
 export const NotificationContainer: React.FC<INotificationContainer> = ({
   className,
+  classNamePrefix,
   ...rest
 }) => (
   <div className={className}>
-    <ToastContainer className="at-toast-container" {...rest} />
+    <ToastContainer
+      className={classNamePrefix && `${classNamePrefix}--container`}
+      {...rest}
+    />
   </div>
 );

@@ -200,7 +200,8 @@ const BasicCheckbox = ({
         onChange={handleChange}
         label={label}
         checkIcon={checkIcon}
-        className="at-custom-class"
+        className="at-checkbox-root"
+        classNamePrefix="at-checkbox"
       />
     </ThemeProvider>
   );
@@ -253,7 +254,8 @@ const BasicSwitchGroup = ({
         options={options}
         values={values}
         disabled={disabled}
-        className="at-custom-class"
+        className="at-switch-group"
+        classNamePrefix="at-checkbox"
       />
     </ThemeProvider>
   );
@@ -275,7 +277,7 @@ storiesOf('Checkbox', module)
       <BasicCheckbox
         theme={{ [checkboxThemeNamespace]: theme }}
         label="Custom Check Icon"
-        checkIcon={<Check />}
+        checkIcon={<Check className="at-check" />}
       />
     </div>
   ))

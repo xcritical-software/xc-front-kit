@@ -1,8 +1,8 @@
 import React from 'react';
 
-export const ChevronUp = ({ fill = '#A7A7A7' }) => (
+export const ChevronUp = ({ className, fill = '#A7A7A7' }) => (
   <svg
-    className="at-select--icon-chevron-up"
+    className={className}
     width="12"
     height="8"
     viewBox="0 0 12 8"
@@ -17,9 +17,9 @@ export const ChevronUp = ({ fill = '#A7A7A7' }) => (
   </svg>
 );
 
-export const ChevronDown = ({ fill = '#A7A7A7' }) => (
+export const ChevronDown = ({ className, fill = '#A7A7A7' }) => (
   <svg
-    className="at-select--icon-chevron-down"
+    className={className}
     width="12"
     height="8"
     viewBox="0 0 12 8"
@@ -34,9 +34,9 @@ export const ChevronDown = ({ fill = '#A7A7A7' }) => (
   </svg>
 );
 
-export const Close = ({ fill = '#A7A7A7', size = 12 }) => (
+export const Close = ({ className, fill = '#A7A7A7', size = 12 }) => (
   <svg
-    className="at-select--icon-close"
+    className={className}
     xmlns="http://www.w3.org/2000/svg"
     width={size}
     height={size}

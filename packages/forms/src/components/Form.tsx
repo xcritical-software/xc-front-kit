@@ -9,7 +9,7 @@ export const PureForm: React.FC<IFormProps> = ({
   name,
   children,
   namespace,
-  className = '',
+  className,
   ...otherProps
 }) => {
   const fieldNames: string[] = [];
@@ -35,7 +35,7 @@ export const PureForm: React.FC<IFormProps> = ({
   React.Children.forEach(children, findChildPropName);
 
   return (
-    <form className={`${className} at-form`} name={name} {...otherProps}>
+    <form className={className} name={name} {...otherProps}>
       <FormProvider value={{ formName: name, fields: fieldNames, namespace }}>
         {children}
       </FormProvider>

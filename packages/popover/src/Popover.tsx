@@ -32,7 +32,8 @@ export const Popover: React.FC<IPopover> = memo(
     theme,
     appearance = 'default',
     baseAppearance = 'default',
-    className = '',
+    className,
+    classNamePrefix,
   }) => {
     const popoverTargetRef = useRef<any>();
     const popoverContentRef = useRef<any>();
@@ -188,6 +189,7 @@ export const Popover: React.FC<IPopover> = memo(
 
     return (
       <Popper
+        className={className}
         position={position}
         autoFlip={autoFlip}
         positionFixed={positionFixed}
@@ -198,7 +200,7 @@ export const Popover: React.FC<IPopover> = memo(
 
           return (
             <PopoverWrapper
-              className={`${className} at-popover--wrapper`}
+              className={classNamePrefix && `${classNamePrefix}--wrapper`}
               theme={theme}
               appearance={appearance}
               baseAppearance={baseAppearance}
@@ -212,7 +214,7 @@ export const Popover: React.FC<IPopover> = memo(
               {children}
               {popperProps.visible && (
                 <Content
-                  className="at-popover--content"
+                  className={classNamePrefix && `${classNamePrefix}--content`}
                   ref={(node) => {
                     const { contentRef } = popperProps;
 
@@ -232,7 +234,7 @@ export const Popover: React.FC<IPopover> = memo(
                   {content}
                   {withArrow && (
                     <Arrow
-                      className="at-popover--arrow"
+                      className={classNamePrefix && `${classNamePrefix}--arrow`}
                       x-arrow=""
                       style={popperProps.arrowStyles}
                       data-arrow-position={popperProps.position}

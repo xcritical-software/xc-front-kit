@@ -29,7 +29,7 @@ const BasicBlanket: React.FC<any> = ({ blanketTheme }) => {
   return (
     <ThemeProvider theme={blanketTheme}>
       <Blanket
-        className="at-custom-class"
+        className="at-blanket"
         isTinted={isTinted}
         onBlanketClicked={handleClick}
       />

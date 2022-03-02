@@ -30,6 +30,7 @@ export interface IDrawerProps {
   withBlanket?: boolean;
   zIndex?: number;
   className?: string;
+  classNamePrefix?: string;
 }
 
 export interface IDrawerStates {

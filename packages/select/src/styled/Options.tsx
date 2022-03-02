@@ -84,6 +84,7 @@ const textCSS = (
 
 const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
   ({
+    classNamePrefix,
     context,
     prefix,
     postfix,
@@ -96,7 +97,9 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
     <div style={labelCSS(context)}>
       {!!prefix && (
         <LabelPrefix
-          className="at-select--label-prefix"
+          className={
+            classNamePrefix && `${classNamePrefix}--option-label-prefix`
+          }
           theme={theme}
           appearance={appearance}
           baseAppearance={baseAppearance}
@@ -106,14 +109,16 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
       )}
 
       <span
-        className="at-select--option-span"
+        className={classNamePrefix && `${classNamePrefix}--option-span`}
         style={textCSS(isRTL, theme, appearance, baseAppearance)}>
         {children}
       </span>
 
       {!!postfix && (
         <LabelPostfix
-          className="at-select--label-postfix"
+          className={
+            classNamePrefix && `${classNamePrefix}--option-label-postfix`
+          }
           theme={theme}
           appearance={appearance}
           baseAppearance={baseAppearance}
@@ -126,6 +131,7 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
 );
 
 export const getFormatOptionLabel = (
+  classNamePrefix,
   theme: IThemeNamespace<ISelectBaseTheme>,
   appearance: string,
   baseAppearance: string,
@@ -135,6 +141,7 @@ export const getFormatOptionLabel = (
   { context }: FormatOptionLabelMeta<IOptionProps>
 ) => (
   <Option
+    classNamePrefix={classNamePrefix}
     theme={theme}
     appearance={appearance}
     baseAppearance={baseAppearance}

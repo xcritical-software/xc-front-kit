@@ -159,7 +159,6 @@ storiesOf('Button', module)
   .addDecorator(withKnobs)
   .add('Basic', () => (
     <Button
-      className="at-custom-class"
       key="button"
       disabled={boolean('Disabled', false)}
       ghost={boolean('Ghost', false)}>
@@ -460,4 +459,105 @@ storiesOf('Button', module)
         </Cell>
       </Row>
     </Table>
+  ))
+  .add('ClassName & Prefix', () => (
+    <ThemeProvider theme={theme}>
+      <Table>
+        <Row>
+          <Cell>
+            <Button
+              height="45px"
+              appearance="primary"
+              shouldFitContent
+              className="at-button-root"
+              classNamePrefix="at-button">
+              Pay
+            </Button>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Button
+              height="45px"
+              appearance="pay"
+              shouldFitContent
+              selected
+              className="at-button-root"
+              classNamePrefix="at-button">
+              Pay
+            </Button>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Button
+              height="45px"
+              appearance="pay"
+              shouldFitContent
+              disabled
+              className="at-button-root"
+              classNamePrefix="at-button">
+              Pay
+            </Button>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Button
+              postfix={<MasterCardIcon />}
+              height="45px"
+              appearance="pay"
+              theme={theme}
+              className="at-button-root"
+              classNamePrefix="at-button">
+              Pay
+            </Button>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Button
+              postfix={<MasterCardIcon />}
+              height="45px"
+              appearance="pay"
+              shouldFitContent
+              theme={theme}
+              className="at-button-root"
+              classNamePrefix="at-button">
+              Pay
+            </Button>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Button
+              prefix={<MasterCardIcon />}
+              height="45px"
+              appearance="pay"
+              textPosition="left"
+              shouldFitContent
+              theme={theme}
+              className="at-button-root"
+              classNamePrefix="at-button">
+              Pay
+            </Button>
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Button
+              prefix={<MasterCardIcon />}
+              postfix={<MasterCardIcon />}
+              height="45px"
+              appearance="pay"
+              shouldFitContent
+              theme={theme}
+              className="at-button-root"
+              classNamePrefix="at-button">
+              Pay
+            </Button>
+          </Cell>
+        </Row>
+      </Table>
+    </ThemeProvider>
   ));

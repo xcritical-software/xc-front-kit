@@ -10,13 +10,13 @@ export const PureBlanket: React.FC<IBlanketProps> = ({
   isTinted = false,
   zIndex,
   onBlanketClicked = () => {},
-  className = '',
+  className,
 }) => {
   const onClick = canClickThrough ? undefined : onBlanketClicked;
 
   return (
     <Root
-      className={`${className} at-blanket`}
+      className={className}
       theme={theme}
       canClickThrough={canClickThrough}
       isTinted={isTinted}
