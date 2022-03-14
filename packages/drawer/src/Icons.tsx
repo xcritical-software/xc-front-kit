@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-export const ArrowLeft = ({ className }): ReactElement => (
+export const ArrowLeft = ({ className }) => (
   <svg
     className={className}
     style={{ width: '24px', height: '24px' }}
@@ -12,7 +12,7 @@ export const ArrowLeft = ({ className }): ReactElement => (
   </svg>
 );
 
-export const ArrowRight = ({ className }): ReactElement => (
+export const ArrowRight = ({ className }) => (
   <svg
     className={className}
     style={{ width: '24px', height: '24px' }}

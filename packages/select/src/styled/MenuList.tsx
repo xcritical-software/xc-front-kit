@@ -1,17 +1,9 @@
 import React, { memo } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { MenuListComponentProps, OptionTypeBase } from 'react-select';
+import { GroupBase, MenuListProps } from 'react-select';
 import styled, { CSSObject } from 'styled-components';
 
-interface IMenuListComponentProps
-  extends MenuListComponentProps<OptionTypeBase> {
-  selectProps: {
-    styles: {
-      menuScrollbar: CSSObject;
-    };
-    classNamePrefix: string;
-  };
-}
+import { IStylesConfigCustom } from '../utils/themeConverter';
 
 interface IThumbProps {
   themeStyles: CSSObject;
@@ -38,12 +30,18 @@ const renderThumb = (themeStyles): React.FC<{ style }> => ({
 //  which leads to a conflict with react-custom-scrollbars
 const FixScrollbarLogic = () => <div />;
 
-export const MenuList: React.FC<IMenuListComponentProps> = memo((props) => {
+export const MenuList: <
+  Option = unknown,
+  IsMulti extends boolean = boolean,
+  Group extends GroupBase<Option> = GroupBase<Option>
+>(
+  props: MenuListProps<Option, IsMulti, Group>
+) => React.ReactElement | null = memo((props) => {
   const {
     getStyles,
     selectProps: { styles, classNamePrefix },
   } = props;
-  const menuListStyles = getStyles('menuList', props);
+  const menuListStyles = getStyles('menuList', props) as CSSObject;
 
   return (
     <>
@@ -54,8 +52,12 @@ export const MenuList: React.FC<IMenuListComponentProps> = memo((props) => {
         <Scrollbars
           className={classNamePrefix && `${classNamePrefix}--scrollbars`}
           autoHeight
-          renderThumbVertical={renderThumb(styles.menuScrollbar)}
-          renderThumbHorizontal={renderThumb(styles.menuScrollbar)}>
+          renderThumbVertical={renderThumb(
+            (styles as IStylesConfigCustom).menuScrollbar
+          )}
+          renderThumbHorizontal={renderThumb(
+            (styles as IStylesConfigCustom).menuScrollbar
+          )}>
           {props.children}
         </Scrollbars>
       </MenuListWrapper>

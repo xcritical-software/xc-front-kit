@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
-import { OptionTypeBase } from 'react-select';
 
-import Select from '@xcritical/select';
+import Select, { OptionTypeBase } from '@xcritical/select';
 
 import { FilterValueElement } from '../filterElement';
 import { ITagConditionProps } from '../../interfaces';

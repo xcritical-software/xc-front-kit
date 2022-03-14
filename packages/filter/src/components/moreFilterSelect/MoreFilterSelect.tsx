@@ -1,8 +1,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { OptionTypeBase } from 'react-select';
 
+import Select, { OptionTypeBase } from '@xcritical/select';
 import Button from '@xcritical/button';
-import Select from '@xcritical/select';
 
 import { Dropdown } from '../Dropdown';
 import { ChevronDown, ChevronUp, DropdownIndicator, Plus } from '../icons';
@@ -65,7 +64,7 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
   const onSelectChange = useCallback(
     (values: OptionTypeBase[]) => {
       const selected = values.map<IStateRecivedFilter>((item) => ({
-        column: item.value as string,
+        column: item.value,
         condition: '',
         value: '',
       }));

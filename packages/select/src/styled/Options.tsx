@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   FormatOptionLabelContext,
   FormatOptionLabelMeta,
-} from 'react-select/src/Select';
+} from 'react-select/dist/declarations/src/Select';
 
 import { IThemeNamespace } from '@xcritical/theme';
 

@@ -1,24 +1,16 @@
-import { OptionTypeBase } from 'react-select/src/types';
-import { FormatOptionLabelContext, Props } from 'react-select/src/Select';
-import { IndicatorProps } from 'react-select/src/components/indicators';
+import { GroupBase, Props } from 'react-select';
+import { FormatOptionLabelContext } from 'react-select/dist/declarations/src/Select';
 
 import { IThemeNamespace, ICSSProperties, IThemeBase } from '@xcritical/theme';
-
-export type DropdownIndicatorProps = IndicatorProps<IOptionItem> & {
-  getStyles: any;
-};
-
-export type ClearIndicatorProps = IndicatorProps<IOptionItem> & {
-  getStyles: any;
-};
-
-export type MultiValueRemoveProps = IndicatorProps<IOptionItem> & {
-  getStyles: any;
-};
 
 export interface IIsRTL {
   isRTL?: boolean;
 }
+
+export type OptionTypeBase = {
+  readonly value: string;
+  readonly label: string;
+};
 
 export interface IThemeProps {
   theme: IThemeNamespace<ISelectBaseTheme>;
@@ -30,7 +22,6 @@ export interface ISelectOnlyProps {
   appearance?: string;
   baseAppearance?: string;
   disabled?: boolean;
-  isMulti?: boolean;
   isSearchable?: boolean;
   isOpenMenu?: boolean;
   className?: string;
@@ -44,8 +35,11 @@ export interface ISelectOnlyProps {
   theme?: IThemeNamespace<ISelectBaseTheme>;
 }
 
-export type SelectProps = Omit<Props<IOptionProps>, 'theme' | 'value'> &
-  ISelectOnlyProps;
+export type SelectProps<
+  Option = unknown,
+  IsMulti extends boolean = false,
+  Group extends GroupBase<Option> = GroupBase<Option>
+> = Omit<Props<Option, IsMulti, Group>, 'theme'> & ISelectOnlyProps;
 
 export interface ISubComponents {
   button?: IThemeBase<ISelectCssTheme>;
@@ -102,7 +96,7 @@ export type GetStyles<TResult = { [key: string]: any }> = IReturnFunction<
   IReturnWithArgsFunction<any, TResult>
 >;
 
-export interface IOptionProps extends IThemeProps, OptionTypeBase {
+export interface IOptionProps extends IThemeProps {
   classNamePrefix: string;
   prefix?: React.ReactElement;
   postfix?: React.ReactElement;
@@ -110,10 +104,11 @@ export interface IOptionProps extends IThemeProps, OptionTypeBase {
   isRTL: boolean;
 }
 
-export interface IOptionItem extends OptionTypeBase {
+export interface IOptionItem {
   prefix?: React.ReactElement;
   postfix?: React.ReactElement;
   name: any;
+  label: string;
 }
 
 export interface IPrefixProps extends IThemeProps, IIsRTL {}

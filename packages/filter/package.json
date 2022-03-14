@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/filter",
-	"version": "1.1.6",
+	"version": "1.2.1",
 	"description": "XCritical Filter Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -29,30 +29,29 @@
 	},
 	"private": false,
 	"peerDependencies": {
-		"polished": "^3.4.4",
+		"polished": "^4.1.4",
 		"react": "^16.8.3",
 		"react-redux": "^7.2.0",
-		"react-select": "3.0.8",
 		"redux": "^4.0.5",
-		"styled-components": "^5.0.0"
+		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {
 		"mdi-react": "^6.7.0",
-		"polished": "^3.4.4",
+		"polished": "^4.1.4",
 		"react": "^16.13.0",
 		"react-dates": "^21.8.0",
 		"react-redux": "^7.2.0",
 		"redux": "^4.0.5"
 	},
 	"dependencies": {
-		"@xcritical/button": "^2.1.1",
-		"@xcritical/input": "^1.1.1",
-		"@xcritical/popover": "^2.1.2",
-		"@xcritical/select": "^1.1.1",
-		"@xcritical/theme": "^1.1.1",
+		"@xcritical/button": "^2.2.1",
+		"@xcritical/input": "^1.2.1",
+		"@xcritical/popover": "^2.2.1",
+		"@xcritical/select": "^1.2.1",
+		"@xcritical/theme": "^1.2.1",
 		"lodash.get": "4.x",
 		"lodash.isempty": "4.x",
 		"utilitify": "^1.0.3",
-		"uuid": "7.0.2"
+		"uuid": "8.3.2"
 	}
 }

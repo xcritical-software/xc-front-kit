@@ -1,273 +1,204 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { ReactNode, useMemo, useState } from 'react';
 import { storiesOf } from '@storybook/react';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { withKnobs, boolean, text, number } from '@storybook/addon-knobs';
+import { ThemeProvider } from 'styled-components';
 import { darken, mix, lighten } from 'polished';
 
 import Modal from '@xcritical/modal';
 
 import Drawer, { drawerThemeNamespace, DrawerTheme } from '../src';
+import { defaultDrawerTheme } from '../src/theme';
 
-interface IBasicDrawerProps {
-  appearance?: string;
-  isRTL?: boolean;
-  isMovable?: boolean;
-  withCloseButton?: boolean;
-  closeIconComponent?: ReactNode;
-  onClose?: () => void;
-  withBlanket?: boolean;
-}
-
-const generateTheme = (
-  padding: number,
-  baseBgColor: string,
-  textColor: string
-): DrawerTheme => ({
-  appearance: {
-    default: {
-      drawerWrapper: {
-        backgroundColor: baseBgColor,
-        display: 'flex',
-        height: '100vh',
-        top: 0,
-        overflow: 'hidden',
-        position: 'fixed',
-        zIndex: 100,
-      },
-    },
-    myaccount: {
-      paddingTop: padding,
-      paddingRight: padding,
-      paddingBottom: padding,
-      paddingLeft: padding,
-      borderRadius: 0,
-      backgroundColor: baseBgColor,
-      color: textColor,
-      fontWeight: 600,
-      hover: {
-        backgroundColor: baseBgColor,
-        color: textColor,
-        fontWeight: 600,
-      },
-      active: {
-        backgroundColor: baseBgColor,
-        color: textColor,
-        fontWeight: 600,
-      },
-      disabled: {
-        backgroundColor: baseBgColor,
-        color: mix(0.5, baseBgColor, textColor),
-        fontWeight: 600,
-      },
-    },
-    dark: {
-      backgroundColor: darken(0.75, baseBgColor),
-      color: lighten(0.75, textColor),
-      drawerWrapper: {
-        backgroundColor: darken(0.75, baseBgColor),
-        color: lighten(0.75, textColor),
-      },
-      separatorWrapper: {
-        backgroundColor: darken(0.75, baseBgColor),
-        color: lighten(0.75, textColor),
-      },
-      iconWrapper: {
-        background: 'red',
-      },
-    },
-  },
-});
-
-const theme = generateTheme(20, '#fff', '#000');
-
-export const GlobalStyle = createGlobalStyle`
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-  }
-  
-  html {
-    box-sizing: border-box;
-  }
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
-`;
-
-const BasicDrawer = ({
-  appearance = 'myaccount',
-  isRTL = false,
-  isMovable = false,
-  withCloseButton = false,
-  closeIconComponent,
-  onClose,
-  withBlanket,
-}: IBasicDrawerProps) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const handleClick = (): void => {
-    setIsOpen(!isOpen);
-  };
-
-  return (
-    <ThemeProvider theme={{ [drawerThemeNamespace]: theme }}>
-      <Drawer
-        isOpen={isOpen}
-        onOutsideClick={handleClick}
-        appearance={appearance}
-        isRTL={isRTL}
-        isMovable={isMovable}
-        withCloseButton={withCloseButton}
-        closeIconComponent={closeIconComponent}
-        onClose={onClose}
-        withBlanket={withBlanket}
-        classNamePrefix="at-drawer">
-        <div>Content</div>
-      </Drawer>
-      <button type="button" onClick={handleClick}>
-        Click for show/hide Drawer
-      </button>
-    </ThemeProvider>
-  );
-};
-
-const DynamicDrawer = ({
-  appearance = 'myaccount',
-  isRTL = false,
-  isMovable = true,
-  withCloseButton = false,
-  closeIconComponent,
-  onClose,
-  withBlanket,
-}: IBasicDrawerProps) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const handleClick = (): void => {
-    setIsOpen(!isOpen);
-  };
-
-  const minWidthProp = 340;
-
-  const maxWidthProp = useMemo(() => {
-    const maxWidth = window.innerWidth - 400;
-
-    if (maxWidth < minWidthProp) return minWidthProp;
-
-    return maxWidth;
-  }, [isOpen]);
-
-  return (
-    <ThemeProvider theme={{ [drawerThemeNamespace]: theme }}>
-      <Drawer
-        isOpen={isOpen}
-        onOutsideClick={handleClick}
-        appearance={appearance}
-        isRTL={isRTL}
-        isMovable={isMovable}
-        withCloseButton={withCloseButton}
-        closeIconComponent={closeIconComponent}
-        onClose={onClose}
-        withBlanket={withBlanket}
-        minWidth={minWidthProp}
-        maxWidth={maxWidthProp}>
-        {maxWidthProp > 1000 && <div style={{ fontSize: '450px' }}>MAX</div>}
-        {maxWidthProp < 1000 && maxWidthProp > 650 && (
-          <div style={{ fontSize: '170px' }}>MIDDLE</div>
-        )}
-        {maxWidthProp < 650 && <div style={{ fontSize: '170px' }}>MIN</div>}
-      </Drawer>
-      <button type="button" onClick={handleClick}>
-        Click for show Drawer
-      </button>
-    </ThemeProvider>
-  );
-};
+const Title = () => <h1>Custom title</h1>;
 
 storiesOf('Drawer', module)
-  .add('Basic', () => (
-    <div>
-      <GlobalStyle />
-      <BasicDrawer />
-    </div>
-  ))
-  .add('Dark', () => (
-    <div>
-      <GlobalStyle />
-      <BasicDrawer appearance="dark" withCloseButton />
-    </div>
-  ))
-  .add('Right', () => (
-    <div>
-      <GlobalStyle />
-      <BasicDrawer isRTL />
-    </div>
-  ))
-  .add('Movable', () => (
-    <div>
-      <GlobalStyle />
-      <BasicDrawer isMovable />
-    </div>
-  ))
-  .add('Movable and Right', () => (
-    <div>
-      <GlobalStyle />
-      <BasicDrawer isRTL isMovable />
-    </div>
-  ))
-  .add('With left close button', () => (
-    <div>
-      <GlobalStyle />
-      <BasicDrawer withCloseButton />
-    </div>
-  ))
-  .add('With right close button', () => (
-    <div>
-      <GlobalStyle />
-      <BasicDrawer withCloseButton isRTL />
-    </div>
-  ))
-  .add('With custom close icon', () => (
-    <div>
-      <GlobalStyle />
-      <BasicDrawer withCloseButton closeIconComponent={<div>X</div>} />
-    </div>
-  ))
+  .addDecorator(withKnobs)
+  .add('Basic', () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const handleChangeState = (): void => {
+      setIsOpen(!isOpen);
+    };
+
+    return (
+      <>
+        <Drawer
+          classNamePrefix="at-drawer"
+          isOpen={isOpen}
+          appearance={text('appearance', 'default')}
+          title={text('Title', 'This is Drawer')}
+          isRTL={boolean('isRTL', false)}
+          isMovable={boolean('isMovable', true)}
+          withCloseButton={boolean('withCloseButton', true)}
+          onClose={handleChangeState}
+          closeIconComponent={
+            boolean('With Custom Close Icon', true) ? <div>X</div> : undefined
+          }
+          withBlanket={boolean('withBlanket', true)}>
+          <div>Content</div>
+          <div>
+            <p>
+              {'lorem impsum long text '.repeat(
+                number('Repeat children text', 600)
+              )}
+            </p>
+          </div>
+        </Drawer>
+        <button type="button" onClick={handleChangeState}>
+          Click for show/hide Drawer
+        </button>
+      </>
+    );
+  })
   .add('Do something after closing Drawer', () => {
-    const [isOpen, changeModalState] = useState(false);
+    const [isDrawerOpen, setIsOpen] = React.useState(false);
+    const [isModalOpen, changeModalState] = useState(false);
     const onCloseModal = () => changeModalState(false);
-    const onCloseDrawer = () => changeModalState(true);
+
+    const handleChangeState = () => {
+      setIsOpen(!isDrawerOpen);
+
+      if (isDrawerOpen) changeModalState(true);
+    };
 
     return (
       <div>
-        <BasicDrawer withCloseButton onClose={onCloseDrawer} />
+        <Drawer isOpen={isDrawerOpen} onClose={handleChangeState} withBlanket>
+          <div>Content</div>
+          <div>
+            <p>
+              {'lorem impsum long text '.repeat(
+                number('Repeat children text', 600)
+              )}
+            </p>
+          </div>
+        </Drawer>
+        <button type="button" onClick={handleChangeState}>
+          Click for show/hide Drawer
+        </button>
         <Modal
           name="modal"
           title="☠️"
-          isOpen={isOpen}
+          isOpen={isModalOpen}
           onModalCancel={onCloseModal}>
           <div>Bye-bye, Drawer!</div>
         </Modal>
       </div>
     );
   })
-  .add('Without Blanket', () => (
-    <div>
-      <GlobalStyle />
-      <BasicDrawer
-        withBlanket={false}
-        withCloseButton
-        closeIconComponent={<div>X</div>}
-      />
-      <p>{'lorem impsum long text '.repeat(600)}</p>
-    </div>
-  ))
-  .add('With dynamic maxWidth', () => (
-    <div>
-      <GlobalStyle />
-      <DynamicDrawer withCloseButton closeIconComponent={<div>X</div>} />
-      <p>Try to change browser width and then to open the Drawer again!</p>
-    </div>
-  ));
+  .add('Themed', () => {
+    const defaultTheme = useMemo(() => {
+      const themeWithAppearance = {
+        appearance: {
+          red: {
+            wrapper: {
+              background: 'red',
+            },
+          },
+          ...defaultDrawerTheme.appearance,
+        },
+      };
+
+      const theme = { [drawerThemeNamespace]: themeWithAppearance };
+
+      return JSON.stringify(theme, null, 2);
+    }, []);
+
+    const [isDrawerOpen, setIsOpen] = React.useState(false);
+    const [draftTheme, setDraftTheme] = useState(defaultTheme);
+    const [theme, setTheme] = useState(JSON.parse(defaultTheme));
+    const [error, setError] = useState(false);
+    const handleChangeState = () => {
+      setIsOpen(!isDrawerOpen);
+    };
+
+    const handleChangeTheme = (e) => {
+      setDraftTheme(e.target.value);
+      setError(false);
+    };
+
+    const handleConfirmTheme = () => {
+      try {
+        const theme = JSON.parse(draftTheme);
+        setDraftTheme(JSON.stringify(theme, null, 2));
+        setTheme(theme);
+      } catch (error) {
+        console.error(error);
+        setError(true);
+      }
+    };
+
+    return (
+      <ThemeProvider theme={theme}>
+        <Drawer
+          isOpen={isDrawerOpen}
+          appearance={text('appearance', 'red')}
+          title={<Title />}
+          isRTL={boolean('isRTL', false)}
+          isMovable={boolean('isMovable', true)}
+          withCloseButton={boolean('withCloseButton', true)}
+          onClose={handleChangeState}
+          closeIconComponent={
+            boolean('With Custom Close Icon', true) ? <div>X</div> : undefined
+          }
+          withBlanket={boolean('withBlanket', true)}>
+          <div>Content</div>
+          <div>
+            <textarea
+              value={draftTheme}
+              onChange={handleChangeTheme}
+              style={{
+                width: '600px',
+                height: '600px',
+                border: error ? '1px solid red' : '1px solid green',
+              }}
+            />
+            <button onClick={handleConfirmTheme}>Confirm theme</button>
+          </div>
+        </Drawer>
+        <button type="button" onClick={handleChangeState}>
+          Click for show/hide Drawer
+        </button>
+      </ThemeProvider>
+    );
+  })
+  .add('Open with prev width', () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const [width, setWidth] = React.useState(800);
+
+    const handleChangeState = (): void => {
+      setIsOpen(!isOpen);
+    };
+
+    return (
+      <>
+        <Drawer
+          isOpen={isOpen}
+          appearance={text('appearance', 'default')}
+          title={text('Title', 'This is Drawer')}
+          isRTL={boolean('isRTL', false)}
+          isMovable={boolean('isMovable', true)}
+          withCloseButton={boolean('withCloseButton', true)}
+          onClose={handleChangeState}
+          onChangeWidth={setWidth}
+          width={width}
+          closeIconComponent={
+            boolean('With Custom Close Icon', true) ? <div>X</div> : undefined
+          }
+          withBlanket={boolean('withBlanket', true)}>
+          <div>Content</div>
+          <div>
+            <p>
+              {'lorem impsum long text '.repeat(
+                number('Repeat children text', 600)
+              )}
+            </p>
+          </div>
+        </Drawer>
+        <button type="button" onClick={handleChangeState}>
+          Click for show/hide Drawer
+        </button>
+      </>
+    );
+  });

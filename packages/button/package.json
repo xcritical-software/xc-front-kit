@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/button",
-	"version": "2.1.2",
+	"version": "2.2.1",
 	"description": "<>",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -34,14 +34,14 @@
 	},
 	"private": false,
 	"peerDependencies": {
+		"fast-equals": "2.0.0",
 		"react": "^16.9.0",
-		"styled-components": "^5.0.0",
-		"fast-equals": "2.0.0"
+		"styled-components": "^5.3.3"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^1.1.1",
+		"@xcritical/theme": "^1.2.1",
 		"lodash.get": "^4.x",
 		"micro-memoize": "^4.0.8",
-		"polished": "^3.4.4"
+		"polished": "^4.1.4"
 	}
 }
