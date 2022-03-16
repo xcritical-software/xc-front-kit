@@ -189,7 +189,6 @@ export const Popover: React.FC<IPopover> = memo(
 
     return (
       <Popper
-        className={className}
         position={position}
         autoFlip={autoFlip}
         positionFixed={positionFixed}

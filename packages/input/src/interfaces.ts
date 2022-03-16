@@ -38,6 +38,8 @@ export interface IBaseItemProps {
   onChange?: (value: string, e?: React.ChangeEvent<HTMLInputElement>) => void;
   isClearable?: boolean;
   clearIcon?: React.FC;
+  className?: string;
+  classNamePrefix?: string;
 }
 
 export interface IInputProps
@@ -48,8 +50,6 @@ export interface IInputProps
   css?: any;
   shouldFitContainer?: boolean;
   showArrows?: boolean;
-  className?: string;
-  classNamePrefix?: string;
 }
 export interface IStyledInput extends HtmlAttributes, ISubComponentProps {
   showArrows: boolean;
@@ -57,7 +57,6 @@ export interface IStyledInput extends HtmlAttributes, ISubComponentProps {
 }
 
 export interface ISubComponentProps extends IIsRTL {
-  isRTL: string;
   theme: IThemeNamespace<InputTheme>;
   appearance: string;
   shouldFitContainer?: boolean;

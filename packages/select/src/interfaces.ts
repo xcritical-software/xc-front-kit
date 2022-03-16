@@ -97,7 +97,7 @@ export type GetStyles<TResult = { [key: string]: any }> = IReturnFunction<
 >;
 
 export interface IOptionProps extends IThemeProps {
-  classNamePrefix: string;
+  classNamePrefix?: string;
   prefix?: React.ReactElement;
   postfix?: React.ReactElement;
   context: FormatOptionLabelContext;
