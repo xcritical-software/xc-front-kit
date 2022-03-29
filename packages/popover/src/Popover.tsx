@@ -32,6 +32,7 @@ export const Popover: React.FC<IPopover> = memo(
     theme,
     appearance = 'default',
     baseAppearance = 'default',
+    onOutsideClick,
   }) => {
     const popoverTargetRef = useRef<any>();
     const popoverContentRef = useRef<any>();
@@ -94,6 +95,15 @@ export const Popover: React.FC<IPopover> = memo(
         changeVisible(false);
       },
       [_visible, changeVisible]
+    );
+
+    const handleClickOutside = useCallback(
+      (e: React.MouseEvent): void => {
+        if (popoverContentRef.current && !popoverContentRef.current.contains(e.target)) {
+          onOutsideClick();
+      }
+      },
+      [hideTimeoutId, changeVisible]
     );
 
     const handleMouseOver = useCallback(
@@ -184,6 +194,13 @@ export const Popover: React.FC<IPopover> = memo(
 
       return () => {};
     }, [trigger, handleClick]);
+
+    useEffect(() => {
+      if(!!onOutsideClick) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+      }
+  }, [handleClickOutside]);
 
     return (
       <Popper
