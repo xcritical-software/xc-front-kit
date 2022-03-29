@@ -104,6 +104,31 @@ const ControlledClick: React.FC = () => {
   );
 };
 
+const ControlledOutsideClick: React.FC = () => {
+  const [controlledVisible, setControlledVisible] = useState(true);
+
+  const handleVisibleChange = (): void => {
+    setControlledVisible(false);
+  };
+
+  return (
+    <>
+      <button type="button" onClick={() => setControlledVisible(true)}>
+        Toggle
+      </button>
+      <hr />
+      <Popover
+        trigger="click"
+        position="bottom center"
+        content={popoverContent}
+        visible={controlledVisible}
+        onOutsideClick={handleVisibleChange}>
+        <ComponentWithPopover>Bottom Center</ComponentWithPopover>
+      </Popover>
+    </>
+  );
+};
+
 storiesOf('Popover', module)
   .add('Default', () => (
     <Grid columns={2}>
@@ -301,6 +326,7 @@ storiesOf('Popover', module)
     </Popover>
   ))
   .add('Controlled click', () => <ControlledClick />)
+  .add('Controlled outsideClick', () => <ControlledOutsideClick />)
   .add('Content fit container width', () => (
     <Popover
       position="bottom center"
