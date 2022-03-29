@@ -98,8 +98,8 @@ export const Popover: React.FC<IPopover> = memo(
     );
 
     const handleClickOutside = useCallback(
-      (e: React.MouseEvent): void => {
-        if (popoverContentRef.current && !popoverContentRef.current.contains(e.target)) {
+      (e: MouseEvent): void => {
+        if (popoverContentRef.current && !popoverContentRef.current.contains(e.target) && !!onOutsideClick) {
           onOutsideClick();
       }
       },
@@ -200,7 +200,9 @@ export const Popover: React.FC<IPopover> = memo(
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
       }
-  }, [handleClickOutside]);
+
+      return () => {};
+  }, [handleClickOutside, onOutsideClick]);
 
     return (
       <Popper
