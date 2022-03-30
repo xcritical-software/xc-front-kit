@@ -47,11 +47,10 @@ export const PureButton: React.FC<IButtonProps> = ({
     [disabled, onClickProps]
   );
 
-  const element = useMemo(() => CustomComponent ?? getElement(disabled, href), [
-    CustomComponent,
-    disabled,
-    href,
-  ]);
+  const element = useMemo(
+    () => CustomComponent ?? getElement(disabled, href),
+    [CustomComponent, disabled, href]
+  );
 
   return (
     <ThemeProvider theme={innerTheme}>

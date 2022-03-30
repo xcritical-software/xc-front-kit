@@ -13,14 +13,14 @@ import {
   ProgressBar,
 } from './styles';
 
-const getNotificationThemeStylesByProperty = ({ theme }: INotification) => (
-  propertyPath: string[]
-): CSSObject => {
-  const notificationTheme = get(theme, notificationThemeNamespace);
-  const mergedTheme = mergeDeep(defaultNotificationTheme, notificationTheme);
+const getNotificationThemeStylesByProperty =
+  ({ theme }: INotification) =>
+  (propertyPath: string[]): CSSObject => {
+    const notificationTheme = get(theme, notificationThemeNamespace);
+    const mergedTheme = mergeDeep(defaultNotificationTheme, notificationTheme);
 
-  return get(mergedTheme, propertyPath);
-};
+    return get(mergedTheme, propertyPath);
+  };
 
 export const getNotificationThemeGeneralStyles = (
   props: INotification
@@ -46,33 +46,33 @@ export const getNotificationThemeGeneralStyles = (
   `;
 };
 
-export const getNotificationThemeTypeStyles = (
-  props: INotification
-): ((type: TypeOptions) => FlattenSimpleInterpolation) => (type) => {
-  const toastStyles = getNotificationThemeStylesByProperty(props)([
-    type,
-    'toast',
-  ]);
-  const closeButtonStyles = getNotificationThemeStylesByProperty(props)([
-    type,
-    'closeButton',
-  ]);
-  const progressBarStyles = getNotificationThemeStylesByProperty(props)([
-    type,
-    'progressBar',
-  ]);
+export const getNotificationThemeTypeStyles =
+  (props: INotification): ((type: TypeOptions) => FlattenSimpleInterpolation) =>
+  (type) => {
+    const toastStyles = getNotificationThemeStylesByProperty(props)([
+      type,
+      'toast',
+    ]);
+    const closeButtonStyles = getNotificationThemeStylesByProperty(props)([
+      type,
+      'closeButton',
+    ]);
+    const progressBarStyles = getNotificationThemeStylesByProperty(props)([
+      type,
+      'progressBar',
+    ]);
 
-  return css`
-    .Toastify__toast--${type} {
-      ${toastStyles};
-    }
+    return css`
+      .Toastify__toast--${type} {
+        ${toastStyles};
+      }
 
-    .Toastify__close-button--${type} {
-      ${closeButtonStyles};
-    }
+      .Toastify__close-button--${type} {
+        ${closeButtonStyles};
+      }
 
-    .Toastify__progress-bar--${type} {
-      ${progressBarStyles};
-    }
-  `;
-};
+      .Toastify__progress-bar--${type} {
+        ${progressBarStyles};
+      }
+    `;
+  };

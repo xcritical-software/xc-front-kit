@@ -166,10 +166,10 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
       [animate, transition]
     );
 
-    const needRenderHeader = useMemo(() => title || withCloseButton, [
-      title,
-      withCloseButton,
-    ]);
+    const needRenderHeader = useMemo(
+      () => title || withCloseButton,
+      [title, withCloseButton]
+    );
 
     return (
       <ThemeProvider theme={innerTheme}>

@@ -4,6 +4,7 @@
 	"description": "Pagination component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
+"xc:source": "src/index.ts",
 	"module": "dist/pagination.esm.js",
 	"types": "dist/typings.d.ts",
 	"files": [

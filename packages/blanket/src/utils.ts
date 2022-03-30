@@ -16,14 +16,14 @@ export const blanketTheme = (
   return func(theme, propertyPath);
 };
 
-export const getBlanketThemeStylesByProperty = ({
-  theme,
-}: ITheme<IBlanketTheme>) => (propertyPath: string[]): CSSObject => {
-  const customBlanketTheme = get(theme, blanketThemeNamespace);
-  const mergedTheme = mergeDeep(defaultBlanketTheme, customBlanketTheme);
+export const getBlanketThemeStylesByProperty =
+  ({ theme }: ITheme<IBlanketTheme>) =>
+  (propertyPath: string[]): CSSObject => {
+    const customBlanketTheme = get(theme, blanketThemeNamespace);
+    const mergedTheme = mergeDeep(defaultBlanketTheme, customBlanketTheme);
 
-  return get(mergedTheme, propertyPath);
-};
+    return get(mergedTheme, propertyPath);
+  };
 
 export const getBaseStyle = ({
   theme,
