@@ -43,7 +43,7 @@
   "devDependencies": {
     "lerna": "^4.0.0",
     "babel-loader": "^8.0.6",
-    "@microsoft/api-extractor": "7.7.13",
+    "@microsoft/api-extractor": "7.19.5",
     "@storybook/addon-a11y": "^6.4.19",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-backgrounds": "^6.4.19",
