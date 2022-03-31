@@ -311,7 +311,7 @@ storiesOf('Popover', module)
     return (
       <>
         <button type="button" onClick={() => setControlledVisible(true)}>
-          Toggle
+          Click for view
         </button>
         <hr />
         <Popover
