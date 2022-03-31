@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.3.0-beta.0...@xcritical/filter@1.3.0-beta.1) (2022-03-31)
+
+**Note:** Version bump only for package @xcritical/filter
+
+
+
+
+
 # [1.3.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.2.1...@xcritical/filter@1.3.0-beta.0) (2022-03-30)
 
 
