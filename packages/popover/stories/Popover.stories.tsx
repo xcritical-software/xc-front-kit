@@ -303,11 +303,11 @@ storiesOf('Popover', module)
   .add('Controlled click', () => <ControlledClick />)
   .add('Controlled outsideClick', () => {
     const [controlledVisible, setControlledVisible] = useState(false);
-  
+
     const handleVisibleChange = (): void => {
       setControlledVisible(false);
     };
-  
+
     return (
       <>
         <button type="button" onClick={() => setControlledVisible(true)}>
