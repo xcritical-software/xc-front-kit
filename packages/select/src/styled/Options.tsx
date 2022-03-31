@@ -121,23 +121,26 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
   )
 );
 
-export const getFormatOptionLabel = (
-  theme: IThemeNamespace<ISelectBaseTheme>,
-  appearance: string,
-  baseAppearance: string,
-  isRTL: boolean
-): any => (
-  { label, prefix, postfix }: IOptionItem,
-  { context }: FormatOptionLabelMeta<IOptionProps>
-) => (
-  <Option
-    theme={theme}
-    appearance={appearance}
-    baseAppearance={baseAppearance}
-    prefix={prefix}
-    postfix={postfix}
-    context={context}
-    isRTL={isRTL}>
-    {label}
-  </Option>
-);
+export const getFormatOptionLabel =
+  (
+    theme: IThemeNamespace<ISelectBaseTheme>,
+    appearance: string,
+    baseAppearance: string,
+    isRTL: boolean
+  ): any =>
+  (
+    { label, prefix, postfix }: IOptionItem,
+    { context }: FormatOptionLabelMeta<IOptionProps>
+  ) =>
+    (
+      <Option
+        theme={theme}
+        appearance={appearance}
+        baseAppearance={baseAppearance}
+        prefix={prefix}
+        postfix={postfix}
+        context={context}
+        isRTL={isRTL}>
+        {label}
+      </Option>
+    );

@@ -8,17 +8,17 @@ import Select from '../../select/src';
 
 import { IDictionary } from './interfaces';
 
-export const DictionarySelector = (dictionaries: IDictionary[]) => (
-  value: any,
-  onChange: (value: any) => void
-): ReactElement => (
-  <Select
-    options={dictionaries}
-    shouldFitContainer
-    onChange={onChange}
-    value={value}
-  />
-);
+export const DictionarySelector =
+  (dictionaries: IDictionary[]) =>
+  (value: any, onChange: (value: any) => void): ReactElement =>
+    (
+      <Select
+        options={dictionaries}
+        shouldFitContainer
+        onChange={onChange}
+        value={value}
+      />
+    );
 
 export const BooleanSelector = (
   value: any,

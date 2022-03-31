@@ -77,38 +77,37 @@ export const getElementStyles: IReturnFunction<AllType> = memoize(
   }
 );
 
-export const getPropertyStyles: GetPropStyles<
-  FlattenInterpolation<AllType>
-> = memoize(
-  (
-    theme,
-    propertyPath,
-    appearance,
-    baseAppearance,
-    defaultPropertyValue = 'inherit'
-  ) => {
-    let property = inlineEditAppearanceTheme(
+export const getPropertyStyles: GetPropStyles<FlattenInterpolation<AllType>> =
+  memoize(
+    (
       theme,
-      appearance as string,
-      baseAppearance as string,
-      [propertyPath]
-    );
-
-    if (!property) {
-      property = defaultPropertyValue;
-    }
-
-    return memoize((elementName: string) => {
-      const element = inlineEditAppearanceTheme(
+      propertyPath,
+      appearance,
+      baseAppearance,
+      defaultPropertyValue = 'inherit'
+    ) => {
+      let property = inlineEditAppearanceTheme(
         theme,
         appearance as string,
         baseAppearance as string,
-        elementName
+        [propertyPath]
       );
 
-      return css`
-        ${() => `${propertyPath}: ${get(element, [propertyPath], property)}`};
-      `;
-    });
-  }
-);
+      if (!property) {
+        property = defaultPropertyValue;
+      }
+
+      return memoize((elementName: string) => {
+        const element = inlineEditAppearanceTheme(
+          theme,
+          appearance as string,
+          baseAppearance as string,
+          elementName
+        );
+
+        return css`
+          ${() => `${propertyPath}: ${get(element, [propertyPath], property)}`};
+        `;
+      });
+    }
+  );

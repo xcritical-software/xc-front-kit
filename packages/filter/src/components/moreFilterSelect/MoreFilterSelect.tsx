@@ -48,9 +48,10 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
     };
   }, [filters]);
 
-  const filterItems = useMemo(() => convertFiltersToOptions(showedFilters), [
-    showedFilters,
-  ]);
+  const filterItems = useMemo(
+    () => convertFiltersToOptions(showedFilters),
+    [showedFilters]
+  );
 
   const selectedValueItems = useMemo(
     () => convertSelectedFiltersToOptions(selectedFilters, filterItems),

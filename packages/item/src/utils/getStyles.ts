@@ -88,26 +88,28 @@ export const getHeightStyle = ({
     : '';
 };
 
-export const getItemStatesStyle = (stateName: string) => ({
-  theme,
-  baseAppearance = 'default',
-  appearance = 'default',
-}: IItemProps): FlattenInterpolation<any> => {
-  const styles = itemAppearanceTheme(
+export const getItemStatesStyle =
+  (stateName: string) =>
+  ({
     theme,
-    appearance,
-    baseAppearance,
-    stateName
-  );
+    baseAppearance = 'default',
+    appearance = 'default',
+  }: IItemProps): FlattenInterpolation<any> => {
+    const styles = itemAppearanceTheme(
+      theme,
+      appearance,
+      baseAppearance,
+      stateName
+    );
 
-  return css`
-    ${styles}
+    return css`
+      ${styles}
 
-    &:focus {
-      color: inherit;
-    }
-  `;
-};
+      &:focus {
+        color: inherit;
+      }
+    `;
+  };
 
 export const getItemInteractiveStyles = ({
   theme,

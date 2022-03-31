@@ -31,10 +31,10 @@ export const Modal: React.FC<IModalProps> = ({
   appearance = 'default',
 }) => {
   const maxZIndex: number = useContext(MaxZIndexContext);
-  const zIndex = useMemo(() => zIndexProp ?? maxZIndex + 1, [
-    maxZIndex,
-    zIndexProp,
-  ]);
+  const zIndex = useMemo(
+    () => zIndexProp ?? maxZIndex + 1,
+    [maxZIndex, zIndexProp]
+  );
 
   if (!isOpen) {
     return null;
