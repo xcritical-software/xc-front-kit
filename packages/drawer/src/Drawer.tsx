@@ -175,7 +175,10 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
 
     return (
       <ThemeProvider theme={innerTheme}>
-        <Portal className={classNamePrefix && `${classNamePrefix}--portal`} id="drawer" zIndex="unset">
+        <Portal
+          className={classNamePrefix && `${classNamePrefix}--portal`}
+          id="drawer"
+          zIndex="unset">
           <Wrapper
             className={classNamePrefix && `${classNamePrefix}--wrapper`}
             appearance={appearance}
@@ -183,16 +186,22 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
             width={width}
             isRTL={isRTL}
             transition={componentTransitionTime}>
-            <Content className={classNamePrefix && `${classNamePrefix}--content`} appearance={appearance} baseAppearance={baseAppearance}>
+            <Content
+              className={classNamePrefix && `${classNamePrefix}--content`}
+              appearance={appearance}
+              baseAppearance={baseAppearance}>
               {isRenderContent && needRenderHeader && (
                 <HeaderWrapper
-                  className={classNamePrefix && `${classNamePrefix}--header-wrapper`}
+                  className={
+                    classNamePrefix && `${classNamePrefix}--header-wrapper`
+                  }
                   appearance={appearance}
                   baseAppearance={baseAppearance}>
                   {withCloseButton && (
                     <CloseIconWrapper
                       className={
-                        classNamePrefix && `${classNamePrefix}--close-icon-wrapper`
+                        classNamePrefix &&
+                        `${classNamePrefix}--close-icon-wrapper`
                       }
                       onClick={onClose}
                       appearance={appearance}
@@ -217,7 +226,9 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
                   )}
 
                   <TitleWrapper
-                    className={classNamePrefix && `${classNamePrefix}--title-wrapper`}
+                    className={
+                      classNamePrefix && `${classNamePrefix}--title-wrapper`
+                    }
                     appearance={appearance}
                     baseAppearance={baseAppearance}>
                     {title}
@@ -225,7 +236,10 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
                 </HeaderWrapper>
               )}
 
-              <Body className={classNamePrefix && `${classNamePrefix}--body`} appearance={appearance} baseAppearance={baseAppearance}>
+              <Body
+                className={classNamePrefix && `${classNamePrefix}--body`}
+                appearance={appearance}
+                baseAppearance={baseAppearance}>
                 {isRenderContent && children}
               </Body>
             </Content>
@@ -257,7 +271,11 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
             appearance={appearance}
             baseAppearance={baseAppearance}
             transition={transition}>
-            <Blanket className={classNamePrefix && `${classNamePrefix}--blanket`} isTinted onBlanketClicked={onClose} />
+            <Blanket
+              className={classNamePrefix && `${classNamePrefix}--blanket`}
+              isTinted
+              onBlanketClicked={onClose}
+            />
           </BlanketWrapper>
         )}
       </ThemeProvider>

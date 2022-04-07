@@ -46,26 +46,26 @@ export type IInlineEditUncontrolledProps<TFieldValue> =
     /** Whether the component shows the readView or the editView. */
     isEditing: boolean;
 
-  /** Handler called when readView is clicked. */
-  onEditRequested: () => void;
-  /**
-   * Handler called editView is closed and changes are confirmed.
-   * Field value is passed as an argument to this function.
-   */
-  onConfirm: (value?: TFieldValue) => void;
-  /** Handler called when checkmark is. */
-  onCancel?: () => void;
-  /** Change default cancel icon */
-  cancelIcon?: FC;
-  /** Change default successIcon */
-  confirmIcon?: FC;
-  invalid?: boolean;
-  error?: string | string[];
-  /** Change 'Read View' to 'Edit View' by double click instead of single click */
-  isDoubleClickMode?: boolean;
-  className?: string;
-  classNamePrefix?: string;
-};
+    /** Handler called when readView is clicked. */
+    onEditRequested: () => void;
+    /**
+     * Handler called editView is closed and changes are confirmed.
+     * Field value is passed as an argument to this function.
+     */
+    onConfirm: (value?: TFieldValue) => void;
+    /** Handler called when checkmark is. */
+    onCancel?: () => void;
+    /** Change default cancel icon */
+    cancelIcon?: FC;
+    /** Change default successIcon */
+    confirmIcon?: FC;
+    invalid?: boolean;
+    error?: string | string[];
+    /** Change 'Read View' to 'Edit View' by double click instead of single click */
+    isDoubleClickMode?: boolean;
+    className?: string;
+    classNamePrefix?: string;
+  };
 
 export type InlineEditCommonProps<TFieldValue> = ICommonProps & {
   /** The value shown in the editView when it is entered. Should be updated by onConfirm. */

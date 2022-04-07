@@ -49,7 +49,7 @@ export const addRootElement = (rootElem: HTMLElement) => {
 export const usePortal = (
   id: string,
   zIndex: number | string = 0,
-  className?: string,
+  className?: string
 ) => {
   const rootElemRef: MutableRefObject<Maybe<HTMLElement>> = useRef(null);
 

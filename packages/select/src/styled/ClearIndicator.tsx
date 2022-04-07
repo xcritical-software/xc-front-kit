@@ -19,7 +19,7 @@ const ClearIndicator = function <
     <components.ClearIndicator {...props}>
       <Close
         className={classNamePrefix && `${classNamePrefix}--icon-close`}
-        fill={clearIndicatorStyles?.color}
+        fill={clearIndicatorStyles.color}
       />
     </components.ClearIndicator>
   );

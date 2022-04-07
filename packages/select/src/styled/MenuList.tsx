@@ -47,10 +47,14 @@ export const MenuList: <
     <>
       <FixScrollbarLogic />
       <MenuListWrapper
-        className={classNamePrefix as string && `${classNamePrefix}--menu-list-wrapper`}
+        className={
+          (classNamePrefix as string) && `${classNamePrefix}--menu-list-wrapper`
+        }
         themeStyles={menuListStyles}>
         <Scrollbars
-          className={classNamePrefix as string && `${classNamePrefix}--scrollbars`}
+          className={
+            (classNamePrefix as string) && `${classNamePrefix}--scrollbars`
+          }
           autoHeight
           renderThumbVertical={renderThumb(
             (styles as IStylesConfigCustom).menuScrollbar

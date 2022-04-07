@@ -71,9 +71,9 @@ const textCSS = (
   )('labelText');
 
   if (isRTL) {
-    paddingRight = padding?.paddingRight || 0;
+    paddingRight = padding.paddingRight || 0;
   } else {
-    paddingLeft = padding?.paddingLeft || 0;
+    paddingLeft = padding.paddingLeft || 0;
   }
 
   return {
@@ -129,25 +129,28 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
     </div>
   )
 );
-export const getFormatOptionLabel = (
-  classNamePrefix,
-  theme: IThemeNamespace<ISelectBaseTheme>,
-  appearance: string,
-  baseAppearance: string,
-  isRTL: boolean
-): any => (
-  { label, prefix, postfix }: IOptionItem,
-  { context }: FormatOptionLabelMeta<IOptionProps>
-) => (
-  <Option
-    classNamePrefix={classNamePrefix}
-    theme={theme}
-    appearance={appearance}
-    baseAppearance={baseAppearance}
-    prefix={prefix}
-    postfix={postfix}
-    context={context}
-    isRTL={isRTL}>
-    {label}
-  </Option>
-);
+export const getFormatOptionLabel =
+  (
+    classNamePrefix,
+    theme: IThemeNamespace<ISelectBaseTheme>,
+    appearance: string,
+    baseAppearance: string,
+    isRTL: boolean
+  ): any =>
+  (
+    { label, prefix, postfix }: IOptionItem,
+    { context }: FormatOptionLabelMeta<IOptionProps>
+  ) =>
+    (
+      <Option
+        classNamePrefix={classNamePrefix}
+        theme={theme}
+        appearance={appearance}
+        baseAppearance={baseAppearance}
+        prefix={prefix}
+        postfix={postfix}
+        context={context}
+        isRTL={isRTL}>
+        {label}
+      </Option>
+    );

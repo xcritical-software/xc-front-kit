@@ -54,7 +54,14 @@ export const PureSelect = function <
   const selectRef = useRef<any>();
 
   const formatOptionLabel = useMemo(
-    () => getFormatOptionLabel(classNamePrefix, innerTheme, appearance, baseAppearance, isRTL),
+    () =>
+      getFormatOptionLabel(
+        classNamePrefix,
+        innerTheme,
+        appearance,
+        baseAppearance,
+        isRTL
+      ),
     [appearance, baseAppearance, innerTheme, isRTL, classNamePrefix]
   );
 
