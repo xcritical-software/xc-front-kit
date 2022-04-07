@@ -112,9 +112,8 @@ const AMStheme = {
 storiesOf('Grid', module)
   .add('Basic', () => {
     const [shouldMovingColumns, changeShouldMovingColumns] = useState(true);
-    const [shouldChangeColumnsWidth, changeShouldChangeColumnsWidth] = useState(
-      true
-    );
+    const [shouldChangeColumnsWidth, changeShouldChangeColumnsWidth] =
+      useState(true);
     const [shouldFitLastColumn, changeShouldFitLastColumn] = useState(true);
 
     return (

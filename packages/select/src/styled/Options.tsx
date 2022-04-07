@@ -129,7 +129,6 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
     </div>
   )
 );
-
 export const getFormatOptionLabel = (
   classNamePrefix,
   theme: IThemeNamespace<ISelectBaseTheme>,

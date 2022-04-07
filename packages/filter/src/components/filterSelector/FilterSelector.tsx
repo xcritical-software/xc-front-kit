@@ -18,9 +18,10 @@ export const FilterSelect: React.FC<ISelectedFilterComponent> = React.memo(
       return null;
     }, [currentFilter]);
 
-    const filterItems = useMemo(() => convertFiltersToOptions(filters), [
-      filters,
-    ]);
+    const filterItems = useMemo(
+      () => convertFiltersToOptions(filters),
+      [filters]
+    );
 
     return (
       <Select

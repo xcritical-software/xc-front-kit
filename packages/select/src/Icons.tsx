@@ -46,12 +46,12 @@ export const Close = ({
   fill = '#A7A7A7',
   size = 12,
 }: {
-  className?: string,
+  className?: string | null,
   fill?: Property.Color;
   size?: number;
 }) => (
   <svg
-    className={className}
+    className={className as string}
     xmlns="http://www.w3.org/2000/svg"
     width={size}
     height={size}

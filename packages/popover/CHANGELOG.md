@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/popover@2.3.0-beta.0...@xcritical/popover@2.3.0-beta.1) (2022-03-31)
+
+
+### Bug Fixes
+
+* **popover:** fix typing, update popover stories ([b723fb5](https://github.com/xcritical-software/xc-front-kit/commit/b723fb507fe8118a8e4453773bdf812df72cbcb9))
+
+
+### Features
+
+* **popover:** add outsideClick ([c81cf87](https://github.com/xcritical-software/xc-front-kit/commit/c81cf8744195b4d60bf45246c503d322daa8d65b))
+* **popover:** update popover stories ([eaf72b4](https://github.com/xcritical-software/xc-front-kit/commit/eaf72b47402ede3ea4b31766c2bc1500ef5a6be4))
+
+
+
+
+
+# [2.3.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/popover@2.2.1...@xcritical/popover@2.3.0-beta.0) (2022-03-30)
+
+
+### Features
+
+* added properties for resolving sources ([97db02d](https://github.com/xcritical-software/xc-front-kit/commit/97db02d3db87f45c151befbdb3d6e43f44d66997))
+
+
+
+
+
 ## [2.2.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/popover@2.2.1-beta.0...@xcritical/popover@2.2.1) (2022-02-16)
 
 **Note:** Version bump only for package @xcritical/popover

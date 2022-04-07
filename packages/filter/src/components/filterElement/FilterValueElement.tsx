@@ -5,6 +5,7 @@ import Input from '@xcritical/input';
 import { ISelectedFilterComponent } from '../../interfaces';
 import { ValidationError } from '../styled';
 
+
 export const FilterValueElement: React.FC<ISelectedFilterComponent> = React.memo(
   ({
     currentFilter,

@@ -306,6 +306,30 @@ storiesOf('Popover', module)
     </Popover>
   ))
   .add('Controlled click', () => <ControlledClick />)
+  .add('Controlled outsideClick', () => {
+    const [controlledVisible, setControlledVisible] = useState(false);
+
+    const handleVisibleChange = (): void => {
+      setControlledVisible(false);
+    };
+
+    return (
+      <>
+        <button type="button" onClick={() => setControlledVisible(true)}>
+          Click for view
+        </button>
+        <hr />
+        <Popover
+          trigger="click"
+          position="bottom center"
+          content={popoverContent}
+          visible={controlledVisible}
+          onOutsideClick={handleVisibleChange}>
+          <ComponentWithPopover>Bottom Center</ComponentWithPopover>
+        </Popover>
+      </>
+    );
+  })
   .add('Content fit container width', () => (
     <Popover
       position="bottom center"

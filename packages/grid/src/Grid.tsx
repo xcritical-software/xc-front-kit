@@ -93,9 +93,8 @@ const Grid: React.FC<IGridProps> = ({
     return observer;
   };
 
-  const observerRef: React.MutableRefObject<
-    ResizeObserver | undefined
-  > = useRef();
+  const observerRef: React.MutableRefObject<ResizeObserver | undefined> =
+    useRef();
 
   useEffect(() => {
     if (shouldFitContainer) observerRef.current = createObserver();

@@ -35,17 +35,16 @@ export interface ICommonProps {
   disabled?: boolean;
 }
 
-export type IInlineEditUncontrolledProps<
-  TFieldValue
-> = InlineEditCommonProps<TFieldValue> & {
-  /** Component to be shown when not in edit view. */
-  readView: FC<any>;
-  readViewProps?: any;
-  /** Component to be shown when editing. */
-  editView: FC<any>;
-  editViewProps?: any;
-  /** Whether the component shows the readView or the editView. */
-  isEditing: boolean;
+export type IInlineEditUncontrolledProps<TFieldValue> =
+  InlineEditCommonProps<TFieldValue> & {
+    /** Component to be shown when not in edit view. */
+    readView: FC<any>;
+    readViewProps?: any;
+    /** Component to be shown when editing. */
+    editView: FC<any>;
+    editViewProps?: any;
+    /** Whether the component shows the readView or the editView. */
+    isEditing: boolean;
 
   /** Handler called when readView is clicked. */
   onEditRequested: () => void;
@@ -80,40 +79,37 @@ export type InlineEditCommonProps<TFieldValue> = ICommonProps & {
   error?: string | string[];
 };
 
-export type IInlineEditProps<
-  TEditViewProps,
-  TViewProps,
-  TFieldValue
-> = InlineEditCommonProps<TFieldValue> & {
-  /** Component to be shown when not in edit view. */
-  readView: FC<TViewProps & IReadViewProps<TFieldValue>>;
-  readViewProps?: Omit<TViewProps, keyof IReadViewProps<TFieldValue>>;
-  /** Component to be shown when editing. */
-  editView: FC<TEditViewProps & IEditViewProps<TFieldValue>>;
-  editViewProps?: Omit<
-    TEditViewProps,
-    'value' | 'onChange' | 'invalid' | 'error'
-  >;
-  /** If this prop is truthy, the editView component is active. */
-  isEditing?: boolean;
-  /** Callback for changing prop "isEditing" outside the InlineEdit component.
-   * Required, if you use "isEditing". */
-  onIsEditingChange?: (value: boolean) => void;
-  /** Determines whether isEditing begins as true. */
-  startWithEditViewOpen?: boolean;
-  /** If this prop is truthy, the editView doesn't close and an error message is displayed below it.
-   */
-  invalid?: boolean;
-  /** Change default cancel icon */
-  cancelIcon?: FC;
-  /** Change default successIcon */
-  confirmIcon?: FC;
-  onCancel?: (value?: TFieldValue) => void;
-  /** Change 'Read View' to 'Edit View' by double click instead of single click */
-  isDoubleClickMode?: boolean;
-  className?: string;
-  classNamePrefix?: string;
-};
+export type IInlineEditProps<TEditViewProps, TViewProps, TFieldValue> =
+  InlineEditCommonProps<TFieldValue> & {
+    /** Component to be shown when not in edit view. */
+    readView: FC<TViewProps & IReadViewProps<TFieldValue>>;
+    readViewProps?: Omit<TViewProps, keyof IReadViewProps<TFieldValue>>;
+    /** Component to be shown when editing. */
+    editView: FC<TEditViewProps & IEditViewProps<TFieldValue>>;
+    editViewProps?: Omit<
+      TEditViewProps,
+      'value' | 'onChange' | 'invalid' | 'error'
+    >;
+    /** If this prop is truthy, the editView component is active. */
+    isEditing?: boolean;
+    /** Callback for changing prop "isEditing" outside the InlineEdit component.
+     * Required, if you use "isEditing". */
+    onIsEditingChange?: (value: boolean) => void;
+    /** Determines whether isEditing begins as true. */
+    startWithEditViewOpen?: boolean;
+    /** If this prop is truthy, the editView doesn't close and an error message is displayed below it.
+     */
+    invalid?: boolean;
+    /** Change default cancel icon */
+    cancelIcon?: FC;
+    /** Change default successIcon */
+    confirmIcon?: FC;
+    onCancel?: (value?: TFieldValue) => void;
+    /** Change 'Read View' to 'Edit View' by double click instead of single click */
+    isDoubleClickMode?: boolean;
+    className?: string;
+    classNamePrefix?: string;
+  };
 
 export interface IReturnFunction<TValue> {
   (

@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.3.0-beta.0...@xcritical/filter@1.3.0-beta.1) (2022-03-31)
+
+**Note:** Version bump only for package @xcritical/filter
+
+
+
+
+
+# [1.3.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.2.1...@xcritical/filter@1.3.0-beta.0) (2022-03-30)
+
+
+### Bug Fixes
+
+* **deps:** bump uuid from 7.0.2 to 8.3.2 ([a4e94e9](https://github.com/xcritical-software/xc-front-kit/commit/a4e94e9be176d1a03ec4a446d556e416b0ba200c))
+
+
+### Features
+
+* added properties for resolving sources ([97db02d](https://github.com/xcritical-software/xc-front-kit/commit/97db02d3db87f45c151befbdb3d6e43f44d66997))
+
+
+
+
+
 ## [1.2.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.2.1-beta.0...@xcritical/filter@1.2.1) (2022-02-16)
 
 **Note:** Version bump only for package @xcritical/filter

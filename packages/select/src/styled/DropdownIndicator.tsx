@@ -25,13 +25,13 @@ const DropdownIndicator = function <
       <components.DropdownIndicator {...props}>
         {selectProps.menuIsOpen ? (
           <ChevronUp
-            className={classNamePrefix && `${classNamePrefix}--icon-chevron-up`}
+            className={classNamePrefix as string && `${classNamePrefix}--icon-chevron-up`}
             fill={dropdownIndicatorStyles?.color}
           />
         ) : (
           <ChevronDown
             className={
-              classNamePrefix && `${classNamePrefix}--icon-chevron-down`
+              classNamePrefix as string && `${classNamePrefix}--icon-chevron-down`
             }
             fill={dropdownIndicatorStyles?.color}
           />

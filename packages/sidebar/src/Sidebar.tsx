@@ -51,9 +51,8 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   const [offsetLeft, changeOffsetLeft] = useState(0);
 
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const observerRef: React.MutableRefObject<
-    ResizeObserver | undefined
-  > = useRef();
+  const observerRef: React.MutableRefObject<ResizeObserver | undefined> =
+    useRef();
   const clickXRef = useRef(0);
   const widthRef = useRef(propsWidth);
 

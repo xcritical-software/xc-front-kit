@@ -21,10 +21,10 @@ const MenuListWrapper = styled.div<IMenuListWrapperProps>`
   ${({ themeStyles }) => themeStyles}
 `;
 
-const renderThumb = (themeStyles): React.FC<{ style }> => ({
-  style,
-  ...props
-}) => <Thumb {...props} themeStyles={{ ...style, ...themeStyles }} />;
+const renderThumb =
+  (themeStyles): React.FC<{ style }> =>
+  ({ style, ...props }) =>
+    <Thumb {...props} themeStyles={{ ...style, ...themeStyles }} />;
 
 // TODO react-select append wheel, touchdown listeners to first child
 //  which leads to a conflict with react-custom-scrollbars
@@ -47,10 +47,10 @@ export const MenuList: <
     <>
       <FixScrollbarLogic />
       <MenuListWrapper
-        className={classNamePrefix && `${classNamePrefix}--menu-list-wrapper`}
+        className={classNamePrefix as string && `${classNamePrefix}--menu-list-wrapper`}
         themeStyles={menuListStyles}>
         <Scrollbars
-          className={classNamePrefix && `${classNamePrefix}--scrollbars`}
+          className={classNamePrefix as string && `${classNamePrefix}--scrollbars`}
           autoHeight
           renderThumbVertical={renderThumb(
             (styles as IStylesConfigCustom).menuScrollbar
