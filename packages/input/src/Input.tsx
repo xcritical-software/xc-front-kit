@@ -69,6 +69,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
     );
 
     const handleClick = useCallback(() => {
+      // eslint-disable-next-line no-unused-expressions
       combinedRef.current?.focus();
     }, []);
 

@@ -27,7 +27,6 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   theme,
   children,
   navComponent,
-  arrowComponent = <Arrow />,
   withArrow = true,
   isScrollbarAutoHide = true,
   isRTL = false,
@@ -41,6 +40,7 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   onChangeState = () => {},
   className,
   classNamePrefix,
+  arrowComponent = <Arrow classNamePrefix={classNamePrefix} />,
 }) => {
   const themeContext = useContext(ThemeContext);
 

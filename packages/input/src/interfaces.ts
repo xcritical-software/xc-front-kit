@@ -37,7 +37,7 @@ export interface IBaseItemProps {
   ) => void;
   onChange?: (value: string, e?: React.ChangeEvent<HTMLInputElement>) => void;
   isClearable?: boolean;
-  clearIcon?: React.FC;
+  clearIcon?: React.FC<IIcon>;
   className?: string;
   classNamePrefix?: string;
 }
@@ -68,3 +68,5 @@ export interface ISubComponentProps extends IIsRTL {
   hasValue?: boolean;
   focusOnInput?: boolean;
 }
+
+export type IIcon = Pick<IBaseItemProps, 'className'>;

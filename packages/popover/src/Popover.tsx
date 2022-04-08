@@ -224,7 +224,7 @@ export const Popover: React.FC<IPopover> = memo(
 
           return (
             <PopoverWrapper
-              className={classNamePrefix && `${classNamePrefix}--wrapper`}
+              className={className && `${className}--wrapper`}
               theme={theme}
               appearance={appearance}
               baseAppearance={baseAppearance}

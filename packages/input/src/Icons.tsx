@@ -1,6 +1,8 @@
 import React from 'react';
 
-export const DefaultClearIcon = ({ className }) => (
+import { IIcon } from './interfaces';
+
+export const DefaultClearIcon: React.FC<IIcon> = ({ className }) => (
   <svg
     className={className}
     width="16"
