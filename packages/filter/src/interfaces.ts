@@ -152,6 +152,8 @@ export interface ITagProps extends ITagContainerProps, IMapDispatchFilterTag {
   disabled: boolean;
   isAutoSelectFirstCondition: boolean;
   isAutoOpenAddedTag: boolean;
+  className?: string;
+  classNamePrefix?: string;
 }
 
 export interface ITagConditionProps {
@@ -162,6 +164,8 @@ export interface ITagConditionProps {
   filterTheme: IFilterTheme;
   onChangeFilter: (changes: PayloadChangeFilterType) => void;
   onRemoveFilter: (filter: IPayloadRemoveFilter) => void;
+  className?: string;
+  classNamePrefix?: string;
 }
 
 export interface IFilterContainerProps {
@@ -210,6 +214,8 @@ export interface IMoreButtonWithFilterSelectorProps {
   isAutoOpenAddedTag: boolean;
   filterTheme: IFilterTheme;
   onChange: (value: IStateRecivedFilter[]) => void;
+  className?: string;
+  classNamePrefix?: string;
 }
 
 export interface IDropdownProps {
@@ -218,6 +224,8 @@ export interface IDropdownProps {
   isOpen: boolean;
   filterTheme: IFilterTheme;
   onClose: () => void;
+  className?: string;
+  classNamePrefix?: string;
 }
 
 export interface IBlanketProps {

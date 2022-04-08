@@ -28,6 +28,8 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
   isAutoOpenAddedTag,
   filterTheme,
   onChange,
+  className,
+  classNamePrefix,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { showedFilters, hiddenedFilters } = useMemo(() => {
@@ -89,6 +91,8 @@ export const MoreFilterSelect: React.FC<IMoreButtonWithFilterSelectorProps> = ({
 
   return (
     <Dropdown
+      className={className}
+      classNamePrefix={classNamePrefix}
       isOpen={isOpen}
       onClose={toggleOpen}
       filterTheme={filterTheme}

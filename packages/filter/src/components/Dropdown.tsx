@@ -17,6 +17,8 @@ export const Dropdown: React.FC<IDropdownProps> = ({
   isOpen,
   filterTheme,
   onClose,
+  classNamePrefix,
+  className,
 }) => {
   const popoverTheme: IThemeNamespace<IPopoverTheme> = useMemo(
     () => ({
@@ -32,14 +34,15 @@ export const Dropdown: React.FC<IDropdownProps> = ({
   const { dropdownBlanketZIndex } = filterTheme;
 
   return (
-    <DropdownRoot>
+    <DropdownRoot className={className}>
       <Popover
         preventOverflowViewport
         visible={isOpen}
         content={children}
         withArrow={false}
         theme={popoverTheme}
-        position="bottom left">
+        position="bottom left"
+        className={classNamePrefix}>
         {target}
       </Popover>
       {isOpen && <Blanket zIndex={dropdownBlanketZIndex} onClick={onClose} />}

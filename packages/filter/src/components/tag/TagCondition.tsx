@@ -21,6 +21,8 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
   filterTheme,
   onChangeFilter,
   onRemoveFilter,
+  className,
+  classNamePrefix,
 }) => {
   const { key: guid, condition, column } = currentFilterState;
 
@@ -76,15 +78,21 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
   }, [guid, onRemoveFilter]);
 
   return (
-    <TagConditionsWrapper className="at-filter--tag-conditions-wrapper">
+    <TagConditionsWrapper className={className && `${className}--wrapper`}>
       <RemoveConditionButton
-        className="at-filter--remove-conditions-button"
+        className={
+          classNamePrefix && `${classNamePrefix}--remove-conditions-button`
+        }
         onClick={onRemoveCondition}>
         <Remove size={20} />
       </RemoveConditionButton>
 
-      <DropdownItem className="at-filter--dropdown-item">
-        <TagLabel className="at-filter--tag-label">Conditions</TagLabel>
+      <DropdownItem
+        className={classNamePrefix && `${classNamePrefix}--dropdown-item`}>
+        <TagLabel
+          className={classNamePrefix && `${classNamePrefix}--tag-label`}>
+          Conditions
+        </TagLabel>
         <Select
           shouldFitContainer
           appearance="filters-tag-condition"
@@ -97,11 +105,21 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
           options={conditions}
           disabled={!column}
           value={selectedCondition}
+          className={className}
+          classNamePrefix={classNamePrefix}
         />
       </DropdownItem>
       {selectedCondition?.hasValue ? (
-        <DropdownItem className="at-filter--dropdown-item">
-          <TagLabel className="at-filter--tag-label">Value</TagLabel>
+        <DropdownItem
+          className={
+            classNamePrefix && `${classNamePrefix}--dropdown-item-selected`
+          }>
+          <TagLabel
+            className={
+              classNamePrefix && `${classNamePrefix}--tag-label-selected`
+            }>
+            Value
+          </TagLabel>
           <div>
             <FilterValueElement
               tagConditionsRef={tagConditionsRef}
@@ -109,6 +127,7 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
               currentFilter={filterSetting}
               filterData={currentFilterState}
               validationError={validationError}
+              classNamePrefix={classNamePrefix}
             />
           </div>
         </DropdownItem>
