@@ -117,6 +117,8 @@ export interface ISelectedFilterComponent {
   validationError?: string;
   onChange: (value: any) => void;
   tagConditionsRef: MutableRefObject<null | HTMLDivElement>;
+  className?: string;
+  classNamePrefix?: string;
 }
 
 export interface IStateRecivedFilter {
@@ -240,3 +242,8 @@ export interface IFilterTheme extends ITheme {
 }
 
 export type IThemeProp<T> = T;
+
+export interface IIcon {
+  classNamePrefix?: string;
+  size?: number;
+}

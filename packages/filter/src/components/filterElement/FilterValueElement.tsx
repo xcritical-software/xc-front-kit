@@ -13,6 +13,7 @@ export const FilterValueElement: React.FC<ISelectedFilterComponent> =
       validationError,
       onChange,
       tagConditionsRef,
+      classNamePrefix,
     }) =>
       currentFilter?.Element ? (
         currentFilter.Element(
@@ -32,7 +33,10 @@ export const FilterValueElement: React.FC<ISelectedFilterComponent> =
             onChange={onChange}
           />
           {validationError && (
-            <ValidationError className="at-filter--validation-error">
+            <ValidationError
+              className={
+                classNamePrefix && `${classNamePrefix}--validation-error`
+              }>
               {validationError}
             </ValidationError>
           )}

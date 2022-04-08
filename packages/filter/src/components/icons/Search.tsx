@@ -1,8 +1,10 @@
 import React from 'react';
 
-export const Search = () => (
+import { IIcon } from '../../interfaces';
+
+export const Search: React.FC<IIcon> = ({ classNamePrefix }) => (
   <svg
-    className="at-filter--search-icon"
+    className={classNamePrefix && `${classNamePrefix}--search-icon`}
     xmlns="http://www.w3.org/2000/svg"
     width="21"
     height="21"

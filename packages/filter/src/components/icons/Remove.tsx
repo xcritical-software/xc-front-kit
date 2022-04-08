@@ -1,8 +1,10 @@
 import React from 'react';
 
-export const Remove = ({ size = 15 }) => (
+import { IIcon } from '../../interfaces';
+
+export const Remove: React.FC<IIcon> = ({ size = 15, classNamePrefix }) => (
   <svg
-    className="at-filter--remove-icon"
+    className={classNamePrefix && `${classNamePrefix}--remove-icon`}
     xmlns="http://www.w3.org/2000/svg"
     width={size}
     height={size}
