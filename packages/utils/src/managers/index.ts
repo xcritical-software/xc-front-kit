@@ -1,3 +1,1 @@
-import { getMaxZIndex, maxZIndexManager } from './MaxZIndexManager';
-
-export { getMaxZIndex, maxZIndexManager };
+export { getMaxZIndex, maxZIndexManager } from './MaxZIndexManager';

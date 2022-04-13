@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Svg } from './Svg';
 
-export const DropdownIndicator = () => (
+export const DropdownIndicator: React.FC = () => (
   <div style={{ height: 24, width: 32 }}>
     <Svg>
       <path

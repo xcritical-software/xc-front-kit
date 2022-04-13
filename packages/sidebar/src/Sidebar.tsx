@@ -27,7 +27,6 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   theme,
   children,
   navComponent,
-  arrowComponent = <Arrow />,
   withArrow = true,
   isScrollbarAutoHide = true,
   isRTL = false,
@@ -39,6 +38,9 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
   navWidth = 90,
   separatorWidth = 10,
   onChangeState = () => {},
+  className,
+  classNamePrefix,
+  arrowComponent = <Arrow classNamePrefix={classNamePrefix} />,
 }) => {
   const themeContext = useContext(ThemeContext);
 
@@ -188,11 +190,16 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
 
   return (
     <ThemeProvider theme={(theme ?? themeContext) || {}}>
-      <Root offsetLeft={offsetLeft} isRTL={isRTL}>
-        <SidebarWrapper ref={sidebarRef} isRTL={isRTL}>
+      <Root className={className} offsetLeft={offsetLeft} isRTL={isRTL}>
+        <SidebarWrapper
+          className={classNamePrefix && `${classNamePrefix}--wrapper`}
+          ref={sidebarRef}
+          isRTL={isRTL}>
           {navComponent && (
-            <NavComponentWrapper>
+            <NavComponentWrapper
+              className={classNamePrefix && `${classNamePrefix}--nav-wrapper`}>
               <Scrollbar
+                className={classNamePrefix && `${classNamePrefix}--scrollbar`}
                 width={navWidth}
                 animate={animate}
                 autoHide={isScrollbarAutoHide}>
@@ -201,9 +208,20 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
             </NavComponentWrapper>
           )}
           {children && (
-            <ResponsiveWrapper animate={animate} width={width} isRTL={isRTL}>
-              <ChildWrapper animate={animate}>
+            <ResponsiveWrapper
+              className={
+                classNamePrefix && `${classNamePrefix}--responsive-wrapper`
+              }
+              animate={animate}
+              width={width}
+              isRTL={isRTL}>
+              <ChildWrapper
+                className={
+                  classNamePrefix && `${classNamePrefix}--child-wrapper`
+                }
+                animate={animate}>
                 <Scrollbar
+                  className={classNamePrefix && `${classNamePrefix}--scrollbar`}
                   width={width}
                   animate={animate}
                   autoHide={isScrollbarAutoHide}>
@@ -211,15 +229,31 @@ export const PureSidebar: React.FC<ISidebarProps> = ({
                 </Scrollbar>
               </ChildWrapper>
 
-              {antiSelectLayer && <AntiSelect isRTL={isRTL} />}
+              {antiSelectLayer && (
+                <AntiSelect
+                  className={
+                    classNamePrefix && `${classNamePrefix}--anti-select`
+                  }
+                  isRTL={isRTL}
+                />
+              )}
 
               <SeparatorWrapper
+                className={
+                  classNamePrefix && `${classNamePrefix}--separator-wrapper`
+                }
                 isRTL={isRTL}
                 separatorWidth={separatorWidth}
                 onMouseDown={handleMouseDown}>
-                <Separator isRTL={isRTL}>
+                <Separator
+                  className={classNamePrefix && `${classNamePrefix}--separator`}
+                  isRTL={isRTL}>
                   {withArrow && (
                     <CloseOpenButton
+                      className={
+                        classNamePrefix &&
+                        `${classNamePrefix}--button-close-open`
+                      }
                       toRight={arrowToRight}
                       onClick={handleClose}
                       isRTL={isRTL}>

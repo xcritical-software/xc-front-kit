@@ -7,6 +7,7 @@ export interface IFormProps
   > {
   name: string;
   namespace?: string;
+  className?: string;
 }
 
 export interface IFormContext {

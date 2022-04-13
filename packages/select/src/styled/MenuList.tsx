@@ -39,15 +39,22 @@ export const MenuList: <
 ) => React.ReactElement | null = memo((props) => {
   const {
     getStyles,
-    selectProps: { styles },
+    selectProps: { styles, classNamePrefix },
   } = props;
   const menuListStyles = getStyles('menuList', props) as CSSObject;
 
   return (
     <>
       <FixScrollbarLogic />
-      <MenuListWrapper themeStyles={menuListStyles}>
+      <MenuListWrapper
+        className={
+          (classNamePrefix as string) && `${classNamePrefix}--menu-list-wrapper`
+        }
+        themeStyles={menuListStyles}>
         <Scrollbars
+          className={
+            (classNamePrefix as string) && `${classNamePrefix}--scrollbars`
+          }
           autoHeight
           renderThumbVertical={renderThumb(
             (styles as IStylesConfigCustom).menuScrollbar

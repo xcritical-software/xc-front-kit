@@ -26,4 +26,5 @@ export interface INotification extends ToastContainerProps {
 
 export interface INotificationContainer extends ToastContainerProps {
   className?: string;
+  classNamePrefix?: string;
 }

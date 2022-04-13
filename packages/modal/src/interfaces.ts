@@ -38,11 +38,14 @@ export interface IModal {
 }
 
 /* COMPONENT */
+export interface IIconCloseProps {
+  className?: string;
+}
 export interface IModalOwnProps {
   name: string;
   title: any;
   children: any;
-  iconClose?: any;
+  iconClose?: IIconCloseProps;
   onCancel?: () => void;
   theme?: IThemeNamespace<IModalTheme>;
   zIndex?: number;
@@ -66,7 +69,10 @@ export interface IModalDispatchProps {
 export interface IModalProps
   extends IModalOwnProps,
     IModalStoreProps,
-    IModalDispatchProps {}
+    IModalDispatchProps {
+  className?: string;
+  classNamePrefix?: string;
+}
 
 export interface IBaseModalTheme {
   blanket?: IBlanketTheme;

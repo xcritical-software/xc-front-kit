@@ -208,7 +208,6 @@ const InternalGrid: React.FC<IInternalGrid> = ({
             {column.isExpandable && !mappedItems[rowIndex].children && (
               <ShiftInsteadButton theme={themeRef.current} />
             )}
-
             <span>{cellContent}</span>
           </BodyCellContent>
         </BodyCell>

@@ -39,6 +39,8 @@ export const Tag: React.FC<ITagProps> = ({
   onRemoveFilter,
   onAddCondition,
   onApply,
+  className,
+  classNamePrefix,
 }) => {
   const [validationErrors, setValidationErrors] = useState({});
   const [isOpen, setIsOpen] = useState(() => {
@@ -153,6 +155,8 @@ export const Tag: React.FC<ITagProps> = ({
     <Dropdown
       isOpen={isOpen}
       onClose={onCloseDropdown}
+      className={className}
+      classNamePrefix={classNamePrefix}
       filterTheme={filterTheme}
       target={
         <Button
@@ -174,6 +178,8 @@ export const Tag: React.FC<ITagProps> = ({
       <TagConditions ref={tagConditionsRef}>
         {conditions.map((condition) => (
           <TagCondition
+            className={className}
+            classNamePrefix={classNamePrefix}
             key={condition.key}
             tagConditionsRef={tagConditionsRef}
             currentFilterState={condition}
@@ -186,7 +192,9 @@ export const Tag: React.FC<ITagProps> = ({
         ))}
 
         <DropdownFooter>
-          <ButtonBlock position="left">
+          <ButtonBlock
+            position="left"
+            className={classNamePrefix && `${classNamePrefix}--button-block`}>
             <Button
               appearance="filter-tag-add-condition"
               onClick={onTagAddCondition}>
@@ -195,6 +203,10 @@ export const Tag: React.FC<ITagProps> = ({
           </ButtonBlock>
           <ButtonBlock>
             <Button
+              className={className && `${className}--tag-remove-button`}
+              classNamePrefix={
+                classNamePrefix && `${classNamePrefix}--tag-remove-button`
+              }
               appearance="filter-tag-remove"
               baseAppearance="link"
               onClick={onTagRemove}>
@@ -202,6 +214,10 @@ export const Tag: React.FC<ITagProps> = ({
             </Button>
 
             <Button
+              className={className && `${className}--tag-apply-button`}
+              classNamePrefix={
+                classNamePrefix && `${classNamePrefix}--tag-apply-button`
+              }
               appearance="filter-tag-apply"
               baseAppearance="primary"
               onClick={onTagApply}>

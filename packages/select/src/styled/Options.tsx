@@ -71,9 +71,9 @@ const textCSS = (
   )('labelText');
 
   if (isRTL) {
-    paddingRight = padding?.paddingRight || 0;
+    paddingRight = padding.paddingRight || 0;
   } else {
-    paddingLeft = padding?.paddingLeft || 0;
+    paddingLeft = padding.paddingLeft || 0;
   }
 
   return {
@@ -84,6 +84,7 @@ const textCSS = (
 
 const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
   ({
+    classNamePrefix,
     context,
     prefix,
     postfix,
@@ -96,6 +97,9 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
     <div style={labelCSS(context)}>
       {!!prefix && (
         <LabelPrefix
+          className={
+            classNamePrefix && `${classNamePrefix}--option-label-prefix`
+          }
           theme={theme}
           appearance={appearance}
           baseAppearance={baseAppearance}
@@ -104,12 +108,17 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
         </LabelPrefix>
       )}
 
-      <span style={textCSS(isRTL, theme, appearance, baseAppearance)}>
+      <span
+        className={classNamePrefix && `${classNamePrefix}--option-span`}
+        style={textCSS(isRTL, theme, appearance, baseAppearance)}>
         {children}
       </span>
 
       {!!postfix && (
         <LabelPostfix
+          className={
+            classNamePrefix && `${classNamePrefix}--option-label-postfix`
+          }
           theme={theme}
           appearance={appearance}
           baseAppearance={baseAppearance}
@@ -120,9 +129,9 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
     </div>
   )
 );
-
 export const getFormatOptionLabel =
   (
+    classNamePrefix,
     theme: IThemeNamespace<ISelectBaseTheme>,
     appearance: string,
     baseAppearance: string,
@@ -134,6 +143,7 @@ export const getFormatOptionLabel =
   ) =>
     (
       <Option
+        classNamePrefix={classNamePrefix}
         theme={theme}
         appearance={appearance}
         baseAppearance={baseAppearance}

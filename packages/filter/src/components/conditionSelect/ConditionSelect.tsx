@@ -9,6 +9,8 @@ export const ConditionSelect: React.FC<ISelectedFilterComponent> = React.memo(
     currentFilter,
     filterData: { condition = '', column = '' } = {},
     onChange,
+    className,
+    classNamePrefix,
   }) => {
     const conditions = useMemo(
       () =>
@@ -34,6 +36,8 @@ export const ConditionSelect: React.FC<ISelectedFilterComponent> = React.memo(
         options={conditions}
         disabled={!column}
         value={selectedCondition}
+        className={className}
+        classNamePrefix={classNamePrefix}
       />
     );
   }

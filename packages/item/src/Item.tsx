@@ -22,6 +22,8 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
     value,
     title,
     onClick: propsOnClick,
+    className,
+    classNamePrefix,
   }: IItemProps) => {
     const onClick = (event: Event): void => {
       if (!disabled && propsOnClick) {
@@ -31,6 +33,7 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
 
     return (
       <Root
+        className={className}
         role={role}
         divided={divided}
         isHidden={hidden}
@@ -44,14 +47,19 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
         title={title}>
         {!!prefix && (
           <Prefix
+            className={classNamePrefix && `${classNamePrefix}--prefix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>
             {prefix}
           </Prefix>
         )}
-        <Wrapper appearance={appearance} baseAppearance={baseAppearance}>
+        <Wrapper
+          className={classNamePrefix && `${classNamePrefix}--wrapper`}
+          appearance={appearance}
+          baseAppearance={baseAppearance}>
           <ContentWrapper
+            className={classNamePrefix && `${classNamePrefix}--content-wrapper`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}
@@ -62,6 +70,7 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
         </Wrapper>
         {!!postfix && (
           <Postfix
+            className={classNamePrefix && `${classNamePrefix}--postfix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>
