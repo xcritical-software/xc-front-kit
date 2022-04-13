@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0-beta.3](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/select@1.3.0-beta.2...@xcritical/select@1.3.0-beta.3) (2022-04-13)
+
+
+### Bug Fixes
+
+* **deps:** bump react-select from 5.1.0 to 5.3.0 ([5e72fb8](https://github.com/xcritical-software/xc-front-kit/commit/5e72fb89d2dd81bc16b6904e6a1e3e23f22388a4))
+
+
+
+
+
 # [1.3.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/select@1.3.0-beta.1...@xcritical/select@1.3.0-beta.2) (2022-04-13)
 
 **Note:** Version bump only for package @xcritical/select
