@@ -3653,6 +3653,14 @@
     core-js "^3.8.2"
     global "^4.4.0"
 
+"@storybook/client-logger@6.4.21":
+  version "6.4.21"
+  resolved "https://registry.yarnpkg.com/@storybook/client-logger/-/client-logger-6.4.21.tgz#7df21cec4d5426669e828af59232ec44ea19c81a"
+  integrity sha512-XkVCQ5swyYDVh5U+87DGRBdC5utJBpVW7kU5P14TQKMnSc/yHbMcXWaA89K8WKDa/WGkGbc0bKi4WrUwHFg2FA==
+  dependencies:
+    core-js "^3.8.2"
+    global "^4.4.0"
+
 "@storybook/codemod@6.4.21":
   version "6.4.21"
   resolved "https://registry.yarnpkg.com/@storybook/codemod/-/codemod-6.4.21.tgz#2e6f859bcc2e6ebefbc2075c2149b7bd7eaa4468"
@@ -4226,7 +4234,7 @@
     resolve-from "^5.0.0"
     ts-dedent "^1.1.0"
 
-"@storybook/theming@6.4.19", "@storybook/theming@^6.4.19":
+"@storybook/theming@6.4.19":
   version "6.4.19"
   resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.4.19.tgz#0a6834d91e0b0eadbb10282e7fb2947e2bbf9e9e"
   integrity sha512-V4pWmTvAxmbHR6B3jA4hPkaxZPyExHvCToy7b76DpUTpuHihijNDMAn85KhOQYIeL9q14zP/aiz899tOHsOidg==
@@ -4235,6 +4243,24 @@
     "@emotion/is-prop-valid" "^0.8.6"
     "@emotion/styled" "^10.0.27"
     "@storybook/client-logger" "6.4.19"
+    core-js "^3.8.2"
+    deep-object-diff "^1.1.0"
+    emotion-theming "^10.0.27"
+    global "^4.4.0"
+    memoizerific "^1.11.3"
+    polished "^4.0.5"
+    resolve-from "^5.0.0"
+    ts-dedent "^2.0.0"
+
+"@storybook/theming@^6.4.19":
+  version "6.4.21"
+  resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-6.4.21.tgz#ea1a33be70c654cb31e5b38fae93f72171e88ef8"
+  integrity sha512-7pLNwmqbyqCeHXzjsacI69IdJcAZr6zoZA84iGqx+Na32OI8wtIpFczbwuYpVPN2jzgRYp23CgIv1Gz27yk/zw==
+  dependencies:
+    "@emotion/core" "^10.1.1"
+    "@emotion/is-prop-valid" "^0.8.6"
+    "@emotion/styled" "^10.0.27"
+    "@storybook/client-logger" "6.4.21"
     core-js "^3.8.2"
     deep-object-diff "^1.1.0"
     emotion-theming "^10.0.27"
@@ -7187,12 +7213,7 @@ core-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
   integrity sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
 
-core-js@^3.0.1, core-js@^3.0.4:
-  version "3.21.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.21.0.tgz#f479dbfc3dffb035a0827602dd056839a774aa71"
-  integrity sha512-YUdI3fFu4TF/2WykQ2xzSiTQdldLB4KVuL9WeAy5XONZYt5Cun/fpQvctoKbCgvPhmzADeesTk/j2Rdx77AcKQ==
-
-core-js@^3.6.5, core-js@^3.8.2:
+core-js@^3.0.1, core-js@^3.0.4, core-js@^3.6.5, core-js@^3.8.2:
   version "3.21.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.21.1.tgz#f2e0ddc1fc43da6f904706e8e955bc19d06a0d94"
   integrity sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==
