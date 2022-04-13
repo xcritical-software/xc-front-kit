@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/sidebar@1.3.0-beta.1...@xcritical/sidebar@1.3.0-beta.2) (2022-04-13)
+
+**Note:** Version bump only for package @xcritical/sidebar
+
+
+
+
+
 # [1.3.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/sidebar@1.3.0-beta.0...@xcritical/sidebar@1.3.0-beta.1) (2022-04-13)
 
 
