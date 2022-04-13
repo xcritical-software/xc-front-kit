@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/filter",
-	"version": "1.3.0-beta.1",
+	"version": "1.3.0-beta.2",
 	"description": "XCritical Filter Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -45,10 +45,10 @@
 		"redux": "^4.0.5"
 	},
 	"dependencies": {
-		"@xcritical/button": "^2.3.0-beta.0",
-		"@xcritical/input": "^1.3.0-beta.0",
-		"@xcritical/popover": "^2.3.0-beta.1",
-		"@xcritical/select": "^1.3.0-beta.0",
+		"@xcritical/button": "^2.3.0-beta.1",
+		"@xcritical/input": "^1.3.0-beta.1",
+		"@xcritical/popover": "^2.3.0-beta.2",
+		"@xcritical/select": "^1.3.0-beta.1",
 		"@xcritical/theme": "^1.3.0-beta.0",
 		"lodash.get": "4.x",
 		"lodash.isempty": "4.x",

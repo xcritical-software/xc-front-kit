@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/portal@0.3.0-beta.0...@xcritical/portal@0.3.0-beta.1) (2022-04-13)
+
+
+### Features
+
+* **locators:** fix lint ([92d6853](https://github.com/xcritical-software/xc-front-kit/commit/92d6853938e622b3453438b91f7c4e2151550aab))
+* **packages:** added additional classnames and classnameprefixes for automatic testing ([4c926fc](https://github.com/xcritical-software/xc-front-kit/commit/4c926fc7439650c7f0a71bcda6c06a4810e41276))
+
+
+
+
+
 # [0.3.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/portal@0.2.1...@xcritical/portal@0.3.0-beta.0) (2022-03-30)
 
 
