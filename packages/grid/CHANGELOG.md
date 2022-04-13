@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.4.0-beta.0...@xcritical/grid@1.4.0-beta.1) (2022-04-13)
+
+
+### Features
+
+* **components:** added additional classes for automatic testing ([838684b](https://github.com/xcritical-software/xc-front-kit/commit/838684b1e96cd2a9a40620e7a67cb49b78c594b1))
+
+
+
+
+
 # [1.4.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.3.1...@xcritical/grid@1.4.0-beta.0) (2022-03-30)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/notification@1.3.0-beta.0...@xcritical/notification@1.3.0-beta.1) (2022-04-13)
+
+
+### Features
+
+* **components:** added additional classes for automatic testing ([838684b](https://github.com/xcritical-software/xc-front-kit/commit/838684b1e96cd2a9a40620e7a67cb49b78c594b1))
+* **packages:** added additional classnames and classnameprefixes for automatic testing ([4c926fc](https://github.com/xcritical-software/xc-front-kit/commit/4c926fc7439650c7f0a71bcda6c06a4810e41276))
+
+
+
+
+
 # [1.3.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/notification@1.2.1...@xcritical/notification@1.3.0-beta.0) (2022-03-30)
 
 
