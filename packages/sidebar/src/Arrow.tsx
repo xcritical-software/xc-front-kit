@@ -1,8 +1,10 @@
 import React, { ReactElement } from 'react';
 
-import { IArrow } from './interfaces';
+export interface IArrowProps {
+  classNamePrefix?: string;
+}
 
-const Arrow: React.FC<IArrow> = ({ classNamePrefix }): ReactElement => (
+const Arrow: React.FC<IArrowProps> = ({ classNamePrefix }): ReactElement => (
   <svg
     className={classNamePrefix && `${classNamePrefix}--button-icon`}
     version="1.1"
