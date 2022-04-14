@@ -3,7 +3,7 @@ import { css, FlattenInterpolation } from 'styled-components';
 import { AllType, getAppearanceTheme } from '@xcritical/theme';
 
 import { checkboxThemeNamespace, defaultCheckboxTheme } from '../theme';
-import { CheckboxTheme, ICheckboxProps } from '../interfaces';
+import { CheckboxTheme, IStyledCheckboxProps } from '../interfaces';
 
 export const checkboxAppearanceTheme = (
   theme: CheckboxTheme,
@@ -21,7 +21,7 @@ export const getCheckboxInteractiveStyles = ({
   appearance = 'default',
   baseAppearance = 'default',
   disabled,
-}: ICheckboxProps): FlattenInterpolation<any> => {
+}: IStyledCheckboxProps): FlattenInterpolation<any> => {
   const standardFocus = css`
     &:focus {
       box-shadow: 0 0 0 2px
