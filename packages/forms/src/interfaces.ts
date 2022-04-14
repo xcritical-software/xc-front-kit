@@ -48,7 +48,7 @@ export type FormFieldProps<TComponentProps> = Omit<
   component: React.ComponentType<TComponentProps & IFormFieldComponentProps>;
   name: string;
   innerRef?: React.Ref<ElementRef<TComponentProps>>;
-  onChange?: Partial<IFormFieldComponentProps['onChange']>;
+  onChange?: IFormFieldComponentProps['onChange'];
 };
 
 export interface IFormFieldComponentProps {
