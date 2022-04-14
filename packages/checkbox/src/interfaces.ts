@@ -11,7 +11,7 @@ export interface ICheckboxTheme extends ICSSProperties {
 export type CheckboxTheme = ITheme<ICheckboxTheme>;
 
 export interface IStyledProps {
-  theme: CheckboxTheme;
+  theme?: CheckboxTheme;
   appearance?: string;
   baseAppearance?: string;
   className?: string;
