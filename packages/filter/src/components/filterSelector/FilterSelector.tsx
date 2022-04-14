@@ -6,7 +6,7 @@ import { ISelectedFilterComponent } from '../../interfaces';
 import { convertFiltersToOptions } from '../../utils';
 
 export const FilterSelect: React.FC<ISelectedFilterComponent> = React.memo(
-  ({ filters, currentFilter, onChange }) => {
+  ({ filters, currentFilter, onChange, classNamePrefix, className }) => {
     const selectedFilter = useMemo(() => {
       if (currentFilter) {
         return {
@@ -18,9 +18,10 @@ export const FilterSelect: React.FC<ISelectedFilterComponent> = React.memo(
       return null;
     }, [currentFilter]);
 
-    const filterItems = useMemo(() => convertFiltersToOptions(filters), [
-      filters,
-    ]);
+    const filterItems = useMemo(
+      () => convertFiltersToOptions(filters),
+      [filters]
+    );
 
     return (
       <Select
@@ -28,6 +29,8 @@ export const FilterSelect: React.FC<ISelectedFilterComponent> = React.memo(
         onChange={onChange}
         options={filterItems}
         value={selectedFilter}
+        className={className}
+        classNamePrefix={classNamePrefix}
       />
     );
   }

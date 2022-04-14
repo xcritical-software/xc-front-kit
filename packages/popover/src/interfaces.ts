@@ -22,6 +22,9 @@ export interface IPopover {
   appearance?: string;
   baseAppearance?: string;
   convertStyles?: (styles: CSSProperties) => CSSProperties;
+  className?: string;
+  classNamePrefix?: string;
+  onOutsideClick?: () => void;
 }
 
 export interface IPopoverTheme {

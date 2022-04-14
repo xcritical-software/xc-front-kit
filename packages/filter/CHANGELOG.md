@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.3.0-beta.3...@xcritical/filter@1.3.0) (2022-04-14)
+
+**Note:** Version bump only for package @xcritical/filter
+
+
+
+
+
+# [1.3.0-beta.3](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.3.0-beta.2...@xcritical/filter@1.3.0-beta.3) (2022-04-13)
+
+**Note:** Version bump only for package @xcritical/filter
+
+
+
+
+
+# [1.3.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.3.0-beta.1...@xcritical/filter@1.3.0-beta.2) (2022-04-13)
+
+
+### Features
+
+* **components:** added additional classes for automatic testing ([838684b](https://github.com/xcritical-software/xc-front-kit/commit/838684b1e96cd2a9a40620e7a67cb49b78c594b1))
+* **locators:** added all dynamic classnames for all comment components ([06a4fb3](https://github.com/xcritical-software/xc-front-kit/commit/06a4fb3bbb096fe51591df9622e37379215bc803))
+* **locators:** added all dynamic classnames for filter ([e7b4497](https://github.com/xcritical-software/xc-front-kit/commit/e7b44970be494493f7a0dfa11518fa516e5d9b06))
+* **locators:** fix lint ([92d6853](https://github.com/xcritical-software/xc-front-kit/commit/92d6853938e622b3453438b91f7c4e2151550aab))
+* **packages:** added additional classnames and classnameprefixes for automatic testing ([4c926fc](https://github.com/xcritical-software/xc-front-kit/commit/4c926fc7439650c7f0a71bcda6c06a4810e41276))
+
+
+
+
+
+# [1.3.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.3.0-beta.0...@xcritical/filter@1.3.0-beta.1) (2022-03-31)
+
+**Note:** Version bump only for package @xcritical/filter
+
+
+
+
+
+# [1.3.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.2.1...@xcritical/filter@1.3.0-beta.0) (2022-03-30)
+
+
+### Bug Fixes
+
+* **deps:** bump uuid from 7.0.2 to 8.3.2 ([a4e94e9](https://github.com/xcritical-software/xc-front-kit/commit/a4e94e9be176d1a03ec4a446d556e416b0ba200c))
+
+
+### Features
+
+* added properties for resolving sources ([97db02d](https://github.com/xcritical-software/xc-front-kit/commit/97db02d3db87f45c151befbdb3d6e43f44d66997))
+
+
+
+
+
 ## [1.2.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.2.1-beta.0...@xcritical/filter@1.2.1) (2022-02-16)
 
 **Note:** Version bump only for package @xcritical/filter

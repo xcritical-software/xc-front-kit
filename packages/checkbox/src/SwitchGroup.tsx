@@ -14,6 +14,8 @@ export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
   disabled = false,
   onChange,
   checkIcon,
+  className,
+  classNamePrefix,
 }) => {
   const [values, setValues] = useState(propValues);
 
@@ -40,7 +42,10 @@ export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
   }, [propValues]);
 
   return (
-    <SwitchGroupWrapper appearance={appearance} baseAppearance={baseAppearance}>
+    <SwitchGroupWrapper
+      className={className}
+      appearance={appearance}
+      baseAppearance={baseAppearance}>
       {options.map(({ value, label }) => (
         <Checkbox
           checkIcon={checkIcon}
@@ -51,6 +56,8 @@ export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
           checked={values.includes(value)}
           disabled={disabled}
           onChange={() => handleChange(value)}
+          className={className && `${className}--checkbox`}
+          classNamePrefix={classNamePrefix}
         />
       ))}
     </SwitchGroupWrapper>

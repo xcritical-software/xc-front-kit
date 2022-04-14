@@ -32,6 +32,8 @@ export interface ISidebarProps {
   onChangeState?: Function;
   collapsed?: boolean;
   width?: number;
+  className?: string;
+  classNamePrefix?: string;
 }
 
 export interface ISidebarStates {

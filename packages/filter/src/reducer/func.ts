@@ -68,7 +68,7 @@ export const changeFilter = (
   if (payload.field === 'condition') {
     const { valueType, hasFieldForValue } = payload;
 
-    let $state = setIn(state, value, ['drafts', `${index}`, 'condition']);
+    const $state = setIn(state, value, ['drafts', `${index}`, 'condition']);
 
     if (valueType?.toLowerCase() === 'string' && hasFieldForValue) {
       return $state;

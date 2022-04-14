@@ -65,9 +65,8 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   minColumnWidth,
   gridProps,
 }) => {
-  const [mappedColumns, setMappedColumns] = useState<IColumn[]>(
-    gridHOCMappedColumns
-  );
+  const [mappedColumns, setMappedColumns] =
+    useState<IColumn[]>(gridHOCMappedColumns);
   const fullWidthRef = useRef(getFullWidth(mappedColumns));
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [changingColumns, setChangingColumns] = useState<string>('');
@@ -209,7 +208,6 @@ const InternalGrid: React.FC<IInternalGrid> = ({
             {column.isExpandable && !mappedItems[rowIndex].children && (
               <ShiftInsteadButton theme={themeRef.current} />
             )}
-
             <span>{cellContent}</span>
           </BodyCellContent>
         </BodyCell>

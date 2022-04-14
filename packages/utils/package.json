@@ -1,9 +1,10 @@
 {
 	"name": "@xcritical/utils",
-	"version": "0.3.1",
+	"version": "0.4.0",
 	"description": "<>",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
+	"xc:source": "src/index.ts",
 	"module": "dist/utils.esm.js",
 	"types": "dist/typings.d.ts",
 	"files": [

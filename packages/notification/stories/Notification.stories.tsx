@@ -53,7 +53,10 @@ const StyledButton = styled.button`
 
 const AnimationNotification: React.FC = () => (
   <>
-    <Notification />
+    <Notification
+      className="at-notification-root"
+      classNamePrefix="at-notification"
+    />
     <StyledButton onClick={() => notify('Bounce', { transition: Bounce })}>
       Show Bounce Notification
     </StyledButton>

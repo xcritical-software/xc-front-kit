@@ -7,6 +7,7 @@ export interface IFormProps
   > {
   name: string;
   namespace?: string;
+  className?: string;
 }
 
 export interface IFormContext {
@@ -40,16 +41,19 @@ export type ElementRef<C> = 'ref' extends keyof C
     : never
   : never;
 
-export type FormFieldProps<TComponentProps> = TComponentProps & {
+export type FormFieldProps<TComponentProps> = Omit<
+  TComponentProps,
+  keyof IFormFieldComponentProps
+> & {
   component: React.ComponentType<TComponentProps & IFormFieldComponentProps>;
   name: string;
   innerRef?: React.Ref<ElementRef<TComponentProps>>;
-  onChange?: IFormFieldComponentProps['onChange'];
+  onChange?: Partial<IFormFieldComponentProps['onChange']>;
 };
 
 export interface IFormFieldComponentProps {
   onChange: (...args: any[]) => void;
-  invalid: boolean;
+  invalid?: boolean;
   error?: string | string[];
   value: any;
   initialValue?: any;

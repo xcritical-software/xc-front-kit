@@ -32,6 +32,8 @@ export const PureButton: React.FC<IButtonProps> = ({
   shouldFitContent = false,
   component: CustomComponent,
   onClick: onClickProps,
+  className,
+  classNamePrefix,
   ...rest
 }) => {
   const themeContext = useContext<IThemeNamespace<ButtonTheme>>(ThemeContext);
@@ -47,15 +49,15 @@ export const PureButton: React.FC<IButtonProps> = ({
     [disabled, onClickProps]
   );
 
-  const element = useMemo(() => CustomComponent ?? getElement(disabled, href), [
-    CustomComponent,
-    disabled,
-    href,
-  ]);
+  const element = useMemo(
+    () => CustomComponent ?? getElement(disabled, href),
+    [CustomComponent, disabled, href]
+  );
 
   return (
     <ThemeProvider theme={innerTheme}>
       <StyledButton
+        className={className}
         as={element}
         ref={buttonRef}
         role={role}
@@ -73,6 +75,7 @@ export const PureButton: React.FC<IButtonProps> = ({
         {...rest}>
         {!!prefix && (
           <Prefix
+            className={classNamePrefix && `${classNamePrefix}--prefix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>
@@ -80,8 +83,12 @@ export const PureButton: React.FC<IButtonProps> = ({
           </Prefix>
         )}
 
-        <ContentWrapper appearance={appearance} baseAppearance={baseAppearance}>
+        <ContentWrapper
+          className={classNamePrefix && `${classNamePrefix}--content-wrapper`}
+          appearance={appearance}
+          baseAppearance={baseAppearance}>
           <Content
+            className={classNamePrefix && `${classNamePrefix}--content`}
             textPosition={textPosition}
             isRTL={isRTL}
             appearance={appearance}
@@ -92,6 +99,7 @@ export const PureButton: React.FC<IButtonProps> = ({
 
         {!!postfix && (
           <Postfix
+            className={classNamePrefix && `${classNamePrefix}--postfix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>

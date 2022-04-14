@@ -1,23 +1,15 @@
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
 const styledComponentsTransformer = createStyledComponentsTransformer();
+
+
 module.exports = {
     stories: ['../packages/**/*.stories.(ts|tsx)'],
-    addons: ['@storybook/addon-actions/register', '@storybook/addon-knobs', '@storybook/addon-docs', '@storybook/addon-backgrounds'],
+    addons: ['@storybook/addon-actions', '@storybook/addon-knobs', '@storybook/addon-docs', '@storybook/addon-backgrounds'],
+    framework: '@storybook/react',
     webpackFinal: async (config) => {
-        config.module.rules.push({
-            test: /\.(ts|tsx)$/,
-            use: [
-                {
-                    loader: require.resolve('ts-loader'),
-                    options: {
-                        transpileOnly: true,
-                        getCustomTransformers: () => ({ before: [styledComponentsTransformer] })
-                    },
-                },
-            ],
-        });
-        config.resolve.mainFields = ['source', 'browser', 'module', 'main']
-        config.resolve.extensions.push('.ts', '.tsx');
+       
+        config.resolve.mainFields = ['xc:source', 'browser', 'module', 'main']
+      
 
         return config;
     },

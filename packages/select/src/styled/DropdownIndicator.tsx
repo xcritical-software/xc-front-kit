@@ -10,7 +10,11 @@ const DropdownIndicator = function <
   IsMulti extends boolean = boolean,
   Group extends GroupBase<Option> = GroupBase<Option>
 >(props: DropdownIndicatorProps<Option, IsMulti, Group>) {
-  const { getStyles, selectProps } = props;
+  const {
+    getStyles,
+    selectProps,
+    selectProps: { classNamePrefix },
+  } = props;
   const dropdownIndicatorStyles = getStyles(
     'dropdownIndicator',
     props
@@ -20,9 +24,21 @@ const DropdownIndicator = function <
     components.DropdownIndicator && (
       <components.DropdownIndicator {...props}>
         {selectProps.menuIsOpen ? (
-          <ChevronUp fill={dropdownIndicatorStyles?.color} />
+          <ChevronUp
+            className={
+              (classNamePrefix as string) &&
+              `${classNamePrefix}--icon-chevron-up`
+            }
+            fill={dropdownIndicatorStyles?.color}
+          />
         ) : (
-          <ChevronDown fill={dropdownIndicatorStyles?.color} />
+          <ChevronDown
+            className={
+              (classNamePrefix as string) &&
+              `${classNamePrefix}--icon-chevron-down`
+            }
+            fill={dropdownIndicatorStyles?.color}
+          />
         )}
       </components.DropdownIndicator>
     )

@@ -29,12 +29,14 @@ export const Modal: React.FC<IModalProps> = ({
   maxHeight,
   minHeight,
   appearance = 'default',
+  className,
+  classNamePrefix,
 }) => {
   const maxZIndex: number = useContext(MaxZIndexContext);
-  const zIndex = useMemo(() => zIndexProp ?? maxZIndex + 1, [
-    maxZIndex,
-    zIndexProp,
-  ]);
+  const zIndex = useMemo(
+    () => zIndexProp ?? maxZIndex + 1,
+    [maxZIndex, zIndexProp]
+  );
 
   if (!isOpen) {
     return null;
@@ -45,12 +47,14 @@ export const Modal: React.FC<IModalProps> = ({
   return (
     <>
       <Blanket
+        className={classNamePrefix && `${classNamePrefix}--blanket`}
         isTinted
         zIndex={zIndex}
         theme={modalBlanketTheme}
         onBlanketClicked={onModalCancel}
       />
       <ModalContent
+        className={className}
         zIndex={zIndex}
         width={width}
         maxWidth={maxWidth}
@@ -59,13 +63,32 @@ export const Modal: React.FC<IModalProps> = ({
         maxHeight={maxHeight}
         minHeight={minHeight}
         appearance={appearance}>
-        <ModalHeaderWrapper appearance={appearance}>
-          <ModalHeader appearance={appearance}>{title}</ModalHeader>
-          <ModalIconClose onClick={onModalCancel} appearance={appearance}>
-            {iconClose || <IconClose />}
+        <ModalHeaderWrapper
+          className={classNamePrefix && `${classNamePrefix}--header-wrapper`}
+          appearance={appearance}>
+          <ModalHeader
+            className={classNamePrefix && `${classNamePrefix}--header`}
+            appearance={appearance}>
+            {title}
+          </ModalHeader>
+          <ModalIconClose
+            className={
+              classNamePrefix && `${classNamePrefix}--icon-wrapper-close`
+            }
+            onClick={onModalCancel}
+            appearance={appearance}>
+            {iconClose || (
+              <IconClose
+                className={classNamePrefix && `${classNamePrefix}--icon-close`}
+              />
+            )}
           </ModalIconClose>
         </ModalHeaderWrapper>
-        <ModalBody appearance={appearance}>{children}</ModalBody>
+        <ModalBody
+          className={classNamePrefix && `${classNamePrefix}--body`}
+          appearance={appearance}>
+          {children}
+        </ModalBody>
       </ModalContent>
     </>
   );

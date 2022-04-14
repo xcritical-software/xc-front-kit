@@ -31,6 +31,7 @@ export const PureSelect = function <
   Group extends GroupBase<Option> = GroupBase<Option>
 >({
   className,
+  classNamePrefix,
   disabled = false,
   isMulti,
   isSearchable = false,
@@ -47,15 +48,21 @@ export const PureSelect = function <
   onChange,
   ...rest
 }: SelectProps<Option, IsMulti, Group>): ReactElement {
-  const themeContext = useContext<IThemeNamespace<ISelectBaseTheme>>(
-    ThemeContext
-  );
+  const themeContext =
+    useContext<IThemeNamespace<ISelectBaseTheme>>(ThemeContext);
   const innerTheme = (theme ?? themeContext) || {};
   const selectRef = useRef<any>();
 
   const formatOptionLabel = useMemo(
-    () => getFormatOptionLabel(innerTheme, appearance, baseAppearance, isRTL),
-    [appearance, baseAppearance, innerTheme, isRTL]
+    () =>
+      getFormatOptionLabel(
+        classNamePrefix,
+        innerTheme,
+        appearance,
+        baseAppearance,
+        isRTL
+      ),
+    [appearance, baseAppearance, innerTheme, isRTL, classNamePrefix]
   );
 
   const selectStyles = useMemo(
@@ -93,7 +100,7 @@ export const PureSelect = function <
     <Select
       ref={selectRef}
       className={className}
-      classNamePrefix={className}
+      classNamePrefix={classNamePrefix}
       formatOptionLabel={formatOptionLabel}
       styles={{ ...selectStyles, ...styles }}
       isDisabled={disabled}

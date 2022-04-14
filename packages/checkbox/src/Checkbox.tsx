@@ -20,6 +20,8 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
   label,
   checkIcon,
   onChange,
+  className,
+  classNamePrefix,
 }) => {
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,11 +36,13 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
 
   return (
     <CheckboxLabel
+      className={className}
       appearance={appearance}
       baseAppearance={baseAppearance}
       disabled={disabled}
       onClick={handleClick}>
       <HiddenCheckbox
+        className={classNamePrefix && `${classNamePrefix}_hidden`}
         type={type}
         checked={checked}
         disabled={disabled}
@@ -46,17 +50,20 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
         onChange={handleInputChange}
       />
       <CheckboxWrapper
+        className={classNamePrefix && `${classNamePrefix}--wrapper`}
         appearance={appearance}
         baseAppearance={baseAppearance}
         type={type}>
         {checkIcon ? (
           <StyledCheckbox
+            className={classNamePrefix && `${classNamePrefix}_styled`}
             appearance={appearance}
             baseAppearance={baseAppearance}>
             {checked && checkIcon}
           </StyledCheckbox>
         ) : (
           <DefaultCheckbox
+            className={classNamePrefix && `${classNamePrefix}_default`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             checked={checked}
@@ -65,7 +72,10 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
         )}
       </CheckboxWrapper>
       {label && (
-        <LabelWrapper appearance={appearance} baseAppearance={baseAppearance}>
+        <LabelWrapper
+          className={classNamePrefix && `${classNamePrefix}--label-wrapper`}
+          appearance={appearance}
+          baseAppearance={baseAppearance}>
           {label}
         </LabelWrapper>
       )}

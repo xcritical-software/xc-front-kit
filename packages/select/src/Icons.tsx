@@ -1,8 +1,15 @@
 import { Property } from 'csstype';
 import React from 'react';
 
-export const ChevronUp = ({ fill = '#A7A7A7' }: { fill?: Property.Color }) => (
+export const ChevronUp = ({
+  className,
+  fill = '#A7A7A7',
+}: {
+  className?: string;
+  fill?: Property.Color;
+}) => (
   <svg
+    className={className}
     width="12"
     height="8"
     viewBox="0 0 12 8"
@@ -18,11 +25,14 @@ export const ChevronUp = ({ fill = '#A7A7A7' }: { fill?: Property.Color }) => (
 );
 
 export const ChevronDown = ({
+  className,
   fill = '#A7A7A7',
 }: {
+  className?: string;
   fill?: Property.Color;
 }) => (
   <svg
+    className={className}
     width="12"
     height="8"
     viewBox="0 0 12 8"
@@ -38,13 +48,16 @@ export const ChevronDown = ({
 );
 
 export const Close = ({
+  className,
   fill = '#A7A7A7',
   size = 12,
 }: {
+  className?: string | null;
   fill?: Property.Color;
   size?: number;
 }) => (
   <svg
+    className={className as string}
     xmlns="http://www.w3.org/2000/svg"
     width={size}
     height={size}

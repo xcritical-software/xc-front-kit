@@ -34,9 +34,9 @@ const initData = {
 const FORM_NAME = 'error-form';
 
 const validate = (model) => ({
-  firstName: model.firstName === '123' ? errors.firstName : null,
-  lastName: model.lastName === '123' ? errors.lastName : null,
-  age: model.age === '123' ? errors.age : null,
+  firstName: model?.firstName === '123' ? errors.firstName : null,
+  lastName: model?.lastName === '123' ? errors.lastName : null,
+  age: model?.age === '123' ? errors.age : null,
 });
 
 const InputWithError = ({
@@ -77,14 +77,14 @@ storiesOf('Form', module)
     const form = useForm(FORM_NAME);
 
     useEffect(() => {
-      const validationErrors = validate(form.model);
-      dispatch(xcriticalFormError(FORM_NAME, validationErrors));
-    }, [dispatch, form.model]);
-
-    useEffect(() => {
       dispatch(xcriticalFormError(FORM_NAME, errors));
       dispatch(xcriticalFormInit(FORM_NAME, initData));
     }, [dispatch]);
+
+    useEffect(() => {
+      const validationErrors = validate(form.model);
+      dispatch(xcriticalFormError(FORM_NAME, validationErrors));
+    }, [dispatch, form.model]);
 
     const handleToggleShowErrors = () => {
       dispatch(xcriticalFormShowErrors(FORM_NAME, !form.showAllErrors));

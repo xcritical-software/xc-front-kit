@@ -32,6 +32,9 @@ export const Popover: React.FC<IPopover> = memo(
     theme,
     appearance = 'default',
     baseAppearance = 'default',
+    className,
+    classNamePrefix,
+    onOutsideClick,
   }) => {
     const popoverTargetRef = useRef<any>();
     const popoverContentRef = useRef<any>();
@@ -94,6 +97,19 @@ export const Popover: React.FC<IPopover> = memo(
         changeVisible(false);
       },
       [_visible, changeVisible]
+    );
+
+    const handleClickOutside = useCallback(
+      (e: MouseEvent): void => {
+        if (
+          popoverContentRef.current &&
+          !popoverContentRef.current.contains(e.target) &&
+          !!onOutsideClick
+        ) {
+          onOutsideClick();
+        }
+      },
+      [onOutsideClick]
     );
 
     const handleMouseOver = useCallback(
@@ -185,6 +201,17 @@ export const Popover: React.FC<IPopover> = memo(
       return () => {};
     }, [trigger, handleClick]);
 
+    useEffect(() => {
+      if (onOutsideClick) {
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () =>
+          document.removeEventListener('mousedown', handleClickOutside);
+      }
+
+      return () => {};
+    }, [handleClickOutside, onOutsideClick]);
+
     return (
       <Popper
         position={position}
@@ -197,6 +224,7 @@ export const Popover: React.FC<IPopover> = memo(
 
           return (
             <PopoverWrapper
+              className={className && `${className}--wrapper`}
               theme={theme}
               appearance={appearance}
               baseAppearance={baseAppearance}
@@ -210,6 +238,7 @@ export const Popover: React.FC<IPopover> = memo(
               {children}
               {popperProps.visible && (
                 <Content
+                  className={classNamePrefix && `${classNamePrefix}--content`}
                   ref={(node) => {
                     const { contentRef } = popperProps;
 
@@ -229,6 +258,7 @@ export const Popover: React.FC<IPopover> = memo(
                   {content}
                   {withArrow && (
                     <Arrow
+                      className={classNamePrefix && `${classNamePrefix}--arrow`}
                       x-arrow=""
                       style={popperProps.arrowStyles}
                       data-arrow-position={popperProps.position}

@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/sidebar@1.3.0-beta.2...@xcritical/sidebar@1.3.0) (2022-04-14)
+
+
+### Bug Fixes
+
+* **deps:** bump react-router-dom from 6.2.1 to 6.3.0 ([673eac4](https://github.com/xcritical-software/xc-front-kit/commit/673eac4173de85c4b8087ed5ba03fe820f4fc7fe))
+
+
+
+
+
+# [1.3.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/sidebar@1.3.0-beta.1...@xcritical/sidebar@1.3.0-beta.2) (2022-04-13)
+
+**Note:** Version bump only for package @xcritical/sidebar
+
+
+
+
+
+# [1.3.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/sidebar@1.3.0-beta.0...@xcritical/sidebar@1.3.0-beta.1) (2022-04-13)
+
+
+### Bug Fixes
+
+* **sidebar:** add interface for Arrow ([a25ce09](https://github.com/xcritical-software/xc-front-kit/commit/a25ce09e79232e9136fd698ebd11dc7caac07a07))
+
+
+### Features
+
+* **components:** added additional classes for automatic testing ([838684b](https://github.com/xcritical-software/xc-front-kit/commit/838684b1e96cd2a9a40620e7a67cb49b78c594b1))
+* **components:** refactoring by PR, added additional generic classes ([90460c0](https://github.com/xcritical-software/xc-front-kit/commit/90460c0a573d606cd0956e526c81b068842c0685))
+* **locators:** rewrite static classnames -> dynamic classnames ([7e0ec75](https://github.com/xcritical-software/xc-front-kit/commit/7e0ec758bd230623a8001ffac9613321bf4fa240))
+* **packages:** added additional classnames and classnameprefixes for automatic testing ([4c926fc](https://github.com/xcritical-software/xc-front-kit/commit/4c926fc7439650c7f0a71bcda6c06a4810e41276))
+
+
+
+
+
+# [1.3.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/sidebar@1.2.1...@xcritical/sidebar@1.3.0-beta.0) (2022-03-30)
+
+
+### Features
+
+* added properties for resolving sources ([97db02d](https://github.com/xcritical-software/xc-front-kit/commit/97db02d3db87f45c151befbdb3d6e43f44d66997))
+
+
+
+
+
 ## [1.2.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/sidebar@1.2.1-beta.0...@xcritical/sidebar@1.2.1) (2022-02-16)
 
 **Note:** Version bump only for package @xcritical/sidebar

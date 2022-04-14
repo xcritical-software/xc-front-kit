@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { isNil, isObject } from 'utilitify';
 
 import { IFormProps } from '../interfaces';
@@ -9,11 +9,12 @@ export const PureForm: React.FC<IFormProps> = ({
   name,
   children,
   namespace,
+  className,
   ...otherProps
 }) => {
   const fieldNames: string[] = [];
 
-  const findChildPropName = (child: React.ReactElement): void => {
+  const findChildPropName = useCallback((child: React.ReactElement): void => {
     if (!isNil(child) && child.props) {
       Object.keys(child.props).forEach((key) => {
         const currentChildValue = child.props[key];
@@ -29,12 +30,18 @@ export const PureForm: React.FC<IFormProps> = ({
         }
       });
     }
-  };
+  }, []);
 
-  React.Children.forEach(children, findChildPropName);
+  const $className = `xc-field-${name}${namespace ? `-${namespace}` : ''} ${
+    className ?? ''
+  }`;
+
+  useEffect(() => {
+    React.Children.forEach(children, findChildPropName);
+  }, [children, findChildPropName]);
 
   return (
-    <form name={name} {...otherProps}>
+    <form className={$className} name={name} {...otherProps}>
       <FormProvider value={{ formName: name, fields: fieldNames, namespace }}>
         {children}
       </FormProvider>

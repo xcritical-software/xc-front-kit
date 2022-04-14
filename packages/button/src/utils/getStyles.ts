@@ -96,28 +96,30 @@ const getVerticalAlign = (spacing = 'default'): string =>
 const getWidth = (shouldFitContent = false): string =>
   shouldFitContent ? '100%' : 'auto';
 
-const getButtonStatesStyle = (stateName: string) => ({
-  theme,
-  baseAppearance,
-  appearance,
-  ghost,
-}: IStyledButtonProps): FlattenInterpolation<any> => {
-  const { _outline, ...styles } = getAppearanceStyleProperty(
+const getButtonStatesStyle =
+  (stateName: string) =>
+  ({
     theme,
     baseAppearance,
     appearance,
-    stateName,
-    ghost
-  );
+    ghost,
+  }: IStyledButtonProps): FlattenInterpolation<any> => {
+    const { _outline, ...styles } = getAppearanceStyleProperty(
+      theme,
+      baseAppearance,
+      appearance,
+      stateName,
+      ghost
+    );
 
-  return css`
-    ${styles}
-    ${ghost ? _outline : {}}
+    return css`
+      ${styles}
+      ${ghost ? _outline : {}}
     
     cursor: ${getCursor(stateName)};
-    transition: ${getTransition(stateName)};
-  `;
-};
+      transition: ${getTransition(stateName)};
+    `;
+  };
 
 export const getItemInteractiveStyles = memoize(
   (
