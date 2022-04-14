@@ -43,7 +43,7 @@ export type ElementRef<C> = 'ref' extends keyof C
 
 export type FormFieldProps<TComponentProps> = Omit<
   TComponentProps,
-  'onChange' | 'innerRef'
+  keyof IFormFieldComponentProps
 > & {
   component: React.ComponentType<TComponentProps & IFormFieldComponentProps>;
   name: string;
