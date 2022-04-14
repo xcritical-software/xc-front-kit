@@ -30,6 +30,8 @@ export const ModalPortal: React.FC<IModalProps> = ({
   minHeight,
   appearance = 'default',
   zIndex,
+  className,
+  classNamePrefix,
 }) => {
   if (!isOpen) {
     return null;
@@ -38,14 +40,19 @@ export const ModalPortal: React.FC<IModalProps> = ({
   const modalBlanketTheme = getModalBlanketTheme(theme);
 
   return (
-    <Portal id={name} zIndex="unset">
+    <Portal
+      className={classNamePrefix && `${classNamePrefix}--portal`}
+      id={name}
+      zIndex="unset">
       <Blanket
+        className={classNamePrefix && `${classNamePrefix}--blanket`}
         isTinted
         zIndex={zIndex}
         theme={modalBlanketTheme}
         onBlanketClicked={onModalCancel}
       />
       <ModalContent
+        className={className}
         width={width}
         maxWidth={maxWidth}
         minWidth={minWidth}
@@ -53,13 +60,32 @@ export const ModalPortal: React.FC<IModalProps> = ({
         maxHeight={maxHeight}
         minHeight={minHeight}
         appearance={appearance}>
-        <ModalHeaderWrapper appearance={appearance}>
-          <ModalHeader appearance={appearance}>{title}</ModalHeader>
-          <ModalIconClose onClick={onModalCancel} appearance={appearance}>
-            {iconClose || <IconClose />}
+        <ModalHeaderWrapper
+          className={classNamePrefix && `${classNamePrefix}--header-wrapper`}
+          appearance={appearance}>
+          <ModalHeader
+            className={classNamePrefix && `${classNamePrefix}--header`}
+            appearance={appearance}>
+            {title}
+          </ModalHeader>
+          <ModalIconClose
+            className={
+              classNamePrefix && `${classNamePrefix}--icon-close-wrapper`
+            }
+            onClick={onModalCancel}
+            appearance={appearance}>
+            {iconClose || (
+              <IconClose
+                className={classNamePrefix && `${classNamePrefix}--icon-close`}
+              />
+            )}
           </ModalIconClose>
         </ModalHeaderWrapper>
-        <ModalBody appearance={appearance}>{children}</ModalBody>
+        <ModalBody
+          className={classNamePrefix && `${classNamePrefix}--body`}
+          appearance={appearance}>
+          {children}
+        </ModalBody>
       </ModalContent>
     </Portal>
   );

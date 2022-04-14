@@ -1,9 +1,10 @@
 {
 	"name": "@xcritical/popover",
-	"version": "2.2.1",
+	"version": "2.3.0-beta.3",
 	"description": "",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
+	"xc:source": "src/index.ts",
 	"module": "dist/popover.esm.js",
 	"types": "dist/typings.d.ts",
 	"files": [
@@ -37,8 +38,8 @@
 		"styled-components": "^5.3.3"
 	},
 	"dependencies": {
-		"@xcritical/popper": "^1.2.1",
-		"@xcritical/theme": "^1.2.1",
+		"@xcritical/popper": "^1.3.0-beta.0",
+		"@xcritical/theme": "^1.3.0-beta.0",
 		"resize-observer-polyfill": "^1.5.1"
 	}
 }

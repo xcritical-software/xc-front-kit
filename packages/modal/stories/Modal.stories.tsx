@@ -169,7 +169,9 @@ const Modals = ({ component: ModalComponent }): React.ReactElement => {
         isOpen={isFirstOpen}
         title="First Modal"
         name="first"
-        onModalCancel={handleFirstClose}>
+        onModalCancel={handleFirstClose}
+        className="at-modal-root"
+        classNamePrefix="at-modal">
         <button type="button" onClick={handleSecondOpen}>
           Open second
         </button>
@@ -180,7 +182,9 @@ const Modals = ({ component: ModalComponent }): React.ReactElement => {
             isOpen={isSecondOpen}
             title="Second Modal"
             name="second"
-            onModalCancel={handleSecondClose}>
+            onModalCancel={handleSecondClose}
+            className="at-modal-root"
+            classNamePrefix="at-modal">
             Second
           </ModalComponent>
         </ModalProvider>
@@ -189,7 +193,9 @@ const Modals = ({ component: ModalComponent }): React.ReactElement => {
           isOpen={isSecondOpen}
           title="Second Modal"
           name="second"
-          onModalCancel={handleSecondClose}>
+          onModalCancel={handleSecondClose}
+          className="at-modal-root"
+          classNamePrefix="at-modal">
           Second
         </ModalComponent>
       )}
@@ -325,4 +331,29 @@ storiesOf('ConnectedModal', module)
         </ModalPortal>
       </ThemeProvider>
     );
-  });
+  })
+  .add('className & Prefix', () => (
+    <Provider store={store}>
+      <ThemeProvider theme={emptyTheme}>
+        <StyledButton
+          onClick={() => store.dispatch(xcriticalModalOpen('defaultModal'))}>
+          Open Default Modal
+        </StyledButton>
+
+        <ConnectedModal
+          className="at-modal-root"
+          classNamePrefix="at-modal"
+          title="Default Modal"
+          name="defaultModal"
+          width={text('Width', 'auto')}
+          minWidth={text('Min width', '100px')}
+          maxWidth={text('Max width', '300px')}>
+          <div>Body example</div>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident,
+            rem!
+          </div>
+        </ConnectedModal>
+      </ThemeProvider>
+    </Provider>
+  ));

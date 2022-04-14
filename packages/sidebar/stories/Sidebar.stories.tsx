@@ -228,7 +228,12 @@ storiesOf('Sidebar', module)
   .add('Basic', () => (
     <BrowserRouter>
       <GlobalStyle />
-      <Sidebar {...props}>{list(100)}</Sidebar>
+      <Sidebar
+        {...props}
+        className="at-sidebar-root"
+        classNamePrefix="at-sidebar">
+        {list(100)}
+      </Sidebar>
       <Switch>
         {routerConfig.map(({ path, component, exact }: any) => (
           <Route key={path} path={path} component={component} exact={exact} />

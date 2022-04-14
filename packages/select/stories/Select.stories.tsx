@@ -95,7 +95,11 @@ const groupOptionsPrefix = [
 storiesOf('Select', module)
   .add('Basic', () => (
     <>
-      <Select options={options} />
+      <Select
+        options={options}
+        className="at-select-root"
+        classNamePrefix="at-select"
+      />
     </>
   ))
   .add('With Search', () => (

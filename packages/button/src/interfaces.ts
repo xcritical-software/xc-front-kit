@@ -88,4 +88,5 @@ export type ButtonGroupTheme = ITheme<CSSObject>;
 
 export interface IButtonGroup {
   theme?: IThemeNamespace<ButtonGroupTheme>;
+  className?: string;
 }

@@ -702,4 +702,101 @@ storiesOf('Input', module)
         </Table>
       </ThemeProvider>
     );
+  })
+  .add('className & Prefix', () => {
+    const [prefixValue, setPrefixValue] = useState('Input with prefix');
+    const [suffixValue, setSuffixValue] = useState('Input with suffix');
+    const [prefixSuffixValue, setPrefixSuffixValue] = useState(
+      'Input with prefix/suffix'
+    );
+    const [longValue, setLongValue] = useState(
+      'Input long text with prefix/suffix'
+    );
+
+    return (
+      <Table>
+        <Row>
+          <Cell>
+            <Input
+              disabled={boolean('Disabled', false)}
+              invalid={boolean('Invalid', false)}
+              isClearable={boolean('isClearable', false)}
+              isRTL={boolean('isRTL', false)}
+              appearance="default"
+              baseAppearance="default"
+              id="input-with-prefix"
+              name="input-with-prefix"
+              value={prefixValue}
+              onChange={setPrefixValue}
+              placeholder="Enter value with prefix"
+              prefix={<SearchIcon className="at-input--search-icon" />}
+              className="at-input-root"
+              classNamePrefix="at-input"
+            />
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Input
+              disabled={boolean('Disabled', false)}
+              invalid={boolean('Invalid', false)}
+              isClearable={boolean('isClearable', false)}
+              isRTL={boolean('isRTL', false)}
+              appearance="default"
+              baseAppearance="default"
+              id="input-with-suffix"
+              name="input-with-suffix"
+              value={suffixValue}
+              onChange={setSuffixValue}
+              placeholder="Enter value with suffix"
+              postfix={<ErrorIcon className="at-input--error-icon" />}
+              className="at-input-root"
+              classNamePrefix="at-input"
+            />
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Input
+              disabled={boolean('Disabled', false)}
+              invalid={boolean('Invalid', false)}
+              isClearable={boolean('isClearable', false)}
+              isRTL={boolean('isRTL', false)}
+              appearance="default"
+              baseAppearance="default"
+              id="input-with-prefix-suffix"
+              name="input-with-prefix-suffix"
+              value={prefixSuffixValue}
+              onChange={setPrefixSuffixValue}
+              placeholder="Enter value with prefix/suffix"
+              prefix={<SearchIcon className="at-input--search-icon" />}
+              postfix={<ErrorIcon className="at-input--error-icon" />}
+              className="at-input-root"
+              classNamePrefix="at-input"
+            />
+          </Cell>
+        </Row>
+        <Row>
+          <Cell>
+            <Input
+              disabled={boolean('Disabled', false)}
+              invalid={boolean('Invalid', false)}
+              isClearable={boolean('isClearable', false)}
+              isRTL={boolean('isRTL', false)}
+              appearance="default"
+              baseAppearance="default"
+              id="input-long-text-with-prefix-suffix"
+              name="input-long-text-with-prefix-suffix"
+              value={longValue}
+              onChange={setLongValue}
+              placeholder="Enter long value with prefix/suffix"
+              prefix={<ErrorIcon className="at-input--error-icon" />}
+              postfix={<ErrorIcon className="at-input--error-icon" />}
+              className="at-input-root"
+              classNamePrefix="at-input"
+            />
+          </Cell>
+        </Row>
+      </Table>
+    );
   });

@@ -9,12 +9,18 @@ const ClearIndicator = function <
   IsMulti extends boolean = boolean,
   Group extends GroupBase<Option> = GroupBase<Option>
 >(props: ClearIndicatorProps<Option, IsMulti, Group>) {
-  const { getStyles } = props;
+  const {
+    getStyles,
+    selectProps: { classNamePrefix },
+  } = props;
   const clearIndicatorStyles = getStyles('clearIndicator', props) as CSSObject;
 
   return (
     <components.ClearIndicator {...props}>
-      <Close fill={clearIndicatorStyles?.color} />
+      <Close
+        className={classNamePrefix && `${classNamePrefix}--icon-close`}
+        fill={clearIndicatorStyles.color}
+      />
     </components.ClearIndicator>
   );
 };

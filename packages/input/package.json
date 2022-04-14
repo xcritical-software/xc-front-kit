@@ -1,9 +1,10 @@
 {
 	"name": "@xcritical/input",
-	"version": "1.2.1",
+	"version": "1.3.0-beta.2",
 	"description": "",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
+	"xc:source": "src/index.ts",
 	"module": "dist/input.esm.js",
 	"types": "dist/typings.d.ts",
 	"files": [
@@ -34,8 +35,8 @@
 		"styled-components": "^5.3.3"
 	},
 	"dependencies": {
-		"@xcritical/theme": "^1.2.1",
-		"@xcritical/utils": "^0.3.1",
+		"@xcritical/theme": "^1.3.0-beta.0",
+		"@xcritical/utils": "^0.4.0-beta.2",
 		"micro-memoize": "^4.0.8"
 	}
 }

@@ -17,6 +17,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
   (
     {
       className,
+      classNamePrefix,
       appearance = 'default',
       baseAppearance = 'default',
       prefix,
@@ -68,6 +69,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
     );
 
     const handleClick = useCallback(() => {
+      // eslint-disable-next-line no-unused-expressions
       combinedRef.current?.focus();
     }, []);
 
@@ -107,6 +109,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
         focusOnInput={isFocused}>
         {!!prefix && (
           <Prefix
+            className={classNamePrefix && `${classNamePrefix}--prefix`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}
@@ -115,6 +118,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
           </Prefix>
         )}
         <StyledInput
+          className={classNamePrefix && `${classNamePrefix}_styled`}
           appearance={appearance}
           baseAppearance={baseAppearance}
           isRTL={isRTL}
@@ -133,6 +137,9 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
         />
         {isClearable && !!value && (
           <ClearIconWrapper
+            className={
+              classNamePrefix && `${classNamePrefix}--icon-wrapper-clear`
+            }
             appearance={appearance}
             baseAppearance={baseAppearance}
             onClick={inputOnClear}
@@ -140,11 +147,16 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
             invalid={invalid}
             hasValue={!!value}
             focusOnInput={isFocused}>
-            <ClearIcon />
+            <ClearIcon
+              className={
+                classNamePrefix && `${classNamePrefix}--icon-clear-default`
+              }
+            />
           </ClearIconWrapper>
         )}
         {!!postfix && (
           <Postfix
+            className={classNamePrefix && `${classNamePrefix}--postfix`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}

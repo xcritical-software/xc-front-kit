@@ -24,6 +24,7 @@ storiesOf('Drawer', module)
     return (
       <>
         <Drawer
+          classNamePrefix="at-drawer"
           isOpen={isOpen}
           appearance={text('appearance', 'default')}
           title={text('Title', 'This is Drawer')}

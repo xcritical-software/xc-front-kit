@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.4.0-beta.1...@xcritical/utils@0.4.0-beta.2) (2022-04-13)
+
+**Note:** Version bump only for package @xcritical/utils
+
+
+
+
+
+# [0.4.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.4.0-beta.0...@xcritical/utils@0.4.0-beta.1) (2022-04-13)
+
+
+### Features
+
+* **locators:** added step for install node versions 14 ([3c0b6df](https://github.com/xcritical-software/xc-front-kit/commit/3c0b6df406dada1c963bab01c07c268f9ee986a3))
+
+
+
+
+
+# [0.4.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.3.1...@xcritical/utils@0.4.0-beta.0) (2022-03-30)
+
+
+### Features
+
+* added properties for resolving sources ([97db02d](https://github.com/xcritical-software/xc-front-kit/commit/97db02d3db87f45c151befbdb3d6e43f44d66997))
+
+
+
+
+
 ## [0.3.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.3.1-beta.0...@xcritical/utils@0.3.1) (2022-02-16)
 
 **Note:** Version bump only for package @xcritical/utils

@@ -40,90 +40,88 @@ export const inputApperanceTheme = memoize(
   }
 );
 
-export const getComponentStyle: IReturnThemeFunction<
-  IBaseInputTheme,
-  string
-> = memoize((theme, appearance, baseAppearance, elementName) => ({
-  ...inputTheme(theme, [elementName]),
-  ...inputApperanceTheme(theme, appearance, baseAppearance, [elementName]),
-}));
+export const getComponentStyle: IReturnThemeFunction<IBaseInputTheme, string> =
+  memoize((theme, appearance, baseAppearance, elementName) => ({
+    ...inputTheme(theme, [elementName]),
+    ...inputApperanceTheme(theme, appearance, baseAppearance, [elementName]),
+  }));
 
-export const getPaddingStyle: IReturnThemeFunction<
-  IBaseInputTheme,
-  any
-> = memoize(
-  (
-    theme,
-    appearance,
-    baseAppearance,
-    isRTL,
-    isDivided,
-    hasPrefix,
-    hasSuffix,
-    elementName
-  ) => {
-    const { bottom = 0, left = 0, right = 0, top = 0 } = inputApperanceTheme(
+export const getPaddingStyle: IReturnThemeFunction<IBaseInputTheme, any> =
+  memoize(
+    (
       theme,
       appearance,
       baseAppearance,
-      'padding'
-    );
-
-    const element = inputApperanceTheme(
-      theme,
-      appearance,
-      baseAppearance,
+      isRTL,
+      isDivided,
+      hasPrefix,
+      hasSuffix,
       elementName
-    );
-    const commonBottom =
-      element?.padding?.bottom !== undefined ? element.padding.bottom : bottom;
+    ) => {
+      const {
+        bottom = 0,
+        left = 0,
+        right = 0,
+        top = 0,
+      } = inputApperanceTheme(theme, appearance, baseAppearance, 'padding');
 
-    const commonLeft =
-      element?.padding?.left !== undefined ? element.padding.left : left;
+      const element = inputApperanceTheme(
+        theme,
+        appearance,
+        baseAppearance,
+        elementName
+      );
+      const commonBottom =
+        element?.padding?.bottom !== undefined
+          ? element.padding.bottom
+          : bottom;
 
-    const commonRight =
-      element?.padding?.right !== undefined ? element.padding.right : right;
+      const commonLeft =
+        element?.padding?.left !== undefined ? element.padding.left : left;
 
-    const commonTop =
-      element?.padding?.top !== undefined ? element.padding.top : top;
+      const commonRight =
+        element?.padding?.right !== undefined ? element.padding.right : right;
 
-    if (hasPrefix && hasSuffix) {
+      const commonTop =
+        element?.padding?.top !== undefined ? element.padding.top : top;
+
+      if (hasPrefix && hasSuffix) {
+        return css`
+          padding: ${commonTop}px ${isDivided ? right : 0}px ${commonBottom}px
+            ${isDivided ? commonLeft : 0}px;
+        `;
+      }
+
+      if (hasPrefix) {
+        return isRTL
+          ? css`
+              padding: ${commonTop}px ${isDivided ? commonRight : 0}px
+                ${commonBottom}px ${commonLeft}px;
+            `
+          : css`
+              padding: ${commonTop}px ${commonRight}px ${commonBottom}px
+                ${isDivided ? commonLeft : 0}px;
+            `;
+      }
+
+      if (hasSuffix) {
+        return isRTL
+          ? css`
+              padding: ${commonTop}px ${commonRight}px ${commonBottom}px
+                ${isDivided ? commonLeft : 0}px;
+            `
+          : css`
+              padding: ${commonTop}px ${isDivided ? commonRight : 0}px
+                ${commonBottom}px ${commonLeft}px;
+            `;
+      }
+
       return css`
-        padding: ${commonTop}px ${isDivided ? right : 0}px ${commonBottom}px
-          ${isDivided ? commonLeft : 0}px;
+        padding: ${commonTop}px ${isRTL ? commonLeft : commonRight}px
+          ${commonBottom}px ${isRTL ? commonRight : commonLeft}px;
       `;
     }
-
-    if (hasPrefix) {
-      return isRTL
-        ? css`
-            padding: ${commonTop}px ${isDivided ? commonRight : 0}px
-              ${commonBottom}px ${commonLeft}px;
-          `
-        : css`
-            padding: ${commonTop}px ${commonRight}px ${commonBottom}px
-              ${isDivided ? commonLeft : 0}px;
-          `;
-    }
-
-    if (hasSuffix) {
-      return isRTL
-        ? css`
-            padding: ${commonTop}px ${commonRight}px ${commonBottom}px
-              ${isDivided ? commonLeft : 0}px;
-          `
-        : css`
-            padding: ${commonTop}px ${isDivided ? commonRight : 0}px
-              ${commonBottom}px ${commonLeft}px;
-          `;
-    }
-
-    return css`
-      padding: ${commonTop}px ${isRTL ? commonLeft : commonRight}px
-        ${commonBottom}px ${isRTL ? commonRight : commonLeft}px;
-    `;
-  }
-);
+  );
 
 export const getRootInputStyles = memoize(
   ({

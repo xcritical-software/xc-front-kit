@@ -85,14 +85,18 @@ const theme = generateTheme(0, '#575857', '#A7A7A7', '#E6E5E9', '#4D4D4D');
 storiesOf('Item', module)
   .add('Basic', () => (
     <div>
-      <ItemGroup divided>
+      <ItemGroup divided className="at-item-group">
         <Item
           onClick={action('item-first-click')}
           value={{ id: 1 }}
           prefix={<MasterCardIcon />}>
           This is just a standard item
         </Item>
-        <Item prefix={<MasterCardIcon />} postfix={<MasterCardIcon />}>
+        <Item
+          className="at-item-root"
+          classNamePrefix="at-item"
+          prefix={<MasterCardIcon />}
+          postfix={<MasterCardIcon />}>
           This is just a standard item
         </Item>
         <Item>This is just a standard item</Item>

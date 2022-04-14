@@ -14,6 +14,8 @@ export interface IStyledProps {
   theme: CheckboxTheme;
   appearance?: string;
   baseAppearance?: string;
+  className?: string;
+  classNamePrefix?: string;
 }
 
 export interface ICheckboxProps extends IStyledProps {

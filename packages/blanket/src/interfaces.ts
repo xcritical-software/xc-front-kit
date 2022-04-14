@@ -18,4 +18,5 @@ export interface IBlanketProps {
   /** Handler function to be called when the blanket is clicked */
   onBlanketClicked?: (event: React.MouseEvent<HTMLDivElement>) => void;
   zIndex?: number;
+  className?: string;
 }

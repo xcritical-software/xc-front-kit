@@ -9,6 +9,7 @@ const ItemGroup: FunctionComponent<IItemGroupProps> = ({
   children,
   appearance,
   baseAppearance,
+  className,
 }: IItemGroupProps) => {
   const renderAllItems = (): React.ReactElement | React.ReactElement[] => {
     const allNonEmptyItems = toArray(children);
@@ -24,7 +25,7 @@ const ItemGroup: FunctionComponent<IItemGroupProps> = ({
     );
   };
 
-  return <div>{renderAllItems()}</div>;
+  return <div className={className}>{renderAllItems()}</div>;
 };
 
 export { ItemGroup };

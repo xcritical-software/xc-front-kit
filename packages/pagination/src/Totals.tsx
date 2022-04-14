@@ -4,12 +4,12 @@ import { ITotalsProps } from './interfaces';
 import { StyledTotals } from './styles';
 
 export const Totals = React.memo<ITotalsProps>(
-  ({ currentPage, pageSize, total }) => {
+  ({ currentPage, pageSize, total, className }) => {
     const from = (currentPage - 1) * pageSize + 1;
     const to = currentPage * pageSize;
 
     return (
-      <StyledTotals>
+      <StyledTotals className={className}>
         {`${from} - ${to > total ? total : to} of ${total}`}
       </StyledTotals>
     );
