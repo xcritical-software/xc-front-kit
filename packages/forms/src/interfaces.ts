@@ -41,11 +41,14 @@ export type ElementRef<C> = 'ref' extends keyof C
     : never
   : never;
 
-export type FormFieldProps<TComponentProps> = TComponentProps & {
+export type FormFieldProps<TComponentProps> = Omit<
+  TComponentProps,
+  'onChange' | 'innerRef'
+> & {
   component: React.ComponentType<TComponentProps & IFormFieldComponentProps>;
   name: string;
   innerRef?: React.Ref<ElementRef<TComponentProps>>;
-  onChange?: IFormFieldComponentProps['onChange'];
+  onChange?: Partial<IFormFieldComponentProps['onChange']>;
 };
 
 export interface IFormFieldComponentProps {
