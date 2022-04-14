@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/button@2.3.0-beta.2...@xcritical/button@2.3.0) (2022-04-14)
+
+**Note:** Version bump only for package @xcritical/button
+
+
+
+
+
 # [2.3.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/button@2.3.0-beta.1...@xcritical/button@2.3.0-beta.2) (2022-04-13)
 
 **Note:** Version bump only for package @xcritical/button

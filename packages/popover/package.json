@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/popover",
-	"version": "2.3.0-beta.3",
+	"version": "2.3.0",
 	"description": "",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
@@ -38,8 +38,8 @@
 		"styled-components": "^5.3.3"
 	},
 	"dependencies": {
-		"@xcritical/popper": "^1.3.0-beta.0",
-		"@xcritical/theme": "^1.3.0-beta.0",
+		"@xcritical/popper": "^1.3.0",
+		"@xcritical/theme": "^1.3.0",
 		"resize-observer-polyfill": "^1.5.1"
 	}
 }
