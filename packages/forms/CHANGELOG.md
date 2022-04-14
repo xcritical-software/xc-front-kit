@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.2.0...@xcritical/forms@1.3.0) (2022-04-14)
+
+
+### Features
+
+* **forms:** added dynamic classnames for form elements ([9de2820](https://github.com/xcritical-software/xc-front-kit/commit/9de282016a2b297c2053b366faf7f153e3ffc870))
+
+
+
+
+
 # [1.2.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.2.0-beta.2...@xcritical/forms@1.2.0) (2022-04-14)
 
 **Note:** Version bump only for package @xcritical/forms
