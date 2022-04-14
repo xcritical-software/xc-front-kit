@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.3.0...@xcritical/forms@1.3.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* **forms:** fix IFormFieldComponentProps invalid is not requered ([27455b5](https://github.com/xcritical-software/xc-front-kit/commit/27455b557b2e00d80485738441d4f22c982a24e5))
+
+
+
+
+
 # [1.3.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.2.0...@xcritical/forms@1.3.0) (2022-04-14)
 
 
