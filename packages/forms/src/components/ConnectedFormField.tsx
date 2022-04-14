@@ -16,6 +16,7 @@ export const PureFormField = function <TProps>({
   onChange: onChangeProp,
   ...props
 }: FormFieldProps<TProps>): React.ReactElement<TProps> {
+  const { className, $props } = props as any;
   const dispatch = useDispatch();
   const { formName, namespace } = useContext(FormContext);
 
@@ -31,6 +32,10 @@ export const PureFormField = function <TProps>({
   const showError = showAllErrors || touch;
   const error = showError ? $error : null;
   const invalid = showError ? !!error : false;
+
+  const $className = `xc-field-${formName}${
+    namespace ? `-${namespace}` : ''
+  }__${name} ${className ?? ''}`;
 
   const onChange = useCallback(
     (...args: any[]) => {
@@ -48,7 +53,8 @@ export const PureFormField = function <TProps>({
 
   return (
     <Component
-      {...(props as any)}
+      className={$className}
+      {...$props}
       value={value || ''}
       initialValue={initialValue}
       error={error}
