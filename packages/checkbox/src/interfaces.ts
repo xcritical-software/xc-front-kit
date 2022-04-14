@@ -11,14 +11,18 @@ export interface ICheckboxTheme extends ICSSProperties {
 export type CheckboxTheme = ITheme<ICheckboxTheme>;
 
 export interface IStyledProps {
-  theme?: CheckboxTheme;
+  theme: CheckboxTheme;
   appearance?: string;
   baseAppearance?: string;
   className?: string;
   classNamePrefix?: string;
 }
 
-export interface ICheckboxProps extends IStyledProps {
+export interface ICheckboxProps {
+  appearance?: string;
+  baseAppearance?: string;
+  className?: string;
+  classNamePrefix?: string;
   type?: 'checkbox' | 'radio';
   label?: string;
   checked?: boolean;
