@@ -50,7 +50,7 @@ export type FormFieldProps<TComponentProps> = TComponentProps & {
 
 export interface IFormFieldComponentProps {
   onChange: (...args: any[]) => void;
-  invalid: boolean;
+  invalid?: boolean;
   error?: string | string[];
   value: any;
   initialValue?: any;
