@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.3.1...@xcritical/forms@1.3.2) (2022-04-14)
+
+
+### Bug Fixes
+
+* **forms:** fix FormFieldProps ([789b065](https://github.com/xcritical-software/xc-front-kit/commit/789b065d5bfeffd7845af64cb7d28c6a1a042ac8))
+* **forms:** fix FormFieldProps - added Omit for onChange ([bfe00ef](https://github.com/xcritical-software/xc-front-kit/commit/bfe00ef98fed7fdb121d0b638664d2b5916cf010))
+* **forms:** fix FormFieldProps - added Omit for onChange ([fbee465](https://github.com/xcritical-software/xc-front-kit/commit/fbee465c8c096fa8b2e7a6bf4cdd7b152851170f))
+
+
+
+
+
 ## [1.3.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.3.0...@xcritical/forms@1.3.1) (2022-04-14)
 
 
