@@ -174,6 +174,8 @@ export interface IFilterContainerProps {
 }
 
 export interface IFilterProps {
+  className?: string;
+  classNamePrefix?: string;
   filters: IFilter[];
   name: string;
   theme?: IThemeNamespace;
@@ -205,8 +207,6 @@ export interface IFilterComponentProps
     IFilterContainerProps,
     IFilterProps {
   onApply: () => void;
-  className?: string;
-  classNamePrefix?: string;
 }
 
 export interface IMoreButtonWithFilterSelectorProps {
