@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/checkbox@1.3.1...@xcritical/checkbox@1.3.2) (2022-04-15)
+
+
+### Bug Fixes
+
+* fix classnames for elements ([5fd21c3](https://github.com/xcritical-software/xc-front-kit/commit/5fd21c30523ba96ebddbe040285e8842d68595fc))
+
+
+
+
+
 ## [1.3.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/checkbox@1.3.0...@xcritical/checkbox@1.3.1) (2022-04-14)
 
 

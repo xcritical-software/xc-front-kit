@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/popover@2.3.0...@xcritical/popover@2.3.1) (2022-04-15)
+
+
+### Bug Fixes
+
+* fix classnames for elements ([5fd21c3](https://github.com/xcritical-software/xc-front-kit/commit/5fd21c30523ba96ebddbe040285e8842d68595fc))
+
+
+
+
+
 # [2.3.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/popover@2.3.0-beta.3...@xcritical/popover@2.3.0) (2022-04-14)
 
 **Note:** Version bump only for package @xcritical/popover
