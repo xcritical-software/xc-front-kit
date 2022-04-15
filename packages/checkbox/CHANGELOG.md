@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/checkbox@1.3.0...@xcritical/checkbox@1.3.1) (2022-04-14)
+
+
+### Bug Fixes
+
+* **checkbox:** fix types ([3470732](https://github.com/xcritical-software/xc-front-kit/commit/3470732e0f2d932826e6c0720c6db1d3903e5df8))
+* **checkbox:** fix types ([3be8fd4](https://github.com/xcritical-software/xc-front-kit/commit/3be8fd4f97021aa27116144f7949303a8ad95c6a))
+* **checkbox:** fix types ([7b89df9](https://github.com/xcritical-software/xc-front-kit/commit/7b89df9986d26f3f5e43dca4e571b289c5b16552))
+* **checkbox:** fix types ([bb05a83](https://github.com/xcritical-software/xc-front-kit/commit/bb05a837eb88d8addffa0227ce41129a97304b05))
+
+
+
+
+
 # [1.3.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/checkbox@1.3.0-beta.2...@xcritical/checkbox@1.3.0) (2022-04-14)
 
 **Note:** Version bump only for package @xcritical/checkbox
