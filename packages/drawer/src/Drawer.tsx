@@ -176,24 +176,24 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
     return (
       <ThemeProvider theme={innerTheme}>
         <Portal
-          className={classNamePrefix && `${classNamePrefix}--portal`}
+          className={classNamePrefix && `${classNamePrefix}__portal`}
           id="drawer"
           zIndex="unset">
           <Wrapper
-            className={classNamePrefix && `${classNamePrefix}--wrapper`}
+            className={classNamePrefix && `${classNamePrefix}__wrapper`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             width={width}
             isRTL={isRTL}
             transition={componentTransitionTime}>
             <Content
-              className={classNamePrefix && `${classNamePrefix}--content`}
+              className={classNamePrefix && `${classNamePrefix}__content`}
               appearance={appearance}
               baseAppearance={baseAppearance}>
               {isRenderContent && needRenderHeader && (
                 <HeaderWrapper
                   className={
-                    classNamePrefix && `${classNamePrefix}--header-wrapper`
+                    classNamePrefix && `${classNamePrefix}__header-wrapper`
                   }
                   appearance={appearance}
                   baseAppearance={baseAppearance}>
@@ -201,7 +201,7 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
                     <CloseIconWrapper
                       className={
                         classNamePrefix &&
-                        `${classNamePrefix}--close-icon-wrapper`
+                        `${classNamePrefix}__close-icon-wrapper`
                       }
                       onClick={onClose}
                       appearance={appearance}
@@ -211,14 +211,14 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
                           <ArrowRight
                             className={
                               classNamePrefix &&
-                              `${classNamePrefix}--icon-arrow-right`
+                              `${classNamePrefix}__icon-arrow-right`
                             }
                           />
                         ) : (
                           <ArrowLeft
                             className={
                               classNamePrefix &&
-                              `${classNamePrefix}--icon-arrow-left`
+                              `${classNamePrefix}__icon-arrow-left`
                             }
                           />
                         ))}
@@ -227,7 +227,7 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
 
                   <TitleWrapper
                     className={
-                      classNamePrefix && `${classNamePrefix}--title-wrapper`
+                      classNamePrefix && `${classNamePrefix}__title-wrapper`
                     }
                     appearance={appearance}
                     baseAppearance={baseAppearance}>
@@ -237,7 +237,7 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
               )}
 
               <Body
-                className={classNamePrefix && `${classNamePrefix}--body`}
+                className={classNamePrefix && `${classNamePrefix}__body`}
                 appearance={appearance}
                 baseAppearance={baseAppearance}>
                 {isRenderContent && children}
@@ -245,7 +245,7 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
             </Content>
 
             <Separator
-              className={classNamePrefix && `${classNamePrefix}--separator`}
+              className={classNamePrefix && `${classNamePrefix}__separator`}
               appearance={appearance}
               baseAppearance={baseAppearance}
               onMouseDown={handleMouseDown}
@@ -257,7 +257,7 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
 
           {antiSelectLayer && (
             <AntiSelect
-              className={classNamePrefix && `${classNamePrefix}--anti-select`}
+              className={classNamePrefix && `${classNamePrefix}__anti-select`}
               appearance={appearance}
               baseAppearance={baseAppearance}
               isRTL={isRTL}
@@ -266,13 +266,13 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
         </Portal>
         {withBlanket && isRenderContent && (
           <BlanketWrapper
-            className={classNamePrefix && `${classNamePrefix}--blanket-wrapper`}
+            className={classNamePrefix && `${classNamePrefix}__blanket-wrapper`}
             visible={!!width}
             appearance={appearance}
             baseAppearance={baseAppearance}
             transition={transition}>
             <Blanket
-              className={classNamePrefix && `${classNamePrefix}--blanket`}
+              className={classNamePrefix && `${classNamePrefix}__blanket`}
               isTinted
               onBlanketClicked={onClose}
             />

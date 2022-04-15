@@ -41,11 +41,11 @@ export const ModalPortal: React.FC<IModalProps> = ({
 
   return (
     <Portal
-      className={classNamePrefix && `${classNamePrefix}--portal`}
+      className={classNamePrefix && `${classNamePrefix}__portal`}
       id={name}
       zIndex="unset">
       <Blanket
-        className={classNamePrefix && `${classNamePrefix}--blanket`}
+        className={classNamePrefix && `${classNamePrefix}__blanket`}
         isTinted
         zIndex={zIndex}
         theme={modalBlanketTheme}
@@ -61,28 +61,28 @@ export const ModalPortal: React.FC<IModalProps> = ({
         minHeight={minHeight}
         appearance={appearance}>
         <ModalHeaderWrapper
-          className={classNamePrefix && `${classNamePrefix}--header-wrapper`}
+          className={classNamePrefix && `${classNamePrefix}__header-wrapper`}
           appearance={appearance}>
           <ModalHeader
-            className={classNamePrefix && `${classNamePrefix}--header`}
+            className={classNamePrefix && `${classNamePrefix}__header`}
             appearance={appearance}>
             {title}
           </ModalHeader>
           <ModalIconClose
             className={
-              classNamePrefix && `${classNamePrefix}--icon-close-wrapper`
+              classNamePrefix && `${classNamePrefix}__icon-close-wrapper`
             }
             onClick={onModalCancel}
             appearance={appearance}>
             {iconClose || (
               <IconClose
-                className={classNamePrefix && `${classNamePrefix}--icon-close`}
+                className={classNamePrefix && `${classNamePrefix}__icon-close`}
               />
             )}
           </ModalIconClose>
         </ModalHeaderWrapper>
         <ModalBody
-          className={classNamePrefix && `${classNamePrefix}--body`}
+          className={classNamePrefix && `${classNamePrefix}__body`}
           appearance={appearance}>
           {children}
         </ModalBody>

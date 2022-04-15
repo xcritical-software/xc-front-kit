@@ -102,12 +102,13 @@ export interface IOptionProps extends IThemeProps {
   postfix?: React.ReactElement;
   context: FormatOptionLabelContext;
   isRTL: boolean;
+  name: any;
 }
 
 export interface IOptionItem {
   prefix?: React.ReactElement;
   postfix?: React.ReactElement;
-  name: any;
+  value: any;
   label: string;
 }
 

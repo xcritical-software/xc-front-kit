@@ -50,7 +50,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
         onChange={handleInputChange}
       />
       <CheckboxWrapper
-        className={classNamePrefix && `${classNamePrefix}--wrapper`}
+        className={classNamePrefix && `${classNamePrefix}__wrapper`}
         appearance={appearance}
         baseAppearance={baseAppearance}
         type={type}>
@@ -73,7 +73,7 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
       </CheckboxWrapper>
       {label && (
         <LabelWrapper
-          className={classNamePrefix && `${classNamePrefix}--label-wrapper`}
+          className={classNamePrefix && `${classNamePrefix}__label-wrapper`}
           appearance={appearance}
           baseAppearance={baseAppearance}>
           {label}

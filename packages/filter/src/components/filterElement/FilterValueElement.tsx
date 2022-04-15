@@ -35,7 +35,7 @@ export const FilterValueElement: React.FC<ISelectedFilterComponent> =
           {validationError && (
             <ValidationError
               className={
-                classNamePrefix && `${classNamePrefix}--validation-error`
+                classNamePrefix && `${classNamePrefix}__validation-error`
               }>
               {validationError}
             </ValidationError>

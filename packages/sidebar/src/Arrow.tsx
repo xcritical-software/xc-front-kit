@@ -6,7 +6,7 @@ export interface IArrowProps {
 
 const Arrow: React.FC<IArrowProps> = ({ classNamePrefix }): ReactElement => (
   <svg
-    className={classNamePrefix && `${classNamePrefix}--button-icon`}
+    className={classNamePrefix && `${classNamePrefix}__button-icon`}
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 32.635 32.635">

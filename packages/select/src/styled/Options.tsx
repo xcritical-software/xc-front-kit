@@ -85,6 +85,7 @@ const textCSS = (
 const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
   ({
     classNamePrefix,
+    name,
     context,
     prefix,
     postfix,
@@ -94,12 +95,11 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
     appearance = 'default',
     baseAppearance = 'default',
   }) => (
-    <div style={labelCSS(context)}>
+    <div
+      style={labelCSS(context)}
+      className={classNamePrefix && `${classNamePrefix}__option--${name}`}>
       {!!prefix && (
         <LabelPrefix
-          className={
-            classNamePrefix && `${classNamePrefix}--option-label-prefix`
-          }
           theme={theme}
           appearance={appearance}
           baseAppearance={baseAppearance}
@@ -109,7 +109,7 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
       )}
 
       <span
-        className={classNamePrefix && `${classNamePrefix}--option-span`}
+        className={classNamePrefix && `${classNamePrefix}__option-span`}
         style={textCSS(isRTL, theme, appearance, baseAppearance)}>
         {children}
       </span>
@@ -117,7 +117,7 @@ const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
       {!!postfix && (
         <LabelPostfix
           className={
-            classNamePrefix && `${classNamePrefix}--option-label-postfix`
+            classNamePrefix && `${classNamePrefix}__option-label-postfix`
           }
           theme={theme}
           appearance={appearance}
@@ -138,13 +138,14 @@ export const getFormatOptionLabel =
     isRTL: boolean
   ): any =>
   (
-    { label, prefix, postfix }: IOptionItem,
+    { label, value, prefix, postfix }: IOptionItem,
     { context }: FormatOptionLabelMeta<IOptionProps>
   ) =>
     (
       <Option
         classNamePrefix={classNamePrefix}
         theme={theme}
+        name={value}
         appearance={appearance}
         baseAppearance={baseAppearance}
         prefix={prefix}

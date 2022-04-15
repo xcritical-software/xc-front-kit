@@ -15,7 +15,7 @@ const MultiValueRemove = function <
   return (
     <components.MultiValueRemove {...props}>
       <Close
-        className={classNamePrefix && `${classNamePrefix}--icon-close`}
+        className={classNamePrefix && `${classNamePrefix}__icon-close`}
         fill="inherit"
         size={8}
       />

@@ -4,7 +4,7 @@ import { IIcon } from '../../interfaces';
 
 export const ChevronUp: React.FC<IIcon> = ({ classNamePrefix }) => (
   <svg
-    className={classNamePrefix && `${classNamePrefix}--chevron-up`}
+    className={classNamePrefix && `${classNamePrefix}__chevron-up`}
     width="12"
     height="8"
     viewBox="0 0 12 8"

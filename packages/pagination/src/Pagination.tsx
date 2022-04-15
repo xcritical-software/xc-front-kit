@@ -110,7 +110,7 @@ const PurePagination: React.FC<IPagination> = ({
     <PaginationWrapper className={className}>
       {showTotals && (
         <Totals
-          className={classNamePrefix && `${classNamePrefix}--totals`}
+          className={classNamePrefix && `${classNamePrefix}__totals`}
           currentPage={currentPage}
           pageSize={pageSize}
           total={total}
@@ -118,12 +118,12 @@ const PurePagination: React.FC<IPagination> = ({
       )}
 
       <ButtonGroup
-        className={classNamePrefix && `${classNamePrefix}--button-group`}
+        className={classNamePrefix && `${classNamePrefix}__button-group`}
         theme={paginationButtonGroupTheme}>
         {needFirstPage && (
           <Button
             className={
-              classNamePrefix && `${classNamePrefix}--button-${currentPage}`
+              classNamePrefix && `${classNamePrefix}__button-${currentPage}`
             }
             classNamePrefix={classNamePrefix && `${classNamePrefix}-button`}
             theme={paginationButtonTheme}
@@ -137,7 +137,7 @@ const PurePagination: React.FC<IPagination> = ({
 
         {showPrevious && (
           <Button
-            className={classNamePrefix && `${classNamePrefix}--button-previous`}
+            className={classNamePrefix && `${classNamePrefix}__button-previous`}
             classNamePrefix={classNamePrefix && `${classNamePrefix}-button`}
             theme={paginationButtonTheme}
             appearance="paginationButton"
@@ -152,7 +152,7 @@ const PurePagination: React.FC<IPagination> = ({
             <Button
               className={
                 classNamePrefix &&
-                `${classNamePrefix}--button-visible-page-${visiblePage}`
+                `${classNamePrefix}__button-visible-page-${visiblePage}`
               }
               classNamePrefix={classNamePrefix && `${classNamePrefix}-button`}
               key={visiblePage}
@@ -167,7 +167,7 @@ const PurePagination: React.FC<IPagination> = ({
 
         {showNext && (
           <Button
-            className={className && `${className}--button-next`}
+            className={className && `${className}__button-next`}
             classNamePrefix={classNamePrefix && `${classNamePrefix}-button`}
             theme={paginationButtonTheme}
             appearance="paginationButton"
@@ -182,7 +182,7 @@ const PurePagination: React.FC<IPagination> = ({
         {needLastPage && (
           <Button
             className={
-              classNamePrefix && `${classNamePrefix}--button-last-page`
+              classNamePrefix && `${classNamePrefix}__button-last-page`
             }
             classNamePrefix={classNamePrefix && `${classNamePrefix}-button`}
             theme={paginationButtonTheme}
@@ -197,7 +197,7 @@ const PurePagination: React.FC<IPagination> = ({
 
       {showSizeChanger && (
         <Select
-          className={classNamePrefix && `${classNamePrefix}--select`}
+          className={classNamePrefix && `${classNamePrefix}__select`}
           classNamePrefix={classNamePrefix && `${classNamePrefix}-select`}
           theme={paginationSelectTheme}
           appearance="paginationSelect"

@@ -27,7 +27,7 @@ const DropdownIndicator = function <
           <ChevronUp
             className={
               (classNamePrefix as string) &&
-              `${classNamePrefix}--icon-chevron-up`
+              `${classNamePrefix}__icon-chevron-up`
             }
             fill={dropdownIndicatorStyles?.color}
           />
@@ -35,7 +35,7 @@ const DropdownIndicator = function <
           <ChevronDown
             className={
               (classNamePrefix as string) &&
-              `${classNamePrefix}--icon-chevron-down`
+              `${classNamePrefix}__icon-chevron-down`
             }
             fill={dropdownIndicatorStyles?.color}
           />

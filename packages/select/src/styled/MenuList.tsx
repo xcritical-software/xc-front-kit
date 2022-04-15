@@ -48,12 +48,12 @@ export const MenuList: <
       <FixScrollbarLogic />
       <MenuListWrapper
         className={
-          (classNamePrefix as string) && `${classNamePrefix}--menu-list-wrapper`
+          (classNamePrefix as string) && `${classNamePrefix}__menu-list-wrapper`
         }
         themeStyles={menuListStyles}>
         <Scrollbars
           className={
-            (classNamePrefix as string) && `${classNamePrefix}--scrollbars`
+            (classNamePrefix as string) && `${classNamePrefix}__scrollbars`
           }
           autoHeight
           renderThumbVertical={renderThumb(

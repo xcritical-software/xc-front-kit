@@ -205,6 +205,8 @@ export interface IFilterComponentProps
     IFilterContainerProps,
     IFilterProps {
   onApply: () => void;
+  className?: string;
+  classNamePrefix?: string;
 }
 
 export interface IMoreButtonWithFilterSelectorProps {

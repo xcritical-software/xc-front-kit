@@ -56,7 +56,7 @@ export const PureSwitchGroup: React.FC<ISwitchGroupProps> = ({
           checked={values.includes(value)}
           disabled={disabled}
           onChange={() => handleChange(value)}
-          className={className && `${className}--checkbox`}
+          className={className && `${className}__checkbox`}
           classNamePrefix={classNamePrefix}
         />
       ))}

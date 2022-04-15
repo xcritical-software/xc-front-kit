@@ -75,7 +75,7 @@ export const PureButton: React.FC<IButtonProps> = ({
         {...rest}>
         {!!prefix && (
           <Prefix
-            className={classNamePrefix && `${classNamePrefix}--prefix`}
+            className={classNamePrefix && `${classNamePrefix}__prefix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>
@@ -84,11 +84,11 @@ export const PureButton: React.FC<IButtonProps> = ({
         )}
 
         <ContentWrapper
-          className={classNamePrefix && `${classNamePrefix}--content-wrapper`}
+          className={classNamePrefix && `${classNamePrefix}__content-wrapper`}
           appearance={appearance}
           baseAppearance={baseAppearance}>
           <Content
-            className={classNamePrefix && `${classNamePrefix}--content`}
+            className={classNamePrefix && `${classNamePrefix}__content`}
             textPosition={textPosition}
             isRTL={isRTL}
             appearance={appearance}
@@ -99,7 +99,7 @@ export const PureButton: React.FC<IButtonProps> = ({
 
         {!!postfix && (
           <Postfix
-            className={classNamePrefix && `${classNamePrefix}--postfix`}
+            className={classNamePrefix && `${classNamePrefix}__postfix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>

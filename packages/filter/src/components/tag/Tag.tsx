@@ -155,19 +155,21 @@ export const Tag: React.FC<ITagProps> = ({
     <Dropdown
       isOpen={isOpen}
       onClose={onCloseDropdown}
-      className={className}
-      classNamePrefix={classNamePrefix}
+      className={`${className} ${classNamePrefix}`}
       filterTheme={filterTheme}
       target={
         <Button
           postfix={
             <>
               {isOpen ? <ChevronUp /> : <ChevronDown />}
-              <RemoveButton onClick={onTagRemove}>
+              <RemoveButton
+                onClick={onTagRemove}
+                className={`${classNamePrefix}__remove`}>
                 <Remove />
               </RemoveButton>
             </>
           }
+          className={`${classNamePrefix}__dropdown`}
           appearance="filter-tag"
           selected={isOpen}
           disabled={disabled}
@@ -175,11 +177,13 @@ export const Tag: React.FC<ITagProps> = ({
           {`${filterSetting.displayName}`}
         </Button>
       }>
-      <TagConditions ref={tagConditionsRef}>
+      <TagConditions
+        ref={tagConditionsRef}
+        className={`${classNamePrefix}__conditions`}>
         {conditions.map((condition) => (
           <TagCondition
-            className={className}
-            classNamePrefix={classNamePrefix}
+            className={`${classNamePrefix}__condition ${classNamePrefix}__condition_${condition.key}`}
+            classNamePrefix={`${classNamePrefix}-condition`}
             key={condition.key}
             tagConditionsRef={tagConditionsRef}
             currentFilterState={condition}
@@ -192,10 +196,9 @@ export const Tag: React.FC<ITagProps> = ({
         ))}
 
         <DropdownFooter>
-          <ButtonBlock
-            position="left"
-            className={classNamePrefix && `${classNamePrefix}--button-block`}>
+          <ButtonBlock position="left">
             <Button
+              className={`${classNamePrefix}__add-condition`}
               appearance="filter-tag-add-condition"
               onClick={onTagAddCondition}>
               Add condition
@@ -203,10 +206,7 @@ export const Tag: React.FC<ITagProps> = ({
           </ButtonBlock>
           <ButtonBlock>
             <Button
-              className={className && `${className}--tag-remove-button`}
-              classNamePrefix={
-                classNamePrefix && `${classNamePrefix}--tag-remove-button`
-              }
+              className={`${classNamePrefix}__add-condition`}
               appearance="filter-tag-remove"
               baseAppearance="link"
               onClick={onTagRemove}>
@@ -214,10 +214,7 @@ export const Tag: React.FC<ITagProps> = ({
             </Button>
 
             <Button
-              className={className && `${className}--tag-apply-button`}
-              classNamePrefix={
-                classNamePrefix && `${classNamePrefix}--tag-apply-button`
-              }
+              className={`${classNamePrefix}__apply`}
               appearance="filter-tag-apply"
               baseAppearance="primary"
               onClick={onTagApply}>

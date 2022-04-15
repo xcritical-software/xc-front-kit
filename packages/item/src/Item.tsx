@@ -47,7 +47,7 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
         title={title}>
         {!!prefix && (
           <Prefix
-            className={classNamePrefix && `${classNamePrefix}--prefix`}
+            className={classNamePrefix && `${classNamePrefix}__prefix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>
@@ -55,11 +55,11 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
           </Prefix>
         )}
         <Wrapper
-          className={classNamePrefix && `${classNamePrefix}--wrapper`}
+          className={classNamePrefix && `${classNamePrefix}__wrapper`}
           appearance={appearance}
           baseAppearance={baseAppearance}>
           <ContentWrapper
-            className={classNamePrefix && `${classNamePrefix}--content-wrapper`}
+            className={classNamePrefix && `${classNamePrefix}__content-wrapper`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}
@@ -70,7 +70,7 @@ export const PureItem: FunctionComponent<IItemProps> = memo(
         </Wrapper>
         {!!postfix && (
           <Postfix
-            className={classNamePrefix && `${classNamePrefix}--postfix`}
+            className={classNamePrefix && `${classNamePrefix}__postfix`}
             isRTL={isRTL}
             appearance={appearance}
             baseAppearance={baseAppearance}>

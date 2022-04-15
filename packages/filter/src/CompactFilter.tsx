@@ -31,6 +31,8 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
   moreName = 'More',
   resetName = 'Reset',
   searchName = 'Search',
+  className = 'xc-filter',
+  classNamePrefix = 'xc-filter',
   name,
   theme,
   prefix,
@@ -63,13 +65,14 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
 
   return (
     <ThemeProvider theme={filterTheme}>
-      <RootPanel>
+      <RootPanel className={className}>
         <TopPanel>
           {prefix && <Prefix>{prefix}</Prefix>}
 
           {isSearchable ? (
             <SearchInputWrapper>
               <Input
+                className={`${classNamePrefix}__search-input`}
                 prefix={<Search />}
                 value={searchInput}
                 disabled={disabled}
@@ -83,6 +86,8 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
             <TopPanelTags>
               {Object.keys(mergedFilters).map((filterId) => (
                 <Tag
+                  className={`${classNamePrefix}__tag ${classNamePrefix}__tag--${filterId}`}
+                  classNamePrefix={`${classNamePrefix}-tag`}
                   name={name}
                   key={filterId}
                   filters={filters}
@@ -100,6 +105,8 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
 
           <TopPanelButtons>
             <MoreFilterSelect
+              className={`${classNamePrefix}__more ${classNamePrefix}-more`}
+              classNamePrefix={classNamePrefix}
               filters={filters}
               selectedFilters={activeFilters}
               disabled={disabled}
@@ -110,6 +117,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
             </MoreFilterSelect>
 
             <Button
+              className={`${classNamePrefix}__reset`}
               appearance="filters-reset"
               baseAppearance="link"
               disabled={disabled}
@@ -118,6 +126,7 @@ const PureCompactFilter: React.FC<IFilterComponentProps> = ({
             </Button>
 
             <Button
+              className={`${classNamePrefix}__apply`}
               appearance="filters-apply"
               baseAppearance="primary"
               disabled={disabled}

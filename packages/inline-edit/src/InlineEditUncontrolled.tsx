@@ -92,7 +92,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
       {isEditing ? (
         <>
           <EditView
-            className={classNamePrefix && `${classNamePrefix}--edit-view`}
+            className={classNamePrefix && `${classNamePrefix}__edit-view`}
             {...editViewProps}
             value={value}
             onChange={handleEditValueChange}
@@ -100,18 +100,18 @@ export const InlineEditUncontrolled = function <TFieldValue>({
             error={error}
           />
           <ButtonsWrapper
-            className={classNamePrefix && `${classNamePrefix}--buttons-wrapper`}
+            className={classNamePrefix && `${classNamePrefix}__buttons-wrapper`}
             appearance={appearance}
             baseAppearance={baseAppearance}>
             <ButtonWrapper
               className={
-                classNamePrefix && `${classNamePrefix}--button-wrapper`
+                classNamePrefix && `${classNamePrefix}__button-wrapper`
               }
               appearance={appearance}
               baseAppearance={baseAppearance}>
               <Button
                 className={
-                  classNamePrefix && `${classNamePrefix}--button-confirm`
+                  classNamePrefix && `${classNamePrefix}__button-confirm`
                 }
                 appearance={appearance}
                 baseAppearance={baseAppearance}
@@ -122,7 +122,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
                 ) : (
                   <ConfirmIcon
                     className={
-                      classNamePrefix && `${classNamePrefix}--icon-confirm`
+                      classNamePrefix && `${classNamePrefix}__icon-confirm`
                     }
                     appearance={appearance}
                     baseAppearance={baseAppearance}
@@ -134,13 +134,13 @@ export const InlineEditUncontrolled = function <TFieldValue>({
             </ButtonWrapper>
             <ButtonWrapper
               className={
-                classNamePrefix && `${classNamePrefix}--button-wrapper`
+                classNamePrefix && `${classNamePrefix}__button-wrapper`
               }
               appearance={appearance}
               baseAppearance={baseAppearance}>
               <Button
                 className={
-                  classNamePrefix && `${classNamePrefix}--button-cancel`
+                  classNamePrefix && `${classNamePrefix}__button-cancel`
                 }
                 appearance={appearance}
                 baseAppearance={baseAppearance}
@@ -151,7 +151,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
                 ) : (
                   <CancelIcon
                     className={
-                      classNamePrefix && `${classNamePrefix}--icon-cancel`
+                      classNamePrefix && `${classNamePrefix}__icon-cancel`
                     }
                     appearance={appearance}
                     baseAppearance={baseAppearance}
@@ -165,16 +165,16 @@ export const InlineEditUncontrolled = function <TFieldValue>({
         </>
       ) : (
         <ReadViewWrapper
-          className={classNamePrefix && `${classNamePrefix}--wrapper`}>
+          className={classNamePrefix && `${classNamePrefix}__wrapper`}>
           <EditButton
-            className={classNamePrefix && `${classNamePrefix}--button-edit`}
+            className={classNamePrefix && `${classNamePrefix}__button-edit`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             onClick={onEditRequested}
             ref={editButtonRef}
           />
           <ReadViewContentWrapper
-            className={classNamePrefix && `${classNamePrefix}--content-wrapper`}
+            className={classNamePrefix && `${classNamePrefix}__content-wrapper`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             readViewFitContainerWidth={readViewFitContainerWidth}

@@ -109,7 +109,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
         focusOnInput={isFocused}>
         {!!prefix && (
           <Prefix
-            className={classNamePrefix && `${classNamePrefix}--prefix`}
+            className={classNamePrefix && `${classNamePrefix}__prefix`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}
@@ -138,7 +138,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
         {isClearable && !!value && (
           <ClearIconWrapper
             className={
-              classNamePrefix && `${classNamePrefix}--icon-wrapper-clear`
+              classNamePrefix && `${classNamePrefix}__icon-wrapper-clear`
             }
             appearance={appearance}
             baseAppearance={baseAppearance}
@@ -149,14 +149,14 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
             focusOnInput={isFocused}>
             <ClearIcon
               className={
-                classNamePrefix && `${classNamePrefix}--icon-clear-default`
+                classNamePrefix && `${classNamePrefix}__icon-clear-default`
               }
             />
           </ClearIconWrapper>
         )}
         {!!postfix && (
           <Postfix
-            className={classNamePrefix && `${classNamePrefix}--postfix`}
+            className={classNamePrefix && `${classNamePrefix}__postfix`}
             appearance={appearance}
             baseAppearance={baseAppearance}
             isRTL={isRTL}

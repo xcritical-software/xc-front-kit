@@ -78,23 +78,20 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
   }, [guid, onRemoveFilter]);
 
   return (
-    <TagConditionsWrapper className={className && `${className}--wrapper`}>
+    <TagConditionsWrapper className={className}>
       <RemoveConditionButton
-        className={
-          classNamePrefix && `${classNamePrefix}--remove-conditions-button`
-        }
+        className={classNamePrefix && `${classNamePrefix}__remove`}
         onClick={onRemoveCondition}>
         <Remove size={20} />
       </RemoveConditionButton>
 
-      <DropdownItem
-        className={classNamePrefix && `${classNamePrefix}--dropdown-item`}>
-        <TagLabel
-          className={classNamePrefix && `${classNamePrefix}--tag-label`}>
+      <DropdownItem className={classNamePrefix && `${classNamePrefix}__type`}>
+        <TagLabel className={classNamePrefix && `${classNamePrefix}__label`}>
           Conditions
         </TagLabel>
         <Select
           shouldFitContainer
+          className={classNamePrefix && `${classNamePrefix}__conditions`}
           appearance="filters-tag-condition"
           menuPortalTarget={document.body}
           styles={tagConditionSelectStyles}
@@ -105,31 +102,21 @@ export const TagCondition: React.FC<ITagConditionProps> = ({
           options={conditions}
           disabled={!column}
           value={selectedCondition}
-          className={className}
-          classNamePrefix={classNamePrefix}
         />
       </DropdownItem>
       {selectedCondition?.hasValue ? (
         <DropdownItem
-          className={
-            classNamePrefix && `${classNamePrefix}--dropdown-item-selected`
-          }>
-          <TagLabel
-            className={
-              classNamePrefix && `${classNamePrefix}--tag-label-selected`
-            }>
-            Value
-          </TagLabel>
-          <div>
-            <FilterValueElement
-              tagConditionsRef={tagConditionsRef}
-              onChange={onChangeValue}
-              currentFilter={filterSetting}
-              filterData={currentFilterState}
-              validationError={validationError}
-              classNamePrefix={classNamePrefix}
-            />
-          </div>
+          className={classNamePrefix && `${classNamePrefix}__value`}>
+          <TagLabel>Value</TagLabel>
+
+          <FilterValueElement
+            tagConditionsRef={tagConditionsRef}
+            onChange={onChangeValue}
+            currentFilter={filterSetting}
+            filterData={currentFilterState}
+            validationError={validationError}
+            classNamePrefix={classNamePrefix}
+          />
         </DropdownItem>
       ) : null}
     </TagConditionsWrapper>

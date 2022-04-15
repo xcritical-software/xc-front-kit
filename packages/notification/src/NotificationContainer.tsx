@@ -10,7 +10,7 @@ export const NotificationContainer: React.FC<INotificationContainer> = ({
 }) => (
   <div className={className}>
     <ToastContainer
-      className={classNamePrefix && `${classNamePrefix}--container`}
+      className={classNamePrefix && `${classNamePrefix}__container`}
       {...rest}
     />
   </div>
