@@ -21,7 +21,7 @@ export interface IFormFieldState {
   touch: boolean;
 }
 
-export interface IFormState<TModel = { [fieldName: string]: any }> {
+export interface IFormState<TModel = { [fieldName: string]: any } | undefined> {
   source: TModel;
   model: TModel;
   isNew: boolean;
