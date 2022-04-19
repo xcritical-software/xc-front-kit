@@ -59,7 +59,9 @@ const reducer: Reducer<IFormState> = (state = initialState, action) => {
   return behavior ? behavior(state, action) : state;
 };
 
-export const formSelector = <TFormFields extends Record<string | number, any>>(
+export const formSelector = <
+  TFormFields extends Record<string | number, any> | undefined
+>(
   state: any,
   formName: string,
   namespace?: string
