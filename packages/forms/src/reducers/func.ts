@@ -4,18 +4,16 @@ import get from 'lodash.get';
 import { IFormAction } from '../actions';
 import { IFormState } from '../interfaces';
 
-export function formInit() {
-  return (
-    _state: IFormState,
-    { payload, meta: { isNew = !payload } }: IFormAction
-  ) => ({
-    source: payload,
-    model: payload,
-    isNew,
-    isChanged: false,
-    errors: {},
-  });
-}
+export const formInit = (
+  _state: IFormState,
+  { payload, meta: { isNew = !payload } }: IFormAction
+) => ({
+  source: payload,
+  model: payload,
+  isNew,
+  isChanged: false,
+  errors: {},
+});
 
 export const formPropertyChange = (
   state: IFormState,
