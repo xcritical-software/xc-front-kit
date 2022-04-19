@@ -16,7 +16,7 @@ export const PureFormField = function <TProps>({
   onChange: onChangeProp,
   ...props
 }: FormFieldProps<TProps>): React.ReactElement<TProps> {
-  const { className, $props } = props as any;
+  const { className, ...$props } = props as any;
   const dispatch = useDispatch();
   const { formName, namespace } = useContext(FormContext);
 
