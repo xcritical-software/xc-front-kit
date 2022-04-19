@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.3.1...@xcritical/filter@1.3.2) (2022-04-15)
+
+
+### Bug Fixes
+
+* **filter:** fix CompactFilter Types ([d540339](https://github.com/xcritical-software/xc-front-kit/commit/d5403398cb0a5cec5a201876ec14e1813a20f37f))
+
+
+
+
+
 ## [1.3.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.3.0...@xcritical/filter@1.3.1) (2022-04-15)
 
 
