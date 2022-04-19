@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.6](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.3.5...@xcritical/forms@1.3.6) (2022-04-19)
+
+
+### Bug Fixes
+
+* **forms:** fix passing props ([316d328](https://github.com/xcritical-software/xc-front-kit/commit/316d328f9c321e8078bb7158241dd686d466ab6b))
+
+
+
+
+
 ## [1.3.5](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.3.4...@xcritical/forms@1.3.5) (2022-04-19)
 
 
