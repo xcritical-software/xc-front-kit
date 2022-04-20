@@ -22,7 +22,7 @@ export const formPropertyChange = (
   const $value = value !== '' ? value : null;
 
   const model = setIn(state.model, $value, field);
-  const source = commit ? setIn(model?.source, $value, field) : model?.source;
+  const source = commit ? setIn(state.source, $value, field) : state.source;
   const isChanged = isDifference(model, source);
   const errors = setIn(state.errors, false, field);
   const fieldsMeta = {
