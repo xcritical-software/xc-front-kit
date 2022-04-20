@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.8](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.3.7...@xcritical/forms@1.3.8) (2022-04-20)
+
+
+### Bug Fixes
+
+* **forms:** fix change source model after change property ([2bd25d6](https://github.com/xcritical-software/xc-front-kit/commit/2bd25d65f736a19b7b1e066d3034f00a47fccbdd))
+
+
+
+
+
 ## [1.3.7](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.3.6...@xcritical/forms@1.3.7) (2022-04-19)
 
 
