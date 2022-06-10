@@ -75,7 +75,7 @@
     "eslint-plugin-react-hooks": "next",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
-    "lerna": "^4.0.0",
+    "lerna": "^5.1.1",
     "lint-staged": "^12.3.4",
     "prettier": "2.5.1",
     "react-docgen-typescript-loader": "^3.4.0",
