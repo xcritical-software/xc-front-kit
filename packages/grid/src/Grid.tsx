@@ -53,6 +53,7 @@ const Grid: React.FC<IGridProps> = ({
   minColumnWidth = 30,
   gridProps = {},
   onChangeExpand: onChangeExpandFromProps,
+  selectedRowId,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
@@ -192,7 +193,10 @@ const Grid: React.FC<IGridProps> = ({
         return;
       }
 
-      if (selectedRows[0] === key) {
+      if (
+        selectedRows[0] === key ||
+        mappedItems.find((e) => e.id === selectedRowId)?.__key === key
+      ) {
         if (onSelect) {
           onSelect({});
         }
@@ -421,6 +425,7 @@ const Grid: React.FC<IGridProps> = ({
     shouldFitLastColumn,
     minColumnWidth,
     gridProps,
+    selectedRowKey: mappedItems.find((e) => e.id === selectedRowId)?.__key,
   };
 
   if (shouldFitContainer) {
