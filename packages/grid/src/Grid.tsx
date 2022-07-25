@@ -53,7 +53,7 @@ const Grid: React.FC<IGridProps> = ({
   minColumnWidth = 30,
   gridProps = {},
   onChangeExpand: onChangeExpandFromProps,
-  selectedRowId,
+  selectedRowIds = [],
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
@@ -61,6 +61,13 @@ const Grid: React.FC<IGridProps> = ({
     items.map(
       (el: IItem): IMappedItem => ({ __expandLevel: 0, ...el, __key: guid() })
     )
+  );
+  const selectedRowKeys = mappedItems.reduce(
+    (keys, item) =>
+      selectedRowIds.some((id) => id === item.id)
+        ? [...keys, item.__key]
+        : keys,
+    []
   );
 
   const contextTheme = useContext(ThemeContext);
@@ -193,10 +200,7 @@ const Grid: React.FC<IGridProps> = ({
         return;
       }
 
-      if (
-        selectedRows[0] === key ||
-        mappedItems.find((e) => e.id === selectedRowId)?.__key === key
-      ) {
+      if (selectedRows[0] === key || selectedRowKeys.includes(key)) {
         if (onSelect) {
           onSelect({});
         }
@@ -425,7 +429,7 @@ const Grid: React.FC<IGridProps> = ({
     shouldFitLastColumn,
     minColumnWidth,
     gridProps,
-    selectedRowKey: mappedItems.find((e) => e.id === selectedRowId)?.__key,
+    selectedRowKeys,
   };
 
   if (shouldFitContainer) {

@@ -84,7 +84,7 @@ export interface IGridProps {
   minColumnWidth?: number;
   gridProps?: IInternalGridProps;
   onChangeExpand?: Function;
-  selectedRowId?: string | number;
+  selectedRowIds?: string[] | number[];
 }
 
 export interface IMultiGrid {
@@ -157,7 +157,7 @@ export interface IInternalGrid {
   shouldFitLastColumn: boolean;
   minColumnWidth: number;
   gridProps: IInternalGridProps;
-  selectedRowKey?: string;
+  selectedRowKeys?: string[];
 }
 
 export interface IMappedItem extends IItem {
