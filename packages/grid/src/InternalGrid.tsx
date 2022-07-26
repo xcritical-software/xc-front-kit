@@ -64,7 +64,6 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   shouldFitLastColumn,
   minColumnWidth,
   gridProps,
-  selectedRowKeys = [],
 }) => {
   const [mappedColumns, setMappedColumns] =
     useState<IColumn[]>(gridHOCMappedColumns);
@@ -155,9 +154,9 @@ const InternalGrid: React.FC<IInternalGrid> = ({
         mappedItems[rowIndex]
       );
     };
-    const isSelected =
-      selectedRows.some((k: string) => k === mappedItems[rowIndex].__key) ||
-      selectedRowKeys.some((key) => key === mappedItems[rowIndex].__key);
+    const isSelected = selectedRows.some(
+      (k: string) => k === mappedItems[rowIndex].__key
+    );
 
     return (
       <CellMeasurer

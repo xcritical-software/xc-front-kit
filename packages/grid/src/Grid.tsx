@@ -53,21 +53,17 @@ const Grid: React.FC<IGridProps> = ({
   minColumnWidth = 30,
   gridProps = {},
   onChangeExpand: onChangeExpandFromProps,
-  selectedRowIds = [],
+  selectedRowKeys = [],
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
     items.map(
-      (el: IItem): IMappedItem => ({ __expandLevel: 0, ...el, __key: guid() })
+      (el: IItem): IMappedItem =>
+        el.__key
+          ? { __expandLevel: 0, ...el, __key: el.__key }
+          : { __expandLevel: 0, ...el, __key: guid() }
     )
-  );
-  const selectedRowKeys = mappedItems.reduce(
-    (keys, item) =>
-      selectedRowIds.some((id) => id === item.id)
-        ? [...keys, item.__key]
-        : keys,
-    []
   );
 
   const contextTheme = useContext(ThemeContext);
@@ -77,7 +73,9 @@ const Grid: React.FC<IGridProps> = ({
     themeRef.current = gridTheme(theme ?? contextTheme);
   }, [theme, contextTheme]);
 
-  const [selectedRows, setSelectedRows] = useState<string[]>([]);
+  const [selectedRows, setSelectedRows] = useState<string[]>(
+    isMultiSelect ? [...selectedRowKeys] : [selectedRowKeys[0]]
+  );
 
   const createObserver = (): ResizeObserver | undefined => {
     if (wrapperRef.current === null) {
@@ -190,7 +188,8 @@ const Grid: React.FC<IGridProps> = ({
             deleteSystemPropsFromObjects(
               mappedItems.filter((el) =>
                 newSelectedRows.some((id) => id === el.__key)
-              )
+              ),
+              true
             )
           );
         }
@@ -200,7 +199,7 @@ const Grid: React.FC<IGridProps> = ({
         return;
       }
 
-      if (selectedRows[0] === key || selectedRowKeys.includes(key)) {
+      if (selectedRows[0] === key) {
         if (onSelect) {
           onSelect({});
         }
@@ -210,7 +209,7 @@ const Grid: React.FC<IGridProps> = ({
         const selectedRow = mappedItems.find((el) => el.__key === key);
 
         if (onSelect) {
-          onSelect(deleteSystemPropsFromObject(selectedRow));
+          onSelect(deleteSystemPropsFromObject(selectedRow, true));
         }
 
         setSelectedRows([key]);
@@ -221,7 +220,11 @@ const Grid: React.FC<IGridProps> = ({
 
   useEffect(() => {
     setMappedItems(
-      items.map((el) => ({ __expandLevel: 0, ...el, __key: guid() }))
+      items.map((el) =>
+        el.__key
+          ? { __expandLevel: 0, ...el, __key: el.__key }
+          : { __expandLevel: 0, ...el, __key: guid() }
+      )
     );
   }, [items]);
 
@@ -429,7 +432,6 @@ const Grid: React.FC<IGridProps> = ({
     shouldFitLastColumn,
     minColumnWidth,
     gridProps,
-    selectedRowKeys,
   };
 
   if (shouldFitContainer) {
