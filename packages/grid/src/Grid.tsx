@@ -23,6 +23,7 @@ import {
   changeGridSort,
   deleteSystemPropsFromObjects,
   deleteSystemPropsFromObject,
+  getMappedItems,
 } from './utils';
 import { MultiGrid } from './MultiGrid';
 import { GridPositions, GridSort } from './consts';
@@ -58,12 +59,7 @@ const Grid: React.FC<IGridProps> = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
-    items.map(
-      (el: IItem): IMappedItem =>
-        el.__key
-          ? { __expandLevel: 0, ...el, __key: el.__key }
-          : { __expandLevel: 0, ...el, __key: guid() }
-    )
+    getMappedItems(items)
   );
 
   const contextTheme = useContext(ThemeContext);
@@ -219,13 +215,7 @@ const Grid: React.FC<IGridProps> = ({
   );
 
   useEffect(() => {
-    setMappedItems(
-      items.map((el) =>
-        el.__key
-          ? { __expandLevel: 0, ...el, __key: el.__key }
-          : { __expandLevel: 0, ...el, __key: guid() }
-      )
-    );
+    setMappedItems(getMappedItems(items));
   }, [items]);
 
   const isMultiGrid = useMemo(

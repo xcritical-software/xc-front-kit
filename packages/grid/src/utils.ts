@@ -34,6 +34,14 @@ export function gridTheme(
   return func(theme, propertyPath) as IGridTheme;
 }
 
+export const getMappedItems = (items: IItem[]): IMappedItem[] =>
+  items.map(
+    (el: IItem): IMappedItem =>
+      el.__key
+        ? { __expandLevel: 0, ...el, __key: el.__key }
+        : { __expandLevel: 0, ...el, __key: guid() }
+  );
+
 export const deleteSystemPropsFromObject = (
   item?: IMappedItem,
   saveKey: boolean = false
