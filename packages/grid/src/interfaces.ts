@@ -84,6 +84,7 @@ export interface IGridProps {
   minColumnWidth?: number;
   gridProps?: IInternalGridProps;
   onChangeExpand?: Function;
+  selectedRowKeys?: string[];
 }
 
 export interface IMultiGrid {
