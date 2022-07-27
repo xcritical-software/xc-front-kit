@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.4.0...@xcritical/grid@1.5.0-beta.0) (2022-07-27)
+
+
+### Features
+
+* **grid:** add check key for items and return key for onselect ([c80e27e](https://github.com/xcritical-software/xc-front-kit/commit/c80e27e507c2c215fd419b200ab846823ffd3434))
+* **grid:** add prop for grid ([b793596](https://github.com/xcritical-software/xc-front-kit/commit/b7935961a366d0ee77c2eee6009d34a890fc7279))
+* **grid:** change selectedrowid to array ([8d9dd03](https://github.com/xcritical-software/xc-front-kit/commit/8d9dd0328336562676f8b88b1ec43bf1c4073c19))
+* **grid:** move map items to utils ([4e2c381](https://github.com/xcritical-software/xc-front-kit/commit/4e2c3819443f1ac43e8ed6ab6b8771d47362d40c))
+
+
+
+
+
 # [1.4.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.4.0-beta.2...@xcritical/grid@1.4.0) (2022-04-14)
 
 **Note:** Version bump only for package @xcritical/grid
