@@ -73,6 +73,10 @@ const Grid: React.FC<IGridProps> = ({
     isMultiSelect ? [...selectedRowKeys] : [selectedRowKeys[0]]
   );
 
+  useEffect(() => {
+    setSelectedRows(selectedRowKeys);
+  }, [selectedRowKeys]);
+
   const createObserver = (): ResizeObserver | undefined => {
     if (wrapperRef.current === null) {
       return undefined;
