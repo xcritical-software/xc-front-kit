@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.2.0...@xcritical/forms@1.2.1-beta.0) (2022-09-16)
+
+
+### Bug Fixes
+
+* **forms:** fix checking to undefined ([23f06d9](https://github.com/xcritical-software/xc-front-kit/commit/23f06d9b05387e71a14a54e079db3facb67a1cc3))
+
+
+
+
+
 # [1.2.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.2.0-beta.2...@xcritical/forms@1.2.0) (2022-04-14)
 
 **Note:** Version bump only for package @xcritical/forms
