@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.0-beta.0...@xcritical/grid@1.5.0-beta.1) (2022-09-16)
+
+
+### Bug Fixes
+
+* **grid:** add reset selected grid items by selected row keys ([5c400f8](https://github.com/xcritical-software/xc-front-kit/commit/5c400f80ce99aced2a4472b1f66503717f65fc7d))
+
+
+
+
+
 # [1.5.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.4.0...@xcritical/grid@1.5.0-beta.0) (2022-07-27)
 
 
