@@ -34,22 +34,34 @@ export function gridTheme(
   return func(theme, propertyPath) as IGridTheme;
 }
 
+export const getMappedItems = (items: IItem[]): IMappedItem[] =>
+  items.map(
+    (el: IItem): IMappedItem =>
+      el.__key
+        ? { __expandLevel: 0, ...el, __key: el.__key }
+        : { __expandLevel: 0, ...el, __key: guid() }
+  );
+
 export const deleteSystemPropsFromObject = (
-  item?: IMappedItem
+  item?: IMappedItem,
+  saveKey: boolean = false
 ): IItem | undefined => {
   if (item) {
     /* eslint-disable @typescript-eslint/no-unused-vars */
     const { __key, __expandLevel, __isExpand, __parent, ...rest } = item;
     /* eslint-enable @typescript-eslint/no-unused-vars */
 
-    return rest;
+    return saveKey ? { __key, ...rest } : rest;
   }
 
   return undefined;
 };
 
-export const deleteSystemPropsFromObjects = (arr: IMappedItem[]): IItem =>
-  arr.map((el: IMappedItem) => deleteSystemPropsFromObject(el));
+export const deleteSystemPropsFromObjects = (
+  arr: IMappedItem[],
+  saveKey: boolean = false
+): IItem =>
+  arr.map((el: IMappedItem) => deleteSystemPropsFromObject(el, saveKey));
 
 export const searchLastVisible = (arr: IColumn[], idx: number) => {
   let lastVisible = 0;

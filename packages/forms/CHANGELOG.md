@@ -3,11 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<<<<<<< HEAD
 ## [1.3.8](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.3.7...@xcritical/forms@1.3.8) (2022-04-20)
+=======
+## [1.2.1-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.2.0...@xcritical/forms@1.2.1-beta.0) (2022-09-16)
+>>>>>>> 3bf11c3646e0a8df3d53acb9f0192a58f3a8ba52
 
 
 ### Bug Fixes
 
+<<<<<<< HEAD
 * **forms:** fix change source model after change property ([2bd25d6](https://github.com/xcritical-software/xc-front-kit/commit/2bd25d65f736a19b7b1e066d3034f00a47fccbdd))
 
 
@@ -97,6 +102,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * **forms:** added dynamic classnames for form elements ([9de2820](https://github.com/xcritical-software/xc-front-kit/commit/9de282016a2b297c2053b366faf7f153e3ffc870))
+=======
+* **forms:** fix checking to undefined ([23f06d9](https://github.com/xcritical-software/xc-front-kit/commit/23f06d9b05387e71a14a54e079db3facb67a1cc3))
+>>>>>>> 3bf11c3646e0a8df3d53acb9f0192a58f3a8ba52
 
 
 

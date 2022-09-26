@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useCallback, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import get from 'lodash.get';
@@ -22,7 +23,8 @@ export const PureFormField = function <TProps>({
 
   const $state = useForm(formName, namespace);
 
-  const value = get($state, `model.${name}`);
+  const $value = get($state, `model.${name}`);
+  const value = $value == null ? '' : $value;
   const initialValue = get($state, `source.${name}`);
 
   const $error = get($state, `errors.${name}`);
@@ -55,7 +57,7 @@ export const PureFormField = function <TProps>({
     <Component
       className={$className}
       {...$props}
-      value={value || ''}
+      value={value}
       initialValue={initialValue}
       error={error}
       invalid={invalid}

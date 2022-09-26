@@ -23,6 +23,7 @@ import {
   changeGridSort,
   deleteSystemPropsFromObjects,
   deleteSystemPropsFromObject,
+  getMappedItems,
 } from './utils';
 import { MultiGrid } from './MultiGrid';
 import { GridPositions, GridSort } from './consts';
@@ -53,13 +54,12 @@ const Grid: React.FC<IGridProps> = ({
   minColumnWidth = 30,
   gridProps = {},
   onChangeExpand: onChangeExpandFromProps,
+  selectedRowKeys = [],
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
   const [mappedItems, setMappedItems] = useState<IMappedItem[]>(
-    items.map(
-      (el: IItem): IMappedItem => ({ __expandLevel: 0, ...el, __key: guid() })
-    )
+    getMappedItems(items)
   );
 
   const contextTheme = useContext(ThemeContext);
@@ -69,7 +69,13 @@ const Grid: React.FC<IGridProps> = ({
     themeRef.current = gridTheme(theme ?? contextTheme);
   }, [theme, contextTheme]);
 
-  const [selectedRows, setSelectedRows] = useState<string[]>([]);
+  const [selectedRows, setSelectedRows] = useState<string[]>(
+    isMultiSelect ? [...selectedRowKeys] : [selectedRowKeys[0]]
+  );
+
+  useEffect(() => {
+    setSelectedRows(selectedRowKeys);
+  }, [selectedRowKeys]);
 
   const createObserver = (): ResizeObserver | undefined => {
     if (wrapperRef.current === null) {
@@ -182,7 +188,8 @@ const Grid: React.FC<IGridProps> = ({
             deleteSystemPropsFromObjects(
               mappedItems.filter((el) =>
                 newSelectedRows.some((id) => id === el.__key)
-              )
+              ),
+              true
             )
           );
         }
@@ -202,7 +209,7 @@ const Grid: React.FC<IGridProps> = ({
         const selectedRow = mappedItems.find((el) => el.__key === key);
 
         if (onSelect) {
-          onSelect(deleteSystemPropsFromObject(selectedRow));
+          onSelect(deleteSystemPropsFromObject(selectedRow, true));
         }
 
         setSelectedRows([key]);
@@ -212,9 +219,7 @@ const Grid: React.FC<IGridProps> = ({
   );
 
   useEffect(() => {
-    setMappedItems(
-      items.map((el) => ({ __expandLevel: 0, ...el, __key: guid() }))
-    );
+    setMappedItems(getMappedItems(items));
   }, [items]);
 
   const isMultiGrid = useMemo(
