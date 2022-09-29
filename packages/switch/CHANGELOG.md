@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/switch@1.2.1...@xcritical/switch@1.3.0-beta.0) (2022-09-29)
+
+
+### Features
+
+* **switch:** Add id prop for component ([c5a674b](https://github.com/xcritical-software/xc-front-kit/commit/c5a674bbdd0019794c22b0f7e90227fe035dada1))
+
+
+
+
+
 ## [1.2.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/switch@1.2.0...@xcritical/switch@1.2.1) (2022-04-15)
 
 
