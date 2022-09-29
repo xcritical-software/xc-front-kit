@@ -29,7 +29,7 @@ export interface ISwitchProps extends ISwitchStyledProps, ISwitchStateProps {
     checked: boolean,
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
-
+  id?: string;
   label?: string;
   name?: string;
   className?: string;

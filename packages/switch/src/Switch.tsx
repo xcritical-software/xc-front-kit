@@ -11,6 +11,7 @@ import {
 import { ISwitchProps } from './interfaces';
 
 const PureSwitch: React.FC<ISwitchProps> = ({
+  id,
   name,
   onChange,
   label,
@@ -39,6 +40,7 @@ const PureSwitch: React.FC<ISwitchProps> = ({
       <SwitchHiddenCheckbox
         className={classNamePrefix && `${classNamePrefix}__checkbox-hidden`}
         type="checkbox"
+        id={id ?? name ?? ''}
         name={name ?? label ?? ''}
         checked={checked}
         disabled={disabled}
