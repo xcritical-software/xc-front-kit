@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.2.1-beta.0...@xcritical/forms@1.4.0-beta.0) (2022-09-26)
+
+
+### Bug Fixes
+
+* **forms:** fix change source model after change property ([2bd25d6](https://github.com/xcritical-software/xc-front-kit/commit/2bd25d65f736a19b7b1e066d3034f00a47fccbdd))
+* **forms:** fix FormFieldProps ([789b065](https://github.com/xcritical-software/xc-front-kit/commit/789b065d5bfeffd7845af64cb7d28c6a1a042ac8))
+* **forms:** fix FormFieldProps - added Omit for onChange ([bfe00ef](https://github.com/xcritical-software/xc-front-kit/commit/bfe00ef98fed7fdb121d0b638664d2b5916cf010))
+* **forms:** fix FormFieldProps - added Omit for onChange ([fbee465](https://github.com/xcritical-software/xc-front-kit/commit/fbee465c8c096fa8b2e7a6bf4cdd7b152851170f))
+* **forms:** fix IFormFieldComponentProps invalid is not requered ([27455b5](https://github.com/xcritical-software/xc-front-kit/commit/27455b557b2e00d80485738441d4f22c982a24e5))
+* **forms:** fix passing props ([fa064c9](https://github.com/xcritical-software/xc-front-kit/commit/fa064c974996d4f0e6b21d70872be0b09822e7dd))
+* **forms:** fix passing props ([316d328](https://github.com/xcritical-software/xc-front-kit/commit/316d328f9c321e8078bb7158241dd686d466ab6b))
+* **forms:** fix passing props ([35cdff7](https://github.com/xcritical-software/xc-front-kit/commit/35cdff78587a29c203091718fce7753ab6a596cd))
+* **forms:** fix passing props ([6bd132f](https://github.com/xcritical-software/xc-front-kit/commit/6bd132fa43f38520ddf307d8e1acfa486be4dfc3))
+* **forms:** fix passing props ([1714946](https://github.com/xcritical-software/xc-front-kit/commit/1714946275a41f8ec960ef7636aa37aa54e28525))
+
+
+### Features
+
+* **forms:** added dynamic classnames for form elements ([9de2820](https://github.com/xcritical-software/xc-front-kit/commit/9de282016a2b297c2053b366faf7f153e3ffc870))
+
+
+
+
+
 <<<<<<< HEAD
 ## [1.3.8](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.3.7...@xcritical/forms@1.3.8) (2022-04-20)
 =======
