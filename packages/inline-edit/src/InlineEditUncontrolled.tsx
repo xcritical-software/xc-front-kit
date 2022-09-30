@@ -49,7 +49,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
   }, [valueProp]);
 
   const handleEditValueChange = useCallback((e: any) => {
-    if (e.target && e.target.value) {
+    if (e?.target && e?.target?.value) {
       setValue(e.target.value);
     } else {
       setValue(e);
