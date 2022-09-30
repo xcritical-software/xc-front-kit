@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.4.0...@xcritical/forms@1.4.1) (2022-09-30)
+
+
+### Bug Fixes
+
+* **forms:** add null checking for event ([1a17205](https://github.com/xcritical-software/xc-front-kit/commit/1a17205ab38325a5fb7d570b6ae82bec1770f132))
+
+
+
+
+
 # [1.4.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.4.0-beta.1...@xcritical/forms@1.4.0) (2022-09-29)
 
 **Note:** Version bump only for package @xcritical/forms
