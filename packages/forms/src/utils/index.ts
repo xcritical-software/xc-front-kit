@@ -25,7 +25,7 @@ export const isEvent = ({
 }: Record<string, any>): boolean => !!(stopPropagation && preventDefault);
 
 export const getValueFromNativeComponent = (event: Event): any => {
-  if (isEvent(event)) {
+  if (event != null && isEvent(event)) {
     const detypedEvent: any = event;
     const {
       target: { type, value, checked, files, options },
