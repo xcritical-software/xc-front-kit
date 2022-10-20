@@ -11,6 +11,7 @@ import { ThemeContext } from 'styled-components';
 import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
 import { ScrollSync } from 'react-virtualized';
+import isEmpty from 'lodash.isempty';
 
 import InternalGrid from './InternalGrid';
 import { IMappedItem, IItem, IGridProps, IColumn } from './interfaces';
@@ -74,7 +75,9 @@ const Grid: React.FC<IGridProps> = ({
   );
 
   useEffect(() => {
-    setSelectedRows(selectedRowKeys);
+    if (!(isEmpty(selectedRows) && isEmpty(selectedRowKeys))) {
+      setSelectedRows(selectedRowKeys);
+    }
   }, [selectedRowKeys]);
 
   const createObserver = (): ResizeObserver | undefined => {

@@ -89,7 +89,7 @@ export const searchNextVisible = (arr: IColumn[], idx: number) => {
 export const getFullWidth = (columns: IColumn[]) =>
   columns
     .filter(({ visible }: IColumn) => visible)
-    .reduce((acc: number, { width: colWidth }) => acc + colWidth, 0);
+    .reduce((acc: number, { width: colWidth }) => acc + colWidth, 10);
 
 export const removeSorting = (columns) =>
   columns.map((el) => {
