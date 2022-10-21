@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.0...@xcritical/grid@1.5.1-beta.0) (2022-10-21)
+
+
+### Bug Fixes
+
+* **grid:** delete isUndefined ([d043e8c](https://github.com/xcritical-software/xc-front-kit/commit/d043e8c43f96b3c98a0b3f4147500e81d12c6eef))
+* **grid:** fix grid select ([7d74583](https://github.com/xcritical-software/xc-front-kit/commit/7d7458373696beecf4994aeb5a7b1d7d4093484b))
+
+
+
+
+
 # [1.5.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.0-beta.3...@xcritical/grid@1.5.0) (2022-09-29)
 
 **Note:** Version bump only for package @xcritical/grid
