@@ -54,7 +54,7 @@ const Grid: React.FC<IGridProps> = ({
   minColumnWidth = 30,
   gridProps = {},
   onChangeExpand: onChangeExpandFromProps,
-  selectedRowKeys = [],
+  selectedRowKeys = undefined,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [wrapperSize, setWrapperSize] = useState({ width: 0, height: 0 });
@@ -70,11 +70,18 @@ const Grid: React.FC<IGridProps> = ({
   }, [theme, contextTheme]);
 
   const [selectedRows, setSelectedRows] = useState<string[]>(
-    isMultiSelect ? [...selectedRowKeys] : [selectedRowKeys[0]]
+    // eslint-disable-next-line no-nested-ternary
+    selectedRowKeys?.length
+      ? isMultiSelect
+        ? [...selectedRowKeys]
+        : [selectedRowKeys[0]]
+      : []
   );
 
   useEffect(() => {
-    setSelectedRows(selectedRowKeys);
+    if (selectedRowKeys) {
+      setSelectedRows(selectedRowKeys);
+    }
   }, [selectedRowKeys]);
 
   const createObserver = (): ResizeObserver | undefined => {
