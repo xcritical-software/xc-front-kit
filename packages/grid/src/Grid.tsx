@@ -11,7 +11,6 @@ import { ThemeContext } from 'styled-components';
 import ResizeObserver from 'resize-observer-polyfill';
 import { setIn } from 'utilitify';
 import { ScrollSync } from 'react-virtualized';
-import { isUndefined } from 'lodash';
 
 import InternalGrid from './InternalGrid';
 import { IMappedItem, IItem, IGridProps, IColumn } from './interfaces';
@@ -80,7 +79,7 @@ const Grid: React.FC<IGridProps> = ({
   );
 
   useEffect(() => {
-    if (!isUndefined(selectedRowKeys)) {
+    if (selectedRowKeys) {
       setSelectedRows(selectedRowKeys);
     }
   }, [selectedRowKeys]);
