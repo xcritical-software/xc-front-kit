@@ -106,7 +106,7 @@ export const Popover: React.FC<IPopover> = memo(
           !popoverContentRef.current.contains(e.target) &&
           !!onOutsideClick
         ) {
-          onOutsideClick();
+          onOutsideClick(e);
         }
       },
       [onOutsideClick]
