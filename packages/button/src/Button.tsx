@@ -1,6 +1,7 @@
 import React, { memo, useRef, useMemo, useContext, useCallback } from 'react';
 import { ThemeContext, ThemeProvider } from 'styled-components';
 
+import { useCombinedRefs } from '@xcritical/utils';
 import { IThemeNamespace } from '@xcritical/theme';
 
 import {
@@ -13,7 +14,7 @@ import {
 import { IButtonProps, ButtonTheme } from './interfaces';
 import { getElement } from './utils';
 
-export const PureButton: React.FC<IButtonProps> = ({
+export const PureButton = React.forwardRef<HTMLButtonElement, IButtonProps>(({
   prefix,
   postfix,
   children,
@@ -35,10 +36,14 @@ export const PureButton: React.FC<IButtonProps> = ({
   className,
   classNamePrefix,
   ...rest
-}) => {
+},
+ref: React.MutableRefObject<HTMLButtonElement>
+) => {
   const themeContext = useContext<IThemeNamespace<ButtonTheme>>(ThemeContext);
   const innerTheme = (theme ?? themeContext) || {};
-  const buttonRef = useRef();
+  const innerRef = useRef<HTMLButtonElement>(null);
+  const combinedRef = useCombinedRefs(null, ref, innerRef);
+
 
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
@@ -59,7 +64,7 @@ export const PureButton: React.FC<IButtonProps> = ({
       <StyledButton
         className={className}
         as={element}
-        ref={buttonRef}
+        ref={combinedRef}
         role={role}
         spacing={spacing}
         isRTL={isRTL}
@@ -109,6 +114,7 @@ export const PureButton: React.FC<IButtonProps> = ({
       </StyledButton>
     </ThemeProvider>
   );
-};
+}
+);
 
 export const Button = memo(PureButton);
