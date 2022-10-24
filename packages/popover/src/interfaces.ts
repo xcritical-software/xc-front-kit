@@ -24,7 +24,7 @@ export interface IPopover {
   convertStyles?: (styles: CSSProperties) => CSSProperties;
   className?: string;
   classNamePrefix?: string;
-  onOutsideClick?: (e: MouseEvent) => void;
+  onOutsideClick?: (e: Event) => void;
 }
 
 export interface IPopoverTheme {
