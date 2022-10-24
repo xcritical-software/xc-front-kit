@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.1-beta.0...@xcritical/grid@1.5.2-beta.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* **grid:** add scroll width to grid body width and fix useEffect in grid ([fbfc256](https://github.com/xcritical-software/xc-front-kit/commit/fbfc256e9a266717260621b54a56e060cdce123f))
+* **grid:** delete import ([3b1192b](https://github.com/xcritical-software/xc-front-kit/commit/3b1192b006d0e1579410eed071c37244e330ec9f))
+
+
+
+
+
 ## [1.5.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.0...@xcritical/grid@1.5.1) (2022-10-20)
 
 
