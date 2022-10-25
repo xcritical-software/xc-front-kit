@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/popover@2.3.1...@xcritical/popover@2.4.0-beta.0) (2022-10-25)
+
+
+### Bug Fixes
+
+* **popover:** fix type prop ([356bfdb](https://github.com/xcritical-software/xc-front-kit/commit/356bfdb064b8968a8ba0d273ae77e8dd1bfdf683))
+
+
+### Features
+
+* **popover:** add event prop for outside click ([7cb2ace](https://github.com/xcritical-software/xc-front-kit/commit/7cb2aceee2e8202a5580dc1ac088462a98f0f624))
+
+
+
+
+
 ## [2.3.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/popover@2.3.0...@xcritical/popover@2.3.1) (2022-04-15)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/button@2.3.1...@xcritical/button@2.4.0-beta.0) (2022-10-25)
+
+
+### Features
+
+* **button:** add forward ref ([279e802](https://github.com/xcritical-software/xc-front-kit/commit/279e8025bd64675782c2e212c61589cfcd17fba0))
+
+
+
+
+
 ## [2.3.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/button@2.3.0...@xcritical/button@2.3.1) (2022-04-15)
 
 
