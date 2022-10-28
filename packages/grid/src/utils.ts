@@ -86,10 +86,16 @@ export const searchNextVisible = (arr: IColumn[], idx: number) => {
   return nextVisible;
 };
 
-export const getFullWidth = (columns: IColumn[]) =>
+export const getFullWidth = (
+  columns: IColumn[],
+  addScrollWidth: boolean = false
+) =>
   columns
     .filter(({ visible }: IColumn) => visible)
-    .reduce((acc: number, { width: colWidth }) => acc + colWidth, 10);
+    .reduce(
+      (acc: number, { width: colWidth }) => acc + colWidth,
+      addScrollWidth ? 10 : 0
+    );
 
 export const removeSorting = (columns) =>
   columns.map((el) => {
