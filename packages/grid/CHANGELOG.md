@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.2-beta.0...@xcritical/grid@1.5.2-beta.1) (2022-10-31)
+
+
+### Bug Fixes
+
+* **grid:** fix grid width ([4ea8b19](https://github.com/xcritical-software/xc-front-kit/commit/4ea8b198299f0dc3edc0c6b291f4a5c3cf022052))
+
+
+
+
+
 ## [1.5.2-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.1-beta.0...@xcritical/grid@1.5.2-beta.0) (2022-10-24)
 
 
