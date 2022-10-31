@@ -34,6 +34,7 @@ import { AddIcon, RemoveIcon } from './icons';
 import { searchLastVisible, getFullWidth } from './utils';
 import { HeaderWrapper } from './HeaderWrapper';
 import { IColumn, IInternalGrid } from './interfaces';
+import { GridPositions } from './consts';
 
 const InternalGrid: React.FC<IInternalGrid> = ({
   rightScroll = true,
@@ -67,7 +68,9 @@ const InternalGrid: React.FC<IInternalGrid> = ({
 }) => {
   const [mappedColumns, setMappedColumns] =
     useState<IColumn[]>(gridHOCMappedColumns);
-  const fullWidthRef = useRef(getFullWidth(mappedColumns));
+  const fullWidthRef = useRef(
+    getFullWidth(mappedColumns, gridPosition === GridPositions.CENTER)
+  );
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [changingColumns, setChangingColumns] = useState<string>('');
   const gridRef = useRef<VirtualisedGrid>();
