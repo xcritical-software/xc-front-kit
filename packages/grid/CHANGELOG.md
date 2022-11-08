@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.2-beta.1...@xcritical/grid@1.5.2-beta.2) (2022-11-08)
+
+
+### Bug Fixes
+
+* add condition for gridHOCMappedColumns full width ([d8dc4ab](https://github.com/xcritical-software/xc-front-kit/commit/d8dc4abee26c37474b17d00bde29f9ef4b59d53a))
+
+
+
+
+
 ## [1.5.2-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.2-beta.0...@xcritical/grid@1.5.2-beta.1) (2022-10-31)
 
 
