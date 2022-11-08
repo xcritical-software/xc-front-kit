@@ -88,7 +88,10 @@ const InternalGrid: React.FC<IInternalGrid> = ({
   );
 
   useEffect(() => {
-    const newFullWidth = getFullWidth(gridHOCMappedColumns);
+    const newFullWidth = getFullWidth(
+      gridHOCMappedColumns,
+      gridPosition === GridPositions.CENTER
+    );
 
     fullWidthRef.current = newFullWidth;
 
