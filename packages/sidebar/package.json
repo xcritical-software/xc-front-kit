@@ -32,14 +32,14 @@
 	"license": "MIT",
 	"private": false,
 	"peerDependencies": {
-		"micro-memoize": "4.0.8",
+		"micro-memoize": "4.0.12",
 		"prop-types": "^15.0.0",
 		"react": "^16.9.0",
 		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {
 		"mdi-react": "^6.7.0",
-		"micro-memoize": "4.0.8",
+		"micro-memoize": "4.0.12",
 		"react-router": "^6.2.1",
 		"react-router-dom": "^6.3.0"
 	},
