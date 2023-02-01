@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy
+name: Deploy libs
 
 # Controls when the action will run.
 on:
@@ -70,6 +70,5 @@ jobs:
         run: "yarn publish:from-git "
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - uses: actions/checkout@v3
-        run: git push --follow-tags --no-verify
+      - run: git push --follow-tags --no-verify
         if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') }}
