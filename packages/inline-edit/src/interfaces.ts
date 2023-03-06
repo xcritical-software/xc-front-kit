@@ -65,7 +65,7 @@ export type IInlineEditUncontrolledProps<TFieldValue> =
     isDoubleClickMode?: boolean;
     className?: string;
     classNamePrefix?: string;
-};
+  };
 
 export type InlineEditCommonProps<TFieldValue> = ICommonProps & {
   /** The value shown in the editView when it is entered. Should be updated by onConfirm. */
