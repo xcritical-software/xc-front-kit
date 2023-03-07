@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useCallback, createRef, useState, useEffect } from 'react';
+import React, {
+  useCallback,
+  createRef,
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
 
 import {
   ReadViewWrapper,
@@ -35,12 +41,14 @@ export const InlineEditUncontrolled = function <TFieldValue>({
   isDoubleClickMode = false,
   className,
   classNamePrefix,
+  closeOnOutsideClick,
 }: IInlineEditUncontrolledProps<TFieldValue>): React.ReactElement<
   IInlineEditUncontrolledProps<TFieldValue>
 > {
   const editButtonRef = createRef<HTMLButtonElement>();
   const confirmButtonRef = createRef<HTMLButtonElement>();
   const cancelButtonRef = createRef<HTMLButtonElement>();
+  const contentRef = useRef<any>();
 
   const [value, setValue] = useState(valueProp);
 
@@ -84,8 +92,36 @@ export const InlineEditUncontrolled = function <TFieldValue>({
     [onCancel, valueProp]
   );
 
+  const handleClickOutside = useCallback(
+    (e: MouseEvent): void => {
+      if (
+        contentRef.current &&
+        !contentRef.current.contains(e.target) &&
+        closeOnOutsideClick &&
+        isEditing
+      ) {
+        e.preventDefault();
+        setValue(valueProp);
+        onCancel?.();
+      }
+    },
+    [closeOnOutsideClick, onCancel, valueProp, isEditing]
+  );
+
+  useEffect(() => {
+    if (closeOnOutsideClick) {
+      document.addEventListener('mousedown', handleClickOutside);
+
+      return () =>
+        document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {};
+  }, [handleClickOutside, closeOnOutsideClick]);
+
   return (
     <ContentWrapper
+      ref={contentRef}
       className={className}
       appearance={appearance}
       baseAppearance={baseAppearance}>
