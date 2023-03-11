@@ -4,7 +4,7 @@
   "description": "<>",
   "main": "dist/index.js",
   "source": "src/index.ts",
-"xc:source": "src/index.ts",
+  "xc:source": "src/index.ts",
   "module": "dist/package.esm.js",
   "types": "dist/typings.d.ts",
   "files": [
@@ -30,7 +30,7 @@
   },
   "private": false,
   "peerDependencies": {
-    "react": "^16.8.3"
+    "react": "^18.2.0"
   },
   "dependencies": {}
 }

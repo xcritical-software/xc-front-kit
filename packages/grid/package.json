@@ -41,7 +41,7 @@
 	"peerDependencies": {
 		"lodash.get": "^4.x",
 		"polished": "^4.1.4",
-		"react": "^16.8.3",
+		"react": "^18.2.0",
 		"styled-components": "^5.3.3"
 	},
 	"dependencies": {

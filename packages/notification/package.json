@@ -34,12 +34,12 @@
 	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/notification#readme",
 	"private": false,
 	"peerDependencies": {
-		"react": "^16.8.3",
+		"react": "^18.2.0",
 		"styled-components": "^5.3.3"
 	},
 	"dependencies": {
 		"lodash.get": "4.x",
-		"react-toastify": "5.5.0",
+		"react-toastify": "9.1.1",
 		"utilitify": "^1.0.3"
 	}
 }

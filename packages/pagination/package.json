@@ -34,7 +34,7 @@
 	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/pagination#readme",
 	"private": false,
 	"peerDependencies": {
-		"react": "^16.8.3",
+		"react": "^18.2.0",
 		"styled-components": "^5.3.3"
 	},
 	"devDependencies": {
