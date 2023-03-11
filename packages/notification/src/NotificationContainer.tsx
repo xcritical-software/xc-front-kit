@@ -11,6 +11,8 @@ export const NotificationContainer: React.FC<INotificationContainer> = ({
   <div className={className}>
     <ToastContainer
       className={classNamePrefix && `${classNamePrefix}__container`}
+      icon={false}
+      closeButton
       {...rest}
     />
   </div>
