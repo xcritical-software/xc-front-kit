@@ -32,16 +32,16 @@
 	"peerDependencies": {
 		"polished": "^4.1.4",
 		"react": "^18.2.0",
-		"react-redux": "^7.2.0",
+		"react-redux": "^8.0.5",
 		"redux": "^4.0.5",
-		"styled-components": "^5.3.3"
+		"styled-components": "^5.3.8"
 	},
 	"devDependencies": {
-		"mdi-react": "^6.7.0",
+		"mdi-react": "^8.2.0",
 		"polished": "^4.1.4",
 		"react": "^18.2.0",
 		"react-dates": "^21.8.0",
-		"react-redux": "^7.2.0",
+		"react-redux": "^8.0.5",
 		"redux": "^4.0.5"
 	},
 	"dependencies": {

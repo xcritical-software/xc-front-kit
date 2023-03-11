@@ -34,7 +34,7 @@
 	"private": false,
 	"peerDependencies": {
 		"react": "^18.2.0",
-		"styled-components": "^5.3.3"
+		"styled-components": "^5.3.8"
 	},
 	"dependencies": {
 		"csstype": "^3.0.9",

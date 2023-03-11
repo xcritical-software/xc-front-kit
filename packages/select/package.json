@@ -32,7 +32,7 @@
 	"peerDependencies": {
 		"lodash.get": "^4.x",
 		"react": "^18.2.0",
-		"styled-components": "^5.3.3"
+		"styled-components": "^5.3.8"
 	},
 	"dependencies": {
 		"@xcritical/theme": "^1.3.0",

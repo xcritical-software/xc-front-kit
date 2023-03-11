@@ -35,7 +35,7 @@
 	"private": false,
 	"peerDependencies": {
 		"react": "^18.2.0",
-		"styled-components": "^5.3.3"
+		"styled-components": "^5.3.8"
 	},
 	"dependencies": {
 		"lodash.get": "4.x",

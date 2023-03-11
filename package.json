@@ -53,6 +53,8 @@
     "@storybook/addon-storysource": "^6.5.16",
     "@storybook/addon-viewport": "^6.5.16",
     "@storybook/addons": "^6.5.16",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
     "@storybook/react": "^6.5.16",
     "@storybook/theming": "^6.5.16",
     "@types/history": "^4.7.5",
