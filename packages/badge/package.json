@@ -39,6 +39,6 @@
 	"dependencies": {
 		"@xcritical/theme": "^1.3.0",
 		"lodash.get": "^4.x",
-		"micro-memoize": "4.0.8"
+		"micro-memoize": "4.0.14"
 	}
 }
