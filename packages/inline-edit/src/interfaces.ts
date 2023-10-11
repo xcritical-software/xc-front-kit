@@ -77,6 +77,7 @@ export type InlineEditCommonProps<TFieldValue> = ICommonProps & {
   onConfirm?: (value?: TFieldValue) => void;
   /** Custom text for error message. */
   error?: string | string[];
+  closeOnOutsideClick?: boolean;
 };
 
 export type IInlineEditProps<TEditViewProps, TViewProps, TFieldValue> =

@@ -1,8 +1,8 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Deploy
+name: Deploy libs
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
@@ -14,31 +14,22 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
   Deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
           token: ${{ secrets.GH_TOKEN }}
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: 14
-          registry-url: https://registry.npmjs.org/
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          cache: "yarn"
+          registry-url: "https://registry.npmjs.org"
+          cache-dependency-path: "yarn.lock"
       - name: Install node_modules
         if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install
@@ -49,27 +40,26 @@ jobs:
       - name: Tests
         run: yarn test
       - name: Git init
-        run: | 
+        run: |
           git config --local user.name "TravisCI"
           git config --local user.email "frontend@xcritical.software"
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-      - name: 'Update version develop'
+      - name: "Update version develop"
         if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') && github.event.ref == 'refs/heads/develop' }}
-        run: 'yarn version:beta --no-commit-hooks'
-      - name: 'Update version release'
+        run: "yarn version:beta --no-commit-hooks"
+      - name: "Update version release"
         if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') && github.event.ref == 'refs/heads/master' }}
-        run: 'yarn version:release --no-commit-hooks'
-      - name: 'Publish develop'
+        run: "yarn version:release --no-commit-hooks"
+      - name: "Publish develop"
         if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') && github.event.ref == 'refs/heads/develop' }}
-        run: 'yarn publish:from-git --canary'
+        run: "yarn publish:from-git --canary"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: 'Publish release'
+      - name: "Publish release"
         if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') && github.event.ref == 'refs/heads/master' }}
-        run: 'yarn publish:from-git '
+        run: "yarn publish:from-git "
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Push tags
-        run: git push --follow-tags --no-verify
+      - run: git push --follow-tags --no-verify
         if: ${{ !startsWith(github.event.head_commit.message, 'chore(release)') }}
