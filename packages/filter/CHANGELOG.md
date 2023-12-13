@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.3.4-beta.0...@xcritical/filter@1.4.0) (2023-12-13)
+
+
+### Features
+
+* add immer wrapper ([431a797](https://github.com/xcritical-software/xc-front-kit/commit/431a7975b17cf2a1f5c2b75bc179e6013d12d807))
+
+
+
+
+
 ## [1.3.4-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/filter@1.3.3...@xcritical/filter@1.3.4-beta.0) (2022-10-25)
 
 **Note:** Version bump only for package @xcritical/filter
