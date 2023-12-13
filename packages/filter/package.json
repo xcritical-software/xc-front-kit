@@ -1,7 +1,7 @@
 {
 	"name": "@xcritical/filter",
 	"version": "1.4.0",
-	"description": "XCritical Filter Component",
+	"description": "Filter Component",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
 	"xc:source": "src/index.ts",
