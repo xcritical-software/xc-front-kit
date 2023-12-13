@@ -1,6 +1,6 @@
 {
 	"name": "@xcritical/inline-edit",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"description": "Inline Edit",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
