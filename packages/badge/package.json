@@ -30,8 +30,8 @@
 	},
 	"private": false,
 	"peerDependencies": {
-		"react": "^16.9.0",
-		"styled-components": "^5.3.3"
+		"react": "^18.2.0",
+		"styled-components": "^5.3.8"
 	},
 	"devDependencies": {
 		"polished": "^4.1.4"

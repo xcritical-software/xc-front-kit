@@ -7,6 +7,12 @@ export const CloseButton = (
     ${closeButtonStyles}
   }
 
+  .Toastify__close-button > svg {
+    fill: currentColor;
+    height: 16px;
+    width: 14px;
+  }
+
   .Toastify__close-button:hover,
   .Toastify__close-button:focus {
     opacity: 1;

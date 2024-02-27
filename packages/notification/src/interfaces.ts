@@ -18,7 +18,7 @@ export interface INotificationTheme extends IToast {
   error?: IToast;
 }
 
-export interface INotification extends ToastContainerProps {
+export interface INotification extends Omit<ToastContainerProps, 'theme'> {
   theme?: {
     [namespace: string]: INotificationTheme;
   };
