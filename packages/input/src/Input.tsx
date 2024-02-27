@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React, { useCallback, useRef, useState } from 'react';
 
-import { useCombinedRefs } from '@xcritical/utils';
-
 import {
   Root,
   Prefix,
@@ -45,7 +43,7 @@ export const PureInput = React.forwardRef<HTMLInputElement, IInputProps>(
   ) => {
     const [isFocused, setIsFocused] = useState(false);
     const innerRef = useRef<HTMLInputElement>(null);
-    const combinedRef = useCombinedRefs(null, ref, innerRef);
+    const combinedRef = ref || innerRef;
 
     const inputOnChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
