@@ -1,7 +1,6 @@
 import React, { memo, useRef, useMemo, useContext, useCallback } from 'react';
 import { ThemeContext, ThemeProvider } from 'styled-components';
 
-import { useCombinedRefs } from '@xcritical/utils';
 import { IThemeNamespace } from '@xcritical/theme';
 
 import {
@@ -44,7 +43,7 @@ export const PureButton = React.forwardRef<HTMLButtonElement, IButtonProps>(
     const themeContext = useContext<IThemeNamespace<ButtonTheme>>(ThemeContext);
     const innerTheme = (theme ?? themeContext) || {};
     const innerRef = useRef<HTMLButtonElement>(null);
-    const combinedRef = useCombinedRefs(null, ref, innerRef);
+    const combinedRef = ref || innerRef;
 
     const onClick = useCallback(
       (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
