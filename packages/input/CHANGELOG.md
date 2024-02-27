@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/input@1.3.1...@xcritical/input@1.4.0) (2024-02-27)
+
+
+### Features
+
+* updated logic for input and buttons refs ([f92b086](https://github.com/xcritical-software/xc-front-kit/commit/f92b0866a845ea9918c828b8ee8d51a9708f7d6f))
+
+
+
+
+
 ## [1.3.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/input@1.3.0...@xcritical/input@1.3.1) (2022-04-15)
 
 
