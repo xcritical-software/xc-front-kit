@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.2-beta.2...@xcritical/grid@1.5.2) (2023-12-13)
+
+**Note:** Version bump only for package @xcritical/grid
+
+
+
+
+
 ## [1.5.2-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.2-beta.1...@xcritical/grid@1.5.2-beta.2) (2022-11-08)
 
 

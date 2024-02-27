@@ -1,7 +1,7 @@
 {
 	"name": "@xcritical/inline-edit",
-	"version": "1.3.2",
-	"description": "",
+	"version": "1.4.2",
+	"description": "Inline Edit",
 	"main": "dist/index.js",
 	"source": "src/index.ts",
 	"xc:source": "src/index.ts",

@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/inline-edit@1.4.1...@xcritical/inline-edit@1.4.2) (2023-12-13)
+
+**Note:** Version bump only for package @xcritical/inline-edit
+
+
+
+
+
+## [1.4.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/inline-edit@1.4.0...@xcritical/inline-edit@1.4.1) (2023-12-13)
+
+
+### Bug Fixes
+
+* just update version ([cf2de80](https://github.com/xcritical-software/xc-front-kit/commit/cf2de8012fab250e0a3ed7517056a97de4021596))
+
+
+
+
+
+# [1.4.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/inline-edit@1.3.2...@xcritical/inline-edit@1.4.0) (2023-12-13)
+
+
+### Features
+
+* **inline-edit:** add new props for inline edit for closing on outside click ([4fe8791](https://github.com/xcritical-software/xc-front-kit/commit/4fe8791017b41b97c06b65bfe2e799de684617ee))
+
+
+
+
+
 ## [1.3.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/inline-edit@1.3.1...@xcritical/inline-edit@1.3.2) (2022-09-30)
 
 

@@ -1,6 +1,7 @@
 import get from 'lodash.get';
 import { Reducer } from 'redux';
 import { v1 as uuid } from 'uuid';
+import produce from 'immer';
 
 import * as actions from '../actions/const';
 import { reducerDictionary } from '../utils';
@@ -55,4 +56,4 @@ export const filterSelector = (
   return get(state.filter, filterName, defaultFilterState);
 };
 
-export default reducerDictionary(reducer, 'filterName');
+export default reducerDictionary(produce(reducer), 'filterName');
