@@ -1,0 +1,6 @@
+{
+  "packages/**/*.+(ts|tsx)": [
+    "eslint --fix --quiet",
+    "git add"
+  ]
+}

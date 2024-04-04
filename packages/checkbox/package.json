@@ -37,7 +37,7 @@
 	},
 	"private": false,
 	"peerDependencies": {
-		"fast-equals": "2.0.0",
+		"fast-equals": "5.0.0",
 		"react": "^16.9.0",
 		"styled-components": "^5.3.3"
 	},
