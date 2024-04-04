@@ -18,7 +18,7 @@
     "deploy": "bash ./copy-to-publish.sh && bash ./publish.sh",
     "check": "npm run lint && npm run test",
     "clean": "yarn lerna run clean",
-    "clean:nm": "npx rimraf node_modules \"packages/*/node_modules\"",
+    "clean:nm": "npx rimraf node_modules \"./packages/*/node_modules\" -g",
     "storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook dev -p 9009",
     "build:lastcommit": "yarn clean && yarn compile --since HEAD~1",
     "publish:from-git": "lerna publish from-git --yes",

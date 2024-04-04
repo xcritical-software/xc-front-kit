@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, PropsWithChildren } from 'react';
 
 export interface IMaxZIndexManager {
   MaxZIndexContext: React.Context<number>;
@@ -15,7 +15,7 @@ export const getMaxZIndex = (): number | undefined =>
 export const maxZIndexManager = (): IMaxZIndexManager => {
   const MaxZIndexContext = React.createContext(1);
 
-  const Provider: FC = ({ children }) => {
+  const Provider: FC<PropsWithChildren> = ({ children }) => {
     const maxZIndex = useMemo(() => getMaxZIndex() ?? 1, []);
 
     return (
