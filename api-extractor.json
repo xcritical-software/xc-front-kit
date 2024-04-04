@@ -308,7 +308,10 @@
             "ae-forgotten-export": {
                 "logLevel": "none",
                 "addToApiReportFile": false
-            }
+            },
+            "ae-wrong-input-file-type": {
+                "logLevel": "none"
+              }
             //
             // . . .
         },

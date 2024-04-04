@@ -1,4 +1,5 @@
 /* eslint-disable no-nested-ternary */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import get from 'lodash.get';
 import memoize from 'micro-memoize';
 import { css, FlattenInterpolation } from 'styled-components';
@@ -175,8 +176,8 @@ export const getButtonStyles = memoize(
     const {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       appearance: _dontTouch,
-      prefixSpacing,
-      postfixSpacing,
+      prefixSpacing: __dontTouch1,
+      postfixSpacing: __dontTouch2,
       ...rootStyles
     } = buttonTheme(theme);
 

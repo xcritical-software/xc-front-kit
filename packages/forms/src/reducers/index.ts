@@ -70,10 +70,9 @@ export const formSelector = <
     ? get(state, `${namespace}.${formName}`, initialState)
     : get(state.form, formName, initialState);
 
-export function useFormSelector<TFormModel = any>(
-  formName: string,
-  namespace?: string
-) {
+export function useFormSelector<
+  TFormModel extends Record<string | number, any> | undefined = any
+>(formName: string, namespace?: string) {
   return useSelector<any, IFormState<TFormModel>>((state) =>
     formSelector(state, formName, namespace)
   );
