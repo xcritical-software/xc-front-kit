@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from 'react';
+import React, { MutableRefObject, PropsWithChildren } from 'react';
 import { CSSProperties } from 'styled-components';
 
 import { IThemeNamespace, ITheme } from '@xcritical/theme';
@@ -209,7 +209,7 @@ export interface IFilterComponentProps
   onApply: () => void;
 }
 
-export interface IMoreButtonWithFilterSelectorProps {
+export interface IMoreButtonWithFilterSelectorProps extends PropsWithChildren {
   selectedFilters: IStateFilter[];
   filters: IFilter[];
   disabled: boolean;

@@ -45,7 +45,7 @@ export interface IModalOwnProps {
   name: string;
   title: any;
   children: any;
-  iconClose?: IIconCloseProps;
+  iconClose?: React.ReactElement<IIconCloseProps>;
   onCancel?: () => void;
   theme?: IThemeNamespace<IModalTheme>;
   zIndex?: number;
