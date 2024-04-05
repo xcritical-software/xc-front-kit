@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import {
   FormatOptionLabelContext,
@@ -82,7 +82,9 @@ const textCSS = (
   };
 };
 
-const Option: React.FC<IOptionProps> = React.memo<IOptionProps>(
+const Option: React.FC<IOptionProps & PropsWithChildren> = React.memo<
+  IOptionProps & PropsWithChildren
+>(
   ({
     classNamePrefix,
     name,

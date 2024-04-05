@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 interface IIconProps {
   color?: string;
   size?: number;
   className?: string;
+  children?: PropsWithChildren['children'];
 }
 
 export const AddIcon = () => (
