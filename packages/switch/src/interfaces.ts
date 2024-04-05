@@ -3,7 +3,7 @@ import { CSSObject } from 'styled-components';
 
 import { ICSSProperties, ITheme } from '@xcritical/theme';
 
-export interface ISwitchTheme extends ICSSProperties {
+export interface ISwitchTheme extends Omit<ICSSProperties, 'container'> {
   label?: CSSObject;
   labelText?: CSSObject & { rightPosition: CSSObject; leftPosition: CSSObject };
   container?: CSSObject;
