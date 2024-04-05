@@ -11960,12 +11960,7 @@ markdown-to-jsx@7.3.2:
   resolved "https://registry.yarnpkg.com/markdown-to-jsx/-/markdown-to-jsx-7.3.2.tgz#f286b4d112dad3028acc1e77dfe1f653b347e131"
   integrity sha512-B+28F5ucp83aQm+OxNrPkS8z0tMKaeHiy0lHJs3LqCyDQFtWuenaIrkaVTgAm1pf1AU85LXltva86hlaT17i8Q==
 
-mdi-react@^6.7.0:
-  version "6.7.0"
-  resolved "https://registry.yarnpkg.com/mdi-react/-/mdi-react-6.7.0.tgz#d291f919b5f0f99cbbeac111f2c9ca5184607b6b"
-  integrity sha512-Xpl3bXh4Nmuufoll8ejtErsDd0v/Ty+Je+qC9V3owriFUQZno91F/f0CkAdQj9fRqWY+LwjhFcWii+3lFFGKvQ==
-
-mdi-react@^9.1.0:
+mdi-react@^9.1.0, mdi-react@^9.4.0:
   version "9.4.0"
   resolved "https://registry.yarnpkg.com/mdi-react/-/mdi-react-9.4.0.tgz#b1f886681084fc85dabbcbc31b39b518f5030ced"
   integrity sha512-3McdJimHT2CO+bSDGgJ1SSmU6HvXLEwLdfFi3M/nQT4aauvVxIbIGTCI8eOCcPtkyVyVuZRcCZ7Gw0oaGldYLw==
