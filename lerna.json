@@ -3,5 +3,6 @@
     "packages/**/*",
     "modules/*"
   ],
+  "useWorkspaces": true,
   "version": "independent"
 }
