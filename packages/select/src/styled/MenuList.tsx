@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { GroupBase, MenuListProps } from 'react-select';
+import { MenuListProps } from 'react-select';
 import styled, { CSSObject } from 'styled-components';
 
 import { IStylesConfigCustom } from '../utils/themeConverter';
@@ -30,13 +30,7 @@ const renderThumb =
 //  which leads to a conflict with react-custom-scrollbars
 const FixScrollbarLogic = () => <div />;
 
-export const MenuList: <
-  Option = unknown,
-  IsMulti extends boolean = boolean,
-  Group extends GroupBase<Option> = GroupBase<Option>
->(
-  props: MenuListProps<Option, IsMulti, Group>
-) => React.ReactElement | null = memo((props) => {
+export const MenuList = memo((props: MenuListProps) => {
   const {
     getStyles,
     selectProps: { styles, classNamePrefix },
