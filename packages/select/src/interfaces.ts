@@ -45,6 +45,7 @@ export interface ISubComponents {
   button?: IThemeBase<ISelectCssTheme>;
   clearIndicator?: IThemeBase<ISelectCssTheme>;
   dropdown?: IThemeBase<ISelectCssTheme>;
+  container?: IThemeBase<ISelectCssTheme>;
   dropdownList?: IThemeBase<ISelectCssTheme>;
   dropdownIndicator?: IThemeBase<ISelectCssTheme>;
   group?: IThemeBase<ISelectCssTheme>;
@@ -78,7 +79,9 @@ export interface ILabelTextCssTheme extends ISelectCssTheme {
   postfixSpacing?: number;
 }
 
-export interface ISelectBaseTheme extends ISelectCssTheme, ISubComponents {}
+export interface ISelectBaseTheme
+  extends Omit<ISelectCssTheme, keyof ISubComponents>,
+    ISubComponents {}
 
 export interface IReturnFunction<TValue> {
   (
