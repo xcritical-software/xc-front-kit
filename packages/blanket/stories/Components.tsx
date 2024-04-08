@@ -1,15 +1,9 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable import/no-extraneous-dependencies */
-import * as React from 'react';
-import { storiesOf } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
+import React from 'react';
 
 import Blanket, { blanketThemeNamespace, IBlanketTheme } from '../src';
 
-const emptyTheme = {};
-
-const theme = {
+export const theme = {
   [blanketThemeNamespace]: {
     background: '#575857',
     color: '#A7A7A7',
@@ -19,7 +13,7 @@ const theme = {
   } as IBlanketTheme,
 };
 
-const BasicBlanket: React.FC<any> = ({ blanketTheme }) => {
+export const BasicBlanket: React.FC<any> = ({ blanketTheme }) => {
   const [isTinted, setIsTinted] = React.useState(false);
 
   const handleClick = (): void => {
@@ -37,7 +31,3 @@ const BasicBlanket: React.FC<any> = ({ blanketTheme }) => {
     </ThemeProvider>
   );
 };
-
-storiesOf('Blanket', module)
-  .add('Basic', () => <BasicBlanket blanketTheme={emptyTheme} />)
-  .add('With Theme', () => <BasicBlanket blanketTheme={theme} />);
