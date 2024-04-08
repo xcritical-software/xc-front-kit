@@ -3244,9 +3244,9 @@
     tiny-invariant "^1.3.1"
 
 "@storybook/addon-viewport@^8.0.5":
-  version "8.0.5"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-viewport/-/addon-viewport-8.0.5.tgz#bfa508a181927222a73e317b2fcad16d31caae53"
-  integrity sha512-Y2sTsNeQctfLBPQYuOjMGSQY4lUycZRZblToU0q6siJ030QjgpuEMcu1yDt654T6jnp/s4VwRS6yaZHnqZ97Mw==
+  version "8.0.6"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-viewport/-/addon-viewport-8.0.6.tgz#a861590b0f47a33369246e08929440643ecc2b51"
+  integrity sha512-R6aGEPA5e05L/NPs6Nbj0u9L6oKmchnJ/x8Rr/Xuc+nqVgXC1rslI0BcjJuC571Bewz7mT8zJ+BjP/gs7T4lnQ==
   dependencies:
     memoizerific "^1.11.3"
 
