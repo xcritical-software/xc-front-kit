@@ -124,7 +124,11 @@ export const Body = styled.div<any>`
   ${getScrollbar};
 `;
 
-export const BodyCell = styled.td<any>`
+export const BodyCell = styled.td.attrs<any>(({ width }) => ({
+  style: {
+    width: `${width}px`,
+  },
+}))`
   display: flex;
   align-items: center;
   ${getBodyCellStyles}

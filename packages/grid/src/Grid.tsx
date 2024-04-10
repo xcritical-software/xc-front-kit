@@ -16,6 +16,8 @@ const Grid: React.FC<IGridProps> = ({
   height = 0,
   rowHeight,
   shouldChangeColumnsWidth = false,
+  shouldMovingColumns,
+  onSortChanged,
 }) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme ?? contextTheme!));
@@ -77,6 +79,8 @@ const Grid: React.FC<IGridProps> = ({
           theme={theme}
           rowHeight={rowHeight}
           shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+          shouldMovingColumns={shouldMovingColumns}
+          onSortChanged={onSortChanged}
         />
       </div>
     );
@@ -91,6 +95,8 @@ const Grid: React.FC<IGridProps> = ({
       theme={theme}
       rowHeight={rowHeight}
       shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+      shouldMovingColumns={shouldMovingColumns}
+      onSortChanged={onSortChanged}
     />
   );
 };

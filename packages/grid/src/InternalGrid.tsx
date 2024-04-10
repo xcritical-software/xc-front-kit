@@ -1,6 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
-import React, { useContext, useEffect, useRef } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import {
   ColumnDef,
   getCoreRowModel,
@@ -9,9 +15,21 @@ import {
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { ThemeContext } from 'styled-components';
+import {
+  DndContext,
+  type DragEndEvent,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
+import { arrayMove } from '@dnd-kit/sortable';
 
 import { IGridProps } from './interfaces';
-import { cellRenderMapper, gridTheme } from './utils';
+import { cellRenderMapper, gridTheme, mappingColumns } from './utils';
 import {
   BodyCell,
   BodyCellContent,
@@ -30,33 +48,24 @@ export const InternalGrid: React.FC<IGridProps> = ({
   height = 0,
   rowHeight,
   shouldChangeColumnsWidth = false,
+  shouldMovingColumns = false,
+  onSortChanged,
 }) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme ?? contextTheme!));
 
-  useEffect(() => {
-    themeRef.current = gridTheme(theme ?? contextTheme!);
-  }, [theme, contextTheme]);
+  const sensors = useSensors(
+    useSensor(MouseSensor, {}),
+    useSensor(TouchSensor, {}),
+    useSensor(KeyboardSensor, {})
+  );
 
   const $columns = React.useMemo<ColumnDef<object>[]>(
-    () =>
-      columns.map((column) => ({
-        id: column.field,
-        accessorKey: column.field,
-        header: column.headerName,
-        size: column.width,
-        cell: (info) => info.getValue(),
-        sortable: column.sortable,
-        resizable: column.resizable === undefined ? true : column.resizable,
-        filterable: false,
-        groupable: false,
-        aggregatable: false,
-        footer: column.footer,
-      })),
+    () => mappingColumns(columns),
     [columns]
   );
 
-  const customRenders = React.useMemo<Record<string, Function>>(
+  const customRenders = useMemo<Record<string, Function>>(
     () =>
       columns.reduce((acc, item) => {
         if (item.render) {
@@ -67,15 +76,58 @@ export const InternalGrid: React.FC<IGridProps> = ({
       }, {} as Record<string, Function>),
     [columns]
   );
+
+  const [columnOrder, setColumnOrder] = React.useState<string[]>(() =>
+    $columns.map((c) => c.id!)
+  );
+
   const table = useReactTable({
     data: items,
     columns: $columns,
+    state: {
+      columnOrder,
+    },
+    onColumnOrderChange: setColumnOrder,
     columnResizeMode: 'onChange',
     columnResizeDirection: 'ltr',
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     debugTable: true,
   });
+
+  const handleDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      const { active, over } = event;
+
+      if (active && over && active.id !== over.id) {
+        setColumnOrder((columnOrder) => {
+          const oldIndex = columnOrder.indexOf(active.id as string);
+          const newIndex = columnOrder.indexOf(over.id as string);
+
+          const newOrder = arrayMove(columnOrder, oldIndex, newIndex); // this is just a splice util
+
+          const sortedColumns = newOrder.map((columnId) =>
+            columns.find((c) => c.field === columnId)
+          );
+
+          if (onSortChanged) {
+            onSortChanged(sortedColumns);
+          }
+
+          return newOrder;
+        });
+      }
+    },
+    [onSortChanged, columns]
+  );
+
+  useEffect(() => {
+    themeRef.current = gridTheme(theme ?? contextTheme!);
+  }, [theme, contextTheme]);
+
+  useEffect(() => {
+    setColumnOrder($columns.map((c) => c.id!));
+  }, [$columns]);
 
   const { rows } = table.getRowModel();
 
@@ -96,57 +148,69 @@ export const InternalGrid: React.FC<IGridProps> = ({
   });
 
   return (
-    <Wrapper
-      $width={width}
-      $height={height}
-      theme={themeRef.current}
-      ref={tableContainerRef}>
-      {/* Even though we're still using sematic table tags, we must use CSS grid and flexbox for dynamic row heights */}
+    <DndContext
+      collisionDetection={closestCenter}
+      modifiers={[restrictToHorizontalAxis]}
+      onDragEnd={handleDragEnd}
+      sensors={sensors}>
+      <Wrapper
+        $width={width}
+        $height={height}
+        theme={themeRef.current}
+        ref={tableContainerRef}>
+        {/* Even though we're still using sematic table tags, we must use CSS grid and flexbox for dynamic row heights */}
 
-      <table style={{ display: 'grid' }}>
-        <HeaderWrapper
-          table={table}
-          theme={themeRef.current}
-          shouldChangeColumnsWidth={shouldChangeColumnsWidth}
-        />
+        <table style={{ display: 'grid' }}>
+          <HeaderWrapper
+            columnOrder={columnOrder}
+            table={table}
+            theme={themeRef.current}
+            shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+            shouldMovingColumns={shouldMovingColumns}
+          />
 
-        <TBody theme={themeRef.current} height={rowVirtualizer.getTotalSize()}>
-          {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-            const row = rows[virtualRow.index];
+          <TBody
+            theme={themeRef.current}
+            height={rowVirtualizer.getTotalSize()}>
+            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+              const row = rows[virtualRow.index];
 
-            return (
-              <Row
-                data-index={virtualRow.index} // needed for dynamic row height measurement
-                ref={(node) => rowVirtualizer.measureElement(node)} // measure dynamic row height
-                key={row.id}
-                translateY={virtualRow.start}>
-                {row.getVisibleCells().map((cell) => (
-                  <BodyCell
-                    key={cell.id}
-                    data-column-id={cell.column.id}
-                    data-column-data={cell.getValue()}
-                    theme={themeRef.current}
-                    style={{
-                      display: 'flex',
-                      width: cell.column.getSize(),
-                    }}>
-                    <BodyCellContentWrapper theme={themeRef.current}>
-                      <BodyCellContent theme={themeRef.current}>
-                        {cellRenderMapper(
-                          cell.getValue,
-                          cell.column,
-                          cell.row,
-                          customRenders[cell.id]
-                        )}
-                      </BodyCellContent>
-                    </BodyCellContentWrapper>
-                  </BodyCell>
-                ))}
-              </Row>
-            );
-          })}
-        </TBody>
-      </table>
-    </Wrapper>
+              return (
+                <Row
+                  data-index={virtualRow.index} // needed for dynamic row height measurement
+                  ref={(node) => rowVirtualizer.measureElement(node)} // measure dynamic row height
+                  key={row.id}
+                  translateY={virtualRow.start}>
+                  {row.getVisibleCells().map((cell) => (
+                    <BodyCell
+                      aria-rowindex={virtualRow.index}
+                      aria-colindex={cell.column.getIndex()}
+                      data-column-name={cell.column.id}
+                      firstRow={virtualRow.index === 0}
+                      even={!!(virtualRow.index % 2)}
+                      key={cell.id}
+                      data-column-id={cell.column.id}
+                      data-column-data={cell.getValue()}
+                      theme={themeRef.current}
+                      width={cell.column.getSize()}>
+                      <BodyCellContentWrapper theme={themeRef.current}>
+                        <BodyCellContent theme={themeRef.current}>
+                          {cellRenderMapper(
+                            cell.getValue,
+                            cell.column,
+                            cell.row,
+                            customRenders[cell.id]
+                          )}
+                        </BodyCellContent>
+                      </BodyCellContentWrapper>
+                    </BodyCell>
+                  ))}
+                </Row>
+              );
+            })}
+          </TBody>
+        </table>
+      </Wrapper>
+    </DndContext>
   );
 };

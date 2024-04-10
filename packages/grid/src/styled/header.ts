@@ -42,15 +42,25 @@ export const HeaderGroup = styled.tr<IHeader>`
   ${getGroupHeaderStyles}
 `;
 
-export const HeaderCell = styled.th.attrs(({ width }: IHeaderCell) => ({
-  style: {
-    width: `${width}px`,
-  },
-}))<IHeaderCell>`
+export const HeaderCell = styled.th.attrs(
+  ({ $width, isDragging }: IHeaderCell) => ({
+    style: {
+      width: `${$width}px`,
+      opacity: isDragging ? 0.8 : 1,
+      zIndex: isDragging ? 1 : 0,
+    },
+  })
+)<IHeaderCell>`
   float: left;
   display: flex;
   justify-content: space-between;
   overflow: hidden;
+  position: relative;
+  whitespace: nowrap;
+  text-overflow: ellipsis;
+
+  transition: width transform 0.2s ease-in-out;
+
   ${getHeaderCellStyles}
 
   &:hover > ${RightBorder} {

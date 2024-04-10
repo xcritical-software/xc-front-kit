@@ -173,12 +173,15 @@ export interface IHeaderCellWrapper {
   header: RTHeader<object, unknown>;
   theme: IGridTheme;
   shouldChangeColumnsWidth: boolean;
+  shouldMovingColumns: boolean;
 }
 
 export interface IHeaderWrapper {
   table: Table<IItem>;
   theme: IGridTheme;
   shouldChangeColumnsWidth: boolean;
+  shouldMovingColumns: boolean;
+  columnOrder: string[];
 }
 
 export interface IHeader {
@@ -193,8 +196,10 @@ export interface ITotal {
 
 export interface IHeaderCell {
   theme: IGridTheme;
-  width: number;
+  isDragging: boolean;
+  $width: number;
   isEmpty?: boolean;
+  transform?: string;
   shouldChangeColumnsWidth: boolean;
 }
 
