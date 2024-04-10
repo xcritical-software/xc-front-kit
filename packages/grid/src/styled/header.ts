@@ -5,13 +5,28 @@ import {
   IHeaderCell,
   IHeaderCellContent,
   IHeaderCellContentWrapper,
+  IRightBorder,
 } from '../interfaces';
 
 import {
   getHeaderStyles,
   getHeaderCellStyles,
   getGroupHeaderStyles,
+  getRightBorderStyles,
 } from './utils';
+
+export const RightBorder = styled.div<IRightBorder>`
+  width: 8px;
+  position: relative;
+  z-index: 9999999;
+  opacity: 0;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+  cursor: ${({ shouldChangeColumnsWidth }) =>
+    shouldChangeColumnsWidth && 'col-resize'};
+  ${getRightBorderStyles}
+`;
 
 export const Header = styled.thead<IHeader>`
   display: grid;
@@ -37,6 +52,11 @@ export const HeaderCell = styled.th.attrs(({ width }: IHeaderCell) => ({
   justify-content: space-between;
   overflow: hidden;
   ${getHeaderCellStyles}
+
+  &:hover > ${RightBorder} {
+    opacity: ${({ shouldChangeColumnsWidth }) =>
+      shouldChangeColumnsWidth ? '1' : 0};
+  }
 `;
 
 export const HeaderCellContentWrapper = styled.div<IHeaderCellContentWrapper>`

@@ -13,16 +13,32 @@ import { columns, rows, totals } from './data';
 
 const meta: Meta<typeof Grid> = {
   component: Grid,
+  argTypes: {
+    shouldChangeColumnsWidth: {
+      control: 'boolean',
+      defaultValue: false,
+      name: 'Should change columns width',
+    },
+    shouldMovingColumns: {
+      control: 'boolean',
+      defaultValue: false,
+      name: 'Should moving columns',
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof Grid>;
 
 export const Basic: Story = {
+  args: {
+    shouldChangeColumnsWidth: true,
+    shouldMovingColumns: false,
+  },
   decorators: [],
   name: 'Basic',
   parameters: {},
-  render: () => (
+  render: ({ shouldChangeColumnsWidth, shouldMovingColumns }) => (
     <>
       <div style={{ height: '500px' }}>
         <Grid
@@ -30,6 +46,8 @@ export const Basic: Story = {
           items={rows}
           totals={totals}
           shouldFitContainer
+          shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+          shouldMovingColumns={shouldMovingColumns}
           width={document.documentElement.clientWidth - 100}
           height={document.documentElement.clientHeight - 100}
         />

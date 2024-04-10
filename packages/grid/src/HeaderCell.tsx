@@ -5,6 +5,7 @@ import {
   HeaderCell,
   HeaderCellContent,
   HeaderCellContentWrapper,
+  RightBorder,
   SortIconWrapper,
 } from './styled';
 import { IHeaderCellWrapper } from './interfaces';
@@ -14,8 +15,13 @@ import { SortAscendingIcon, SortDescendingIcon } from './icons';
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   header,
   theme,
+  shouldChangeColumnsWidth,
 }) => (
-  <HeaderCell theme={theme} width={header.getSize()} isEmpty={false}>
+  <HeaderCell
+    theme={theme}
+    shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+    width={header.getSize()}
+    isEmpty={false}>
     <HeaderCellContentWrapper
       theme={theme}
       center={false}
@@ -33,5 +39,12 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
         )}
       </SortIconWrapper>
     </HeaderCellContentWrapper>
+    <RightBorder
+      theme={theme}
+      onDoubleClick={() => header.column.resetSize()}
+      onMouseDown={header.getResizeHandler()}
+      onTouchStart={header.getResizeHandler()}
+      shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+    />
   </HeaderCell>
 );

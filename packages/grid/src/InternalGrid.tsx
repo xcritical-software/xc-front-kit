@@ -29,6 +29,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
   width = 0,
   height = 0,
   rowHeight,
+  shouldChangeColumnsWidth = false,
 }) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme ?? contextTheme!));
@@ -103,7 +104,11 @@ export const InternalGrid: React.FC<IGridProps> = ({
       {/* Even though we're still using sematic table tags, we must use CSS grid and flexbox for dynamic row heights */}
 
       <table style={{ display: 'grid' }}>
-        <HeaderWrapper table={table} theme={themeRef.current} />
+        <HeaderWrapper
+          table={table}
+          theme={themeRef.current}
+          shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+        />
 
         <TBody theme={themeRef.current} height={rowVirtualizer.getTotalSize()}>
           {rowVirtualizer.getVirtualItems().map((virtualRow) => {

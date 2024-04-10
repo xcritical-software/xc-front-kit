@@ -15,6 +15,7 @@ const Grid: React.FC<IGridProps> = ({
   width = 0,
   height = 0,
   rowHeight,
+  shouldChangeColumnsWidth = false,
 }) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme ?? contextTheme!));
@@ -75,6 +76,7 @@ const Grid: React.FC<IGridProps> = ({
           columns={columns}
           theme={theme}
           rowHeight={rowHeight}
+          shouldChangeColumnsWidth={shouldChangeColumnsWidth}
         />
       </div>
     );
@@ -88,6 +90,7 @@ const Grid: React.FC<IGridProps> = ({
       columns={columns}
       theme={theme}
       rowHeight={rowHeight}
+      shouldChangeColumnsWidth={shouldChangeColumnsWidth}
     />
   );
 };

@@ -172,11 +172,13 @@ export interface IMappedItem extends IItem {
 export interface IHeaderCellWrapper {
   header: RTHeader<object, unknown>;
   theme: IGridTheme;
+  shouldChangeColumnsWidth: boolean;
 }
 
 export interface IHeaderWrapper {
   table: Table<IItem>;
   theme: IGridTheme;
+  shouldChangeColumnsWidth: boolean;
 }
 
 export interface IHeader {
@@ -193,6 +195,7 @@ export interface IHeaderCell {
   theme: IGridTheme;
   width: number;
   isEmpty?: boolean;
+  shouldChangeColumnsWidth: boolean;
 }
 
 export interface ITotalCell {
@@ -230,6 +233,10 @@ export interface IBodyCellContentWrapper {
   rowHeight?: number;
 }
 
+export interface IRightBorder {
+  theme: IGridTheme;
+  shouldChangeColumnsWidth: boolean;
+}
 export interface IBodyCellContent {
   theme: IGridTheme;
 }

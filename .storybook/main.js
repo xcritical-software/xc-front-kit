@@ -6,6 +6,7 @@ const styledComponentsTransformer = createStyledComponentsTransformer();
 module.exports = {
     stories: ['../packages/**/stories/*.stories.(ts|tsx)'],
     addons: [
+        '@storybook/addon-controls',
         getAbsolutePath("@storybook/addon-actions"),
         getAbsolutePath("@storybook/addon-docs"),
         getAbsolutePath("@storybook/addon-backgrounds"),

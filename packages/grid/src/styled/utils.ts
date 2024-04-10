@@ -10,6 +10,7 @@ import {
   IBodyCellContentWrapper,
   ITotalCell,
   ITotal,
+  IRightBorder,
 } from '../interfaces';
 
 export const getHeaderStyles = ({ theme }: IHeader) => {
@@ -190,3 +191,8 @@ export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
 export const getExpandButtonStyles = ({ theme }) => `
     margin: ${theme.expandButtonMargin}
   `;
+
+export const getRightBorderStyles = ({ theme }: IRightBorder) => `
+      background-color: ${theme.header?.backgroundColor};
+      border-right: ${theme.headerCellBorder};
+    `;
