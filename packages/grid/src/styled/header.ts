@@ -4,31 +4,30 @@ import {
   IHeader,
   IHeaderCell,
   IHeaderCellContent,
-  IRightBorder,
-  IMovingElem,
+  IHeaderCellContentWrapper,
 } from '../interfaces';
 
 import {
   getHeaderStyles,
   getHeaderCellStyles,
-  getHeaderCellContentStyles,
-  getRightBorderStyles,
-  getMovingElemStyles,
+  getGroupHeaderStyles,
 } from './utils';
 
-export const Header = styled.div.attrs(({ translateX }: IHeader) => ({
-  style: {
-    transform: `translateX(${translateX}px)`,
-  },
-}))<IHeader>`
-  overflow: hidden;
-  width: ${({ width }) => `calc(${width}px + 100%)`};
-  margin: 0;
-  padding: 0;
+export const Header = styled.thead<IHeader>`
+  display: grid;
+  position: sticky;
+  top: 0;
+  z-index: 1;
   ${getHeaderStyles}
 `;
 
-export const HeaderCell = styled.div.attrs(({ width }: IHeaderCell) => ({
+export const HeaderGroup = styled.tr<IHeader>`
+  display: flex;
+  width: 100%;
+  ${getGroupHeaderStyles}
+`;
+
+export const HeaderCell = styled.th.attrs(({ width }: IHeaderCell) => ({
   style: {
     width: `${width}px`,
   },
@@ -40,37 +39,24 @@ export const HeaderCell = styled.div.attrs(({ width }: IHeaderCell) => ({
   ${getHeaderCellStyles}
 `;
 
-export const MovingElem = styled.div.attrs(({ mouseMove }: IMovingElem) => ({
-  style: {
-    transform: `translateX(${mouseMove}px)`,
-  },
-}))<IMovingElem>`
-  position: absolute;
-  left: ${({ startCoord: { x } }) => `${x - 8}px`};
-  width: ${({ width }) => `${width}px`};
-  outline: '1px solid black';
-  z-index: 9999999999;
-  cursor: grabbing;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  height: ${({ startCoord: { height } }) => `${height}px`};
-  ${({ center }) => center && 'justify-content: center;'}
-  ${getMovingElemStyles}
-`;
-
-export const HeaderCellContent = styled.div<IHeaderCellContent>`
+export const HeaderCellContentWrapper = styled.div<IHeaderCellContentWrapper>`
   width: calc(100% - 8px);
   overflow: hidden;
   display: flex;
   align-items: center;
 
-  cursor: ${({ shouldMovingColumns }) => shouldMovingColumns && 'grab'};
+  cursor: ${({ canSort }) => canSort && 'pointer'};
   ${({ center }) =>
     center &&
     `justify-content: center;
      margin-left: 8px;`}
-  ${getHeaderCellContentStyles}
+`;
+
+export const HeaderCellContent = styled.span<IHeaderCellContent>`
+  font-size: ${({ theme }) => theme.header?.fontSize};
+  color: ${({ theme }) => theme.header?.color};
+  padding: ${({ theme }) => theme.header?.padding};
+  overflow: ${({ theme }) => theme.header?.overflow};
 `;
 
 export const SortIconWrapper = styled.div`
@@ -78,13 +64,4 @@ export const SortIconWrapper = styled.div`
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-`;
-
-export const RightBorder = styled.div<IRightBorder>`
-  width: 8px;
-  position: relative;
-  z-index: 9999999;
-  cursor: ${({ shouldChangeColumnsWidth }) =>
-    shouldChangeColumnsWidth && 'w-resize'};
-  ${getRightBorderStyles}
 `;

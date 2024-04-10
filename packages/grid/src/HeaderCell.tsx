@@ -1,97 +1,37 @@
-import React, { useRef, useCallback, useState, useEffect } from 'react';
+import React from 'react';
+import { flexRender } from '@tanstack/react-table';
 
-import { RightBorder, HeaderCell, HeaderCellContent } from './styled';
+import {
+  HeaderCell,
+  HeaderCellContent,
+  HeaderCellContentWrapper,
+  SortIconWrapper,
+} from './styled';
 import { IHeaderCellWrapper } from './interfaces';
-import { HeaderCellContentWrapper } from './HeaderCellContentWrapper';
+import { GridSort } from './consts';
+import { SortAscendingIcon, SortDescendingIcon } from './icons';
 
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
-  content,
-  width,
-  minColumnWidth,
-  onChangeWidth,
-  index,
-  onMouseDown,
-  isEmpty,
-  setChangingColumns,
-  center,
+  header,
   theme,
-  shouldMovingColumns,
-  shouldChangeColumnsWidth,
-  sortable,
-  sortOrder,
-  gridPosition,
-  onChangeSort,
-}) => {
-  const [newWidth, setNewWidth] = useState(width);
-  const clickXRef = useRef(0);
-  const widthRef = useRef(width);
-
-  useEffect(() => {
-    setNewWidth(width);
-  }, [width]);
-
-  const handleMouseMove = useCallback(
-    (e) => {
-      const { clientX: currentX } = e;
-      const calcNewWidth = width + (currentX - clickXRef.current);
-
-      if (calcNewWidth >= 1200) return;
-
-      if (calcNewWidth <= minColumnWidth) {
-        setNewWidth(minColumnWidth);
-        widthRef.current = minColumnWidth;
-      } else {
-        setNewWidth(calcNewWidth);
-        widthRef.current = calcNewWidth;
-      }
-    },
-    [width]
-  );
-
-  const handleMouseUp = useCallback(() => {
-    onChangeWidth(index, widthRef.current);
-    document.removeEventListener('mouseup', handleMouseUp);
-    document.removeEventListener('mousemove', handleMouseMove);
-    setChangingColumns('');
-  }, [setChangingColumns, handleMouseMove, index, onChangeWidth]);
-
-  const handleMouseDown = useCallback(
-    (e) => {
-      if (!shouldChangeColumnsWidth) return;
-
-      clickXRef.current = e.clientX;
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('mousemove', handleMouseMove);
-      setChangingColumns('resize');
-    },
-    [
-      setChangingColumns,
-      handleMouseMove,
-      handleMouseUp,
-      shouldChangeColumnsWidth,
-    ]
-  );
-
-  return (
-    <HeaderCell theme={theme} width={newWidth} isEmpty={isEmpty}>
-      <HeaderCellContent
-        theme={theme}
-        center={center}
-        onMouseDown={(e) => onMouseDown(e, index)}
-        onClick={() => onChangeSort(sortable, sortOrder, index, gridPosition)}
-        shouldMovingColumns={shouldMovingColumns}>
-        <HeaderCellContentWrapper
-          theme={theme}
-          content={isEmpty ? null : content}
-          sortOrder={sortOrder}
-        />
+}) => (
+  <HeaderCell theme={theme} width={header.getSize()} isEmpty={false}>
+    <HeaderCellContentWrapper
+      theme={theme}
+      center={false}
+      canSort={header.column.getCanSort()}
+      onClick={header.column.getToggleSortingHandler()}>
+      <HeaderCellContent theme={theme}>
+        {flexRender(header.column.columnDef.header, header.getContext())}
       </HeaderCellContent>
-      <RightBorder
-        theme={theme}
-        onMouseDown={handleMouseDown}
-        isEmpty={isEmpty}
-        shouldChangeColumnsWidth={shouldChangeColumnsWidth}
-      />
-    </HeaderCell>
-  );
-};
+      <SortIconWrapper>
+        {header.column.getIsSorted() === GridSort.ASC && (
+          <SortAscendingIcon size={theme.sortIconSize} />
+        )}
+        {header.column.getIsSorted() === GridSort.DESC && (
+          <SortDescendingIcon size={theme.sortIconSize} />
+        )}
+      </SortIconWrapper>
+    </HeaderCellContentWrapper>
+  </HeaderCell>
+);

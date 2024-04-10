@@ -99,7 +99,7 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^6.2.1",
-    "styled-components": "^5.3.11",
+    "styled-components": "^6.1.8",
     "styled-css-grid": "^1.2.1"
   },
   "resolutions": {

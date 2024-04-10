@@ -35,7 +35,7 @@
 		"micro-memoize": "4.0.8",
 		"prop-types": "^15.0.0",
 		"react": "^16.9.0",
-		"styled-components": "^5.3.3"
+		"styled-components": "^6.1.8"
 	},
 	"devDependencies": {
 		"mdi-react": "^9.1.0",

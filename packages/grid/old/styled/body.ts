@@ -1,12 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import {
-  IBodyCellContent,
-  IBodyCellContentWrapper,
-  IBodyCellOffset,
-  IRow,
-  ITBody,
-} from '../interfaces';
+import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
 
 import {
   getBodyCellStyles,
@@ -124,23 +118,22 @@ export const Body = styled.div<any>`
   ${getScrollbar};
 `;
 
-export const BodyCell = styled.td<any>`
+export const BodyCell = styled.div<any>`
   display: flex;
   align-items: center;
   ${getBodyCellStyles}
+  span {
+    display: inline-block;
+    font-weight: 400;
+  }
 `;
 
-export const BodyCellContentWrapper = styled.div<IBodyCellContentWrapper>`
+export const BodyCellContent = styled.div<IBodyCellContent>`
   overflow: hidden;
   width: 100%;
   display: flex;
   align-items: center;
   ${getBodyCellContentStyles}
-`;
-
-export const BodyCellContent = styled.div<IBodyCellContent>`
-  display: inline-block;
-  font-weight: 400;
 `;
 
 export const BodyCellOffset = styled.div<IBodyCellOffset>`
@@ -161,23 +154,4 @@ export const ShiftInsteadButton = styled.div`
   width: 16px;
   float: left;
   ${getExpandButtonStyles}
-`;
-
-export const TBody = styled.tbody.attrs<ITBody>(({ height }) => ({
-  style: {
-    height: `${height}px`,
-  },
-}))`
-  display: grid;
-  position: relative;
-`;
-
-export const Row = styled.tr.attrs<IRow>(({ translateY }) => ({
-  style: {
-    transform: `translateY(${translateY}px)`,
-  },
-}))`
-  display: flex;
-  position: absolute;
-  width: 100%;
 `;

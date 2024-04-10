@@ -1,5 +1,4 @@
 import { setIn } from 'utilitify';
-import { Column, Row } from '@tanstack/react-table';
 
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
@@ -155,15 +154,4 @@ export const changeGridSort = ({
   }
 
   return [];
-};
-
-export const cellRenderMapper = (
-  valueFn: () => any,
-  column: Column<any>,
-  row: Row<any>,
-  renderFn?: Function
-) => {
-  if (!renderFn) return valueFn();
-
-  return renderFn(valueFn(), column.id, row.original, row.index, row);
 };

@@ -5,6 +5,6 @@ export enum GridPositions {
 }
 
 export enum GridSort {
-  ASC = 'asc',
-  DESC = 'desc',
+  ASC = 'ASC',
+  DESC = 'DESC',
 }

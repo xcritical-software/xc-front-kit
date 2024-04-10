@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from 'react';
 
 interface IIconProps {
   color?: string;
-  size?: string | number | undefined;
+  size?: number;
   className?: string;
   children?: PropsWithChildren['children'];
 }

@@ -4,29 +4,18 @@ import { css } from 'styled-components';
 import {
   IHeader,
   IHeaderCell,
+  IHeaderCellContent,
   ITotalCellContent,
+  IRightBorder,
   IBodyCellOffset,
   IWrapper,
-  IBodyCellContentWrapper,
+  IMovingElem,
+  IBodyCellContent,
   ITotalCell,
   ITotal,
 } from '../interfaces';
 
 export const getHeaderStyles = ({ theme }: IHeader) => {
-  if (theme.border !== 'none') {
-    return css`
-      background-color: ${theme.header?.backgroundColor};
-      border-bottom: ${theme.header?.border};
-    `;
-  }
-
-  return css`
-    background-color: ${theme.header?.backgroundColor};
-    border: ${theme.header?.border};
-  `;
-};
-
-export const getGroupHeaderStyles = ({ theme }: IHeader) => {
   if (theme.border !== 'none') {
     return css`
       background-color: ${theme.header?.backgroundColor};
@@ -111,7 +100,14 @@ export const getTotalCellStyles = ({ theme }: ITotalCell) => {
     `;
 };
 
-export const getHeaderCellContentStyles = () => ``;
+export const getHeaderCellContentStyles = ({ theme }: IHeaderCellContent) => `
+      span {
+        font-size: ${theme.header?.fontSize};
+        color: ${theme.header?.color};
+        padding: ${theme.header?.padding};
+        overflow: ${theme.header?.overflow};
+      }
+    `;
 
 export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
     background-color: ${theme.totals?.backgroundColor};
@@ -122,12 +118,21 @@ export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
     }
       `;
 
+export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
+      background-color: ${
+        isEmpty
+          ? theme.emptyHeaderCellBackground
+          : theme.header?.backgroundColor
+      };
+      border-right: ${theme.headerCellBorder};
+    `;
+
 export const getBodyCellContentStyles = ({
   theme: { row, selectedRowColor },
   selected,
   rowHeight,
   center,
-}: IBodyCellContentWrapper) => css`
+}: IBodyCellContent) => css`
   padding: ${row?.padding};
   ${rowHeight ? `height: ${rowHeight}px` : null};
   ${center
@@ -164,6 +169,16 @@ export const getWrapperStyles = ({
     border: ${border};
     border-radius: ${borderRadius}px;
   `;
+
+export const getMovingElemStyles = ({ theme }: IMovingElem) => `
+      background-color: ${theme.movingHeaderCellBackgroungColor};
+      border: ${theme.headerCellBorder};
+      span {
+        color: ${theme.movingHeaderCellColor};
+        font-size: ${theme.header?.fontSize};
+        padding: ${theme.header?.padding};
+      }
+    `;
 
 export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
   let border = '';

@@ -1,6 +1,5 @@
 import { ReactElement, CSSProperties, RefObject } from 'react';
 import { Alignment } from 'react-virtualized';
-import { Header as RTHeader, Table } from '@tanstack/react-table';
 
 import { ITheme } from '@xcritical/theme';
 
@@ -40,7 +39,6 @@ export interface ICellRenderParams {
 
 export interface IColumn {
   headerName: CellContent;
-  footer?: CellContent;
   field: string;
   width: number;
   visible: boolean;
@@ -55,7 +53,6 @@ export interface IColumn {
   ) => CellContent;
   fixedPosition?: GridPositions.LEFT | GridPositions.RIGHT;
   sortable?: boolean;
-  resizable?: boolean;
   sortOrder?: GridSort.ASC | GridSort.DESC | null;
 }
 export interface ITotals {
@@ -170,17 +167,42 @@ export interface IMappedItem extends IItem {
 }
 
 export interface IHeaderCellWrapper {
-  header: RTHeader<object, unknown>;
+  content: CellContent;
+  width: number;
+  minColumnWidth: number;
+  onChangeWidth: Function;
+  index: number;
+  onMouseDown: Function;
+  isEmpty: boolean;
+  setChangingColumns: Function;
+  center: boolean;
   theme: IGridTheme;
+  shouldChangeColumnsWidth: boolean;
+  shouldMovingColumns: boolean;
+  sortable?: boolean;
+  sortOrder?: GridSort.ASC | GridSort.DESC | null;
+  gridPosition: GridPositions;
+  onChangeSort: Function;
 }
 
 export interface IHeaderWrapper {
-  table: Table<IItem>;
+  fullWidth: number;
+  translateX: number;
+  columns: IColumn[];
+  onChangeWidth: Function;
+  onChangeColumns: Function;
+  setChangingColumns: Function;
   theme: IGridTheme;
+  shouldMovingColumns: boolean;
+  shouldChangeColumnsWidth: boolean;
+  gridPosition: GridPositions;
+  minColumnWidth: number;
+  onChangeSort: Function;
 }
 
 export interface IHeader {
   theme: IGridTheme;
+  width: number;
 }
 
 export interface ITotal {
@@ -192,7 +214,7 @@ export interface ITotal {
 export interface IHeaderCell {
   theme: IGridTheme;
   width: number;
-  isEmpty?: boolean;
+  isEmpty: boolean;
 }
 
 export interface ITotalCell {
@@ -200,38 +222,25 @@ export interface ITotalCell {
   width: number;
 }
 
-export interface IHeaderCellContentWrapper {
-  theme: IGridTheme;
-  center?: boolean;
-  canSort?: boolean;
-}
 export interface IHeaderCellContent {
   theme: IGridTheme;
-  center?: boolean;
+  center: boolean;
+  shouldMovingColumns: boolean;
 }
 export interface ITotalCellContent {
   theme: IGridTheme;
   center: boolean;
 }
-
-export interface ITBody {
+export interface IRightBorder {
+  isEmpty: boolean;
   theme: IGridTheme;
-  height: number;
+  shouldChangeColumnsWidth: boolean;
 }
-export interface IRow {
-  theme: IGridTheme;
-  translateY: number;
-}
-
-export interface IBodyCellContentWrapper {
-  theme: IGridTheme;
-  center?: boolean;
-  selected?: boolean;
-  rowHeight?: number;
-}
-
 export interface IBodyCellContent {
   theme: IGridTheme;
+  center: boolean;
+  selected: boolean;
+  rowHeight?: number;
 }
 export interface IBodyCellOffset {
   theme: IGridTheme;
@@ -240,9 +249,20 @@ export interface IBodyCellOffset {
 }
 export interface IWrapper {
   theme: IGridTheme;
-  $width: number;
-  $height: number;
-  changingColumns?: string;
+  width: number;
+  changingColumns: string;
+}
+
+export interface IMovingElem {
+  theme: IGridTheme;
+  mouseMove: number;
+  center: boolean;
+  startCoord: {
+    x: number;
+    y: number;
+    height: number;
+  };
+  width: number;
 }
 
 export interface IGridTheme {
