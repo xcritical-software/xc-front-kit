@@ -90,6 +90,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
     state: {
       columnOrder,
     },
+    getSubRows: (row) => row.children,
     enableMultiRowSelection: isMultiSelect,
     enableRowSelection: !disableSelect,
     onColumnOrderChange: setColumnOrder,
@@ -203,9 +204,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
                       data-column-data={cell.getValue()}
                       theme={themeRef.current}
                       width={cell.column.getSize()}>
-                      <BodyCellContentWrapper
-                        theme={themeRef.current}
-                        selected={row.getIsSelected()}>
+                      <BodyCellContentWrapper theme={themeRef.current}>
                         <BodyCellContent
                           theme={themeRef.current}
                           selected={row.getIsSelected()}>
