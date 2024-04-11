@@ -47,9 +47,12 @@ export const InternalGrid: React.FC<IGridProps> = ({
   width = 0,
   height = 0,
   rowHeight,
+  disableSelect,
+  isMultiSelect,
   shouldChangeColumnsWidth = false,
   shouldMovingColumns = false,
   onSortChanged,
+  onSelect,
 }) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme ?? contextTheme!));
@@ -87,7 +90,10 @@ export const InternalGrid: React.FC<IGridProps> = ({
     state: {
       columnOrder,
     },
+    enableMultiRowSelection: isMultiSelect,
+    enableRowSelection: !disableSelect,
     onColumnOrderChange: setColumnOrder,
+    onRowSelectionChange: onSelect,
     columnResizeMode: 'onChange',
     columnResizeDirection: 'ltr',
     getCoreRowModel: getCoreRowModel(),
@@ -180,6 +186,9 @@ export const InternalGrid: React.FC<IGridProps> = ({
                   data-index={virtualRow.index} // needed for dynamic row height measurement
                   ref={(node) => rowVirtualizer.measureElement(node)} // measure dynamic row height
                   key={row.id}
+                  onClick={
+                    disableSelect ? undefined : row.getToggleSelectedHandler()
+                  }
                   translateY={virtualRow.start}>
                   {row.getVisibleCells().map((cell) => (
                     <BodyCell
@@ -189,12 +198,17 @@ export const InternalGrid: React.FC<IGridProps> = ({
                       firstRow={virtualRow.index === 0}
                       even={!!(virtualRow.index % 2)}
                       key={cell.id}
+                      selected={row.getIsSelected()}
                       data-column-id={cell.column.id}
                       data-column-data={cell.getValue()}
                       theme={themeRef.current}
                       width={cell.column.getSize()}>
-                      <BodyCellContentWrapper theme={themeRef.current}>
-                        <BodyCellContent theme={themeRef.current}>
+                      <BodyCellContentWrapper
+                        theme={themeRef.current}
+                        selected={row.getIsSelected()}>
+                        <BodyCellContent
+                          theme={themeRef.current}
+                          selected={row.getIsSelected()}>
                           {cellRenderMapper(
                             cell.getValue,
                             cell.column,

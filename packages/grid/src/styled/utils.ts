@@ -124,8 +124,7 @@ export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
       `;
 
 export const getBodyCellContentStyles = ({
-  theme: { row, selectedRowColor },
-  selected,
+  theme: { row },
   rowHeight,
   center,
 }: IBodyCellContentWrapper) => css`
@@ -136,19 +135,6 @@ export const getBodyCellContentStyles = ({
         justify-content: center;
       `
     : null};
-  span {
-    font-size: ${row?.fontSize};
-    color: ${selected ? selectedRowColor : row?.color};
-    display: flex;
-    ${rowHeight
-      ? css`
-          white-space: nowrap;
-          overflow: hidden;
-          display: block;
-          text-overflow: ellipsis;
-        `
-      : null}
-  }
 `;
 
 export const getBodyCellOffsetStyles = ({

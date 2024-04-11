@@ -18,6 +18,7 @@ const Grid: React.FC<IGridProps> = ({
   shouldChangeColumnsWidth = false,
   shouldMovingColumns,
   onSortChanged,
+  ...props
 }) => {
   const contextTheme = useContext(ThemeContext);
   const themeRef = useRef(gridTheme(theme ?? contextTheme!));
@@ -72,6 +73,7 @@ const Grid: React.FC<IGridProps> = ({
     return (
       <div ref={wrapperRef} style={{ height: '100%' }}>
         <InternalGrid
+          {...props}
           width={wrapperSize.width}
           height={wrapperSize.height}
           items={items}
@@ -88,6 +90,7 @@ const Grid: React.FC<IGridProps> = ({
 
   return (
     <InternalGrid
+      {...props}
       width={wrapperSize.width}
       height={wrapperSize.height}
       items={items}

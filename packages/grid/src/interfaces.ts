@@ -1,6 +1,11 @@
 import { ReactElement, CSSProperties, RefObject } from 'react';
 import { Alignment } from 'react-virtualized';
-import { Header as RTHeader, Table } from '@tanstack/react-table';
+import {
+  OnChangeFn,
+  Header as RTHeader,
+  RowSelectionState,
+  Table,
+} from '@tanstack/react-table';
 
 import { ITheme } from '@xcritical/theme';
 
@@ -67,13 +72,13 @@ export interface IGridProps {
   columns: IColumn[];
   width?: number;
   height?: number;
-  isDisableSelect?: boolean;
+  disableSelect?: boolean;
   isMultiSelect?: boolean;
   onChangeColumns?: Function;
   onSortChanged?: Function;
   totals?: ITotals;
   theme?: ITheme;
-  onSelect?: Function;
+  onSelect?: OnChangeFn<RowSelectionState>;
   shouldMovingColumns?: boolean;
   shouldChangeColumnsWidth?: boolean;
   shouldChangeLeftColumnsWidth?: boolean;
@@ -234,7 +239,6 @@ export interface IRow {
 export interface IBodyCellContentWrapper {
   theme: IGridTheme;
   center?: boolean;
-  selected?: boolean;
   rowHeight?: number;
 }
 
@@ -244,6 +248,8 @@ export interface IRightBorder {
 }
 export interface IBodyCellContent {
   theme: IGridTheme;
+  selected: boolean;
+  rowHeight?: number;
 }
 export interface IBodyCellOffset {
   theme: IGridTheme;

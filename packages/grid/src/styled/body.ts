@@ -145,6 +145,21 @@ export const BodyCellContentWrapper = styled.div<IBodyCellContentWrapper>`
 export const BodyCellContent = styled.div<IBodyCellContent>`
   display: inline-block;
   font-weight: 400;
+
+    font-size: ${({ theme: { row } }) => row?.fontSize};
+    color: ${({ selected, theme: { selectedRowColor, row } }) =>
+      selected ? selectedRowColor : row?.color};
+    display: flex;
+    ${({ rowHeight }) =>
+      rowHeight
+        ? css`
+            white-space: nowrap;
+            overflow: hidden;
+            display: block;
+            text-overflow: ellipsis;
+          `
+        : null}
+  }
 `;
 
 export const BodyCellOffset = styled.div<IBodyCellOffset>`
