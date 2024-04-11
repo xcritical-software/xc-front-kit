@@ -11,7 +11,6 @@ import {
   ITotalCell,
   ITotal,
   IRightBorder,
-  IPinnedProps,
 } from '../interfaces';
 
 export const getHeaderStyles = ({ theme }: IHeader) => {
@@ -177,23 +176,21 @@ export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
   `;
 };
 
-export const getPinnedStyles = ({
-  pinned,
-  pinPagging,
-  isFirstPinned,
-}: IPinnedProps) => {
+export const getPinnedStyles = ({ pinned, pinPagging, isFirstPinned }: any) => {
   if (pinned) {
-    return css`
+    return `
       position: sticky;
       ${pinned === 'left' ? 'left' : 'right'}: ${pinPagging}px;
       z-index: 1;
-      ${isFirstPinned
-        ? `box-shadow: ${
-            pinned === 'left'
-              ? '-4px 0 4px -4px gray inset'
-              : '4px 0 4px -4px gray inset'
-          };`
-        : `box-shadow: ${isFirstPinned};`}
+      ${
+        isFirstPinned
+          ? `box-shadow: ${
+              pinned === 'left'
+                ? '-4px 0 4px -4px gray inset'
+                : '4px 0 4px -4px gray inset'
+            };`
+          : `box-shadow: ${isFirstPinned};`
+      }
     `;
   }
 

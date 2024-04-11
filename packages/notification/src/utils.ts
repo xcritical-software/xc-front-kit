@@ -1,6 +1,6 @@
 import get from 'lodash.get';
 import { TypeOptions } from 'react-toastify';
-import { css, CSSObject, FlattenSimpleInterpolation } from 'styled-components';
+import { css, CSSObject, RuleSet } from 'styled-components';
 import { mergeDeep } from 'utilitify';
 
 import { INotification } from './interfaces';
@@ -24,7 +24,7 @@ const getNotificationThemeStylesByProperty =
 
 export const getNotificationThemeGeneralStyles = (
   props: INotification
-): FlattenSimpleInterpolation => {
+): RuleSet => {
   const containerStyles = getNotificationThemeStylesByProperty(props)([
     'container',
   ]);
@@ -47,7 +47,7 @@ export const getNotificationThemeGeneralStyles = (
 };
 
 export const getNotificationThemeTypeStyles =
-  (props: INotification): ((type: TypeOptions) => FlattenSimpleInterpolation) =>
+  (props: INotification): ((type: TypeOptions) => RuleSet) =>
   (type) => {
     const toastStyles = getNotificationThemeStylesByProperty(props)([
       type,

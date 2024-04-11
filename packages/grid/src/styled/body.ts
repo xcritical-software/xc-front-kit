@@ -4,7 +4,6 @@ import {
   IBodyCellContent,
   IBodyCellContentWrapper,
   IBodyCellOffset,
-  IPinnedProps,
   IRow,
   ITBody,
 } from '../interfaces';
@@ -126,7 +125,7 @@ export const Body = styled.div<any>`
   ${getScrollbar};
 `;
 
-export const BodyCell = styled.td.attrs<any & IPinnedProps>(({ width }) => ({
+export const BodyCell = styled.td.attrs<any>(({ width }) => ({
   style: {
     width: `${width}px`,
   },

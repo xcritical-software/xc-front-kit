@@ -1,4 +1,4 @@
-import { css, CSSObject, FlattenSimpleInterpolation } from 'styled-components';
+import { css, CSSObject } from 'styled-components';
 import get from 'lodash.get';
 import { mergeDeep } from 'utilitify';
 
@@ -25,9 +25,7 @@ export const getBlanketThemeStylesByProperty =
     return get(mergedTheme, propertyPath);
   };
 
-export const getBaseStyle = ({
-  theme,
-}: IBlanketProps): FlattenSimpleInterpolation => {
+export const getBaseStyle = ({ theme }: IBlanketProps) => {
   const baseStyles = blanketTheme(theme);
 
   return css`

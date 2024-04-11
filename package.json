@@ -11,7 +11,7 @@
     "lint": "eslint \"packages/**/{src,stories,test}/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "yarn lint --fix --quiet",
     "compile": "yarn lerna run compile:local",
-    "compile:prod": "yarn lerna run compile",
+    "compile:prod": "yarn lerna run compile --stream",
     "build": "yarn clean && yarn compile",
     "build:prod": "yarn clean && yarn compile:prod",
     "build:storybook": "storybook build -c .storybook -o .storybook-static --quiet",

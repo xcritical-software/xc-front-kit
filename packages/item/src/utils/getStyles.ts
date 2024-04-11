@@ -1,15 +1,11 @@
-import {
-  css,
-  FlattenSimpleInterpolation,
-  FlattenInterpolation,
-  ThemeProps,
-} from 'styled-components';
+import { css, RuleSet } from 'styled-components';
 
 import {
   getAppearanceTheme,
   getThemedState,
   ITheme,
   AllType,
+  ThemeProps,
 } from '@xcritical/theme';
 
 import { itemThemeNamespace, itemThemeStyle } from '../theme';
@@ -39,7 +35,7 @@ export const getBaseStyle = ({
   theme,
   appearance = 'default',
   baseAppearance = 'default',
-}: IItemProps): FlattenSimpleInterpolation => {
+}: IItemProps) => {
   const background: string = itemAppearanceTheme(
     theme,
     appearance,
@@ -73,7 +69,7 @@ export const getHeightStyle = ({
   theme,
   appearance = 'default',
   baseAppearance = 'default',
-}: IItemProps): FlattenSimpleInterpolation | string => {
+}: IItemProps): RuleSet<object> | '' => {
   const height = itemAppearanceTheme(
     theme,
     appearance,
@@ -94,7 +90,7 @@ export const getItemStatesStyle =
     theme,
     baseAppearance = 'default',
     appearance = 'default',
-  }: IItemProps): FlattenInterpolation<any> => {
+  }: IItemProps): RuleSet<any> => {
     const styles = itemAppearanceTheme(
       theme,
       appearance,
@@ -117,8 +113,8 @@ export const getItemInteractiveStyles = ({
   baseAppearance = 'default',
   disabled,
   selected,
-}: IItemProps): FlattenInterpolation<ThemeProps<IItemProps>> => {
-  const standardFocus = css`
+}: IItemProps) => {
+  const standardFocus = css<ThemeProps<IItemProps>>`
     &:focus {
       box-shadow: 0 0 0 2px
         ${itemAppearanceTheme(theme, appearance, baseAppearance, [

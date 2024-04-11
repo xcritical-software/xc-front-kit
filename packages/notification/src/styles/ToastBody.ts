@@ -1,8 +1,6 @@
-import { css, CSSObject, FlattenSimpleInterpolation } from 'styled-components';
+import { css, CSSObject, RuleSet } from 'styled-components';
 
-export const ToastBody = (
-  toastBodyStyles: CSSObject
-): FlattenSimpleInterpolation => css`
+export const ToastBody = (toastBodyStyles: CSSObject): RuleSet => css`
   .Toastify__toast-body {
     ${toastBodyStyles}
   }

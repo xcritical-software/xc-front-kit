@@ -107,3 +107,7 @@ export interface IReturnThemeFunction<T, TProp = [], TValue = any> {
     ...props: TProp[]
   ): TValue;
 }
+
+export type ThemeProps<T> = {
+  theme: T;
+};

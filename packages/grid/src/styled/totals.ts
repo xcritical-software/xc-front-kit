@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { IHeader, ITotalCellContent, ITotal, ITotalCell } from '../interfaces';
+import { ITotalCellContent, ITotal, ITotalCell } from '../interfaces';
 
 import {
   getTotalStyles,
@@ -8,11 +8,11 @@ import {
   getTotalCellContentStyles,
 } from './utils';
 
-export const TotalBlock = styled.div.attrs(({ translateX }: ITotal) => ({
+export const TotalBlock = styled.div.attrs<ITotal>(({ translateX }) => ({
   style: {
     transform: `translateX(${translateX}px)`,
   },
-}))<IHeader>`
+}))`
   overflow: hidden;
   width: ${({ width }) => `calc(${width}px + 100%)`};
   margin: 0;
