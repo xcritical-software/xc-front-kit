@@ -9,7 +9,10 @@ import React, {
 } from 'react';
 import {
   ColumnDef,
+  ColumnPinningState,
+  ExpandedState,
   getCoreRowModel,
+  getExpandedRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
@@ -28,17 +31,24 @@ import {
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
 
-import { IGridProps } from './interfaces';
-import { cellRenderMapper, gridTheme, mappingColumns } from './utils';
+import { IColumn, IGridProps } from './interfaces';
+import {
+  cellRenderMapper,
+  getPinnedProps,
+  gridTheme,
+  mappingColumns,
+} from './utils';
 import {
   BodyCell,
   BodyCellContent,
   BodyCellContentWrapper,
+  ExpandButtonWrapper,
   Row,
   TBody,
   Wrapper,
 } from './styled';
 import { HeaderWrapper } from './HeaderWrapper';
+import { RemoveIcon, AddIcon } from './icons';
 
 export const InternalGrid: React.FC<IGridProps> = ({
   items,
@@ -68,28 +78,43 @@ export const InternalGrid: React.FC<IGridProps> = ({
     [columns]
   );
 
-  const customRenders = useMemo<Record<string, Function>>(
-    () =>
-      columns.reduce((acc, item) => {
-        if (item.render) {
-          acc[item.field] = item.render;
-        }
+  const [mappedField, columnPinning] = useMemo<
+    [
+      mappedField: Record<string, IColumn | undefined>,
+      pinning: ColumnPinningState
+    ]
+  >(() => {
+    const pinning: ColumnPinningState = {
+      left: [],
+      right: [],
+    };
+    const cols = columns.reduce((acc, item) => {
+      acc[item.field] = item;
 
-        return acc;
-      }, {} as Record<string, Function>),
-    [columns]
-  );
+      if (item.fixedPosition) {
+        // eslint-disable-next-line no-unused-expressions
+        pinning[item.fixedPosition]?.push(item.field);
+      }
 
+      return acc;
+    }, {} as Record<string, IColumn>);
+
+    return [cols, pinning];
+  }, [columns]);
+
+  const [expanded, setExpanded] = React.useState<ExpandedState>({});
   const [columnOrder, setColumnOrder] = React.useState<string[]>(() =>
     $columns.map((c) => c.id!)
   );
-
   const table = useReactTable({
     data: items,
     columns: $columns,
     state: {
+      columnPinning,
       columnOrder,
+      expanded,
     },
+    onExpandedChange: setExpanded,
     getSubRows: (row) => row.children,
     enableMultiRowSelection: isMultiSelect,
     enableRowSelection: !disableSelect,
@@ -98,6 +123,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
     columnResizeMode: 'onChange',
     columnResizeDirection: 'ltr',
     getCoreRowModel: getCoreRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
     getSortedRowModel: getSortedRowModel(),
     debugTable: true,
   });
@@ -193,6 +219,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
                   translateY={virtualRow.start}>
                   {row.getVisibleCells().map((cell) => (
                     <BodyCell
+                      {...getPinnedProps(cell.column)}
                       aria-rowindex={virtualRow.index}
                       aria-colindex={cell.column.getIndex()}
                       data-column-name={cell.column.id}
@@ -203,8 +230,21 @@ export const InternalGrid: React.FC<IGridProps> = ({
                       data-column-id={cell.column.id}
                       data-column-data={cell.getValue()}
                       theme={themeRef.current}
+                      depth={row.depth}
                       width={cell.column.getSize()}>
                       <BodyCellContentWrapper theme={themeRef.current}>
+                        {mappedField[cell.column.id]?.isExpandable &&
+                          row.getCanExpand() && (
+                            <ExpandButtonWrapper
+                              onClick={row.getToggleExpandedHandler()}
+                              theme={themeRef.current}>
+                              {row.getIsExpanded() ? (
+                                <RemoveIcon />
+                              ) : (
+                                <AddIcon />
+                              )}
+                            </ExpandButtonWrapper>
+                          )}
                         <BodyCellContent
                           theme={themeRef.current}
                           selected={row.getIsSelected()}>
@@ -212,7 +252,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
                             cell.getValue,
                             cell.column,
                             cell.row,
-                            customRenders[cell.id]
+                            mappedField[cell.id]?.render
                           )}
                         </BodyCellContent>
                       </BodyCellContentWrapper>

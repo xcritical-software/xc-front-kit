@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { flexRender } from '@tanstack/react-table';
 import { useSortable } from '@dnd-kit/sortable';
@@ -13,6 +14,7 @@ import {
 import { IHeaderCellWrapper } from './interfaces';
 import { GridSort } from './consts';
 import { SortAscendingIcon, SortDescendingIcon } from './icons';
+import { getPinnedProps } from './utils';
 
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   header,
@@ -20,10 +22,14 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   shouldChangeColumnsWidth,
   shouldMovingColumns,
 }) => {
+  const { isFirstPinned, pinned, pinPagging } = getPinnedProps(header.column);
+
   const { attributes, isDragging, listeners, setNodeRef, transform } =
     useSortable({
       id: header.column.id,
     });
+
+  const $shouldMovingColumns = shouldMovingColumns && !pinned;
 
   return (
     <HeaderCell
@@ -31,13 +37,16 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
       ref={setNodeRef}
       isDragging={isDragging}
       theme={theme}
+      pinned={pinned}
+      isFirstPinned={isFirstPinned}
+      pinPagging={pinPagging}
       style={{ transform: CSS.Translate.toString(transform) }}
       shouldChangeColumnsWidth={shouldChangeColumnsWidth}
       $width={header.getSize()}
       isEmpty={false}>
       <HeaderCellContentWrapper
-        {...(shouldMovingColumns ? listeners : {})}
-        {...(shouldMovingColumns ? attributes : {})}
+        {...($shouldMovingColumns ? listeners : {})}
+        {...($shouldMovingColumns ? attributes : {})}
         theme={theme}
         center={false}
         canSort={header.column.getCanSort()}

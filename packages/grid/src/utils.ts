@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { Column, ColumnDef, Row } from '@tanstack/react-table';
 
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
@@ -39,3 +40,25 @@ export const mappingColumns = (columns: IColumn[]): ColumnDef<object>[] =>
     aggregatable: false,
     footer: column.footer,
   }));
+
+export const getPinnedProps = (column: Column<any>) => {
+  const pinned = column.getIsPinned();
+  const isFirstPinned =
+    pinned === 'left'
+      ? column.getIsLastColumn('left')
+      : pinned === 'right'
+      ? column.getIsFirstColumn('right')
+      : false;
+  const pinPagging =
+    pinned === 'left'
+      ? column.getStart('left')
+      : pinned === 'right'
+      ? column.getAfter('right')
+      : undefined;
+
+  return {
+    pinned,
+    isFirstPinned,
+    pinPagging,
+  };
+};

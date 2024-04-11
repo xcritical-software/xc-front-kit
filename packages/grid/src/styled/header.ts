@@ -13,6 +13,7 @@ import {
   getHeaderCellStyles,
   getGroupHeaderStyles,
   getRightBorderStyles,
+  getPinnedStyles,
 } from './utils';
 
 export const RightBorder = styled.div<IRightBorder>`
@@ -47,7 +48,7 @@ export const HeaderCell = styled.th.attrs(
     style: {
       width: `${$width}px`,
       opacity: isDragging ? 0.8 : 1,
-      zIndex: isDragging ? 1 : 0,
+      zIndex: isDragging ? 1 : undefined,
     },
   })
 )<IHeaderCell>`
@@ -58,10 +59,11 @@ export const HeaderCell = styled.th.attrs(
   position: relative;
   whitespace: nowrap;
   text-overflow: ellipsis;
+  z-index: 0;
 
   transition: width transform 0.2s ease-in-out;
-
   ${getHeaderCellStyles}
+  ${getPinnedStyles}
 
   &:hover > ${RightBorder} {
     opacity: ${({ shouldChangeColumnsWidth }) =>

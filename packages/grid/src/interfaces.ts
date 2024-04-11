@@ -199,7 +199,13 @@ export interface ITotal {
   width: number;
 }
 
-export interface IHeaderCell {
+export interface IPinnedProps {
+  pinned: false | 'left' | 'right';
+  isFirstPinned: boolean;
+  pinPagging?: number;
+}
+
+export interface IHeaderCell extends IPinnedProps {
   theme: IGridTheme;
   isDragging: boolean;
   $width: number;

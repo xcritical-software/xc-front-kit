@@ -4,6 +4,7 @@ import {
   IBodyCellContent,
   IBodyCellContentWrapper,
   IBodyCellOffset,
+  IPinnedProps,
   IRow,
   ITBody,
 } from '../interfaces';
@@ -13,6 +14,7 @@ import {
   getBodyCellContentStyles,
   getBodyCellOffsetStyles,
   getExpandButtonStyles,
+  getPinnedStyles,
 } from './utils';
 
 const scrollbarSize = 8;
@@ -124,7 +126,7 @@ export const Body = styled.div<any>`
   ${getScrollbar};
 `;
 
-export const BodyCell = styled.td.attrs<any>(({ width }) => ({
+export const BodyCell = styled.td.attrs<any & IPinnedProps>(({ width }) => ({
   style: {
     width: `${width}px`,
   },
@@ -132,6 +134,7 @@ export const BodyCell = styled.td.attrs<any>(({ width }) => ({
   display: flex;
   align-items: center;
   ${getBodyCellStyles}
+  ${getPinnedStyles}
 `;
 
 export const BodyCellContentWrapper = styled.div<IBodyCellContentWrapper>`

@@ -11,6 +11,7 @@ import {
   ITotalCell,
   ITotal,
   IRightBorder,
+  IPinnedProps,
 } from '../interfaces';
 
 export const getHeaderStyles = ({ theme }: IHeader) => {
@@ -64,6 +65,7 @@ export const getBodyCellStyles = ({
   selected,
   even,
   firstRow,
+  depth,
 }: any) => {
   let background = '';
 
@@ -84,6 +86,7 @@ export const getBodyCellStyles = ({
       `;
 
   return css`
+    padding-left: ${depth * 2}rem;
     background: ${background};
     border-top: ${borderTop};
     ${rowCellBorder !== 'none' ? cellBorder : ''};
@@ -172,6 +175,29 @@ export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
   };
   ${border}
   `;
+};
+
+export const getPinnedStyles = ({
+  pinned,
+  pinPagging,
+  isFirstPinned,
+}: IPinnedProps) => {
+  if (pinned) {
+    return css`
+      position: sticky;
+      ${pinned === 'left' ? 'left' : 'right'}: ${pinPagging}px;
+      z-index: 1;
+      ${isFirstPinned
+        ? `box-shadow: ${
+            pinned === 'left'
+              ? '-4px 0 4px -4px gray inset'
+              : '4px 0 4px -4px gray inset'
+          };`
+        : `box-shadow: ${isFirstPinned};`}
+    `;
+  }
+
+  return '';
 };
 
 export const getExpandButtonStyles = ({ theme }) => `
