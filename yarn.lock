@@ -3184,9 +3184,9 @@
     uuid "^9.0.0"
 
 "@storybook/addon-backgrounds@^8.0.5":
-  version "8.0.5"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-backgrounds/-/addon-backgrounds-8.0.5.tgz#d96c2a7f92d5ec4be720d951f21511e20d2db2be"
-  integrity sha512-XKSnJm6bGVkG9hv6VSK+djz7ZbxEHwVpsSEUKtOEt/ScLFxU0mlsH8dd5aMy9/MAYuB93Y+bJ2SR5kyOjmi1zQ==
+  version "8.0.8"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-backgrounds/-/addon-backgrounds-8.0.8.tgz#da119e0fa0f0c6d44c2c44c34b9861953fedd653"
+  integrity sha512-lrAJjVxDeXSK116rDajb56TureZiT76ygraP22/IvU3IcWCEcRiKYwlay8WgCTbJHtFmdBpelLBapoT46+IR9Q==
   dependencies:
     "@storybook/global" "^5.0.0"
     memoizerific "^1.11.3"
