@@ -7,7 +7,6 @@ import {
   Row,
   SortingState,
 } from '@tanstack/react-table';
-import { Column } from 'react-virtualized';
 
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
