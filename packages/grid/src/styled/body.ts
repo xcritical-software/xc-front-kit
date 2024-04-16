@@ -14,6 +14,7 @@ import {
   getBodyCellOffsetStyles,
   getExpandButtonStyles,
   getPinnedStyles,
+  getRowStyles,
 } from './utils';
 
 const scrollbarSize = 8;
@@ -201,4 +202,5 @@ export const Row = styled.tr.attrs<IRow>(({ translateY }) => ({
   display: flex;
   position: absolute;
   width: 100%;
+  ${getRowStyles}
 `;

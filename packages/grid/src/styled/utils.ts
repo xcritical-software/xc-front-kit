@@ -11,6 +11,7 @@ import {
   ITotalCell,
   ITotal,
   IRightBorder,
+  IRow,
 } from '../interfaces';
 
 export const getHeaderStyles = ({ theme }: IHeader) => {
@@ -53,25 +54,28 @@ export const getTotalStyles = ({ theme }: ITotal) => {
   `;
 };
 
-export const getBodyCellStyles = ({
-  theme: {
-    evenRowBackground,
-    selectedRowBackgroundColor,
-    row,
-    rowCellBorder,
-    header,
-  },
+export const getRowStyles = ({
+  theme: { evenRowBackground, selectedRowBackgroundColor, row },
   selected,
   even,
-  firstRow,
-  depth,
-}: any) => {
-  let background = '';
+}: IRow) => {
+  let background: string | undefined = '';
 
   if (selected) background = selectedRowBackgroundColor;
   else if (even) background = evenRowBackground;
-  else background = row.backgroundColor;
+  else background = row?.backgroundColor;
 
+  return css<IRow>`
+    background: ${background};
+    ${({ rowHeight }) => (rowHeight ? `height: ${rowHeight}px` : null)};
+  `;
+};
+
+export const getBodyCellStyles = ({
+  theme: { row, rowCellBorder, header },
+  firstRow,
+  depth,
+}: any) => {
   const headerBorder = header.border !== 'none';
   const borderTop = !firstRow || !headerBorder ? row.border : 'none';
   const cellBorder = firstRow
@@ -86,7 +90,6 @@ export const getBodyCellStyles = ({
 
   return css`
     padding-left: ${depth * 2}rem;
-    background: ${background};
     border-top: ${borderTop};
     ${rowCellBorder !== 'none' ? cellBorder : ''};
   `;

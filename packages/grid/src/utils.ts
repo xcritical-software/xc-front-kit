@@ -1,10 +1,18 @@
 /* eslint-disable no-nested-ternary */
-import { Column, ColumnDef, Row } from '@tanstack/react-table';
+import {
+  Cell,
+  Column,
+  ColumnDef,
+  ColumnSizingState,
+  Row,
+  SortingState,
+} from '@tanstack/react-table';
+import { Column } from 'react-virtualized';
 
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
 import { gridThemeNamespace, defaultTheme } from './theme';
-import { IGridTheme, IColumn } from './interfaces';
+import { IGridTheme, IColumn, IItem } from './interfaces';
 
 export function gridTheme(
   theme: IThemeNamespace,
@@ -16,29 +24,39 @@ export function gridTheme(
 }
 
 export const cellRenderMapper = (
-  valueFn: () => any,
+  value: any,
   column: Column<any>,
   row: Row<any>,
   renderFn?: Function
 ) => {
-  if (!renderFn) return valueFn();
+  if (!renderFn) return value;
 
-  return renderFn(valueFn(), column.id, row.original, row.index, row);
+  return renderFn(value, column.id, row.original, row.index, row);
 };
-
-export const mappingColumns = (columns: IColumn[]): ColumnDef<object>[] =>
+export type ColumnDefWithBase<T> = ColumnDef<T> & { _base: IColumn };
+export const mappingColumns = (
+  columns: IColumn[]
+): ColumnDefWithBase<IItem>[] =>
   columns.map((column) => ({
     id: column.field,
     accessorKey: column.field,
     header: column.headerName,
     size: column.width,
-    cell: (info) => info.getValue(),
+    cell: ({ cell, getValue }) => {
+      const value = getValue();
+
+      return column.render
+        ? cellRenderMapper(value, cell.column, cell.row, column.render)
+        : value ?? '';
+    },
+
     sortable: column.sortable,
     resizable: column.resizable === undefined ? true : column.resizable,
     filterable: false,
     groupable: false,
     aggregatable: false,
     footer: column.footer,
+    _base: column,
   }));
 
 export const getPinnedProps = (column: Column<any>) => {
@@ -62,3 +80,27 @@ export const getPinnedProps = (column: Column<any>) => {
     pinPagging,
   };
 };
+
+export const getBaseColls = (cell: Cell<IItem, unknown>) =>
+  (cell.column.columnDef as ColumnDefWithBase<IItem>)._base;
+
+export const getChangedColumns = (
+  columns: IColumn[],
+  columnOrder: string[],
+  columnSize: ColumnSizingState,
+  columnSorting: SortingState
+) =>
+  columnOrder.map((columnId) => {
+    const column = columns.find((c) => c.field === columnId);
+    const sorting = columnSorting.find((c) => c.id === columnId);
+
+    return {
+      ...column,
+      sortOrder: sorting?.desc
+        ? 'desc'
+        : sorting?.desc === false
+        ? 'asc'
+        : undefined,
+      width: columnSize[columnId] || column?.width,
+    };
+  });

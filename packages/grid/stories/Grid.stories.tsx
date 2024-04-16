@@ -7,18 +7,23 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
-import Grid from '../src';
+import Grid, { gridThemeNamespace } from '../src';
 
+import * as countries from './countries';
 import {
   columns,
   columnsFixed,
+  columnsWithRender,
+  createRowsWithRender,
   rows,
   rowsFixed,
   rowsWithChildren,
   totals,
 } from './data';
 import { AMStheme } from './styled';
+import { generateTheme } from './utils';
 
 const meta: Meta<typeof Grid> = {
   component: Grid,
@@ -27,7 +32,13 @@ const meta: Meta<typeof Grid> = {
     shouldMovingColumns: false,
     disableSelect: false,
     isMultiSelect: false,
+    onChangeColumns: action('onChangeColumns'),
+    onChangeExpand: action('onChangeExpand'),
+    onSelect: action('onSelect'),
+    onSortChanged: action('onSortChanged'),
   },
+
+  parameters: { actions: { argTypesRegex: '^on.*' } },
   argTypes: {
     shouldChangeColumnsWidth: {
       control: 'boolean',
@@ -113,10 +124,58 @@ export const FixedBoth: Story = {
           width={document.documentElement.clientWidth - 100}
           height={document.documentElement.clientHeight - 100}
           rowHeight={30}
-          theme={AMStheme}
+          theme={AMStheme[gridThemeNamespace]}
           onSortChanged={(cols) => console.table(cols)}
         />
       </div>
     </>
+  ),
+};
+
+type PagePropsAndCustomArgs = React.ComponentProps<typeof Grid> & {
+  color: string;
+};
+export const ThemedWithMultiSelect: StoryObj<PagePropsAndCustomArgs> = {
+  decorators: [],
+  name: 'Themed and multi select',
+  argTypes: {
+    color: {
+      control: 'color',
+      defaultValue: '#023fa1',
+      name: 'Theme color',
+    },
+  },
+  args: {
+    isMultiSelect: true,
+    color: '#023fa1',
+  },
+
+  render: ({ color, ...props }) => (
+    <Grid
+      {...props}
+      columns={countries.columns}
+      items={countries.items}
+      width={document.documentElement.clientWidth - 100}
+      height={document.documentElement.clientHeight - 100}
+      theme={generateTheme(color)}
+    />
+  ),
+};
+
+export const RenderFunction: Story = {
+  decorators: [],
+  name: 'Render cell function',
+  parameters: {},
+  render: (props) => (
+    <Grid
+      {...props}
+      columns={columnsWithRender}
+      items={createRowsWithRender()}
+      width={document.documentElement.clientWidth - 100}
+      height={document.documentElement.clientHeight - 100}
+      rowHeight={30}
+      theme={AMStheme}
+      onSortChanged={(cols) => console.table(cols)}
+    />
   ),
 };

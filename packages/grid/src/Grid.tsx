@@ -21,7 +21,7 @@ const Grid: React.FC<IGridProps> = ({
   ...props
 }) => {
   const contextTheme = useContext(ThemeContext);
-  const themeRef = useRef(gridTheme(theme ?? contextTheme!));
+  const [$theme, setTheme] = useState(gridTheme(theme ?? contextTheme!));
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const [wrapperSize, setWrapperSize] = useState({ width, height });
@@ -66,7 +66,7 @@ const Grid: React.FC<IGridProps> = ({
   );
 
   useEffect(() => {
-    themeRef.current = gridTheme(theme ?? contextTheme!);
+    setTheme(gridTheme(theme ?? contextTheme!));
   }, [theme, contextTheme]);
 
   if (shouldFitContainer) {
@@ -78,7 +78,7 @@ const Grid: React.FC<IGridProps> = ({
           height={wrapperSize.height}
           items={items}
           columns={columns}
-          theme={theme}
+          theme={$theme}
           rowHeight={rowHeight}
           shouldChangeColumnsWidth={shouldChangeColumnsWidth}
           shouldMovingColumns={shouldMovingColumns}
@@ -95,7 +95,7 @@ const Grid: React.FC<IGridProps> = ({
       height={wrapperSize.height}
       items={items}
       columns={columns}
-      theme={theme}
+      theme={$theme}
       rowHeight={rowHeight}
       shouldChangeColumnsWidth={shouldChangeColumnsWidth}
       shouldMovingColumns={shouldMovingColumns}

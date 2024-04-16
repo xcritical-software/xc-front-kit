@@ -77,7 +77,7 @@ export interface IGridProps {
   onChangeColumns?: Function;
   onSortChanged?: Function;
   totals?: ITotals;
-  theme?: ITheme;
+  theme?: ITheme<IGridTheme>;
   onSelect?: OnChangeFn<RowSelectionState>;
   shouldMovingColumns?: boolean;
   shouldChangeColumnsWidth?: boolean;
@@ -93,6 +93,7 @@ export interface IGridProps {
   gridProps?: IInternalGridProps;
   onChangeExpand?: Function;
   selectedRowKeys?: string[];
+  isClientSort?: boolean;
 }
 
 export interface IMultiGrid {
@@ -240,6 +241,9 @@ export interface ITBody {
 export interface IRow {
   theme: IGridTheme;
   translateY: number;
+  even: boolean;
+  selected?: boolean;
+  rowHeight?: number;
 }
 
 export interface IBodyCellContentWrapper {

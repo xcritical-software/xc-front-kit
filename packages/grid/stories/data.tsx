@@ -17,7 +17,7 @@ const renderFunc = (
   { parentItem }: ICellRenderParams
 ) => {
   // eslint-disable-next-line no-console
-  console.log(fieldName, rowIndex, parentItem);
+  console.log('renderFunc', fieldName, rowIndex, parentItem);
 
   return (
     <>

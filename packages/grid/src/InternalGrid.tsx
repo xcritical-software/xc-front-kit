@@ -1,23 +1,20 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import {
-  ColumnDef,
   ColumnPinningState,
+  ColumnSizingState,
   ExpandedState,
+  RowSelectionState,
+  SortingState,
+  Updater,
+  flexRender,
   getCoreRowModel,
   getExpandedRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { ThemeContext } from 'styled-components';
 import {
   DndContext,
   type DragEndEvent,
@@ -30,12 +27,15 @@ import {
 } from '@dnd-kit/core';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
+import debounce from 'lodash.debounce';
+
+import { useFirstMountState } from '@xcritical/utils';
 
 import { IColumn, IGridProps } from './interfaces';
 import {
-  cellRenderMapper,
+  getBaseColls,
+  getChangedColumns,
   getPinnedProps,
-  gridTheme,
   mappingColumns,
 } from './utils';
 import {
@@ -63,32 +63,23 @@ export const InternalGrid: React.FC<IGridProps> = ({
   shouldMovingColumns = false,
   onSortChanged,
   onSelect,
+  onChangeColumns,
+  isClientSort,
 }) => {
-  const contextTheme = useContext(ThemeContext);
-  const themeRef = useRef(gridTheme(theme ?? contextTheme!));
-
+  const isFirtsMount = useFirstMountState();
   const sensors = useSensors(
     useSensor(MouseSensor, {}),
     useSensor(TouchSensor, {}),
     useSensor(KeyboardSensor, {})
   );
+  const $columns = React.useMemo(() => mappingColumns(columns), [columns]);
 
-  const $columns = React.useMemo<ColumnDef<object>[]>(
-    () => mappingColumns(columns),
-    [columns]
-  );
-
-  const [mappedField, columnPinning] = useMemo<
-    [
-      mappedField: Record<string, IColumn | undefined>,
-      pinning: ColumnPinningState
-    ]
-  >(() => {
+  const [columnPinning] = useMemo<[pinning: ColumnPinningState]>(() => {
     const pinning: ColumnPinningState = {
       left: [],
       right: [],
     };
-    const cols = columns.reduce((acc, item) => {
+    columns.reduce((acc, item) => {
       acc[item.field] = item;
 
       if (item.fixedPosition) {
@@ -99,13 +90,30 @@ export const InternalGrid: React.FC<IGridProps> = ({
       return acc;
     }, {} as Record<string, IColumn>);
 
-    return [cols, pinning];
+    return [pinning];
   }, [columns]);
 
+  const enableSelect = isMultiSelect || !disableSelect;
+
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [cellSize, setCellSize] = React.useState<ColumnSizingState>({});
   const [expanded, setExpanded] = React.useState<ExpandedState>({});
   const [columnOrder, setColumnOrder] = React.useState<string[]>(() =>
     $columns.map((c) => c.id!)
   );
+
+  const $onSelect = useCallback(
+    (selection: Updater<RowSelectionState>) => {
+      setRowSelection(selection);
+
+      if (onSelect) {
+        onSelect(selection);
+      }
+    },
+    [onSelect]
+  );
+
   const table = useReactTable({
     data: items,
     columns: $columns,
@@ -113,54 +121,81 @@ export const InternalGrid: React.FC<IGridProps> = ({
       columnPinning,
       columnOrder,
       expanded,
+      rowSelection,
+      sorting,
+      columnSizing: cellSize,
     },
+
     onExpandedChange: setExpanded,
     getSubRows: (row) => row.children,
     enableMultiRowSelection: isMultiSelect,
-    enableRowSelection: !disableSelect,
+    enableRowSelection: enableSelect,
     onColumnOrderChange: setColumnOrder,
-    onRowSelectionChange: onSelect,
+    onRowSelectionChange: $onSelect,
     columnResizeMode: 'onChange',
     columnResizeDirection: 'ltr',
+    onColumnSizingChange: setCellSize,
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    getSortedRowModel: isClientSort ? getSortedRowModel() : undefined,
     debugTable: true,
   });
 
-  const handleDragEnd = useCallback(
-    (event: DragEndEvent) => {
-      const { active, over } = event;
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
+    const { active, over } = event;
 
-      if (active && over && active.id !== over.id) {
-        setColumnOrder((columnOrder) => {
-          const oldIndex = columnOrder.indexOf(active.id as string);
-          const newIndex = columnOrder.indexOf(over.id as string);
+    if (active && over && active.id !== over.id) {
+      setColumnOrder((columnOrder) => {
+        const oldIndex = columnOrder.indexOf(active.id as string);
+        const newIndex = columnOrder.indexOf(over.id as string);
 
-          const newOrder = arrayMove(columnOrder, oldIndex, newIndex); // this is just a splice util
+        const newOrder = arrayMove(columnOrder, oldIndex, newIndex); // this is just a splice util
 
-          const sortedColumns = newOrder.map((columnId) =>
-            columns.find((c) => c.field === columnId)
-          );
-
-          if (onSortChanged) {
-            onSortChanged(sortedColumns);
-          }
-
-          return newOrder;
-        });
-      }
-    },
-    [onSortChanged, columns]
-  );
+        return newOrder;
+      });
+    }
+  }, []);
 
   useEffect(() => {
-    themeRef.current = gridTheme(theme ?? contextTheme!);
-  }, [theme, contextTheme]);
-
-  useEffect(() => {
-    setColumnOrder($columns.map((c) => c.id!));
+    if (!isFirtsMount) setColumnOrder($columns.map((c) => c.id!));
   }, [$columns]);
+
+  const debouncedOnChangeColumns = useCallback(
+    debounce((columnOrder, cellSize, sorting) => {
+      if (onChangeColumns) {
+        const sortedColumns = getChangedColumns(
+          columns,
+          columnOrder,
+          cellSize,
+          sorting
+        );
+        onChangeColumns(sortedColumns);
+      }
+    }, 100),
+
+    [onChangeColumns, columns]
+  );
+  useEffect(() => {
+    if (!isFirtsMount) {
+      debouncedOnChangeColumns(columnOrder, cellSize, sorting);
+    }
+  }, [columnOrder, cellSize]);
+
+  useEffect(() => {
+    if (!isFirtsMount) {
+      if (onSortChanged) {
+        const sortedColumns = getChangedColumns(
+          columns,
+          columnOrder,
+          cellSize,
+          sorting
+        );
+
+        onSortChanged(sortedColumns);
+      }
+    }
+  }, [sorting]);
 
   const { rows } = table.getRowModel();
 
@@ -189,7 +224,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
       <Wrapper
         $width={width}
         $height={height}
-        theme={themeRef.current}
+        theme={theme}
         ref={tableContainerRef}>
         {/* Even though we're still using sematic table tags, we must use CSS grid and flexbox for dynamic row heights */}
 
@@ -197,14 +232,12 @@ export const InternalGrid: React.FC<IGridProps> = ({
           <HeaderWrapper
             columnOrder={columnOrder}
             table={table}
-            theme={themeRef.current}
+            theme={theme!}
             shouldChangeColumnsWidth={shouldChangeColumnsWidth}
             shouldMovingColumns={shouldMovingColumns}
           />
 
-          <TBody
-            theme={themeRef.current}
-            height={rowVirtualizer.getTotalSize()}>
+          <TBody theme={theme} height={rowVirtualizer.getTotalSize()}>
             {rowVirtualizer.getVirtualItems().map((virtualRow) => {
               const row = rows[virtualRow.index];
 
@@ -214,8 +247,12 @@ export const InternalGrid: React.FC<IGridProps> = ({
                   ref={(node) => rowVirtualizer.measureElement(node)} // measure dynamic row height
                   key={row.id}
                   onClick={
-                    disableSelect ? undefined : row.getToggleSelectedHandler()
+                    enableSelect ? row.getToggleSelectedHandler() : undefined
                   }
+                  rowHeight={rowHeight}
+                  selected={row.getIsSelected()}
+                  even={!!(virtualRow.index % 2)}
+                  theme={theme}
                   translateY={virtualRow.start}>
                   {row.getVisibleCells().map((cell) => (
                     <BodyCell
@@ -229,15 +266,15 @@ export const InternalGrid: React.FC<IGridProps> = ({
                       selected={row.getIsSelected()}
                       data-column-id={cell.column.id}
                       data-column-data={cell.getValue()}
-                      theme={themeRef.current}
+                      theme={theme}
                       depth={row.depth}
                       width={cell.column.getSize()}>
-                      <BodyCellContentWrapper theme={themeRef.current}>
-                        {mappedField[cell.column.id]?.isExpandable &&
+                      <BodyCellContentWrapper theme={theme}>
+                        {getBaseColls(cell).isExpandable &&
                           row.getCanExpand() && (
                             <ExpandButtonWrapper
                               onClick={row.getToggleExpandedHandler()}
-                              theme={themeRef.current}>
+                              theme={theme}>
                               {row.getIsExpanded() ? (
                                 <RemoveIcon />
                               ) : (
@@ -246,13 +283,11 @@ export const InternalGrid: React.FC<IGridProps> = ({
                             </ExpandButtonWrapper>
                           )}
                         <BodyCellContent
-                          theme={themeRef.current}
+                          theme={theme}
                           selected={row.getIsSelected()}>
-                          {cellRenderMapper(
-                            cell.getValue,
-                            cell.column,
-                            cell.row,
-                            mappedField[cell.id]?.render
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
                           )}
                         </BodyCellContent>
                       </BodyCellContentWrapper>

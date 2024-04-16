@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { colors } from '@xcritical/theme';
+import { ITheme, colors } from '@xcritical/theme';
 
-import { gridThemeNamespace } from '../src';
+import { IGridTheme, gridThemeNamespace } from '../src';
 
 export const Page = styled.div`
   width: 100%;
@@ -31,18 +31,16 @@ export const SelectorColumnsWrapper = styled.div`
   display: flex;
 `;
 
-export const AMStheme = {
+export const AMStheme: ITheme<IGridTheme> = {
   [gridThemeNamespace]: {
     evenRowBackground: colors.GRAY_LIGHT,
     selectedRowBackgroundColor: colors.BLACK_RAISIN,
     offsetExpand: 20,
-    border: 'none',
-    borderRadius: 0,
     headerCellBorder: `1px solid ${colors.GRAY}`,
     totalsCellBorder: 'none',
-    rowCellBorder: 'none',
+    rowCellBorder: `1px solid ${colors.GRAY}`,
     header: {
-      border: 'none',
+      border: `1px solid ${colors.GRAY}`,
       fontSize: '14px',
       color: 'black',
       backgroundColor: 'white',
