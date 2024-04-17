@@ -8,7 +8,7 @@ import { blanketThemeNamespace, defaultBlanketTheme } from './theme';
 import { IBlanketTheme, IBlanketProps } from './interfaces';
 
 export const blanketTheme = (
-  theme: ITheme<IBlanketTheme>,
+  theme?: ITheme<IBlanketTheme>,
   propertyPath?: string | string[]
 ): AllType => {
   const func = getThemedState(blanketThemeNamespace, defaultBlanketTheme);

@@ -9,8 +9,8 @@
 	"types": "dist/typings.d.ts",
 	"scripts": {
 		"test": "exit 0",
-		"compile": "tsdx build --format cjs,esm --verbose && api-extractor run",
-		"compile:local": "tsdx build --format cjs,esm --verbose && api-extractor run --local",
+		"compile": "tsup",
+		"compile:local": "tsup",
 		"publish-files": "gulp --cwd . publish-files",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"

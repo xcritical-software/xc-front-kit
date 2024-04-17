@@ -12,8 +12,8 @@
 	],
 	"scripts": {
 		"test": "exit 0",
-		"compile:local": "tsdx build --format cjs,esm --verbose && api-extractor run --local",
-		"compile": "tsdx build --format cjs,esm --verbose && api-extractor run",
+		"compile:local": "tsup",
+		"compile": "tsup",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},

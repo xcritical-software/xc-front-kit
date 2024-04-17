@@ -12,8 +12,8 @@
 	],
 	"scripts": {
 		"test": "exit 0",
-		"compile": "tsdx build --format cjs,esm --verbose && api-extractor run",
-		"compile:local": "tsdx build --format cjs,esm --verbose && api-extractor run --local",
+		"compile": "tsup",
+		"compile:local": "tsup",
 		"publish-files": "gulp --cwd . publish-files",
 		"build:cjs": "tsc --project ./tsconfig.json --outDir ./.publish/ --module commonjs -d",
 		"build:esm": "tsc --project ./tsconfig.json --outDir ./.publish/esm --module esnext",
