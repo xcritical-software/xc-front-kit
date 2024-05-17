@@ -1,4 +1,4 @@
-import { ReactElement, CSSProperties, RefObject } from 'react';
+import { ReactElement, CSSProperties } from 'react';
 import { Alignment } from 'react-virtualized';
 import {
   OnChangeFn,
@@ -78,7 +78,7 @@ export interface IGridProps {
   onSortChanged?: Function;
   totals?: ITotals;
   theme?: ITheme<IGridTheme>;
-  onSelect?: OnChangeFn<RowSelectionState>;
+  onSelect?: OnChangeFn<RowSelectionState | undefined>;
   shouldMovingColumns?: boolean;
   shouldChangeColumnsWidth?: boolean;
   shouldChangeLeftColumnsWidth?: boolean;
@@ -92,80 +92,8 @@ export interface IGridProps {
   minColumnWidth?: number;
   gridProps?: IInternalGridProps;
   onChangeExpand?: Function;
-  selectedRowKeys?: string[];
+  selectedRowKeys?: RowSelectionState;
   isClientSort?: boolean;
-}
-
-export interface IMultiGrid {
-  width: number;
-  height: number;
-  shouldMovingColumns?: boolean;
-  shouldChangeColumnsWidth?: boolean;
-  shouldChangeLeftColumnsWidth?: boolean;
-  shouldChangeRightColumnsWidth?: boolean;
-  leftMappedColumns: IColumn[];
-  centerMappedColumns: IColumn[];
-  rightMappedColumns: IColumn[];
-  setLeftMappedColumns: Function;
-  setCenterMappedColumns: Function;
-  setRightMappedColumns: Function;
-  leftFixedWidth: number;
-  rightFixedWidth: number;
-  scrollTop: number;
-  onScroll: Function;
-  allGridsProps: IAllGridsProps;
-  isScrollingOptOut?: boolean;
-  overscanColumnCount?: number;
-  overscanRowCount?: number;
-  shouldFitLastColumn: boolean;
-}
-
-interface IAllGridsProps {
-  totals?: IItem;
-  onChangeExpand: (rowIndex: number, chidrens: IItem[], parent: IItem) => void;
-  handleSelect: Function;
-  selectedRows: string[];
-  mappedItems: IMappedItem[];
-  themeRef: RefObject<IGridTheme>;
-  rowHeight?: number;
-  minColumnWidth: number;
-  onChangeSort: Function;
-  gridProps: IInternalGridProps;
-}
-
-export interface IInternalGrid {
-  rightScroll?: boolean;
-  bottomScroll?: boolean;
-  width: number;
-  height: number;
-  shouldMovingColumns?: boolean;
-  shouldChangeColumnsWidth?: boolean;
-  scrollTop?: number;
-  onScrollsyncScroll?: Function;
-  setGridHOCMappedColumns: Function;
-  gridHOCMappedColumns: IColumn[];
-  resizeGridAfterResizeLastColumn?: boolean;
-  gridPosition: GridPositions;
-  onChangeColumns?: Function;
-  totals?: ITotals;
-  handleSelect: Function;
-  onChangeExpand: (
-    rowIndex: number,
-    chidrens: IMappedItem[],
-    parent: IMappedItem
-  ) => void;
-  mappedItems: IMappedItem[];
-  selectedRows: string[];
-  themeRef: RefObject<IGridTheme>;
-  rowHeight?: number;
-  overscanColumnCount?: number;
-  isScrollingOptOut?: boolean;
-  overscanRowCount?: number;
-  shiftFirstColumn: boolean;
-  onChangeSort: Function;
-  shouldFitLastColumn: boolean;
-  minColumnWidth: number;
-  gridProps: IInternalGridProps;
 }
 
 export interface IMappedItem extends IItem {

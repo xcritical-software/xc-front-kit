@@ -29,7 +29,7 @@ import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
 import debounce from 'lodash.debounce';
 
-import { useFirstMountState } from '@xcritical/utils';
+import { useFirstMountState, useStateFromProp } from '@xcritical/utils';
 
 import { IColumn, IGridProps } from './interfaces';
 import {
@@ -61,6 +61,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
   isMultiSelect,
   shouldChangeColumnsWidth = false,
   shouldMovingColumns = false,
+  selectedRowKeys,
   onSortChanged,
   onSelect,
   onChangeColumns,
@@ -96,7 +97,9 @@ export const InternalGrid: React.FC<IGridProps> = ({
   const enableSelect = isMultiSelect || !disableSelect;
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [rowSelection = {}, setRowSelection] = useStateFromProp<
+    RowSelectionState | undefined
+  >(selectedRowKeys);
   const [cellSize, setCellSize] = React.useState<ColumnSizingState>({});
   const [expanded, setExpanded] = React.useState<ExpandedState>({});
   const [columnOrder, setColumnOrder] = React.useState<string[]>(() =>
@@ -105,11 +108,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
 
   const $onSelect = useCallback(
     (selection: Updater<RowSelectionState>) => {
-      setRowSelection(selection);
-
-      if (onSelect) {
-        onSelect(selection);
-      }
+      setRowSelection(selection, onSelect);
     },
     [onSelect]
   );

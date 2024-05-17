@@ -5,6 +5,7 @@ const styledComponentsTransformer = createStyledComponentsTransformer();
 
 module.exports = {
     stories: ['../packages/**/stories/*.stories.(ts|tsx)'],
+
     addons: [
         getAbsolutePath("@storybook/addon-controls"),
         getAbsolutePath("@storybook/addon-actions"),
@@ -26,9 +27,11 @@ module.exports = {
         return config;
     },
 
-    docs: {
-        autodocs: true
-    }
+    typescript: {
+        reactDocgen: "react-docgen-typescript",
+      },
+
+   
 };
 
 function getAbsolutePath(value) {
