@@ -48,6 +48,8 @@ export interface IColumn {
   footer?: CellContent;
   field: string;
   width: number;
+  maxWidth?: number;
+  minWidth?: number;
   visible: boolean;
   center?: boolean;
   isExpandable?: boolean;
@@ -76,6 +78,7 @@ export interface IGridProps {
   isMultiSelect?: boolean;
   onChangeColumns?: Function;
   onSortChanged?: Function;
+  // TODO: need to implement
   totals?: ITotals;
   theme?: ITheme<IGridTheme>;
   onSelect?: OnChangeFn<RowSelectionState | undefined>;

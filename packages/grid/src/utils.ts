@@ -34,13 +34,16 @@ export const cellRenderMapper = (
 };
 export type ColumnDefWithBase<T> = ColumnDef<T> & { _base: IColumn };
 export const mappingColumns = (
-  columns: IColumn[]
+  columns: IColumn[],
+  options: { minColumnWidth?: number }
 ): ColumnDefWithBase<IItem>[] =>
   columns.map((column) => ({
     id: column.field,
     accessorKey: column.field,
     header: column.headerName,
     size: column.width,
+    maxSize: column.maxWidth,
+    minSize: column.minWidth || options.minColumnWidth,
     cell: ({ cell, getValue }) => {
       const value = getValue();
 

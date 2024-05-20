@@ -68,6 +68,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
   onSelect,
   onChangeColumns,
   isClientSort,
+  minColumnWidth,
   overscan = 8,
 }) => {
   const isFirtsMount = useFirstMountState();
@@ -76,7 +77,10 @@ export const InternalGrid: React.FC<IGridProps> = ({
     useSensor(TouchSensor, {}),
     useSensor(KeyboardSensor, {})
   );
-  const $columns = React.useMemo(() => mappingColumns(columns), [columns]);
+  const $columns = React.useMemo(
+    () => mappingColumns(columns, { minColumnWidth }),
+    [columns, minColumnWidth]
+  );
 
   const [columnPinning] = useMemo<[pinning: ColumnPinningState]>(() => {
     const pinning: ColumnPinningState = {
@@ -135,7 +139,6 @@ export const InternalGrid: React.FC<IGridProps> = ({
       sorting,
       columnSizing: cellSize,
     },
-
     onExpandedChange: setExpanded,
     getSubRows: (row) => row.children,
     enableMultiRowSelection: isMultiSelect,
