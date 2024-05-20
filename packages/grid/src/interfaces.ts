@@ -4,6 +4,7 @@ import {
   OnChangeFn,
   Header as RTHeader,
   RowSelectionState,
+  SortingFnOption,
   Table,
 } from '@tanstack/react-table';
 
@@ -63,6 +64,8 @@ export interface IColumn {
   fixedPosition?: GridPositions.LEFT | GridPositions.RIGHT;
   sortable?: boolean;
   resizable?: boolean;
+  sortingFn?: SortingFnOption<IItem>;
+
   sortOrder?: GridSort.ASC | GridSort.DESC | null;
 }
 export interface ITotals {
@@ -78,6 +81,8 @@ export interface IGridProps {
   isMultiSelect?: boolean;
   onChangeColumns?: Function;
   onSortChanged?: Function;
+  enableSorting?: boolean;
+  enableMultiSort?: boolean;
   // TODO: need to implement
   totals?: ITotals;
   theme?: ITheme<IGridTheme>;
@@ -92,7 +97,7 @@ export interface IGridProps {
   gridProps?: IInternalGridProps;
   onChangeExpand?: Function;
   selectedRowKeys?: RowSelectionState;
-  isClientSort?: boolean;
+  manualSorting?: boolean;
   getRowId?: (row: IItem) => string;
 }
 

@@ -67,7 +67,9 @@ export const InternalGrid: React.FC<IGridProps> = ({
   onSortChanged,
   onSelect,
   onChangeColumns,
-  isClientSort,
+  enableSorting = true,
+  enableMultiSort,
+  manualSorting = false,
   minColumnWidth,
   overscan = 8,
 }) => {
@@ -139,6 +141,9 @@ export const InternalGrid: React.FC<IGridProps> = ({
       sorting,
       columnSizing: cellSize,
     },
+    enableColumnResizing: shouldChangeColumnsWidth,
+    enableMultiSort,
+    enableSorting,
     onExpandedChange: setExpanded,
     getSubRows: (row) => row.children,
     enableMultiRowSelection: isMultiSelect,
@@ -152,7 +157,8 @@ export const InternalGrid: React.FC<IGridProps> = ({
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
-    getSortedRowModel: isClientSort ? getSortedRowModel() : undefined,
+    manualSorting,
+    getSortedRowModel: !manualSorting ? getSortedRowModel() : undefined,
     debugTable: true,
   });
 

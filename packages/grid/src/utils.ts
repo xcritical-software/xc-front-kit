@@ -44,6 +44,7 @@ export const mappingColumns = (
     size: column.width,
     maxSize: column.maxWidth,
     minSize: column.minWidth || options.minColumnWidth,
+
     cell: ({ cell, getValue }) => {
       const value = getValue();
 
@@ -51,7 +52,7 @@ export const mappingColumns = (
         ? cellRenderMapper(value, cell.column, cell.row, column.render)
         : value ?? '';
     },
-
+    sortingFn: column.sortingFn || 'auto',
     sortable: column.sortable,
     resizable: column.resizable === undefined ? true : column.resizable,
     filterable: false,
