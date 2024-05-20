@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { MouseEvent, useCallback, useEffect, useMemo } from 'react';
 import {
   ColumnPinningState,
   ColumnSizingState,
@@ -13,6 +13,7 @@ import {
   getExpandedRowModel,
   getSortedRowModel,
   useReactTable,
+  Row as RowType,
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import {
@@ -31,7 +32,7 @@ import debounce from 'lodash.debounce';
 
 import { useFirstMountState, useStateFromProp } from '@xcritical/utils';
 
-import { IColumn, IGridProps } from './interfaces';
+import { IColumn, IGridProps, IItem } from './interfaces';
 import {
   getBaseColls,
   getChangedColumns,
@@ -111,6 +112,14 @@ export const InternalGrid: React.FC<IGridProps> = ({
       setRowSelection(selection, onSelect);
     },
     [onSelect]
+  );
+
+  const $onExpandCallback = useCallback(
+    (row: RowType<IItem>) => (e: MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      row.toggleExpanded();
+    },
+    []
   );
 
   const table = useReactTable({
@@ -272,7 +281,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
                         {getBaseColls(cell).isExpandable &&
                           row.getCanExpand() && (
                             <ExpandButtonWrapper
-                              onClick={row.getToggleExpandedHandler()}
+                              onClick={$onExpandCallback(row)}
                               theme={theme}>
                               {row.getIsExpanded() ? (
                                 <RemoveIcon />
