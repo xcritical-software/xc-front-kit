@@ -72,10 +72,24 @@ export const getRowStyles = ({
 };
 
 export const getBodyCellStyles = ({
-  theme: { row, rowCellBorder, header },
+  theme: {
+    row,
+    rowCellBorder,
+    header,
+    evenRowBackground,
+    selectedRowBackgroundColor,
+  },
   firstRow,
   depth,
+  selected,
+  even,
 }: any) => {
+  let background: string | undefined = '';
+
+  if (selected) background = selectedRowBackgroundColor;
+  else if (even) background = evenRowBackground;
+  else background = row?.backgroundColor;
+
   const headerBorder = header.border !== 'none';
   const borderTop = !firstRow || !headerBorder ? row.border : 'none';
   const cellBorder = firstRow
@@ -91,6 +105,7 @@ export const getBodyCellStyles = ({
   return css`
     padding-left: ${depth * 2}rem;
     border-top: ${borderTop};
+    background: ${background};
     ${rowCellBorder !== 'none' ? cellBorder : ''};
   `;
 };
