@@ -80,20 +80,17 @@ export interface IGridProps {
   theme?: ITheme<IGridTheme>;
   onSelect?: OnChangeFn<RowSelectionState | undefined>;
   shouldMovingColumns?: boolean;
+  enableSubRowSelection?: boolean;
   shouldChangeColumnsWidth?: boolean;
-  shouldChangeLeftColumnsWidth?: boolean;
-  shouldChangeRightColumnsWidth?: boolean;
   shouldFitContainer?: boolean;
   rowHeight?: number;
-  isScrollingOptOut?: boolean;
-  overscanColumnCount?: number;
-  overscanRowCount?: number;
-  shouldFitLastColumn?: boolean;
+  overscan?: number;
   minColumnWidth?: number;
   gridProps?: IInternalGridProps;
   onChangeExpand?: Function;
   selectedRowKeys?: RowSelectionState;
   isClientSort?: boolean;
+  getRowId?: (row: IItem) => string;
 }
 
 export interface IMappedItem extends IItem {

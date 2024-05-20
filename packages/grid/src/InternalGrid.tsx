@@ -62,11 +62,13 @@ export const InternalGrid: React.FC<IGridProps> = ({
   isMultiSelect,
   shouldChangeColumnsWidth = false,
   shouldMovingColumns = false,
+  enableSubRowSelection,
   selectedRowKeys,
   onSortChanged,
   onSelect,
   onChangeColumns,
   isClientSort,
+  overscan = 8,
 }) => {
   const isFirtsMount = useFirstMountState();
   const sensors = useSensors(
@@ -138,6 +140,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
     getSubRows: (row) => row.children,
     enableMultiRowSelection: isMultiSelect,
     enableRowSelection: enableSelect,
+    enableSubRowSelection: enableSubRowSelection || isMultiSelect,
     onColumnOrderChange: setColumnOrder,
     onRowSelectionChange: $onSelect,
     columnResizeMode: 'onChange',
@@ -220,7 +223,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
       navigator.userAgent.indexOf('Firefox') === -1
         ? (element) => element.getBoundingClientRect().height
         : undefined,
-    overscan: 5,
+    overscan,
   });
 
   return (
