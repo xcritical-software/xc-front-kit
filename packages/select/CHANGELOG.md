@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/select@1.3.1...@xcritical/select@1.4.0-beta.2) (2024-05-21)
+
+### Bug Fixes
+
+- **select:** types ([8a04af1](https://github.com/xcritical-software/xc-front-kit/commit/8a04af12911e646890f023c7b0df35826c753545))
+- **select:** types ([8d18c31](https://github.com/xcritical-software/xc-front-kit/commit/8d18c31f6145b4a831580595989b6f1fe01b0522))
+- **select:** types ([8461ec1](https://github.com/xcritical-software/xc-front-kit/commit/8461ec1f6cf2e1c744451675edfa4866b5f07899))
+- types ([ecda37f](https://github.com/xcritical-software/xc-front-kit/commit/ecda37f19520913819f0e8afb2a5fe11447ea93f))
+
+### Features
+
+- update dependencies ([53936e4](https://github.com/xcritical-software/xc-front-kit/commit/53936e4a6e0d31fd977829525117525cb977a970))
+
 # [1.4.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/select@1.3.1...@xcritical/select@1.4.0-beta.0) (2024-05-21)
 
 ### Bug Fixes

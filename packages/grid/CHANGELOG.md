@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.2-beta.2...@xcritical/grid@1.6.0-beta.1) (2024-05-21)
+
+### Bug Fixes
+
+- **grid:** add enableSubRowSelection flag for selection sub rows ([c5a5226](https://github.com/xcritical-software/xc-front-kit/commit/c5a52266d4791d7616d2f6159376985d9f27bc2f))
+- **grid:** add min max column size ([5a387d0](https://github.com/xcritical-software/xc-front-kit/commit/5a387d06a428ad75f36ddb7563965c6430aaf36f))
+- **grid:** added background for cell ([47057bc](https://github.com/xcritical-software/xc-front-kit/commit/47057bc2a2864448d3289053906f26886a319aec))
+- **grid:** expand button didn't affect select event ([8650ff4](https://github.com/xcritical-software/xc-front-kit/commit/8650ff4b926aab401b5691875b50dd7d0f2a37e3))
+- **grid:** fix types ([fd63f0e](https://github.com/xcritical-software/xc-front-kit/commit/fd63f0e83ff6f9f61776546ea1646290296ccaf5))
+- **select:** types ([8a04af1](https://github.com/xcritical-software/xc-front-kit/commit/8a04af12911e646890f023c7b0df35826c753545))
+- types ([ecda37f](https://github.com/xcritical-software/xc-front-kit/commit/ecda37f19520913819f0e8afb2a5fe11447ea93f))
+
+### Features
+
+- **grid:** add change column width ([4c771ad](https://github.com/xcritical-software/xc-front-kit/commit/4c771ad51faeddd14cf49fa61465a772c6c03f62))
+- **grid:** add pinned functional ([428b090](https://github.com/xcritical-software/xc-front-kit/commit/428b0906920719c05cc7e5f2cddfee4ea220b0d2))
+- **grid:** add row selection ([ed4567a](https://github.com/xcritical-software/xc-front-kit/commit/ed4567a36fb27460f620c7b8a8e3abc6fce3e075))
+- **grid:** add row selection ([9dbf25a](https://github.com/xcritical-software/xc-front-kit/commit/9dbf25a50cbe564196a4d9942ed4230d542d7d5b))
+- **grid:** add sorting column ([ae5b8f0](https://github.com/xcritical-software/xc-front-kit/commit/ae5b8f05eb2ce141c5f9fa0836dc92af4de60774))
+- **grid:** add sorting on client or just change event ([ad95bb7](https://github.com/xcritical-software/xc-front-kit/commit/ad95bb70256e4c473679b3d9132650b60bef7ac3))
+- **grid:** add sorting options for columns ([7c9372d](https://github.com/xcritical-software/xc-front-kit/commit/7c9372d7b2df2ae8fd5c0945e505c37f2d037334))
+- update dependencies ([53936e4](https://github.com/xcritical-software/xc-front-kit/commit/53936e4a6e0d31fd977829525117525cb977a970))
+
 # [1.6.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.2-beta.2...@xcritical/grid@1.6.0-beta.0) (2024-05-21)
 
 ### Bug Fixes

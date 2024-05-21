@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/switch@1.3.0...@xcritical/switch@1.4.0-beta.2) (2024-05-21)
+
+### Bug Fixes
+
+- **switch:** types ([298f7b1](https://github.com/xcritical-software/xc-front-kit/commit/298f7b1d672d4a740e2a3c8935ffe7130b69885c))
+
+### Features
+
+- update dependencies ([53936e4](https://github.com/xcritical-software/xc-front-kit/commit/53936e4a6e0d31fd977829525117525cb977a970))
+
 # [1.4.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/switch@1.3.0...@xcritical/switch@1.4.0-beta.0) (2024-05-21)
 
 ### Bug Fixes

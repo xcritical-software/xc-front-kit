@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/badge",
-  "version": "1.4.0-beta.1",
+  "version": "1.4.0-beta.2",
   "description": "Small count and labeling component",
   "main": "dist/index.js",
   "source": "src/index.ts",
@@ -37,7 +37,7 @@
     "polished": "^4.1.4"
   },
   "dependencies": {
-    "@xcritical/theme": "^1.4.0-beta.1",
+    "@xcritical/theme": "^1.4.0-beta.2",
     "lodash.get": "^4.x",
     "micro-memoize": "4.0.8"
   },

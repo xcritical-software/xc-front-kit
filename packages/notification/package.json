@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/notification",
-  "version": "1.4.0-beta.1",
+  "version": "1.4.0-beta.2",
   "description": "",
   "main": "dist/index.js",
   "source": "src/index.ts",

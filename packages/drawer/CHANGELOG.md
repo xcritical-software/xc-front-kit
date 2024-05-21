@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/drawer@2.2.1...@xcritical/drawer@2.3.0-beta.1) (2024-05-21)
+
+### Bug Fixes
+
+- types ([ecda37f](https://github.com/xcritical-software/xc-front-kit/commit/ecda37f19520913819f0e8afb2a5fe11447ea93f))
+
+### Features
+
+- update dependencies ([53936e4](https://github.com/xcritical-software/xc-front-kit/commit/53936e4a6e0d31fd977829525117525cb977a970))
+
 # [2.3.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/drawer@2.2.1...@xcritical/drawer@2.3.0-beta.0) (2024-05-21)
 
 ### Bug Fixes

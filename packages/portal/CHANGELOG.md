@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/portal@0.3.0...@xcritical/portal@0.3.1-beta.1) (2024-05-21)
+
+**Note:** Version bump only for package @xcritical/portal
+
 ## [0.3.1-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/portal@0.3.0...@xcritical/portal@0.3.1-beta.0) (2024-05-21)
 
 **Note:** Version bump only for package @xcritical/portal

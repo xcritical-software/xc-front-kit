@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.4.0...@xcritical/utils@0.5.0-beta.1) (2024-05-21)
+
+### Bug Fixes
+
+- **utils:** types ([af60fef](https://github.com/xcritical-software/xc-front-kit/commit/af60fef30e0e52380041624dd022444473d37486))
+
+### Features
+
+- **grid:** add sorting column ([ae5b8f0](https://github.com/xcritical-software/xc-front-kit/commit/ae5b8f05eb2ce141c5f9fa0836dc92af4de60774))
+
 # [0.5.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.4.0...@xcritical/utils@0.5.0-beta.0) (2024-05-21)
 
 ### Bug Fixes

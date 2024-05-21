@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/modal@1.6.1...@xcritical/modal@1.7.0-beta.1) (2024-05-21)
+
+### Bug Fixes
+
+- **select:** types ([8a04af1](https://github.com/xcritical-software/xc-front-kit/commit/8a04af12911e646890f023c7b0df35826c753545))
+
+### Features
+
+- update dependencies ([53936e4](https://github.com/xcritical-software/xc-front-kit/commit/53936e4a6e0d31fd977829525117525cb977a970))
+
 # [1.7.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/modal@1.6.1...@xcritical/modal@1.7.0-beta.0) (2024-05-21)
 
 ### Bug Fixes

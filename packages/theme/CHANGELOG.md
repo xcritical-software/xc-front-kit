@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/theme@1.3.0...@xcritical/theme@1.4.0-beta.2) (2024-05-21)
+
+### Bug Fixes
+
+- types ([ecda37f](https://github.com/xcritical-software/xc-front-kit/commit/ecda37f19520913819f0e8afb2a5fe11447ea93f))
+
+### Features
+
+- **grid:** add sorting column ([ae5b8f0](https://github.com/xcritical-software/xc-front-kit/commit/ae5b8f05eb2ce141c5f9fa0836dc92af4de60774))
+- update dependencies ([53936e4](https://github.com/xcritical-software/xc-front-kit/commit/53936e4a6e0d31fd977829525117525cb977a970))
+
 # [1.4.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/theme@1.3.0...@xcritical/theme@1.4.0-beta.0) (2024-05-21)
 
 ### Bug Fixes
