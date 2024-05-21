@@ -1,38 +1,38 @@
 {
-	"name": "@xcritical/portal",
-	"version": "0.3.0",
-	"description": "XCritical Portal Component",
-	"main": "dist/index.js",
-	"source": "src/index.ts",
-	"xc:source": "src/index.ts",
-	"module": "dist/portal.esm.js",
-	"types": "dist/typings.d.ts",
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"test": "exit 0",
-		"compile": "tsup",
-		"compile:local": "tsup",
-		"build": "yarn clean && yarn compile",
-		"clean": "rimraf dist lib .publish"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
-	},
-	"keywords": [
-		"portal"
-	],
-	"author": "XCritical Software",
-	"license": "MIT",
-	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/portal#readme",
-	"publishConfig": {
-		"access": "public"
-	},
-	"private": false,
-	"peerDependencies": {
-		"react": "^16.8.3",
-		"react-dom": "^16.12.0"
-	}
+  "name": "@xcritical/portal",
+  "version": "0.3.1-beta.0",
+  "description": "XCritical Portal Component",
+  "main": "dist/index.js",
+  "source": "src/index.ts",
+  "xc:source": "src/index.ts",
+  "module": "dist/portal.esm.js",
+  "types": "dist/typings.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "exit 0",
+    "compile": "tsup",
+    "compile:local": "tsup",
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf dist lib .publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+  },
+  "keywords": [
+    "portal"
+  ],
+  "author": "XCritical Software",
+  "license": "MIT",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/portal#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "peerDependencies": {
+    "react": "^16.8.3",
+    "react-dom": "^16.12.0"
+  }
 }

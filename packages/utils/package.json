@@ -1,38 +1,38 @@
 {
-	"name": "@xcritical/utils",
-	"version": "0.4.0",
-	"description": "<>",
-	"main": "dist/index.js",
-	"source": "src/index.ts",
-	"xc:source": "src/index.ts",
-	"module": "dist/utils.esm.js",
-	"types": "dist/typings.d.ts",
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"test": "jest --config=jest.config.js",
-		"compile": "tsup",
-		"compile:local": "tsup",
-		"build": "yarn clean && yarn compile",
-		"clean": "rimraf dist lib .publish"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
-	},
-	"keywords": [],
-	"author": "XCritical Software",
-	"license": "MIT",
-	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/utils#readme",
-	"publishConfig": {
-		"access": "public"
-	},
-	"private": false,
-	"peerDependencies": {
-		"react": "^16.8.3"
-	},
-	"devDependencies": {
-		"@testing-library/react-hooks": "^8.0.0"
-	}
+  "name": "@xcritical/utils",
+  "version": "0.5.0-beta.0",
+  "description": "<>",
+  "main": "dist/index.js",
+  "source": "src/index.ts",
+  "xc:source": "src/index.ts",
+  "module": "dist/utils.esm.js",
+  "types": "dist/typings.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "jest --config=jest.config.js",
+    "compile": "tsup",
+    "compile:local": "tsup",
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf dist lib .publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+  },
+  "keywords": [],
+  "author": "XCritical Software",
+  "license": "MIT",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/utils#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "peerDependencies": {
+    "react": "^16.8.3"
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^8.0.0"
+  }
 }

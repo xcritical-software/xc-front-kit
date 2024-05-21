@@ -1,45 +1,45 @@
 {
-	"name": "@xcritical/popover",
-	"version": "2.4.0",
-	"description": "",
-	"main": "dist/index.js",
-	"source": "src/index.ts",
-	"xc:source": "src/index.ts",
-	"module": "dist/popover.esm.js",
-	"types": "dist/typings.d.ts",
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"test": "exit 0",
-		"compile": "tsup",
-		"compile:local": "tsup",
-		"build": "yarn clean && yarn compile",
-		"clean": "rimraf dist lib .publish"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
-	},
-	"keywords": [
-		"popover",
-		"style-components",
-		"themed"
-	],
-	"publishConfig": {
-		"access": "public"
-	},
-	"author": "XCritical Software",
-	"license": "MIT",
-	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/popover#readme",
-	"private": false,
-	"peerDependencies": {
-		"react": "^16.8.3",
-		"styled-components": "^6.1.8"
-	},
-	"dependencies": {
-		"@xcritical/popper": "^1.3.0",
-		"@xcritical/theme": "^1.3.0",
-		"resize-observer-polyfill": "^1.5.1"
-	}
+  "name": "@xcritical/popover",
+  "version": "2.5.0-beta.0",
+  "description": "",
+  "main": "dist/index.js",
+  "source": "src/index.ts",
+  "xc:source": "src/index.ts",
+  "module": "dist/popover.esm.js",
+  "types": "dist/typings.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "exit 0",
+    "compile": "tsup",
+    "compile:local": "tsup",
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf dist lib .publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+  },
+  "keywords": [
+    "popover",
+    "style-components",
+    "themed"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "XCritical Software",
+  "license": "MIT",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/popover#readme",
+  "private": false,
+  "peerDependencies": {
+    "react": "^16.8.3",
+    "styled-components": "^6.1.8"
+  },
+  "dependencies": {
+    "@xcritical/popper": "^1.4.0-beta.0",
+    "@xcritical/theme": "^1.4.0-beta.0",
+    "resize-observer-polyfill": "^1.5.1"
+  }
 }
