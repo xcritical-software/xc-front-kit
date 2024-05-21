@@ -39,11 +39,12 @@
     "styled-components": "^6.1.8"
   },
   "dependencies": {
-    "@xcritical/blanket": "^1.4.0-beta.0",
+    "@xcritical/blanket": "^1.4.0-beta.1",
     "@xcritical/portal": "^0.3.1-beta.0",
-    "@xcritical/theme": "^1.4.0-beta.0",
+    "@xcritical/theme": "^1.4.0-beta.1",
     "lodash.get": "4.x",
     "micro-memoize": "^4.0.8",
     "polished": "^4.1.4"
-  }
+  },
+  "gitHead": "1d05de862b39bcfd905720c6293e439929125e15"
 }

@@ -38,8 +38,9 @@
     "styled-components": "^6.1.8"
   },
   "dependencies": {
-    "@xcritical/popper": "^1.4.0-beta.0",
-    "@xcritical/theme": "^1.4.0-beta.0",
+    "@xcritical/popper": "^1.4.0-beta.1",
+    "@xcritical/theme": "^1.4.0-beta.1",
     "resize-observer-polyfill": "^1.5.1"
-  }
+  },
+  "gitHead": "1d05de862b39bcfd905720c6293e439929125e15"
 }
