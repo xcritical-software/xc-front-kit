@@ -26,4 +26,6 @@ export const PureBlanket: React.FC<IBlanketProps> = ({
   );
 };
 
-export const Blanket = React.memo(withTheme(PureBlanket));
+export const Blanket: React.FC<IBlanketProps> = React.memo(
+  withTheme(PureBlanket)
+);

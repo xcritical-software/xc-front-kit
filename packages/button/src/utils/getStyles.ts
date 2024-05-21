@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import get from 'lodash.get';
 import memoize from 'micro-memoize';
-import { css, FlattenInterpolation } from 'styled-components';
+import { css } from 'styled-components';
 import { shallowEqual } from 'fast-equals';
 
 import {
@@ -99,12 +99,7 @@ const getWidth = (shouldFitContent = false): string =>
 
 const getButtonStatesStyle =
   (stateName: string) =>
-  ({
-    theme,
-    baseAppearance,
-    appearance,
-    ghost,
-  }: IStyledButtonProps): FlattenInterpolation<any> => {
+  ({ theme, baseAppearance, appearance, ghost }: IStyledButtonProps) => {
     const { _outline, ...styles } = getAppearanceStyleProperty(
       theme,
       baseAppearance,
@@ -123,12 +118,9 @@ const getButtonStatesStyle =
   };
 
 export const getItemInteractiveStyles = memoize(
-  (
-    disabled: boolean = false,
-    selected: boolean = false
-  ): FlattenInterpolation<any> => {
+  (disabled: boolean = false, selected: boolean = false) => {
     if (disabled) {
-      return css`
+      return css<IStyledButtonProps>`
         cursor: not-allowed;
         opacity: 0.5;
         ${getButtonStatesStyle('disabled')}
@@ -136,7 +128,7 @@ export const getItemInteractiveStyles = memoize(
     }
 
     if (selected) {
-      return css`
+      return css<IStyledButtonProps>`
         ${getButtonStatesStyle('selected')}
 
         &:hover {
@@ -149,7 +141,7 @@ export const getItemInteractiveStyles = memoize(
       `;
     }
 
-    return css`
+    return css<IStyledButtonProps>`
       &:hover {
         ${getButtonStatesStyle('hover')};
       }

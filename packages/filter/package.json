@@ -12,8 +12,8 @@
 	],
 	"scripts": {
 		"test": "exit 0",
-		"compile": "tsdx build --format cjs,esm --verbose && api-extractor run",
-		"compile:local": "tsdx build --format cjs,esm --verbose && api-extractor run --local",
+		"compile": "tsup",
+		"compile:local": "tsup",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},
@@ -34,7 +34,7 @@
 		"react": "^16.8.3",
 		"react-redux": "^7.2.0",
 		"redux": "^4.0.5",
-		"styled-components": "^5.3.3"
+		"styled-components": "^6.1.8"
 	},
 	"devDependencies": {
 		"mdi-react": "^9.1.0",

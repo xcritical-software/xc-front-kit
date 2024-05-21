@@ -5,3 +5,4 @@ config/
 .publish
 dist
 stories_old
+tsup.config.ts

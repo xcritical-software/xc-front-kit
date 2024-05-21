@@ -5,11 +5,13 @@ const styledComponentsTransformer = createStyledComponentsTransformer();
 
 module.exports = {
     stories: ['../packages/**/stories/*.stories.(ts|tsx)'],
+
     addons: [
+        getAbsolutePath("@storybook/addon-controls"),
         getAbsolutePath("@storybook/addon-actions"),
         getAbsolutePath("@storybook/addon-docs"),
         getAbsolutePath("@storybook/addon-backgrounds"),
-        "@storybook/addon-webpack5-compiler-swc"
+        getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
     ],
 
     framework: {
@@ -25,9 +27,11 @@ module.exports = {
         return config;
     },
 
-    docs: {
-        autodocs: true
-    }
+    typescript: {
+        reactDocgen: "react-docgen-typescript",
+      },
+
+   
 };
 
 function getAbsolutePath(value) {

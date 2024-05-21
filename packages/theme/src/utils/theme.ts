@@ -3,7 +3,7 @@ import get from 'lodash.get';
 import isEmpty from 'lodash.isempty';
 import memoize from 'micro-memoize';
 import { shallowEqual } from 'fast-equals';
-import { css, FlattenSimpleInterpolation } from 'styled-components';
+import { css } from 'styled-components';
 import { mergeDeep } from 'utilitify';
 
 import {
@@ -136,7 +136,7 @@ export const getFontStyle = ({
   weight,
   lineHeight,
   lineHeightRatio = 1.69,
-}: IFont): FlattenSimpleInterpolation => css`
+}: IFont) => css`
   ${weight ? `font-weight: ${weight}` : null};
   ${size
     ? `font-size: ${size}px; line-height: ${lineHeight ?? lineHeightRatio};`

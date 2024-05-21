@@ -1,3 +1,4 @@
-export { Drawer as default, IDrawerProps } from './Drawer';
+export { Drawer as default } from './Drawer';
+export type { IDrawerProps } from './Drawer';
 export { drawerThemeNamespace } from './theme';
 export * from './interfaces';

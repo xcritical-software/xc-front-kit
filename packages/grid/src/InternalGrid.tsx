@@ -1,366 +1,324 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  MutableRefObject,
-  useMemo,
-} from 'react';
+import React, { MouseEvent, useCallback, useEffect, useMemo } from 'react';
 import {
-  Grid as VirtualisedGrid,
-  CellMeasurer,
-  ScrollPosition,
-  GridCellProps,
-  CellMeasurerCache,
-} from 'react-virtualized';
-import { setIn } from 'utilitify';
+  ColumnPinningState,
+  ColumnSizingState,
+  ExpandedState,
+  RowSelectionState,
+  SortingState,
+  Updater,
+  flexRender,
+  getCoreRowModel,
+  getExpandedRowModel,
+  getSortedRowModel,
+  useReactTable,
+  Row as RowType,
+} from '@tanstack/react-table';
+import { useVirtualizer } from '@tanstack/react-virtual';
+import {
+  DndContext,
+  type DragEndEvent,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
+import { arrayMove } from '@dnd-kit/sortable';
+import debounce from 'lodash.debounce';
 
+import { useFirstMountState, useStateFromProp } from '@xcritical/utils';
+
+import { IColumn, IGridProps, IItem } from './interfaces';
 import {
-  Body,
+  getBaseColls,
+  getChangedColumns,
+  getPinnedProps,
+  mappingColumns,
+} from './utils';
+import {
   BodyCell,
-  BodyCellOffset,
   BodyCellContent,
+  BodyCellContentWrapper,
   ExpandButtonWrapper,
+  Row,
+  TBody,
   Wrapper,
-  TotalBlock,
-  TotalCellContent,
-  TotalCell,
-  ShiftInsteadButton,
-  TotalsShift,
 } from './styled';
-import { AddIcon, RemoveIcon } from './icons';
-import { searchLastVisible, getFullWidth } from './utils';
 import { HeaderWrapper } from './HeaderWrapper';
-import { IColumn, IInternalGrid } from './interfaces';
-import { GridPositions } from './consts';
+import { RemoveIcon, AddIcon } from './icons';
 
-const InternalGrid: React.FC<IInternalGrid> = ({
-  rightScroll = true,
-  bottomScroll = true,
-  width,
-  height,
-  shouldMovingColumns = true,
-  shouldChangeColumnsWidth = true,
-  scrollTop,
-  onScrollsyncScroll,
-  gridHOCMappedColumns,
-  setGridHOCMappedColumns,
-  resizeGridAfterResizeLastColumn,
-  gridPosition,
-  onChangeColumns = () => {},
-  totals,
-  handleSelect,
-  onChangeExpand,
-  mappedItems = [],
-  selectedRows,
-  themeRef,
+export const InternalGrid: React.FC<IGridProps> = ({
+  items,
+  columns,
+  theme,
+  width = 0,
+  height = 0,
   rowHeight,
-  isScrollingOptOut,
-  overscanColumnCount,
-  overscanRowCount,
-  shiftFirstColumn,
-  onChangeSort,
-  shouldFitLastColumn,
+  disableSelect,
+  isMultiSelect,
+  shouldChangeColumnsWidth = false,
+  shouldMovingColumns = false,
+  enableSubRowSelection,
+  selectedRowKeys,
+  onSortChanged,
+  onSelect,
+  onChangeColumns,
+  enableSorting = true,
+  enableMultiSort,
+  manualSorting = false,
   minColumnWidth,
-  gridProps,
+  overscan = 8,
 }) => {
-  const [mappedColumns, setMappedColumns] =
-    useState<IColumn[]>(gridHOCMappedColumns);
-  const fullWidthRef = useRef(
-    getFullWidth(mappedColumns, gridPosition === GridPositions.CENTER)
+  const isFirtsMount = useFirstMountState();
+  const sensors = useSensors(
+    useSensor(MouseSensor, {}),
+    useSensor(TouchSensor, {}),
+    useSensor(KeyboardSensor, {})
   );
-  const [scrollLeft, setScrollLeft] = useState<number>(0);
-  const [changingColumns, setChangingColumns] = useState<string>('');
-  const gridRef = useRef<VirtualisedGrid>();
-  const cacheRef = useRef(
-    new CellMeasurerCache({
-      fixedWidth: true,
-      fixedHeight: Boolean(rowHeight),
-      defaultHeight: rowHeight ?? 100,
-    })
+  const $columns = React.useMemo(
+    () => mappingColumns(columns, { minColumnWidth }),
+    [columns, minColumnWidth]
   );
 
-  const filteredColums = useMemo<IColumn[]>(
-    () => mappedColumns.filter(({ visible }) => visible),
-    [mappedColumns]
-  );
-
-  useEffect(() => {
-    const newFullWidth = getFullWidth(
-      gridHOCMappedColumns,
-      gridPosition === GridPositions.CENTER
-    );
-
-    fullWidthRef.current = newFullWidth;
-
-    if (newFullWidth < width && shouldFitLastColumn) {
-      const lastElemIdx = searchLastVisible(
-        gridHOCMappedColumns,
-        gridHOCMappedColumns.length
-      );
-      const widthLast = gridHOCMappedColumns[lastElemIdx].width;
-      const newColumns = setIn(
-        gridHOCMappedColumns,
-        Number(widthLast) + (width - newFullWidth),
-        [String(lastElemIdx), 'width']
-      );
-      setMappedColumns(newColumns);
-
-      return;
-    }
-
-    setMappedColumns(gridHOCMappedColumns);
-  }, [gridHOCMappedColumns, width, shouldFitLastColumn]);
-
-  const handleScroll = useCallback(
-    (e: ScrollPosition) => {
-      setScrollLeft(-e.scrollLeft);
-
-      if (onScrollsyncScroll) {
-        onScrollsyncScroll(e);
-      }
-    },
-    [setScrollLeft, onScrollsyncScroll]
-  );
-
-  const cellRenderer: React.FC<GridCellProps> = ({
-    columnIndex,
-    key,
-    parent,
-    rowIndex,
-    style,
-  }) => {
-    const isFirstColumn = columnIndex === 0;
-
-    const row = mappedItems[rowIndex];
-    const { __key, __parent, __isExpand } = mappedItems[rowIndex];
-    const column = filteredColums[columnIndex];
-
-    const expandLevel =
-      isFirstColumn && shiftFirstColumn ? row.__expandLevel : 0;
-
-    const { field, render: renderFunction } = column;
-    const { [field]: content } = row;
-
-    const cellContent = renderFunction
-      ? renderFunction(content, field, row, rowIndex, {
-          expandLevel,
-          isExpanded: __isExpand,
-          parentItem: __parent,
-          key: __key,
-        })
-      : content;
-
-    const handleExpand = () => {
-      onChangeExpand(
-        rowIndex,
-        mappedItems[rowIndex].children,
-        mappedItems[rowIndex]
-      );
+  const [columnPinning] = useMemo<[pinning: ColumnPinningState]>(() => {
+    const pinning: ColumnPinningState = {
+      left: [],
+      right: [],
     };
-    const isSelected = selectedRows.some(
-      (k: string) => k === mappedItems[rowIndex].__key
-    );
+    columns.reduce((acc, item) => {
+      acc[item.field] = item;
 
-    return (
-      <CellMeasurer
-        cache={cacheRef.current}
-        columnIndex={columnIndex}
-        key={key}
-        parent={parent}
-        rowIndex={rowIndex}>
-        <BodyCell
-          aria-rowindex={rowIndex}
-          aria-colindex={columnIndex}
-          data-column-name={field}
-          role="gridcell"
-          onClick={(e: MouseEvent) => {
-            handleSelect(e, mappedItems[rowIndex].__key);
-          }}
-          key={key}
-          selected={isSelected}
-          style={{
-            ...style,
-            width: column.width,
-          }}
-          firstRow={rowIndex === 0}
-          even={!!(rowIndex % 2)}
-          theme={themeRef.current}>
-          <BodyCellOffset
-            center={!!column.center}
-            expandLevel={expandLevel}
-            theme={themeRef.current}
-          />
-
-          <BodyCellContent
-            theme={themeRef.current}
-            center={!!column.center}
-            selected={isSelected}
-            rowHeight={rowHeight}>
-            {column.isExpandable && mappedItems[rowIndex].children && (
-              <ExpandButtonWrapper
-                onClick={handleExpand}
-                theme={themeRef.current}>
-                {mappedItems[rowIndex].__isExpand ? (
-                  <RemoveIcon />
-                ) : (
-                  <AddIcon />
-                )}
-              </ExpandButtonWrapper>
-            )}
-
-            {column.isExpandable && !mappedItems[rowIndex].children && (
-              <ShiftInsteadButton theme={themeRef.current} />
-            )}
-            <span>{cellContent}</span>
-          </BodyCellContent>
-        </BodyCell>
-      </CellMeasurer>
-    );
-  };
-
-  const handleChangeWidth = useCallback(
-    (index, newWidth) => {
-      let newColumns: IColumn[] = setIn(mappedColumns, newWidth, [
-        index,
-        'width',
-      ]);
-      let newFullWidth: number = newColumns.reduce(
-        (acc, { width: colWidth }) => acc + colWidth,
-        0
-      );
-
-      if (
-        newFullWidth < width &&
-        !resizeGridAfterResizeLastColumn &&
-        shouldFitLastColumn
-      ) {
-        const lastColIdx = searchLastVisible(newColumns, newColumns.length);
-        newColumns = setIn(
-          newColumns,
-          newColumns[lastColIdx].width + (width - newFullWidth),
-          [String(lastColIdx), 'width']
-        );
-
-        newFullWidth = newColumns.reduce(
-          (acc, { width: colWidth }) => acc + colWidth,
-          0
-        );
+      if (item.fixedPosition) {
+        // eslint-disable-next-line no-unused-expressions
+        pinning[item.fixedPosition]?.push(item.field);
       }
 
-      fullWidthRef.current = newFullWidth;
-      setGridHOCMappedColumns(newColumns);
-      setMappedColumns(newColumns);
-      onChangeColumns(newColumns, gridPosition);
+      return acc;
+    }, {} as Record<string, IColumn>);
+
+    return [pinning];
+  }, [columns]);
+
+  const enableSelect = isMultiSelect || !disableSelect;
+
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [rowSelection = {}, setRowSelection] = useStateFromProp<
+    RowSelectionState | undefined
+  >(selectedRowKeys);
+  const [cellSize, setCellSize] = React.useState<ColumnSizingState>({});
+  const [expanded, setExpanded] = React.useState<ExpandedState>({});
+  const [columnOrder, setColumnOrder] = React.useState<string[]>(() =>
+    $columns.map((c) => c.id!)
+  );
+
+  const $onSelect = useCallback(
+    (selection: Updater<RowSelectionState>) => {
+      setRowSelection(selection, onSelect);
     },
-    [mappedColumns, onChangeColumns, width, gridPosition, shouldFitLastColumn]
+    [onSelect]
   );
 
-  const handleChangeColumns = useCallback(
-    (newColumns) => {
-      setMappedColumns(newColumns);
-      onChangeColumns(newColumns, gridPosition);
+  const $onExpandCallback = useCallback(
+    (row: RowType<IItem>) => (e: MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+      row.toggleExpanded();
     },
-    [onChangeColumns, gridPosition]
+    []
   );
 
-  useEffect(() => {
-    if (isScrollingOptOut) gridRef.current?.recomputeGridSize();
-  }, [selectedRows]);
+  const table = useReactTable({
+    data: items,
+    columns: $columns,
+    state: {
+      columnPinning,
+      columnOrder,
+      expanded,
+      rowSelection,
+      sorting,
+      columnSizing: cellSize,
+    },
+    enableColumnResizing: shouldChangeColumnsWidth,
+    enableMultiSort,
+    enableSorting,
+    onExpandedChange: setExpanded,
+    getSubRows: (row) => row.children,
+    enableMultiRowSelection: isMultiSelect,
+    enableRowSelection: enableSelect,
+    enableSubRowSelection: enableSubRowSelection || isMultiSelect,
+    onColumnOrderChange: setColumnOrder,
+    onRowSelectionChange: $onSelect,
+    columnResizeMode: 'onChange',
+    columnResizeDirection: 'ltr',
+    onColumnSizingChange: setCellSize,
+    onSortingChange: setSorting,
+    getCoreRowModel: getCoreRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
+    manualSorting,
+    getSortedRowModel: !manualSorting ? getSortedRowModel() : undefined,
+    debugTable: true,
+  });
+
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (active && over && active.id !== over.id) {
+      setColumnOrder((columnOrder) => {
+        const oldIndex = columnOrder.indexOf(active.id as string);
+        const newIndex = columnOrder.indexOf(over.id as string);
+
+        const newOrder = arrayMove(columnOrder, oldIndex, newIndex); // this is just a splice util
+
+        return newOrder;
+      });
+    }
+  }, []);
 
   useEffect(() => {
-    if (gridRef.current) gridRef.current.recomputeGridSize();
+    if (!isFirtsMount) setColumnOrder($columns.map((c) => c.id!));
+  }, [$columns]);
 
-    if (cacheRef.current && !rowHeight) cacheRef.current.clearAll();
-  }, [mappedColumns, mappedItems]);
+  const debouncedOnChangeColumns = useCallback(
+    debounce((columnOrder, cellSize, sorting) => {
+      if (onChangeColumns) {
+        const sortedColumns = getChangedColumns(
+          columns,
+          columnOrder,
+          cellSize,
+          sorting
+        );
+        onChangeColumns(sortedColumns);
+      }
+    }, 100),
 
-  useEffect(() => {
-    if (gridRef.current) gridRef.current.recomputeGridSize();
-  }, [selectedRows]);
-
-  const {
-    header: { height: headerHeight = 0 } = {},
-    totals: { height: totalsHeight = 0 } = {},
-  } = themeRef.current!;
-
-  const gridHeight = useMemo(
-    () =>
-      Number(
-        height -
-          Number(headerHeight) -
-          Number(totals ? totalsHeight : 0) -
-          (resizeGridAfterResizeLastColumn ? 8 : 0)
-      ),
-    [
-      height,
-      headerHeight,
-      totals,
-      totalsHeight,
-      resizeGridAfterResizeLastColumn,
-    ]
+    [onChangeColumns, columns]
   );
+  useEffect(() => {
+    if (!isFirtsMount) {
+      debouncedOnChangeColumns(columnOrder, cellSize, sorting);
+    }
+  }, [columnOrder, cellSize]);
+
+  useEffect(() => {
+    if (!isFirtsMount) {
+      if (onSortChanged) {
+        const sortedColumns = getChangedColumns(
+          columns,
+          columnOrder,
+          cellSize,
+          sorting
+        );
+
+        onSortChanged(sortedColumns);
+      }
+    }
+  }, [sorting]);
+
+  const { rows } = table.getRowModel();
+
+  // The virtualizer needs to know the scrollable container element
+  const tableContainerRef = React.useRef<HTMLDivElement>(null);
+
+  const rowVirtualizer = useVirtualizer({
+    count: rows.length,
+    estimateSize: () => rowHeight || 33, // estimate row height for accurate scrollbar dragging
+    getScrollElement: () => tableContainerRef.current,
+    // measure dynamic row height, except in firefox because it measures table border height incorrectly
+    measureElement:
+      typeof window !== 'undefined' &&
+      navigator.userAgent.indexOf('Firefox') === -1
+        ? (element) => element.getBoundingClientRect().height
+        : undefined,
+    overscan,
+  });
 
   return (
-    <Wrapper
-      theme={themeRef.current}
-      width={width}
-      changingColumns={changingColumns}>
-      <HeaderWrapper
-        fullWidth={fullWidthRef.current}
-        columns={mappedColumns}
-        translateX={scrollLeft}
-        onChangeWidth={handleChangeWidth}
-        onChangeColumns={handleChangeColumns}
-        setChangingColumns={setChangingColumns}
-        theme={themeRef.current!}
-        shouldMovingColumns={shouldMovingColumns}
-        shouldChangeColumnsWidth={shouldChangeColumnsWidth}
-        gridPosition={gridPosition}
-        minColumnWidth={minColumnWidth}
-        onChangeSort={onChangeSort}
-      />
-      <Body rightScroll={rightScroll} bottomScroll={bottomScroll}>
-        <VirtualisedGrid
-          ref={gridRef as MutableRefObject<VirtualisedGrid>}
-          columnCount={filteredColums.length}
-          columnWidth={({ index }: any) => filteredColums[index].width}
-          deferredMeasurementCache={cacheRef.current}
-          height={gridHeight}
-          cellRenderer={cellRenderer}
-          rowCount={mappedItems.length}
-          rowHeight={cacheRef.current.rowHeight}
-          width={width}
-          onScroll={handleScroll}
-          scrollTop={scrollTop}
-          isScrollingOptOut={isScrollingOptOut}
-          overscanColumnCount={overscanColumnCount}
-          overscanRowCount={overscanRowCount}
-          {...gridProps}
-        />
-      </Body>
-      {resizeGridAfterResizeLastColumn && <TotalsShift />}
-      {totals && (
-        <TotalBlock
-          width={fullWidthRef.current}
-          translateX={scrollLeft}
-          theme={themeRef.current}>
-          {filteredColums.map((el: IColumn, index: number) => (
-            <TotalCell
-              theme={themeRef.current}
-              width={
-                filteredColums.length === index + 1 ? el.width + 8 : el.width
-              }>
-              <TotalCellContent center={!!el.center} theme={themeRef.current}>
-                <span>{totals[el.field]}</span>
-              </TotalCellContent>
-            </TotalCell>
-          ))}
-        </TotalBlock>
-      )}
-    </Wrapper>
+    <DndContext
+      collisionDetection={closestCenter}
+      modifiers={[restrictToHorizontalAxis]}
+      onDragEnd={handleDragEnd}
+      sensors={sensors}>
+      <Wrapper
+        $width={width}
+        $height={height}
+        theme={theme}
+        ref={tableContainerRef}>
+        {/* Even though we're still using sematic table tags, we must use CSS grid and flexbox for dynamic row heights */}
+
+        <table style={{ display: 'grid' }}>
+          <HeaderWrapper
+            columnOrder={columnOrder}
+            table={table}
+            theme={theme!}
+            shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+            shouldMovingColumns={shouldMovingColumns}
+          />
+
+          <TBody theme={theme} height={rowVirtualizer.getTotalSize()}>
+            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+              const row = rows[virtualRow.index];
+
+              return (
+                <Row
+                  data-index={virtualRow.index} // needed for dynamic row height measurement
+                  ref={(node) => rowVirtualizer.measureElement(node)} // measure dynamic row height
+                  key={row.id}
+                  onClick={
+                    enableSelect ? row.getToggleSelectedHandler() : undefined
+                  }
+                  rowHeight={rowHeight}
+                  selected={row.getIsSelected()}
+                  even={!!(virtualRow.index % 2)}
+                  theme={theme}
+                  translateY={virtualRow.start}>
+                  {row.getVisibleCells().map((cell) => (
+                    <BodyCell
+                      {...getPinnedProps(cell.column)}
+                      aria-rowindex={virtualRow.index}
+                      aria-colindex={cell.column.getIndex()}
+                      data-column-name={cell.column.id}
+                      firstRow={virtualRow.index === 0}
+                      even={!!(virtualRow.index % 2)}
+                      key={cell.id}
+                      selected={row.getIsSelected()}
+                      data-column-id={cell.column.id}
+                      data-column-data={cell.getValue()}
+                      theme={theme}
+                      depth={row.depth}
+                      width={cell.column.getSize()}>
+                      <BodyCellContentWrapper theme={theme}>
+                        {getBaseColls(cell).isExpandable &&
+                          row.getCanExpand() && (
+                            <ExpandButtonWrapper
+                              onClick={$onExpandCallback(row)}
+                              theme={theme}>
+                              {row.getIsExpanded() ? (
+                                <RemoveIcon />
+                              ) : (
+                                <AddIcon />
+                              )}
+                            </ExpandButtonWrapper>
+                          )}
+                        <BodyCellContent
+                          theme={theme}
+                          selected={row.getIsSelected()}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </BodyCellContent>
+                      </BodyCellContentWrapper>
+                    </BodyCell>
+                  ))}
+                </Row>
+              );
+            })}
+          </TBody>
+        </table>
+      </Wrapper>
+    </DndContext>
   );
 };
-
-export default InternalGrid;

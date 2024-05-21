@@ -48,8 +48,9 @@ export const PureSelect = function <
   onChange,
   ...rest
 }: SelectProps<Option, IsMulti, Group>): ReactElement {
-  const themeContext =
-    useContext<IThemeNamespace<ISelectBaseTheme>>(ThemeContext);
+  const themeContext = useContext<
+    IThemeNamespace<ISelectBaseTheme> | undefined
+  >(ThemeContext);
   const innerTheme = (theme ?? themeContext) || {};
   const selectRef = useRef<any>();
 

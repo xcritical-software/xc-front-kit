@@ -40,7 +40,9 @@ export const PureButton = React.forwardRef<HTMLButtonElement, IButtonProps>(
     },
     ref: React.MutableRefObject<HTMLButtonElement>
   ) => {
-    const themeContext = useContext<IThemeNamespace<ButtonTheme>>(ThemeContext);
+    const themeContext = useContext<IThemeNamespace<ButtonTheme> | undefined>(
+      ThemeContext
+    );
     const innerTheme = (theme ?? themeContext) || {};
     const innerRef = useRef<HTMLButtonElement>(null);
     const combinedRef = ref || innerRef;

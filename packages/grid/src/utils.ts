@@ -1,29 +1,17 @@
-import { setIn } from 'utilitify';
+/* eslint-disable no-nested-ternary */
+import {
+  Cell,
+  Column,
+  ColumnDef,
+  ColumnSizingState,
+  Row,
+  SortingState,
+} from '@tanstack/react-table';
 
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
 import { gridThemeNamespace, defaultTheme } from './theme';
-import { IGridTheme, IMappedItem, IColumn, IItem } from './interfaces';
-import { GridPositions } from './consts';
-
-export const guid = () => {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
-
-  return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}${
-    s4() + s4()
-  }-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
-};
-
-export const addOrDeleteItemFromArray = (array: string[], item: string) => {
-  if (array.some((el: string) => el === item))
-    return array.filter((el: string) => el !== item);
-
-  return [...array, item];
-};
+import { IGridTheme, IColumn, IItem } from './interfaces';
 
 export function gridTheme(
   theme: IThemeNamespace,
@@ -34,124 +22,88 @@ export function gridTheme(
   return func(theme, propertyPath) as IGridTheme;
 }
 
-export const getMappedItems = (items: IItem[]): IMappedItem[] =>
-  items.map(
-    (el: IItem): IMappedItem =>
-      el.__key
-        ? { __expandLevel: 0, ...el, __key: el.__key }
-        : { __expandLevel: 0, ...el, __key: guid() }
-  );
+export const cellRenderMapper = (
+  value: any,
+  column: Column<any>,
+  row: Row<any>,
+  renderFn?: Function
+) => {
+  if (!renderFn) return value;
 
-export const deleteSystemPropsFromObject = (
-  item?: IMappedItem,
-  saveKey: boolean = false
-): IItem | undefined => {
-  if (item) {
-    /* eslint-disable @typescript-eslint/no-unused-vars */
-    const { __key, __expandLevel, __isExpand, __parent, ...rest } = item;
-    /* eslint-enable @typescript-eslint/no-unused-vars */
-
-    return saveKey ? { __key, ...rest } : rest;
-  }
-
-  return undefined;
+  return renderFn(value, column.id, row.original, row.index, row);
 };
-
-export const deleteSystemPropsFromObjects = (
-  arr: IMappedItem[],
-  saveKey: boolean = false
-): IItem =>
-  arr.map((el: IMappedItem) => deleteSystemPropsFromObject(el, saveKey));
-
-export const searchLastVisible = (arr: IColumn[], idx: number) => {
-  let lastVisible = 0;
-  for (let i = idx - 1; i >= 0; i--) {
-    if (arr[i].visible) {
-      lastVisible = i;
-      break;
-    }
-  }
-
-  return lastVisible;
-};
-export const searchNextVisible = (arr: IColumn[], idx: number) => {
-  let nextVisible = arr.length - 1;
-  for (let i = idx + 1; i < arr.length; i++) {
-    if (arr[i].visible) {
-      nextVisible = i;
-      break;
-    }
-  }
-
-  return nextVisible;
-};
-
-export const getFullWidth = (
+export type ColumnDefWithBase<T> = ColumnDef<T> & { _base: IColumn };
+export const mappingColumns = (
   columns: IColumn[],
-  addScrollWidth: boolean = false
-) =>
-  columns
-    .filter(({ visible }: IColumn) => visible)
-    .reduce(
-      (acc: number, { width: colWidth }) => acc + colWidth,
-      addScrollWidth ? 10 : 0
-    );
+  options: { minColumnWidth?: number }
+): ColumnDefWithBase<IItem>[] =>
+  columns.map((column) => ({
+    id: column.field,
+    accessorKey: column.field,
+    header: column.headerName,
+    size: column.width,
+    maxSize: column.maxWidth,
+    minSize: column.minWidth || options.minColumnWidth,
 
-export const removeSorting = (columns) =>
-  columns.map((el) => {
-    if (el.sortable && el.sortOrder) {
-      return {
-        ...el,
-        sortOrder: null,
-      };
-    }
+    cell: ({ cell, getValue }) => {
+      const value = getValue();
 
-    return el;
-  });
+      return column.render
+        ? cellRenderMapper(value, cell.column, cell.row, column.render)
+        : value ?? '';
+    },
+    sortingFn: column.sortingFn || 'auto',
+    sortable: column.sortable,
+    resizable: column.resizable === undefined ? true : column.resizable,
+    filterable: false,
+    groupable: false,
+    aggregatable: false,
+    footer: column.footer,
+    _base: column,
+  }));
 
-export const changeGridSort = ({
-  sortOrder,
-  index,
-  gridPosition,
-  leftColumns,
-  centerColumns,
-  rightColumns,
-  setLeftMappedColumns,
-  setCenterMappedColumns,
-  setRightMappedColumns,
-}) => {
-  if (gridPosition === GridPositions.LEFT) {
-    const newLeftColumns = setIn(leftColumns, sortOrder, [index, 'sortOrder']);
-    setLeftMappedColumns(newLeftColumns);
-    setCenterMappedColumns(centerColumns);
-    setRightMappedColumns(rightColumns);
+export const getPinnedProps = (column: Column<any>) => {
+  const pinned = column.getIsPinned();
+  const isFirstPinned =
+    pinned === 'left'
+      ? column.getIsLastColumn('left')
+      : pinned === 'right'
+      ? column.getIsFirstColumn('right')
+      : false;
+  const pinPagging =
+    pinned === 'left'
+      ? column.getStart('left')
+      : pinned === 'right'
+      ? column.getAfter('right')
+      : undefined;
 
-    return [...newLeftColumns, ...centerColumns, ...rightColumns];
-  }
-
-  if (gridPosition === GridPositions.CENTER) {
-    const newCenterColumns = setIn(centerColumns, sortOrder, [
-      index,
-      'sortOrder',
-    ]);
-    setLeftMappedColumns(leftColumns);
-    setCenterMappedColumns(newCenterColumns);
-    setRightMappedColumns(rightColumns);
-
-    return [...leftColumns, ...newCenterColumns, ...rightColumns];
-  }
-
-  if (gridPosition === GridPositions.RIGHT) {
-    const newRightColumns = setIn(rightColumns, sortOrder, [
-      index,
-      'sortOrder',
-    ]);
-    setLeftMappedColumns(leftColumns);
-    setCenterMappedColumns(centerColumns);
-    setRightMappedColumns(newRightColumns);
-
-    return [...leftColumns, ...centerColumns, ...newRightColumns];
-  }
-
-  return [];
+  return {
+    pinned,
+    isFirstPinned,
+    pinPagging,
+  };
 };
+
+export const getBaseColls = (cell: Cell<IItem, unknown>) =>
+  (cell.column.columnDef as ColumnDefWithBase<IItem>)._base;
+
+export const getChangedColumns = (
+  columns: IColumn[],
+  columnOrder: string[],
+  columnSize: ColumnSizingState,
+  columnSorting: SortingState
+) =>
+  columnOrder.map((columnId) => {
+    const column = columns.find((c) => c.field === columnId);
+    const sorting = columnSorting.find((c) => c.id === columnId);
+
+    return {
+      ...column,
+      sortOrder: sorting?.desc
+        ? 'desc'
+        : sorting?.desc === false
+        ? 'asc'
+        : undefined,
+      width: columnSize[columnId] || column?.width,
+    };
+  });

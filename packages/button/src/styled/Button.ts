@@ -25,7 +25,7 @@ const style = css<IStyledButtonProps>`
   direction: ${({ isRTL }) => (isRTL ? 'rtl' : 'ltr')};
 `;
 
-export const StyledButton = styled.div`
+export const StyledButton = styled.div<IStyledButtonProps>`
   align-items: center;
   box-sizing: border-box;
   display: inline-flex;

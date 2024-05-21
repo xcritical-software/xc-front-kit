@@ -1,4 +1,4 @@
-import { css, FlattenInterpolation } from 'styled-components';
+import { css, RuleSet } from 'styled-components';
 import get from 'lodash.get';
 import memoize from 'micro-memoize';
 
@@ -77,37 +77,36 @@ export const getElementStyles: IReturnFunction<AllType> = memoize(
   }
 );
 
-export const getPropertyStyles: GetPropStyles<FlattenInterpolation<AllType>> =
-  memoize(
-    (
+export const getPropertyStyles: GetPropStyles<RuleSet<AllType>> = memoize(
+  (
+    theme,
+    propertyPath,
+    appearance,
+    baseAppearance,
+    defaultPropertyValue = 'inherit'
+  ) => {
+    let property = inlineEditAppearanceTheme(
       theme,
-      propertyPath,
-      appearance,
-      baseAppearance,
-      defaultPropertyValue = 'inherit'
-    ) => {
-      let property = inlineEditAppearanceTheme(
+      appearance as string,
+      baseAppearance as string,
+      [propertyPath]
+    );
+
+    if (!property) {
+      property = defaultPropertyValue;
+    }
+
+    return memoize((elementName: string) => {
+      const element = inlineEditAppearanceTheme(
         theme,
         appearance as string,
         baseAppearance as string,
-        [propertyPath]
+        elementName
       );
 
-      if (!property) {
-        property = defaultPropertyValue;
-      }
-
-      return memoize((elementName: string) => {
-        const element = inlineEditAppearanceTheme(
-          theme,
-          appearance as string,
-          baseAppearance as string,
-          elementName
-        );
-
-        return css`
-          ${() => `${propertyPath}: ${get(element, [propertyPath], property)}`};
-        `;
-      });
-    }
-  );
+      return css`
+        ${() => `${propertyPath}: ${get(element, [propertyPath], property)}`};
+      `;
+    });
+  }
+);

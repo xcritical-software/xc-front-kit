@@ -4,18 +4,31 @@ import { css } from 'styled-components';
 import {
   IHeader,
   IHeaderCell,
-  IHeaderCellContent,
   ITotalCellContent,
-  IRightBorder,
   IBodyCellOffset,
   IWrapper,
-  IMovingElem,
-  IBodyCellContent,
+  IBodyCellContentWrapper,
   ITotalCell,
   ITotal,
+  IRightBorder,
+  IRow,
 } from '../interfaces';
 
 export const getHeaderStyles = ({ theme }: IHeader) => {
+  if (theme.border !== 'none') {
+    return css`
+      background-color: ${theme.header?.backgroundColor};
+      border-bottom: ${theme.header?.border};
+    `;
+  }
+
+  return css`
+    background-color: ${theme.header?.backgroundColor};
+    border: ${theme.header?.border};
+  `;
+};
+
+export const getGroupHeaderStyles = ({ theme }: IHeader) => {
   if (theme.border !== 'none') {
     return css`
       background-color: ${theme.header?.backgroundColor};
@@ -41,23 +54,41 @@ export const getTotalStyles = ({ theme }: ITotal) => {
   `;
 };
 
-export const getBodyCellStyles = ({
-  theme: {
-    evenRowBackground,
-    selectedRowBackgroundColor,
-    row,
-    rowCellBorder,
-    header,
-  },
+export const getRowStyles = ({
+  theme: { evenRowBackground, selectedRowBackgroundColor, row },
   selected,
   even,
-  firstRow,
-}: any) => {
-  let background = '';
+}: IRow) => {
+  let background: string | undefined = '';
 
   if (selected) background = selectedRowBackgroundColor;
   else if (even) background = evenRowBackground;
-  else background = row.backgroundColor;
+  else background = row?.backgroundColor;
+
+  return css<IRow>`
+    background: ${background};
+    ${({ rowHeight }) => (rowHeight ? `height: ${rowHeight}px` : null)};
+  `;
+};
+
+export const getBodyCellStyles = ({
+  theme: {
+    row,
+    rowCellBorder,
+    header,
+    evenRowBackground,
+    selectedRowBackgroundColor,
+  },
+  firstRow,
+  depth,
+  selected,
+  even,
+}: any) => {
+  let background: string | undefined = '';
+
+  if (selected) background = selectedRowBackgroundColor;
+  else if (even) background = evenRowBackground;
+  else background = row?.backgroundColor;
 
   const headerBorder = header.border !== 'none';
   const borderTop = !firstRow || !headerBorder ? row.border : 'none';
@@ -72,8 +103,9 @@ export const getBodyCellStyles = ({
       `;
 
   return css`
-    background: ${background};
+    padding-left: ${depth * 2}rem;
     border-top: ${borderTop};
+    background: ${background};
     ${rowCellBorder !== 'none' ? cellBorder : ''};
   `;
 };
@@ -100,14 +132,7 @@ export const getTotalCellStyles = ({ theme }: ITotalCell) => {
     `;
 };
 
-export const getHeaderCellContentStyles = ({ theme }: IHeaderCellContent) => `
-      span {
-        font-size: ${theme.header?.fontSize};
-        color: ${theme.header?.color};
-        padding: ${theme.header?.padding};
-        overflow: ${theme.header?.overflow};
-      }
-    `;
+export const getHeaderCellContentStyles = () => ``;
 
 export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
     background-color: ${theme.totals?.backgroundColor};
@@ -118,21 +143,11 @@ export const getTotalCellContentStyles = ({ theme }: ITotalCellContent) => `
     }
       `;
 
-export const getRightBorderStyles = ({ theme, isEmpty }: IRightBorder) => `
-      background-color: ${
-        isEmpty
-          ? theme.emptyHeaderCellBackground
-          : theme.header?.backgroundColor
-      };
-      border-right: ${theme.headerCellBorder};
-    `;
-
 export const getBodyCellContentStyles = ({
-  theme: { row, selectedRowColor },
-  selected,
+  theme: { row },
   rowHeight,
   center,
-}: IBodyCellContent) => css`
+}: IBodyCellContentWrapper) => css`
   padding: ${row?.padding};
   ${rowHeight ? `height: ${rowHeight}px` : null};
   ${center
@@ -140,19 +155,6 @@ export const getBodyCellContentStyles = ({
         justify-content: center;
       `
     : null};
-  span {
-    font-size: ${row?.fontSize};
-    color: ${selected ? selectedRowColor : row?.color};
-    display: flex;
-    ${rowHeight
-      ? css`
-          white-space: nowrap;
-          overflow: hidden;
-          display: block;
-          text-overflow: ellipsis;
-        `
-      : null}
-  }
 `;
 
 export const getBodyCellOffsetStyles = ({
@@ -169,16 +171,6 @@ export const getWrapperStyles = ({
     border: ${border};
     border-radius: ${borderRadius}px;
   `;
-
-export const getMovingElemStyles = ({ theme }: IMovingElem) => `
-      background-color: ${theme.movingHeaderCellBackgroungColor};
-      border: ${theme.headerCellBorder};
-      span {
-        color: ${theme.movingHeaderCellColor};
-        font-size: ${theme.header?.fontSize};
-        padding: ${theme.header?.padding};
-      }
-    `;
 
 export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
   let border = '';
@@ -202,6 +194,32 @@ export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
   `;
 };
 
+export const getPinnedStyles = ({ pinned, pinPagging, isFirstPinned }: any) => {
+  if (pinned) {
+    return `
+      position: sticky;
+      ${pinned === 'left' ? 'left' : 'right'}: ${pinPagging}px;
+      z-index: 1;
+      ${
+        isFirstPinned
+          ? `box-shadow: ${
+              pinned === 'left'
+                ? '-4px 0 4px -4px gray inset'
+                : '4px 0 4px -4px gray inset'
+            };`
+          : `box-shadow: ${isFirstPinned};`
+      }
+    `;
+  }
+
+  return '';
+};
+
 export const getExpandButtonStyles = ({ theme }) => `
     margin: ${theme.expandButtonMargin}
   `;
+
+export const getRightBorderStyles = ({ theme }: IRightBorder) => `
+      background-color: ${theme.header?.backgroundColor};
+      border-right: ${theme.headerCellBorder};
+    `;

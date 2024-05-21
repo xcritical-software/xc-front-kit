@@ -11,9 +11,9 @@
 		"dist"
 	],
 	"scripts": {
-		"test": "exit 0",
-		"compile": "tsdx build --format cjs,esm --verbose && api-extractor run",
-		"compile:local": "tsdx build --format cjs,esm --verbose && api-extractor run --local",
+		"test": "jest --config=jest.config.js",
+		"compile": "tsup",
+		"compile:local": "tsup",
 		"build": "yarn clean && yarn compile",
 		"clean": "rimraf dist lib .publish"
 	},
@@ -31,5 +31,8 @@
 	"private": false,
 	"peerDependencies": {
 		"react": "^16.8.3"
+	},
+	"devDependencies": {
+		"@testing-library/react-hooks": "^8.0.0"
 	}
 }

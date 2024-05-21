@@ -74,7 +74,9 @@ export const Drawer: React.FC<React.PropsWithChildren<IDrawerProps>> = memo(
     classNamePrefix,
   }) => {
     const [animate, setAnimate] = useState(true);
-    const themeContext = useContext<IThemeNamespace<DrawerTheme>>(ThemeContext);
+    const themeContext = useContext<IThemeNamespace<DrawerTheme> | undefined>(
+      ThemeContext
+    );
     const innerTheme = theme || themeContext || tempObject;
     const clickXRef = useRef(0);
 

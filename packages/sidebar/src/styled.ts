@@ -16,7 +16,7 @@ import {
   IScrollbarProps,
 } from './interfaces';
 
-export const Root = styled.div.attrs(({ offsetLeft }: ISidebarStates) => ({
+export const Root = styled.div.attrs<ISidebarStates>(({ offsetLeft }) => ({
   style: {
     width: `${offsetLeft}px`,
   },

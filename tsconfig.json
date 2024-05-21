@@ -18,7 +18,6 @@
     "noImplicitThis": true,
     "noImplicitAny": false,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "declaration": false,
     "allowSyntheticDefaultImports": true,
@@ -27,15 +26,22 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "@xcritical/*": ["node_modules/@xcritical/*/src"]
+    }
   },
   "include": [
     "packages/**/src/**/*",
+    "packages/**/tsup.config.ts",
     "packages/**/stories/**/*",
-    "packages/**/test/**/*"
+    "packages/**/test/**/*",
+    "./jest-setup.ts",
+    "./tsup.config.ts"
   ],
   "exclude": [
     "node_modules",
     "build",
     "scripts",
-  ]
+  ],
 }

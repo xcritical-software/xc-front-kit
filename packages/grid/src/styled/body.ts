@@ -1,12 +1,20 @@
 import styled, { css } from 'styled-components';
 
-import { IBodyCellContent, IBodyCellOffset } from '../interfaces';
+import {
+  IBodyCellContent,
+  IBodyCellContentWrapper,
+  IBodyCellOffset,
+  IRow,
+  ITBody,
+} from '../interfaces';
 
 import {
   getBodyCellStyles,
   getBodyCellContentStyles,
   getBodyCellOffsetStyles,
   getExpandButtonStyles,
+  getPinnedStyles,
+  getRowStyles,
 } from './utils';
 
 const scrollbarSize = 8;
@@ -118,22 +126,43 @@ export const Body = styled.div<any>`
   ${getScrollbar};
 `;
 
-export const BodyCell = styled.div<any>`
+export const BodyCell = styled.td.attrs<any>(({ width }) => ({
+  style: {
+    width: `${width}px`,
+  },
+}))`
   display: flex;
   align-items: center;
   ${getBodyCellStyles}
-  span {
-    display: inline-block;
-    font-weight: 400;
-  }
+  ${getPinnedStyles}
 `;
 
-export const BodyCellContent = styled.div<IBodyCellContent>`
+export const BodyCellContentWrapper = styled.div<IBodyCellContentWrapper>`
   overflow: hidden;
   width: 100%;
   display: flex;
   align-items: center;
   ${getBodyCellContentStyles}
+`;
+
+export const BodyCellContent = styled.div<IBodyCellContent>`
+  display: inline-block;
+  font-weight: 400;
+
+    font-size: ${({ theme: { row } }) => row?.fontSize};
+    color: ${({ selected, theme: { selectedRowColor, row } }) =>
+      selected ? selectedRowColor : row?.color};
+    display: flex;
+    ${({ rowHeight }) =>
+      rowHeight
+        ? css`
+            white-space: nowrap;
+            overflow: hidden;
+            display: block;
+            text-overflow: ellipsis;
+          `
+        : null}
+  }
 `;
 
 export const BodyCellOffset = styled.div<IBodyCellOffset>`
@@ -154,4 +183,24 @@ export const ShiftInsteadButton = styled.div`
   width: 16px;
   float: left;
   ${getExpandButtonStyles}
+`;
+
+export const TBody = styled.tbody.attrs<ITBody>(({ height }) => ({
+  style: {
+    height: `${height}px`,
+  },
+}))`
+  display: grid;
+  position: relative;
+`;
+
+export const Row = styled.tr.attrs<IRow>(({ translateY }) => ({
+  style: {
+    transform: `translateY(${translateY}px)`,
+  },
+}))`
+  display: flex;
+  position: absolute;
+  width: 100%;
+  ${getRowStyles}
 `;

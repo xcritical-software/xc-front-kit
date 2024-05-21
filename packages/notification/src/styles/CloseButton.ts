@@ -1,8 +1,6 @@
-import { css, CSSObject, FlattenSimpleInterpolation } from 'styled-components';
+import { css, CSSObject, RuleSet } from 'styled-components';
 
-export const CloseButton = (
-  closeButtonStyles: CSSObject
-): FlattenSimpleInterpolation => css`
+export const CloseButton = (closeButtonStyles: CSSObject): RuleSet => css`
   .Toastify__close-button {
     ${closeButtonStyles}
   }

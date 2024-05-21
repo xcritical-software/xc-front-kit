@@ -12,14 +12,14 @@ interface IWrapperProps extends IThemeProps {
   isRTL: boolean;
   transition: string;
 }
-export const Wrapper = styled.div.attrs(
-  ({ width, transition }: IWrapperProps) => ({
+export const Wrapper = styled.div.attrs<IWrapperProps>(
+  ({ width, transition }) => ({
     style: {
       width: `${width}px`,
       transition,
     },
   })
-)<IWrapperProps>`
+)`
   flex-direction: ${({ isRTL }) => (isRTL ? 'row-reverse' : 'row')};
   ${({ isRTL }) => (isRTL ? 'right: 0px' : 'left: 0px')};
   ${({ theme, appearance, baseAppearance }) =>
@@ -75,13 +75,13 @@ interface IBlanketWrapperProps extends IThemeProps {
   visible: boolean;
   transition: string;
 }
-export const BlanketWrapper = styled.div.attrs(
-  ({ transition }: IBlanketWrapperProps) => ({
+export const BlanketWrapper = styled.div.attrs<IBlanketWrapperProps>(
+  ({ transition }) => ({
     style: {
       transition,
     },
   })
-)<IBlanketWrapperProps>`
+)`
   opacity: ${({ visible }) => (visible ? '1' : '0')};
   ${({ theme, appearance, baseAppearance }) =>
     getElementStyles(theme, 'blanketWrapper', appearance, baseAppearance)}

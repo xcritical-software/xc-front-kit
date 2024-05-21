@@ -83,4 +83,6 @@ export const PureCheckbox: React.FC<ICheckboxProps> = ({
   );
 };
 
-export const Checkbox = React.memo(withTheme(PureCheckbox));
+export const Checkbox: React.FC<ICheckboxProps> = React.memo(
+  withTheme(PureCheckbox)
+);

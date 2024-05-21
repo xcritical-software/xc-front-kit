@@ -8,32 +8,17 @@ export * from './body';
 export * from './header';
 export * from './totals';
 
-export const Wrapper = styled.div.attrs(({ width }: IWrapper) => ({
+export const Wrapper = styled.div.attrs<IWrapper>(({ $width, $height }) => ({
   style: {
-    width: `${width}px`,
+    width: `${$width}px`,
+    height: `${$height}px`,
   },
 }))`
   * {
     box-sizing: border-box;
   }
-  overflow: hidden;
-  ${({ changingColumns }) => {
-    if (changingColumns === 'move') {
-      return `
-        user-select: none;
-        cursor: grabbing;
-        `;
-    }
+  overflow: auto;
 
-    if (changingColumns === 'resize') {
-      return `
-        user-select: none;
-        cursor: w-resize;
-        `;
-    }
-
-    return '';
-  }}
   ${getWrapperStyles}
 `;
 
