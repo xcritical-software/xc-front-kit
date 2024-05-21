@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.6.0-beta.1...@xcritical/grid@2.0.0-beta.0) (2024-05-21)
+
+### Features
+
+- **grid:** up major version ([a86b53e](https://github.com/xcritical-software/xc-front-kit/commit/a86b53ec0fd9f46407a3a911d51b8b4586501819))
+
+### BREAKING CHANGES
+
+- **grid:** base component has been changed to a new components
+
 # [1.6.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.5.2-beta.2...@xcritical/grid@1.6.0-beta.1) (2024-05-21)
 
 ### Bug Fixes
