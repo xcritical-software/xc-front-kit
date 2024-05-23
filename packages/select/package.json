@@ -1,46 +1,47 @@
 {
-	"name": "@xcritical/select",
-	"version": "1.3.1",
-	"description": "XCritical Select Component",
-	"main": "dist/index.js",
-	"source": "src/index.ts",
-	"xc:source": "src/index.ts",
-	"module": "dist/select.esm.js",
-	"types": "dist/typings.d.ts",
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"test": "exit 0",
-		"compile": "tsup",
-		"compile:local": "tsup",
-		"build": "yarn clean && yarn compile",
-		"clean": "rimraf dist lib .publish"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
-	},
-	"keywords": [],
-	"author": "XCritical Software",
-	"license": "MIT",
-	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/select#readme",
-	"publishConfig": {
-		"access": "public"
-	},
-	"private": false,
-	"peerDependencies": {
-		"lodash.get": "^4.x",
-		"react": "^16.8.3",
-		"styled-components": "^6.1.8"
-	},
-	"dependencies": {
-		"@xcritical/theme": "^1.3.0",
-		"lodash.isempty": "4.x",
-		"micro-memoize": "^4.0.8",
-		"polished": "^4.1.4",
-		"react-custom-scrollbars": "^4.2.1",
-		"react-select": "5.3.0",
-		"utilitify": "^1.0.3"
-	}
+  "name": "@xcritical/select",
+  "version": "1.4.0-beta.2",
+  "description": "XCritical Select Component",
+  "main": "dist/index.js",
+  "source": "src/index.ts",
+  "xc:source": "src/index.ts",
+  "module": "dist/select.esm.js",
+  "types": "dist/typings.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "exit 0",
+    "compile": "tsup",
+    "compile:local": "tsup",
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf dist lib .publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+  },
+  "keywords": [],
+  "author": "XCritical Software",
+  "license": "MIT",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/select#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "private": false,
+  "peerDependencies": {
+    "lodash.get": "^4.x",
+    "react": "^16.8.3",
+    "styled-components": "^6.1.8"
+  },
+  "dependencies": {
+    "@xcritical/theme": "^1.4.0-beta.2",
+    "lodash.isempty": "4.x",
+    "micro-memoize": "^4.0.8",
+    "polished": "^4.1.4",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-select": "5.3.0",
+    "utilitify": "^1.0.3"
+  },
+  "gitHead": "1d05de862b39bcfd905720c6293e439929125e15"
 }

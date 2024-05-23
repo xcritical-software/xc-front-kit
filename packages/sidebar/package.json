@@ -1,54 +1,55 @@
 {
-	"name": "@xcritical/sidebar",
-	"version": "1.3.1",
-	"description": "XCritical Sidebar Component",
-	"main": "dist/index.js",
-	"source": "src/index.ts",
-	"xc:source": "src/index.ts",
-	"module": "dist/sidebar.esm.js",
-	"types": "dist/typings.d.ts",
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"test": "exit 0",
-		"compile": "tsup",
-		"compile:local": "tsup",
-		"build": "yarn clean && yarn compile",
-		"clean": "rimraf dist lib .publish"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
-	},
-	"keywords": [
-		"sidebar",
-		"library"
-	],
-	"publishConfig": {
-		"access": "public"
-	},
-	"author": "XCritical Software",
-	"license": "MIT",
-	"private": false,
-	"peerDependencies": {
-		"micro-memoize": "4.0.8",
-		"prop-types": "^15.0.0",
-		"react": "^16.9.0",
-		"styled-components": "^6.1.8"
-	},
-	"devDependencies": {
-		"mdi-react": "^9.1.0",
-		"micro-memoize": "4.0.8",
-		"react-router": "^6.2.1",
-		"react-router-dom": "^6.3.0"
-	},
-	"dependencies": {
-		"@xcritical/theme": "^1.3.0",
-		"lodash.get": "^4.x",
-		"polished": "^4.1.4",
-		"react-custom-scrollbars": "^4.2.1",
-		"resize-observer-polyfill": "^1.5.1",
-		"utilitify": "^1.0.3"
-	}
+  "name": "@xcritical/sidebar",
+  "version": "1.4.0-beta.2",
+  "description": "XCritical Sidebar Component",
+  "main": "dist/index.js",
+  "source": "src/index.ts",
+  "xc:source": "src/index.ts",
+  "module": "dist/sidebar.esm.js",
+  "types": "dist/typings.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "exit 0",
+    "compile": "tsup",
+    "compile:local": "tsup",
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf dist lib .publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+  },
+  "keywords": [
+    "sidebar",
+    "library"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "XCritical Software",
+  "license": "MIT",
+  "private": false,
+  "peerDependencies": {
+    "micro-memoize": "4.0.8",
+    "prop-types": "^15.0.0",
+    "react": "^16.9.0",
+    "styled-components": "^6.1.8"
+  },
+  "devDependencies": {
+    "mdi-react": "^9.1.0",
+    "micro-memoize": "4.0.8",
+    "react-router": "^6.2.1",
+    "react-router-dom": "^6.3.0"
+  },
+  "dependencies": {
+    "@xcritical/theme": "^1.4.0-beta.2",
+    "lodash.get": "^4.x",
+    "polished": "^4.1.4",
+    "react-custom-scrollbars": "^4.2.1",
+    "resize-observer-polyfill": "^1.5.1",
+    "utilitify": "^1.0.3"
+  },
+  "gitHead": "1d05de862b39bcfd905720c6293e439929125e15"
 }

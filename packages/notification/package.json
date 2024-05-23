@@ -1,45 +1,46 @@
 {
-	"name": "@xcritical/notification",
-	"version": "1.3.1",
-	"description": "",
-	"main": "dist/index.js",
-	"source": "src/index.ts",
-	"xc:source": "src/index.ts",
-	"module": "dist/notification.esm.js",
-	"types": "dist/typings.d.ts",
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"test": "exit 0",
-		"compile": "tsup",
-		"compile:local": "tsup",
-		"build": "yarn clean && yarn compile",
-		"clean": "rimraf dist lib .publish"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
-	},
-	"keywords": [
-		"notification",
-		"style-components",
-		"themed"
-	],
-	"publishConfig": {
-		"access": "public"
-	},
-	"author": "XCritical Software",
-	"license": "MIT",
-	"homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/notification#readme",
-	"private": false,
-	"peerDependencies": {
-		"react": "^16.8.3",
-		"styled-components": "^6.1.8"
-	},
-	"dependencies": {
-		"lodash.get": "4.x",
-		"react-toastify": "5.5.0",
-		"utilitify": "^1.0.3"
-	}
+  "name": "@xcritical/notification",
+  "version": "1.4.0-beta.2",
+  "description": "",
+  "main": "dist/index.js",
+  "source": "src/index.ts",
+  "xc:source": "src/index.ts",
+  "module": "dist/notification.esm.js",
+  "types": "dist/typings.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "exit 0",
+    "compile": "tsup",
+    "compile:local": "tsup",
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf dist lib .publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+  },
+  "keywords": [
+    "notification",
+    "style-components",
+    "themed"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "XCritical Software",
+  "license": "MIT",
+  "homepage": "https://github.com/xcritical-software/xc-front-kit/tree/develop/packages/notification#readme",
+  "private": false,
+  "peerDependencies": {
+    "react": "^16.8.3",
+    "styled-components": "^6.1.8"
+  },
+  "dependencies": {
+    "lodash.get": "4.x",
+    "react-toastify": "5.5.0",
+    "utilitify": "^1.0.3"
+  },
+  "gitHead": "1d05de862b39bcfd905720c6293e439929125e15"
 }
