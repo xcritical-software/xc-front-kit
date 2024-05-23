@@ -196,7 +196,7 @@ export const TBody = styled.tbody.attrs<ITBody>(({ height }) => ({
 
 export const Row = styled.tr.attrs<IRow>(({ translateY }) => ({
   style: {
-    transform: `translateY(${translateY}px)`,
+    top: `${translateY}px`,
   },
 }))`
   display: flex;
