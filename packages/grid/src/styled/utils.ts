@@ -80,7 +80,6 @@ export const getBodyCellStyles = ({
     selectedRowBackgroundColor,
   },
   firstRow,
-  depth,
   selected,
   even,
 }: any) => {
@@ -103,7 +102,6 @@ export const getBodyCellStyles = ({
       `;
 
   return css`
-    padding-left: ${depth * 2}rem;
     border-top: ${borderTop};
     background: ${background};
     ${rowCellBorder !== 'none' ? cellBorder : ''};
