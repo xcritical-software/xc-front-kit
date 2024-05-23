@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.0...@xcritical/grid@2.0.0-beta.1) (2024-05-23)
+
+### Bug Fixes
+
+- change row transform to row top ([3926c26](https://github.com/xcritical-software/xc-front-kit/commit/3926c26a72b0983db496e6a5bd5e1e584217e12e))
+
 # [2.0.0-beta.0](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@1.6.0-beta.1...@xcritical/grid@2.0.0-beta.0) (2024-05-21)
 
 ### Features
