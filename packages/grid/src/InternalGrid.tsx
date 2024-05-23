@@ -288,6 +288,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
                       data-column-data={cell.getValue()}
                       theme={theme}
                       depth={row.depth}
+                      isExpandable={getBaseColls(cell).isExpandable}
                       width={cell.column.getSize()}>
                       <BodyCellContentWrapper theme={theme}>
                         {getBaseColls(cell).isExpandable &&
