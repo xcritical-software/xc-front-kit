@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.1...@xcritical/grid@2.0.0-beta.2) (2024-05-23)
+
+### Bug Fixes
+
+- **grid:** remove grid deep padding ([09a6973](https://github.com/xcritical-software/xc-front-kit/commit/09a6973dd404350dc3a47e8c44e994151c899216))
+
 # [2.0.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.0...@xcritical/grid@2.0.0-beta.1) (2024-05-23)
 
 ### Bug Fixes
