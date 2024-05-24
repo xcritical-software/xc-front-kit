@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.5.0-beta.1...@xcritical/utils@0.5.0-beta.2) (2024-05-24)
+
+### Features
+
+- **grid:** add props to manage the state ([c052abf](https://github.com/xcritical-software/xc-front-kit/commit/c052abfb9b26395d69ce0967b36bc114b152a80f))
+
 # [0.5.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.4.0...@xcritical/utils@0.5.0-beta.1) (2024-05-21)
 
 ### Bug Fixes
