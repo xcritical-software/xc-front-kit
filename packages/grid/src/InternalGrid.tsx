@@ -72,6 +72,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
   manualSorting = false,
   minColumnWidth,
   overscan = 8,
+  debugTable,
 }) => {
   const isFirtsMount = useFirstMountState();
   const sensors = useSensors(
@@ -159,7 +160,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
     getExpandedRowModel: getExpandedRowModel(),
     manualSorting,
     getSortedRowModel: !manualSorting ? getSortedRowModel() : undefined,
-    debugTable: true,
+    debugTable: debugTable ?? process.env.NODE_ENV === 'development',
   });
 
   const handleDragEnd = useCallback((event: DragEndEvent) => {

@@ -99,6 +99,7 @@ export interface IGridProps {
   selectedRowKeys?: RowSelectionState;
   manualSorting?: boolean;
   getRowId?: (row: IItem) => string;
+  debugTable?: boolean;
 }
 
 export interface IMappedItem extends IItem {
