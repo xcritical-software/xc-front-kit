@@ -1,11 +1,13 @@
 import { ReactElement, CSSProperties } from 'react';
-import { Alignment } from 'react-virtualized';
 import {
+  ColumnSizingState,
   OnChangeFn,
   Header as RTHeader,
   RowSelectionState,
   SortingFnOption,
+  SortingState,
   Table,
+  VisibilityState,
 } from '@tanstack/react-table';
 
 import { ITheme } from '@xcritical/theme';
@@ -13,25 +15,6 @@ import { ITheme } from '@xcritical/theme';
 import { GridPositions, GridSort } from './consts';
 
 type CellContent = string | number | ReactElement | any;
-
-export interface IInternalGridProps {
-  'aria-label'?: string;
-  'aria-readonly'?: boolean;
-  className?: string;
-  containerProps?: object;
-  containerRole?: string;
-  containerStyle?: CSSProperties;
-  id?: string;
-  isScrolling?: boolean;
-  scrollingResetTimeInterval?: number;
-  scrollLeft?: number;
-  scrollToAlignment?: Alignment;
-  scrollToColumn?: number;
-  scrollTop?: number;
-  scrollToRow?: number;
-  style?: CSSProperties;
-  tabIndex?: number | null;
-}
 
 export interface IItem {
   [key: string]: CellContent;
@@ -73,32 +56,47 @@ export interface ITotals {
 }
 
 export interface IGridProps {
+  // props
   items: IItem[];
   columns: IColumn[];
   width?: number;
   height?: number;
-  disableSelect?: boolean;
-  isMultiSelect?: boolean;
-  onChangeColumns?: Function;
-  onSortChanged?: Function;
-  enableSorting?: boolean;
-  enableMultiSort?: boolean;
+  rowHeight?: number;
+  overscan?: number;
+  minColumnWidth?: number;
   // TODO: need to implement
   totals?: ITotals;
   theme?: ITheme<IGridTheme>;
-  onSelect?: OnChangeFn<RowSelectionState | undefined>;
+  getRowId?: (row: IItem) => string;
+
+  // flags
+  manualSorting?: boolean;
+  enableSorting?: boolean;
+  enableMultiSort?: boolean;
+  disableSelect?: boolean;
+  isMultiSelect?: boolean;
   shouldMovingColumns?: boolean;
   enableSubRowSelection?: boolean;
   shouldChangeColumnsWidth?: boolean;
   shouldFitContainer?: boolean;
-  rowHeight?: number;
-  overscan?: number;
-  minColumnWidth?: number;
-  gridProps?: IInternalGridProps;
-  onChangeExpand?: Function;
+  debugTable?: boolean;
+
+  // states
+  columnVisibility?: VisibilityState;
   selectedRowKeys?: RowSelectionState;
-  manualSorting?: boolean;
-  getRowId?: (row: IItem) => string;
+  columnOrder?: string[];
+  columnSizes?: ColumnSizingState;
+  columnSorting?: SortingState;
+
+  // callbacks
+  onChangeColumnSorting?: OnChangeFn<SortingState | undefined>;
+  onChangeColumnsOrder?: OnChangeFn<string[]>;
+  onChangeColumnVisibility?: OnChangeFn<VisibilityState | undefined>;
+  onChangeColumnSizes?: OnChangeFn<ColumnSizingState | undefined>;
+  onSelect?: OnChangeFn<RowSelectionState | undefined>;
+  onChangeColumns?: Function;
+  onSortChanged?: Function;
+  onChangeExpand?: Function;
 }
 
 export interface IMappedItem extends IItem {
