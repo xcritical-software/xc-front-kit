@@ -7,13 +7,13 @@ import {
   ExpandedState,
   RowSelectionState,
   SortingState,
-  Updater,
   flexRender,
   getCoreRowModel,
   getExpandedRowModel,
   getSortedRowModel,
   useReactTable,
   Row as RowType,
+  VisibilityState,
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import {
@@ -64,7 +64,15 @@ export const InternalGrid: React.FC<IGridProps> = ({
   shouldMovingColumns = false,
   enableSubRowSelection,
   selectedRowKeys,
+  columnVisibility: columnVisibilityProp,
+  columnOrder: columnOrderProp,
+  columnSorting: columnSortingProp,
+  columnSizes,
   onSortChanged,
+  onChangeColumnsOrder,
+  onChangeColumnSorting,
+  onChangeColumnVisibility,
+  onChangeColumnSizes,
   onSelect,
   onChangeColumns,
   enableSorting = true,
@@ -106,21 +114,35 @@ export const InternalGrid: React.FC<IGridProps> = ({
 
   const enableSelect = isMultiSelect || !disableSelect;
 
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [rowSelection = {}, setRowSelection] = useStateFromProp<
-    RowSelectionState | undefined
-  >(selectedRowKeys);
-  const [cellSize, setCellSize] = React.useState<ColumnSizingState>({});
-  const [expanded, setExpanded] = React.useState<ExpandedState>({});
-  const [columnOrder, setColumnOrder] = React.useState<string[]>(() =>
-    $columns.map((c) => c.id!)
+  const [sorting, setSorting] = useStateFromProp<SortingState | undefined>(
+    columnSortingProp,
+    onChangeColumnSorting,
+    true
   );
 
-  const $onSelect = useCallback(
-    (selection: Updater<RowSelectionState>) => {
-      setRowSelection(selection, onSelect);
-    },
-    [onSelect]
+  const [rowSelection = {}, setRowSelection] = useStateFromProp<
+    RowSelectionState | undefined
+  >(selectedRowKeys, onSelect, true);
+
+  const [cellSize, setCellSize] = useStateFromProp<
+    ColumnSizingState | undefined
+  >(columnSizes, onChangeColumnSizes, true);
+
+  const [columnVisibility, setColumnVisibility] = useStateFromProp<
+    VisibilityState | undefined
+  >(columnVisibilityProp, onChangeColumnVisibility, true);
+
+  const $columnOrder = useMemo<string[]>(
+    () => columnOrderProp ?? $columns.map((c) => c.id!),
+    [columnOrderProp, columns]
+  );
+
+  const [expanded, setExpanded] = React.useState<ExpandedState>({});
+
+  const [columnOrder, setColumnOrder] = useStateFromProp<string[]>(
+    () => $columnOrder,
+    onChangeColumnsOrder,
+    true
   );
 
   const $onExpandCallback = useCallback(
@@ -135,6 +157,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
     data: items,
     columns: $columns,
     state: {
+      columnVisibility,
       columnPinning,
       columnOrder,
       expanded,
@@ -142,6 +165,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
       sorting,
       columnSizing: cellSize,
     },
+    onColumnVisibilityChange: setColumnVisibility,
     enableColumnResizing: shouldChangeColumnsWidth,
     enableMultiSort,
     enableSorting,
@@ -151,7 +175,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
     enableRowSelection: enableSelect,
     enableSubRowSelection: enableSubRowSelection || isMultiSelect,
     onColumnOrderChange: setColumnOrder,
-    onRowSelectionChange: $onSelect,
+    onRowSelectionChange: setRowSelection,
     columnResizeMode: 'onChange',
     columnResizeDirection: 'ltr',
     onColumnSizingChange: setCellSize,
@@ -160,7 +184,10 @@ export const InternalGrid: React.FC<IGridProps> = ({
     getExpandedRowModel: getExpandedRowModel(),
     manualSorting,
     getSortedRowModel: !manualSorting ? getSortedRowModel() : undefined,
-    debugTable: debugTable ?? process.env.NODE_ENV === 'development',
+    debugTable:
+      debugTable !== undefined
+        ? debugTable
+        : process.env.NODE_ENV === 'development',
   });
 
   const handleDragEnd = useCallback((event: DragEndEvent) => {
@@ -198,10 +225,10 @@ export const InternalGrid: React.FC<IGridProps> = ({
     [onChangeColumns, columns]
   );
   useEffect(() => {
-    if (!isFirtsMount) {
+    if (!isFirtsMount && onChangeColumns) {
       debouncedOnChangeColumns(columnOrder, cellSize, sorting);
     }
-  }, [columnOrder, cellSize]);
+  }, [columnOrder, cellSize, sorting]);
 
   useEffect(() => {
     if (!isFirtsMount) {
@@ -209,8 +236,8 @@ export const InternalGrid: React.FC<IGridProps> = ({
         const sortedColumns = getChangedColumns(
           columns,
           columnOrder,
-          cellSize,
-          sorting
+          cellSize ?? {},
+          sorting ?? []
         );
 
         onSortChanged(sortedColumns);

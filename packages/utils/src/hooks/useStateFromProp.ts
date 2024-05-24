@@ -7,7 +7,7 @@ export function useStateFromProp<S>(
   onChange?: (arg: S) => void,
   ignoreInintialChanges?: boolean
 ): [S, (state: SetStateAction<S>, cb?: (state: S) => void) => void] {
-  const [value, setValue] = useStateCallback(initialValue);
+  const [value, setValue] = useStateCallback(initialValue, onChange);
 
   useEffect(
     () => setValue(initialValue, ignoreInintialChanges ? undefined : onChange),
