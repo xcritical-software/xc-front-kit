@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.3...@xcritical/grid@2.0.0-beta.4) (2024-05-24)
+
+### Bug Fixes
+
+- **grid:** empty states ([7373415](https://github.com/xcritical-software/xc-front-kit/commit/73734151da171dacbd1a2e79f2771044eb0a8ee1))
+
 # [2.0.0-beta.3](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.2...@xcritical/grid@2.0.0-beta.3) (2024-05-24)
 
 ### Bug Fixes
