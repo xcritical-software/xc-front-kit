@@ -124,11 +124,11 @@ export const InternalGrid: React.FC<IGridProps> = ({
     RowSelectionState | undefined
   >(selectedRowKeys, onSelect, true);
 
-  const [cellSize, setCellSize] = useStateFromProp<
+  const [cellSize = {}, setCellSize] = useStateFromProp<
     ColumnSizingState | undefined
   >(columnSizes, onChangeColumnSizes, true);
 
-  const [columnVisibility, setColumnVisibility] = useStateFromProp<
+  const [columnVisibility = {}, setColumnVisibility] = useStateFromProp<
     VisibilityState | undefined
   >(columnVisibilityProp, onChangeColumnVisibility, true);
 
