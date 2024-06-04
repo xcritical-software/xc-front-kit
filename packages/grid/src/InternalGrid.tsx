@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
-import React, { MouseEvent, useCallback, useEffect, useMemo } from 'react';
+import React, { MouseEvent, useCallback, useMemo } from 'react';
 import {
   ColumnPinningState,
   ColumnSizingState,
@@ -28,17 +28,11 @@ import {
 } from '@dnd-kit/core';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
-import debounce from 'lodash.debounce';
 
-import { useFirstMountState, useStateFromProp } from '@xcritical/utils';
+import { useStateFromProp } from '@xcritical/utils';
 
-import { IColumn, IGridProps, IItem } from './interfaces';
-import {
-  getBaseColls,
-  getChangedColumns,
-  getPinnedProps,
-  mappingColumns,
-} from './utils';
+import { IColumn, IInternalGridProps, IItem } from './interfaces';
+import { getBaseColls, getPinnedProps, mappingColumns } from './utils';
 import {
   BodyCell,
   BodyCellContent,
@@ -51,7 +45,7 @@ import {
 import { HeaderWrapper } from './HeaderWrapper';
 import { RemoveIcon, AddIcon } from './icons';
 
-export const InternalGrid: React.FC<IGridProps> = ({
+export const InternalGrid: React.FC<IInternalGridProps> = ({
   items,
   columns,
   theme,
@@ -68,13 +62,11 @@ export const InternalGrid: React.FC<IGridProps> = ({
   columnOrder: columnOrderProp,
   columnSorting: columnSortingProp,
   columnSizes,
-  onSortChanged,
   onChangeColumnsOrder,
   onChangeColumnSorting,
   onChangeColumnVisibility,
   onChangeColumnSizes,
   onSelect,
-  onChangeColumns,
   enableSorting = true,
   enableMultiSort,
   manualSorting = false,
@@ -82,7 +74,6 @@ export const InternalGrid: React.FC<IGridProps> = ({
   overscan = 8,
   debugTable,
 }) => {
-  const isFirtsMount = useFirstMountState();
   const sensors = useSensors(
     useSensor(MouseSensor, {}),
     useSensor(TouchSensor, {}),
@@ -205,42 +196,6 @@ export const InternalGrid: React.FC<IGridProps> = ({
     }
   }, []);
 
-  const debouncedOnChangeColumns = useCallback(
-    debounce((columnOrder, cellSize, sorting) => {
-      if (onChangeColumns) {
-        const sortedColumns = getChangedColumns(
-          columns,
-          columnOrder,
-          cellSize,
-          sorting
-        );
-        onChangeColumns(sortedColumns);
-      }
-    }, 100),
-
-    [onChangeColumns, columns]
-  );
-  useEffect(() => {
-    if (!isFirtsMount && onChangeColumns) {
-      debouncedOnChangeColumns(columnOrder, cellSize, sorting);
-    }
-  }, [columnOrder, cellSize, sorting]);
-
-  useEffect(() => {
-    if (!isFirtsMount) {
-      if (onSortChanged) {
-        const sortedColumns = getChangedColumns(
-          columns,
-          columnOrder,
-          cellSize ?? {},
-          sorting ?? []
-        );
-
-        onSortChanged(sortedColumns);
-      }
-    }
-  }, [sorting]);
-
   const { rows } = table.getRowModel();
 
   // The virtualizer needs to know the scrollable container element
@@ -276,7 +231,7 @@ export const InternalGrid: React.FC<IGridProps> = ({
           <HeaderWrapper
             columnOrder={columnOrder}
             table={table}
-            theme={theme!}
+            theme={theme}
             shouldChangeColumnsWidth={shouldChangeColumnsWidth}
             shouldMovingColumns={shouldMovingColumns}
           />

@@ -91,11 +91,11 @@ export const getChangedColumns = (
   columns: IColumn[],
   columnOrder: string[],
   columnSize: ColumnSizingState,
-  columnSorting: SortingState
+  columnSorting?: SortingState
 ) =>
   columnOrder.map((columnId) => {
     const column = columns.find((c) => c.field === columnId);
-    const sorting = columnSorting.find((c) => c.id === columnId);
+    const sorting = columnSorting?.find((c) => c.id === columnId);
 
     return {
       ...column,

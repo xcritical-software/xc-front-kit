@@ -10,7 +10,7 @@ import {
   VisibilityState,
 } from '@tanstack/react-table';
 
-import { ITheme } from '@xcritical/theme';
+import { ITheme, IThemeNamespace } from '@xcritical/theme';
 
 import { GridPositions, GridSort } from './consts';
 
@@ -55,7 +55,7 @@ export interface ITotals {
   [key: string]: string | number;
 }
 
-export interface IGridProps {
+export interface IGridBaseProps {
   // props
   items: IItem[];
   columns: IColumn[];
@@ -66,7 +66,6 @@ export interface IGridProps {
   minColumnWidth?: number;
   // TODO: need to implement
   totals?: ITotals;
-  theme?: ITheme<IGridTheme>;
   getRowId?: (row: IItem) => string;
 
   // flags
@@ -94,9 +93,15 @@ export interface IGridProps {
   onChangeColumnVisibility?: OnChangeFn<VisibilityState | undefined>;
   onChangeColumnSizes?: OnChangeFn<ColumnSizingState | undefined>;
   onSelect?: OnChangeFn<RowSelectionState | undefined>;
-  onChangeColumns?: Function;
-  onSortChanged?: Function;
   onChangeExpand?: Function;
+}
+
+export interface IGridProps extends IGridBaseProps {
+  theme?: IThemeNamespace<IGridTheme>;
+}
+
+export interface IInternalGridProps extends IGridBaseProps {
+  theme: ITheme<IGridTheme>;
 }
 
 export interface IMappedItem extends IItem {

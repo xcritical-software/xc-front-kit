@@ -10,7 +10,10 @@ export function useStateFromProp<S>(
   const [value, setValue] = useStateCallback(initialValue, onChange);
 
   useEffect(
-    () => setValue(initialValue, ignoreInintialChanges ? undefined : onChange),
+    () =>
+      initialValue !== value
+        ? setValue(initialValue, ignoreInintialChanges ? undefined : onChange)
+        : undefined,
     [initialValue]
   );
 
