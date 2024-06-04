@@ -16,6 +16,8 @@ import { GridPositions, GridSort } from './consts';
 
 type CellContent = string | number | ReactElement | any;
 
+export { ColumnSizingState, RowSelectionState, SortingState, VisibilityState };
+
 export interface IItem {
   [key: string]: CellContent;
 }
