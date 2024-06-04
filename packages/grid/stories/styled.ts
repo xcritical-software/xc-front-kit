@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ITheme, colors } from '@xcritical/theme';
+import { IThemeNamespace, colors } from '@xcritical/theme';
 
 import { IGridTheme, gridThemeNamespace } from '../src';
 
@@ -31,7 +31,7 @@ export const SelectorColumnsWrapper = styled.div`
   display: flex;
 `;
 
-export const AMStheme: ITheme<IGridTheme> = {
+export const AMStheme: IThemeNamespace<IGridTheme> = {
   [gridThemeNamespace]: {
     evenRowBackground: colors.GRAY_LIGHT,
     selectedRowBackgroundColor: colors.BLACK_RAISIN,

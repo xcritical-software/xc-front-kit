@@ -32,10 +32,8 @@ const meta: Meta<typeof Grid> = {
     shouldMovingColumns: false,
     disableSelect: false,
     isMultiSelect: false,
-    onChangeColumns: action('onChangeColumns'),
     onChangeExpand: action('onChangeExpand'),
     onSelect: action('onSelect'),
-    onSortChanged: action('onSortChanged'),
   },
 
   parameters: { actions: { argTypesRegex: '^on.*' } },
@@ -125,7 +123,6 @@ export const FixedBoth: Story = {
           height={document.documentElement.clientHeight - 100}
           rowHeight={30}
           theme={AMStheme[gridThemeNamespace]}
-          onSortChanged={(cols) => console.table(cols)}
         />
       </div>
     </>
@@ -175,7 +172,6 @@ export const RenderFunction: Story = {
       height={document.documentElement.clientHeight - 100}
       rowHeight={30}
       theme={AMStheme}
-      onSortChanged={(cols) => console.table(cols)}
     />
   ),
 };
