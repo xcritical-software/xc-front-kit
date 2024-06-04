@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import styled from 'styled-components';
 import EqualIcon from 'mdi-react/EqualIcon';
 import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon';
 import KeyboardArrowUpIcon from 'mdi-react/KeyboardArrowUpIcon';
+import { faker } from '@faker-js/faker';
 
 import { ICellRenderParams, IColumn, IMappedItem } from '../src/interfaces';
 import { Popover, popoverThemeNamespace } from '../../popover';
@@ -117,6 +119,25 @@ export const columns = [
     field: 'col10',
   },
 ].map((el) => ({ ...el, visible: true }));
+
+export const makeColumns = (num) =>
+  [...Array(num + 1)].map((_, i) => ({
+    center,
+    width,
+    visible: true,
+    headerName: `Col ${i}`,
+    field: `col${i}`,
+  }));
+
+export const makeData = (num, columns) =>
+  [...Array(num)].map(() => ({
+    ...Object.fromEntries(
+      columns.map((col) => [col.field, faker.person.firstName()])
+    ),
+  }));
+
+export const columsBig = makeColumns(1_000);
+export const rowsBig = makeData(1_000, columsBig);
 
 export const generateLorem = (n: any) => {
   const text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.

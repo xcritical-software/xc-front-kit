@@ -7,7 +7,6 @@ import {
   ExpandedState,
   RowSelectionState,
   SortingState,
-  flexRender,
   getCoreRowModel,
   getExpandedRowModel,
   getSortedRowModel,
@@ -32,18 +31,10 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { useStateFromProp } from '@xcritical/utils';
 
 import { IColumn, IInternalGridProps, IItem } from './interfaces';
-import { getBaseColls, getPinnedProps, mappingColumns } from './utils';
-import {
-  BodyCell,
-  BodyCellContent,
-  BodyCellContentWrapper,
-  ExpandButtonWrapper,
-  Row,
-  TBody,
-  Wrapper,
-} from './styled';
+import { mappingColumns } from './utils';
+import { TBody, Wrapper } from './styled';
 import { HeaderWrapper } from './HeaderWrapper';
-import { RemoveIcon, AddIcon } from './icons';
+import { RowBody } from './RowBody';
 
 export const InternalGrid: React.FC<IInternalGridProps> = ({
   items,
@@ -71,7 +62,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   enableMultiSort,
   manualSorting = false,
   minColumnWidth,
-  overscan = 8,
+  overscan = 5,
   debugTable,
 }) => {
   const sensors = useSensors(
@@ -198,8 +189,18 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
 
   const { rows } = table.getRowModel();
 
+  const visibleColumns = table.getVisibleLeafColumns();
+
   // The virtualizer needs to know the scrollable container element
   const tableContainerRef = React.useRef<HTMLDivElement>(null);
+
+  const columnVirtualizer = useVirtualizer({
+    count: visibleColumns.length,
+    estimateSize: (index) => visibleColumns[index].getSize(), // estimate width of each column for accurate scrollbar dragging
+    getScrollElement: () => tableContainerRef.current,
+    horizontal: true,
+    overscan, // how many columns to render on each side off screen each way (adjust this for performance)
+  });
 
   const rowVirtualizer = useVirtualizer({
     count: rows.length,
@@ -214,6 +215,33 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     overscan,
   });
 
+  const virtualColumns = columnVirtualizer.getVirtualItems();
+  const virtualRows = rowVirtualizer.getVirtualItems();
+
+  let virtualPaddingVars = {
+    '--virtual-padding-left': 0,
+    '--virtual-padding-right': 0,
+    '--virtual-padding-right-display': 'none',
+    '--virtual-padding-left-display': 'none',
+  };
+
+  if (columnVirtualizer && virtualColumns.length) {
+    let virtualPaddingLeft: number | undefined;
+    let virtualPaddingRight: number | undefined;
+
+    virtualPaddingLeft = virtualColumns[0]?.start ?? 0;
+    virtualPaddingRight =
+      columnVirtualizer.getTotalSize() -
+      (virtualColumns[virtualColumns.length - 1]?.end ?? 0);
+
+    virtualPaddingVars = {
+      '--virtual-padding-left': virtualPaddingLeft,
+      '--virtual-padding-right': virtualPaddingRight,
+      '--virtual-padding-right-display': virtualPaddingRight ? 'flex' : 'none',
+      '--virtual-padding-left-display': virtualPaddingLeft ? 'flex' : 'none',
+    };
+  }
+
   return (
     <DndContext
       collisionDetection={closestCenter}
@@ -227,7 +255,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
         ref={tableContainerRef}>
         {/* Even though we're still using sematic table tags, we must use CSS grid and flexbox for dynamic row heights */}
 
-        <table style={{ display: 'grid' }}>
+        <table style={{ display: 'grid', ...virtualPaddingVars }}>
           <HeaderWrapper
             columnOrder={columnOrder}
             table={table}
@@ -237,63 +265,23 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
           />
 
           <TBody theme={theme} height={rowVirtualizer.getTotalSize()}>
-            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+            {virtualRows.map((virtualRow) => {
               const row = rows[virtualRow.index];
+              const visibleCells = row.getVisibleCells();
 
               return (
-                <Row
-                  data-index={virtualRow.index} // needed for dynamic row height measurement
-                  ref={(node) => rowVirtualizer.measureElement(node)} // measure dynamic row height
+                <RowBody
+                  row={row}
+                  vr={virtualRow}
+                  vcs={virtualColumns}
+                  visibleCells={visibleCells}
+                  rowVirtualizer={rowVirtualizer} // measure dynamic row height
                   key={row.id}
-                  onClick={
-                    enableSelect ? row.getToggleSelectedHandler() : undefined
-                  }
+                  enableSelect={enableSelect}
                   rowHeight={rowHeight}
-                  selected={row.getIsSelected()}
-                  even={!!(virtualRow.index % 2)}
                   theme={theme}
-                  translateY={virtualRow.start}>
-                  {row.getVisibleCells().map((cell) => (
-                    <BodyCell
-                      {...getPinnedProps(cell.column)}
-                      aria-rowindex={virtualRow.index}
-                      aria-colindex={cell.column.getIndex()}
-                      data-column-name={cell.column.id}
-                      firstRow={virtualRow.index === 0}
-                      even={!!(virtualRow.index % 2)}
-                      key={cell.id}
-                      selected={row.getIsSelected()}
-                      data-column-id={cell.column.id}
-                      data-column-data={cell.getValue()}
-                      theme={theme}
-                      depth={row.depth}
-                      isExpandable={getBaseColls(cell).isExpandable}
-                      width={cell.column.getSize()}>
-                      <BodyCellContentWrapper theme={theme}>
-                        {getBaseColls(cell).isExpandable &&
-                          row.getCanExpand() && (
-                            <ExpandButtonWrapper
-                              onClick={$onExpandCallback(row)}
-                              theme={theme}>
-                              {row.getIsExpanded() ? (
-                                <RemoveIcon />
-                              ) : (
-                                <AddIcon />
-                              )}
-                            </ExpandButtonWrapper>
-                          )}
-                        <BodyCellContent
-                          theme={theme}
-                          selected={row.getIsSelected()}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </BodyCellContent>
-                      </BodyCellContentWrapper>
-                    </BodyCell>
-                  ))}
-                </Row>
+                  onClick={$onExpandCallback}
+                />
               );
             })}
           </TBody>

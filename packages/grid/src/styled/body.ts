@@ -131,7 +131,9 @@ export const BodyCell = styled.td.attrs<any>(({ width }) => ({
     width: `${width}px`,
   },
 }))`
+  left: calc(var(--virtual-padding-left) * 1px);
   display: flex;
+  position: relative;
   align-items: center;
   ${getBodyCellStyles}
   ${getPinnedStyles}
