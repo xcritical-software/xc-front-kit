@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-beta.3](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.5.0-beta.2...@xcritical/utils@0.5.0-beta.3) (2024-06-04)
+
+### Features
+
+- **grid:** remove old contract ([8609d44](https://github.com/xcritical-software/xc-front-kit/commit/8609d444cb21e6cd4c1fab621ea2b40722d8f25f))
+
 # [0.5.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.5.0-beta.1...@xcritical/utils@0.5.0-beta.2) (2024-05-24)
 
 ### Features
