@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.7](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.6...@xcritical/grid@2.0.0-beta.7) (2024-06-05)
+
+### Bug Fixes
+
+- **grid:** fix reexport types ([d819279](https://github.com/xcritical-software/xc-front-kit/commit/d819279215d33ab4e2124a05b4f620c2269ac4c3))
+- **grid:** optimize grid performance with pinned collumns ([5424e7d](https://github.com/xcritical-software/xc-front-kit/commit/5424e7d2620d922507f8e5d6148ef383615d3111))
+- **grid:** use css variable for size ([014b043](https://github.com/xcritical-software/xc-front-kit/commit/014b043aa7a2329511ebd62365765e021e02684f))
+
+### Features
+
+- **grid:** update grid performance ([9c1f7ff](https://github.com/xcritical-software/xc-front-kit/commit/9c1f7ff45c4b072ba7e3f4fafc3eef3113b95561))
+
 # [2.0.0-beta.6](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.5...@xcritical/grid@2.0.0-beta.6) (2024-06-04)
 
 ### Features
