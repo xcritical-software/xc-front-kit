@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.5...@xcritical/grid@2.0.0-beta.6) (2024-06-04)
+
+### Features
+
+- **grid:** add proxy types ([ef6142c](https://github.com/xcritical-software/xc-front-kit/commit/ef6142cf2c67e6bf94d8aadb85d25c9897905dd8))
+
+# [2.0.0-beta.5](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.4...@xcritical/grid@2.0.0-beta.5) (2024-06-04)
+
+### Features
+
+- **grid:** remove old contract ([8609d44](https://github.com/xcritical-software/xc-front-kit/commit/8609d444cb21e6cd4c1fab621ea2b40722d8f25f))
+
 # [2.0.0-beta.4](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.3...@xcritical/grid@2.0.0-beta.4) (2024-05-24)
 
 ### Bug Fixes
