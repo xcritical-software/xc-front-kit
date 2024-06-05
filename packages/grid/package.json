@@ -57,7 +57,8 @@
     "utilitify": "^1.0.3"
   },
   "devDependencies": {
-    "mdi-react": "^6.7.0"
+    "mdi-react": "^6.7.0",
+    "@faker-js/faker": "^8.4.1"
   },
   "gitHead": "1d05de862b39bcfd905720c6293e439929125e15"
 }

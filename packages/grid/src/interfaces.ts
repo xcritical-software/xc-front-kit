@@ -1,7 +1,6 @@
 import { ReactElement, CSSProperties } from 'react';
 import {
   ColumnSizingState,
-  OnChangeFn,
   Header as RTHeader,
   RowSelectionState,
   SortingFnOption,
@@ -9,14 +8,13 @@ import {
   Table,
   VisibilityState,
 } from '@tanstack/react-table';
+import { VirtualItem } from '@tanstack/react-virtual';
 
 import { ITheme, IThemeNamespace } from '@xcritical/theme';
 
 import { GridPositions, GridSort } from './consts';
 
 type CellContent = string | number | ReactElement | any;
-
-export { ColumnSizingState, RowSelectionState, SortingState, VisibilityState };
 
 export interface IItem {
   [key: string]: CellContent;
@@ -90,11 +88,11 @@ export interface IGridBaseProps {
   columnSorting?: SortingState;
 
   // callbacks
-  onChangeColumnSorting?: OnChangeFn<SortingState | undefined>;
-  onChangeColumnsOrder?: OnChangeFn<string[]>;
-  onChangeColumnVisibility?: OnChangeFn<VisibilityState | undefined>;
-  onChangeColumnSizes?: OnChangeFn<ColumnSizingState | undefined>;
-  onSelect?: OnChangeFn<RowSelectionState | undefined>;
+  onChangeColumnSorting?: (state: SortingState | undefined) => void;
+  onChangeColumnsOrder?: (state: string[] | undefined) => void;
+  onChangeColumnVisibility?: (state: VisibilityState | undefined) => void;
+  onChangeColumnSizes?: (state: ColumnSizingState | undefined) => void;
+  onSelect?: (state: RowSelectionState | undefined) => void;
   onChangeExpand?: Function;
 }
 
@@ -126,6 +124,7 @@ export interface IHeaderWrapper {
   shouldChangeColumnsWidth: boolean;
   shouldMovingColumns: boolean;
   columnOrder: string[];
+  vcs: VirtualItem[];
 }
 
 export interface IHeader {

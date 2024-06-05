@@ -16,8 +16,10 @@ import {
   columns,
   columnsFixed,
   columnsWithRender,
+  columsBig,
   createRowsWithRender,
   rows,
+  rowsBig,
   rowsFixed,
   rowsWithChildren,
   totals,
@@ -75,6 +77,27 @@ export const Basic: Story = {
           {...props}
           columns={columns}
           items={rows}
+          totals={totals}
+          shouldFitContainer
+          width={document.documentElement.clientWidth - 100}
+          height={document.documentElement.clientHeight - 100}
+        />
+      </div>
+    </>
+  ),
+};
+
+export const BigTable: Story = {
+  decorators: [],
+  name: 'Big table',
+  parameters: {},
+  render: (props) => (
+    <>
+      <div style={{ height: '500px' }}>
+        <Grid
+          {...props}
+          columns={columsBig}
+          items={rowsBig}
           totals={totals}
           shouldFitContainer
           width={document.documentElement.clientWidth - 100}

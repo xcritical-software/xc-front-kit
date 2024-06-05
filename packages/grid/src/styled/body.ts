@@ -126,12 +126,13 @@ export const Body = styled.div<any>`
   ${getScrollbar};
 `;
 
-export const BodyCell = styled.td.attrs<any>(({ width }) => ({
+export const BodyCell = styled.td.attrs<any>(({ id }) => ({
   style: {
-    width: `${width}px`,
+    width: `calc(var(--col-${id}-size) * 1px)`,
   },
 }))`
   display: flex;
+  position: relative;
   align-items: center;
   ${getBodyCellStyles}
   ${getPinnedStyles}
