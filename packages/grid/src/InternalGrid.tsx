@@ -258,6 +258,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
         <table style={{ display: 'grid', ...virtualPaddingVars }}>
           <HeaderWrapper
             columnOrder={columnOrder}
+            vcs={virtualColumns}
             table={table}
             theme={theme}
             shouldChangeColumnsWidth={shouldChangeColumnsWidth}

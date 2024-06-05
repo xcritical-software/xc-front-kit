@@ -8,6 +8,7 @@ import {
   Table,
   VisibilityState,
 } from '@tanstack/react-table';
+import { VirtualItem } from '@tanstack/react-virtual';
 
 import { ITheme, IThemeNamespace } from '@xcritical/theme';
 
@@ -123,6 +124,7 @@ export interface IHeaderWrapper {
   shouldChangeColumnsWidth: boolean;
   shouldMovingColumns: boolean;
   columnOrder: string[];
+  vcs: VirtualItem[];
 }
 
 export interface IHeader {

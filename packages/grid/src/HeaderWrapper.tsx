@@ -1,12 +1,8 @@
 import React, { useRef } from 'react';
-import {
-  SortableContext,
-  horizontalListSortingStrategy,
-} from '@dnd-kit/sortable';
 
-import { HeaderCellWrapper } from './HeaderCell';
-import { Header, HeaderGroup } from './styled';
+import { Header } from './styled';
 import { IHeaderWrapper } from './interfaces';
+import { HeaderRow } from './HeaderRow';
 
 export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
   table,
@@ -14,27 +10,21 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
   shouldChangeColumnsWidth,
   shouldMovingColumns,
   columnOrder,
+  vcs,
 }) => {
   const headerRef = useRef<HTMLTableSectionElement>(null);
 
   return (
     <Header ref={headerRef} theme={theme}>
       {table.getHeaderGroups().map((el) => (
-        <SortableContext
-          items={columnOrder}
-          strategy={horizontalListSortingStrategy}>
-          <HeaderGroup>
-            {el.headers.map((header) => (
-              <HeaderCellWrapper
-                key={header.id}
-                theme={theme}
-                header={header}
-                shouldChangeColumnsWidth={shouldChangeColumnsWidth}
-                shouldMovingColumns={shouldMovingColumns}
-              />
-            ))}
-          </HeaderGroup>
-        </SortableContext>
+        <HeaderRow
+          theme={theme}
+          group={el}
+          shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+          shouldMovingColumns={shouldMovingColumns}
+          columnOrder={columnOrder}
+          vcs={vcs}
+        />
       ))}
     </Header>
   );
