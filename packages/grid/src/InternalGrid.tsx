@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
-import React, { MouseEvent, useCallback, useMemo } from 'react';
+import React, { MouseEvent, useCallback, useEffect, useMemo } from 'react';
 import {
   ColumnPinningState,
   ColumnSizingState,
@@ -31,8 +31,8 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { useStateFromProp } from '@xcritical/utils';
 
 import { IColumn, IInternalGridProps, IItem } from './interfaces';
-import { mappingColumns } from './utils';
-import { TBody, Wrapper } from './styled';
+import { getSelectUpDownElement, mappingColumns } from './utils';
+import { HiddenFocusElement, TBody, Wrapper } from './styled';
 import { HeaderWrapper } from './HeaderWrapper';
 import { RowBody } from './RowBody';
 
@@ -70,6 +70,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     useSensor(TouchSensor, {}),
     useSensor(KeyboardSensor, {})
   );
+
   const $columns = React.useMemo(
     () => mappingColumns(columns, { minColumnWidth }),
     [columns, minColumnWidth]
@@ -135,6 +136,44 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     []
   );
 
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (active && over && active.id !== over.id) {
+      setColumnOrder((columnOrder) => {
+        const oldIndex = columnOrder.indexOf(active.id as string);
+        const newIndex = columnOrder.indexOf(over.id as string);
+
+        const newOrder = arrayMove(columnOrder, oldIndex, newIndex); // this is just a splice util
+
+        return newOrder;
+      });
+    }
+  }, []);
+
+  const onKeyDown = useCallback(
+    (e: KeyboardEvent & { originalEvent: Event }) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        getSelectUpDownElement(table, rowVirtualizer, 'down');
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        getSelectUpDownElement(table, rowVirtualizer, 'up');
+      }
+    },
+    []
+  );
+
+  const $onSelect = () => {
+    setFocus();
+  };
+
+  const setFocus = () => {
+    hiddenContainerRef.current?.focus();
+  };
+
   const table = useReactTable({
     data: items,
     columns: $columns,
@@ -172,27 +211,15 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
         : process.env.NODE_ENV === 'development',
   });
 
-  const handleDragEnd = useCallback((event: DragEndEvent) => {
-    const { active, over } = event;
-
-    if (active && over && active.id !== over.id) {
-      setColumnOrder((columnOrder) => {
-        const oldIndex = columnOrder.indexOf(active.id as string);
-        const newIndex = columnOrder.indexOf(over.id as string);
-
-        const newOrder = arrayMove(columnOrder, oldIndex, newIndex); // this is just a splice util
-
-        return newOrder;
-      });
-    }
-  }, []);
-
   const { rows } = table.getRowModel();
 
   const visibleColumns = table.getVisibleLeafColumns();
 
   // The virtualizer needs to know the scrollable container element
   const tableContainerRef = React.useRef<HTMLDivElement>(null);
+
+  // the hidden focus element is needed to capture keyboard events
+  const hiddenContainerRef = React.useRef<HTMLDivElement>(null);
 
   const columnVirtualizer = useVirtualizer({
     count: visibleColumns.length,
@@ -255,6 +282,14 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     };
   }
 
+  useEffect(() => {
+    hiddenContainerRef.current?.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      hiddenContainerRef.current?.removeEventListener('keydown', onKeyDown);
+    };
+  }, []);
+
   return (
     <DndContext
       collisionDetection={closestCenter}
@@ -267,7 +302,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
         theme={theme}
         ref={tableContainerRef}>
         {/* Even though we're still using sematic table tags, we must use CSS grid and flexbox for dynamic row heights */}
-
+        <HiddenFocusElement ref={hiddenContainerRef} tabIndex={0} />
         <table style={{ display: 'grid', ...virtualPaddingVars, ...colSizes }}>
           <HeaderWrapper
             columnOrder={columnOrder}
@@ -286,6 +321,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
               return (
                 <RowBody
                   row={row}
+                  onSelect={$onSelect}
                   vr={virtualRow}
                   vcs={virtualColumns}
                   visibleCells={visibleCells}

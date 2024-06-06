@@ -1,5 +1,5 @@
 import { Cell, Row as RowTable } from '@tanstack/react-table';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { VirtualItem, Virtualizer } from '@tanstack/react-virtual';
 
 import { ITheme } from '@xcritical/theme';
@@ -17,6 +17,10 @@ type CellContentProps = {
   onClick: Function;
   enableSelect: boolean;
   rowHeight?: number;
+  onSelect: (
+    row: RowTable<IItem>,
+    e: React.MouseEvent<HTMLTableRowElement>
+  ) => void;
   rowVirtualizer: Virtualizer<HTMLDivElement, Element>;
 };
 
@@ -28,6 +32,7 @@ export const RowBody = React.memo(
     vr,
     enableSelect,
     onClick,
+    onSelect,
     visibleCells,
     rowHeight,
     rowVirtualizer,
@@ -55,12 +60,23 @@ export const RowBody = React.memo(
       [visibleCells]
     );
 
+    const onClickHandler = useCallback(
+      (e: React.MouseEvent<HTMLTableRowElement>) => {
+        onSelect(row, e);
+
+        if (enableSelect) {
+          row.getToggleSelectedHandler()(e);
+        }
+      },
+      [row, enableSelect]
+    );
+
     return (
       <Row
         data-index={vr.index} // needed for dynamic row height measurement
         ref={(node) => rowVirtualizer.measureElement(node)} // measure dynamic row height
         key={row.id}
-        onClick={enableSelect ? row.getToggleSelectedHandler() : undefined}
+        onClick={onClickHandler}
         rowHeight={rowHeight}
         selected={row.getIsSelected()}
         even={!!(vr.index % 2)}
@@ -74,6 +90,7 @@ export const RowBody = React.memo(
             theme={theme}
             cell={cell}
             row={row}
+            isSelected={row.getIsSelected()}
           />
         ))}
         <td
@@ -95,6 +112,7 @@ export const RowBody = React.memo(
               theme={theme}
               cell={cell}
               row={row}
+              isSelected={row.getIsSelected()}
             />
           );
         })}
@@ -112,6 +130,7 @@ export const RowBody = React.memo(
             theme={theme}
             cell={cell}
             row={row}
+            isSelected={row.getIsSelected()}
           />
         ))}
       </Row>

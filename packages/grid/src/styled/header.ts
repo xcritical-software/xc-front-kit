@@ -33,7 +33,7 @@ export const Header = styled.thead<IHeader>`
   display: grid;
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   ${getHeaderStyles}
 `;
 

@@ -205,3 +205,12 @@ export const Row = styled.tr.attrs<IRow>(({ translateY }) => ({
   width: 100%;
   ${getRowStyles}
 `;
+
+export const HiddenFocusElement = styled.div`
+  position: fixed;
+  width: 0;
+  height: 0;
+  top: 0px;
+  left: 0px;
+  outline: 0px;
+`;

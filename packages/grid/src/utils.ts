@@ -5,8 +5,11 @@ import {
   ColumnDef,
   ColumnSizingState,
   Row,
+  RowSelectionState,
   SortingState,
+  Table,
 } from '@tanstack/react-table';
+import { Virtualizer } from '@tanstack/react-virtual';
 
 import { getThemedState, IThemeNamespace } from '@xcritical/theme';
 
@@ -107,3 +110,37 @@ export const getChangedColumns = (
       width: columnSize[columnId] || column?.width,
     };
   });
+
+export const getSelectUpDownElement = (
+  table: Table<IItem>,
+  rowVirtualizer: Virtualizer<HTMLDivElement, Element>,
+  direction: 'up' | 'down'
+) => {
+  table.setRowSelection((rowSelection: RowSelectionState) => {
+    const { flatRows } = table.getRowModel();
+    const selectedRows = Object.keys(rowSelection);
+
+    if (selectedRows.length === 0) return rowSelection;
+
+    const selectedRowIndex = flatRows.findIndex(
+      (r) => r.id === selectedRows[0]
+    );
+
+    if (selectedRowIndex === -1) {
+      return rowSelection;
+    }
+
+    const nextRow =
+      direction === 'down'
+        ? flatRows[selectedRowIndex + 1]
+        : flatRows[selectedRowIndex - 1];
+
+    if (nextRow) {
+      rowVirtualizer.scrollToIndex(nextRow.index);
+
+      return { [nextRow.id]: true } as RowSelectionState;
+    }
+
+    return rowSelection;
+  });
+};
