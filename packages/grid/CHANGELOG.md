@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.8](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.7...@xcritical/grid@2.0.0-beta.8) (2024-08-26)
+
+### Features
+
+- **grid:** added keyboard nvigation by row ([4280c95](https://github.com/xcritical-software/xc-front-kit/commit/4280c957cdafbb64801e056872186b08ef9e6b35))
+
 # [2.0.0-beta.7](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.6...@xcritical/grid@2.0.0-beta.7) (2024-06-05)
 
 ### Bug Fixes
