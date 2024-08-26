@@ -45,7 +45,6 @@ export const AMStheme: IThemeNamespace<IGridTheme> = {
       color: 'black',
       backgroundColor: 'white',
       height: 35,
-      padding: '20px',
     },
     row: {
       border: `1px solid ${colors.GRAY}`,

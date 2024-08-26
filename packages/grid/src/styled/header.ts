@@ -62,7 +62,7 @@ export const HeaderCell = styled.th.attrs(
   z-index: 0;
 
   transition: width transform 0.2s ease-in-out;
-  ${getHeaderCellStyles}
+  ${(props) => getHeaderCellStyles(props)}
   ${getPinnedStyles}
 
   &:hover > ${RightBorder} {
@@ -85,10 +85,10 @@ export const HeaderCellContentWrapper = styled.div<IHeaderCellContentWrapper>`
 `;
 
 export const HeaderCellContent = styled.span<IHeaderCellContent>`
-  font-size: ${({ theme }) => theme.header?.fontSize};
-  color: ${({ theme }) => theme.header?.color};
-  padding: ${({ theme }) => theme.header?.padding};
-  overflow: ${({ theme }) => theme.header?.overflow};
+  font-size: ${({ theme }) => theme.headerCellContent?.fontSize};
+  color: ${({ theme }) => theme.headerCellContent?.color};
+  padding: ${({ theme }) => theme.headerCellContent?.padding};
+  overflow: ${({ theme }) => theme.headerCellContent?.overflow};
 `;
 
 export const SortIconWrapper = styled.div`

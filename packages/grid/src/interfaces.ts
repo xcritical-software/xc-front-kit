@@ -215,9 +215,9 @@ export interface IGridTheme {
   selectedRowBackgroundColor?: string;
   offsetExpand?: number;
   border?: string;
-  headerCellBorder?: string;
   totalsCellBorder?: string;
   header?: CSSProperties;
+  headerCellContent?: CSSProperties;
   row?: CSSProperties;
   totals?: CSSProperties;
   emptyHeaderCellBackground?: string;

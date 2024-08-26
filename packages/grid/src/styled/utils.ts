@@ -170,27 +170,14 @@ export const getWrapperStyles = ({
     border-radius: ${borderRadius}px;
   `;
 
-export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell) => {
-  let border = '';
-  const wrapperBorder = theme.border !== 'none';
-  const headerBorder = theme.header?.border !== 'none';
+export const getHeaderCellStyles = ({ theme, isEmpty }: IHeaderCell): any => ({
+  ...theme.header,
 
-  if (!wrapperBorder && !headerBorder) {
-    border = `border-top: ${theme.headerCellBorder};
-              border-bottom: ${theme.headerCellBorder};
-              :first-child {
-                border-left: ${theme.headerCellBorder}
-              }`;
-  } else if (!headerBorder) border = `border-bottom: ${theme.headerCellBorder}`;
-
-  return `
-  height: ${theme.header?.height}px;
-  background-color: ${
+  height: `${theme.header?.height}px`,
+  backgroundColor: `${
     isEmpty ? theme.emptyHeaderCellBackground : theme.header?.backgroundColor
-  };
-  ${border}
-  `;
-};
+  }`,
+});
 
 export const getPinnedStyles = ({ pinned, pinPagging, isFirstPinned }: any) => {
   if (pinned) {
@@ -202,8 +189,8 @@ export const getPinnedStyles = ({ pinned, pinPagging, isFirstPinned }: any) => {
         isFirstPinned
           ? `box-shadow: ${
               pinned === 'left'
-                ? '-4px 0 4px -4px gray inset'
-                : '4px 0 4px -4px gray inset'
+                ? '-2px 0 2px -2px gray inset'
+                : '2px 0 2px -2px gray inset'
             };`
           : `box-shadow: ${isFirstPinned};`
       }
@@ -219,5 +206,4 @@ export const getExpandButtonStyles = ({ theme }) => `
 
 export const getRightBorderStyles = ({ theme }: IRightBorder) => `
       background-color: ${theme.header?.backgroundColor};
-      border-right: ${theme.headerCellBorder};
     `;
