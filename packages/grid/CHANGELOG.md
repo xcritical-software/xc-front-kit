@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.9](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.8...@xcritical/grid@2.0.0-beta.9) (2024-08-26)
+
+### Features
+
+- **grid:** optimize header style ([20bb2e7](https://github.com/xcritical-software/xc-front-kit/commit/20bb2e7b6876cf1924283feb12ee417aa7e15213))
+
 # [2.0.0-beta.8](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.7...@xcritical/grid@2.0.0-beta.8) (2024-08-26)
 
 ### Features
