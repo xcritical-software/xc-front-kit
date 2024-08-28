@@ -115,15 +115,15 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     VisibilityState | undefined
   >(columnVisibilityProp, onChangeColumnVisibility, true);
 
+  const [expanded, setExpanded] = React.useState<ExpandedState>({});
+
   const $columnOrder = useMemo<string[]>(
     () => columnOrderProp ?? $columns.map((c) => c.id!),
     [columnOrderProp, columns]
   );
 
-  const [expanded, setExpanded] = React.useState<ExpandedState>({});
-
   const [columnOrder, setColumnOrder] = useStateFromProp<string[]>(
-    () => $columnOrder,
+    $columnOrder,
     onChangeColumnsOrder,
     true
   );
@@ -173,11 +173,8 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   const setFocus = () => {
     hiddenContainerRef.current?.focus();
   };
-
-  const table = useReactTable({
-    data: items,
-    columns: $columns,
-    state: {
+  const state = useMemo(
+    () => ({
       columnVisibility,
       columnPinning,
       columnOrder,
@@ -185,7 +182,22 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
       rowSelection,
       sorting,
       columnSizing: cellSize,
-    },
+    }),
+    [
+      columnVisibility,
+      columnPinning,
+      columnOrder,
+      expanded,
+      rowSelection,
+      sorting,
+      cellSize,
+    ]
+  );
+
+  const table = useReactTable({
+    data: items,
+    columns: $columns,
+    state,
     onColumnVisibilityChange: setColumnVisibility,
     enableColumnResizing: shouldChangeColumnsWidth,
     enableMultiSort,

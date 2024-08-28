@@ -36,7 +36,6 @@ export const AMStheme: IThemeNamespace<IGridTheme> = {
     evenRowBackground: colors.GRAY_LIGHT,
     selectedRowBackgroundColor: colors.BLACK_RAISIN,
     offsetExpand: 20,
-    headerCellBorder: `1px solid ${colors.GRAY}`,
     totalsCellBorder: 'none',
     rowCellBorder: `1px solid ${colors.GRAY}`,
     header: {

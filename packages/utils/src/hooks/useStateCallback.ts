@@ -18,7 +18,7 @@ function useStateCallback<S>(
       cbRef.current = cb ?? onChange; // store current, passed callback in ref
       setState(state);
     },
-    []
+    [onChange]
   ); // keep object reference stable, exactly like `useState`
 
   useEffect(() => {
