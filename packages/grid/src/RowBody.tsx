@@ -85,6 +85,7 @@ export const RowBody = React.memo(
         {left.map((cell) => (
           <CellContent
             vr={vr}
+            rowHeight={rowHeight}
             onClick={onClick}
             key={cell.id}
             theme={theme}
@@ -107,6 +108,7 @@ export const RowBody = React.memo(
           return (
             <CellContent
               vr={vr}
+              rowHeight={rowHeight}
               onClick={onClick}
               key={cell.id}
               theme={theme}

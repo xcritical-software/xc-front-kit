@@ -21,10 +21,19 @@ type CellContentProps = {
   cell: Cell<IItem, unknown>;
   onClick: Function;
   isSelected: boolean;
+  rowHeight?: number;
 };
 
 export const CellContent = React.memo(
-  ({ theme, row, cell, onClick, vr, isSelected }: CellContentProps) => {
+  ({
+    theme,
+    row,
+    cell,
+    onClick,
+    vr,
+    isSelected,
+    rowHeight,
+  }: CellContentProps) => {
     const { isExpandable } = getBaseColls(cell);
 
     return (
@@ -49,7 +58,10 @@ export const CellContent = React.memo(
               {row.getIsExpanded() ? <RemoveIcon /> : <AddIcon />}
             </ExpandButtonWrapper>
           )}
-          <BodyCellContent theme={theme} selected={isSelected}>
+          <BodyCellContent
+            theme={theme}
+            selected={isSelected}
+            rowHeight={rowHeight}>
             {flexRender(cell.column.columnDef.cell, cell.getContext())}
           </BodyCellContent>
         </BodyCellContentWrapper>

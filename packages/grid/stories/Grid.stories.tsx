@@ -9,7 +9,7 @@ import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Grid, { gridThemeNamespace } from '../src';
+import Grid from '../src';
 
 import * as countries from './countries';
 import {
@@ -36,6 +36,10 @@ const meta: Meta<typeof Grid> = {
     isMultiSelect: false,
     onChangeExpand: action('onChangeExpand'),
     onSelect: action('onSelect'),
+    onChangeColumnSorting: action('onChangeColumnSorting'),
+    onChangeColumnSizes: action('onChangeColumnSizes'),
+    onChangeColumnsOrder: action('onChangeColumnsOrder'),
+    onChangeColumnVisibility: action('onChangeColumnVisibility'),
   },
 
   parameters: { actions: { argTypesRegex: '^on.*' } },
@@ -145,7 +149,7 @@ export const FixedBoth: Story = {
           width={document.documentElement.clientWidth - 100}
           height={document.documentElement.clientHeight - 100}
           rowHeight={30}
-          theme={AMStheme[gridThemeNamespace]}
+          theme={AMStheme}
         />
       </div>
     </>
