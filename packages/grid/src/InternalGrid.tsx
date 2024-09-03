@@ -58,6 +58,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   onChangeColumnVisibility,
   onChangeColumnSizes,
   onSelect,
+  autoFitLastColumn,
   enableSorting = true,
   enableMultiSort,
   manualSorting = false,
@@ -257,18 +258,14 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   const virtualColumns = columnVirtualizer.getVirtualItems();
   const virtualRows = rowVirtualizer.getVirtualItems();
 
-  const colSizes = React.useMemo(() => {
-    const headers = table.getLeafHeaders();
-    const colSizes: { [key: string]: number } = {};
+  const headers = table.getLeafHeaders();
+  const colSizes: { [key: string]: number } = {};
 
-    for (let i = 0; i < headers.length; i++) {
-      const header = headers[i]!;
-      colSizes[`--header-${header.id}-size`] = header.getSize();
-      colSizes[`--col-${header.column.id}-size`] = header.column.getSize();
-    }
-
-    return colSizes;
-  }, [table.getState().columnSizingInfo]);
+  for (let i = 0; i < headers.length; i++) {
+    const header = headers[i]!;
+    colSizes[`--header-${header.id}-size`] = header.getSize();
+    colSizes[`--col-${header.column.id}-size`] = header.column.getSize();
+  }
 
   let virtualPaddingVars = {
     '--virtual-padding-left': 0,
@@ -321,6 +318,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
             vcs={virtualColumns}
             table={table}
             theme={theme}
+            autoFitLastColumn={autoFitLastColumn}
             shouldChangeColumnsWidth={shouldChangeColumnsWidth}
             shouldMovingColumns={shouldMovingColumns}
           />
@@ -332,6 +330,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
 
               return (
                 <RowBody
+                  autoFitLastColumn={autoFitLastColumn}
                   row={row}
                   onSelect={$onSelect}
                   vr={virtualRow}

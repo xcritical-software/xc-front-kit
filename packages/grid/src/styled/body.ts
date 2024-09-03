@@ -134,6 +134,8 @@ export const BodyCell = styled.td.attrs<any>(({ id }) => ({
   display: flex;
   position: relative;
   align-items: center;
+  ${({ autoFitLastColumn }) => autoFitLastColumn && 'flex-grow: 1;'};
+
   ${getBodyCellStyles}
   ${getPinnedStyles}
 `;

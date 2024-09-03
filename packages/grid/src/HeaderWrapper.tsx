@@ -9,6 +9,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
   theme,
   shouldChangeColumnsWidth,
   shouldMovingColumns,
+  autoFitLastColumn,
   columnOrder,
   vcs,
 }) => {
@@ -20,6 +21,7 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
         <HeaderRow
           theme={theme}
           group={el}
+          autoFitLastColumn={autoFitLastColumn}
           shouldChangeColumnsWidth={shouldChangeColumnsWidth}
           shouldMovingColumns={shouldMovingColumns}
           columnOrder={columnOrder}

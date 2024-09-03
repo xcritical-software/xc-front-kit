@@ -60,6 +60,7 @@ export const HeaderCell = styled.th.attrs(
   whitespace: nowrap;
   text-overflow: ellipsis;
   z-index: 0;
+  ${({ autoFitLastColumn }) => autoFitLastColumn && 'flex-grow: 1;'};
 
   transition: width transform 0.2s ease-in-out;
   ${(props) => getHeaderCellStyles(props)}

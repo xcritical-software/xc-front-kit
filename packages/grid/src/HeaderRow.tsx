@@ -15,6 +15,7 @@ import { HeaderGroup } from './styled';
 type HeaderRowProps = {
   group: HeaderGroupType<IItem>;
   theme: IGridTheme;
+  autoFitLastColumn?: boolean;
   shouldChangeColumnsWidth: boolean;
   shouldMovingColumns: boolean;
   columnOrder: string[];
@@ -27,6 +28,7 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
   shouldChangeColumnsWidth,
   shouldMovingColumns,
   columnOrder,
+  autoFitLastColumn = false,
   vcs,
 }) => {
   const { left, center, right } = useMemo(
@@ -67,6 +69,7 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
           <HeaderCellWrapper
             key={header.id}
             theme={theme}
+            autoFitLastColumn={false}
             header={header}
             shouldChangeColumnsWidth={shouldChangeColumnsWidth}
             shouldMovingColumns={shouldMovingColumns}
@@ -78,11 +81,14 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
             return null;
           }
 
+          const isLastColumn = idx === center.length - 1;
+
           return (
             <HeaderCellWrapper
               key={header.id}
               theme={theme}
               header={header}
+              autoFitLastColumn={isLastColumn ? autoFitLastColumn : false}
               shouldChangeColumnsWidth={shouldChangeColumnsWidth}
               shouldMovingColumns={shouldMovingColumns}
             />
@@ -94,6 +100,7 @@ export const HeaderRow: React.FC<HeaderRowProps> = ({
             key={header.id}
             theme={theme}
             header={header}
+            autoFitLastColumn={false}
             shouldChangeColumnsWidth={shouldChangeColumnsWidth}
             shouldMovingColumns={shouldMovingColumns}
           />

@@ -54,6 +54,11 @@ const meta: Meta<typeof Grid> = {
       defaultValue: false,
       name: 'Should moving columns',
     },
+    autoFitLastColumn: {
+      control: 'boolean',
+      defaultValue: false,
+      name: 'Expands last column to fill space.',
+    },
     disableSelect: {
       control: 'boolean',
       defaultValue: false,

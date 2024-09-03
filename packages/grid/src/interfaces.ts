@@ -79,6 +79,7 @@ export interface IGridBaseProps {
   shouldChangeColumnsWidth?: boolean;
   shouldFitContainer?: boolean;
   debugTable?: boolean;
+  autoFitLastColumn?: boolean;
 
   // states
   columnVisibility?: VisibilityState;
@@ -114,6 +115,7 @@ export interface IMappedItem extends IItem {
 export interface IHeaderCellWrapper {
   header: RTHeader<object, unknown>;
   theme: IGridTheme;
+  autoFitLastColumn: boolean;
   shouldChangeColumnsWidth: boolean;
   shouldMovingColumns: boolean;
 }
@@ -124,6 +126,7 @@ export interface IHeaderWrapper {
   shouldChangeColumnsWidth: boolean;
   shouldMovingColumns: boolean;
   columnOrder: string[];
+  autoFitLastColumn?: boolean;
   vcs: VirtualItem[];
 }
 
@@ -148,6 +151,7 @@ export interface IHeaderCell extends IPinnedProps {
   isDragging: boolean;
   $width: number;
   isEmpty?: boolean;
+  autoFitLastColumn: boolean;
   transform?: string;
   shouldChangeColumnsWidth: boolean;
 }

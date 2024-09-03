@@ -19,6 +19,7 @@ import { getPinnedProps } from './utils';
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   header,
   theme,
+  autoFitLastColumn,
   shouldChangeColumnsWidth,
   shouldMovingColumns,
 }) => {
@@ -37,6 +38,7 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
       ref={setNodeRef}
       isDragging={isDragging}
       theme={theme}
+      autoFitLastColumn={autoFitLastColumn}
       pinned={pinned}
       isFirstPinned={isFirstPinned}
       pinPagging={pinPagging}

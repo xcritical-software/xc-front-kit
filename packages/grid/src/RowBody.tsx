@@ -9,6 +9,7 @@ import { IGridTheme, IItem } from './interfaces';
 import { CellContent } from './CellContent';
 
 type CellContentProps = {
+  autoFitLastColumn?: boolean;
   theme: ITheme<IGridTheme>;
   vr: VirtualItem;
   vcs: VirtualItem[];
@@ -36,6 +37,7 @@ export const RowBody = React.memo(
     visibleCells,
     rowHeight,
     rowVirtualizer,
+    autoFitLastColumn,
   }: CellContentProps) => {
     const { left, center, right } = useMemo(
       () =>
@@ -105,6 +107,8 @@ export const RowBody = React.memo(
             return null;
           }
 
+          const isLastColumn = idx === center.length - 1;
+
           return (
             <CellContent
               vr={vr}
@@ -114,6 +118,7 @@ export const RowBody = React.memo(
               theme={theme}
               cell={cell}
               row={row}
+              autoFitLastColumn={isLastColumn ? autoFitLastColumn : false}
               isSelected={row.getIsSelected()}
             />
           );
