@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/modal",
-  "version": "1.7.0-beta.3",
+  "version": "1.7.0-beta.4",
   "description": "Modal component",
   "main": "dist/index.js",
   "source": "src/index.ts",
@@ -46,7 +46,7 @@
     "@xcritical/blanket": "^1.4.0-beta.2",
     "@xcritical/portal": "^0.3.1-beta.1",
     "@xcritical/theme": "^1.4.0-beta.2",
-    "@xcritical/utils": "^0.5.0-beta.3",
+    "@xcritical/utils": "^0.5.0-beta.4",
     "micro-memoize": "^4.0.8"
   },
   "gitHead": "1d05de862b39bcfd905720c6293e439929125e15"

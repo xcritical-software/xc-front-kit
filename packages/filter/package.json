@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/filter",
-  "version": "1.5.0-beta.3",
+  "version": "1.5.0-beta.4",
   "description": "Filter Component",
   "main": "dist/index.js",
   "source": "src/index.ts",
@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@xcritical/button": "^2.6.0-beta.1",
-    "@xcritical/input": "^1.5.0-beta.3",
+    "@xcritical/input": "^1.5.0-beta.4",
     "@xcritical/popover": "^2.5.0-beta.1",
     "@xcritical/select": "^1.4.0-beta.2",
     "@xcritical/theme": "^1.4.0-beta.2",
