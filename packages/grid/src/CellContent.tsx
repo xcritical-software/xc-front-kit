@@ -22,6 +22,7 @@ type CellContentProps = {
   onClick: Function;
   isSelected: boolean;
   rowHeight?: number;
+  autoFitLastColumn?: boolean;
 };
 
 export const CellContent = React.memo(
@@ -31,6 +32,7 @@ export const CellContent = React.memo(
     cell,
     onClick,
     vr,
+    autoFitLastColumn,
     isSelected,
     rowHeight,
   }: CellContentProps) => {
@@ -45,6 +47,7 @@ export const CellContent = React.memo(
         firstRow={vr.index === 0}
         even={!!(vr.index % 2)}
         key={cell.id}
+        autoFitLastColumn={autoFitLastColumn}
         selected={isSelected}
         data-column-id={cell.column.id}
         data-column-data={cell.getValue()}
