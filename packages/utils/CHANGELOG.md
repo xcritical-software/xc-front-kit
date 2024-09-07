@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-beta.4](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.5.0-beta.3...@xcritical/utils@0.5.0-beta.4) (2024-08-28)
+
+### Bug Fixes
+
+- **grid:** fix row height ([a02780a](https://github.com/xcritical-software/xc-front-kit/commit/a02780a012b152e09afc7c29cb3b31283192f429))
+
 # [0.5.0-beta.3](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.5.0-beta.2...@xcritical/utils@0.5.0-beta.3) (2024-06-04)
 
 ### Features
