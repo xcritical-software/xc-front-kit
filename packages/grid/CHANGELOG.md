@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.12](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.11...@xcritical/grid@2.0.0-beta.12) (2024-09-07)
+
+### Bug Fixes
+
+- change check empty sort order ([d1f9ab3](https://github.com/xcritical-software/xc-front-kit/commit/d1f9ab399128ea1c6d8ed2f9d57468c3438c8dd4))
+
 # [2.0.0-beta.11](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.10...@xcritical/grid@2.0.0-beta.11) (2024-09-03)
 
 ### Features
