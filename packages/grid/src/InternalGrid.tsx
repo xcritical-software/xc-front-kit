@@ -119,8 +119,9 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   const [expanded, setExpanded] = React.useState<ExpandedState>({});
 
   const $columnOrder = useMemo<string[]>(
-    () => columnOrderProp ?? $columns.map((c) => c.id!),
-    [columnOrderProp, columns]
+    () =>
+      columnOrderProp?.length ? columnOrderProp : $columns.map((c) => c.id!),
+    [columnOrderProp, $columns]
   );
 
   const [columnOrder, setColumnOrder] = useStateFromProp<string[]>(
