@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.13](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.12...@xcritical/grid@2.0.0-beta.13) (2024-09-09)
+
+### Bug Fixes
+
+- **grid:** fix center props and render undefined value ([bff8284](https://github.com/xcritical-software/xc-front-kit/commit/bff8284aa8dde96bef7102e3820294b72093d0d8))
+
 # [2.0.0-beta.12](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.11...@xcritical/grid@2.0.0-beta.12) (2024-09-07)
 
 ### Bug Fixes
