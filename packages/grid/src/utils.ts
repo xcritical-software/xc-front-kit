@@ -33,7 +33,7 @@ export const cellRenderMapper = (
 ) => {
   if (!renderFn) return value;
 
-  return renderFn(value, column.id, row.original, row.index, row);
+  return renderFn(value, column.id, row.original, row.index, row) ?? '';
 };
 export type ColumnDefWithBase<T> = ColumnDef<T> & { _base: IColumn };
 export const mappingColumns = (

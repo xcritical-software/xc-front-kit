@@ -21,6 +21,11 @@ const renderFunc = (
   // eslint-disable-next-line no-console
   console.log('renderFunc', fieldName, rowIndex, parentItem);
 
+  // return random undefined to test the error handling
+  if (Math.random() > 0.9) {
+    return undefined;
+  }
+
   return (
     <>
       {field.current}
