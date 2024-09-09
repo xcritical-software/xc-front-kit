@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.11](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.10...@xcritical/grid@2.0.0-beta.11) (2024-09-03)
+
+### Features
+
+- **grid:** add auto fill last column size ([9334383](https://github.com/xcritical-software/xc-front-kit/commit/93343830e1810f4f368a4280b2055598801d415c))
+
 # [2.0.0-beta.10](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.9...@xcritical/grid@2.0.0-beta.10) (2024-08-28)
 
 ### Bug Fixes
