@@ -11,7 +11,7 @@ import {
   ExpandButtonWrapper,
 } from './styled';
 import { RemoveIcon, AddIcon } from './icons';
-import { getBaseColls, getPinnedProps } from './utils';
+import { ColumnDefWithBase, getBaseColls, getPinnedProps } from './utils';
 import { IGridTheme, IItem } from './interfaces';
 
 type CellContentProps = {
@@ -38,6 +38,8 @@ export const CellContent = React.memo(
   }: CellContentProps) => {
     const { isExpandable } = getBaseColls(cell);
 
+    const columnDef = cell.column.columnDef as ColumnDefWithBase<IItem>;
+
     return (
       <BodyCell
         {...getPinnedProps(cell.column)}
@@ -55,7 +57,10 @@ export const CellContent = React.memo(
         depth={row.depth}
         isExpandable={isExpandable}
         id={cell.column.id}>
-        <BodyCellContentWrapper theme={theme} key={cell.id}>
+        <BodyCellContentWrapper
+          theme={theme}
+          key={cell.id}
+          center={columnDef._base.center}>
           {isExpandable && row.getCanExpand() && (
             <ExpandButtonWrapper onClick={onClick(row)} theme={theme}>
               {row.getIsExpanded() ? <RemoveIcon /> : <AddIcon />}
