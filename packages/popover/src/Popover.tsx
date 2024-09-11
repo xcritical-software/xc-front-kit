@@ -69,6 +69,9 @@ export const Popover: React.FC<IPopover> = memo(
 
     const handleClick = useCallback(
       (e: Event): void => {
+        e.stopPropagation();
+        e.preventDefault();
+
         if (
           popoverContentRef.current &&
           popoverContentRef.current.contains(e.target)

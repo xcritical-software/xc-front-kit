@@ -56,6 +56,7 @@ export const mappingColumns = (
         : value ?? '';
     },
     sortingFn: column.sortingFn || 'auto',
+    enableSorting: column.sortable,
     sortable: column.sortable,
     resizable: column.resizable === undefined ? true : column.resizable,
     filterable: false,

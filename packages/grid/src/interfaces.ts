@@ -1,6 +1,7 @@
 import { ReactElement, CSSProperties } from 'react';
 import {
   ColumnSizingState,
+  ExpandedState,
   Header as RTHeader,
   RowSelectionState,
   SortingFnOption,
@@ -87,12 +88,15 @@ export interface IGridBaseProps {
   columnOrder?: string[];
   columnSizes?: ColumnSizingState;
   columnSorting?: SortingState;
+  rowExpand?: ExpandedState;
 
   // callbacks
   onChangeColumnSorting?: (state: SortingState | undefined) => void;
   onChangeColumnsOrder?: (state: string[] | undefined) => void;
   onChangeColumnVisibility?: (state: VisibilityState | undefined) => void;
+
   onChangeColumnSizes?: (state: ColumnSizingState | undefined) => void;
+  onChangeRowExpand?: (state: ExpandedState | undefined) => void;
   onSelect?: (state: RowSelectionState | undefined) => void;
   onChangeExpand?: Function;
 }
