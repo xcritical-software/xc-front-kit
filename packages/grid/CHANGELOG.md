@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.14](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.13...@xcritical/grid@2.0.0-beta.14) (2024-09-11)
+
+### Bug Fixes
+
+- grid row expanding and sorting. also added stopPropagation for popover ([e1c0c7a](https://github.com/xcritical-software/xc-front-kit/commit/e1c0c7a4fbc729132db3b492be060072ad63fd15))
+
 # [2.0.0-beta.13](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.12...@xcritical/grid@2.0.0-beta.13) (2024-09-09)
 
 ### Bug Fixes
