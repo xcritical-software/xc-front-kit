@@ -49,6 +49,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   shouldMovingColumns = false,
   enableSubRowSelection,
   selectedRowKeys,
+  rowExpand: rowExpandedProp,
   columnVisibility: columnVisibilityProp,
   columnOrder: columnOrderProp,
   columnSorting: columnSortingProp,
@@ -56,9 +57,10 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   onChangeColumnsOrder,
   onChangeColumnSorting,
   onChangeColumnVisibility,
+  onChangeRowExpand,
   onChangeColumnSizes,
   onSelect,
-  autoFitLastColumn,
+  autoFitLastColumn = true,
   enableSorting = true,
   enableMultiSort,
   manualSorting = false,
@@ -116,7 +118,9 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     VisibilityState | undefined
   >(columnVisibilityProp, onChangeColumnVisibility, true);
 
-  const [expanded, setExpanded] = React.useState<ExpandedState>({});
+  const [expanded = {}, setExpanded] = useStateFromProp<
+    ExpandedState | undefined
+  >(rowExpandedProp, onChangeRowExpand, true);
 
   const $columnOrder = useMemo<string[]>(
     () =>
