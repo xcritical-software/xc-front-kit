@@ -5,6 +5,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import {
+  DragAndDropButton,
   HeaderCell,
   HeaderCellContent,
   HeaderCellContentWrapper,
@@ -15,6 +16,7 @@ import { IHeaderCellWrapper } from './interfaces';
 import { GridSort } from './consts';
 import { SortAscendingIcon, SortDescendingIcon } from './icons';
 import { getPinnedProps } from './utils';
+import { DragDotsIcon } from './DragDots';
 
 export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
   header,
@@ -47,8 +49,6 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
       $width={header.getSize()}
       isEmpty={false}>
       <HeaderCellContentWrapper
-        {...($shouldMovingColumns ? listeners : {})}
-        {...($shouldMovingColumns ? attributes : {})}
         theme={theme}
         center={false}
         canSort={header.column.getCanSort()}
@@ -65,6 +65,12 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
           )}
         </SortIconWrapper>
       </HeaderCellContentWrapper>
+      {$shouldMovingColumns && (
+        <DragAndDropButton {...listeners} {...attributes}>
+          <DragDotsIcon />
+        </DragAndDropButton>
+      )}
+
       <RightBorder
         theme={theme}
         onDoubleClick={() => header.column.resetSize()}
