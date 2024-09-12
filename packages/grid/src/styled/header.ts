@@ -29,6 +29,14 @@ export const RightBorder = styled.div<IRightBorder>`
   ${getRightBorderStyles}
 `;
 
+export const DragAndDropButton = styled.div`
+  width: 15px;
+  position: relative;
+  z-index: 9999999;
+  cursor: move;
+  align-content: center;
+`;
+
 export const Header = styled.thead<IHeader>`
   display: grid;
   position: sticky;
