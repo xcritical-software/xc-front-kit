@@ -66,6 +66,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   manualSorting = false,
   minColumnWidth,
   overscan = 5,
+  getRowId: getRowIdProps,
   debugTable,
 }) => {
   const sensors = useSensors(
@@ -222,6 +223,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     manualSorting,
+    getRowId: getRowIdProps,
     getSortedRowModel: !manualSorting ? getSortedRowModel() : undefined,
     debugTable:
       debugTable !== undefined
