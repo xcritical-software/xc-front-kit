@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.15](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.14...@xcritical/grid@2.0.0-beta.15) (2024-09-12)
+
+### Features
+
+- **grid:** added header button for drag and drop ([8ae41b2](https://github.com/xcritical-software/xc-front-kit/commit/8ae41b2c514791249a8713b6612d935d5ad548e5))
+- **grid:** added header button for drag and drop ([ca36c40](https://github.com/xcritical-software/xc-front-kit/commit/ca36c40c5c4be859a41bdc004f5e76485b83e55e))
+
 # [2.0.0-beta.14](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.13...@xcritical/grid@2.0.0-beta.14) (2024-09-11)
 
 ### Bug Fixes
