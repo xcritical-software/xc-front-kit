@@ -3,6 +3,7 @@ import {
   ColumnSizingState,
   ExpandedState,
   Header as RTHeader,
+  Row,
   RowSelectionState,
   SortingFnOption,
   SortingState,
@@ -67,7 +68,7 @@ export interface IGridBaseProps {
   minColumnWidth?: number;
   // TODO: need to implement
   totals?: ITotals;
-  getRowId?: (row: IItem) => string;
+  getRowId?: (originalRow: IItem, index: number, parent?: Row<IItem>) => string;
 
   // flags
   manualSorting?: boolean;
