@@ -36,6 +36,7 @@ const meta: Meta<typeof Grid> = {
     isMultiSelect: false,
     onChangeExpand: action('onChangeExpand'),
     onSelect: action('onSelect'),
+    onFocusChange: action('onFocusChange'),
     onChangeColumnSorting: action('onChangeColumnSorting'),
     onChangeColumnSizes: action('onChangeColumnSizes'),
     onChangeColumnsOrder: action('onChangeColumnsOrder'),
