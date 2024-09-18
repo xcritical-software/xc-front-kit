@@ -66,6 +66,7 @@ export interface IGridBaseProps {
   rowHeight?: number;
   overscan?: number;
   minColumnWidth?: number;
+  onFocusChange?: (focused: boolean) => void;
   // TODO: need to implement
   totals?: ITotals;
   getRowId?: (originalRow: IItem, index: number, parent?: Row<IItem>) => string;

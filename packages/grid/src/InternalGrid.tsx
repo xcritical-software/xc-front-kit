@@ -60,6 +60,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   onChangeRowExpand,
   onChangeColumnSizes,
   onSelect,
+  onFocusChange,
   autoFitLastColumn = true,
   enableSorting = true,
   enableMultiSort,
@@ -179,6 +180,10 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
 
   const setFocus = () => {
     hiddenContainerRef.current?.focus();
+    onFocusChange?.(true);
+  };
+  const onBlur = () => {
+    onFocusChange?.(false);
   };
   const state = useMemo(
     () => ({
@@ -318,7 +323,11 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
         theme={theme}
         ref={tableContainerRef}>
         {/* Even though we're still using sematic table tags, we must use CSS grid and flexbox for dynamic row heights */}
-        <HiddenFocusElement ref={hiddenContainerRef} tabIndex={0} />
+        <HiddenFocusElement
+          ref={hiddenContainerRef}
+          onBlur={onBlur}
+          tabIndex={0}
+        />
         <table style={{ display: 'grid', ...virtualPaddingVars, ...colSizes }}>
           <HeaderWrapper
             columnOrder={columnOrder}
