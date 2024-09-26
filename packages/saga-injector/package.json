@@ -49,7 +49,8 @@
 		"redux-saga": "^1.0.5"
 	},
 	"dependencies": {
-		"redux-logger": "^3.0.6"
+		"redux-logger": "^3.0.6",
+		"@xcritical/utils": "^0.5.0-beta.4"
 	},
 	"gitHead": "1d05de862b39bcfd905720c6293e439929125e15"
 }

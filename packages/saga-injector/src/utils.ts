@@ -1,5 +1,7 @@
 import { useStore } from 'react-redux';
-import { useState, useLayoutEffect, useRef } from 'react';
+import { useState, useLayoutEffect } from 'react';
+
+import { useFirstMountState } from '@xcritical/utils';
 
 import { IInjectorStore, IInjectReducer, IInjectSaga } from './types';
 
@@ -47,19 +49,6 @@ export const useInjectReducer = (reducerForInject: IInjectReducer) => {
   return isInjected;
 };
 
-// TODO: delete useFirstMountState after front-kit update
-export function useFirstMountState(): boolean {
-  const isFirst = useRef(true);
-
-  if (isFirst.current) {
-    isFirst.current = false;
-
-    return true;
-  }
-
-  return isFirst.current;
-}
-
 /**
  * Inject saga to current store
  */
@@ -83,7 +72,7 @@ export const useInjectSaga = ({
       const oldDescriptor = store.injectedSagas[key];
 
       if (oldDescriptor) {
-        oldDescriptor?.task.cancel();
+        oldDescriptor.task.cancel();
         delete store.injectedSagas[key];
       }
 
@@ -140,7 +129,7 @@ export const useInjectSaga = ({
       const oldDescriptor = store.injectedSagas[key];
 
       if (oldDescriptor && allowSagaUnmount) {
-        oldDescriptor?.task.cancel();
+        oldDescriptor.task.cancel();
         delete store.injectedSagas[key];
       }
     };
