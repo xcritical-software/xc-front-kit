@@ -10,15 +10,18 @@ export const ReduxInject = ({
   saga,
   fallback,
   allowSagaUnmount = false,
+  reloadSagaIfChanged = false,
 }: IInjectProps) => {
   const isInjectedReducers = useInjectReducer({
     key: (reducerKey || keyName)!,
     reducer,
   });
+
   const isInjectedSagas = useInjectSaga({
     key: (sagaKey || keyName)!,
     saga,
     allowSagaUnmount,
+    reloadSagaIfChanged,
   });
 
   if (!isInjectedReducers || !isInjectedSagas) {

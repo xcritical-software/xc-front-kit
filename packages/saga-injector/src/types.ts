@@ -9,8 +9,8 @@ export interface IBaseInjectProps {
   children: JSX.Element;
   fallback?: JSX.Element;
   allowSagaUnmount?: boolean;
+  reloadSagaIfChanged?: boolean;
 }
-
 interface IInjectSagaKey extends IBaseInjectProps {
   sagaKey: string;
   saga: IInjectSaga['saga'];
@@ -18,7 +18,6 @@ interface IInjectSagaKey extends IBaseInjectProps {
   reducer?: IInjectReducer['reducer'];
   reducerKey?: string;
 }
-
 interface IInjectSagaWithKeyName extends IBaseInjectProps {
   keyName: string;
   saga: IInjectSaga['saga'];
@@ -26,7 +25,6 @@ interface IInjectSagaWithKeyName extends IBaseInjectProps {
   reducerKey?: string;
   sagaKey?: string;
 }
-
 interface IInjectReducerKey extends IBaseInjectProps {
   reducerKey: string;
   reducer: IInjectReducer['reducer'];
@@ -34,7 +32,6 @@ interface IInjectReducerKey extends IBaseInjectProps {
   saga?: IInjectSaga['saga'];
   sagaKey?: string;
 }
-
 interface IInjectReducerWithKeyName extends IBaseInjectProps {
   keyName: string;
   reducer: IInjectReducer['reducer'];
@@ -58,6 +55,7 @@ export type IInjectSaga = {
   key: string;
   allowSagaUnmount: boolean;
   saga?: () => Generator;
+  reloadSagaIfChanged?: boolean;
 };
 
 export interface IInjectedSaga {

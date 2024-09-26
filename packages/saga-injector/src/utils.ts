@@ -1,5 +1,5 @@
 import { useStore } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 
 import { IInjectorStore, IInjectReducer, IInjectSaga } from './types';
 
@@ -10,7 +10,7 @@ export const useInjectReducer = (reducerForInject: IInjectReducer) => {
   const store = useStore() as IInjectorStore;
   const [isInjected, setIsInjected] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!reducerForInject.reducer) {
       setIsInjected(true);
 
@@ -47,14 +47,63 @@ export const useInjectReducer = (reducerForInject: IInjectReducer) => {
   return isInjected;
 };
 
+// TODO: delete useFirstMountState after front-kit update
+export function useFirstMountState(): boolean {
+  const isFirst = useRef(true);
+
+  if (isFirst.current) {
+    isFirst.current = false;
+
+    return true;
+  }
+
+  return isFirst.current;
+}
+
 /**
  * Inject saga to current store
  */
-export const useInjectSaga = ({ allowSagaUnmount, key, saga }: IInjectSaga) => {
+export const useInjectSaga = ({
+  allowSagaUnmount,
+  key,
+  saga,
+  reloadSagaIfChanged,
+}: IInjectSaga) => {
   const store = useStore() as IInjectorStore;
   const [isInjected, setIsInjected] = useState(false);
+  const isFirstMount = useFirstMountState();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (isFirstMount) return;
+
+    const hasSaga = !!store.injectedSagas[key];
+
+    if (hasSaga && saga && reloadSagaIfChanged) {
+      setIsInjected(false);
+      const oldDescriptor = store.injectedSagas[key];
+
+      if (oldDescriptor) {
+        oldDescriptor?.task.cancel();
+        delete store.injectedSagas[key];
+      }
+
+      store.injectedSagas[key] = {
+        saga,
+        task: store.runSaga(saga),
+      };
+
+      if (process.env.NODE_ENV === 'development') {
+        console.info(
+          `%cSaga with key "${key}" 're-injected`,
+          'background: #ad7; color: black'
+        );
+      }
+
+      setIsInjected(true);
+    }
+  }, [saga]);
+
+  useLayoutEffect(() => {
     if (!saga) {
       setIsInjected(true);
 
@@ -68,18 +117,7 @@ export const useInjectSaga = ({ allowSagaUnmount, key, saga }: IInjectSaga) => {
       return;
     }
 
-    let hasSaga = !!store.injectedSagas[key];
-
-    // TODO: find another way for hot reloading
-    // if (process.env.NODE_ENV === 'development') {
-    //   // for hot reloading
-    //   const oldDescriptor = store.injectedSagas[key];
-
-    //   if (hasSaga && oldDescriptor?.saga !== saga) {
-    //     oldDescriptor?.task.cancel();
-    //     hasSaga = false;
-    //   }
-    // }
+    const hasSaga = !!store.injectedSagas[key];
 
     if (!hasSaga) {
       store.injectedSagas[key] = {
@@ -99,7 +137,7 @@ export const useInjectSaga = ({ allowSagaUnmount, key, saga }: IInjectSaga) => {
 
     // eslint-disable-next-line consistent-return
     return () => {
-      let oldDescriptor = store.injectedSagas[key];
+      const oldDescriptor = store.injectedSagas[key];
 
       if (oldDescriptor && allowSagaUnmount) {
         oldDescriptor?.task.cancel();
