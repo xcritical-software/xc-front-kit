@@ -102,8 +102,7 @@
     "react-dom": "^16.13.0",
     "react-router-dom": "^6.2.1",
     "styled-components": "^6.1.8",
-    "styled-css-grid": "^1.2.1",
-    "@reduxjs/toolkit": "^1.9.5"
+    "styled-css-grid": "^1.2.1"
   },
   "resolutions": {
     "typescript": "^5.4.4",
