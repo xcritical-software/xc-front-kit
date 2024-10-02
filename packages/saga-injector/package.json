@@ -1,0 +1,58 @@
+{
+	"name": "@xcritical/saga-injector",
+	"version": "1.0.0",
+	"description": "Inject reducer and saga anywhere in the application.",
+	"main": "dist/index.js",
+	"source": "src/index.ts",
+	"xc:source": "src/index.ts",
+	"module": "dist/sidebar.esm.js",
+	"types": "dist/typings.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"test": "exit 0",
+		"compile": "tsup",
+		"compile:local": "tsup",
+		"build": "yarn clean && yarn compile",
+		"clean": "rimraf dist lib .publish"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com:xcritical-software/xc-front-kit.git"
+	},
+	"keywords": [
+		"sidebar",
+		"library"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"author": "XCritical Software",
+	"license": "MIT",
+	"private": false,
+	"peerDependencies": {
+		"@redux-saga/core": "^1.0.5",
+		"@types/react-redux": "^7.1.4",
+		"react": "17.0.2",
+		"react-redux": "^7.2.0",
+		"redux": "^4.0.1",
+		"redux-saga": "^1.0.5",
+		"@reduxjs/toolkit": "^1.9.5"
+	},
+	"devDependencies": {
+		"@types/react-redux": "^7.1.4",
+		"@types/redux-logger": "^3.0.8",
+		"@types/webpack-env": "^1.15.3",
+		"react": "17.0.2",
+		"react-redux": "^7.2.0",
+		"redux": "^4.0.1",
+		"redux-saga": "^1.0.5",
+		"@reduxjs/toolkit": "^1.9.5"
+	},
+	"dependencies": {
+		"redux-logger": "^3.0.6",
+		"@xcritical/utils": "^0.5.0-beta.4"
+	},
+	"gitHead": "1d05de862b39bcfd905720c6293e439929125e15"
+}
