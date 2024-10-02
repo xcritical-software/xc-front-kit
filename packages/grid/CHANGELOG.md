@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.17](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.16...@xcritical/grid@2.0.0-beta.17) (2024-09-18)
+
+### Bug Fixes
+
+- **grid:** add focusChange event ([33fc0bc](https://github.com/xcritical-software/xc-front-kit/commit/33fc0bcb26f335f910240631c6f18b0fcd79f198))
+
 # [2.0.0-beta.16](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.15...@xcritical/grid@2.0.0-beta.16) (2024-09-13)
 
 ### Bug Fixes
