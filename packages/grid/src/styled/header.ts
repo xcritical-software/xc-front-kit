@@ -98,6 +98,8 @@ export const HeaderCellContent = styled.span<IHeaderCellContent>`
   color: ${({ theme }) => theme.headerCellContent?.color};
   padding: ${({ theme }) => theme.headerCellContent?.padding};
   overflow: ${({ theme }) => theme.headerCellContent?.overflow};
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const SortIconWrapper = styled.div`

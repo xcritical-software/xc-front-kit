@@ -32,7 +32,7 @@ export const defaultTheme: IGridTheme = {
     fontSize: '16px',
     color: 'black',
     padding: '12px',
-    overflow: 'initial',
+    overflow: 'hidden',
   },
   row: {
     border: `1px solid ${colors.GRAY}`,
