@@ -229,6 +229,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     getExpandedRowModel: getExpandedRowModel(),
     manualSorting,
     getRowId: getRowIdProps,
+    sortDescFirst: true,
     getSortedRowModel: !manualSorting ? getSortedRowModel() : undefined,
     debugTable:
       debugTable !== undefined
