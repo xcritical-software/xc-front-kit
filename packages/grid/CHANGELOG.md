@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.16](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.15...@xcritical/grid@2.0.0-beta.16) (2024-09-13)
+
+### Bug Fixes
+
+- add getRowId ([ce19c31](https://github.com/xcritical-software/xc-front-kit/commit/ce19c31d35c4f56d43b61091a439b745a8495eae))
+
 # [2.0.0-beta.15](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.14...@xcritical/grid@2.0.0-beta.15) (2024-09-12)
 
 ### Features

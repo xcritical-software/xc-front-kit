@@ -69,9 +69,6 @@ export const Popover: React.FC<IPopover> = memo(
 
     const handleClick = useCallback(
       (e: Event): void => {
-        e.stopPropagation();
-        e.preventDefault();
-
         if (
           popoverContentRef.current &&
           popoverContentRef.current.contains(e.target)
@@ -80,6 +77,8 @@ export const Popover: React.FC<IPopover> = memo(
         }
 
         if (e.target === popoverTargetRef.current) {
+          e.stopPropagation();
+          e.preventDefault();
           _setVisible(false);
           changeVisible(false);
 
@@ -90,6 +89,8 @@ export const Popover: React.FC<IPopover> = memo(
           popoverTargetRef.current &&
           popoverTargetRef.current.contains(e.target)
         ) {
+          e.stopPropagation();
+          e.preventDefault();
           _setVisible(!_visible);
           changeVisible(!_visible);
 

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0-beta.3](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/popover@2.5.0-beta.2...@xcritical/popover@2.5.0-beta.3) (2024-09-16)
+
+### Bug Fixes
+
+- move stop propagation ([e3d3697](https://github.com/xcritical-software/xc-front-kit/commit/e3d3697e309fd2eefe5b278baf2517c948cb677d))
+
 # [2.5.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/popover@2.5.0-beta.1...@xcritical/popover@2.5.0-beta.2) (2024-09-11)
 
 ### Bug Fixes
