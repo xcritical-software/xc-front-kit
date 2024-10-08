@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/grid",
-  "version": "2.0.0-beta.17",
+  "version": "2.0.0-beta.18",
   "description": "Grid Component",
   "main": "dist/index.js",
   "source": "src/index.ts",
