@@ -126,7 +126,7 @@ export const Body = styled.div<any>`
   ${getScrollbar};
 `;
 
-export const BodyCell = styled.td.attrs<any>(({ id }) => ({
+export const BodyCell = styled.td.attrs<any>(({ 'data-column-id': id }) => ({
   style: {
     width: `calc(var(--col-${id}-size) * 1px)`,
   },
