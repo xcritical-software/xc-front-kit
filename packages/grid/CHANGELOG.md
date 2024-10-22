@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.19](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.18...@xcritical/grid@2.0.0-beta.19) (2024-10-22)
+
+### Bug Fixes
+
+- **grid:** change body cell id ([aa633c5](https://github.com/xcritical-software/xc-front-kit/commit/aa633c5115d66513668acf61b15a74209c9b0198))
+
 # [2.0.0-beta.18](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.17...@xcritical/grid@2.0.0-beta.18) (2024-10-02)
 
 ### Bug Fixes
