@@ -56,7 +56,7 @@ export const CellContent = React.memo(
         theme={theme}
         depth={row.depth}
         isExpandable={isExpandable}
-        id={cell.column.id}>
+        id={cell.id}>
         <BodyCellContentWrapper
           theme={theme}
           key={cell.id}
