@@ -42,7 +42,7 @@ export default (pkg) => defineConfig((options) => {
         entry: {
           [pkg.module.replace('dist/','').replace('.js','')]: 'src/index.ts',
         },
-        target: 'es2017',
+        target: 'es2020',
         format: ['esm'],
        
         outExtension: () => ({ js: '.js', dts: '.d.ts'}),
