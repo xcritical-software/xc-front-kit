@@ -19,6 +19,25 @@ export const Wrapper = styled.div.attrs<IWrapper>(({ $width, $height }) => ({
   }
   overflow: auto;
 
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 0px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0);
+  scrollbar-width: thin;
+  :focus {
+    outline: none;
+  }
+
   ${getWrapperStyles}
 `;
 

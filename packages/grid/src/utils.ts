@@ -115,6 +115,7 @@ export const getChangedColumns = (
 export const getSelectUpDownElement = (
   table: Table<IItem>,
   rowVirtualizer: Virtualizer<HTMLDivElement, Element>,
+
   direction: 'up' | 'down'
 ) => {
   table.setRowSelection((rowSelection: RowSelectionState) => {
@@ -137,7 +138,10 @@ export const getSelectUpDownElement = (
         : flatRows[selectedRowIndex - 1];
 
     if (nextRow) {
-      rowVirtualizer.scrollToIndex(nextRow.index);
+      rowVirtualizer.scrollToIndex(nextRow.index, {
+        align: 'center',
+        behavior: 'auto',
+      });
 
       return { [nextRow.id]: true } as RowSelectionState;
     }
