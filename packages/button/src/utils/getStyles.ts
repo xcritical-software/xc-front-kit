@@ -138,6 +138,10 @@ export const getItemInteractiveStyles = memoize(
         &:active {
           ${getButtonStatesStyle('active')};
         }
+
+        &:focus {
+          ${getButtonStatesStyle('focus')};
+        }
       `;
     }
 
@@ -148,6 +152,9 @@ export const getItemInteractiveStyles = memoize(
 
       &:active {
         ${getButtonStatesStyle('active')};
+      }
+      &:focus {
+        ${getButtonStatesStyle('focus')};
       }
     `;
   },

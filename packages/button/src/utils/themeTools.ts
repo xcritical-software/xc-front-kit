@@ -66,6 +66,15 @@ export const generateApperance = ({
     _outline,
     borderColor: borderColor || background,
   },
+  focus: {
+    background: darken(0.1, background),
+    color,
+    boxShadowColor: boxShadowColor ?? darken(0.1, background),
+    ...(fontWeight && { fontWeight }),
+
+    _outline,
+    borderColor: borderColor || background,
+  },
   disabled: {
     background,
     color,
