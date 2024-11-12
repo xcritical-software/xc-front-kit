@@ -140,6 +140,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   const $onExpandCallback = useCallback(
     (row: RowType<IItem>) => (e: MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
+      e.preventDefault();
       row.toggleExpanded();
     },
     []
