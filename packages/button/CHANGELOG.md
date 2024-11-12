@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0-beta.2](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/button@2.6.0-beta.1...@xcritical/button@2.6.0-beta.2) (2024-11-12)
+
+### Features
+
+- **button:** add focus theme ([5b4a74e](https://github.com/xcritical-software/xc-front-kit/commit/5b4a74e9c943463ae1bddbfeb585cd6529be8407))
+
 # [2.6.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/button@2.5.0...@xcritical/button@2.6.0-beta.1) (2024-05-21)
 
 ### Bug Fixes

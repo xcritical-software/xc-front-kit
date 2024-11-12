@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.22](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.21...@xcritical/grid@2.0.0-beta.22) (2024-11-12)
+
+**Note:** Version bump only for package @xcritical/grid
+
 # [2.0.0-beta.21](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.20...@xcritical/grid@2.0.0-beta.21) (2024-11-12)
 
 ### Bug Fixes
