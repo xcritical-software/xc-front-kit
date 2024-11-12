@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.20](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.19...@xcritical/grid@2.0.0-beta.20) (2024-11-12)
+
+### Features
+
+- **grid:** added rowVirualiser paddings ([d67d2a8](https://github.com/xcritical-software/xc-front-kit/commit/d67d2a8a58939a4cdeaa44b1e2da84413ad8872b))
+
 # [2.0.0-beta.19](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.18...@xcritical/grid@2.0.0-beta.19) (2024-10-22)
 
 ### Bug Fixes
