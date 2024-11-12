@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.21](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.20...@xcritical/grid@2.0.0-beta.21) (2024-11-12)
+
+### Bug Fixes
+
+- **grid:** add preventDefault for expand button ([22b9e7f](https://github.com/xcritical-software/xc-front-kit/commit/22b9e7f8c21bad4aa7943b791c9995dbae94fafd))
+
 # [2.0.0-beta.20](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.19...@xcritical/grid@2.0.0-beta.20) (2024-11-12)
 
 ### Features
