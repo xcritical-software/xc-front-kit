@@ -66,6 +66,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   enableMultiSort,
   manualSorting = false,
   minColumnWidth,
+  scrollPaddingEnd = 20,
   overscan = 5,
   getRowId: getRowIdProps,
   debugTable,
@@ -266,6 +267,8 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
         ? (element) => element.getBoundingClientRect().height
         : undefined,
     overscan,
+    paddingEnd: scrollPaddingEnd,
+    scrollPaddingEnd,
   });
 
   const virtualColumns = columnVirtualizer.getVirtualItems();
