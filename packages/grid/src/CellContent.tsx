@@ -66,7 +66,7 @@ export const CellContent = React.memo(
               onClick={onClick(row)}
               theme={theme}
               className={`grid-expand_${vr.index}`}>
-              {row.getIsExpanded() ? <RemoveIcon /> : <AddIcon />}
+              {row.getIsExpanded() ? <RemoveIcon /> : <AddIcon id={vr.index} />}
             </ExpandButtonWrapper>
           )}
           <BodyCellContent
