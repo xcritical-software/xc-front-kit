@@ -56,7 +56,10 @@ export const CellContent = React.memo(
         theme={theme}
         depth={row.depth}
         isExpandable={isExpandable}
-        id={cell.id}>
+        id={cell.id}
+        className={`table__expand-button ${
+          row.getIsExpanded() ? 'table__expand-button--expanded' : ''
+        }`}>
         <BodyCellContentWrapper
           theme={theme}
           key={cell.id}
