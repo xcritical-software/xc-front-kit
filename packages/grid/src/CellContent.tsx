@@ -56,10 +56,7 @@ export const CellContent = React.memo(
         theme={theme}
         depth={row.depth}
         isExpandable={isExpandable}
-        id={cell.id}
-        className={`table__expand-button ${
-          row.getIsExpanded() ? 'table__expand-button--expanded' : ''
-        }`}>
+        id={cell.id}>
         <BodyCellContentWrapper
           theme={theme}
           key={cell.id}
@@ -68,8 +65,10 @@ export const CellContent = React.memo(
             <ExpandButtonWrapper
               onClick={onClick(row)}
               theme={theme}
-              className={`grid-expand_${vr.index}`}>
-              {row.getIsExpanded() ? <RemoveIcon /> : <AddIcon id={vr.index} />}
+              className={`table__expand-button ${
+                row.getIsExpanded() ? 'table__expand-button--expanded' : ''
+              }`}>
+              {row.getIsExpanded() ? <RemoveIcon /> : <AddIcon />}
             </ExpandButtonWrapper>
           )}
           <BodyCellContent
