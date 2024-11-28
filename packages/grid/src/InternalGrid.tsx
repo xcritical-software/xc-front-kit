@@ -348,6 +348,9 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
             {virtualRows.map((virtualRow) => {
               const row = rows[virtualRow.index];
               const visibleCells = row.getVisibleCells();
+              const rowId = row.parentId
+                ? `${row.parentId}.${row.index}`
+                : row.id;
 
               return (
                 <RowBody
@@ -358,7 +361,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
                   vcs={virtualColumns}
                   visibleCells={visibleCells}
                   rowVirtualizer={rowVirtualizer} // measure dynamic row height
-                  key={row.id}
+                  key={rowId}
                   enableSelect={enableSelect}
                   rowHeight={rowHeight}
                   theme={theme}

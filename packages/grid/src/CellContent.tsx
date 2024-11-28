@@ -62,7 +62,12 @@ export const CellContent = React.memo(
           key={cell.id}
           center={columnDef._base.center}>
           {isExpandable && row.getCanExpand() && (
-            <ExpandButtonWrapper onClick={onClick(row)} theme={theme}>
+            <ExpandButtonWrapper
+              onClick={onClick(row)}
+              theme={theme}
+              className={`table__expand-button ${
+                row.getIsExpanded() ? 'table__expand-button--expanded' : ''
+              }`}>
               {row.getIsExpanded() ? <RemoveIcon /> : <AddIcon />}
             </ExpandButtonWrapper>
           )}
