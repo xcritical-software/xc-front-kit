@@ -14,7 +14,7 @@ export const AddIcon = () => (
     width="16"
     height="16"
     viewBox="0 0 30 30">
-    <g id="ic_add" transform="translate(-4548 -3846)">
+    <g transform="translate(-4548 -3846)">
       <rect
         width="16"
         height="16"
@@ -37,16 +37,14 @@ export const RemoveIcon = () => (
     width="16"
     height="16"
     viewBox="0 0 30 30">
-    <g id="ic_remove" transform="translate(-3998 -3896)">
+    <g transform="translate(-3998 -3896)">
       <rect
-        id="Base"
         width="16"
         height="16"
         transform="translate(3998 3896)"
         fill="none"
       />
       <path
-        id="Icon"
         d="M62-214H48v-2H62Z"
         transform="translate(3958 4126)"
         fill="#000"
