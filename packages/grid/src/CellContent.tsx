@@ -65,7 +65,7 @@ export const CellContent = React.memo(
             <ExpandButtonWrapper
               onClick={onClick(row)}
               theme={theme}
-              className={`table__expand-button ${
+              className={`table__expand-button--${cell.id} ${
                 row.getIsExpanded() ? 'table__expand-button--expanded' : ''
               }`}>
               {row.getIsExpanded() ? <RemoveIcon /> : <AddIcon />}
