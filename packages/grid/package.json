@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/grid",
-  "version": "2.0.0-beta.24",
+  "version": "2.0.0-beta.25",
   "description": "Grid Component",
   "main": "dist/index.js",
   "source": "src/index.ts",
@@ -52,7 +52,7 @@
     "@tanstack/react-table": "^8.20.5",
     "@tanstack/react-virtual": "^3.10.9",
     "@xcritical/theme": "^1.4.0-beta.2",
-    "@xcritical/utils": "^0.5.0-beta.4",
+    "@xcritical/utils": "^0.5.0-beta.5",
     "lodash.debounce": "^4.0.8",
     "utilitify": "^1.0.3"
   },

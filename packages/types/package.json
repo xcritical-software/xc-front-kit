@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/types",
-  "version": "1.0.0",
+  "version": "1.1.0-beta.0",
   "description": "",
   "main": "dist/index.js",
   "source": "src/index.ts",
@@ -30,9 +30,5 @@
     "access": "public"
   },
   "private": false,
-  "peerDependencies": {
-  },
-  "dependencies": {
-  },
   "gitHead": "1d05de862b39bcfd905720c6293e439929125e15"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@xcritical/saga-injector",
-  "version": "1.1.0-beta.0",
+  "version": "1.1.0-beta.1",
   "description": "Inject reducer and saga anywhere in the application.",
   "main": "dist/index.js",
   "source": "src/index.ts",
@@ -51,7 +51,7 @@
     "redux-saga": "^1.0.5"
   },
   "dependencies": {
-    "@xcritical/utils": "^0.5.0-beta.4",
+    "@xcritical/utils": "^0.5.0-beta.5",
     "redux-logger": "^3.0.6"
   },
   "gitHead": "1d05de862b39bcfd905720c6293e439929125e15"

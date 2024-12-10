@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0-beta.1](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/saga-injector@1.1.0-beta.0...@xcritical/saga-injector@1.1.0-beta.1) (2024-12-10)
+
+**Note:** Version bump only for package @xcritical/saga-injector
+
 # 1.1.0-beta.0 (2024-10-02)
 
 ### Features

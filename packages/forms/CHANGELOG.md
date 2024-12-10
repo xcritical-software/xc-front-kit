@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0-beta.6](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.5.0-beta.5...@xcritical/forms@1.5.0-beta.6) (2024-12-10)
+
+**Note:** Version bump only for package @xcritical/forms
+
 # [1.5.0-beta.5](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/forms@1.5.0-beta.4...@xcritical/forms@1.5.0-beta.5) (2024-11-12)
 
 **Note:** Version bump only for package @xcritical/forms

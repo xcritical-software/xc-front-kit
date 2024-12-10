@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-beta.5](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.5.0-beta.4...@xcritical/utils@0.5.0-beta.5) (2024-12-10)
+
+### Features
+
+- **types:** added types package ([f024b5c](https://github.com/xcritical-software/xc-front-kit/commit/f024b5cb6608c6418b75f11d285234f80527e9e4))
+
 # [0.5.0-beta.4](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/utils@0.5.0-beta.3...@xcritical/utils@0.5.0-beta.4) (2024-08-28)
 
 ### Bug Fixes
