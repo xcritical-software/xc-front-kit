@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.26](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.25...@xcritical/grid@2.0.0-beta.26) (2025-04-07)
+
+### Bug Fixes
+
+- **grid:** update getBodyCellContentStyles to handle row padding dynamically ([994c13c](https://github.com/xcritical-software/xc-front-kit/commit/994c13c8a77840bbc95d56e866b339ed4e8df3e9))
+
 # [2.0.0-beta.25](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.24...@xcritical/grid@2.0.0-beta.25) (2024-12-10)
 
 **Note:** Version bump only for package @xcritical/grid
