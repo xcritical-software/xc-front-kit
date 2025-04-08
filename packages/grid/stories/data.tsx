@@ -65,10 +65,10 @@ export const totals = {
 
 export const columns = [
   {
-    center,
     width,
     headerName: 'Number row',
     field: 'row',
+    position: 'right',
   },
   {
     center,
@@ -84,10 +84,10 @@ export const columns = [
   },
   { width, headerName: 'Col 1', field: 'col1' },
   {
-    center,
     width,
     headerName: 'Price',
     field: 'price',
+    position: 'right',
   },
   {
     center,
