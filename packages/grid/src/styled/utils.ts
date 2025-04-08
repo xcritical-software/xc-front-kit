@@ -13,6 +13,7 @@ import {
   IRightBorder,
   IRow,
 } from '../interfaces';
+import { GridPositions } from '../consts';
 
 export const getHeaderStyles = ({ theme }: IHeader) => {
   if (theme.border !== 'none') {
@@ -145,11 +146,10 @@ export const getBodyCellContentStyles = ({
   theme: { row },
   rowHeight,
   center,
+  position = GridPositions.LEFT,
 }: IBodyCellContentWrapper) => css`
-  ${row &&
-  css`
-    ${Object.entries(row).map(([key, value]) => `${key}: ${value};`)}
-  `}
+  padding: ${row?.padding};
+  justify-content: ${position === GridPositions.LEFT ? 'start' : 'end'};
   ${rowHeight ? `height: ${rowHeight}px` : null};
   ${center
     ? css`

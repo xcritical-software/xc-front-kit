@@ -50,6 +50,7 @@ export interface IColumn {
   sortable?: boolean;
   resizable?: boolean;
   sortingFn?: SortingFnOption<IItem>;
+  position?: GridPositions;
 
   sortOrder?: GridSort.ASC | GridSort.DESC | null;
 }
@@ -198,6 +199,7 @@ export interface IBodyCellContentWrapper {
   theme: IGridTheme;
   center?: boolean;
   rowHeight?: number;
+  position?: GridPositions;
 }
 
 export interface IRightBorder {
