@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.27](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.26...@xcritical/grid@2.0.0-beta.27) (2025-04-08)
+
+### Features
+
+- add position prop for grid column ([30fcf80](https://github.com/xcritical-software/xc-front-kit/commit/30fcf80fff8c85dcbb98ec87778b9c16c78ba397))
+- add position prop for grid column ([13f58e1](https://github.com/xcritical-software/xc-front-kit/commit/13f58e1ca7a7e924631d6e0bea6099e71c4e98c0))
+- add position prop for grid column ([e829efe](https://github.com/xcritical-software/xc-front-kit/commit/e829efe6090777e42c157b884b6c3a091b5ccc53))
+
 # [2.0.0-beta.26](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.25...@xcritical/grid@2.0.0-beta.26) (2025-04-07)
 
 ### Bug Fixes
