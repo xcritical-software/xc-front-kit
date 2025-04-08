@@ -149,7 +149,7 @@ export const getBodyCellContentStyles = ({
   position = GridPositions.LEFT,
 }: IBodyCellContentWrapper) => css`
   padding: ${row?.padding};
-  justify-content: ${position === GridPositions.LEFT ? 'start' : 'end'}
+  justify-content: ${position === GridPositions.LEFT ? 'start' : 'end'};
   ${rowHeight ? `height: ${rowHeight}px` : null};
   ${center
     ? css`
