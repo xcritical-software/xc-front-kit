@@ -177,7 +177,6 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     []
   );
 
-
   const $onSelect = () => {
     setFocus();
   };
@@ -274,16 +273,12 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     scrollPaddingEnd,
   });
 
-  const $totalSize = useMemo<number>(
-    () => rowVirtualizer.getTotalSize(),
-    [rowVirtualizer.getTotalSize()]
-  );
-
-  getGridHeight?.($totalSize);
-
-
+  
+  
   const virtualColumns = columnVirtualizer.getVirtualItems();
   const virtualRows = rowVirtualizer.getVirtualItems();
+  const $totalSize = rowVirtualizer.getTotalSize();
+  getGridHeight?.($totalSize);
 
   const headers = table.getLeafHeaders();
   const colSizes: { [key: string]: number } = {};
