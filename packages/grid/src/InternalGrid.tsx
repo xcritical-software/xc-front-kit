@@ -272,8 +272,6 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     paddingEnd: scrollPaddingEnd,
     scrollPaddingEnd,
   });
-
-  
   
   const virtualColumns = columnVirtualizer.getVirtualItems();
   const virtualRows = rowVirtualizer.getVirtualItems();
