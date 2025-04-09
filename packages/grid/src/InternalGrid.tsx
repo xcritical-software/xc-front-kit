@@ -61,6 +61,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   onChangeColumnSizes,
   onSelect,
   onFocusChange,
+  getGridHeight,
   autoFitLastColumn = true,
   enableSorting = true,
   enableMultiSort,
@@ -176,6 +177,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     []
   );
 
+
   const $onSelect = () => {
     setFocus();
   };
@@ -272,6 +274,14 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     scrollPaddingEnd,
   });
 
+  const $totalSize = useMemo<number>(
+    () => rowVirtualizer.getTotalSize(),
+    [rowVirtualizer.getTotalSize()]
+  );
+
+  getGridHeight?.($totalSize);
+
+
   const virtualColumns = columnVirtualizer.getVirtualItems();
   const virtualRows = rowVirtualizer.getVirtualItems();
 
@@ -344,7 +354,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
             shouldMovingColumns={shouldMovingColumns}
           />
 
-          <TBody theme={theme} height={rowVirtualizer.getTotalSize()}>
+          <TBody theme={theme} height={$totalSize}>
             {virtualRows.map((virtualRow) => {
               const row = rows[virtualRow.index];
               const visibleCells = row.getVisibleCells();

@@ -98,6 +98,7 @@ export interface IGridBaseProps {
   onChangeColumnSorting?: (state: SortingState | undefined) => void;
   onChangeColumnsOrder?: (state: string[] | undefined) => void;
   onChangeColumnVisibility?: (state: VisibilityState | undefined) => void;
+  getGridHeight?: (height: number) => void;
 
   onChangeColumnSizes?: (state: ColumnSizingState | undefined) => void;
   onChangeRowExpand?: (state: ExpandedState | undefined) => void;
