@@ -1,6 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
-import React, { MouseEvent, useCallback, useEffect, useMemo } from 'react';
+import React, {
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {
   ColumnPinningState,
   ColumnSizingState,
@@ -103,6 +109,8 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   }, [columns]);
 
   const enableSelect = isMultiSelect || !disableSelect;
+
+  const [_height, setHeight] = useState(0);
 
   const [sorting, setSorting] = useStateFromProp<SortingState | undefined>(
     columnSortingProp,
@@ -276,7 +284,13 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   const virtualColumns = columnVirtualizer.getVirtualItems();
   const virtualRows = rowVirtualizer.getVirtualItems();
   const $totalSize = rowVirtualizer.getTotalSize();
-  getGridHeight?.($totalSize);
+
+  useEffect(() => {
+    if (_height !== $totalSize) {
+      getGridHeight?.($totalSize);
+      setHeight($totalSize);
+    }
+  }, [$totalSize]);
 
   const headers = table.getLeafHeaders();
   const colSizes: { [key: string]: number } = {};
