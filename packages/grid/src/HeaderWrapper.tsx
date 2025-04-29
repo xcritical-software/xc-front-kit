@@ -16,9 +16,10 @@ export const HeaderWrapper: React.FC<IHeaderWrapper> = ({
   const headerRef = useRef<HTMLTableSectionElement>(null);
 
   return (
-    <Header ref={headerRef} theme={theme}>
+    <Header ref={headerRef} theme={theme} className="xcritical-grid__header">
       {table.getHeaderGroups().map((el) => (
         <HeaderRow
+          key={el.id}
           theme={theme}
           group={el}
           autoFitLastColumn={autoFitLastColumn}

@@ -1,6 +1,7 @@
 import { Cell, Row, flexRender } from '@tanstack/react-table';
 import React from 'react';
 import { VirtualItem } from '@tanstack/react-virtual';
+import classNames from 'classnames';
 
 import { ITheme } from '@xcritical/theme';
 
@@ -13,7 +14,6 @@ import {
 import { RemoveIcon, AddIcon } from './icons';
 import { ColumnDefWithBase, getBaseColls, getPinnedProps } from './utils';
 import { IGridTheme, IItem } from './interfaces';
-
 type CellContentProps = {
   theme: ITheme<IGridTheme>;
   vr: VirtualItem;
@@ -40,6 +40,14 @@ export const CellContent = React.memo(
 
     const columnDef = cell.column.columnDef as ColumnDefWithBase<IItem>;
 
+    const isExpanded = row.getIsExpanded();
+
+    const className = classNames('xcritical-grid__row-cell', {
+      'xcritical-grid__row-cell--expandable':
+        isExpandable && row.getCanExpand(),
+      'xcritical-grid__row-cell--expanded': isExpanded,
+    });
+
     return (
       <BodyCell
         {...getPinnedProps(cell.column)}
@@ -49,10 +57,12 @@ export const CellContent = React.memo(
         firstRow={vr.index === 0}
         even={!!(vr.index % 2)}
         key={cell.id}
+        className={className}
         autoFitLastColumn={autoFitLastColumn}
         selected={isSelected}
         data-column-id={cell.column.id}
         data-column-data={cell.getValue()}
+        data-row-depth={row.depth}
         theme={theme}
         depth={row.depth}
         isExpandable={isExpandable}
