@@ -1,6 +1,12 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
-import React, { MouseEvent, useCallback, useEffect, useMemo } from 'react';
+import React, {
+  MouseEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 import {
   ColumnPinningState,
   ColumnSizingState,
@@ -31,7 +37,12 @@ import classNames from 'classnames';
 
 import { useStateFromProp } from '@xcritical/utils';
 
-import { IColumn, IInternalGridProps, IItem } from './interfaces';
+import {
+  IColumn,
+  IInternalGridProps,
+  IItem,
+  InteractionType,
+} from './interfaces';
 import { getSelectUpDownElement, mappingColumns } from './utils';
 import { HiddenFocusElement, TBody, Wrapper } from './styled';
 import { HeaderWrapper } from './HeaderWrapper';
@@ -108,6 +119,8 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
 
   const enableSelect = isMultiSelect || !disableSelect;
 
+  const lastInteractionType = useRef<InteractionType>(null);
+
   const [sorting, setSorting] = useStateFromProp<SortingState | undefined>(
     columnSortingProp,
     onChangeColumnSorting,
@@ -116,7 +129,11 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
 
   const [rowSelection = {}, setRowSelection] = useStateFromProp<
     RowSelectionState | undefined
-  >(selectedRowKeys, onSelect, true);
+  >(selectedRowKeys, undefined, true);
+
+  useEffect(() => {
+    onSelect?.(rowSelection, lastInteractionType.current);
+  }, [rowSelection]);
 
   const [cellSize = {}, setCellSize] = useStateFromProp<
     ColumnSizingState | undefined
@@ -168,6 +185,8 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent & { originalEvent: Event }) => {
+      lastInteractionType.current = 'keyboard';
+
       if (e.key === 'ArrowDown') {
         e.preventDefault();
         getSelectUpDownElement(table, rowVirtualizer, 'down');
@@ -183,6 +202,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
 
   const $onSelect = () => {
     setFocus();
+    lastInteractionType.current = 'mouse';
   };
 
   const setFocus = () => {
@@ -192,6 +212,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   const onBlur = () => {
     onFocusChange?.(false);
   };
+
   const state = useMemo(
     () => ({
       columnVisibility,
