@@ -105,10 +105,12 @@ export interface IGridBaseProps {
   onChangeRowExpand?: (state: ExpandedState | undefined) => void;
   onSelect?: (
     state: RowSelectionState | undefined,
-    interactionType?: 'keyboard' | 'mouse' | null
+    interactionType?: InteractionType
   ) => void;
   onChangeExpand?: Function;
 }
+
+export type InteractionType = 'keyboard' | 'mouse' | null;
 
 export interface IGridProps extends IGridBaseProps {
   theme?: IThemeNamespace<IGridTheme>;
