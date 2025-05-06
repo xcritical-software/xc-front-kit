@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.28](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.27...@xcritical/grid@2.0.0-beta.28) (2025-05-06)
+
+### Features
+
+- **grid:** enhance grid components with className ([37d394d](https://github.com/xcritical-software/xc-front-kit/commit/37d394d60d97e9a92f2976572424b94b8e87b597))
+
 # [2.0.0-beta.27](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.26...@xcritical/grid@2.0.0-beta.27) (2025-04-08)
 
 ### Features
