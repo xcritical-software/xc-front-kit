@@ -27,6 +27,7 @@ import {
 } from '@dnd-kit/core';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
 import { arrayMove } from '@dnd-kit/sortable';
+import classNames from 'classnames';
 
 import { useStateFromProp } from '@xcritical/utils';
 
@@ -70,7 +71,11 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   overscan = 5,
   getRowId: getRowIdProps,
   debugTable,
+  name,
+  className,
 }) => {
+  const $className = classNames('xcritical-grid', className);
+
   const sensors = useSensors(
     useSensor(MouseSensor, {}),
     useSensor(TouchSensor, {}),
@@ -326,6 +331,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
         $width={width}
         $height={height}
         theme={theme}
+        className={$className}
         ref={tableContainerRef}>
         {/* Even though we're still using sematic table tags, we must use CSS grid and flexbox for dynamic row heights */}
         <HiddenFocusElement
@@ -333,7 +339,10 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
           onBlur={onBlur}
           tabIndex={0}
         />
-        <table style={{ display: 'grid', ...virtualPaddingVars, ...colSizes }}>
+        <table
+          style={{ display: 'grid', ...virtualPaddingVars, ...colSizes }}
+          data-table-name={name}
+          className="xcritical-grid__table">
           <HeaderWrapper
             columnOrder={columnOrder}
             vcs={virtualColumns}

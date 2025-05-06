@@ -33,10 +33,15 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
     });
 
   const $shouldMovingColumns = shouldMovingColumns && !pinned;
+  const sorting = header.column.getIsSorted();
 
   return (
     <HeaderCell
+      className="xcritical-grid__header-cell"
       colSpan={header.colSpan}
+      data-header-id={header.column.id}
+      data-header-index={header.index}
+      data-header-sorting={sorting}
       ref={setNodeRef}
       isDragging={isDragging}
       theme={theme}
@@ -57,10 +62,10 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
           {flexRender(header.column.columnDef.header, header.getContext())}
         </HeaderCellContent>
         <SortIconWrapper>
-          {header.column.getIsSorted() === GridSort.ASC && (
+          {sorting === GridSort.ASC && (
             <SortAscendingIcon size={theme.sortIconSize} />
           )}
-          {header.column.getIsSorted() === GridSort.DESC && (
+          {sorting === GridSort.DESC && (
             <SortDescendingIcon size={theme.sortIconSize} />
           )}
         </SortIconWrapper>
@@ -73,6 +78,7 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
 
       <RightBorder
         theme={theme}
+        className="xcritical-grid__header-cell-right-border"
         onDoubleClick={() => header.column.resetSize()}
         onMouseDown={header.getResizeHandler()}
         onTouchStart={header.getResizeHandler()}

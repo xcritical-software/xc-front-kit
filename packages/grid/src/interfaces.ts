@@ -60,6 +60,8 @@ export interface ITotals {
 
 export interface IGridBaseProps {
   // props
+  name?: string;
+  className?: string;
   items: IItem[];
   columns: IColumn[];
   width?: number;

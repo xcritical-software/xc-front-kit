@@ -1,13 +1,13 @@
 import { Cell, Row as RowTable } from '@tanstack/react-table';
 import React, { useCallback, useMemo } from 'react';
 import { VirtualItem, Virtualizer } from '@tanstack/react-virtual';
+import classNames from 'classnames';
 
 import { ITheme } from '@xcritical/theme';
 
 import { Row } from './styled';
 import { IGridTheme, IItem } from './interfaces';
 import { CellContent } from './CellContent';
-
 type CellContentProps = {
   autoFitLastColumn?: boolean;
   theme: ITheme<IGridTheme>;
@@ -23,6 +23,11 @@ type CellContentProps = {
     e: React.MouseEvent<HTMLTableRowElement>
   ) => void;
   rowVirtualizer: Virtualizer<HTMLDivElement, Element>;
+};
+
+const style = {
+  display: 'var(--virtual-padding-left-display)',
+  width: `calc(var(--virtual-padding-left) * 1px)`,
 };
 
 export const RowBody = React.memo(
@@ -72,16 +77,24 @@ export const RowBody = React.memo(
       },
       [row, enableSelect]
     );
+    const even = !!(vr.index % 2);
+    const selected = row.getIsSelected();
+
+    const className = classNames('xcritical-grid__row', {
+      'xcritical-grid__row--selected': selected,
+      'xcritical-grid__row--even': even,
+    });
 
     return (
       <Row
         data-index={vr.index} // needed for dynamic row height measurement
         ref={(node) => rowVirtualizer.measureElement(node)} // measure dynamic row height
         key={row.id}
+        className={className}
         onClick={onClickHandler}
         rowHeight={rowHeight}
-        selected={row.getIsSelected()}
-        even={!!(vr.index % 2)}
+        selected={selected}
+        even={even}
         theme={theme}
         translateY={vr.start}>
         {left.map((cell) => (
@@ -93,15 +106,10 @@ export const RowBody = React.memo(
             theme={theme}
             cell={cell}
             row={row}
-            isSelected={row.getIsSelected()}
+            isSelected={selected}
           />
         ))}
-        <td
-          style={{
-            display: 'var(--virtual-padding-left-display)',
-            width: `calc(var(--virtual-padding-left) * 1px)`,
-          }}
-        />
+        <td style={style} />
         {center.map((cell, idx) => {
           if (!vcs.some((v) => v.index === idx)) {
             return null;
@@ -123,12 +131,7 @@ export const RowBody = React.memo(
             />
           );
         })}
-        <td
-          style={{
-            display: 'var(--virtual-padding-right-display)',
-            width: `calc(var(--virtual-padding-right) * 1px)`,
-          }}
-        />
+        <td style={style} />
         {right.map((cell) => (
           <CellContent
             vr={vr}
