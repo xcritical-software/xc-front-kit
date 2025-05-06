@@ -103,7 +103,10 @@ export interface IGridBaseProps {
 
   onChangeColumnSizes?: (state: ColumnSizingState | undefined) => void;
   onChangeRowExpand?: (state: ExpandedState | undefined) => void;
-  onSelect?: (state: RowSelectionState | undefined) => void;
+  onSelect?: (
+    state: RowSelectionState | undefined,
+    interactionType?: 'keyboard' | 'mouse' | null
+  ) => void;
   onChangeExpand?: Function;
 }
 
