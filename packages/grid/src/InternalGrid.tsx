@@ -115,7 +115,6 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   const enableSelect = isMultiSelect || !disableSelect;
 
   const lastInteractionType = useRef<'keyboard' | 'mouse' | null>(null);
-  const rowSelectionTimeout = useRef<number | null>(null);
 
   const [sorting, setSorting] = useStateFromProp<SortingState | undefined>(
     columnSortingProp,
@@ -128,27 +127,8 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   >(selectedRowKeys, undefined, true);
 
   useEffect(() => {
-    if (lastInteractionType.current === 'keyboard') {
-      if (rowSelectionTimeout.current) {
-        clearTimeout(rowSelectionTimeout.current);
-      }
-
-      rowSelectionTimeout.current = window.setTimeout(() => {
-        onSelect?.(rowSelection, lastInteractionType.current);
-      }, 500);
-    } else {
-      onSelect?.(rowSelection, lastInteractionType.current);
-    }
+    onSelect?.(rowSelection, lastInteractionType.current);
   }, [rowSelection]);
-
-  useEffect(
-    () => () => {
-      if (rowSelectionTimeout.current) {
-        clearTimeout(rowSelectionTimeout.current);
-      }
-    },
-    []
-  );
 
   const [cellSize = {}, setCellSize] = useStateFromProp<
     ColumnSizingState | undefined
