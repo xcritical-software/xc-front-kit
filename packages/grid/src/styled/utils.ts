@@ -146,10 +146,7 @@ export const getBodyCellContentStyles = ({
   rowHeight,
   center,
 }: IBodyCellContentWrapper) => css`
-  ${row &&
-  css`
-    ${Object.entries(row).map(([key, value]) => `${key}: ${value};`)}
-  `}
+  padding: ${row?.padding};
   ${rowHeight ? `height: ${rowHeight}px` : null};
   ${center
     ? css`
