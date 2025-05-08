@@ -70,6 +70,7 @@ export const CellContent = React.memo(
         <BodyCellContentWrapper
           theme={theme}
           key={cell.id}
+          position={columnDef._base.position}
           center={columnDef._base.center}>
           {isExpandable && row.getCanExpand() && (
             <ExpandButtonWrapper

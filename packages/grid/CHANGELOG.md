@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.29](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.28...@xcritical/grid@2.0.0-beta.29) (2025-05-06)
+
+### Features
+
+- add delay for keyboard grid row select ([ab35c6c](https://github.com/xcritical-software/xc-front-kit/commit/ab35c6cea11ad456cd2802f2864d71183a28190f))
+- add delay for keyboard grid row select ([51b376e](https://github.com/xcritical-software/xc-front-kit/commit/51b376eb27e160ea3a1e19822fb100631e2808ae))
+- add delay for keyboard grid row select ([1a7af14](https://github.com/xcritical-software/xc-front-kit/commit/1a7af146cfc21657943e5471c58a2ad5c8471e8c))
+
+# [2.0.0-beta.28](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.27...@xcritical/grid@2.0.0-beta.28) (2025-05-06)
+
+### Features
+
+- **grid:** enhance grid components with className ([37d394d](https://github.com/xcritical-software/xc-front-kit/commit/37d394d60d97e9a92f2976572424b94b8e87b597))
+
+# [2.0.0-beta.27](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.26...@xcritical/grid@2.0.0-beta.27) (2025-04-08)
+
+### Features
+
+- add position prop for grid column ([30fcf80](https://github.com/xcritical-software/xc-front-kit/commit/30fcf80fff8c85dcbb98ec87778b9c16c78ba397))
+- add position prop for grid column ([13f58e1](https://github.com/xcritical-software/xc-front-kit/commit/13f58e1ca7a7e924631d6e0bea6099e71c4e98c0))
+- add position prop for grid column ([e829efe](https://github.com/xcritical-software/xc-front-kit/commit/e829efe6090777e42c157b884b6c3a091b5ccc53))
+
+# [2.0.0-beta.26](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.25...@xcritical/grid@2.0.0-beta.26) (2025-04-07)
+
+### Bug Fixes
+
+- **grid:** update getBodyCellContentStyles to handle row padding dynamically ([994c13c](https://github.com/xcritical-software/xc-front-kit/commit/994c13c8a77840bbc95d56e866b339ed4e8df3e9))
+
 # [2.0.0-beta.25](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.24...@xcritical/grid@2.0.0-beta.25) (2024-12-10)
 
 **Note:** Version bump only for package @xcritical/grid

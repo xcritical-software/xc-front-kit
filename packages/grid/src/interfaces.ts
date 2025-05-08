@@ -50,6 +50,7 @@ export interface IColumn {
   sortable?: boolean;
   resizable?: boolean;
   sortingFn?: SortingFnOption<IItem>;
+  position?: GridPositions;
 
   sortOrder?: GridSort.ASC | GridSort.DESC | null;
 }
@@ -102,9 +103,14 @@ export interface IGridBaseProps {
 
   onChangeColumnSizes?: (state: ColumnSizingState | undefined) => void;
   onChangeRowExpand?: (state: ExpandedState | undefined) => void;
-  onSelect?: (state: RowSelectionState | undefined) => void;
+  onSelect?: (
+    state: RowSelectionState | undefined,
+    interactionType?: InteractionType
+  ) => void;
   onChangeExpand?: Function;
 }
+
+export type InteractionType = 'keyboard' | 'mouse' | null;
 
 export interface IGridProps extends IGridBaseProps {
   theme?: IThemeNamespace<IGridTheme>;
@@ -200,6 +206,7 @@ export interface IBodyCellContentWrapper {
   theme: IGridTheme;
   center?: boolean;
   rowHeight?: number;
+  position?: GridPositions;
 }
 
 export interface IRightBorder {
