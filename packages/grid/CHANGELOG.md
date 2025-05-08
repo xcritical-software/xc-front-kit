@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.30](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.29...@xcritical/grid@2.0.0-beta.30) (2025-05-08)
+
+### Bug Fixes
+
+- **grid:** update RowBody styles for left and right padding ([2361079](https://github.com/xcritical-software/xc-front-kit/commit/23610799934295fde6d90bd9aa44ff5a2c220e82))
+
 # [2.0.0-beta.29](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.28...@xcritical/grid@2.0.0-beta.29) (2025-05-06)
 
 ### Features
