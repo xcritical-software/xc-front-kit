@@ -25,9 +25,14 @@ type CellContentProps = {
   rowVirtualizer: Virtualizer<HTMLDivElement, Element>;
 };
 
-const style = {
+const styleLeft = {
   display: 'var(--virtual-padding-left-display)',
   width: `calc(var(--virtual-padding-left) * 1px)`,
+};
+
+const styleRight = {
+  display: 'var(--virtual-padding-right-display)',
+  width: `calc(var(--virtual-padding-right) * 1px)`,
 };
 
 export const RowBody = React.memo(
@@ -109,7 +114,7 @@ export const RowBody = React.memo(
             isSelected={selected}
           />
         ))}
-        <td style={style} />
+        <td style={styleLeft} />
         {center.map((cell, idx) => {
           if (!vcs.some((v) => v.index === idx)) {
             return null;
@@ -131,7 +136,7 @@ export const RowBody = React.memo(
             />
           );
         })}
-        <td style={style} />
+        <td style={styleRight} />
         {right.map((cell) => (
           <CellContent
             vr={vr}
