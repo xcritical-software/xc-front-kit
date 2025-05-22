@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0-beta.4](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/popover@2.5.0-beta.3...@xcritical/popover@2.5.0-beta.4) (2025-05-22)
+
+### Bug Fixes
+
+- **popover:** fix timeout ([e54fee7](https://github.com/xcritical-software/xc-front-kit/commit/e54fee7208570768f76b377db1f226850e0600a0))
+
 # [2.5.0-beta.3](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/popover@2.5.0-beta.2...@xcritical/popover@2.5.0-beta.3) (2024-09-16)
 
 ### Bug Fixes
