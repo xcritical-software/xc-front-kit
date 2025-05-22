@@ -39,12 +39,12 @@ export const Popover: React.FC<IPopover> = memo(
     const popoverTargetRef = useRef<any>();
     const popoverContentRef = useRef<any>();
     const popperScheduleUpdateRef = useRef<any>();
+    const timeOutRef = useRef<any>(null);
     const popoverContentObserverRef: React.MutableRefObject<
       ResizeObserver | undefined
     > = useRef();
 
     const [_visible, _setVisible] = useState(false);
-    const [hideTimeoutId, setHideTimeoutId] = useState<null | number>(null);
 
     const popperModifiers: Modifiers = useMemo(() => {
       if (preventOverflowViewport) {
@@ -117,28 +117,33 @@ export const Popover: React.FC<IPopover> = memo(
     );
 
     const handleMouseOver = useCallback(
-      (e: React.MouseEvent): void => {
+      (e) => {
         if (e.target === popoverTargetRef.current) {
           return;
         }
 
-        if (hideTimeoutId) {
-          clearTimeout(hideTimeoutId);
+        if (timeOutRef.current) {
+          clearTimeout(timeOutRef.current);
+          timeOutRef.current = null;
         }
 
-        _setVisible(true);
-        changeVisible(true);
+        timeOutRef.current = window.setTimeout(() => {
+          _setVisible(true);
+          changeVisible(true);
+        }, hoverOutTimeout);
       },
-      [hideTimeoutId, changeVisible]
+      [changeVisible]
     );
+    const handleMouseOut = useCallback(() => {
+      if (timeOutRef.current) {
+        clearTimeout(timeOutRef.current);
+        timeOutRef.current = null;
+      }
 
-    const handleMouseOut = useCallback((): void => {
-      const timeoutId = window.setTimeout(() => {
+      timeOutRef.current = window.setTimeout(() => {
         _setVisible(false);
         changeVisible(false);
       }, hoverOutTimeout);
-
-      setHideTimeoutId(timeoutId);
     }, [changeVisible, hoverOutTimeout]);
 
     const createContentObserver = useCallback(() => {
