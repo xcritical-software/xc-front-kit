@@ -54,7 +54,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   theme,
   width = 0,
   height = 0,
-  rowHeight,
+  rowHeight = 33,
   disableSelect,
   isMultiSelect,
   shouldChangeColumnsWidth = false,
@@ -269,7 +269,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
 
   const rowVirtualizer = useVirtualizer({
     count: disableVirtualization ? 0 : rows.length,
-    estimateSize: () => rowHeight || 33, // estimate row height for accurate scrollbar dragging
+    estimateSize: () => rowHeight, // estimate row height for accurate scrollbar dragging
     getScrollElement: () => tableContainerRef.current,
     // measure dynamic row height, except in firefox because it measures table border height incorrectly
     measureElement:
@@ -326,9 +326,9 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
       disableVirtualization
         ? rows.map((_, index) => ({
             index,
-            start: index * (rowHeight || 33),
-            end: (index + 1) * (rowHeight || 33),
-            size: rowHeight || 33,
+            start: index * rowHeight,
+            end: (index + 1) * rowHeight,
+            size: rowHeight,
             key: index.toString(),
             lane: 0,
           }))
