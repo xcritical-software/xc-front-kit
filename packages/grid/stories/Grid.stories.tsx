@@ -70,6 +70,13 @@ const meta: Meta<typeof Grid> = {
       defaultValue: false,
       name: 'Enable multi select',
     },
+    disableVirtualization: {
+      control: 'boolean',
+      defaultValue: false,
+      name: 'Disable virtualization',
+      description:
+        'When enabled, all rows are rendered at once (no virtualization). Useful for small datasets or when you need all content visible for printing/exporting.',
+    },
   },
 };
 
@@ -206,5 +213,29 @@ export const RenderFunction: Story = {
       rowHeight={30}
       theme={AMStheme}
     />
+  ),
+};
+
+export const DisabledVirtualization: Story = {
+  decorators: [],
+  name: 'Disabled Virtualization',
+  parameters: {},
+  args: {
+    disableVirtualization: true,
+  },
+  render: (props) => (
+    <>
+      <div style={{ border: '1px solid #ccc', height: '500px' }}>
+        <Grid
+          {...props}
+          columns={columns}
+          items={rows.slice(0, 50)} // Limit to 50 rows for demo
+          shouldChangeColumnsWidth={false}
+          width="100%"
+          height="100%"
+          rowHeight={40}
+        />
+      </div>
+    </>
   ),
 };

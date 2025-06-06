@@ -22,7 +22,7 @@ type CellContentProps = {
     row: RowTable<IItem>,
     e: React.MouseEvent<HTMLTableRowElement>
   ) => void;
-  rowVirtualizer: Virtualizer<HTMLDivElement, Element>;
+  rowVirtualizer?: Virtualizer<HTMLDivElement, Element>;
 };
 
 const styleLeft = {
@@ -93,7 +93,7 @@ export const RowBody = React.memo(
     return (
       <Row
         data-index={vr.index} // needed for dynamic row height measurement
-        ref={(node) => rowVirtualizer.measureElement(node)} // measure dynamic row height
+        ref={(node) => rowVirtualizer?.measureElement(node)} // measure dynamic row height
         key={row.id}
         className={className}
         onClick={onClickHandler}
