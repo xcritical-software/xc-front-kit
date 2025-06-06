@@ -285,20 +285,18 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent & { originalEvent: Event }) => {
-      lastInteractionType.current = 'keyboard';
+      if (!disableVirtualization) {
+        lastInteractionType.current = 'keyboard';
 
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
 
-        if (!disableVirtualization) {
           getSelectUpDownElement(table, rowVirtualizer, 'down');
         }
-      }
 
-      if (e.key === 'ArrowUp') {
-        e.preventDefault();
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
 
-        if (!disableVirtualization) {
           getSelectUpDownElement(table, rowVirtualizer, 'up');
         }
       }
@@ -306,35 +304,27 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     [disableVirtualization, rowVirtualizer, table]
   );
 
-  const virtualColumns = useMemo(
-    () =>
-      disableVirtualization
-        ? visibleColumns.map((column, index) => ({
-            index,
-            start: 0,
-            end: column.getSize(),
-            size: column.getSize(),
-            key: column.id,
-            lane: 0,
-          }))
-        : columnVirtualizer.getVirtualItems(),
-    [disableVirtualization, visibleColumns, columnVirtualizer]
-  );
+  const virtualColumns = disableVirtualization
+    ? visibleColumns.map((column, index) => ({
+        index,
+        start: 0,
+        end: column.getSize(),
+        size: column.getSize(),
+        key: column.id,
+        lane: 0,
+      }))
+    : columnVirtualizer.getVirtualItems();
 
-  const virtualRows = useMemo(
-    () =>
-      disableVirtualization
-        ? rows.map((_, index) => ({
-            index,
-            start: index * rowHeight,
-            end: (index + 1) * rowHeight,
-            size: rowHeight,
-            key: index.toString(),
-            lane: 0,
-          }))
-        : rowVirtualizer.getVirtualItems(),
-    [disableVirtualization, rows, rowHeight, rowVirtualizer]
-  );
+  const virtualRows = disableVirtualization
+    ? rows.map((_, index) => ({
+        index,
+        start: index * rowHeight,
+        end: (index + 1) * rowHeight,
+        size: rowHeight,
+        key: index.toString(),
+        lane: 0,
+      }))
+    : rowVirtualizer.getVirtualItems();
 
   const headers = table.getLeafHeaders();
   const colSizes: { [key: string]: number } = {};
