@@ -306,27 +306,35 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     [disableVirtualization, rowVirtualizer, table]
   );
 
-  const virtualColumns = disableVirtualization
-    ? visibleColumns.map((column, index) => ({
-        index,
-        start: 0,
-        end: column.getSize(),
-        size: column.getSize(),
-        key: column.id,
-        lane: 0,
-      }))
-    : columnVirtualizer.getVirtualItems();
+  const virtualColumns = useMemo(
+    () =>
+      disableVirtualization
+        ? visibleColumns.map((column, index) => ({
+            index,
+            start: 0,
+            end: column.getSize(),
+            size: column.getSize(),
+            key: column.id,
+            lane: 0,
+          }))
+        : columnVirtualizer.getVirtualItems(),
+    [disableVirtualization, visibleColumns, columnVirtualizer]
+  );
 
-  const virtualRows = disableVirtualization
-    ? rows.map((_, index) => ({
-        index,
-        start: index * (rowHeight || 33),
-        end: (index + 1) * (rowHeight || 33),
-        size: rowHeight || 33,
-        key: index.toString(),
-        lane: 0,
-      }))
-    : rowVirtualizer.getVirtualItems();
+  const virtualRows = useMemo(
+    () =>
+      disableVirtualization
+        ? rows.map((_, index) => ({
+            index,
+            start: index * (rowHeight || 33),
+            end: (index + 1) * (rowHeight || 33),
+            size: rowHeight || 33,
+            key: index.toString(),
+            lane: 0,
+          }))
+        : rowVirtualizer.getVirtualItems(),
+    [disableVirtualization, rows, rowHeight, rowVirtualizer]
+  );
 
   const headers = table.getLeafHeaders();
   const colSizes: { [key: string]: number } = {};
