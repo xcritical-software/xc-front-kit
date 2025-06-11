@@ -17,7 +17,7 @@ export const PureInlineEdit = function <
   invalid = false,
   isEditing,
   onIsEditingChange,
-  closeOnEscape = false,
+  closeOnEscape = true,
   className,
   classNamePrefix,
   ...rest

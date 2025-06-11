@@ -259,8 +259,8 @@ export const Basic: Story = {
         <BasicInlineEditInput editView={Input} />
       </div>
       <div style={{ width: '300px', marginLeft: '50px' }}>
-        <p>Basic InlineEdit with closing by Esc button</p>
-        <BasicInlineEditInput editView={Input} closeOnEscape />
+        <p>Basic InlineEdit without closing by Esc button</p>
+        <BasicInlineEditInput editView={Input} closeOnEscape={false} />
       </div>
     </div>
   ),

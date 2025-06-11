@@ -151,7 +151,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
     }
 
     return () => {};
-  }, [handleEscapeKey, closeOnEscape, isEditing, isFocus]);
+  }, [handleEscapeKey, isFocus]);
 
   return (
     <ContentWrapper
