@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.31](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.30...@xcritical/grid@2.0.0-beta.31) (2025-06-25)
+
+### Bug Fixes
+
+- **grid:** set default rowHeight and ensure consistent row size calculations ([29047d1](https://github.com/xcritical-software/xc-front-kit/commit/29047d1622a287d2971b938eba86b1e07b59b850))
+
+### Features
+
+- **grid:** add disableVirtualization mode ([7df1a0a](https://github.com/xcritical-software/xc-front-kit/commit/7df1a0a77a6a0940d6c4244f80ac99043525a523))
+- **grid:** enhance keyboard navigation and scrolling behavior in grid component ([fa34a3b](https://github.com/xcritical-software/xc-front-kit/commit/fa34a3bbb8f0bebe3d560e85b55d0f762b90c9b2))
+- **grid:** implement disableVirtualization feature in grid components ([7957139](https://github.com/xcritical-software/xc-front-kit/commit/7957139674ebb28d6ad5751f95b15c69f748c642))
+
 # [2.0.0-beta.30](https://github.com/xcritical-software/xc-front-kit/compare/@xcritical/grid@2.0.0-beta.29...@xcritical/grid@2.0.0-beta.30) (2025-05-08)
 
 ### Bug Fixes
