@@ -137,11 +137,22 @@ export const getSelectUpDownElement = (
         ? flatRows[selectedRowIndex + 1]
         : flatRows[selectedRowIndex - 1];
 
-    if (nextRow) {
+    if (nextRow && rowVirtualizer.getVirtualItems().length > 0) {
       rowVirtualizer.scrollToIndex(nextRow.index, {
         align: 'center',
         behavior: 'auto',
       });
+
+      return { [nextRow.id]: true } as RowSelectionState;
+    }
+
+    if (nextRow) {
+      // scroll to element
+      const element = document.getElementById(`${nextRow.id}_row`);
+
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
 
       return { [nextRow.id]: true } as RowSelectionState;
     }

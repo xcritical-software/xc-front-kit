@@ -229,7 +229,7 @@ export const DisabledVirtualization: Story = {
         <Grid
           {...props}
           columns={columns}
-          items={rows.slice(0, 5)} // Limit to 50 rows for demo
+          items={rows.slice(0, 50)} // Limit to 50 rows for demo
           shouldChangeColumnsWidth={false}
           width="100%"
           height="auto"

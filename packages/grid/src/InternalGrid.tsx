@@ -184,6 +184,25 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     }
   }, []);
 
+  const onKeyDown = useCallback(
+    (e: KeyboardEvent & { originalEvent: Event }) => {
+      lastInteractionType.current = 'keyboard';
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+
+        getSelectUpDownElement(table, rowVirtualizer, 'down');
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+
+        getSelectUpDownElement(table, rowVirtualizer, 'up');
+      }
+    },
+    []
+  );
+
   const $onSelect = () => {
     setFocus();
     lastInteractionType.current = 'mouse';
@@ -282,27 +301,6 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     paddingEnd: scrollPaddingEnd,
     scrollPaddingEnd,
   });
-
-  const onKeyDown = useCallback(
-    (e: KeyboardEvent & { originalEvent: Event }) => {
-      if (!disableVirtualization) {
-        lastInteractionType.current = 'keyboard';
-
-        if (e.key === 'ArrowDown') {
-          e.preventDefault();
-
-          getSelectUpDownElement(table, rowVirtualizer, 'down');
-        }
-
-        if (e.key === 'ArrowUp') {
-          e.preventDefault();
-
-          getSelectUpDownElement(table, rowVirtualizer, 'up');
-        }
-      }
-    },
-    [disableVirtualization, rowVirtualizer, table]
-  );
 
   const virtualColumns = disableVirtualization
     ? visibleColumns.map((column, index) => ({
