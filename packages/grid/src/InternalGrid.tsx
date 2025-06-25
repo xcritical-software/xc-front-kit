@@ -190,13 +190,11 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
 
       if (e.key === 'ArrowDown') {
         e.preventDefault();
-
         getSelectUpDownElement(table, rowVirtualizer, 'down');
       }
 
       if (e.key === 'ArrowUp') {
         e.preventDefault();
-
         getSelectUpDownElement(table, rowVirtualizer, 'up');
       }
     },
@@ -280,7 +278,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
 
   const columnVirtualizer = useVirtualizer({
     count: disableVirtualization ? 0 : visibleColumns.length,
-    estimateSize: (index) => visibleColumns[index]?.getSize() || 0, // estimate width of each column for accurate scrollbar dragging
+    estimateSize: (index) => visibleColumns[index]?.getSize(), // estimate width of each column for accurate scrollbar dragging
     getScrollElement: () => tableContainerRef.current,
     horizontal: true,
     overscan, // how many columns to render on each side off screen each way (adjust this for performance)
