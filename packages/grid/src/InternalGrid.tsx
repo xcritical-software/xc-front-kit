@@ -84,6 +84,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   debugTable,
   name,
   className,
+  disableVirtualization = false,
 }) => {
   const $className = classNames('xcritical-grid', className);
 
@@ -276,19 +277,20 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
   const hiddenContainerRef = React.useRef<HTMLDivElement>(null);
 
   const columnVirtualizer = useVirtualizer({
-    count: visibleColumns.length,
-    estimateSize: (index) => visibleColumns[index].getSize(), // estimate width of each column for accurate scrollbar dragging
+    count: disableVirtualization ? 0 : visibleColumns.length,
+    estimateSize: (index) => visibleColumns[index]?.getSize(), // estimate width of each column for accurate scrollbar dragging
     getScrollElement: () => tableContainerRef.current,
     horizontal: true,
     overscan, // how many columns to render on each side off screen each way (adjust this for performance)
   });
 
   const rowVirtualizer = useVirtualizer({
-    count: rows.length,
+    count: disableVirtualization ? 0 : rows.length,
     estimateSize: () => rowHeight || 33, // estimate row height for accurate scrollbar dragging
     getScrollElement: () => tableContainerRef.current,
     // measure dynamic row height, except in firefox because it measures table border height incorrectly
     measureElement:
+      !disableVirtualization &&
       typeof window !== 'undefined' &&
       navigator.userAgent.indexOf('Firefox') === -1
         ? (element) => element.getBoundingClientRect().height
@@ -298,8 +300,24 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     scrollPaddingEnd,
   });
 
-  const virtualColumns = columnVirtualizer.getVirtualItems();
-  const virtualRows = rowVirtualizer.getVirtualItems();
+  const virtualColumns = disableVirtualization
+    ? visibleColumns.map((column, index) => ({
+        index,
+        start: 0,
+        end: column.getSize(),
+        size: column.getSize(),
+        key: column.id,
+        lane: 0,
+      }))
+    : columnVirtualizer.getVirtualItems();
+
+  const virtualRows = disableVirtualization
+    ? rows.map((_, index) => ({
+        index,
+        key: index.toString(),
+        lane: 0,
+      }))
+    : rowVirtualizer.getVirtualItems();
 
   const headers = table.getLeafHeaders();
   const colSizes: { [key: string]: number } = {};
@@ -340,7 +358,11 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
     return () => {
       hiddenContainerRef.current?.removeEventListener('keydown', onKeyDown);
     };
-  }, []);
+  }, [onKeyDown]);
+
+  const totalHeight = disableVirtualization
+    ? '100%'
+    : rowVirtualizer.getTotalSize();
 
   return (
     <DndContext
@@ -374,7 +396,7 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
             shouldMovingColumns={shouldMovingColumns}
           />
 
-          <TBody theme={theme} height={rowVirtualizer.getTotalSize()}>
+          <TBody theme={theme} height={totalHeight}>
             {virtualRows.map((virtualRow) => {
               const row = rows[virtualRow.index];
               const visibleCells = row.getVisibleCells();
@@ -390,8 +412,11 @@ export const InternalGrid: React.FC<IInternalGridProps> = ({
                   vr={virtualRow}
                   vcs={virtualColumns}
                   visibleCells={visibleCells}
-                  rowVirtualizer={rowVirtualizer} // measure dynamic row height
+                  rowVirtualizer={
+                    disableVirtualization ? undefined : rowVirtualizer
+                  }
                   key={rowId}
+                  disableVirtualization={disableVirtualization}
                   enableSelect={enableSelect}
                   rowHeight={rowHeight}
                   theme={theme}

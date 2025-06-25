@@ -76,14 +76,16 @@ export const HeaderCellWrapper: React.FC<IHeaderCellWrapper> = ({
         </DragAndDropButton>
       )}
 
-      <RightBorder
-        theme={theme}
-        className="xcritical-grid__header-cell-right-border"
-        onDoubleClick={() => header.column.resetSize()}
-        onMouseDown={header.getResizeHandler()}
-        onTouchStart={header.getResizeHandler()}
-        shouldChangeColumnsWidth={shouldChangeColumnsWidth}
-      />
+      {shouldChangeColumnsWidth && (
+        <RightBorder
+          theme={theme}
+          className="xcritical-grid__header-cell-right-border"
+          onDoubleClick={() => header.column.resetSize()}
+          onMouseDown={header.getResizeHandler()}
+          onTouchStart={header.getResizeHandler()}
+          shouldChangeColumnsWidth={shouldChangeColumnsWidth}
+        />
+      )}
     </HeaderCell>
   );
 };

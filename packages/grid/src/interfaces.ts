@@ -64,8 +64,8 @@ export interface IGridBaseProps {
   className?: string;
   items: IItem[];
   columns: IColumn[];
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
   rowHeight?: number;
   overscan?: number;
   minColumnWidth?: number;
@@ -87,6 +87,7 @@ export interface IGridBaseProps {
   shouldFitContainer?: boolean;
   debugTable?: boolean;
   autoFitLastColumn?: boolean;
+  disableVirtualization?: boolean;
 
   // states
   columnVisibility?: VisibilityState;
@@ -192,7 +193,7 @@ export interface ITotalCellContent {
 
 export interface ITBody {
   theme: IGridTheme;
-  height: number;
+  height: number | string;
 }
 export interface IRow {
   theme: IGridTheme;
@@ -200,6 +201,7 @@ export interface IRow {
   even: boolean;
   selected?: boolean;
   rowHeight?: number;
+  disableVirtualization?: boolean;
 }
 
 export interface IBodyCellContentWrapper {
@@ -225,8 +227,8 @@ export interface IBodyCellOffset {
 }
 export interface IWrapper {
   theme: IGridTheme;
-  $width: number;
-  $height: number;
+  $width: number | string;
+  $height: number | string;
   changingColumns?: string;
 }
 

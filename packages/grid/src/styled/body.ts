@@ -190,7 +190,7 @@ export const ShiftInsteadButton = styled.div`
 
 export const TBody = styled.tbody.attrs<ITBody>(({ height }) => ({
   style: {
-    height: `${height}px`,
+    height,
   },
 }))`
   display: grid;
@@ -203,7 +203,8 @@ export const Row = styled.tr.attrs<IRow>(({ translateY }) => ({
   },
 }))`
   display: flex;
-  position: absolute;
+  position: ${({ disableVirtualization }) =>
+    disableVirtualization ? 'relative' : 'absolute'};
   width: 100%;
   ${getRowStyles}
 `;

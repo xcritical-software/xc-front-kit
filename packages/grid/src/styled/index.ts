@@ -10,8 +10,8 @@ export * from './totals';
 
 export const Wrapper = styled.div.attrs<IWrapper>(({ $width, $height }) => ({
   style: {
-    width: `${$width}px`,
-    height: `${$height}px`,
+    width: $width,
+    height: $height,
   },
 }))`
   * {
