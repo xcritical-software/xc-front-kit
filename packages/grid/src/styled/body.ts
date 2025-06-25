@@ -203,7 +203,8 @@ export const Row = styled.tr.attrs<IRow>(({ translateY }) => ({
   },
 }))`
   display: flex;
-  position: absolute;
+  position: ${({ disableVirtualization }) =>
+    disableVirtualization ? 'relative' : 'absolute'};
   width: 100%;
   ${getRowStyles}
 `;

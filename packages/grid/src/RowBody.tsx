@@ -18,6 +18,7 @@ type CellContentProps = {
   onClick: Function;
   enableSelect: boolean;
   rowHeight?: number;
+  disableVirtualization?: boolean;
   onSelect: (
     row: RowTable<IItem>,
     e: React.MouseEvent<HTMLTableRowElement>
@@ -48,6 +49,7 @@ export const RowBody = React.memo(
     rowHeight,
     rowVirtualizer,
     autoFitLastColumn,
+    disableVirtualization,
   }: CellContentProps) => {
     const { left, center, right } = useMemo(
       () =>
@@ -101,6 +103,7 @@ export const RowBody = React.memo(
         selected={selected}
         even={even}
         theme={theme}
+        disableVirtualization={disableVirtualization}
         translateY={vr.start}>
         {left.map((cell) => (
           <CellContent

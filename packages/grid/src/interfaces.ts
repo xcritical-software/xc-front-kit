@@ -201,6 +201,7 @@ export interface IRow {
   even: boolean;
   selected?: boolean;
   rowHeight?: number;
+  disableVirtualization?: boolean;
 }
 
 export interface IBodyCellContentWrapper {
