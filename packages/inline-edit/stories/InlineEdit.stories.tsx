@@ -3,9 +3,8 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
 import * as React from 'react';
-import { storiesOf } from '@storybook/react';
-import styled, { ThemeProvider } from 'styled-components';
-import { lighten } from 'polished';
+import type { Meta, StoryObj } from '@storybook/react';
+import { ThemeProvider } from 'styled-components';
 import BookIcon from 'mdi-react/BookIcon';
 import CreditCardIcon from 'mdi-react/CreditCardIcon';
 
@@ -14,62 +13,8 @@ import Select from '@xcritical/select';
 import { AllType } from '@xcritical/theme';
 
 import InlineEdit, { inlineEditThemeNamespace } from '../src';
-import { InlineEditTheme } from '../src/interfaces';
 
-const generateTheme = (
-  baseBgColor: string,
-  textColor: string
-): InlineEditTheme => ({
-  backgroundColor: baseBgColor,
-  color: textColor,
-  appearance: {
-    crm: {
-      readViewContentWrapper: {
-        padding: 0,
-      },
-      editButton: {
-        focus: {
-          border: `2px solid ${lighten(0.6, '#003e6c')}`,
-          backgroundColor: '#003e6c',
-        },
-      },
-      actionButtonWrapper: {
-        backgroundColor: '#003e6c',
-      },
-      button: {
-        backgroundColor: 'white',
-        border: '1px solid blue',
-      },
-      hover: {
-        backgroundColor: lighten(0.6, '#003e6c'),
-      },
-      confirmIcon: {
-        fill: 'green',
-      },
-      cancelIcon: {
-        fill: 'red',
-      },
-    },
-  },
-});
-
-const theme = generateTheme('#fff', '#000');
-
-const options = [
-  { value: 'firstCard', label: '1234 1234 1234 1234' },
-  { value: 'secondCard', label: '4321 4321 4321 4321' },
-  { value: 'thirdCard', label: '4567 4567 4567 4567' },
-  { value: 'fourthCard', label: '0123 0123 0123 0123' },
-];
-
-const ErrorMessage = styled.p`
-  color: red;
-  padding: 2px 5px 2px;
-  margin: 0;
-  font-size: 0.9em;
-  word-break: break-word;
-  text-align: justify;
-`;
+import { ErrorMessage, theme, options } from './Components';
 
 const BasicInlineEditInput: React.FC<AllType> = ({
   appearance = 'default',
@@ -79,6 +24,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
   defaultValue = '',
   className,
   classNamePrefix,
+  closeOnEscape,
   ...rest
 }) => {
   const [value, setValue] = React.useState(defaultValue);
@@ -119,6 +65,7 @@ const BasicInlineEditInput: React.FC<AllType> = ({
         isDoubleClickMode={isDoubleClickMode}
         className={className}
         classNamePrefix={classNamePrefix}
+        closeOnEscape={closeOnEscape}
       />
     </ThemeProvider>
   );
@@ -296,23 +243,50 @@ const InlineEditSelectWithValidation: React.FC<AllType> = ({
   );
 };
 
-storiesOf('InlineEdit', module)
-  .add('Basic', () => (
-    <div style={{ width: '200px' }}>
-      <BasicInlineEditInput editView={Input} />
+const meta: Meta<typeof InlineEdit> = {
+  component: InlineEdit,
+};
+
+export default meta;
+type Story = StoryObj<typeof InlineEdit>;
+
+export const Basic: Story = {
+  name: 'Basic',
+  render: () => (
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '300px', marginLeft: '10px' }}>
+        <p>Basic InlineEdit</p>
+        <BasicInlineEditInput editView={Input} />
+      </div>
+      <div style={{ width: '300px', marginLeft: '50px' }}>
+        <p>Basic InlineEdit without closing by Esc button</p>
+        <BasicInlineEditInput editView={Input} closeOnEscape={false} />
+      </div>
     </div>
-  ))
-  .add('Themed', () => (
+  ),
+};
+
+export const Themed: Story = {
+  name: 'Themed',
+  render: () => (
     <div style={{ width: '200px' }}>
       <BasicInlineEditInput editView={Input} appearance="crm" />
     </div>
-  ))
-  .add('Select', () => (
+  ),
+};
+
+export const InlineEditSelect: Story = {
+  name: 'Select',
+  render: () => (
     <div style={{ width: '200px' }}>
       <BasicInlineEditSelect options={options} appearance="crm" />
     </div>
-  ))
-  .add('CustomButtonIcon', () => (
+  ),
+};
+
+export const CustomButtonIcon: Story = {
+  name: 'Custom Button Icon',
+  render: () => (
     <div style={{ width: '200px' }}>
       <BasicInlineEditInput
         cancelIcon={() => <BookIcon color="red" />}
@@ -320,8 +294,12 @@ storiesOf('InlineEdit', module)
         appearance="crm"
       />
     </div>
-  ))
-  .add('InlineEdit with custom validation', () => (
+  ),
+};
+
+export const WithValidation: Story = {
+  name: 'InlineEdit with custom validation',
+  render: () => (
     <div style={{ display: 'flex' }}>
       <div style={{ width: '300px', marginLeft: '10px' }}>
         <p>Input InlineEdit</p>
@@ -332,8 +310,12 @@ storiesOf('InlineEdit', module)
         <InlineEditSelectWithValidation options={options} />
       </div>
     </div>
-  ))
-  .add('Edit view on double click', () => (
+  ),
+};
+
+export const DoubleClickMode: Story = {
+  name: 'Edit view on double click',
+  render: () => (
     <div style={{ width: '200px' }}>
       <BasicInlineEditInput
         editView={Input}
@@ -341,8 +323,12 @@ storiesOf('InlineEdit', module)
         defaultValue="Edit view on double click"
       />
     </div>
-  ))
-  .add('className & Prefix', () => (
+  ),
+};
+
+export const ClassNamePrefix: Story = {
+  name: 'className & Prefix',
+  render: () => (
     <div style={{ width: '200px' }}>
       <BasicInlineEditInput
         cancelIcon={() => <BookIcon color="red" className="at-book-icon" />}
@@ -352,4 +338,5 @@ storiesOf('InlineEdit', module)
         classNamePrefix="at-inline-edit"
       />
     </div>
-  ));
+  ),
+};

@@ -42,6 +42,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
   className,
   classNamePrefix,
   closeOnOutsideClick,
+  closeOnEscape = false,
 }: IInlineEditUncontrolledProps<TFieldValue>): React.ReactElement<
   IInlineEditUncontrolledProps<TFieldValue>
 > {
@@ -49,6 +50,7 @@ export const InlineEditUncontrolled = function <TFieldValue>({
   const confirmButtonRef = createRef<HTMLButtonElement>();
   const cancelButtonRef = createRef<HTMLButtonElement>();
   const contentRef = useRef<any>();
+  const [isFocus, setIsFocus] = useState(false);
 
   const [value, setValue] = useState(valueProp);
 
@@ -108,6 +110,26 @@ export const InlineEditUncontrolled = function <TFieldValue>({
     [closeOnOutsideClick, onCancel, valueProp, isEditing]
   );
 
+  // Обработка нажатия клавиши Escape для закрытия режима редактирования
+  const handleEscapeKey = useCallback(
+    (event: KeyboardEvent): void => {
+      if (event.key === 'Escape' && isEditing && !disabled && closeOnEscape) {
+        event.preventDefault();
+        setValue(valueProp);
+        onCancel?.();
+      }
+    },
+    [isEditing, disabled, closeOnEscape, valueProp, onCancel]
+  );
+
+  const handleFocus = useCallback(() => {
+    setIsFocus(true);
+  }, []);
+
+  const handleBlur = useCallback(() => {
+    setIsFocus(false);
+  }, []);
+
   useEffect(() => {
     if (closeOnOutsideClick) {
       document.addEventListener('mousedown', handleClickOutside);
@@ -119,12 +141,27 @@ export const InlineEditUncontrolled = function <TFieldValue>({
     return () => {};
   }, [handleClickOutside, closeOnOutsideClick]);
 
+  useEffect(() => {
+    if (closeOnEscape && isEditing && isFocus) {
+      document.addEventListener('keydown', handleEscapeKey);
+
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKey);
+      };
+    }
+
+    return () => {};
+  }, [handleEscapeKey, isFocus]);
+
   return (
     <ContentWrapper
       ref={contentRef}
       className={className}
       appearance={appearance}
-      baseAppearance={baseAppearance}>
+      baseAppearance={baseAppearance}
+      tabIndex={closeOnEscape ? 0 : undefined}
+      onFocus={closeOnEscape ? handleFocus : undefined}
+      onBlur={closeOnEscape ? handleBlur : undefined}>
       {isEditing ? (
         <>
           <EditView

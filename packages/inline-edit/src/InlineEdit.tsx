@@ -17,6 +17,7 @@ export const PureInlineEdit = function <
   invalid = false,
   isEditing,
   onIsEditingChange,
+  closeOnEscape = true,
   className,
   classNamePrefix,
   ...rest
@@ -29,6 +30,8 @@ export const PureInlineEdit = function <
 > {
   const [isEditingAuto, setIsEditingAutoMode] = useState(startWithEditViewOpen);
   const [value, setValue] = useState(valueProp);
+
+  const currentIsEditing = isEditing !== undefined ? isEditing : isEditingAuto;
 
   useEffect(() => {
     if (invalid && isEditing === undefined) {
@@ -79,10 +82,11 @@ export const PureInlineEdit = function <
       value={value}
       onConfirm={handleConfirm}
       onCancel={handleCancel}
-      isEditing={isEditing !== undefined ? isEditing : isEditingAuto}
+      isEditing={currentIsEditing}
       disabled={disabled}
       onEditRequested={handleEditRequested}
       appearance={appearance}
+      closeOnEscape={closeOnEscape}
       className={className}
       classNamePrefix={classNamePrefix}
     />

@@ -65,6 +65,8 @@ export type IInlineEditUncontrolledProps<TFieldValue> =
     isDoubleClickMode?: boolean;
     className?: string;
     classNamePrefix?: string;
+    /** Whether to close edit mode when ESC key is pressed. */
+    closeOnEscape?: boolean;
   };
 
 export type InlineEditCommonProps<TFieldValue> = ICommonProps & {
@@ -78,6 +80,8 @@ export type InlineEditCommonProps<TFieldValue> = ICommonProps & {
   /** Custom text for error message. */
   error?: string | string[];
   closeOnOutsideClick?: boolean;
+  /** Whether to close edit mode when ESC key is pressed. */
+  closeOnEscape?: boolean;
 };
 
 export type IInlineEditProps<TEditViewProps, TViewProps, TFieldValue> =
