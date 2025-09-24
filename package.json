@@ -83,7 +83,7 @@
     "prettier": "2.8.4",
     "react-docgen-typescript-loader": "^3.7.2",
     "redux-devtools-extension": "^2.13.8",
-    "rimraf": "^4.3.0",
+    "rimraf": "^5.0.7",
     "rollup-plugin-strip-code": "^0.2.7",
     "storybook": "^8.1.1",
     "ts-jest": "^27.1.3",
